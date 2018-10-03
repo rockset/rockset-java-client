@@ -32,35 +32,3 @@ Add this dependency to your project's build file:
 ```groovy
 compile "io.rockset:rockset-java:1.0.0"
 ```
-
-## Getting Started
-
-Please follow the [installation](#installation) instruction and execute the following Java code:
-
-```java
-
-import io.rockset.client.*;
-import io.rockset.client.auth.*;
-import io.rockset.client.model.*;
-import io.rockset.client.api.ApiKeysApi;
-
-import java.io.File;
-import java.util.*;
-
-public class ApiKeysApiExample {
-
-    public static void main(String[] args) {
-        
-        ApiKeysApi apiInstance = new ApiKeysApi();
-        CreateApiKeyRequest body = new CreateApiKeyRequest(); // CreateApiKeyRequest | JSON object
-        try {
-            CreateApiKeyResponse result = apiInstance.create(body);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling ApiKeysApi#create");
-            e.printStackTrace();
-        }
-    }
-}
-
-```
