@@ -1,10 +1,10 @@
 import io.rockset.ApiException;
-import io.rockset.Client;
+import io.rockset.RocksetClient;
 import io.rockset.model.*;
 
 public class CreateCollectionExample {
   public static void main(String[] args) {
-    Client rs = new Client("<apiKey>", "<apiServer>");
+    RocksetClient rs = new RocksetClient("<apiKey>", "<apiServer>");
 
     CreateCollectionRequest request = new CreateCollectionRequest()
                                             .name("my-first-collection");

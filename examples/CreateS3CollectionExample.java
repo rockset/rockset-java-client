@@ -2,12 +2,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.rockset.ApiException;
-import io.rockset.Client;
+import io.rockset.RocksetClient;
 import io.rockset.model.*;
 
 public class CreateS3CollectionExample {
   public static void main(String[] args) {
-    Client rs = new Client("<apiKey>", "<apiServer>");
+    RocksetClient rs = new RocksetClient("<apiKey>", "<apiServer>");
 
     SourceS3 sourceS3 = new SourceS3().setBucket("<bucket>");
 

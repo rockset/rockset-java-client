@@ -1,10 +1,10 @@
 import io.rockset.ApiException;
-import io.rockset.Client;
+import io.rockset.RocksetClient;
 import io.rockset.model.*;
 
 public class GetCollectionExample {
   public static void main(String[] args) {
-    Client rs = new Client("<apiKey>", "<apiServer>");
+    RocksetClient rs = new RocksetClient("<apiKey>", "<apiServer>");
 
     try {
       GetCollectionResponse response = rs.getCollection("_info.events");

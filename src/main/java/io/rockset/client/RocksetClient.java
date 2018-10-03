@@ -5,7 +5,7 @@ import io.rockset.client.model.*;
 
 import java.util.List;
 
-public class Client {
+public class RocksetClient {
     private ApiClient apiClient;
     private ApiKeysApi apiKeys;
     private CollectionsApi collection;
