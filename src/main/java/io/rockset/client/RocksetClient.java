@@ -14,7 +14,7 @@ public class RocksetClient {
     private QueriesApi query;
     private UsersApi user;
 
-    public Client(String apiKey, String apiServer) {
+    public RocksetClient(String apiKey, String apiServer) {
 
       assert !apiKey.isEmpty();
 
