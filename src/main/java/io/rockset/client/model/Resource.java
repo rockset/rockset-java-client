@@ -20,6 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import io.rockset.client.model.FieldMappingV2;
 import io.rockset.client.model.ResourceStats;
 import io.rockset.client.model.Source;
 import io.swagger.annotations.ApiModel;
@@ -31,7 +32,7 @@ import java.util.List;
 /**
  * Resource
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-03T00:56:56.344Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-27T21:04:28.359Z")
 public class Resource {
   @SerializedName("created_at")
   private String createdAt = null;
@@ -111,6 +112,9 @@ public class Resource {
 
   @SerializedName("retention_secs")
   private Long retentionSecs = null;
+
+  @SerializedName("field_mappings")
+  private List<FieldMappingV2> fieldMappings = null;
 
   public Resource createdAt(String createdAt) {
     this.createdAt = createdAt;
@@ -264,6 +268,32 @@ public class Resource {
     this.retentionSecs = retentionSecs;
   }
 
+  public Resource fieldMappings(List<FieldMappingV2> fieldMappings) {
+    this.fieldMappings = fieldMappings;
+    return this;
+  }
+
+  public Resource addFieldMappingsItem(FieldMappingV2 fieldMappingsItem) {
+    if (this.fieldMappings == null) {
+      this.fieldMappings = new ArrayList<FieldMappingV2>();
+    }
+    this.fieldMappings.add(fieldMappingsItem);
+    return this;
+  }
+
+   /**
+   * list of mappings applied on all documents in a collection
+   * @return fieldMappings
+  **/
+  @ApiModelProperty(value = "list of mappings applied on all documents in a collection")
+  public List<FieldMappingV2> getFieldMappings() {
+    return fieldMappings;
+  }
+
+  public void setFieldMappings(List<FieldMappingV2> fieldMappings) {
+    this.fieldMappings = fieldMappings;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -281,12 +311,13 @@ public class Resource {
         Objects.equals(this.status, resource.status) &&
         Objects.equals(this.sources, resource.sources) &&
         Objects.equals(this.stats, resource.stats) &&
-        Objects.equals(this.retentionSecs, resource.retentionSecs);
+        Objects.equals(this.retentionSecs, resource.retentionSecs) &&
+        Objects.equals(this.fieldMappings, resource.fieldMappings);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(createdAt, createdBy, name, description, status, sources, stats, retentionSecs);
+    return Objects.hash(createdAt, createdBy, name, description, status, sources, stats, retentionSecs, fieldMappings);
   }
 
 
@@ -303,6 +334,7 @@ public class Resource {
     sb.append("    sources: ").append(toIndentedString(sources)).append("\n");
     sb.append("    stats: ").append(toIndentedString(stats)).append("\n");
     sb.append("    retentionSecs: ").append(toIndentedString(retentionSecs)).append("\n");
+    sb.append("    fieldMappings: ").append(toIndentedString(fieldMappings)).append("\n");
     sb.append("}");
     return sb.toString();
   }

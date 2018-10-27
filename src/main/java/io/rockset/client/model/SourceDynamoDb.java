@@ -25,71 +25,29 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * QueryParameter
+ * SourceDynamoDb
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-27T21:04:28.359Z")
-public class QueryParameter {
-  @SerializedName("name")
-  private String name = null;
+public class SourceDynamoDb {
+  @SerializedName("table_name")
+  private String tableName = null;
 
-  @SerializedName("type")
-  private String type = null;
-
-  @SerializedName("value")
-  private String value = null;
-
-  public QueryParameter name(String name) {
-    this.name = name;
+  public SourceDynamoDb tableName(String tableName) {
+    this.tableName = tableName;
     return this;
   }
 
    /**
-   * name of the field
-   * @return name
+   * name of DynamoDB table containing data
+   * @return tableName
   **/
-  @ApiModelProperty(example = "_id", required = true, value = "name of the field")
-  public String getName() {
-    return name;
+  @ApiModelProperty(example = "dynamodb_table_name", required = true, value = "name of DynamoDB table containing data")
+  public String getTableName() {
+    return tableName;
   }
 
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public QueryParameter type(String type) {
-    this.type = type;
-    return this;
-  }
-
-   /**
-   * data type of the field
-   * @return type
-  **/
-  @ApiModelProperty(example = "string", required = true, value = "data type of the field")
-  public String getType() {
-    return type;
-  }
-
-  public void setType(String type) {
-    this.type = type;
-  }
-
-  public QueryParameter value(String value) {
-    this.value = value;
-    return this;
-  }
-
-   /**
-   * literal value of the field
-   * @return value
-  **/
-  @ApiModelProperty(example = "85beb391", required = true, value = "literal value of the field")
-  public String getValue() {
-    return value;
-  }
-
-  public void setValue(String value) {
-    this.value = value;
+  public void setTableName(String tableName) {
+    this.tableName = tableName;
   }
 
 
@@ -101,26 +59,22 @@ public class QueryParameter {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    QueryParameter queryParameter = (QueryParameter) o;
-    return Objects.equals(this.name, queryParameter.name) &&
-        Objects.equals(this.type, queryParameter.type) &&
-        Objects.equals(this.value, queryParameter.value);
+    SourceDynamoDb sourceDynamoDb = (SourceDynamoDb) o;
+    return Objects.equals(this.tableName, sourceDynamoDb.tableName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, type, value);
+    return Objects.hash(tableName);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class QueryParameter {\n");
+    sb.append("class SourceDynamoDb {\n");
     
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    value: ").append(toIndentedString(value)).append("\n");
+    sb.append("    tableName: ").append(toIndentedString(tableName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

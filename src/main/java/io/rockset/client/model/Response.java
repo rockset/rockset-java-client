@@ -23,73 +23,84 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
- * QueryParameter
+ * Response
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-27T21:04:28.359Z")
-public class QueryParameter {
-  @SerializedName("name")
-  private String name = null;
+public class Response {
+  @SerializedName("metadata")
+  private Map<String, List<Object>> metadata = null;
 
-  @SerializedName("type")
-  private String type = null;
+  @SerializedName("status")
+  private Integer status = null;
 
-  @SerializedName("value")
-  private String value = null;
+  @SerializedName("entity")
+  private Object entity = null;
 
-  public QueryParameter name(String name) {
-    this.name = name;
+  public Response metadata(Map<String, List<Object>> metadata) {
+    this.metadata = metadata;
+    return this;
+  }
+
+  public Response putMetadataItem(String key, List<Object> metadataItem) {
+    if (this.metadata == null) {
+      this.metadata = new HashMap<String, List<Object>>();
+    }
+    this.metadata.put(key, metadataItem);
     return this;
   }
 
    /**
-   * name of the field
-   * @return name
+   * Get metadata
+   * @return metadata
   **/
-  @ApiModelProperty(example = "_id", required = true, value = "name of the field")
-  public String getName() {
-    return name;
+  @ApiModelProperty(value = "")
+  public Map<String, List<Object>> getMetadata() {
+    return metadata;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setMetadata(Map<String, List<Object>> metadata) {
+    this.metadata = metadata;
   }
 
-  public QueryParameter type(String type) {
-    this.type = type;
+  public Response status(Integer status) {
+    this.status = status;
     return this;
   }
 
    /**
-   * data type of the field
-   * @return type
+   * Get status
+   * @return status
   **/
-  @ApiModelProperty(example = "string", required = true, value = "data type of the field")
-  public String getType() {
-    return type;
+  @ApiModelProperty(value = "")
+  public Integer getStatus() {
+    return status;
   }
 
-  public void setType(String type) {
-    this.type = type;
+  public void setStatus(Integer status) {
+    this.status = status;
   }
 
-  public QueryParameter value(String value) {
-    this.value = value;
+  public Response entity(Object entity) {
+    this.entity = entity;
     return this;
   }
 
    /**
-   * literal value of the field
-   * @return value
+   * Get entity
+   * @return entity
   **/
-  @ApiModelProperty(example = "85beb391", required = true, value = "literal value of the field")
-  public String getValue() {
-    return value;
+  @ApiModelProperty(value = "")
+  public Object getEntity() {
+    return entity;
   }
 
-  public void setValue(String value) {
-    this.value = value;
+  public void setEntity(Object entity) {
+    this.entity = entity;
   }
 
 
@@ -101,26 +112,26 @@ public class QueryParameter {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    QueryParameter queryParameter = (QueryParameter) o;
-    return Objects.equals(this.name, queryParameter.name) &&
-        Objects.equals(this.type, queryParameter.type) &&
-        Objects.equals(this.value, queryParameter.value);
+    Response response = (Response) o;
+    return Objects.equals(this.metadata, response.metadata) &&
+        Objects.equals(this.status, response.status) &&
+        Objects.equals(this.entity, response.entity);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, type, value);
+    return Objects.hash(metadata, status, entity);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class QueryParameter {\n");
+    sb.append("class Response {\n");
     
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    value: ").append(toIndentedString(value)).append("\n");
+    sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    entity: ").append(toIndentedString(entity)).append("\n");
     sb.append("}");
     return sb.toString();
   }

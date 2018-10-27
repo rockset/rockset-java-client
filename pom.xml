@@ -4,10 +4,10 @@
     <groupId>io.rockset</groupId>
     <artifactId>rockset-java</artifactId>
     <packaging>jar</packaging>
-    <name>rockset-java</name>
+    <name>Rockset Java</name>
     <version>1.0.0</version>
     <url>https://github.com/rockset/rockset-java-client</url>
-    <description>Rockset Java</description>
+    <description>The official Rockset Java client library</description>
     <scm>
         <connection>scm:git:git@github.com:rockset/rockset-java-client.git</connection>
         <developerConnection>scm:git:git@github.com:rockset/rockser-java-client.git</developerConnection>
@@ -16,9 +16,8 @@
 
     <licenses>
         <license>
-            <name>Unlicense</name>
-            <url>http://unlicense.org</url>
-            <distribution>repo</distribution>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
         </license>
     </licenses>
 

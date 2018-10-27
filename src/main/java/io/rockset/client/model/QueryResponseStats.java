@@ -27,10 +27,13 @@ import java.io.IOException;
 /**
  * QueryResponseStats
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-03T00:56:56.344Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-27T21:04:28.359Z")
 public class QueryResponseStats {
   @SerializedName("elapsed_time_ms")
   private Long elapsedTimeMs = null;
+
+  @SerializedName("rows_scanned")
+  private Long rowsScanned = null;
 
   public QueryResponseStats elapsedTimeMs(Long elapsedTimeMs) {
     this.elapsedTimeMs = elapsedTimeMs;
@@ -50,6 +53,24 @@ public class QueryResponseStats {
     this.elapsedTimeMs = elapsedTimeMs;
   }
 
+  public QueryResponseStats rowsScanned(Long rowsScanned) {
+    this.rowsScanned = rowsScanned;
+    return this;
+  }
+
+   /**
+   * rows scanned as part of query execution
+   * @return rowsScanned
+  **/
+  @ApiModelProperty(example = "25000", value = "rows scanned as part of query execution")
+  public Long getRowsScanned() {
+    return rowsScanned;
+  }
+
+  public void setRowsScanned(Long rowsScanned) {
+    this.rowsScanned = rowsScanned;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -60,12 +81,13 @@ public class QueryResponseStats {
       return false;
     }
     QueryResponseStats queryResponseStats = (QueryResponseStats) o;
-    return Objects.equals(this.elapsedTimeMs, queryResponseStats.elapsedTimeMs);
+    return Objects.equals(this.elapsedTimeMs, queryResponseStats.elapsedTimeMs) &&
+        Objects.equals(this.rowsScanned, queryResponseStats.rowsScanned);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(elapsedTimeMs);
+    return Objects.hash(elapsedTimeMs, rowsScanned);
   }
 
 
@@ -75,6 +97,7 @@ public class QueryResponseStats {
     sb.append("class QueryResponseStats {\n");
     
     sb.append("    elapsedTimeMs: ").append(toIndentedString(elapsedTimeMs)).append("\n");
+    sb.append("    rowsScanned: ").append(toIndentedString(rowsScanned)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -23,11 +23,13 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-03T00:56:56.344Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-27T21:04:28.359Z")
 public class User {
   @SerializedName("type")
   private String type = null;
@@ -37,6 +39,9 @@ public class User {
 
   @SerializedName("email")
   private String email = null;
+
+  @SerializedName("roles")
+  private List<String> roles = null;
 
    /**
    * has value &#x60;user&#x60; for a user object
@@ -83,6 +88,32 @@ public class User {
     this.email = email;
   }
 
+  public User roles(List<String> roles) {
+    this.roles = roles;
+    return this;
+  }
+
+  public User addRolesItem(String rolesItem) {
+    if (this.roles == null) {
+      this.roles = new ArrayList<String>();
+    }
+    this.roles.add(rolesItem);
+    return this;
+  }
+
+   /**
+   * List of roles for a given user
+   * @return roles
+  **/
+  @ApiModelProperty(example = "\"[\\\"admin\\\", \\\"member\\\", \\\"read-only\\\"]\"", value = "List of roles for a given user")
+  public List<String> getRoles() {
+    return roles;
+  }
+
+  public void setRoles(List<String> roles) {
+    this.roles = roles;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -95,12 +126,13 @@ public class User {
     User user = (User) o;
     return Objects.equals(this.type, user.type) &&
         Objects.equals(this.createdAt, user.createdAt) &&
-        Objects.equals(this.email, user.email);
+        Objects.equals(this.email, user.email) &&
+        Objects.equals(this.roles, user.roles);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(type, createdAt, email);
+    return Objects.hash(type, createdAt, email, roles);
   }
 
 
@@ -112,6 +144,7 @@ public class User {
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
+    sb.append("    roles: ").append(toIndentedString(roles)).append("\n");
     sb.append("}");
     return sb.toString();
   }

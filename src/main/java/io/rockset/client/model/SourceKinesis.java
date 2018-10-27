@@ -25,71 +25,29 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * QueryParameter
+ * SourceKinesis
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-27T21:04:28.359Z")
-public class QueryParameter {
-  @SerializedName("name")
-  private String name = null;
+public class SourceKinesis {
+  @SerializedName("stream_name")
+  private String streamName = null;
 
-  @SerializedName("type")
-  private String type = null;
-
-  @SerializedName("value")
-  private String value = null;
-
-  public QueryParameter name(String name) {
-    this.name = name;
+  public SourceKinesis streamName(String streamName) {
+    this.streamName = streamName;
     return this;
   }
 
    /**
-   * name of the field
-   * @return name
+   * name of kinesis stream
+   * @return streamName
   **/
-  @ApiModelProperty(example = "_id", required = true, value = "name of the field")
-  public String getName() {
-    return name;
+  @ApiModelProperty(example = "click_stream", required = true, value = "name of kinesis stream")
+  public String getStreamName() {
+    return streamName;
   }
 
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public QueryParameter type(String type) {
-    this.type = type;
-    return this;
-  }
-
-   /**
-   * data type of the field
-   * @return type
-  **/
-  @ApiModelProperty(example = "string", required = true, value = "data type of the field")
-  public String getType() {
-    return type;
-  }
-
-  public void setType(String type) {
-    this.type = type;
-  }
-
-  public QueryParameter value(String value) {
-    this.value = value;
-    return this;
-  }
-
-   /**
-   * literal value of the field
-   * @return value
-  **/
-  @ApiModelProperty(example = "85beb391", required = true, value = "literal value of the field")
-  public String getValue() {
-    return value;
-  }
-
-  public void setValue(String value) {
-    this.value = value;
+  public void setStreamName(String streamName) {
+    this.streamName = streamName;
   }
 
 
@@ -101,26 +59,22 @@ public class QueryParameter {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    QueryParameter queryParameter = (QueryParameter) o;
-    return Objects.equals(this.name, queryParameter.name) &&
-        Objects.equals(this.type, queryParameter.type) &&
-        Objects.equals(this.value, queryParameter.value);
+    SourceKinesis sourceKinesis = (SourceKinesis) o;
+    return Objects.equals(this.streamName, sourceKinesis.streamName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, type, value);
+    return Objects.hash(streamName);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class QueryParameter {\n");
+    sb.append("class SourceKinesis {\n");
     
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    value: ").append(toIndentedString(value)).append("\n");
+    sb.append("    streamName: ").append(toIndentedString(streamName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

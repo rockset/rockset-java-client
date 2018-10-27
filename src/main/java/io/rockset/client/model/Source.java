@@ -21,6 +21,8 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.rockset.client.model.CsvParams;
+import io.rockset.client.model.SourceDynamoDb;
+import io.rockset.client.model.SourceKinesis;
 import io.rockset.client.model.SourceS3;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -30,7 +32,7 @@ import java.io.IOException;
  * Details about the data source for the given collection. Only one of the following fields are allowed to be defined. Only collections can act as data sources for views. 
  */
 @ApiModel(description = "Details about the data source for the given collection. Only one of the following fields are allowed to be defined. Only collections can act as data sources for views. ")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-03T00:56:56.344Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-27T21:04:28.359Z")
 public class Source {
   @SerializedName("type")
   private String type = null;
@@ -40,6 +42,12 @@ public class Source {
 
   @SerializedName("s3")
   private SourceS3 s3 = null;
+
+  @SerializedName("kinesis")
+  private SourceKinesis kinesis = null;
+
+  @SerializedName("dynamodb")
+  private SourceDynamoDb dynamodb = null;
 
   /**
    * can be one of: CSV
@@ -141,6 +149,42 @@ public class Source {
     this.s3 = s3;
   }
 
+  public Source kinesis(SourceKinesis kinesis) {
+    this.kinesis = kinesis;
+    return this;
+  }
+
+   /**
+   * configuration for ingestion from kinesis stream
+   * @return kinesis
+  **/
+  @ApiModelProperty(value = "configuration for ingestion from kinesis stream")
+  public SourceKinesis getKinesis() {
+    return kinesis;
+  }
+
+  public void setKinesis(SourceKinesis kinesis) {
+    this.kinesis = kinesis;
+  }
+
+  public Source dynamodb(SourceDynamoDb dynamodb) {
+    this.dynamodb = dynamodb;
+    return this;
+  }
+
+   /**
+   * configuration for ingestion from  a dynamodb table
+   * @return dynamodb
+  **/
+  @ApiModelProperty(value = "configuration for ingestion from  a dynamodb table")
+  public SourceDynamoDb getDynamodb() {
+    return dynamodb;
+  }
+
+  public void setDynamodb(SourceDynamoDb dynamodb) {
+    this.dynamodb = dynamodb;
+  }
+
   public Source format(FormatEnum format) {
     this.format = format;
     return this;
@@ -190,13 +234,15 @@ public class Source {
     return Objects.equals(this.type, source.type) &&
         Objects.equals(this.integrationName, source.integrationName) &&
         Objects.equals(this.s3, source.s3) &&
+        Objects.equals(this.kinesis, source.kinesis) &&
+        Objects.equals(this.dynamodb, source.dynamodb) &&
         Objects.equals(this.format, source.format) &&
         Objects.equals(this.formatParamsCsv, source.formatParamsCsv);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(type, integrationName, s3, format, formatParamsCsv);
+    return Objects.hash(type, integrationName, s3, kinesis, dynamodb, format, formatParamsCsv);
   }
 
 
@@ -208,6 +254,8 @@ public class Source {
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    integrationName: ").append(toIndentedString(integrationName)).append("\n");
     sb.append("    s3: ").append(toIndentedString(s3)).append("\n");
+    sb.append("    kinesis: ").append(toIndentedString(kinesis)).append("\n");
+    sb.append("    dynamodb: ").append(toIndentedString(dynamodb)).append("\n");
     sb.append("    format: ").append(toIndentedString(format)).append("\n");
     sb.append("    formatParamsCsv: ").append(toIndentedString(formatParamsCsv)).append("\n");
     sb.append("}");

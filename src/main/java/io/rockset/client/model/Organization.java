@@ -25,29 +25,30 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * QueryParameter
+ * An organization in Rockset is a container for users and collections.
  */
+@ApiModel(description = "An organization in Rockset is a container for users and collections.")
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-27T21:04:28.359Z")
-public class QueryParameter {
+public class Organization {
   @SerializedName("name")
   private String name = null;
 
-  @SerializedName("type")
-  private String type = null;
+  @SerializedName("inputRateLimitMbs")
+  private Long inputRateLimitMbs = null;
 
-  @SerializedName("value")
-  private String value = null;
+  @SerializedName("sizeLimitGb")
+  private Long sizeLimitGb = null;
 
-  public QueryParameter name(String name) {
+  public Organization name(String name) {
     this.name = name;
     return this;
   }
 
    /**
-   * name of the field
+   * name of the organization
    * @return name
   **/
-  @ApiModelProperty(example = "_id", required = true, value = "name of the field")
+  @ApiModelProperty(example = "rockset", required = true, value = "name of the organization")
   public String getName() {
     return name;
   }
@@ -56,40 +57,40 @@ public class QueryParameter {
     this.name = name;
   }
 
-  public QueryParameter type(String type) {
-    this.type = type;
+  public Organization inputRateLimitMbs(Long inputRateLimitMbs) {
+    this.inputRateLimitMbs = inputRateLimitMbs;
     return this;
   }
 
    /**
-   * data type of the field
-   * @return type
+   * Get inputRateLimitMbs
+   * @return inputRateLimitMbs
   **/
-  @ApiModelProperty(example = "string", required = true, value = "data type of the field")
-  public String getType() {
-    return type;
+  @ApiModelProperty(value = "")
+  public Long getInputRateLimitMbs() {
+    return inputRateLimitMbs;
   }
 
-  public void setType(String type) {
-    this.type = type;
+  public void setInputRateLimitMbs(Long inputRateLimitMbs) {
+    this.inputRateLimitMbs = inputRateLimitMbs;
   }
 
-  public QueryParameter value(String value) {
-    this.value = value;
+  public Organization sizeLimitGb(Long sizeLimitGb) {
+    this.sizeLimitGb = sizeLimitGb;
     return this;
   }
 
    /**
-   * literal value of the field
-   * @return value
+   * Get sizeLimitGb
+   * @return sizeLimitGb
   **/
-  @ApiModelProperty(example = "85beb391", required = true, value = "literal value of the field")
-  public String getValue() {
-    return value;
+  @ApiModelProperty(value = "")
+  public Long getSizeLimitGb() {
+    return sizeLimitGb;
   }
 
-  public void setValue(String value) {
-    this.value = value;
+  public void setSizeLimitGb(Long sizeLimitGb) {
+    this.sizeLimitGb = sizeLimitGb;
   }
 
 
@@ -101,26 +102,26 @@ public class QueryParameter {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    QueryParameter queryParameter = (QueryParameter) o;
-    return Objects.equals(this.name, queryParameter.name) &&
-        Objects.equals(this.type, queryParameter.type) &&
-        Objects.equals(this.value, queryParameter.value);
+    Organization organization = (Organization) o;
+    return Objects.equals(this.name, organization.name) &&
+        Objects.equals(this.inputRateLimitMbs, organization.inputRateLimitMbs) &&
+        Objects.equals(this.sizeLimitGb, organization.sizeLimitGb);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, type, value);
+    return Objects.hash(name, inputRateLimitMbs, sizeLimitGb);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class QueryParameter {\n");
+    sb.append("class Organization {\n");
     
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    value: ").append(toIndentedString(value)).append("\n");
+    sb.append("    inputRateLimitMbs: ").append(toIndentedString(inputRateLimitMbs)).append("\n");
+    sb.append("    sizeLimitGb: ").append(toIndentedString(sizeLimitGb)).append("\n");
     sb.append("}");
     return sb.toString();
   }

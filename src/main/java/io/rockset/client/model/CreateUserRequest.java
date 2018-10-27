@@ -23,14 +23,19 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * CreateUserRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-03T00:56:56.344Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-27T21:04:28.359Z")
 public class CreateUserRequest {
   @SerializedName("email")
   private String email = null;
+
+  @SerializedName("roles")
+  private List<String> roles = null;
 
   public CreateUserRequest email(String email) {
     this.email = email;
@@ -50,6 +55,32 @@ public class CreateUserRequest {
     this.email = email;
   }
 
+  public CreateUserRequest roles(List<String> roles) {
+    this.roles = roles;
+    return this;
+  }
+
+  public CreateUserRequest addRolesItem(String rolesItem) {
+    if (this.roles == null) {
+      this.roles = new ArrayList<String>();
+    }
+    this.roles.add(rolesItem);
+    return this;
+  }
+
+   /**
+   * List of roles for a given user
+   * @return roles
+  **/
+  @ApiModelProperty(example = "\"[\\\"admin\\\", \\\"member\\\", \\\"read-only\\\"]\"", value = "List of roles for a given user")
+  public List<String> getRoles() {
+    return roles;
+  }
+
+  public void setRoles(List<String> roles) {
+    this.roles = roles;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -60,12 +91,13 @@ public class CreateUserRequest {
       return false;
     }
     CreateUserRequest createUserRequest = (CreateUserRequest) o;
-    return Objects.equals(this.email, createUserRequest.email);
+    return Objects.equals(this.email, createUserRequest.email) &&
+        Objects.equals(this.roles, createUserRequest.roles);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(email);
+    return Objects.hash(email, roles);
   }
 
 
@@ -75,6 +107,7 @@ public class CreateUserRequest {
     sb.append("class CreateUserRequest {\n");
     
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
+    sb.append("    roles: ").append(toIndentedString(roles)).append("\n");
     sb.append("}");
     return sb.toString();
   }

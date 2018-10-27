@@ -8,7 +8,7 @@ Official Java client library for Rockset
 
 Building the API client library requires:
 1. Java 1.7+
-2. Maven/Gradle
+2. Maven
 
 ## Installation
 
@@ -21,14 +21,13 @@ Add this dependency to your project's POM:
   <groupId>io.rockset</groupId>
   <artifactId>rockset-java</artifactId>
   <version>1.0.0</version>
-  <scope>compile</scope>
 </dependency>
 ```
 
-### Gradle users
+## Support
 
-Add this dependency to your project's build file:
+Feel free to log issues against this client through GitHub.
 
-```groovy
-compile "io.rockset:rockset-java:1.0.0"
-```
+## License
+
+The Rockset Java Client is licensed under the following [License](https://github.com/rockset/rockset-java-client/blob/master/LICENSE)
