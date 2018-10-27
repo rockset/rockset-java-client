@@ -1,6 +1,6 @@
-import io.rockset.ApiException;
-import io.rockset.RocksetClient;
-import io.rockset.model.*;
+import com.rockset.ApiException;
+import com.rockset.RocksetClient;
+import com.rockset.model.*;
 
 public class GetCollectionExample {
   public static void main(String[] args) {
