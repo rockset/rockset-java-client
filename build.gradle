@@ -1,7 +1,7 @@
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 
-group = 'io.rockset'
+group = 'com.rockset'
 version = '1.0.0'
 
 buildscript {

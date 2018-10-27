@@ -18,7 +18,7 @@ Add this dependency to your project's POM:
 
 ```xml
 <dependency>
-  <groupId>io.rockset</groupId>
+  <groupId>com.rockset</groupId>
   <artifactId>rockset-java</artifactId>
   <version>1.0.0</version>
 </dependency>

@@ -1,6 +1,6 @@
 lazy val root = (project in file(".")).
   settings(
-    organization := "io.rockset",
+    organization := "com.rockset",
     name := "rockset-java",
     version := "1.0.0",
     scalaVersion := "2.11.4",
