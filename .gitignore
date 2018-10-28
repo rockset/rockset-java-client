@@ -1,2 +1,13 @@
+# intellij files
 .idea/
 *.iml
+
+# java output files
+target/
+
+# project files
+**/.checkstyle
+**/.classpath
+**/.project
+**/.settings/
+
