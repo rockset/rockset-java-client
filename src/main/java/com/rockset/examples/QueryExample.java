@@ -1,6 +1,8 @@
-import com.rockset.ApiException;
-import com.rockset.RocksetClient;
-import com.rockset.model.*;
+package com.rockset.examples;
+
+import com.rockset.client.ApiException;
+import com.rockset.client.RocksetClient;
+import com.rockset.client.model.*;
 
 public class QueryExample {
   public static void main(String[] args) {
@@ -16,4 +18,5 @@ public class QueryExample {
     } catch (ApiException e) {
       e.printStackTrace();
     }
+  } 
 }
