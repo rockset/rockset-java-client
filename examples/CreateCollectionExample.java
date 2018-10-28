@@ -11,7 +11,7 @@ public class CreateCollectionExample {
 
     try {
       CreateCollectionResponse response = rs.createCollection(request);
-      System.out.Println(response);
+      System.out.println(response);
     } catch (ApiException e) {
       e.printStackTrace();
     }

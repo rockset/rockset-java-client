@@ -28,7 +28,7 @@ import java.io.IOException;
  * API keys are used to authenticate requests to Rockset&#39;s API. An API key is tied to the user who creates it. A new API key can be created for each use case, with a maximum of 10 API keys per user.
  */
 @ApiModel(description = "API keys are used to authenticate requests to Rockset's API. An API key is tied to the user who creates it. A new API key can be created for each use case, with a maximum of 10 API keys per user.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-27T22:21:17.757Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-28T00:40:02.700Z")
 public class ApiKey {
   @SerializedName("type")
   private String type = null;

@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * AwsKeyIntegration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-27T22:21:17.757Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-28T00:40:02.700Z")
 public class AwsKeyIntegration {
   @SerializedName("aws_access_key_id")
   private String awsAccessKeyId = null;

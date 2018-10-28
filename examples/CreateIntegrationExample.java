@@ -14,7 +14,7 @@ public class CreateIntegrationExample {
 
     try {
       CreateIntegrationResponse response = rs.createIntegration(request);
-      System.out.Println(response);
+      System.out.println(response);
     } catch (ApiException e) {
       e.printStackTrace();
     }

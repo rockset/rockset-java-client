@@ -8,7 +8,7 @@ public class GetCollectionExample {
 
     try {
       GetCollectionResponse response = rs.getCollection("_info.events");
-      System.out.Println(response);
+      System.out.println(response);
     } catch (ApiException e) {
       e.printStackTrace();
     }

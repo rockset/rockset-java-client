@@ -12,7 +12,7 @@ public class QueryExample {
 
     try {
       QueryResponse response = rs.query(request);
-      System.out.Println(response);
+      System.out.println(response);
     } catch (ApiException e) {
       e.printStackTrace();
     }

@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * QueryFieldType
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-27T22:21:17.757Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-28T00:40:02.700Z")
 public class QueryFieldType {
   @SerializedName("name")
   private String name = null;

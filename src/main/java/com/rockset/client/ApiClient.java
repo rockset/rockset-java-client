@@ -54,6 +54,7 @@ public class ApiClient {
 
     private String basePath = "https://api.rs2.usw2.rockset.com";
     private String apiKey;
+    private String version;
     private boolean debugging = false;
     private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
     private String tempFolderPath = null;
@@ -122,6 +123,14 @@ public class ApiClient {
      */
     public ApiClient setApiKey(String apiKey) {
         this.apiKey = apiKey;
+        return this;
+    }
+    
+    /**
+    * set version
+    */
+    public ApiClient setVersion(String version) {
+        this.version = version;
         return this;
     }
 
@@ -1039,6 +1048,7 @@ public class ApiClient {
         }
 
         reqBuilder.header("Authorization", "ApiKey " + apiKey);
+        reqBuilder.header("x-rockset-version", version);
     }
 
     /**

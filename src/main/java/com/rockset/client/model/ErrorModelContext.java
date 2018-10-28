@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * ErrorModelContext
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-27T22:21:17.757Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-28T00:40:02.700Z")
 public class ErrorModelContext {
   @SerializedName("lineinfo")
   private String lineinfo = null;
