@@ -14,7 +14,7 @@ mvn package
 
 This will create a jar file rockset-java-${version}.jar
 
-### Maven users
+### Usage
 
 Add this dependency to your project's POM:
 
@@ -25,6 +25,8 @@ Add this dependency to your project's POM:
   <version>0.4.7</version>
 </dependency>
 ```
+
+You can see a few [sample examples](https://github.com/rockset/rockset-java-client/tree/dhruba_feedback/examples) of how to create a collection, how to put documents in a collection and how to use SQL to query your collections. There are also a set of [javadocs](http://docs.rockset.com/java-client/com/rockset/client/RocksetClient.html) that you can look to build your application.
 
 ## Support
 
