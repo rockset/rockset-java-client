@@ -28,6 +28,12 @@ Add this dependency to your project's POM:
 
 You can see a few [sample examples](https://github.com/rockset/rockset-java-client/tree/dhruba_feedback/examples) of how to create a collection, how to put documents in a collection and how to use SQL to query your collections. There are also a set of [javadocs](http://docs.rockset.com/java-client/com/rockset/client/RocksetClient.html) that you can look to build your application.
 
+## Testing
+Set ROCKSET_APIKEY and ROCKSET_APISERVER endpoint in the environment variables. To run test:
+```
+mvn test
+```
+
 ## Support
 
 Feel free to log issues against this client through GitHub.

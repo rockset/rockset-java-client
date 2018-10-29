@@ -10,7 +10,7 @@ public class CreateCollectionExample {
 
     CreateCollectionRequest request = new CreateCollectionRequest()
                                             .name("my-first-collection");
-
+    
     try {
       CreateCollectionResponse response = rs.createCollection(request);
       System.out.println(response);

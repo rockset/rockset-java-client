@@ -7,8 +7,10 @@
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/model/CommitMarkPositions.java
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/model/QueryParameter.java
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/auth/OAuth.java
+/data/home/kw/rockset-java-client/src/main/java/com/rockset/examples/AddDocumentExample.java
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/model/SourceS3.java
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/JSON.java
+/data/home/kw/rockset-java-client/src/main/java/com/rockset/examples/GetCollectionExample.java
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/model/QueryRequest.java
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/model/QueryRequestSql.java
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/ApiClient.java
@@ -30,13 +32,16 @@
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/StringUtil.java
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/model/SqlExpression.java
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/model/SourceDynamoDb.java
+/data/home/kw/rockset-java-client/src/main/java/com/rockset/examples/CreateS3CollectionExample.java
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/model/DeleteDocumentsResponse.java
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/model/DeleteCollectionResponse.java
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/Pair.java
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/model/GetCollectionResponse.java
+/data/home/kw/rockset-java-client/src/main/java/com/rockset/examples/CreateCollectionExample.java
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/api/UsersApi.java
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/GzipRequestInterceptor.java
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/model/DeleteUserResponse.java
+/data/home/kw/rockset-java-client/src/main/java/com/rockset/examples/QueryExample.java
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/model/QueryResponse.java
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/model/FieldMapping.java
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/ApiException.java
@@ -66,6 +71,7 @@
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/model/FieldMappingV2.java
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/Configuration.java
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/model/CreateApiKeyResponse.java
+/data/home/kw/rockset-java-client/src/main/java/com/rockset/examples/CreateIntegrationExample.java
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/model/DeleteApiKeyResponse.java
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/model/ListUsersResponse.java
 /data/home/kw/rockset-java-client/src/main/java/com/rockset/client/model/AddDocumentsResponse.java

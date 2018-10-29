@@ -1,4 +1,6 @@
 com/rockset/client/api/UsersApi$15.class
+com/rockset/examples/CreateCollectionExample.class
+com/rockset/examples/QueryExample.class
 com/rockset/client/api/OrganizationsApi$10.class
 com/rockset/client/ProgressResponseBody$ProgressListener.class
 com/rockset/client/model/OutputField$OnErrorEnum.class
@@ -83,6 +85,7 @@ com/rockset/client/api/OrganizationsApi$8.class
 com/rockset/client/api/CollectionsApi$4.class
 com/rockset/client/model/Organization.class
 com/rockset/client/model/ErrorModel.class
+com/rockset/examples/CreateIntegrationExample.class
 com/rockset/client/api/QueriesApi$4.class
 com/rockset/client/model/ListApiKeysResponse.class
 com/rockset/client/model/SourceDynamoDb.class
@@ -100,6 +103,7 @@ com/rockset/client/api/UsersApi$17.class
 com/rockset/client/api/ApiKeysApi$27.class
 com/rockset/client/GzipRequestInterceptor.class
 com/rockset/client/api/UsersApi$8.class
+com/rockset/examples/AddDocumentExample.class
 com/rockset/client/api/ApiKeysApi$9.class
 com/rockset/client/api/QueriesApi$5.class
 com/rockset/client/api/CollectionsApi$6.class
@@ -113,6 +117,7 @@ com/rockset/client/api/OrganizationsApi$6.class
 com/rockset/client/auth/Authentication.class
 com/rockset/client/ApiClient$3.class
 com/rockset/client/api/CollectionsApi$17.class
+com/rockset/examples/CreateS3CollectionExample.class
 com/rockset/client/model/Source.class
 com/rockset/client/api/ApiKeysApi$8.class
 com/rockset/client/api/IntegrationsApi$14.class
@@ -162,6 +167,7 @@ com/rockset/client/api/ApiKeysApi$13.class
 com/rockset/client/api/ApiKeysApi$19.class
 com/rockset/client/RocksetClient.class
 com/rockset/client/model/CreateIntegrationResponse.class
+com/rockset/examples/GetCollectionExample.class
 com/rockset/client/api/OrganizationsApi$12.class
 com/rockset/client/api/OrganizationsApi$17.class
 com/rockset/client/model/Resource$StatusEnum.class
