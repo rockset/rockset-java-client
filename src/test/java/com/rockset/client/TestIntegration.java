@@ -16,9 +16,14 @@ public class TestIntegration {
   private String awsSecretkey;
 
   @BeforeSuite
-  public void setUp() {
+  public void setUp() throws Exception {
     String apiKey = System.getenv("ROCKSET_APIKEY");
     String apiServer = System.getenv("ROCKSET_APISERVER");
+    if (apiKey == null || apiServer == null) {
+      throw new Exception("If you want to run unit tests "
+                          + "Please set ROCKSET_APIKEY and ROCKSET_APISERVER");
+    }
+
     this.client = new RocksetClient(apiKey, apiServer);
     this.integrationName = "java-client-test-integration-"
         + RandomStringUtils.randomAlphanumeric(5);
