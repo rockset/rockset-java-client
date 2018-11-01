@@ -1,4 +1,4 @@
-# Rockset Node Client Changelog
+# Rockset Java Client Changelog
 
-## v1.0.0 2018-10-29
+## v0.4.7 2018-10-28
 - Initial client release
