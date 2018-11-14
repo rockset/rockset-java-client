@@ -2,10 +2,6 @@ package com.rockset.client;
 
 import com.rockset.client.api.*;
 import com.rockset.client.model.*;
-import org.apache.maven.model.Model;
-import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-
-import java.io.FileReader;
 import java.util.List;
 
 public class RocksetClient {
@@ -29,16 +25,10 @@ public class RocksetClient {
         apiServer = "https://" + apiServer;
       }
 
-      try {
-        MavenXpp3Reader reader = new MavenXpp3Reader();
-        Model model = reader.read(new FileReader("pom.xml"));
-        apiClient = new ApiClient()
-            .setApiKey(apiKey)
-            .setApiServer(apiServer)
-            .setVersion(model.getVersion());
-      } catch (Exception e) {
-        assert(true);
-      }
+      apiClient = new ApiClient()
+          .setApiKey(apiKey)
+          .setApiServer(apiServer)
+          .setVersion("0.4.8");// TODO: figure out how we can set this dynamically.
 
       apiKeys = new ApiKeysApi(this.apiClient);
       collection = new CollectionsApi(this.apiClient);
