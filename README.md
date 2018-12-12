@@ -48,4 +48,4 @@ Feel free to log issues against this client through GitHub.
 
 ## License
 
-The Rockset Java Client is licensed under the [MIT License](https://github.com/rockset/rockset-java-client/blob/master/LICENSE)
+The Rockset Java Client is licensed under the [Apache 2.0 License](https://github.com/rockset/rockset-java-client/blob/master/LICENSE)
