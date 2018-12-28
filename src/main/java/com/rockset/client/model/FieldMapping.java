@@ -19,7 +19,7 @@ import java.util.Arrays;
 /**
  * FieldMapping
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-28T00:40:02.700Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-12-28T20:02:03.641Z")
 public class FieldMapping {
 
   @Override

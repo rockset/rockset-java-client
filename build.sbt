@@ -2,7 +2,7 @@ lazy val root = (project in file(".")).
   settings(
     organization := "com.rockset",
     name := "rockset-java",
-    version := "0.4.8",
+    version := "0.5.8",
     scalaVersion := "2.11.4",
     scalacOptions ++= Seq("-feature"),
     javacOptions in compile ++= Seq("-Xlint:deprecation"),

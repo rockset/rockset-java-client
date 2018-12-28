@@ -174,6 +174,6 @@ public class RocksetClient {
    * @throws ApiException
    */
     public QueryResponse query(QueryRequest request) throws ApiException {
-      return query.query(request, null);
+      return query.query(request);
     }
 }

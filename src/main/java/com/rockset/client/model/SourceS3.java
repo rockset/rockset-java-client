@@ -23,19 +23,56 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * SourceS3
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-28T00:40:02.700Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-12-28T20:02:03.641Z")
 public class SourceS3 {
+  @SerializedName("prefix")
+  private String prefix = null;
+
+  @SerializedName("pattern")
+  private String pattern = null;
+
   @SerializedName("bucket")
   private String bucket = null;
 
-  @SerializedName("prefixes")
-  private List<String> prefixes = new ArrayList<String>();
+  public SourceS3 prefix(String prefix) {
+    this.prefix = prefix;
+    return this;
+  }
+
+   /**
+   * Prefix that selects keys to ingest.
+   * @return prefix
+  **/
+  @ApiModelProperty(example = "prefix/to/keys", value = "Prefix that selects keys to ingest.")
+  public String getPrefix() {
+    return prefix;
+  }
+
+  public void setPrefix(String prefix) {
+    this.prefix = prefix;
+  }
+
+  public SourceS3 pattern(String pattern) {
+    this.pattern = pattern;
+    return this;
+  }
+
+   /**
+   * Pattern that selects keys to ingest.
+   * @return pattern
+  **/
+  @ApiModelProperty(example = "prefix/to/_**_/keys/_*.format", value = "Pattern that selects keys to ingest.")
+  public String getPattern() {
+    return pattern;
+  }
+
+  public void setPattern(String pattern) {
+    this.pattern = pattern;
+  }
 
   public SourceS3 bucket(String bucket) {
     this.bucket = bucket;
@@ -55,29 +92,6 @@ public class SourceS3 {
     this.bucket = bucket;
   }
 
-  public SourceS3 prefixes(List<String> prefixes) {
-    this.prefixes = prefixes;
-    return this;
-  }
-
-  public SourceS3 addPrefixesItem(String prefixesItem) {
-    this.prefixes.add(prefixesItem);
-    return this;
-  }
-
-   /**
-   * list of prefixes to paths from which data should be ingested
-   * @return prefixes
-  **/
-  @ApiModelProperty(example = "\"['/transactions', '/stores']\"", required = true, value = "list of prefixes to paths from which data should be ingested")
-  public List<String> getPrefixes() {
-    return prefixes;
-  }
-
-  public void setPrefixes(List<String> prefixes) {
-    this.prefixes = prefixes;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -88,13 +102,14 @@ public class SourceS3 {
       return false;
     }
     SourceS3 sourceS3 = (SourceS3) o;
-    return Objects.equals(this.bucket, sourceS3.bucket) &&
-        Objects.equals(this.prefixes, sourceS3.prefixes);
+    return Objects.equals(this.prefix, sourceS3.prefix) &&
+        Objects.equals(this.pattern, sourceS3.pattern) &&
+        Objects.equals(this.bucket, sourceS3.bucket);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(bucket, prefixes);
+    return Objects.hash(prefix, pattern, bucket);
   }
 
 
@@ -103,8 +118,9 @@ public class SourceS3 {
     StringBuilder sb = new StringBuilder();
     sb.append("class SourceS3 {\n");
     
+    sb.append("    prefix: ").append(toIndentedString(prefix)).append("\n");
+    sb.append("    pattern: ").append(toIndentedString(pattern)).append("\n");
     sb.append("    bucket: ").append(toIndentedString(bucket)).append("\n");
-    sb.append("    prefixes: ").append(toIndentedString(prefixes)).append("\n");
     sb.append("}");
     return sb.toString();
   }

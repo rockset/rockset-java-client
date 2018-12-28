@@ -20,7 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.rockset.client.model.CsvParams;
+import com.rockset.client.model.FormatParams;
 import com.rockset.client.model.SourceDynamoDb;
 import com.rockset.client.model.SourceKinesis;
 import com.rockset.client.model.SourceS3;
@@ -32,7 +32,7 @@ import java.io.IOException;
  * Details about the data source for the given collection. Only one of the following fields are allowed to be defined. Only collections can act as data sources for views. 
  */
 @ApiModel(description = "Details about the data source for the given collection. Only one of the following fields are allowed to be defined. Only collections can act as data sources for views. ")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-28T00:40:02.700Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-12-28T20:02:03.641Z")
 public class Source {
   @SerializedName("type")
   private String type = null;
@@ -49,60 +49,8 @@ public class Source {
   @SerializedName("dynamodb")
   private SourceDynamoDb dynamodb = null;
 
-  /**
-   * can be one of: CSV
-   */
-  @JsonAdapter(FormatEnum.Adapter.class)
-  public enum FormatEnum {
-    JSON("JSON"),
-    
-    CSV("CSV"),
-    
-    AUTO_DETECT("AUTO_DETECT");
-
-    private String value;
-
-    FormatEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static FormatEnum fromValue(String text) {
-      for (FormatEnum b : FormatEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-
-    public static class Adapter extends TypeAdapter<FormatEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final FormatEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public FormatEnum read(final JsonReader jsonReader) throws IOException {
-        String value = jsonReader.nextString();
-        return FormatEnum.fromValue(String.valueOf(value));
-      }
-    }
-  }
-
-  @SerializedName("format")
-  private FormatEnum format = null;
-
-  @SerializedName("format_params_csv")
-  private CsvParams formatParamsCsv = null;
+  @SerializedName("format_params")
+  private FormatParams formatParams = null;
 
    /**
    * has value &#x60;source&#x60; for a source object
@@ -185,40 +133,22 @@ public class Source {
     this.dynamodb = dynamodb;
   }
 
-  public Source format(FormatEnum format) {
-    this.format = format;
+  public Source formatParams(FormatParams formatParams) {
+    this.formatParams = formatParams;
     return this;
   }
 
    /**
-   * can be one of: CSV
-   * @return format
+   * format parameters for data from this source
+   * @return formatParams
   **/
-  @ApiModelProperty(example = "CSV", value = "can be one of: CSV")
-  public FormatEnum getFormat() {
-    return format;
+  @ApiModelProperty(value = "format parameters for data from this source")
+  public FormatParams getFormatParams() {
+    return formatParams;
   }
 
-  public void setFormat(FormatEnum format) {
-    this.format = format;
-  }
-
-  public Source formatParamsCsv(CsvParams formatParamsCsv) {
-    this.formatParamsCsv = formatParamsCsv;
-    return this;
-  }
-
-   /**
-   * a json doc that describes the params for the specified format
-   * @return formatParamsCsv
-  **/
-  @ApiModelProperty(value = "a json doc that describes the params for the specified format")
-  public CsvParams getFormatParamsCsv() {
-    return formatParamsCsv;
-  }
-
-  public void setFormatParamsCsv(CsvParams formatParamsCsv) {
-    this.formatParamsCsv = formatParamsCsv;
+  public void setFormatParams(FormatParams formatParams) {
+    this.formatParams = formatParams;
   }
 
 
@@ -236,13 +166,12 @@ public class Source {
         Objects.equals(this.s3, source.s3) &&
         Objects.equals(this.kinesis, source.kinesis) &&
         Objects.equals(this.dynamodb, source.dynamodb) &&
-        Objects.equals(this.format, source.format) &&
-        Objects.equals(this.formatParamsCsv, source.formatParamsCsv);
+        Objects.equals(this.formatParams, source.formatParams);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(type, integrationName, s3, kinesis, dynamodb, format, formatParamsCsv);
+    return Objects.hash(type, integrationName, s3, kinesis, dynamodb, formatParams);
   }
 
 
@@ -256,8 +185,7 @@ public class Source {
     sb.append("    s3: ").append(toIndentedString(s3)).append("\n");
     sb.append("    kinesis: ").append(toIndentedString(kinesis)).append("\n");
     sb.append("    dynamodb: ").append(toIndentedString(dynamodb)).append("\n");
-    sb.append("    format: ").append(toIndentedString(format)).append("\n");
-    sb.append("    formatParamsCsv: ").append(toIndentedString(formatParamsCsv)).append("\n");
+    sb.append("    formatParams: ").append(toIndentedString(formatParams)).append("\n");
     sb.append("}");
     return sb.toString();
   }

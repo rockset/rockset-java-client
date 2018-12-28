@@ -58,13 +58,12 @@ public class QueriesApi {
     /**
      * Build call for query
      * @param body JSON object (required)
-     * @param workspace name of the workspace (optional, default to commons)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call queryCall(QueryRequest body, String workspace, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call queryCall(QueryRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -72,8 +71,6 @@ public class QueriesApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        if (workspace != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("workspace", workspace));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -108,7 +105,7 @@ public class QueriesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call queryValidateBeforeCall(QueryRequest body, String workspace, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call queryValidateBeforeCall(QueryRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         // verify the required parameter 'body' is set
         if (body == null) {
@@ -116,7 +113,7 @@ public class QueriesApi {
         }
         
 
-        com.squareup.okhttp.Call call = queryCall(body, workspace, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = queryCall(body, progressListener, progressRequestListener);
         return call;
 
     }
@@ -125,12 +122,11 @@ public class QueriesApi {
      * Query
      * Make a SQL query to Rockset.
      * @param body JSON object (required)
-     * @param workspace name of the workspace (optional, default to commons)
      * @return QueryResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public QueryResponse query(QueryRequest body, String workspace) throws ApiException {
-        ApiResponse<QueryResponse> resp = queryWithHttpInfo(body, workspace);
+    public QueryResponse query(QueryRequest body) throws ApiException {
+        ApiResponse<QueryResponse> resp = queryWithHttpInfo(body);
         return resp.getData();
     }
 
@@ -138,12 +134,11 @@ public class QueriesApi {
      * Query
      * Make a SQL query to Rockset.
      * @param body JSON object (required)
-     * @param workspace name of the workspace (optional, default to commons)
      * @return ApiResponse&lt;QueryResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<QueryResponse> queryWithHttpInfo(QueryRequest body, String workspace) throws ApiException {
-        com.squareup.okhttp.Call call = queryValidateBeforeCall(body, workspace, null, null);
+    public ApiResponse<QueryResponse> queryWithHttpInfo(QueryRequest body) throws ApiException {
+        com.squareup.okhttp.Call call = queryValidateBeforeCall(body, null, null);
         Type localVarReturnType = new TypeToken<QueryResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -152,12 +147,11 @@ public class QueriesApi {
      * Query (asynchronously)
      * Make a SQL query to Rockset.
      * @param body JSON object (required)
-     * @param workspace name of the workspace (optional, default to commons)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call queryAsync(QueryRequest body, String workspace, final ApiCallback<QueryResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call queryAsync(QueryRequest body, final ApiCallback<QueryResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -178,7 +172,7 @@ public class QueriesApi {
             };
         }
 
-        com.squareup.okhttp.Call call = queryValidateBeforeCall(body, workspace, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = queryValidateBeforeCall(body, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<QueryResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

@@ -15,12 +15,42 @@ package com.rockset.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import com.rockset.client.model.Organization;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 
 /**
- * CommitMark
+ * OrganizationResponse
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-12-28T20:02:03.641Z")
-public class CommitMark {
+public class OrganizationResponse {
+  @SerializedName("data")
+  private Organization data = null;
+
+  public OrganizationResponse data(Organization data) {
+    this.data = data;
+    return this;
+  }
+
+   /**
+   * Organization object
+   * @return data
+  **/
+  @ApiModelProperty(value = "Organization object")
+  public Organization getData() {
+    return data;
+  }
+
+  public void setData(Organization data) {
+    this.data = data;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -30,20 +60,22 @@ public class CommitMark {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    return true;
+    OrganizationResponse organizationResponse = (OrganizationResponse) o;
+    return Objects.equals(this.data, organizationResponse.data);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash();
+    return Objects.hash(data);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CommitMark {\n");
+    sb.append("class OrganizationResponse {\n");
     
+    sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("}");
     return sb.toString();
   }

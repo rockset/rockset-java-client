@@ -20,34 +20,78 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.rockset.client.model.CsvParams;
+import com.rockset.client.model.XmlParams;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * SourceDynamoDb
+ * FormatParams
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-12-28T20:02:03.641Z")
-public class SourceDynamoDb {
-  @SerializedName("table_name")
-  private String tableName = null;
+public class FormatParams {
+  @SerializedName("json")
+  private Boolean json = null;
 
-  public SourceDynamoDb tableName(String tableName) {
-    this.tableName = tableName;
+  @SerializedName("csv")
+  private CsvParams csv = null;
+
+  @SerializedName("xml")
+  private XmlParams xml = null;
+
+  public FormatParams json(Boolean json) {
+    this.json = json;
     return this;
   }
 
    /**
-   * name of DynamoDB table containing data
-   * @return tableName
+   * source data is in json format
+   * @return json
   **/
-  @ApiModelProperty(example = "dynamodb_table_name", required = true, value = "name of DynamoDB table containing data")
-  public String getTableName() {
-    return tableName;
+  @ApiModelProperty(example = "true", value = "source data is in json format")
+  public Boolean isJson() {
+    return json;
   }
 
-  public void setTableName(String tableName) {
-    this.tableName = tableName;
+  public void setJson(Boolean json) {
+    this.json = json;
+  }
+
+  public FormatParams csv(CsvParams csv) {
+    this.csv = csv;
+    return this;
+  }
+
+   /**
+   * Get csv
+   * @return csv
+  **/
+  @ApiModelProperty(value = "")
+  public CsvParams getCsv() {
+    return csv;
+  }
+
+  public void setCsv(CsvParams csv) {
+    this.csv = csv;
+  }
+
+  public FormatParams xml(XmlParams xml) {
+    this.xml = xml;
+    return this;
+  }
+
+   /**
+   * Get xml
+   * @return xml
+  **/
+  @ApiModelProperty(value = "")
+  public XmlParams getXml() {
+    return xml;
+  }
+
+  public void setXml(XmlParams xml) {
+    this.xml = xml;
   }
 
 
@@ -59,22 +103,26 @@ public class SourceDynamoDb {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SourceDynamoDb sourceDynamoDb = (SourceDynamoDb) o;
-    return Objects.equals(this.tableName, sourceDynamoDb.tableName);
+    FormatParams formatParams = (FormatParams) o;
+    return Objects.equals(this.json, formatParams.json) &&
+        Objects.equals(this.csv, formatParams.csv) &&
+        Objects.equals(this.xml, formatParams.xml);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(tableName);
+    return Objects.hash(json, csv, xml);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SourceDynamoDb {\n");
+    sb.append("class FormatParams {\n");
     
-    sb.append("    tableName: ").append(toIndentedString(tableName)).append("\n");
+    sb.append("    json: ").append(toIndentedString(json)).append("\n");
+    sb.append("    csv: ").append(toIndentedString(csv)).append("\n");
+    sb.append("    xml: ").append(toIndentedString(xml)).append("\n");
     sb.append("}");
     return sb.toString();
   }

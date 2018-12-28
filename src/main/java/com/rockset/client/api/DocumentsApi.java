@@ -59,7 +59,7 @@ public class DocumentsApi {
 
     /**
      * Build call for add
-     * @param collection name of the workspace (required)
+     * @param collection name of the collection (required)
      * @param body JSON object (required)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
@@ -130,7 +130,7 @@ public class DocumentsApi {
     /**
      * Add Documents
      * Add documents to a collection in Rockset.
-     * @param collection name of the workspace (required)
+     * @param collection name of the collection (required)
      * @param body JSON object (required)
      * @return AddDocumentsResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -143,7 +143,7 @@ public class DocumentsApi {
     /**
      * Add Documents
      * Add documents to a collection in Rockset.
-     * @param collection name of the workspace (required)
+     * @param collection name of the collection (required)
      * @param body JSON object (required)
      * @return ApiResponse&lt;AddDocumentsResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -157,7 +157,7 @@ public class DocumentsApi {
     /**
      * Add Documents (asynchronously)
      * Add documents to a collection in Rockset.
-     * @param collection name of the workspace (required)
+     * @param collection name of the collection (required)
      * @param body JSON object (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call

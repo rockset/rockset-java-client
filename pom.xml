@@ -5,7 +5,7 @@
     <artifactId>rockset-java</artifactId>
     <packaging>jar</packaging>
     <name>Rockset Java</name>
-    <version>0.4.8</version>
+    <version>0.5.8</version>
     <url>https://github.com/rockset/rockset-java-client</url>
     <description>The official Rockset Java client library</description>
     <scm>
@@ -16,8 +16,8 @@
 
     <licenses>
         <license>
-            <name>MIT License</name>
-            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
 

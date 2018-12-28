@@ -28,69 +28,188 @@ import java.io.IOException;
  * An organization in Rockset is a container for users and collections.
  */
 @ApiModel(description = "An organization in Rockset is a container for users and collections.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-10-28T00:40:02.700Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-12-28T20:02:03.641Z")
 public class Organization {
-  @SerializedName("name")
-  private String name = null;
+  @SerializedName("id")
+  private String id = null;
 
-  @SerializedName("inputRateLimitMbs")
-  private Long inputRateLimitMbs = null;
+  @SerializedName("display_name")
+  private String displayName = null;
 
-  @SerializedName("sizeLimitGb")
-  private Long sizeLimitGb = null;
+  /**
+   * pricing tier
+   */
+  @JsonAdapter(TierEnum.Adapter.class)
+  public enum TierEnum {
+    STARTER("STARTER"),
+    
+    PREMIUM("PREMIUM"),
+    
+    ENTERPRISE("ENTERPRISE");
 
-  public Organization name(String name) {
-    this.name = name;
+    private String value;
+
+    TierEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static TierEnum fromValue(String text) {
+      for (TierEnum b : TierEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+
+    public static class Adapter extends TypeAdapter<TierEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final TierEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public TierEnum read(final JsonReader jsonReader) throws IOException {
+        String value = jsonReader.nextString();
+        return TierEnum.fromValue(String.valueOf(value));
+      }
+    }
+  }
+
+  @SerializedName("tier")
+  private TierEnum tier = null;
+
+  /**
+   * org state
+   */
+  @JsonAdapter(StateEnum.Adapter.class)
+  public enum StateEnum {
+    NEW("NEW"),
+    
+    ACTIVE("ACTIVE"),
+    
+    DELETED("DELETED");
+
+    private String value;
+
+    StateEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static StateEnum fromValue(String text) {
+      for (StateEnum b : StateEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+
+    public static class Adapter extends TypeAdapter<StateEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final StateEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public StateEnum read(final JsonReader jsonReader) throws IOException {
+        String value = jsonReader.nextString();
+        return StateEnum.fromValue(String.valueOf(value));
+      }
+    }
+  }
+
+  @SerializedName("state")
+  private StateEnum state = null;
+
+  public Organization id(String id) {
+    this.id = id;
+    return this;
+  }
+
+   /**
+   * unique identifier for the organization
+   * @return id
+  **/
+  @ApiModelProperty(example = "rockset", value = "unique identifier for the organization")
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public Organization displayName(String displayName) {
+    this.displayName = displayName;
     return this;
   }
 
    /**
    * name of the organization
-   * @return name
+   * @return displayName
   **/
-  @ApiModelProperty(example = "rockset", required = true, value = "name of the organization")
-  public String getName() {
-    return name;
+  @ApiModelProperty(example = "Rockset, Inc", value = "name of the organization")
+  public String getDisplayName() {
+    return displayName;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setDisplayName(String displayName) {
+    this.displayName = displayName;
   }
 
-  public Organization inputRateLimitMbs(Long inputRateLimitMbs) {
-    this.inputRateLimitMbs = inputRateLimitMbs;
+  public Organization tier(TierEnum tier) {
+    this.tier = tier;
     return this;
   }
 
    /**
-   * Get inputRateLimitMbs
-   * @return inputRateLimitMbs
+   * pricing tier
+   * @return tier
   **/
-  @ApiModelProperty(value = "")
-  public Long getInputRateLimitMbs() {
-    return inputRateLimitMbs;
+  @ApiModelProperty(example = "STARTER", value = "pricing tier")
+  public TierEnum getTier() {
+    return tier;
   }
 
-  public void setInputRateLimitMbs(Long inputRateLimitMbs) {
-    this.inputRateLimitMbs = inputRateLimitMbs;
+  public void setTier(TierEnum tier) {
+    this.tier = tier;
   }
 
-  public Organization sizeLimitGb(Long sizeLimitGb) {
-    this.sizeLimitGb = sizeLimitGb;
+  public Organization state(StateEnum state) {
+    this.state = state;
     return this;
   }
 
    /**
-   * Get sizeLimitGb
-   * @return sizeLimitGb
+   * org state
+   * @return state
   **/
-  @ApiModelProperty(value = "")
-  public Long getSizeLimitGb() {
-    return sizeLimitGb;
+  @ApiModelProperty(example = "ACTIVE", value = "org state")
+  public StateEnum getState() {
+    return state;
   }
 
-  public void setSizeLimitGb(Long sizeLimitGb) {
-    this.sizeLimitGb = sizeLimitGb;
+  public void setState(StateEnum state) {
+    this.state = state;
   }
 
 
@@ -103,14 +222,15 @@ public class Organization {
       return false;
     }
     Organization organization = (Organization) o;
-    return Objects.equals(this.name, organization.name) &&
-        Objects.equals(this.inputRateLimitMbs, organization.inputRateLimitMbs) &&
-        Objects.equals(this.sizeLimitGb, organization.sizeLimitGb);
+    return Objects.equals(this.id, organization.id) &&
+        Objects.equals(this.displayName, organization.displayName) &&
+        Objects.equals(this.tier, organization.tier) &&
+        Objects.equals(this.state, organization.state);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, inputRateLimitMbs, sizeLimitGb);
+    return Objects.hash(id, displayName, tier, state);
   }
 
 
@@ -119,9 +239,10 @@ public class Organization {
     StringBuilder sb = new StringBuilder();
     sb.append("class Organization {\n");
     
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    inputRateLimitMbs: ").append(toIndentedString(inputRateLimitMbs)).append("\n");
-    sb.append("    sizeLimitGb: ").append(toIndentedString(sizeLimitGb)).append("\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
+    sb.append("    tier: ").append(toIndentedString(tier)).append("\n");
+    sb.append("    state: ").append(toIndentedString(state)).append("\n");
     sb.append("}");
     return sb.toString();
   }

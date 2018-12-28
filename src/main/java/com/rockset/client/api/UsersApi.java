@@ -360,7 +360,7 @@ public class UsersApi {
     }
 
     /**
-     * Retrieve current user
+     * Get Current User
      * Retrieve currently active user.
      * @return ListUsersResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -371,7 +371,7 @@ public class UsersApi {
     }
 
     /**
-     * Retrieve current user
+     * Get Current User
      * Retrieve currently active user.
      * @return ApiResponse&lt;ListUsersResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -383,7 +383,7 @@ public class UsersApi {
     }
 
     /**
-     * Retrieve current user (asynchronously)
+     * Get Current User (asynchronously)
      * Retrieve currently active user.
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
