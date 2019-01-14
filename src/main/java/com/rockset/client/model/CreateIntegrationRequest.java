@@ -20,6 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.rockset.client.model.AwsExternalIdIntegration;
 import com.rockset.client.model.AwsKeyIntegration;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -28,7 +29,7 @@ import java.io.IOException;
 /**
  * CreateIntegrationRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-12-28T20:02:03.641Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-14T23:36:13.223Z")
 public class CreateIntegrationRequest {
   @SerializedName("name")
   private String name = null;
@@ -38,6 +39,9 @@ public class CreateIntegrationRequest {
 
   @SerializedName("aws")
   private AwsKeyIntegration aws = null;
+
+  @SerializedName("aws_external_id")
+  private AwsExternalIdIntegration awsExternalId = null;
 
   public CreateIntegrationRequest name(String name) {
     this.name = name;
@@ -93,6 +97,15 @@ public class CreateIntegrationRequest {
     this.aws = aws;
   }
 
+   /**
+   * details for an AWS External Id integration
+   * @return awsExternalId
+  **/
+  @ApiModelProperty(value = "details for an AWS External Id integration")
+  public AwsExternalIdIntegration getAwsExternalId() {
+    return awsExternalId;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -105,12 +118,13 @@ public class CreateIntegrationRequest {
     CreateIntegrationRequest createIntegrationRequest = (CreateIntegrationRequest) o;
     return Objects.equals(this.name, createIntegrationRequest.name) &&
         Objects.equals(this.description, createIntegrationRequest.description) &&
-        Objects.equals(this.aws, createIntegrationRequest.aws);
+        Objects.equals(this.aws, createIntegrationRequest.aws) &&
+        Objects.equals(this.awsExternalId, createIntegrationRequest.awsExternalId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, description, aws);
+    return Objects.hash(name, description, aws, awsExternalId);
   }
 
 
@@ -122,6 +136,7 @@ public class CreateIntegrationRequest {
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    aws: ").append(toIndentedString(aws)).append("\n");
+    sb.append("    awsExternalId: ").append(toIndentedString(awsExternalId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

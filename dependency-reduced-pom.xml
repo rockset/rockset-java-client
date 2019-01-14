@@ -4,7 +4,7 @@
   <groupId>com.rockset</groupId>
   <artifactId>rockset-java</artifactId>
   <name>Rockset Java</name>
-  <version>0.5.8</version>
+  <version>0.5.9</version>
   <description>The official Rockset Java client library</description>
   <url>https://github.com/rockset/rockset-java-client</url>
   <developers>

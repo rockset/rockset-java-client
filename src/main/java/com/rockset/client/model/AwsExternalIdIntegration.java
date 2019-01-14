@@ -20,35 +20,58 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.rockset.client.model.Organization;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * OrganizationResponse
+ * AwsExternalIdIntegration
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-14T23:36:13.223Z")
-public class OrganizationResponse {
-  @SerializedName("data")
-  private Organization data = null;
+public class AwsExternalIdIntegration {
+  @SerializedName("aws_role_arn")
+  private String awsRoleArn = null;
 
-  public OrganizationResponse data(Organization data) {
-    this.data = data;
+  @SerializedName("aws_external_id")
+  private String awsExternalId = null;
+
+  @SerializedName("rockset_iam_user")
+  private String rocksetIamUser = null;
+
+  public AwsExternalIdIntegration awsRoleArn(String awsRoleArn) {
+    this.awsRoleArn = awsRoleArn;
     return this;
   }
 
    /**
-   * Organization object
-   * @return data
+   * ARN of rockset-role created in your account
+   * @return awsRoleArn
   **/
-  @ApiModelProperty(value = "Organization object")
-  public Organization getData() {
-    return data;
+  @ApiModelProperty(example = "arn:aws:iam::2378964092:role/rockset-role", required = true, value = "ARN of rockset-role created in your account")
+  public String getAwsRoleArn() {
+    return awsRoleArn;
   }
 
-  public void setData(Organization data) {
-    this.data = data;
+  public void setAwsRoleArn(String awsRoleArn) {
+    this.awsRoleArn = awsRoleArn;
+  }
+
+   /**
+   * Get awsExternalId
+   * @return awsExternalId
+  **/
+  @ApiModelProperty(example = "adf98a7sdffkjh233rjh9a8sdf", value = "")
+  public String getAwsExternalId() {
+    return awsExternalId;
+  }
+
+   /**
+   * Get rocksetIamUser
+   * @return rocksetIamUser
+  **/
+  @ApiModelProperty(example = "arn:aws:iam::983247598:root", value = "")
+  public String getRocksetIamUser() {
+    return rocksetIamUser;
   }
 
 
@@ -60,22 +83,26 @@ public class OrganizationResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    OrganizationResponse organizationResponse = (OrganizationResponse) o;
-    return Objects.equals(this.data, organizationResponse.data);
+    AwsExternalIdIntegration awsExternalIdIntegration = (AwsExternalIdIntegration) o;
+    return Objects.equals(this.awsRoleArn, awsExternalIdIntegration.awsRoleArn) &&
+        Objects.equals(this.awsExternalId, awsExternalIdIntegration.awsExternalId) &&
+        Objects.equals(this.rocksetIamUser, awsExternalIdIntegration.rocksetIamUser);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data);
+    return Objects.hash(awsRoleArn, awsExternalId, rocksetIamUser);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class OrganizationResponse {\n");
+    sb.append("class AwsExternalIdIntegration {\n");
     
-    sb.append("    data: ").append(toIndentedString(data)).append("\n");
+    sb.append("    awsRoleArn: ").append(toIndentedString(awsRoleArn)).append("\n");
+    sb.append("    awsExternalId: ").append(toIndentedString(awsExternalId)).append("\n");
+    sb.append("    rocksetIamUser: ").append(toIndentedString(rocksetIamUser)).append("\n");
     sb.append("}");
     return sb.toString();
   }

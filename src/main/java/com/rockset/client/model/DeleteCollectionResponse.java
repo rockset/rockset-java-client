@@ -28,7 +28,7 @@ import java.io.IOException;
 /**
  * DeleteCollectionResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-12-28T20:02:03.641Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-14T23:36:13.223Z")
 public class DeleteCollectionResponse {
   @SerializedName("data")
   private Resource data = null;

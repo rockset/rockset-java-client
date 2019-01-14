@@ -1,5 +1,9 @@
 # Rockset Java Client Changelog
 
+## v0.5.9 2019-01-14
+- Added support for AWS External ID as a new type of integration
+- rockset-jdbc driver is now part of rockset-java-client
+
 ## v0.5.8 2018-12-28
 - Support for creating collections from XML data files
 - Support for prefix patterns in S3 sources
