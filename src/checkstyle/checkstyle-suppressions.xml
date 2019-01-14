@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+ <!DOCTYPE suppressions PUBLIC
+     "-//Puppy Crawl//DTD Suppressions 1.0//EN"
+     "http://www.puppycrawl.com/dtds/suppressions_1_0.dtd">
+
+<suppressions>
+		
+        <suppress checks="Regexp" files="FirstExample.java" />
+        <suppress checks="Regexp" files="TestTable.java" />
+        <suppress checks="Regexp" files="RocksetDriver.java" />
+        <suppress checks="OverloadMethodsDeclarationOrder" files="RocksetConnection.java" />
+        <suppress checks="OverloadMethodsDeclarationOrder" files="RocksetResultSet.java" />
+        <suppress checks="OverloadMethodsDeclarationOrder" files="RocksetStatement.java" />
+        <suppress checks="OverloadMethodsDeclarationOrder" files="RocksetDatabaseMetaData.java" />
+
+</suppressions>

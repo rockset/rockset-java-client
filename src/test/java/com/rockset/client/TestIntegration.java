@@ -43,8 +43,8 @@ public class TestIntegration {
     CreateIntegrationResponse response =
         client.createIntegration(request);
     Assert.assertEquals(response.getData().getName(), integrationName);
-    Assert.assertEquals(response.getData().getAws().getAwsAccessKeyId(), awsAccessKey);
-    Assert.assertEquals(response.getData().getAws().getAwsSecretAccessKey(), awsSecretkey);
+    Assert.assertEquals(response.getData().getAws().getAwsAccessKeyId().substring(0, 4), awsAccessKey);
+    Assert.assertEquals(response.getData().getAws().getAwsSecretAccessKey().substring(0, 4), awsSecretkey);
   }
 
   @Test(dependsOnMethods = {"testIntegrationCreate"})
