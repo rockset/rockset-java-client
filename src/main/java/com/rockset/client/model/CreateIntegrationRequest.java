@@ -22,6 +22,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.rockset.client.model.AwsExternalIdIntegration;
 import com.rockset.client.model.AwsKeyIntegration;
+import com.rockset.client.model.GcpServiceAccount;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -29,7 +30,7 @@ import java.io.IOException;
 /**
  * CreateIntegrationRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-14T23:36:13.223Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-16T22:16:35.734Z")
 public class CreateIntegrationRequest {
   @SerializedName("name")
   private String name = null;
@@ -42,6 +43,9 @@ public class CreateIntegrationRequest {
 
   @SerializedName("aws_external_id")
   private AwsExternalIdIntegration awsExternalId = null;
+
+  @SerializedName("gcp_service_account")
+  private GcpServiceAccount gcpServiceAccount = null;
 
   public CreateIntegrationRequest name(String name) {
     this.name = name;
@@ -106,6 +110,24 @@ public class CreateIntegrationRequest {
     return awsExternalId;
   }
 
+  public CreateIntegrationRequest gcpServiceAccount(GcpServiceAccount gcpServiceAccount) {
+    this.gcpServiceAccount = gcpServiceAccount;
+    return this;
+  }
+
+   /**
+   * details of a GCP Service Account integration
+   * @return gcpServiceAccount
+  **/
+  @ApiModelProperty(value = "details of a GCP Service Account integration")
+  public GcpServiceAccount getGcpServiceAccount() {
+    return gcpServiceAccount;
+  }
+
+  public void setGcpServiceAccount(GcpServiceAccount gcpServiceAccount) {
+    this.gcpServiceAccount = gcpServiceAccount;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -119,12 +141,13 @@ public class CreateIntegrationRequest {
     return Objects.equals(this.name, createIntegrationRequest.name) &&
         Objects.equals(this.description, createIntegrationRequest.description) &&
         Objects.equals(this.aws, createIntegrationRequest.aws) &&
-        Objects.equals(this.awsExternalId, createIntegrationRequest.awsExternalId);
+        Objects.equals(this.awsExternalId, createIntegrationRequest.awsExternalId) &&
+        Objects.equals(this.gcpServiceAccount, createIntegrationRequest.gcpServiceAccount);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, description, aws, awsExternalId);
+    return Objects.hash(name, description, aws, awsExternalId, gcpServiceAccount);
   }
 
 
@@ -137,6 +160,7 @@ public class CreateIntegrationRequest {
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    aws: ").append(toIndentedString(aws)).append("\n");
     sb.append("    awsExternalId: ").append(toIndentedString(awsExternalId)).append("\n");
+    sb.append("    gcpServiceAccount: ").append(toIndentedString(gcpServiceAccount)).append("\n");
     sb.append("}");
     return sb.toString();
   }

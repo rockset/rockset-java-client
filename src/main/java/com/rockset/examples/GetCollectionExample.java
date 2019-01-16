@@ -11,7 +11,7 @@ public class GetCollectionExample {
     try {
       GetCollectionResponse response = rs.getCollection("_info.events");
       System.out.println(response);
-    } catch (ApiException e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }

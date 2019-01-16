@@ -24,7 +24,7 @@ public class CreateS3CollectionExample {
     try {
       CreateCollectionResponse response = rs.createCollection(request);
       System.out.println(response);
-    } catch (ApiException e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }

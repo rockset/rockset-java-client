@@ -30,7 +30,7 @@ public class AddDocumentExample {
       CreateCollectionResponse response = rs.createCollection(request);
       AddDocumentsResponse documentsResponse =
           rs.addDocuments(response.getData().getName(), documentsRequest);
-    } catch (ApiException e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }

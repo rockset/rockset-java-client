@@ -42,18 +42,18 @@ public class RocksetClient {
    * Create a Rockset API key to create and query collections
    * @param request CreateApiKeyRequest object which contains the name of the API key
    * @return CreateApiKeyResponse object containing the ApiKey created
-   * @throws ApiException
+   * @throws Exception
    */
-    public CreateApiKeyResponse createApiKey(CreateApiKeyRequest request) throws ApiException {
+    public CreateApiKeyResponse createApiKey(CreateApiKeyRequest request) throws Exception {
       return apiKeys.create(request);
     }
 
   /**
    * List all API keys for a user
    * @return List of all API key objects
-   * @throws ApiException
+   * @throws Exception
    */
-    public List<ApiKey> listApiKeys() throws ApiException {
+    public List<ApiKey> listApiKeys() throws Exception {
       return apiKeys.list().getData();
     }
 
@@ -61,9 +61,9 @@ public class RocksetClient {
    * Delete an API key
    * @param name specify the name of the API key to be deleted
    * @return DeleteApiKeyResponse object
-   * @throws ApiException
+   * @throws Exception
    */
-    public DeleteApiKeyResponse deleteApiKey(String name) throws ApiException {
+    public DeleteApiKeyResponse deleteApiKey(String name) throws Exception {
       return apiKeys.delete(name);
     }
 
@@ -71,18 +71,18 @@ public class RocksetClient {
    * Create a collection in Rockset
    * @param request CreateCollectionRequest object which contains the name and sources for a collection
    * @return CreateCollectionResponse object which contains information about the collection created
-   * @throws ApiException
+   * @throws Exception
    */
-    public CreateCollectionResponse createCollection(CreateCollectionRequest request) throws ApiException {
+    public CreateCollectionResponse createCollection(CreateCollectionRequest request) throws Exception {
       return collection.create(request);
     }
 
   /**
    * List all collections in an organization
    * @return List of Resource object, one for each collection
-   * @throws ApiException
+   * @throws Exception
    */
-    public List<Resource> listCollections() throws ApiException {
+    public List<Resource> listCollections() throws Exception {
       return collection.list().getData();
     }
 
@@ -90,9 +90,9 @@ public class RocksetClient {
    * Get collection details
    * @param name Name of the collection
    * @return GetCollectionResponse object with details about the desctribed collection
-   * @throws ApiException
+   * @throws Exception
    */
-    public GetCollectionResponse getCollection(String name) throws ApiException {
+    public GetCollectionResponse getCollection(String name) throws Exception {
       return collection.get(name);
     }
 
@@ -100,9 +100,9 @@ public class RocksetClient {
    * Delete a collection
    * @param name Name of the collection to be deleted
    * @return DeleteCollectionResponse object with details about the deleted collection
-   * @throws ApiException
+   * @throws Exception
    */
-    public DeleteCollectionResponse deleteCollection(String name) throws ApiException {
+    public DeleteCollectionResponse deleteCollection(String name) throws Exception {
       return collection.delete(name);
     }
 
@@ -111,9 +111,9 @@ public class RocksetClient {
    * @param collectionName Name of the collection
    * @param request AddDocumentsRequest object which contains list of documents to be inserted
    * @return AddDocumentsResponse object containing status of documents added
-   * @throws ApiException
+   * @throws Exception
    */
-    public AddDocumentsResponse addDocuments(String collectionName, AddDocumentsRequest request) throws ApiException {
+    public AddDocumentsResponse addDocuments(String collectionName, AddDocumentsRequest request) throws Exception {
       return document.add(collectionName, request);
     }
 
@@ -122,18 +122,18 @@ public class RocksetClient {
    * @param collectionName Name of the collection
    * @param request DeleteDocumentsRequest object containing id of the documents to be deleted
    * @return DeleteDocumentsResponse object with details of the documents deleted
-   * @throws ApiException
+   * @throws Exception
    */
-    public DeleteDocumentsResponse deleteDocuments(String collectionName, DeleteDocumentsRequest request) throws ApiException {
+    public DeleteDocumentsResponse deleteDocuments(String collectionName, DeleteDocumentsRequest request) throws Exception {
       return document.delete(collectionName, request);
     }
 
   /**
    * List integration
    * @return List of integration object containing details of each integration
-   * @throws ApiException
+   * @throws Exception
    */
-    public List<Integration> listIntegrations() throws ApiException {
+    public List<Integration> listIntegrations() throws Exception {
       return integration.list().getData();
     }
 
@@ -141,9 +141,9 @@ public class RocksetClient {
    * Create an integration e.g. AWS
    * @param request CreateIntegrationRequest object containing details of the integration to be created
    * @return CreateIntegrationResponse response object containing details of the integration created
-   * @throws ApiException
+   * @throws Exception
    */
-    public CreateIntegrationResponse createIntegration(CreateIntegrationRequest request) throws ApiException {
+    public CreateIntegrationResponse createIntegration(CreateIntegrationRequest request) throws Exception {
       return integration.create(request);
     }
 
@@ -151,9 +151,9 @@ public class RocksetClient {
    * Get integration details
    * @param name Name of the integration
    * @return GetIntegrationResponse object with details of the described integration
-   * @throws ApiException
+   * @throws Exception
    */
-    public GetIntegrationResponse getIntegration(String name) throws ApiException {
+    public GetIntegrationResponse getIntegration(String name) throws Exception {
       return integration.get(name);
     }
 
@@ -161,9 +161,9 @@ public class RocksetClient {
    * Delete an integration. Integration shouldn't be associated with a collection, else it will fail
    * @param name Name of the integration to be deleted
    * @return DeleteIntegrationResponse object containing details of the integration deleted
-   * @throws ApiException
+   * @throws Exception
    */
-    public DeleteIntegrationResponse deleteIntegration(String name) throws ApiException{
+    public DeleteIntegrationResponse deleteIntegration(String name) throws Exception{
       return integration.delete(name);
     }
 
@@ -171,9 +171,9 @@ public class RocksetClient {
    * Query a collection in Rockset
    * @param request QueryRequest object containing the SQL query
    * @return QueryResponse object containing the results of the SQL query
-   * @throws ApiException
+   * @throws Exception
    */
-    public QueryResponse query(QueryRequest request) throws ApiException {
+    public QueryResponse query(QueryRequest request) throws Exception {
       return query.query(request);
     }
 }

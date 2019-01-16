@@ -20,35 +20,34 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.rockset.client.model.User;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * DeleteUserResponse
+ * GcpServiceAccount
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-16T22:16:35.734Z")
-public class DeleteUserResponse {
-  @SerializedName("data")
-  private User data = null;
+public class GcpServiceAccount {
+  @SerializedName("service_account_key_file_json")
+  private String serviceAccountKeyFileJson = null;
 
-  public DeleteUserResponse data(User data) {
-    this.data = data;
+  public GcpServiceAccount serviceAccountKeyFileJson(String serviceAccountKeyFileJson) {
+    this.serviceAccountKeyFileJson = serviceAccountKeyFileJson;
     return this;
   }
 
    /**
-   * user object that was deleted
-   * @return data
+   * Contents of JSON Service Account key file
+   * @return serviceAccountKeyFileJson
   **/
-  @ApiModelProperty(value = "user object that was deleted")
-  public User getData() {
-    return data;
+  @ApiModelProperty(required = true, value = "Contents of JSON Service Account key file")
+  public String getServiceAccountKeyFileJson() {
+    return serviceAccountKeyFileJson;
   }
 
-  public void setData(User data) {
-    this.data = data;
+  public void setServiceAccountKeyFileJson(String serviceAccountKeyFileJson) {
+    this.serviceAccountKeyFileJson = serviceAccountKeyFileJson;
   }
 
 
@@ -60,22 +59,22 @@ public class DeleteUserResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    DeleteUserResponse deleteUserResponse = (DeleteUserResponse) o;
-    return Objects.equals(this.data, deleteUserResponse.data);
+    GcpServiceAccount gcpServiceAccount = (GcpServiceAccount) o;
+    return Objects.equals(this.serviceAccountKeyFileJson, gcpServiceAccount.serviceAccountKeyFileJson);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data);
+    return Objects.hash(serviceAccountKeyFileJson);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class DeleteUserResponse {\n");
+    sb.append("class GcpServiceAccount {\n");
     
-    sb.append("    data: ").append(toIndentedString(data)).append("\n");
+    sb.append("    serviceAccountKeyFileJson: ").append(toIndentedString(serviceAccountKeyFileJson)).append("\n");
     sb.append("}");
     return sb.toString();
   }

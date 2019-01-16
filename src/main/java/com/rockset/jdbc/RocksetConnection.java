@@ -5,7 +5,6 @@ import static com.google.common.collect.Maps.fromProperties;
 import static java.nio.charset.StandardCharsets.US_ASCII;
 import static java.util.Objects.requireNonNull;
 
-import com.rockset.client.ApiException;
 import com.rockset.client.RocksetClient;
 import com.rockset.client.model.QueryRequest;
 import com.rockset.client.model.QueryRequestSql;
@@ -482,7 +481,7 @@ public class RocksetConnection implements Connection {
   // This is invoked by the RocksetStatement to execute a query
   //
   QueryResponse startQuery(String sql, Map<String, String> sessionPropertiesOverride)
-        throws ApiException {
+        throws Exception {
     final  QueryRequest request = new QueryRequest()
                                       .sql(new QueryRequestSql().query(sql));
     return client.query(request);
@@ -491,14 +490,14 @@ public class RocksetConnection implements Connection {
   //
   // List all collections
   //
-  List<Resource> listCollections() throws ApiException {
+  List<Resource> listCollections() throws Exception {
     return client.listCollections();
   }
 
   //
   // Get schema for a table
   //
-  QueryResponse describeTable(String name) throws ApiException {
+  QueryResponse describeTable(String name) throws Exception {
     String sql = "describe \"" + name + "\";";
     return startQuery(sql, null);
   }

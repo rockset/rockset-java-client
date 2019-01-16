@@ -28,7 +28,7 @@ import java.io.IOException;
  * Field masking function name + args. The args is a JSON object.
  */
 @ApiModel(description = "Field masking function name + args. The args is a JSON object.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-14T23:36:13.223Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-16T22:16:35.734Z")
 public class FieldMaskMask {
   @SerializedName("name")
   private String name = null;

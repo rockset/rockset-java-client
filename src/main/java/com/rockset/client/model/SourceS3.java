@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * SourceS3
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-14T23:36:13.223Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-16T22:16:35.734Z")
 public class SourceS3 {
   @SerializedName("prefix")
   private String prefix = null;

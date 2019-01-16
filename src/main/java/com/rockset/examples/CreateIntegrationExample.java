@@ -17,7 +17,7 @@ public class CreateIntegrationExample {
     try {
       CreateIntegrationResponse response = rs.createIntegration(request);
       System.out.println(response);
-    } catch (ApiException e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }
