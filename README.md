@@ -1,7 +1,6 @@
 # rockset-java-client
 
-Official Java client library for Rockset.
-This also includes the JDBC driver for accessing data on Rockset.
+Official Java client library and JDBC driver for Rockset.
 
 ## Requirements
 
