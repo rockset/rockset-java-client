@@ -22,6 +22,8 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.rockset.client.model.FormatParams;
 import com.rockset.client.model.SourceDynamoDb;
+import com.rockset.client.model.SourceFileUpload;
+import com.rockset.client.model.SourceGcs;
 import com.rockset.client.model.SourceKinesis;
 import com.rockset.client.model.SourceS3;
 import io.swagger.annotations.ApiModel;
@@ -32,7 +34,7 @@ import java.io.IOException;
  * Details about the data source for the given collection. Only one of the following fields are allowed to be defined. Only collections can act as data sources for views. 
  */
 @ApiModel(description = "Details about the data source for the given collection. Only one of the following fields are allowed to be defined. Only collections can act as data sources for views. ")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-16T22:16:35.734Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-24T01:18:37.603Z")
 public class Source {
   @SerializedName("type")
   private String type = null;
@@ -48,6 +50,12 @@ public class Source {
 
   @SerializedName("dynamodb")
   private SourceDynamoDb dynamodb = null;
+
+  @SerializedName("gcs")
+  private SourceGcs gcs = null;
+
+  @SerializedName("file_upload")
+  private SourceFileUpload fileUpload = null;
 
   @SerializedName("format_params")
   private FormatParams formatParams = null;
@@ -133,6 +141,42 @@ public class Source {
     this.dynamodb = dynamodb;
   }
 
+  public Source gcs(SourceGcs gcs) {
+    this.gcs = gcs;
+    return this;
+  }
+
+   /**
+   * configuration for ingestion from GCS
+   * @return gcs
+  **/
+  @ApiModelProperty(value = "configuration for ingestion from GCS")
+  public SourceGcs getGcs() {
+    return gcs;
+  }
+
+  public void setGcs(SourceGcs gcs) {
+    this.gcs = gcs;
+  }
+
+  public Source fileUpload(SourceFileUpload fileUpload) {
+    this.fileUpload = fileUpload;
+    return this;
+  }
+
+   /**
+   * file upload details
+   * @return fileUpload
+  **/
+  @ApiModelProperty(value = "file upload details")
+  public SourceFileUpload getFileUpload() {
+    return fileUpload;
+  }
+
+  public void setFileUpload(SourceFileUpload fileUpload) {
+    this.fileUpload = fileUpload;
+  }
+
   public Source formatParams(FormatParams formatParams) {
     this.formatParams = formatParams;
     return this;
@@ -166,12 +210,14 @@ public class Source {
         Objects.equals(this.s3, source.s3) &&
         Objects.equals(this.kinesis, source.kinesis) &&
         Objects.equals(this.dynamodb, source.dynamodb) &&
+        Objects.equals(this.gcs, source.gcs) &&
+        Objects.equals(this.fileUpload, source.fileUpload) &&
         Objects.equals(this.formatParams, source.formatParams);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(type, integrationName, s3, kinesis, dynamodb, formatParams);
+    return Objects.hash(type, integrationName, s3, kinesis, dynamodb, gcs, fileUpload, formatParams);
   }
 
 
@@ -185,6 +231,8 @@ public class Source {
     sb.append("    s3: ").append(toIndentedString(s3)).append("\n");
     sb.append("    kinesis: ").append(toIndentedString(kinesis)).append("\n");
     sb.append("    dynamodb: ").append(toIndentedString(dynamodb)).append("\n");
+    sb.append("    gcs: ").append(toIndentedString(gcs)).append("\n");
+    sb.append("    fileUpload: ").append(toIndentedString(fileUpload)).append("\n");
     sb.append("    formatParams: ").append(toIndentedString(formatParams)).append("\n");
     sb.append("}");
     return sb.toString();

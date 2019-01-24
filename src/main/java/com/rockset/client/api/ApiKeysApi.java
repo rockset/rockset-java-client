@@ -15,7 +15,6 @@ package com.rockset.client.api;
 
 import com.rockset.client.ApiCallback;
 import com.rockset.client.ApiClient;
-import com.rockset.client.ApiException;
 import com.rockset.client.ApiResponse;
 import com.rockset.client.Configuration;
 import com.rockset.client.Pair;
@@ -63,9 +62,9 @@ public class ApiKeysApi {
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call createCall(CreateApiKeyRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call createCall(CreateApiKeyRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -107,11 +106,11 @@ public class ApiKeysApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call createValidateBeforeCall(CreateApiKeyRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call createValidateBeforeCall(CreateApiKeyRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'body' is set
         if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling create(Async)");
+            throw new Exception("Missing the required parameter 'body' when calling create(Async)");
         }
         
 
@@ -125,9 +124,9 @@ public class ApiKeysApi {
      * Create a new API key for the authenticated user.
      * @param body JSON object (required)
      * @return CreateApiKeyResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public CreateApiKeyResponse create(CreateApiKeyRequest body) throws ApiException {
+    public CreateApiKeyResponse create(CreateApiKeyRequest body) throws Exception {
         ApiResponse<CreateApiKeyResponse> resp = createWithHttpInfo(body);
         return resp.getData();
     }
@@ -137,9 +136,9 @@ public class ApiKeysApi {
      * Create a new API key for the authenticated user.
      * @param body JSON object (required)
      * @return ApiResponse&lt;CreateApiKeyResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<CreateApiKeyResponse> createWithHttpInfo(CreateApiKeyRequest body) throws ApiException {
+    public ApiResponse<CreateApiKeyResponse> createWithHttpInfo(CreateApiKeyRequest body) throws Exception {
         com.squareup.okhttp.Call call = createValidateBeforeCall(body, null, null);
         Type localVarReturnType = new TypeToken<CreateApiKeyResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -151,9 +150,9 @@ public class ApiKeysApi {
      * @param body JSON object (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call createAsync(CreateApiKeyRequest body, final ApiCallback<CreateApiKeyResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call createAsync(CreateApiKeyRequest body, final ApiCallback<CreateApiKeyResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -186,9 +185,9 @@ public class ApiKeysApi {
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call create_0Call(CreateApiKeyRequest body, String user, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call create_0Call(CreateApiKeyRequest body, String user, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -231,16 +230,16 @@ public class ApiKeysApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call create_0ValidateBeforeCall(CreateApiKeyRequest body, String user, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call create_0ValidateBeforeCall(CreateApiKeyRequest body, String user, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'body' is set
         if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling create_0(Async)");
+            throw new Exception("Missing the required parameter 'body' when calling create_0(Async)");
         }
         
         // verify the required parameter 'user' is set
         if (user == null) {
-            throw new ApiException("Missing the required parameter 'user' when calling create_0(Async)");
+            throw new Exception("Missing the required parameter 'user' when calling create_0(Async)");
         }
         
 
@@ -255,9 +254,9 @@ public class ApiKeysApi {
      * @param body JSON object (required)
      * @param user  (required)
      * @return CreateApiKeyResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public CreateApiKeyResponse create_0(CreateApiKeyRequest body, String user) throws ApiException {
+    public CreateApiKeyResponse create_0(CreateApiKeyRequest body, String user) throws Exception {
         ApiResponse<CreateApiKeyResponse> resp = create_0WithHttpInfo(body, user);
         return resp.getData();
     }
@@ -268,9 +267,9 @@ public class ApiKeysApi {
      * @param body JSON object (required)
      * @param user  (required)
      * @return ApiResponse&lt;CreateApiKeyResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<CreateApiKeyResponse> create_0WithHttpInfo(CreateApiKeyRequest body, String user) throws ApiException {
+    public ApiResponse<CreateApiKeyResponse> create_0WithHttpInfo(CreateApiKeyRequest body, String user) throws Exception {
         com.squareup.okhttp.Call call = create_0ValidateBeforeCall(body, user, null, null);
         Type localVarReturnType = new TypeToken<CreateApiKeyResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -283,9 +282,9 @@ public class ApiKeysApi {
      * @param user  (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call create_0Async(CreateApiKeyRequest body, String user, final ApiCallback<CreateApiKeyResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call create_0Async(CreateApiKeyRequest body, String user, final ApiCallback<CreateApiKeyResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -317,9 +316,9 @@ public class ApiKeysApi {
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call deleteCall(String name, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call deleteCall(String name, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -362,11 +361,11 @@ public class ApiKeysApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call deleteValidateBeforeCall(String name, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call deleteValidateBeforeCall(String name, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'name' is set
         if (name == null) {
-            throw new ApiException("Missing the required parameter 'name' when calling delete(Async)");
+            throw new Exception("Missing the required parameter 'name' when calling delete(Async)");
         }
         
 
@@ -380,9 +379,9 @@ public class ApiKeysApi {
      * Delete an API key for the authenticated user.
      * @param name name of the API key (required)
      * @return DeleteApiKeyResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public DeleteApiKeyResponse delete(String name) throws ApiException {
+    public DeleteApiKeyResponse delete(String name) throws Exception {
         ApiResponse<DeleteApiKeyResponse> resp = deleteWithHttpInfo(name);
         return resp.getData();
     }
@@ -392,9 +391,9 @@ public class ApiKeysApi {
      * Delete an API key for the authenticated user.
      * @param name name of the API key (required)
      * @return ApiResponse&lt;DeleteApiKeyResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<DeleteApiKeyResponse> deleteWithHttpInfo(String name) throws ApiException {
+    public ApiResponse<DeleteApiKeyResponse> deleteWithHttpInfo(String name) throws Exception {
         com.squareup.okhttp.Call call = deleteValidateBeforeCall(name, null, null);
         Type localVarReturnType = new TypeToken<DeleteApiKeyResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -406,9 +405,9 @@ public class ApiKeysApi {
      * @param name name of the API key (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call deleteAsync(String name, final ApiCallback<DeleteApiKeyResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call deleteAsync(String name, final ApiCallback<DeleteApiKeyResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -441,9 +440,9 @@ public class ApiKeysApi {
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call delete_0Call(String name, String user, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call delete_0Call(String name, String user, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -487,16 +486,16 @@ public class ApiKeysApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call delete_0ValidateBeforeCall(String name, String user, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call delete_0ValidateBeforeCall(String name, String user, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'name' is set
         if (name == null) {
-            throw new ApiException("Missing the required parameter 'name' when calling delete_0(Async)");
+            throw new Exception("Missing the required parameter 'name' when calling delete_0(Async)");
         }
         
         // verify the required parameter 'user' is set
         if (user == null) {
-            throw new ApiException("Missing the required parameter 'user' when calling delete_0(Async)");
+            throw new Exception("Missing the required parameter 'user' when calling delete_0(Async)");
         }
         
 
@@ -511,9 +510,9 @@ public class ApiKeysApi {
      * @param name name of the API key (required)
      * @param user  (required)
      * @return DeleteApiKeyResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public DeleteApiKeyResponse delete_0(String name, String user) throws ApiException {
+    public DeleteApiKeyResponse delete_0(String name, String user) throws Exception {
         ApiResponse<DeleteApiKeyResponse> resp = delete_0WithHttpInfo(name, user);
         return resp.getData();
     }
@@ -524,9 +523,9 @@ public class ApiKeysApi {
      * @param name name of the API key (required)
      * @param user  (required)
      * @return ApiResponse&lt;DeleteApiKeyResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<DeleteApiKeyResponse> delete_0WithHttpInfo(String name, String user) throws ApiException {
+    public ApiResponse<DeleteApiKeyResponse> delete_0WithHttpInfo(String name, String user) throws Exception {
         com.squareup.okhttp.Call call = delete_0ValidateBeforeCall(name, user, null, null);
         Type localVarReturnType = new TypeToken<DeleteApiKeyResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -539,9 +538,9 @@ public class ApiKeysApi {
      * @param user  (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call delete_0Async(String name, String user, final ApiCallback<DeleteApiKeyResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call delete_0Async(String name, String user, final ApiCallback<DeleteApiKeyResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -572,9 +571,9 @@ public class ApiKeysApi {
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call listCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call listCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -616,7 +615,7 @@ public class ApiKeysApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call listValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call listValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
 
         com.squareup.okhttp.Call call = listCall(progressListener, progressRequestListener);
@@ -628,9 +627,9 @@ public class ApiKeysApi {
      * List API Keys
      * List all API keys for the authenticated user.
      * @return ListApiKeysResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ListApiKeysResponse list() throws ApiException {
+    public ListApiKeysResponse list() throws Exception {
         ApiResponse<ListApiKeysResponse> resp = listWithHttpInfo();
         return resp.getData();
     }
@@ -639,9 +638,9 @@ public class ApiKeysApi {
      * List API Keys
      * List all API keys for the authenticated user.
      * @return ApiResponse&lt;ListApiKeysResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<ListApiKeysResponse> listWithHttpInfo() throws ApiException {
+    public ApiResponse<ListApiKeysResponse> listWithHttpInfo() throws Exception {
         com.squareup.okhttp.Call call = listValidateBeforeCall(null, null);
         Type localVarReturnType = new TypeToken<ListApiKeysResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -652,9 +651,9 @@ public class ApiKeysApi {
      * List all API keys for the authenticated user.
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listAsync(final ApiCallback<ListApiKeysResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call listAsync(final ApiCallback<ListApiKeysResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -686,9 +685,9 @@ public class ApiKeysApi {
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call list_0Call(String user, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call list_0Call(String user, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -731,11 +730,11 @@ public class ApiKeysApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call list_0ValidateBeforeCall(String user, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call list_0ValidateBeforeCall(String user, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'user' is set
         if (user == null) {
-            throw new ApiException("Missing the required parameter 'user' when calling list_0(Async)");
+            throw new Exception("Missing the required parameter 'user' when calling list_0(Async)");
         }
         
 
@@ -749,9 +748,9 @@ public class ApiKeysApi {
      * List all API keys for any user (admin only).
      * @param user  (required)
      * @return ListApiKeysResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ListApiKeysResponse list_0(String user) throws ApiException {
+    public ListApiKeysResponse list_0(String user) throws Exception {
         ApiResponse<ListApiKeysResponse> resp = list_0WithHttpInfo(user);
         return resp.getData();
     }
@@ -761,9 +760,9 @@ public class ApiKeysApi {
      * List all API keys for any user (admin only).
      * @param user  (required)
      * @return ApiResponse&lt;ListApiKeysResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<ListApiKeysResponse> list_0WithHttpInfo(String user) throws ApiException {
+    public ApiResponse<ListApiKeysResponse> list_0WithHttpInfo(String user) throws Exception {
         com.squareup.okhttp.Call call = list_0ValidateBeforeCall(user, null, null);
         Type localVarReturnType = new TypeToken<ListApiKeysResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -775,9 +774,9 @@ public class ApiKeysApi {
      * @param user  (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call list_0Async(String user, final ApiCallback<ListApiKeysResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call list_0Async(String user, final ApiCallback<ListApiKeysResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;

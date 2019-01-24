@@ -1,5 +1,8 @@
 # Rockset Java Client Changelog
 
+## v0.5.10 2019-01-23
+- Added support for Google Cloud Storage
+
 ## v0.5.9 2019-01-14
 - Added support for AWS External ID as a new type of integration
 - rockset-jdbc driver is now part of rockset-java-client

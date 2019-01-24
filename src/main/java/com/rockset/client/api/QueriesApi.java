@@ -15,7 +15,6 @@ package com.rockset.client.api;
 
 import com.rockset.client.ApiCallback;
 import com.rockset.client.ApiClient;
-import com.rockset.client.ApiException;
 import com.rockset.client.ApiResponse;
 import com.rockset.client.Configuration;
 import com.rockset.client.Pair;
@@ -61,9 +60,9 @@ public class QueriesApi {
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call queryCall(QueryRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call queryCall(QueryRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -105,11 +104,11 @@ public class QueriesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call queryValidateBeforeCall(QueryRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call queryValidateBeforeCall(QueryRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'body' is set
         if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling query(Async)");
+            throw new Exception("Missing the required parameter 'body' when calling query(Async)");
         }
         
 
@@ -123,9 +122,9 @@ public class QueriesApi {
      * Make a SQL query to Rockset.
      * @param body JSON object (required)
      * @return QueryResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public QueryResponse query(QueryRequest body) throws ApiException {
+    public QueryResponse query(QueryRequest body) throws Exception {
         ApiResponse<QueryResponse> resp = queryWithHttpInfo(body);
         return resp.getData();
     }
@@ -135,9 +134,9 @@ public class QueriesApi {
      * Make a SQL query to Rockset.
      * @param body JSON object (required)
      * @return ApiResponse&lt;QueryResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<QueryResponse> queryWithHttpInfo(QueryRequest body) throws ApiException {
+    public ApiResponse<QueryResponse> queryWithHttpInfo(QueryRequest body) throws Exception {
         com.squareup.okhttp.Call call = queryValidateBeforeCall(body, null, null);
         Type localVarReturnType = new TypeToken<QueryResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -149,9 +148,9 @@ public class QueriesApi {
      * @param body JSON object (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call queryAsync(QueryRequest body, final ApiCallback<QueryResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call queryAsync(QueryRequest body, final ApiCallback<QueryResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;

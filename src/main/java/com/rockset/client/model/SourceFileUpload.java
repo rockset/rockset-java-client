@@ -25,71 +25,71 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * EventTimeInfo
+ * SourceFileUpload
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-24T01:18:37.603Z")
-public class EventTimeInfo {
-  @SerializedName("field")
-  private String field = null;
+public class SourceFileUpload {
+  @SerializedName("file_name")
+  private String fileName = null;
 
-  @SerializedName("format")
-  private String format = null;
+  @SerializedName("file_size")
+  private Long fileSize = null;
 
-  @SerializedName("time_zone")
-  private String timeZone = null;
+  @SerializedName("file_upload_time")
+  private String fileUploadTime = null;
 
-  public EventTimeInfo field(String field) {
-    this.field = field;
+  public SourceFileUpload fileName(String fileName) {
+    this.fileName = fileName;
     return this;
   }
 
    /**
-   * name of the field containing event time
-   * @return field
+   * name of the file
+   * @return fileName
   **/
-  @ApiModelProperty(example = "timestamp", required = true, value = "name of the field containing event time")
-  public String getField() {
-    return field;
+  @ApiModelProperty(example = "file1.json", required = true, value = "name of the file")
+  public String getFileName() {
+    return fileName;
   }
 
-  public void setField(String field) {
-    this.field = field;
+  public void setFileName(String fileName) {
+    this.fileName = fileName;
   }
 
-  public EventTimeInfo format(String format) {
-    this.format = format;
+  public SourceFileUpload fileSize(Long fileSize) {
+    this.fileSize = fileSize;
     return this;
   }
 
    /**
-   * format of time field, can be one of: milliseconds_since_epoch, seconds_since_epoch
-   * @return format
+   * size of the file in bytes
+   * @return fileSize
   **/
-  @ApiModelProperty(example = "seconds_since_epoch", value = "format of time field, can be one of: milliseconds_since_epoch, seconds_since_epoch")
-  public String getFormat() {
-    return format;
+  @ApiModelProperty(example = "12345", required = true, value = "size of the file in bytes")
+  public Long getFileSize() {
+    return fileSize;
   }
 
-  public void setFormat(String format) {
-    this.format = format;
+  public void setFileSize(Long fileSize) {
+    this.fileSize = fileSize;
   }
 
-  public EventTimeInfo timeZone(String timeZone) {
-    this.timeZone = timeZone;
+  public SourceFileUpload fileUploadTime(String fileUploadTime) {
+    this.fileUploadTime = fileUploadTime;
     return this;
   }
 
    /**
-   * default time zone, in standard IANA format
-   * @return timeZone
+   * time of file upload
+   * @return fileUploadTime
   **/
-  @ApiModelProperty(example = "UTC", value = "default time zone, in standard IANA format")
-  public String getTimeZone() {
-    return timeZone;
+  @ApiModelProperty(example = "2019-01-15T21:48:23Z", required = true, value = "time of file upload")
+  public String getFileUploadTime() {
+    return fileUploadTime;
   }
 
-  public void setTimeZone(String timeZone) {
-    this.timeZone = timeZone;
+  public void setFileUploadTime(String fileUploadTime) {
+    this.fileUploadTime = fileUploadTime;
   }
 
 
@@ -101,26 +101,26 @@ public class EventTimeInfo {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    EventTimeInfo eventTimeInfo = (EventTimeInfo) o;
-    return Objects.equals(this.field, eventTimeInfo.field) &&
-        Objects.equals(this.format, eventTimeInfo.format) &&
-        Objects.equals(this.timeZone, eventTimeInfo.timeZone);
+    SourceFileUpload sourceFileUpload = (SourceFileUpload) o;
+    return Objects.equals(this.fileName, sourceFileUpload.fileName) &&
+        Objects.equals(this.fileSize, sourceFileUpload.fileSize) &&
+        Objects.equals(this.fileUploadTime, sourceFileUpload.fileUploadTime);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(field, format, timeZone);
+    return Objects.hash(fileName, fileSize, fileUploadTime);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class EventTimeInfo {\n");
+    sb.append("class SourceFileUpload {\n");
     
-    sb.append("    field: ").append(toIndentedString(field)).append("\n");
-    sb.append("    format: ").append(toIndentedString(format)).append("\n");
-    sb.append("    timeZone: ").append(toIndentedString(timeZone)).append("\n");
+    sb.append("    fileName: ").append(toIndentedString(fileName)).append("\n");
+    sb.append("    fileSize: ").append(toIndentedString(fileSize)).append("\n");
+    sb.append("    fileUploadTime: ").append(toIndentedString(fileUploadTime)).append("\n");
     sb.append("}");
     return sb.toString();
   }

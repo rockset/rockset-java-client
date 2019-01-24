@@ -15,7 +15,6 @@ package com.rockset.client.api;
 
 import com.rockset.client.ApiCallback;
 import com.rockset.client.ApiClient;
-import com.rockset.client.ApiException;
 import com.rockset.client.ApiResponse;
 import com.rockset.client.Configuration;
 import com.rockset.client.Pair;
@@ -64,9 +63,9 @@ public class IntegrationsApi {
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call createCall(CreateIntegrationRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call createCall(CreateIntegrationRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -108,11 +107,11 @@ public class IntegrationsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call createValidateBeforeCall(CreateIntegrationRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call createValidateBeforeCall(CreateIntegrationRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'body' is set
         if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling create(Async)");
+            throw new Exception("Missing the required parameter 'body' when calling create(Async)");
         }
         
 
@@ -126,9 +125,9 @@ public class IntegrationsApi {
      * Create a new integration with Rockset.
      * @param body integration credentials (required)
      * @return CreateIntegrationResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public CreateIntegrationResponse create(CreateIntegrationRequest body) throws ApiException {
+    public CreateIntegrationResponse create(CreateIntegrationRequest body) throws Exception {
         ApiResponse<CreateIntegrationResponse> resp = createWithHttpInfo(body);
         return resp.getData();
     }
@@ -138,9 +137,9 @@ public class IntegrationsApi {
      * Create a new integration with Rockset.
      * @param body integration credentials (required)
      * @return ApiResponse&lt;CreateIntegrationResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<CreateIntegrationResponse> createWithHttpInfo(CreateIntegrationRequest body) throws ApiException {
+    public ApiResponse<CreateIntegrationResponse> createWithHttpInfo(CreateIntegrationRequest body) throws Exception {
         com.squareup.okhttp.Call call = createValidateBeforeCall(body, null, null);
         Type localVarReturnType = new TypeToken<CreateIntegrationResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -152,9 +151,9 @@ public class IntegrationsApi {
      * @param body integration credentials (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call createAsync(CreateIntegrationRequest body, final ApiCallback<CreateIntegrationResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call createAsync(CreateIntegrationRequest body, final ApiCallback<CreateIntegrationResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -186,9 +185,9 @@ public class IntegrationsApi {
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call deleteCall(String integration, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call deleteCall(String integration, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -231,11 +230,11 @@ public class IntegrationsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call deleteValidateBeforeCall(String integration, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call deleteValidateBeforeCall(String integration, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'integration' is set
         if (integration == null) {
-            throw new ApiException("Missing the required parameter 'integration' when calling delete(Async)");
+            throw new Exception("Missing the required parameter 'integration' when calling delete(Async)");
         }
         
 
@@ -249,9 +248,9 @@ public class IntegrationsApi {
      * Remove an integration.
      * @param integration name of the integration (required)
      * @return DeleteIntegrationResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public DeleteIntegrationResponse delete(String integration) throws ApiException {
+    public DeleteIntegrationResponse delete(String integration) throws Exception {
         ApiResponse<DeleteIntegrationResponse> resp = deleteWithHttpInfo(integration);
         return resp.getData();
     }
@@ -261,9 +260,9 @@ public class IntegrationsApi {
      * Remove an integration.
      * @param integration name of the integration (required)
      * @return ApiResponse&lt;DeleteIntegrationResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<DeleteIntegrationResponse> deleteWithHttpInfo(String integration) throws ApiException {
+    public ApiResponse<DeleteIntegrationResponse> deleteWithHttpInfo(String integration) throws Exception {
         com.squareup.okhttp.Call call = deleteValidateBeforeCall(integration, null, null);
         Type localVarReturnType = new TypeToken<DeleteIntegrationResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -275,9 +274,9 @@ public class IntegrationsApi {
      * @param integration name of the integration (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call deleteAsync(String integration, final ApiCallback<DeleteIntegrationResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call deleteAsync(String integration, final ApiCallback<DeleteIntegrationResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -309,9 +308,9 @@ public class IntegrationsApi {
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getCall(String integration, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call getCall(String integration, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -354,11 +353,11 @@ public class IntegrationsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getValidateBeforeCall(String integration, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call getValidateBeforeCall(String integration, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'integration' is set
         if (integration == null) {
-            throw new ApiException("Missing the required parameter 'integration' when calling get(Async)");
+            throw new Exception("Missing the required parameter 'integration' when calling get(Async)");
         }
         
 
@@ -372,9 +371,9 @@ public class IntegrationsApi {
      * Get information about a single integration.
      * @param integration name of the integration (required)
      * @return GetIntegrationResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public GetIntegrationResponse get(String integration) throws ApiException {
+    public GetIntegrationResponse get(String integration) throws Exception {
         ApiResponse<GetIntegrationResponse> resp = getWithHttpInfo(integration);
         return resp.getData();
     }
@@ -384,9 +383,9 @@ public class IntegrationsApi {
      * Get information about a single integration.
      * @param integration name of the integration (required)
      * @return ApiResponse&lt;GetIntegrationResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<GetIntegrationResponse> getWithHttpInfo(String integration) throws ApiException {
+    public ApiResponse<GetIntegrationResponse> getWithHttpInfo(String integration) throws Exception {
         com.squareup.okhttp.Call call = getValidateBeforeCall(integration, null, null);
         Type localVarReturnType = new TypeToken<GetIntegrationResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -398,9 +397,9 @@ public class IntegrationsApi {
      * @param integration name of the integration (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getAsync(String integration, final ApiCallback<GetIntegrationResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call getAsync(String integration, final ApiCallback<GetIntegrationResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -431,9 +430,9 @@ public class IntegrationsApi {
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call listCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call listCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -475,7 +474,7 @@ public class IntegrationsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call listValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call listValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
 
         com.squareup.okhttp.Call call = listCall(progressListener, progressRequestListener);
@@ -487,9 +486,9 @@ public class IntegrationsApi {
      * List Integrations
      * List all integrations for organization.
      * @return ListIntegrationsResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ListIntegrationsResponse list() throws ApiException {
+    public ListIntegrationsResponse list() throws Exception {
         ApiResponse<ListIntegrationsResponse> resp = listWithHttpInfo();
         return resp.getData();
     }
@@ -498,9 +497,9 @@ public class IntegrationsApi {
      * List Integrations
      * List all integrations for organization.
      * @return ApiResponse&lt;ListIntegrationsResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<ListIntegrationsResponse> listWithHttpInfo() throws ApiException {
+    public ApiResponse<ListIntegrationsResponse> listWithHttpInfo() throws Exception {
         com.squareup.okhttp.Call call = listValidateBeforeCall(null, null);
         Type localVarReturnType = new TypeToken<ListIntegrationsResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -511,9 +510,9 @@ public class IntegrationsApi {
      * List all integrations for organization.
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listAsync(final ApiCallback<ListIntegrationsResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call listAsync(final ApiCallback<ListIntegrationsResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;

@@ -84,7 +84,7 @@ public class RocksetConnection implements Connection {
       endpoint = info.getProperty("endpoint");
     }
 
-    this.client = new RocksetClient(apiKey, endpoint);
+    this.client = new RocksetClient(apiKey, endpoint, "jdbc");
 
     timeZoneId.set(TimeZone.getDefault().getID());
     locale.set(Locale.getDefault());

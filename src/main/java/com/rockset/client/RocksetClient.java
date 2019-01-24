@@ -13,8 +13,7 @@ public class RocksetClient {
     private QueriesApi query;
     private UsersApi user;
 
-    public RocksetClient(String apiKey, String apiServer) {
-
+    private void setUp(String apiKey, String apiServer, String application) {
       assert !apiKey.isEmpty();
 
       if (apiServer.isEmpty()) {
@@ -25,10 +24,17 @@ public class RocksetClient {
         apiServer = "https://" + apiServer;
       }
 
+      String userAgent = "java";
+      if (!application.isEmpty()) {
+        userAgent += ":";
+        userAgent += application;
+      }
+
       apiClient = new ApiClient()
           .setApiKey(apiKey)
           .setApiServer(apiServer)
-          .setVersion("0.5.9");// TODO: figure out how we can set this dynamically.
+          .setVersion("0.5.10")// TODO: figure out how we can set this dynamically.
+          .setUserAgent(userAgent);
 
       apiKeys = new ApiKeysApi(this.apiClient);
       collection = new CollectionsApi(this.apiClient);
@@ -36,6 +42,14 @@ public class RocksetClient {
       integration = new IntegrationsApi(this.apiClient);
       query = new QueriesApi(this.apiClient);
       user = new UsersApi(this.apiClient);
+    }
+
+    public RocksetClient(String apiKey, String apiServer) {
+      setUp(apiKey, apiServer, "");
+    }
+
+    public RocksetClient(String apiKey, String apiServer, String application) {
+      setUp(apiKey, apiServer, application);
     }
 
   /**

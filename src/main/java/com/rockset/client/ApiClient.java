@@ -19,10 +19,14 @@ import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
 import okio.BufferedSink;
 import okio.Okio;
+import org.apache.commons.lang3.NotImplementedException;
+import org.json.JSONObject;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.OffsetDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
 
+import javax.naming.AuthenticationException;
+import javax.naming.LimitExceededException;
 import javax.net.ssl.*;
 import java.io.File;
 import java.io.IOException;
@@ -31,6 +35,7 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.rmi.ServerException;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
 import java.security.SecureRandom;
@@ -42,6 +47,7 @@ import java.text.DateFormat;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -85,9 +91,6 @@ public class ApiClient {
         verifyingSsl = true;
 
         json = new JSON();
-
-        // Set default User-Agent.
-        setUserAgent("Swagger-Codegen/1.0.0/java");
 
         // Setup authentications (key: authentication name, value: authentication).
         authentications = new HashMap<String, Authentication>();
@@ -793,10 +796,10 @@ public class ApiClient {
      *
      * @param <T> Type
      * @param call An instance of the Call object
-     * @throws ApiException If fail to execute the call
+     * @throws Exception If fail to execute the call
      * @return ApiResponse&lt;T&gt;
      */
-    public <T> ApiResponse<T> execute(Call call) throws ApiException {
+    public <T> ApiResponse<T> execute(Call call) throws Exception {
         return execute(call, null);
     }
 
@@ -811,7 +814,7 @@ public class ApiClient {
      *   when returnType is null.
      * @throws ApiException If fail to execute the call
      */
-    public <T> ApiResponse<T> execute(Call call, Type returnType) throws ApiException {
+    public <T> ApiResponse<T> execute(Call call, Type returnType) throws Exception {
         try {
             Response response = call.execute();
             T data = handleResponse(response, returnType);
@@ -854,7 +857,7 @@ public class ApiClient {
                 T result;
                 try {
                     result = (T) handleResponse(response, returnType);
-                } catch (ApiException e) {
+                } catch (Exception e) {
                     callback.onFailure(e, response.code(), response.headers().toMultimap());
                     return;
                 }
@@ -869,11 +872,11 @@ public class ApiClient {
      * @param <T> Type
      * @param response Response
      * @param returnType Return type
-     * @throws ApiException If the response has a unsuccessful status code or
+     * @throws Exception If the response has a unsuccessful status code or
      *   fail to deserialize the response body
      * @return Type
      */
-    public <T> T handleResponse(Response response, Type returnType) throws ApiException {
+    public <T> T handleResponse(Response response, Type returnType) throws Exception {
         if (response.isSuccessful()) {
             if (returnType == null || response.code() == 204) {
                 // returning null if the returnType is not defined,
@@ -898,7 +901,25 @@ public class ApiClient {
                     throw new ApiException(response.message(), e, response.code(), response.headers().toMultimap());
                 }
             }
-            throw new ApiException(response.message(), response.code(), response.headers().toMultimap(), respBody);
+
+			if (response.code() == 401) {
+                throw new AuthenticationException(respBody);
+            } else if (response.code() == 403 || response.code() == 413 || response.code() == 429) {
+                throw new LimitExceededException(respBody);
+            } else if (response.code() == 400) {
+                JSONObject jsonObject = new JSONObject(respBody);
+                throw new IllegalArgumentException(jsonObject.get("type") + " : " + jsonObject.get("message"));
+            } else if (response.code() == 501) {
+                throw new NotImplementedException(respBody);
+            } else if (response.code() == 502) {
+                throw new TimeoutException("error connecting to " + this.basePath);
+            } else if (response.code() > 400 && response.code() < 500) {
+                throw new IllegalArgumentException(respBody);
+            } else if (response.code() >= 500 || response.code() < 530) {
+                throw new ServerException(respBody);
+            } else {
+                throw new ApiException(response.message(), response.code(), response.headers().toMultimap(), respBody);
+            }
         }
     }
 

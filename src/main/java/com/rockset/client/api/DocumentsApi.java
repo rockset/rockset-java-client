@@ -15,7 +15,6 @@ package com.rockset.client.api;
 
 import com.rockset.client.ApiCallback;
 import com.rockset.client.ApiClient;
-import com.rockset.client.ApiException;
 import com.rockset.client.ApiResponse;
 import com.rockset.client.Configuration;
 import com.rockset.client.Pair;
@@ -64,9 +63,9 @@ public class DocumentsApi {
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call addCall(String collection, AddDocumentsRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call addCall(String collection, AddDocumentsRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -109,16 +108,16 @@ public class DocumentsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call addValidateBeforeCall(String collection, AddDocumentsRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call addValidateBeforeCall(String collection, AddDocumentsRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'collection' is set
         if (collection == null) {
-            throw new ApiException("Missing the required parameter 'collection' when calling add(Async)");
+            throw new Exception("Missing the required parameter 'collection' when calling add(Async)");
         }
         
         // verify the required parameter 'body' is set
         if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling add(Async)");
+            throw new Exception("Missing the required parameter 'body' when calling add(Async)");
         }
         
 
@@ -133,9 +132,9 @@ public class DocumentsApi {
      * @param collection name of the collection (required)
      * @param body JSON object (required)
      * @return AddDocumentsResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public AddDocumentsResponse add(String collection, AddDocumentsRequest body) throws ApiException {
+    public AddDocumentsResponse add(String collection, AddDocumentsRequest body) throws Exception {
         ApiResponse<AddDocumentsResponse> resp = addWithHttpInfo(collection, body);
         return resp.getData();
     }
@@ -146,9 +145,9 @@ public class DocumentsApi {
      * @param collection name of the collection (required)
      * @param body JSON object (required)
      * @return ApiResponse&lt;AddDocumentsResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<AddDocumentsResponse> addWithHttpInfo(String collection, AddDocumentsRequest body) throws ApiException {
+    public ApiResponse<AddDocumentsResponse> addWithHttpInfo(String collection, AddDocumentsRequest body) throws Exception {
         com.squareup.okhttp.Call call = addValidateBeforeCall(collection, body, null, null);
         Type localVarReturnType = new TypeToken<AddDocumentsResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -161,9 +160,9 @@ public class DocumentsApi {
      * @param body JSON object (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call addAsync(String collection, AddDocumentsRequest body, final ApiCallback<AddDocumentsResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call addAsync(String collection, AddDocumentsRequest body, final ApiCallback<AddDocumentsResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -196,9 +195,9 @@ public class DocumentsApi {
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call deleteCall(String collection, DeleteDocumentsRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call deleteCall(String collection, DeleteDocumentsRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -241,16 +240,16 @@ public class DocumentsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call deleteValidateBeforeCall(String collection, DeleteDocumentsRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call deleteValidateBeforeCall(String collection, DeleteDocumentsRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'collection' is set
         if (collection == null) {
-            throw new ApiException("Missing the required parameter 'collection' when calling delete(Async)");
+            throw new Exception("Missing the required parameter 'collection' when calling delete(Async)");
         }
         
         // verify the required parameter 'body' is set
         if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling delete(Async)");
+            throw new Exception("Missing the required parameter 'body' when calling delete(Async)");
         }
         
 
@@ -265,9 +264,9 @@ public class DocumentsApi {
      * @param collection name of the collection (required)
      * @param body JSON object (required)
      * @return DeleteDocumentsResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public DeleteDocumentsResponse delete(String collection, DeleteDocumentsRequest body) throws ApiException {
+    public DeleteDocumentsResponse delete(String collection, DeleteDocumentsRequest body) throws Exception {
         ApiResponse<DeleteDocumentsResponse> resp = deleteWithHttpInfo(collection, body);
         return resp.getData();
     }
@@ -278,9 +277,9 @@ public class DocumentsApi {
      * @param collection name of the collection (required)
      * @param body JSON object (required)
      * @return ApiResponse&lt;DeleteDocumentsResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<DeleteDocumentsResponse> deleteWithHttpInfo(String collection, DeleteDocumentsRequest body) throws ApiException {
+    public ApiResponse<DeleteDocumentsResponse> deleteWithHttpInfo(String collection, DeleteDocumentsRequest body) throws Exception {
         com.squareup.okhttp.Call call = deleteValidateBeforeCall(collection, body, null, null);
         Type localVarReturnType = new TypeToken<DeleteDocumentsResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -293,9 +292,9 @@ public class DocumentsApi {
      * @param body JSON object (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call deleteAsync(String collection, DeleteDocumentsRequest body, final ApiCallback<DeleteDocumentsResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call deleteAsync(String collection, DeleteDocumentsRequest body, final ApiCallback<DeleteDocumentsResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;

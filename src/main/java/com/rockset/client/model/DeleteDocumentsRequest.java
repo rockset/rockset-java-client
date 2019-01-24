@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * DeleteDocumentsRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-16T22:16:35.734Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-24T01:18:37.603Z")
 public class DeleteDocumentsRequest {
   @SerializedName("data")
   private List<DeleteDocumentsRequestData> data = new ArrayList<DeleteDocumentsRequestData>();

@@ -25,29 +25,50 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * DeleteDocumentsRequestData
+ * SourceGcs
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-24T01:18:37.603Z")
-public class DeleteDocumentsRequestData {
-  @SerializedName("_id")
-  private String id = null;
+public class SourceGcs {
+  @SerializedName("bucket")
+  private String bucket = null;
 
-  public DeleteDocumentsRequestData id(String id) {
-    this.id = id;
+  @SerializedName("prefix")
+  private String prefix = null;
+
+  public SourceGcs bucket(String bucket) {
+    this.bucket = bucket;
     return this;
   }
 
    /**
-   * unique document ID
-   * @return id
+   * name of GCS bucket you want to ingest from
+   * @return bucket
   **/
-  @ApiModelProperty(example = "2cd61e3b", required = true, value = "unique document ID")
-  public String getId() {
-    return id;
+  @ApiModelProperty(example = "server-logs", value = "name of GCS bucket you want to ingest from")
+  public String getBucket() {
+    return bucket;
   }
 
-  public void setId(String id) {
-    this.id = id;
+  public void setBucket(String bucket) {
+    this.bucket = bucket;
+  }
+
+  public SourceGcs prefix(String prefix) {
+    this.prefix = prefix;
+    return this;
+  }
+
+   /**
+   * Prefix that selects keys to ingest.
+   * @return prefix
+  **/
+  @ApiModelProperty(example = "prefix/to/keys", value = "Prefix that selects keys to ingest.")
+  public String getPrefix() {
+    return prefix;
+  }
+
+  public void setPrefix(String prefix) {
+    this.prefix = prefix;
   }
 
 
@@ -59,22 +80,24 @@ public class DeleteDocumentsRequestData {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    DeleteDocumentsRequestData deleteDocumentsRequestData = (DeleteDocumentsRequestData) o;
-    return Objects.equals(this.id, deleteDocumentsRequestData.id);
+    SourceGcs sourceGcs = (SourceGcs) o;
+    return Objects.equals(this.bucket, sourceGcs.bucket) &&
+        Objects.equals(this.prefix, sourceGcs.prefix);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id);
+    return Objects.hash(bucket, prefix);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class DeleteDocumentsRequestData {\n");
+    sb.append("class SourceGcs {\n");
     
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    bucket: ").append(toIndentedString(bucket)).append("\n");
+    sb.append("    prefix: ").append(toIndentedString(prefix)).append("\n");
     sb.append("}");
     return sb.toString();
   }

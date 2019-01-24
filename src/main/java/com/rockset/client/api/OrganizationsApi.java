@@ -15,7 +15,6 @@ package com.rockset.client.api;
 
 import com.rockset.client.ApiCallback;
 import com.rockset.client.ApiClient;
-import com.rockset.client.ApiException;
 import com.rockset.client.ApiResponse;
 import com.rockset.client.Configuration;
 import com.rockset.client.Pair;
@@ -59,9 +58,9 @@ public class OrganizationsApi {
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call getCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -103,7 +102,7 @@ public class OrganizationsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call getValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
 
         com.squareup.okhttp.Call call = getCall(progressListener, progressRequestListener);
@@ -115,9 +114,9 @@ public class OrganizationsApi {
      * Get Organization
      * Retrieve information about current organization.
      * @return OrganizationResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public OrganizationResponse get() throws ApiException {
+    public OrganizationResponse get() throws Exception {
         ApiResponse<OrganizationResponse> resp = getWithHttpInfo();
         return resp.getData();
     }
@@ -126,9 +125,9 @@ public class OrganizationsApi {
      * Get Organization
      * Retrieve information about current organization.
      * @return ApiResponse&lt;OrganizationResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<OrganizationResponse> getWithHttpInfo() throws ApiException {
+    public ApiResponse<OrganizationResponse> getWithHttpInfo() throws Exception {
         com.squareup.okhttp.Call call = getValidateBeforeCall(null, null);
         Type localVarReturnType = new TypeToken<OrganizationResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -139,9 +138,9 @@ public class OrganizationsApi {
      * Retrieve information about current organization.
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getAsync(final ApiCallback<OrganizationResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call getAsync(final ApiCallback<OrganizationResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;

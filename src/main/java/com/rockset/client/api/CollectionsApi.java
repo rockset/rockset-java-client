@@ -15,7 +15,6 @@ package com.rockset.client.api;
 
 import com.rockset.client.ApiCallback;
 import com.rockset.client.ApiClient;
-import com.rockset.client.ApiException;
 import com.rockset.client.ApiResponse;
 import com.rockset.client.Configuration;
 import com.rockset.client.Pair;
@@ -64,9 +63,9 @@ public class CollectionsApi {
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call createCall(CreateCollectionRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call createCall(CreateCollectionRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -108,11 +107,11 @@ public class CollectionsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call createValidateBeforeCall(CreateCollectionRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call createValidateBeforeCall(CreateCollectionRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'body' is set
         if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling create(Async)");
+            throw new Exception("Missing the required parameter 'body' when calling create(Async)");
         }
         
 
@@ -126,9 +125,9 @@ public class CollectionsApi {
      * Create new collection for organization.
      * @param body JSON object (required)
      * @return CreateCollectionResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public CreateCollectionResponse create(CreateCollectionRequest body) throws ApiException {
+    public CreateCollectionResponse create(CreateCollectionRequest body) throws Exception {
         ApiResponse<CreateCollectionResponse> resp = createWithHttpInfo(body);
         return resp.getData();
     }
@@ -138,9 +137,9 @@ public class CollectionsApi {
      * Create new collection for organization.
      * @param body JSON object (required)
      * @return ApiResponse&lt;CreateCollectionResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<CreateCollectionResponse> createWithHttpInfo(CreateCollectionRequest body) throws ApiException {
+    public ApiResponse<CreateCollectionResponse> createWithHttpInfo(CreateCollectionRequest body) throws Exception {
         com.squareup.okhttp.Call call = createValidateBeforeCall(body, null, null);
         Type localVarReturnType = new TypeToken<CreateCollectionResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -152,9 +151,9 @@ public class CollectionsApi {
      * @param body JSON object (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call createAsync(CreateCollectionRequest body, final ApiCallback<CreateCollectionResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call createAsync(CreateCollectionRequest body, final ApiCallback<CreateCollectionResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -186,9 +185,9 @@ public class CollectionsApi {
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call deleteCall(String collection, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call deleteCall(String collection, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -231,11 +230,11 @@ public class CollectionsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call deleteValidateBeforeCall(String collection, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call deleteValidateBeforeCall(String collection, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'collection' is set
         if (collection == null) {
-            throw new ApiException("Missing the required parameter 'collection' when calling delete(Async)");
+            throw new Exception("Missing the required parameter 'collection' when calling delete(Async)");
         }
         
 
@@ -249,9 +248,9 @@ public class CollectionsApi {
      * Delete a collection and all its documents from Rockset.
      * @param collection name of the collection (required)
      * @return DeleteCollectionResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public DeleteCollectionResponse delete(String collection) throws ApiException {
+    public DeleteCollectionResponse delete(String collection) throws Exception {
         ApiResponse<DeleteCollectionResponse> resp = deleteWithHttpInfo(collection);
         return resp.getData();
     }
@@ -261,9 +260,9 @@ public class CollectionsApi {
      * Delete a collection and all its documents from Rockset.
      * @param collection name of the collection (required)
      * @return ApiResponse&lt;DeleteCollectionResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<DeleteCollectionResponse> deleteWithHttpInfo(String collection) throws ApiException {
+    public ApiResponse<DeleteCollectionResponse> deleteWithHttpInfo(String collection) throws Exception {
         com.squareup.okhttp.Call call = deleteValidateBeforeCall(collection, null, null);
         Type localVarReturnType = new TypeToken<DeleteCollectionResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -275,9 +274,9 @@ public class CollectionsApi {
      * @param collection name of the collection (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call deleteAsync(String collection, final ApiCallback<DeleteCollectionResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call deleteAsync(String collection, final ApiCallback<DeleteCollectionResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -309,9 +308,9 @@ public class CollectionsApi {
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getCall(String collection, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call getCall(String collection, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -354,11 +353,11 @@ public class CollectionsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getValidateBeforeCall(String collection, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call getValidateBeforeCall(String collection, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'collection' is set
         if (collection == null) {
-            throw new ApiException("Missing the required parameter 'collection' when calling get(Async)");
+            throw new Exception("Missing the required parameter 'collection' when calling get(Async)");
         }
         
 
@@ -372,9 +371,9 @@ public class CollectionsApi {
      * Get the results of a describe call on a collection.
      * @param collection name of the collection (required)
      * @return GetCollectionResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public GetCollectionResponse get(String collection) throws ApiException {
+    public GetCollectionResponse get(String collection) throws Exception {
         ApiResponse<GetCollectionResponse> resp = getWithHttpInfo(collection);
         return resp.getData();
     }
@@ -384,9 +383,9 @@ public class CollectionsApi {
      * Get the results of a describe call on a collection.
      * @param collection name of the collection (required)
      * @return ApiResponse&lt;GetCollectionResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<GetCollectionResponse> getWithHttpInfo(String collection) throws ApiException {
+    public ApiResponse<GetCollectionResponse> getWithHttpInfo(String collection) throws Exception {
         com.squareup.okhttp.Call call = getValidateBeforeCall(collection, null, null);
         Type localVarReturnType = new TypeToken<GetCollectionResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -398,9 +397,9 @@ public class CollectionsApi {
      * @param collection name of the collection (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getAsync(String collection, final ApiCallback<GetCollectionResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call getAsync(String collection, final ApiCallback<GetCollectionResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -431,9 +430,9 @@ public class CollectionsApi {
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
+     * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call listCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call listCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -475,7 +474,7 @@ public class CollectionsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call listValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call listValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
 
         com.squareup.okhttp.Call call = listCall(progressListener, progressRequestListener);
@@ -487,9 +486,9 @@ public class CollectionsApi {
      * List Collections
      * Retrieve all collections in an organization.
      * @return ListCollectionsResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ListCollectionsResponse list() throws ApiException {
+    public ListCollectionsResponse list() throws Exception {
         ApiResponse<ListCollectionsResponse> resp = listWithHttpInfo();
         return resp.getData();
     }
@@ -498,9 +497,9 @@ public class CollectionsApi {
      * List Collections
      * Retrieve all collections in an organization.
      * @return ApiResponse&lt;ListCollectionsResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<ListCollectionsResponse> listWithHttpInfo() throws ApiException {
+    public ApiResponse<ListCollectionsResponse> listWithHttpInfo() throws Exception {
         com.squareup.okhttp.Call call = listValidateBeforeCall(null, null);
         Type localVarReturnType = new TypeToken<ListCollectionsResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -511,9 +510,9 @@ public class CollectionsApi {
      * Retrieve all collections in an organization.
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listAsync(final ApiCallback<ListCollectionsResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call listAsync(final ApiCallback<ListCollectionsResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;

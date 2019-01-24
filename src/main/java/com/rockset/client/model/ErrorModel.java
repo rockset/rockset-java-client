@@ -29,7 +29,7 @@ import java.io.IOException;
  * Describes details about an error
  */
 @ApiModel(description = "Describes details about an error")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-16T22:16:35.734Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-24T01:18:37.603Z")
 public class ErrorModel {
   @SerializedName("code")
   private Integer code = null;

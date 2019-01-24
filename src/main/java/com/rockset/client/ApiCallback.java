@@ -31,7 +31,7 @@ public interface ApiCallback<T> {
      * @param statusCode Status code of the response if available, otherwise it would be 0
      * @param responseHeaders Headers of the response if available, otherwise it would be null
      */
-    void onFailure(ApiException e, int statusCode, Map<String, List<String>> responseHeaders);
+    void onFailure(Exception e, int statusCode, Map<String, List<String>> responseHeaders);
 
     /**
      * This is called when the API call succeeded.

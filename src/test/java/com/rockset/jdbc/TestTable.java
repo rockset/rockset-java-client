@@ -167,7 +167,7 @@ public class TestTable {
         //Retrieve by column name
         Date c1 = rs.getDate("c1");
         Time c2 = rs.getTime("c2");
-        long c3 = rs.getLong("c3");
+        String c3 = rs.getString("c3");
 
         //Display values
         System.out.println("c1: " + c1.toString()
