@@ -92,7 +92,7 @@ public class RocksetDriver implements Driver, Closeable {
 
   @Override
   public boolean jdbcCompliant() {
-    return false;
+    return true;
   }
 
   @Override
