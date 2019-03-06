@@ -940,7 +940,40 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
   @Override
   public ResultSet getPrimaryKeys(String catalog, String schema, String table)
       throws SQLException {
-    throw new SQLFeatureNotSupportedException("primary keys not supported");
+    RocksetDriver.log("Entry : RocksetDatabaseMetaData getPrimaryKeys");
+    try {
+      Column col1 = new Column("TABLE_CAT", Column.ColumnTypes.STRING);
+      Column col2 = new Column("TABLE_SCHEM", Column.ColumnTypes.STRING);
+      Column col3 = new Column("TABLE_NAME", Column.ColumnTypes.STRING);
+      Column col4 = new Column("COLUMN_NAME", Column.ColumnTypes.STRING);
+      Column col5 = new Column("KEY_SEQ", Column.ColumnTypes.NUMBER);
+      Column col6 = new Column("PK_NAME", Column.ColumnTypes.STRING);
+      ArrayList<Column> columns = new ArrayList<Column>();
+      columns.add(col1);
+      columns.add(col2);
+      columns.add(col3);
+      columns.add(col4);
+      columns.add(col5);
+      columns.add(col6);
+
+      ObjectMapper mapper = new ObjectMapper();
+      List<Object> data = new ArrayList<Object>();
+      String str = "{\"TABLE_CAT\": \"" + RocksetConnection.DEFAULT_CATALOG + "\""
+                    + ", \"TABLE_SCHEM\": \"" + RocksetConnection.DEFAULT_SCHEMA + "\""
+                    + ", \"TABLE_NAME\": \"" + table  + "\""
+                    + ", \"COLUMN_NAME\": \"" + "" + "\""
+                    + ", \"KEY_SEQ\": \"" + "0"
+                    + ", \"PK_NAME\": \"" + "" + "\"";
+
+      str += " }";
+      JsonNode docRootNode = mapper.readTree(str);
+      data.add(docRootNode);
+      RocksetDriver.log("Exit : RocksetDatabaseMetaData getPrimaryKeys");
+      return new RocksetResultSet(columns, data);
+    } catch (Exception e) {
+      throw new SQLException("Error processing getPrimaryKeys "
+                      + " exception " + e.getMessage());
+    }
   }
 
   @Override
