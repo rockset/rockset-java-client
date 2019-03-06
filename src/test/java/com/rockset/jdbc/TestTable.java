@@ -320,7 +320,7 @@ public class TestTable {
     for (String name: names) {
       CreateCollectionRequest request =
                         new CreateCollectionRequest().name(name);
-      CreateCollectionResponse response = testClient.createCollection(request);
+      CreateCollectionResponse response = testClient.createCollection("commons", request);
 
       Assert.assertEquals(response.getData().getName(), name);
       Assert.assertEquals(response.getData().getStatus(), Resource.StatusEnum.CREATED);
@@ -333,7 +333,7 @@ public class TestTable {
   private void deleteCollections(List<String> names)  throws Exception {
     for (String name: names) {
       DeleteCollectionResponse deleteCollectionResponse
-                    = testClient.deleteCollection(name);
+                    = testClient.deleteCollection("commons", name);
       Assert.assertEquals(deleteCollectionResponse.getData().getName(), name);
       Assert.assertEquals(deleteCollectionResponse.getData().getStatus(),
                           Resource.StatusEnum.DELETED);

@@ -33,7 +33,7 @@ public class TestCollection {
     CreateCollectionRequest request =
         new CreateCollectionRequest().name(collectionName);
     CreateCollectionResponse response =
-        client.createCollection(request);
+        client.createCollection("commons", request);
 
     Assert.assertEquals(response.getData().getName(), collectionName);
     Assert.assertEquals(response.getData().getStatus(), Resource.StatusEnum.CREATED);
@@ -43,7 +43,7 @@ public class TestCollection {
   public void testGetCollection() throws Exception {
     // describe collection
     GetCollectionResponse getCollectionResponse
-        = client.getCollection(collectionName);
+        = client.getCollection("commons", collectionName);
     Assert.assertEquals(getCollectionResponse.getData().getName(), collectionName);
   }
 
@@ -51,7 +51,7 @@ public class TestCollection {
   public void testDeleteCollection() throws Exception {
     // delete collection
     DeleteCollectionResponse deleteCollectionResponse
-        = client.deleteCollection(collectionName);
+        = client.deleteCollection("commons", collectionName);
     Assert.assertEquals(deleteCollectionResponse.getData().getName(), collectionName);
     Assert.assertEquals(deleteCollectionResponse.getData().getStatus(), Resource.StatusEnum.DELETED);
   }
