@@ -33,6 +33,13 @@ import java.sql.SQLXML;
 import java.sql.Statement;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -47,40 +54,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
 
 import org.joda.time.DateTimeZone;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.DateTimeFormatterBuilder;
-import org.joda.time.format.DateTimeParser;
-import org.joda.time.format.ISODateTimeFormat;
 
 public class RocksetResultSet implements ResultSet {
 
   private static final Logger logger = Logger.getLogger(RocksetResultSet.class.getName());
-
-  private static final DateTimeFormatter DATE_FORMATTER = ISODateTimeFormat.date();
-  private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormat.forPattern(
-          "HH:mm:ss.SSS");
-  private static final DateTimeFormatter TIME_WITH_TIME_ZONE_FORMATTER =
-      new DateTimeFormatterBuilder()
-      .append(DateTimeFormat.forPattern("HH:mm:ss.SSS ZZZ").getPrinter(),
-          new DateTimeParser[] {
-              DateTimeFormat.forPattern("HH:mm:ss.SSS Z").getParser(),
-              DateTimeFormat.forPattern("HH:mm:ss.SSS ZZZ").getParser(),
-          })
-      .toFormatter()
-      .withOffsetParsed();
-
-  private static final DateTimeFormatter TIMESTAMP_FORMATTER =
-      DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS");
-  private static final DateTimeFormatter TIMESTAMP_WITH_TIME_ZONE_FORMATTER =
-      new DateTimeFormatterBuilder()
-      .append(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS ZZZ").getPrinter(),
-          new DateTimeParser[] {
-              DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS Z").getParser(),
-              DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS ZZZ").getParser(),
-          })
-      .toFormatter()
-      .withOffsetParsed();
 
   private static final int YEAR_FIELD = 0;
   private static final int MONTH_FIELD = 1;
@@ -1296,6 +1273,7 @@ public class RocksetResultSet implements ResultSet {
   }
 
   private Time getTime(int columnIndex, DateTimeZone localTimeZone) throws SQLException {
+
     Object value = column(columnIndex);
     if (value == null) {
       return null;
@@ -1324,12 +1302,16 @@ public class RocksetResultSet implements ResultSet {
     Column columnInfo = columnInfo(columnIndex);
     if (columnInfo.getType() == Column.ColumnTypes.TIMESTAMP) {
       try {
-        return new Timestamp(TIMESTAMP_FORMATTER.withZone(localTimeZone).parseMillis(
-                    value.toString()));
-      } catch (IllegalArgumentException e) {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("uuuu-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
+        LocalDateTime dateTime = LocalDateTime.parse(((JsonNode) value).asText(), format);
+        ZonedDateTime zonedDateTime = dateTime.atZone(ZoneId.of("UTC"));
+        Instant instant = zonedDateTime.toInstant();
+        return Timestamp.from(instant);
+      } catch (Exception e) {
         throw new SQLException("Invalid timestamp from server: " + value, e);
       }
     }
+
     throw new IllegalArgumentException("Expected column to be a timestamp type but is "
             + columnInfo.getType());
   }
@@ -1381,6 +1363,15 @@ public class RocksetResultSet implements ResultSet {
           Map.Entry<String, JsonNode> field = fields.next();
           JsonNode value = field.getValue();
           Column.ColumnTypes type = Column.ColumnTypes.fromValue(value.getNodeType().toString());
+          if (type.equals(Column.ColumnTypes.STRING)) {
+            SimpleDateFormat format = new SimpleDateFormat("uuuu-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
+            try {
+              format.parse(value.asText());
+              type = Column.ColumnTypes.TIMESTAMP;
+            } catch (ParseException e) {
+              // ignore
+            }
+          }
           if (type.equals(Column.ColumnTypes.OBJECT)) {
             if (value.get("__rockset_type") != null) {
               type = Column.ColumnTypes.fromValue(value.get("__rockset_type").asText());
