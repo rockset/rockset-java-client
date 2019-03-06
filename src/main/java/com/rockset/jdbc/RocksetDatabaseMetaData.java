@@ -970,7 +970,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
                     + ", \"TABLE_SCHEM\": \"" + RocksetConnection.DEFAULT_SCHEMA + "\""
                     + ", \"TABLE_NAME\": \"" + table  + "\""
                     + ", \"COLUMN_NAME\": \"" + "" + "\""
-                    + ", \"KEY_SEQ\": \"" + "0"
+                    + ", \"KEY_SEQ\": " + 0
                     + ", \"PK_NAME\": \"" + "" + "\"";
 
       str += " }";
