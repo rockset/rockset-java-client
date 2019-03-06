@@ -783,9 +783,16 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
         String str = "{\"TABLE_CAT\": \"" + RocksetConnection.DEFAULT_CATALOG + "\""
                     + ", \"TABLE_SCHEM\": \"" + RocksetConnection.DEFAULT_SCHEMA + "\""
                     + ", \"TABLE_NAME\": \"" + collection.getName()  + "\""
-                    + ", \"TABLE_TYPE\": \"" + "TABLE" + "\"";
+                    + ", \"TABLE_TYPE\": \"" + "TABLE" + "\""
+                    + ", \"TYPE_CAT\": \"\""
+                    + ", \"TYPE_SCHEM\": \"\""
+                    + ", \"TYPE_NAME\": \"\""
+                    + ", \"SELF_REFERENCING_COL_NAME\": \"\""
+                    + ", \"REF_GENERATION\": \"\"";
         if (collection.getDescription() != null) {
           str += ", \"REMARKS\": \"" + collection.getDescription() + "\"";
+        } else {
+          str += ", \"REMARKS\": \"\"";
         }
         str += " }";
         JsonNode docRootNode = mapper.readTree(str);
@@ -901,8 +908,9 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
         if (collection.getName().equals(tableNamePattern)) {
           RocksetTable table = new RocksetTable(tableNamePattern,
                 connection.describeTable(tableNamePattern));
+          ResultSet resultSet = table.getColumns();
           RocksetDriver.log("Exit : RocksetDatabaseMetaData getColumns");
-          return table.getColumns();
+          return resultSet;
         }
       }
     } catch (Exception e) {
@@ -1104,7 +1112,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
   @Override
   public ResultSet getSuperTypes(String catalog, String schemaPattern,
           String typeNamePattern) throws SQLException {
-    RocksetDriver.log("Entry : RocksetDatabaseMetaData getUDTs");
+    RocksetDriver.log("Entry : RocksetDatabaseMetaData getSuperTypes");
     Column col1 = new Column("TYPE_CAT", Column.ColumnTypes.STRING);
     Column col2 = new Column("TYPE_SCHEM", Column.ColumnTypes.STRING);
     Column col3 = new Column("TYPE_NAME", Column.ColumnTypes.STRING);
@@ -1118,7 +1126,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
     columns.add(col4);
     columns.add(col5);
     columns.add(col6);
-    RocksetDriver.log("Exit : RocksetDatabaseMetaData getUDTs");
+    RocksetDriver.log("Exit : RocksetDatabaseMetaData getSuperTypes");
     return new RocksetResultSet(columns, new ArrayList<Object>());
   }
 

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.BooleanNode;
 import com.fasterxml.jackson.databind.node.NumericNode;
+import com.fasterxml.jackson.databind.node.TextNode;
 import com.google.common.collect.ImmutableMap;
 
 import com.rockset.client.model.QueryFieldType;
@@ -1343,6 +1344,14 @@ public class RocksetResultSet implements ResultSet {
     if (value instanceof BooleanNode) {
       BooleanNode n = (BooleanNode)(value);
       return (Number) (n.asBoolean() ? 1 : 0);
+    }
+
+    if (value instanceof TextNode) {
+      String val = value.toString().substring(1, value.toString().length() - 1);
+      if (val.isEmpty()) {
+        return 0;
+      }
+      return (Number) ((Integer.parseInt(val)));
     }
 
     throw new SQLException("Value is not a number: " + value.getClass().getCanonicalName());

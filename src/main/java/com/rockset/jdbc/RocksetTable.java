@@ -59,13 +59,13 @@ class RocksetTable {
     Column col2 = new Column("TABLE_SCHEM", Column.ColumnTypes.STRING);
     Column col3 = new Column("TABLE_NAME", Column.ColumnTypes.STRING);
     Column col4 = new Column("COLUMN_NAME", Column.ColumnTypes.STRING);
-    Column col5 = new Column("DATA_TYPE", Column.ColumnTypes.STRING);
+    Column col5 = new Column("DATA_TYPE", Column.ColumnTypes.NUMBER);
     Column col6 = new Column("TYPE_NAME", Column.ColumnTypes.STRING);
     Column col7 = new Column("COLUMN_SIZE", Column.ColumnTypes.NUMBER);
     Column col8 = new Column("BUFFER_LENGTH", Column.ColumnTypes.STRING);
     Column col9 = new Column("DECIMAL_DIGITS", Column.ColumnTypes.NUMBER);
     Column col10 = new Column("NUM_PREC_RADIX", Column.ColumnTypes.NUMBER);
-    Column col11 = new Column("NULLABLE", Column.ColumnTypes.STRING);
+    Column col11 = new Column("NULLABLE", Column.ColumnTypes.NUMBER);
     Column col12 = new Column("REMARKS", Column.ColumnTypes.STRING);
     Column col13 = new Column("COLUMN_DEF", Column.ColumnTypes.STRING);
     Column col14 = new Column("SQL_DATA_TYPE", Column.ColumnTypes.NUMBER);
@@ -112,6 +112,7 @@ class RocksetTable {
     // each row refers to a single column
     List<Object> data = new ArrayList<Object>();
 
+    int position = 0;
     while (describe.next()) {
       // The "field" tag has to be an array.
       RocksetArray arr = (RocksetArray)describe.getObject("field");
@@ -151,6 +152,10 @@ class RocksetTable {
 
       // map rockset types as defined in 
       // https://github.com/rockset/rs/blob/master/cpp/compiler/util/types.cc#L11
+
+      boolean isChar = false;
+      boolean isNumber = false;
+
       if (rockType.equals("array")) {
         arrayAndObjectFields.put(fieldName, arr);
         sqlType = java.sql.Types.ARRAY;
@@ -158,9 +163,11 @@ class RocksetTable {
       } else if (rockType.equals("int")) {
         sqlType = java.sql.Types.BIGINT;
         sqlTypeName = "bigint";
+        isNumber = true;
       } else if (rockType.equals("string")) {
         sqlType = java.sql.Types.VARCHAR;
         sqlTypeName = "varchar";
+        isChar = true;
       } else if (rockType.equals("object")) {
         arrayAndObjectFields.put(fieldName, arr);
         sqlType = java.sql.Types.JAVA_OBJECT;
@@ -168,6 +175,7 @@ class RocksetTable {
       } else if (rockType.equals("float")) {
         sqlType = java.sql.Types.DOUBLE;
         sqlTypeName = "double";
+        isNumber = true;
       } else if (rockType.equals("bool")) {
         sqlType = java.sql.Types.BOOLEAN;
         sqlTypeName = "boolean";
@@ -195,11 +203,27 @@ class RocksetTable {
                     + ", \"TABLE_SCHEM\": \"" + RocksetConnection.DEFAULT_SCHEMA + "\""
                     + ", \"TABLE_NAME\": \"" + tableName  + "\"";
       str += ", \"COLUMN_NAME\": \"" + fieldName  + "\"";
-      str += ", \"DATA_TYPE\": \"" + sqlType  + "\"";
+      str += ", \"DATA_TYPE\": " + sqlType;
       str += ", \"TYPE_NAME\": \"" + sqlTypeName  + "\"";
+      str += ", \"COLUMN_SIZE\": " + 255;
+      str += ", \"DECIMAL_DIGITS\": " + (isNumber ? 2 : 0);
+      str += ", \"NUM_PREC_RADIX\": " + 2;
+      str += ", \"NULLABLE\": " + ResultSetMetaData.columnNullable;
+      str += ", \"REMARKS\": \"\"";
+      str += ", \"COLUMN_DEF\": \"\"";
+      str += ", \"CHAR_OCTET_LENGTH\": " + (isChar ? 255 : 0);
+      str += ", \"ORDINAL_POSITION\": " + position;
+      str += ", \"IS_NULLABLE\": \"YES\"";
+      str += ", \"SCOPE_CATALOG\": \"\"";
+      str += ", \"SCOPE_SCHEMA\": \"\"";
+      str += ", \"SCOPE_TABLE\": \"\"";
+      str += ", \"SOURCE_DATA_TYPE\": " + sqlType;
+      str += ", \"IS_AUTOINCREMENT\": \"\"";
+      str += ", \"IS_GENERATEDCOLUMN\": \"\"";
       str += " }";
       JsonNode docRootNode = mapper.readTree(str);
       data.add(docRootNode);
+      position++;
     }
     return new RocksetResultSet(columns, data);
   }
