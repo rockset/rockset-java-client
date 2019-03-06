@@ -28,41 +28,49 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
   private final RocksetConnection connection;
 
   RocksetDatabaseMetaData(RocksetConnection connection) {
+    RocksetDriver.log("Entry: RocksetDatabaseMetaData");
     this.connection = requireNonNull(connection, "connection is null");
   }
 
   @Override
   public boolean allProceduresAreCallable() throws SQLException {
+    RocksetDriver.log("Entry: RocksetDatabaseMetaData allProceduresAreCallable");
     return false;
   }
 
   @Override
   public boolean allTablesAreSelectable() throws SQLException {
+    RocksetDriver.log("Entry: RocksetDatabaseMetaData allTablesAreSelectable");
     return true;
   }
 
   @Override
   public String getURL() throws SQLException {
+    RocksetDriver.log("Entry: RocksetDatabaseMetaData getURL");
     return connection.getUri().toString();
   }
 
   @Override
   public String getUserName() throws SQLException {
+    RocksetDriver.log("Entry: RocksetDatabaseMetaData getUserName");
     return connection.getUser();
   }
 
   @Override
   public boolean isReadOnly() throws SQLException {
+    RocksetDriver.log("Entry: RocksetDatabaseMetaData isReadOnly");
     return connection.isReadOnly();
   }
 
   @Override
   public boolean nullsAreSortedHigh() throws SQLException {
+    RocksetDriver.log("Entry: RocksetDatabaseMetaData nullsAreSortedHigh");
     return false;
   }
 
   @Override
   public boolean nullsAreSortedLow() throws SQLException {
+    RocksetDriver.log("Entry: RocksetDatabaseMetaData nullsAreSortedLow");
     return false;
   }
 
@@ -645,6 +653,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
   @Override
   public ResultSet getProcedures(String catalog, String schemaPattern,
           String procedureNamePattern) throws SQLException {
+    RocksetDriver.log("Entry: RocksetDatabaseMetaData getProcedures");
     Column col1 = new Column("PROCEDURE_CAT", Column.ColumnTypes.STRING);
     Column col2 = new Column("PROCEDURE_SCHEM", Column.ColumnTypes.STRING);
     Column col3 = new Column("PROCEDURE_NAME", Column.ColumnTypes.STRING);
@@ -664,6 +673,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
     columns.add(col7);
     columns.add(col8);
     columns.add(col9);
+    RocksetDriver.log("Exit : RocksetDatabaseMetaData getProcedures");
     return new RocksetResultSet(columns, new ArrayList<Object>());
   }
 
@@ -678,6 +688,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
   @Override
   public ResultSet getProcedureColumns(String catalog, String schemaPattern,
           String procedureNamePattern, String columnNamePattern) throws SQLException {
+    RocksetDriver.log("Entry: RocksetDatabaseMetaData getProcedureColumns");
     Column col1 = new Column("PROCEDURE_CAT", Column.ColumnTypes.STRING);
     Column col2 = new Column("PROCEDURE_SCHEM", Column.ColumnTypes.STRING);
     Column col3 = new Column("PROCEDURE_NAME", Column.ColumnTypes.STRING);
@@ -720,6 +731,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
     columns.add(col18);
     columns.add(col19);
     columns.add(col20);
+    RocksetDriver.log("Exit : RocksetDatabaseMetaData getProcedureColumns");
     return new RocksetResultSet(columns, new ArrayList<Object>());
   }
 
@@ -732,6 +744,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
   @Override
   public ResultSet getTables(String catalog, String schemaPattern, String tableNamePattern,
           String[] types) throws SQLException {
+    RocksetDriver.log("Entry : RocksetDatabaseMetaData getTables");
     try {
       Column col1 = new Column("TABLE_CAT", Column.ColumnTypes.STRING);
       Column col2 = new Column("TABLE_SCHEM", Column.ColumnTypes.STRING);
@@ -778,6 +791,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
         JsonNode docRootNode = mapper.readTree(str);
         data.add(docRootNode);
       }
+      RocksetDriver.log("Exit : RocksetDatabaseMetaData getTables");
       return new RocksetResultSet(columns, data);
     } catch (Exception e) {
       throw new SQLException("Error processing getTables "
@@ -791,6 +805,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
   //
   @Override
   public ResultSet getSchemas() throws SQLException {
+    RocksetDriver.log("Entry : RocksetDatabaseMetaData getSchemas");
     Column col1 = new Column("TABLE_SCHEM", Column.ColumnTypes.STRING);
     Column col2 = new Column("TABLE_CATALOG", Column.ColumnTypes.STRING);
     ArrayList<Column> columns = new ArrayList<Column>();
@@ -806,6 +821,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
       JsonNode docRootNode = mapper.readTree(str);
       List<Object> data = new ArrayList<Object>();
       data.add(docRootNode);
+      RocksetDriver.log("Exit : RocksetDatabaseMetaData getSchemas");
       return new RocksetResultSet(columns, data);
     } catch (Exception e) {
       throw new SQLException("Error processing getSchemas "
@@ -819,6 +835,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
   //
   @Override
   public ResultSet getCatalogs() throws SQLException {
+    RocksetDriver.log("Entry : RocksetDatabaseMetaData getCatalogs");
     Column col1 = new Column("TABLE_CAT", Column.ColumnTypes.STRING);
     ArrayList<Column> columns = new ArrayList<Column>();
     columns.add(col1);
@@ -830,6 +847,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
       JsonNode docRootNode = mapper.readTree(str);
       List<Object> data = new ArrayList<Object>();
       data.add(docRootNode);
+      RocksetDriver.log("Exit : RocksetDatabaseMetaData getCatalogs");
       return new RocksetResultSet(columns, data);
     } catch (Exception e) {
       throw new SQLException("Error processing getCatalogs "
@@ -843,6 +861,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
   //
   @Override
   public ResultSet getTableTypes() throws SQLException {
+    RocksetDriver.log("Entry : RocksetDatabaseMetaData getTableTypes");
     Column col1 = new Column("TABLE_TYPE", Column.ColumnTypes.STRING);
     ArrayList<Column> columns = new ArrayList<Column>();
     columns.add(col1);
@@ -853,6 +872,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
       JsonNode docRootNode = mapper.readTree(str);
       List<Object> data = new ArrayList<Object>();
       data.add(docRootNode);
+      RocksetDriver.log("Exit : RocksetDatabaseMetaData getTableTypes");
       return new RocksetResultSet(columns, data);
     } catch (Exception e) {
       throw new SQLException("Error processing getTableTypes "
@@ -873,6 +893,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
   public ResultSet getColumns(String catalog, String schemaPattern,
           String tableNamePattern, String columnNamePattern) throws SQLException {
     // TODO: XXX filter matching table names. For now, support exact match.
+    RocksetDriver.log("Entry : RocksetDatabaseMetaData getColumns");
 
     try {
       List<Resource> collections =  connection.listCollections();
@@ -880,6 +901,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
         if (collection.getName().equals(tableNamePattern)) {
           RocksetTable table = new RocksetTable(tableNamePattern,
                 connection.describeTable(tableNamePattern));
+          RocksetDriver.log("Exit : RocksetDatabaseMetaData getColumns");
           return table.getColumns();
         }
       }
@@ -1029,6 +1051,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
   @Override
   public ResultSet getUDTs(String catalog, String schemaPattern,
           String typeNamePattern, int[] types) throws SQLException {
+    RocksetDriver.log("Entry : RocksetDatabaseMetaData getUDTs");
     Column col1 = new Column("TYPE_CAT", Column.ColumnTypes.STRING);
     Column col2 = new Column("TYPE_SCHEM", Column.ColumnTypes.STRING);
     Column col3 = new Column("TYPE_NAME", Column.ColumnTypes.STRING);
@@ -1044,6 +1067,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
     columns.add(col5);
     columns.add(col6);
     columns.add(col7);
+    RocksetDriver.log("Exit : RocksetDatabaseMetaData getUDTs");
     return new RocksetResultSet(columns, new ArrayList<Object>());
   }
 
@@ -1080,6 +1104,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
   @Override
   public ResultSet getSuperTypes(String catalog, String schemaPattern,
           String typeNamePattern) throws SQLException {
+    RocksetDriver.log("Entry : RocksetDatabaseMetaData getUDTs");
     Column col1 = new Column("TYPE_CAT", Column.ColumnTypes.STRING);
     Column col2 = new Column("TYPE_SCHEM", Column.ColumnTypes.STRING);
     Column col3 = new Column("TYPE_NAME", Column.ColumnTypes.STRING);
@@ -1093,6 +1118,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
     columns.add(col4);
     columns.add(col5);
     columns.add(col6);
+    RocksetDriver.log("Exit : RocksetDatabaseMetaData getUDTs");
     return new RocksetResultSet(columns, new ArrayList<Object>());
   }
 
@@ -1103,6 +1129,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
   @Override
   public ResultSet getSuperTables(String catalog, String schemaPattern,
           String tableNamePattern) throws SQLException {
+    RocksetDriver.log("Entry : RocksetDatabaseMetaData getSuperTables");
     Column col1 = new Column("TABLE_CAT", Column.ColumnTypes.STRING);
     Column col2 = new Column("TABLE_SCHEM", Column.ColumnTypes.STRING);
     Column col3 = new Column("TABLE_NAME", Column.ColumnTypes.STRING);
@@ -1112,6 +1139,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
     columns.add(col2);
     columns.add(col3);
     columns.add(col4);
+    RocksetDriver.log("Exit : RocksetDatabaseMetaData getSuperTables");
     return new RocksetResultSet(columns, new ArrayList<Object>());
   }
 
@@ -1126,6 +1154,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
   @Override
   public ResultSet getAttributes(String catalog, String schemaPattern,
           String typeNamePattern, String attributeNamePattern) throws SQLException {
+    RocksetDriver.log("Entry : RocksetDatabaseMetaData getAttributes");
     Column col1 = new Column("TYPE_CAT", Column.ColumnTypes.STRING);
     Column col2 = new Column("TYPE_SCHEM", Column.ColumnTypes.STRING);
     Column col3 = new Column("TYPE_NAME", Column.ColumnTypes.STRING);
@@ -1170,6 +1199,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
     columns.add(col19);
     columns.add(col20);
     columns.add(col21);
+    RocksetDriver.log("Exit : RocksetDatabaseMetaData getAttributes");
     return new RocksetResultSet(columns, new ArrayList<Object>());
   }
 
@@ -1274,6 +1304,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
   @Override
   public ResultSet getPseudoColumns(String catalog, String schemaPattern,
           String tableNamePattern, String columnNamePattern) throws SQLException {
+    RocksetDriver.log("Enter : RocksetDatabaseMetaData getPseudoColumns");
     Column col1 = new Column("TABLE_CAT", Column.ColumnTypes.STRING);
     Column col2 = new Column("TABLE_SCHEM", Column.ColumnTypes.STRING);
     Column col3 = new Column("TABLE_NAME", Column.ColumnTypes.STRING);
@@ -1300,6 +1331,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
     columns.add(col10);
     columns.add(col11);
     columns.add(col12);
+    RocksetDriver.log("Exit : RocksetDatabaseMetaData getPseudoColumns");
     return new RocksetResultSet(columns, new ArrayList<Object>());
   }
 
