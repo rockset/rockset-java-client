@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * Resource
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-24T01:18:37.603Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-03-06T00:47:37.549Z")
 public class Resource {
   @SerializedName("created_at")
   private String createdAt = null;
@@ -46,8 +46,11 @@ public class Resource {
   @SerializedName("description")
   private String description = null;
 
+  @SerializedName("workspace")
+  private String workspace = null;
+
   /**
-   * current status of collection, one of: CREATED, READY, DELETED, PAUSED, RESUMING
+   * current status of collection, one of: CREATED, READY, DELETED
    */
   @JsonAdapter(StatusEnum.Adapter.class)
   public enum StatusEnum {
@@ -56,10 +59,6 @@ public class Resource {
     READY("READY"),
     
     DELETED("DELETED"),
-    
-    PAUSED("PAUSED"),
-    
-    RESUMING("RESUMING"),
     
     UNKNOWN("UNKNOWN");
 
@@ -188,16 +187,34 @@ public class Resource {
     this.description = description;
   }
 
+  public Resource workspace(String workspace) {
+    this.workspace = workspace;
+    return this;
+  }
+
+   /**
+   * name of the workspace that the collection is in
+   * @return workspace
+  **/
+  @ApiModelProperty(example = "commons", value = "name of the workspace that the collection is in")
+  public String getWorkspace() {
+    return workspace;
+  }
+
+  public void setWorkspace(String workspace) {
+    this.workspace = workspace;
+  }
+
   public Resource status(StatusEnum status) {
     this.status = status;
     return this;
   }
 
    /**
-   * current status of collection, one of: CREATED, READY, DELETED, PAUSED, RESUMING
+   * current status of collection, one of: CREATED, READY, DELETED
    * @return status
   **/
-  @ApiModelProperty(example = "PAUSED", value = "current status of collection, one of: CREATED, READY, DELETED, PAUSED, RESUMING")
+  @ApiModelProperty(example = "READY", value = "current status of collection, one of: CREATED, READY, DELETED")
   public StatusEnum getStatus() {
     return status;
   }
@@ -308,6 +325,7 @@ public class Resource {
         Objects.equals(this.createdBy, resource.createdBy) &&
         Objects.equals(this.name, resource.name) &&
         Objects.equals(this.description, resource.description) &&
+        Objects.equals(this.workspace, resource.workspace) &&
         Objects.equals(this.status, resource.status) &&
         Objects.equals(this.sources, resource.sources) &&
         Objects.equals(this.stats, resource.stats) &&
@@ -317,7 +335,7 @@ public class Resource {
 
   @Override
   public int hashCode() {
-    return Objects.hash(createdAt, createdBy, name, description, status, sources, stats, retentionSecs, fieldMappings);
+    return Objects.hash(createdAt, createdBy, name, description, workspace, status, sources, stats, retentionSecs, fieldMappings);
   }
 
 
@@ -330,6 +348,7 @@ public class Resource {
     sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    workspace: ").append(toIndentedString(workspace)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    sources: ").append(toIndentedString(sources)).append("\n");
     sb.append("    stats: ").append(toIndentedString(stats)).append("\n");

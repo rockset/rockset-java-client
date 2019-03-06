@@ -26,11 +26,11 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
-import com.rockset.client.model.CreateCollectionRequest;
-import com.rockset.client.model.CreateCollectionResponse;
-import com.rockset.client.model.DeleteCollectionResponse;
-import com.rockset.client.model.GetCollectionResponse;
-import com.rockset.client.model.ListCollectionsResponse;
+import com.rockset.client.model.CreateWorkspaceRequest;
+import com.rockset.client.model.CreateWorkspaceResponse;
+import com.rockset.client.model.DeleteWorkspaceResponse;
+import com.rockset.client.model.GetWorkspaceResponse;
+import com.rockset.client.model.ListWorkspacesResponse;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -38,14 +38,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CollectionsApi {
+public class WorkspacesApi {
     private ApiClient apiClient;
 
-    public CollectionsApi() {
+    public WorkspacesApi() {
         this(Configuration.getDefaultApiClient());
     }
 
-    public CollectionsApi(ApiClient apiClient) {
+    public WorkspacesApi(ApiClient apiClient) {
         this.apiClient = apiClient;
     }
 
@@ -58,20 +58,141 @@ public class CollectionsApi {
     }
 
     /**
-     * Build call for create
+     * Build call for child
      * @param workspace name of the workspace (required)
-     * @param body JSON object (required)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call createCall(String workspace, CreateCollectionRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public com.squareup.okhttp.Call childCall(String workspace, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/orgs/self/ws/{workspace}/ws"
+            .replaceAll("\\{" + "workspace" + "\\}", apiClient.escapeString(workspace.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call childValidateBeforeCall(String workspace, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        
+        // verify the required parameter 'workspace' is set
+        if (workspace == null) {
+            throw new Exception("Missing the required parameter 'workspace' when calling child(Async)");
+        }
+        
+
+        com.squareup.okhttp.Call call = childCall(workspace, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * List Workspaces
+     * List workspaces under given workspace.
+     * @param workspace name of the workspace (required)
+     * @return ListWorkspacesResponse
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ListWorkspacesResponse child(String workspace) throws Exception {
+        ApiResponse<ListWorkspacesResponse> resp = childWithHttpInfo(workspace);
+        return resp.getData();
+    }
+
+    /**
+     * List Workspaces
+     * List workspaces under given workspace.
+     * @param workspace name of the workspace (required)
+     * @return ApiResponse&lt;ListWorkspacesResponse&gt;
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<ListWorkspacesResponse> childWithHttpInfo(String workspace) throws Exception {
+        com.squareup.okhttp.Call call = childValidateBeforeCall(workspace, null, null);
+        Type localVarReturnType = new TypeToken<ListWorkspacesResponse>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * List Workspaces (asynchronously)
+     * List workspaces under given workspace.
+     * @param workspace name of the workspace (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call childAsync(String workspace, final ApiCallback<ListWorkspacesResponse> callback) throws Exception {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = childValidateBeforeCall(workspace, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<ListWorkspacesResponse>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for create
+     * @param body workspace details (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws Exception If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call createCall(CreateWorkspaceRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = body;
 
         // create path and map variables
-        String localVarPath = "/v1/orgs/self/ws/{workspace}/collections"
-            .replaceAll("\\{" + "workspace" + "\\}", apiClient.escapeString(workspace.toString()));
+        String localVarPath = "/v1/orgs/self/ws";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -109,12 +230,7 @@ public class CollectionsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call createValidateBeforeCall(String workspace, CreateCollectionRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
-        
-        // verify the required parameter 'workspace' is set
-        if (workspace == null) {
-            throw new Exception("Missing the required parameter 'workspace' when calling create(Async)");
-        }
+    private com.squareup.okhttp.Call createValidateBeforeCall(CreateWorkspaceRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'body' is set
         if (body == null) {
@@ -122,48 +238,45 @@ public class CollectionsApi {
         }
         
 
-        com.squareup.okhttp.Call call = createCall(workspace, body, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = createCall(body, progressListener, progressRequestListener);
         return call;
 
     }
 
     /**
-     * Create Collection
-     * Create new collection in a workspace.
-     * @param workspace name of the workspace (required)
-     * @param body JSON object (required)
-     * @return CreateCollectionResponse
+     * Create Workspace
+     * Create a new workspace in your org.
+     * @param body workspace details (required)
+     * @return CreateWorkspaceResponse
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public CreateCollectionResponse create(String workspace, CreateCollectionRequest body) throws Exception {
-        ApiResponse<CreateCollectionResponse> resp = createWithHttpInfo(workspace, body);
+    public CreateWorkspaceResponse create(CreateWorkspaceRequest body) throws Exception {
+        ApiResponse<CreateWorkspaceResponse> resp = createWithHttpInfo(body);
         return resp.getData();
     }
 
     /**
-     * Create Collection
-     * Create new collection in a workspace.
-     * @param workspace name of the workspace (required)
-     * @param body JSON object (required)
-     * @return ApiResponse&lt;CreateCollectionResponse&gt;
+     * Create Workspace
+     * Create a new workspace in your org.
+     * @param body workspace details (required)
+     * @return ApiResponse&lt;CreateWorkspaceResponse&gt;
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<CreateCollectionResponse> createWithHttpInfo(String workspace, CreateCollectionRequest body) throws Exception {
-        com.squareup.okhttp.Call call = createValidateBeforeCall(workspace, body, null, null);
-        Type localVarReturnType = new TypeToken<CreateCollectionResponse>(){}.getType();
+    public ApiResponse<CreateWorkspaceResponse> createWithHttpInfo(CreateWorkspaceRequest body) throws Exception {
+        com.squareup.okhttp.Call call = createValidateBeforeCall(body, null, null);
+        Type localVarReturnType = new TypeToken<CreateWorkspaceResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
-     * Create Collection (asynchronously)
-     * Create new collection in a workspace.
-     * @param workspace name of the workspace (required)
-     * @param body JSON object (required)
+     * Create Workspace (asynchronously)
+     * Create a new workspace in your org.
+     * @param body workspace details (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call createAsync(String workspace, CreateCollectionRequest body, final ApiCallback<CreateCollectionResponse> callback) throws Exception {
+    public com.squareup.okhttp.Call createAsync(CreateWorkspaceRequest body, final ApiCallback<CreateWorkspaceResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -184,27 +297,25 @@ public class CollectionsApi {
             };
         }
 
-        com.squareup.okhttp.Call call = createValidateBeforeCall(workspace, body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<CreateCollectionResponse>(){}.getType();
+        com.squareup.okhttp.Call call = createValidateBeforeCall(body, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<CreateWorkspaceResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
     /**
      * Build call for delete
      * @param workspace name of the workspace (required)
-     * @param collection name of the collection (required)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call deleteCall(String workspace, String collection, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public com.squareup.okhttp.Call deleteCall(String workspace, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/v1/orgs/self/ws/{workspace}/collections/{collection}"
-            .replaceAll("\\{" + "workspace" + "\\}", apiClient.escapeString(workspace.toString()))
-            .replaceAll("\\{" + "collection" + "\\}", apiClient.escapeString(collection.toString()));
+        String localVarPath = "/v1/orgs/self/ws/{workspace}"
+            .replaceAll("\\{" + "workspace" + "\\}", apiClient.escapeString(workspace.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -242,61 +353,53 @@ public class CollectionsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call deleteValidateBeforeCall(String workspace, String collection, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private com.squareup.okhttp.Call deleteValidateBeforeCall(String workspace, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'workspace' is set
         if (workspace == null) {
             throw new Exception("Missing the required parameter 'workspace' when calling delete(Async)");
         }
         
-        // verify the required parameter 'collection' is set
-        if (collection == null) {
-            throw new Exception("Missing the required parameter 'collection' when calling delete(Async)");
-        }
-        
 
-        com.squareup.okhttp.Call call = deleteCall(workspace, collection, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = deleteCall(workspace, progressListener, progressRequestListener);
         return call;
 
     }
 
     /**
-     * Delete Collection
-     * Delete a collection and all its documents from Rockset.
+     * Delete Workspace
+     * Remove a workspace.
      * @param workspace name of the workspace (required)
-     * @param collection name of the collection (required)
-     * @return DeleteCollectionResponse
+     * @return DeleteWorkspaceResponse
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public DeleteCollectionResponse delete(String workspace, String collection) throws Exception {
-        ApiResponse<DeleteCollectionResponse> resp = deleteWithHttpInfo(workspace, collection);
+    public DeleteWorkspaceResponse delete(String workspace) throws Exception {
+        ApiResponse<DeleteWorkspaceResponse> resp = deleteWithHttpInfo(workspace);
         return resp.getData();
     }
 
     /**
-     * Delete Collection
-     * Delete a collection and all its documents from Rockset.
+     * Delete Workspace
+     * Remove a workspace.
      * @param workspace name of the workspace (required)
-     * @param collection name of the collection (required)
-     * @return ApiResponse&lt;DeleteCollectionResponse&gt;
+     * @return ApiResponse&lt;DeleteWorkspaceResponse&gt;
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<DeleteCollectionResponse> deleteWithHttpInfo(String workspace, String collection) throws Exception {
-        com.squareup.okhttp.Call call = deleteValidateBeforeCall(workspace, collection, null, null);
-        Type localVarReturnType = new TypeToken<DeleteCollectionResponse>(){}.getType();
+    public ApiResponse<DeleteWorkspaceResponse> deleteWithHttpInfo(String workspace) throws Exception {
+        com.squareup.okhttp.Call call = deleteValidateBeforeCall(workspace, null, null);
+        Type localVarReturnType = new TypeToken<DeleteWorkspaceResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
-     * Delete Collection (asynchronously)
-     * Delete a collection and all its documents from Rockset.
+     * Delete Workspace (asynchronously)
+     * Remove a workspace.
      * @param workspace name of the workspace (required)
-     * @param collection name of the collection (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call deleteAsync(String workspace, String collection, final ApiCallback<DeleteCollectionResponse> callback) throws Exception {
+    public com.squareup.okhttp.Call deleteAsync(String workspace, final ApiCallback<DeleteWorkspaceResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -317,157 +420,24 @@ public class CollectionsApi {
             };
         }
 
-        com.squareup.okhttp.Call call = deleteValidateBeforeCall(workspace, collection, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<DeleteCollectionResponse>(){}.getType();
+        com.squareup.okhttp.Call call = deleteValidateBeforeCall(workspace, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<DeleteWorkspaceResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
     /**
      * Build call for get
      * @param workspace name of the workspace (required)
-     * @param collection name of the collection (required)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getCall(String workspace, String collection, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public com.squareup.okhttp.Call getCall(String workspace, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/v1/orgs/self/ws/{workspace}/collections/{collection}"
-            .replaceAll("\\{" + "workspace" + "\\}", apiClient.escapeString(workspace.toString()))
-            .replaceAll("\\{" + "collection" + "\\}", apiClient.escapeString(collection.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
-
-        if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
-                @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
-                    return originalResponse.newBuilder()
-                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
-                    .build();
-                }
-            });
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getValidateBeforeCall(String workspace, String collection, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
-        
-        // verify the required parameter 'workspace' is set
-        if (workspace == null) {
-            throw new Exception("Missing the required parameter 'workspace' when calling get(Async)");
-        }
-        
-        // verify the required parameter 'collection' is set
-        if (collection == null) {
-            throw new Exception("Missing the required parameter 'collection' when calling get(Async)");
-        }
-        
-
-        com.squareup.okhttp.Call call = getCall(workspace, collection, progressListener, progressRequestListener);
-        return call;
-
-    }
-
-    /**
-     * Get Collection
-     * Get details about a collection.
-     * @param workspace name of the workspace (required)
-     * @param collection name of the collection (required)
-     * @return GetCollectionResponse
-     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
-     */
-    public GetCollectionResponse get(String workspace, String collection) throws Exception {
-        ApiResponse<GetCollectionResponse> resp = getWithHttpInfo(workspace, collection);
-        return resp.getData();
-    }
-
-    /**
-     * Get Collection
-     * Get details about a collection.
-     * @param workspace name of the workspace (required)
-     * @param collection name of the collection (required)
-     * @return ApiResponse&lt;GetCollectionResponse&gt;
-     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
-     */
-    public ApiResponse<GetCollectionResponse> getWithHttpInfo(String workspace, String collection) throws Exception {
-        com.squareup.okhttp.Call call = getValidateBeforeCall(workspace, collection, null, null);
-        Type localVarReturnType = new TypeToken<GetCollectionResponse>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
-    }
-
-    /**
-     * Get Collection (asynchronously)
-     * Get details about a collection.
-     * @param workspace name of the workspace (required)
-     * @param collection name of the collection (required)
-     * @param callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws Exception If fail to process the API call, e.g. serializing the request body object
-     */
-    public com.squareup.okhttp.Call getAsync(String workspace, String collection, final ApiCallback<GetCollectionResponse> callback) throws Exception {
-
-        ProgressResponseBody.ProgressListener progressListener = null;
-        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
-
-        if (callback != null) {
-            progressListener = new ProgressResponseBody.ProgressListener() {
-                @Override
-                public void update(long bytesRead, long contentLength, boolean done) {
-                    callback.onDownloadProgress(bytesRead, contentLength, done);
-                }
-            };
-
-            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
-                @Override
-                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
-                    callback.onUploadProgress(bytesWritten, contentLength, done);
-                }
-            };
-        }
-
-        com.squareup.okhttp.Call call = getValidateBeforeCall(workspace, collection, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<GetCollectionResponse>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
-        return call;
-    }
-    /**
-     * Build call for list
-     * @param workspace name of the workspace (required)
-     * @param progressListener Progress listener
-     * @param progressRequestListener Progress request listener
-     * @return Call to execute
-     * @throws Exception If fail to serialize the request body object
-     */
-    public com.squareup.okhttp.Call listCall(String workspace, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/v1/orgs/self/ws/{workspace}/collections"
+        String localVarPath = "/v1/orgs/self/ws/{workspace}"
             .replaceAll("\\{" + "workspace" + "\\}", apiClient.escapeString(workspace.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -506,53 +476,53 @@ public class CollectionsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call listValidateBeforeCall(String workspace, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private com.squareup.okhttp.Call getValidateBeforeCall(String workspace, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'workspace' is set
         if (workspace == null) {
-            throw new Exception("Missing the required parameter 'workspace' when calling list(Async)");
+            throw new Exception("Missing the required parameter 'workspace' when calling get(Async)");
         }
         
 
-        com.squareup.okhttp.Call call = listCall(workspace, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getCall(workspace, progressListener, progressRequestListener);
         return call;
 
     }
 
     /**
-     * List Collections
-     * Retrieve all collections in a workspace.
+     * Get Workspace
+     * Get information about a single workspace.
      * @param workspace name of the workspace (required)
-     * @return ListCollectionsResponse
+     * @return GetWorkspaceResponse
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ListCollectionsResponse list(String workspace) throws Exception {
-        ApiResponse<ListCollectionsResponse> resp = listWithHttpInfo(workspace);
+    public GetWorkspaceResponse get(String workspace) throws Exception {
+        ApiResponse<GetWorkspaceResponse> resp = getWithHttpInfo(workspace);
         return resp.getData();
     }
 
     /**
-     * List Collections
-     * Retrieve all collections in a workspace.
+     * Get Workspace
+     * Get information about a single workspace.
      * @param workspace name of the workspace (required)
-     * @return ApiResponse&lt;ListCollectionsResponse&gt;
+     * @return ApiResponse&lt;GetWorkspaceResponse&gt;
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<ListCollectionsResponse> listWithHttpInfo(String workspace) throws Exception {
-        com.squareup.okhttp.Call call = listValidateBeforeCall(workspace, null, null);
-        Type localVarReturnType = new TypeToken<ListCollectionsResponse>(){}.getType();
+    public ApiResponse<GetWorkspaceResponse> getWithHttpInfo(String workspace) throws Exception {
+        com.squareup.okhttp.Call call = getValidateBeforeCall(workspace, null, null);
+        Type localVarReturnType = new TypeToken<GetWorkspaceResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
-     * List Collections (asynchronously)
-     * Retrieve all collections in a workspace.
+     * Get Workspace (asynchronously)
+     * Get information about a single workspace.
      * @param workspace name of the workspace (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listAsync(String workspace, final ApiCallback<ListCollectionsResponse> callback) throws Exception {
+    public com.squareup.okhttp.Call getAsync(String workspace, final ApiCallback<GetWorkspaceResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -573,8 +543,121 @@ public class CollectionsApi {
             };
         }
 
-        com.squareup.okhttp.Call call = listValidateBeforeCall(workspace, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<ListCollectionsResponse>(){}.getType();
+        com.squareup.okhttp.Call call = getValidateBeforeCall(workspace, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<GetWorkspaceResponse>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for list
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws Exception If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call listCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/orgs/self/ws";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call listValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        
+
+        com.squareup.okhttp.Call call = listCall(progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * List Workspaces
+     * List all workspaces.
+     * @return ListWorkspacesResponse
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ListWorkspacesResponse list() throws Exception {
+        ApiResponse<ListWorkspacesResponse> resp = listWithHttpInfo();
+        return resp.getData();
+    }
+
+    /**
+     * List Workspaces
+     * List all workspaces.
+     * @return ApiResponse&lt;ListWorkspacesResponse&gt;
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<ListWorkspacesResponse> listWithHttpInfo() throws Exception {
+        com.squareup.okhttp.Call call = listValidateBeforeCall(null, null);
+        Type localVarReturnType = new TypeToken<ListWorkspacesResponse>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * List Workspaces (asynchronously)
+     * List all workspaces.
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call listAsync(final ApiCallback<ListWorkspacesResponse> callback) throws Exception {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = listValidateBeforeCall(progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<ListWorkspacesResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }

@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * QueryResponseStats
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-24T01:18:37.603Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-03-06T00:47:37.549Z")
 public class QueryResponseStats {
   @SerializedName("elapsed_time_ms")
   private Long elapsedTimeMs = null;

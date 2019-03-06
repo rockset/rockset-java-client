@@ -22,7 +22,7 @@ public class CreateS3CollectionExample {
                                             .sources(sources);
 
     try {
-      CreateCollectionResponse response = rs.createCollection(request);
+      CreateCollectionResponse response = rs.createCollection("commons", request);
       System.out.println(response);
     } catch (Exception e) {
       e.printStackTrace();

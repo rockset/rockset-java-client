@@ -28,7 +28,7 @@ import java.io.IOException;
 /**
  * OutputField
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-24T01:18:37.603Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-03-06T00:47:37.549Z")
 public class OutputField {
   @SerializedName("field_name")
   private String fieldName = null;
@@ -95,7 +95,7 @@ public class OutputField {
    * The name of a field, parsed as a SQL qualified name 
    * @return fieldName
   **/
-  @ApiModelProperty(example = "address.city.zipcode", value = "The name of a field, parsed as a SQL qualified name ")
+  @ApiModelProperty(example = "zip_hash", value = "The name of a field, parsed as a SQL qualified name ")
   public String getFieldName() {
     return fieldName;
   }

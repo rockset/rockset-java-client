@@ -20,42 +20,55 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.rockset.client.model.DeleteDocumentsRequestData;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * DeleteDocumentsRequest
+ * UpdateUserRequest
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-03-06T00:47:37.549Z")
-public class DeleteDocumentsRequest {
-  @SerializedName("data")
-  private List<DeleteDocumentsRequestData> data = new ArrayList<DeleteDocumentsRequestData>();
+public class UpdateUserRequest {
+  @SerializedName("first_name")
+  private String firstName = null;
 
-  public DeleteDocumentsRequest data(List<DeleteDocumentsRequestData> data) {
-    this.data = data;
-    return this;
-  }
+  @SerializedName("last_name")
+  private String lastName = null;
 
-  public DeleteDocumentsRequest addDataItem(DeleteDocumentsRequestData dataItem) {
-    this.data.add(dataItem);
+  public UpdateUserRequest firstName(String firstName) {
+    this.firstName = firstName;
     return this;
   }
 
    /**
-   * array of document IDs
-   * @return data
+   * user first name
+   * @return firstName
   **/
-  @ApiModelProperty(required = true, value = "array of document IDs")
-  public List<DeleteDocumentsRequestData> getData() {
-    return data;
+  @ApiModelProperty(example = "John", value = "user first name")
+  public String getFirstName() {
+    return firstName;
   }
 
-  public void setData(List<DeleteDocumentsRequestData> data) {
-    this.data = data;
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public UpdateUserRequest lastName(String lastName) {
+    this.lastName = lastName;
+    return this;
+  }
+
+   /**
+   * user last name
+   * @return lastName
+  **/
+  @ApiModelProperty(example = "Doe", value = "user last name")
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
   }
 
 
@@ -67,22 +80,24 @@ public class DeleteDocumentsRequest {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    DeleteDocumentsRequest deleteDocumentsRequest = (DeleteDocumentsRequest) o;
-    return Objects.equals(this.data, deleteDocumentsRequest.data);
+    UpdateUserRequest updateUserRequest = (UpdateUserRequest) o;
+    return Objects.equals(this.firstName, updateUserRequest.firstName) &&
+        Objects.equals(this.lastName, updateUserRequest.lastName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data);
+    return Objects.hash(firstName, lastName);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class DeleteDocumentsRequest {\n");
+    sb.append("class UpdateUserRequest {\n");
     
-    sb.append("    data: ").append(toIndentedString(data)).append("\n");
+    sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
+    sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

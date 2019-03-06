@@ -20,7 +20,6 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.rockset.client.model.ErrorModelContext;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -29,11 +28,8 @@ import java.io.IOException;
  * Describes details about an error
  */
 @ApiModel(description = "Describes details about an error")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-24T01:18:37.603Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-03-06T00:47:37.549Z")
 public class ErrorModel {
-  @SerializedName("code")
-  private Integer code = null;
-
   @SerializedName("message")
   private String message = null;
 
@@ -64,15 +60,13 @@ public class ErrorModel {
     
     DEPENDENTRESOURCES("DEPENDENTRESOURCES"),
     
-    PAUSED("PAUSED"),
-    
     QUERY_ERROR("QUERY_ERROR"),
-    
-    QUERY_PARSE_ERROR("QUERY_PARSE_ERROR"),
     
     NOT_READY("NOT_READY"),
     
-    FORBIDDEN("FORBIDDEN");
+    FORBIDDEN("FORBIDDEN"),
+    
+    QUERY_TIMEOUT("QUERY_TIMEOUT");
 
     private String value;
 
@@ -115,26 +109,14 @@ public class ErrorModel {
   @SerializedName("type")
   private TypeEnum type = null;
 
-  @SerializedName("context")
-  private ErrorModelContext context = null;
+  @SerializedName("line")
+  private Integer line = null;
 
-  public ErrorModel code(Integer code) {
-    this.code = code;
-    return this;
-  }
+  @SerializedName("column")
+  private Integer column = null;
 
-   /**
-   * HTTP status code
-   * @return code
-  **/
-  @ApiModelProperty(example = "404", value = "HTTP status code")
-  public Integer getCode() {
-    return code;
-  }
-
-  public void setCode(Integer code) {
-    this.code = code;
-  }
+  @SerializedName("trace_id")
+  private String traceId = null;
 
   public ErrorModel message(String message) {
     this.message = message;
@@ -172,22 +154,58 @@ public class ErrorModel {
     this.type = type;
   }
 
-  public ErrorModel context(ErrorModelContext context) {
-    this.context = context;
+  public ErrorModel line(Integer line) {
+    this.line = line;
     return this;
   }
 
    /**
-   * additional error information
-   * @return context
+   * Line where the error happened (if applicable)
+   * @return line
   **/
-  @ApiModelProperty(value = "additional error information")
-  public ErrorModelContext getContext() {
-    return context;
+  @ApiModelProperty(value = "Line where the error happened (if applicable)")
+  public Integer getLine() {
+    return line;
   }
 
-  public void setContext(ErrorModelContext context) {
-    this.context = context;
+  public void setLine(Integer line) {
+    this.line = line;
+  }
+
+  public ErrorModel column(Integer column) {
+    this.column = column;
+    return this;
+  }
+
+   /**
+   * Column where the error happened (if applicable)
+   * @return column
+  **/
+  @ApiModelProperty(value = "Column where the error happened (if applicable)")
+  public Integer getColumn() {
+    return column;
+  }
+
+  public void setColumn(Integer column) {
+    this.column = column;
+  }
+
+  public ErrorModel traceId(String traceId) {
+    this.traceId = traceId;
+    return this;
+  }
+
+   /**
+   * Internal trace ID to help with debugging
+   * @return traceId
+  **/
+  @ApiModelProperty(value = "Internal trace ID to help with debugging")
+  public String getTraceId() {
+    return traceId;
+  }
+
+  public void setTraceId(String traceId) {
+    this.traceId = traceId;
   }
 
 
@@ -200,15 +218,16 @@ public class ErrorModel {
       return false;
     }
     ErrorModel errorModel = (ErrorModel) o;
-    return Objects.equals(this.code, errorModel.code) &&
-        Objects.equals(this.message, errorModel.message) &&
+    return Objects.equals(this.message, errorModel.message) &&
         Objects.equals(this.type, errorModel.type) &&
-        Objects.equals(this.context, errorModel.context);
+        Objects.equals(this.line, errorModel.line) &&
+        Objects.equals(this.column, errorModel.column) &&
+        Objects.equals(this.traceId, errorModel.traceId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(code, message, type, context);
+    return Objects.hash(message, type, line, column, traceId);
   }
 
 
@@ -217,10 +236,11 @@ public class ErrorModel {
     StringBuilder sb = new StringBuilder();
     sb.append("class ErrorModel {\n");
     
-    sb.append("    code: ").append(toIndentedString(code)).append("\n");
     sb.append("    message: ").append(toIndentedString(message)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    context: ").append(toIndentedString(context)).append("\n");
+    sb.append("    line: ").append(toIndentedString(line)).append("\n");
+    sb.append("    column: ").append(toIndentedString(column)).append("\n");
+    sb.append("    traceId: ").append(toIndentedString(traceId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

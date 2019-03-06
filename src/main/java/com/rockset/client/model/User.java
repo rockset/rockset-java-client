@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * User
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-24T01:18:37.603Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-03-06T00:47:37.549Z")
 public class User {
   @SerializedName("type")
   private String type = null;
@@ -40,8 +40,17 @@ public class User {
   @SerializedName("email")
   private String email = null;
 
+  @SerializedName("first_name")
+  private String firstName = null;
+
+  @SerializedName("last_name")
+  private String lastName = null;
+
   @SerializedName("roles")
   private List<String> roles = null;
+
+  @SerializedName("state")
+  private String state = null;
 
    /**
    * has value &#x60;user&#x60; for a user object
@@ -88,6 +97,42 @@ public class User {
     this.email = email;
   }
 
+  public User firstName(String firstName) {
+    this.firstName = firstName;
+    return this;
+  }
+
+   /**
+   * user first name
+   * @return firstName
+  **/
+  @ApiModelProperty(example = "John", value = "user first name")
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public User lastName(String lastName) {
+    this.lastName = lastName;
+    return this;
+  }
+
+   /**
+   * user last name
+   * @return lastName
+  **/
+  @ApiModelProperty(example = "Doe", value = "user last name")
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
   public User roles(List<String> roles) {
     this.roles = roles;
     return this;
@@ -114,6 +159,24 @@ public class User {
     this.roles = roles;
   }
 
+  public User state(String state) {
+    this.state = state;
+    return this;
+  }
+
+   /**
+   * state of user - NEW / ACTIVE
+   * @return state
+  **/
+  @ApiModelProperty(example = "ACTIVE", value = "state of user - NEW / ACTIVE")
+  public String getState() {
+    return state;
+  }
+
+  public void setState(String state) {
+    this.state = state;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -127,12 +190,15 @@ public class User {
     return Objects.equals(this.type, user.type) &&
         Objects.equals(this.createdAt, user.createdAt) &&
         Objects.equals(this.email, user.email) &&
-        Objects.equals(this.roles, user.roles);
+        Objects.equals(this.firstName, user.firstName) &&
+        Objects.equals(this.lastName, user.lastName) &&
+        Objects.equals(this.roles, user.roles) &&
+        Objects.equals(this.state, user.state);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(type, createdAt, email, roles);
+    return Objects.hash(type, createdAt, email, firstName, lastName, roles, state);
   }
 
 
@@ -144,7 +210,10 @@ public class User {
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
+    sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
+    sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
     sb.append("    roles: ").append(toIndentedString(roles)).append("\n");
+    sb.append("    state: ").append(toIndentedString(state)).append("\n");
     sb.append("}");
     return sb.toString();
   }

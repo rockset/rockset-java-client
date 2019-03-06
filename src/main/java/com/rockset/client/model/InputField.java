@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * InputField
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-24T01:18:37.603Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-03-06T00:47:37.549Z")
 public class InputField {
   @SerializedName("field_name")
   private String fieldName = null;
@@ -151,7 +151,7 @@ public class InputField {
    * Sql parameter name
    * @return param
   **/
-  @ApiModelProperty(value = "Sql parameter name")
+  @ApiModelProperty(example = "zip", value = "Sql parameter name")
   public String getParam() {
     return param;
   }

@@ -12,7 +12,7 @@ public class CreateCollectionExample {
                                             .name("my-first-collection");
     
     try {
-      CreateCollectionResponse response = rs.createCollection(request);
+      CreateCollectionResponse response = rs.createCollection("commoms", request);
       System.out.println(response);
     } catch (Exception e) {
       e.printStackTrace();

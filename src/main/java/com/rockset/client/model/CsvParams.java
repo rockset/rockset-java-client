@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * CsvParams
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-01-24T01:18:37.603Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-03-06T00:47:37.549Z")
 public class CsvParams {
   @SerializedName("firstLineAsColumnNames")
   private Boolean firstLineAsColumnNames = null;
@@ -52,7 +52,11 @@ public class CsvParams {
     
     BOOLEAN("BOOLEAN"),
     
+    BOOL("BOOL"),
+    
     INTEGER("INTEGER"),
+    
+    INT("INT"),
     
     FLOAT("FLOAT"),
     
@@ -106,6 +110,9 @@ public class CsvParams {
 
   @SerializedName("columnTypes")
   private List<ColumnTypesEnum> columnTypes = null;
+
+  @SerializedName("quoteChar")
+  private String quoteChar = null;
 
   public CsvParams firstLineAsColumnNames(Boolean firstLineAsColumnNames) {
     this.firstLineAsColumnNames = firstLineAsColumnNames;
@@ -213,6 +220,24 @@ public class CsvParams {
     this.columnTypes = columnTypes;
   }
 
+  public CsvParams quoteChar(String quoteChar) {
+    this.quoteChar = quoteChar;
+    return this;
+  }
+
+   /**
+   * character within which a cell value is enclosed,null character if no such character, default is &#39;\&quot;&#39;
+   * @return quoteChar
+  **/
+  @ApiModelProperty(example = "\"", value = "character within which a cell value is enclosed,null character if no such character, default is '\"'")
+  public String getQuoteChar() {
+    return quoteChar;
+  }
+
+  public void setQuoteChar(String quoteChar) {
+    this.quoteChar = quoteChar;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -227,12 +252,13 @@ public class CsvParams {
         Objects.equals(this.separator, csvParams.separator) &&
         Objects.equals(this.encoding, csvParams.encoding) &&
         Objects.equals(this.columnNames, csvParams.columnNames) &&
-        Objects.equals(this.columnTypes, csvParams.columnTypes);
+        Objects.equals(this.columnTypes, csvParams.columnTypes) &&
+        Objects.equals(this.quoteChar, csvParams.quoteChar);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(firstLineAsColumnNames, separator, encoding, columnNames, columnTypes);
+    return Objects.hash(firstLineAsColumnNames, separator, encoding, columnNames, columnTypes, quoteChar);
   }
 
 
@@ -246,6 +272,7 @@ public class CsvParams {
     sb.append("    encoding: ").append(toIndentedString(encoding)).append("\n");
     sb.append("    columnNames: ").append(toIndentedString(columnNames)).append("\n");
     sb.append("    columnTypes: ").append(toIndentedString(columnTypes)).append("\n");
+    sb.append("    quoteChar: ").append(toIndentedString(quoteChar)).append("\n");
     sb.append("}");
     return sb.toString();
   }

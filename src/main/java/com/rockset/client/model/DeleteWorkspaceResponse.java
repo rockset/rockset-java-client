@@ -20,41 +20,34 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.rockset.client.model.DeleteDocumentsRequestData;
+import com.rockset.client.model.Workspace;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * DeleteDocumentsRequest
+ * DeleteWorkspaceResponse
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-03-06T00:47:37.549Z")
-public class DeleteDocumentsRequest {
+public class DeleteWorkspaceResponse {
   @SerializedName("data")
-  private List<DeleteDocumentsRequestData> data = new ArrayList<DeleteDocumentsRequestData>();
+  private Workspace data = null;
 
-  public DeleteDocumentsRequest data(List<DeleteDocumentsRequestData> data) {
+  public DeleteWorkspaceResponse data(Workspace data) {
     this.data = data;
     return this;
   }
 
-  public DeleteDocumentsRequest addDataItem(DeleteDocumentsRequestData dataItem) {
-    this.data.add(dataItem);
-    return this;
-  }
-
    /**
-   * array of document IDs
+   * the workspace that was deleted
    * @return data
   **/
-  @ApiModelProperty(required = true, value = "array of document IDs")
-  public List<DeleteDocumentsRequestData> getData() {
+  @ApiModelProperty(value = "the workspace that was deleted")
+  public Workspace getData() {
     return data;
   }
 
-  public void setData(List<DeleteDocumentsRequestData> data) {
+  public void setData(Workspace data) {
     this.data = data;
   }
 
@@ -67,8 +60,8 @@ public class DeleteDocumentsRequest {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    DeleteDocumentsRequest deleteDocumentsRequest = (DeleteDocumentsRequest) o;
-    return Objects.equals(this.data, deleteDocumentsRequest.data);
+    DeleteWorkspaceResponse deleteWorkspaceResponse = (DeleteWorkspaceResponse) o;
+    return Objects.equals(this.data, deleteWorkspaceResponse.data);
   }
 
   @Override
@@ -80,7 +73,7 @@ public class DeleteDocumentsRequest {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class DeleteDocumentsRequest {\n");
+    sb.append("class DeleteWorkspaceResponse {\n");
     
     sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("}");

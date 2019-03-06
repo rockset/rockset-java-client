@@ -27,9 +27,9 @@ public class AddDocumentExample {
         new AddDocumentsRequest().data(list);
     
     try {
-      CreateCollectionResponse response = rs.createCollection(request);
+      CreateCollectionResponse response = rs.createCollection("commons", request);
       AddDocumentsResponse documentsResponse =
-          rs.addDocuments(response.getData().getName(), documentsRequest);
+          rs.addDocuments("commons", response.getData().getName(), documentsRequest);
     } catch (Exception e) {
       e.printStackTrace();
     }

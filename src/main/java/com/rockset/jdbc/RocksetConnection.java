@@ -491,7 +491,7 @@ public class RocksetConnection implements Connection {
   // List all collections
   //
   List<Resource> listCollections() throws Exception {
-    return client.listCollections();
+    return client.listCollections(DEFAULT_SCHEMA);
   }
 
   //

@@ -87,8 +87,8 @@ public class RocksetClient {
    * @return CreateCollectionResponse object which contains information about the collection created
    * @throws Exception
    */
-    public CreateCollectionResponse createCollection(CreateCollectionRequest request) throws Exception {
-      return collection.create(request);
+    public CreateCollectionResponse createCollection(String workspace, CreateCollectionRequest request) throws Exception {
+      return collection.create(workspace, request);
     }
 
   /**
@@ -96,8 +96,8 @@ public class RocksetClient {
    * @return List of Resource object, one for each collection
    * @throws Exception
    */
-    public List<Resource> listCollections() throws Exception {
-      return collection.list().getData();
+    public List<Resource> listCollections(String workspace) throws Exception {
+      return collection.list(workspace).getData();
     }
 
   /**
@@ -106,8 +106,8 @@ public class RocksetClient {
    * @return GetCollectionResponse object with details about the desctribed collection
    * @throws Exception
    */
-    public GetCollectionResponse getCollection(String name) throws Exception {
-      return collection.get(name);
+    public GetCollectionResponse getCollection(String workspace, String name) throws Exception {
+      return collection.get(workspace, name);
     }
 
   /**
@@ -116,8 +116,8 @@ public class RocksetClient {
    * @return DeleteCollectionResponse object with details about the deleted collection
    * @throws Exception
    */
-    public DeleteCollectionResponse deleteCollection(String name) throws Exception {
-      return collection.delete(name);
+    public DeleteCollectionResponse deleteCollection(String workspace, String name) throws Exception {
+      return collection.delete(workspace, name);
     }
 
   /**
@@ -127,8 +127,9 @@ public class RocksetClient {
    * @return AddDocumentsResponse object containing status of documents added
    * @throws Exception
    */
-    public AddDocumentsResponse addDocuments(String collectionName, AddDocumentsRequest request) throws Exception {
-      return document.add(collectionName, request);
+    public AddDocumentsResponse addDocuments(String workspace, String collectionName,
+                                             AddDocumentsRequest request) throws Exception {
+      return document.add(workspace, collectionName, request);
     }
 
   /**
@@ -138,8 +139,9 @@ public class RocksetClient {
    * @return DeleteDocumentsResponse object with details of the documents deleted
    * @throws Exception
    */
-    public DeleteDocumentsResponse deleteDocuments(String collectionName, DeleteDocumentsRequest request) throws Exception {
-      return document.delete(collectionName, request);
+    public DeleteDocumentsResponse deleteDocuments(String workspace, String collectionName,
+                                                   DeleteDocumentsRequest request) throws Exception {
+      return document.delete(workspace, collectionName, request);
     }
 
   /**

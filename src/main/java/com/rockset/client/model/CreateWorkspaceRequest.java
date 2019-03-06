@@ -20,42 +20,55 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.rockset.client.model.DeleteDocumentsRequestData;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * DeleteDocumentsRequest
+ * CreateWorkspaceRequest
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-03-06T00:47:37.549Z")
-public class DeleteDocumentsRequest {
-  @SerializedName("data")
-  private List<DeleteDocumentsRequestData> data = new ArrayList<DeleteDocumentsRequestData>();
+public class CreateWorkspaceRequest {
+  @SerializedName("name")
+  private String name = null;
 
-  public DeleteDocumentsRequest data(List<DeleteDocumentsRequestData> data) {
-    this.data = data;
-    return this;
-  }
+  @SerializedName("description")
+  private String description = null;
 
-  public DeleteDocumentsRequest addDataItem(DeleteDocumentsRequestData dataItem) {
-    this.data.add(dataItem);
+  public CreateWorkspaceRequest name(String name) {
+    this.name = name;
     return this;
   }
 
    /**
-   * array of document IDs
-   * @return data
+   * descriptive label and unique identifier
+   * @return name
   **/
-  @ApiModelProperty(required = true, value = "array of document IDs")
-  public List<DeleteDocumentsRequestData> getData() {
-    return data;
+  @ApiModelProperty(example = "event_logs", required = true, value = "descriptive label and unique identifier")
+  public String getName() {
+    return name;
   }
 
-  public void setData(List<DeleteDocumentsRequestData> data) {
-    this.data = data;
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public CreateWorkspaceRequest description(String description) {
+    this.description = description;
+    return this;
+  }
+
+   /**
+   * longer explanation for the workspace
+   * @return description
+  **/
+  @ApiModelProperty(example = "Datasets of system logs for the ops team.", value = "longer explanation for the workspace")
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
   }
 
 
@@ -67,22 +80,24 @@ public class DeleteDocumentsRequest {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    DeleteDocumentsRequest deleteDocumentsRequest = (DeleteDocumentsRequest) o;
-    return Objects.equals(this.data, deleteDocumentsRequest.data);
+    CreateWorkspaceRequest createWorkspaceRequest = (CreateWorkspaceRequest) o;
+    return Objects.equals(this.name, createWorkspaceRequest.name) &&
+        Objects.equals(this.description, createWorkspaceRequest.description);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data);
+    return Objects.hash(name, description);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class DeleteDocumentsRequest {\n");
+    sb.append("class CreateWorkspaceRequest {\n");
     
-    sb.append("    data: ").append(toIndentedString(data)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("}");
     return sb.toString();
   }
