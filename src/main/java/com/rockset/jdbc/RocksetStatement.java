@@ -6,6 +6,7 @@ import static java.util.Objects.requireNonNull;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.primitives.Ints;
 
+import com.rockset.client.model.QueryParameter;
 import com.rockset.client.model.QueryResponse;
 
 import java.sql.Connection;
@@ -14,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
 import java.sql.SQLWarning;
 import java.sql.Statement;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -139,6 +141,11 @@ public class RocksetStatement implements Statement {
 
   @Override
   public boolean execute(String sql) throws SQLException {
+    return executeWithParams(sql, null);
+  }
+
+  protected boolean executeWithParams(String sql, List<QueryParameter> params)
+      throws SQLException {
     clearCurrentResults();
     checkOpen();
 
@@ -146,13 +153,12 @@ public class RocksetStatement implements Statement {
     try {
       // Make query to rockset service. We do not use queryTimeoutSeconds
       // because rockset queries do not yet have a client-side timeout.
-      QueryResponse resp = connection().startQuery(sql,
+      QueryResponse resp = connection().startQuery(sql, params,
               getStatementSessionProperties());
 
       // store resuts in memory
       resultSet = new RocksetResultSet(resp, maxRows.get());
       currentResult.set(resultSet);
-
       return true;
     } catch (RuntimeException e) {
       throw new SQLException("Error executing query '" + sql + "'"

@@ -1,6 +1,7 @@
 package com.rockset.jdbc;
 
 import java.sql.Types;
+import java.sql.SQLException;
 
 class RocksetUtils {
 
@@ -95,5 +96,42 @@ class RocksetUtils {
     }
     return stype;
   }
-}
 
+  static String sqlTypeToRocksetTypeNames(int sqlType) throws SQLException {
+    String rtype = "";
+
+    switch (sqlType) {
+      case Types.ARRAY: 
+        rtype = "array";
+        break;
+      case Types.BINARY: 
+        rtype = "bytes";
+        break;
+      case Types.BOOLEAN: 
+        rtype = "bool";
+        break;
+      case Types.NULL:
+        rtype = "null";
+        break;
+      case Types.NUMERIC: 
+        rtype = "int";
+        break;
+      case Types.VARCHAR: 
+        rtype = "string";
+        break;
+      case Types.TIMESTAMP:
+        rtype = "timestamp";
+        break;
+      case Types.TIME:
+        rtype = "time";
+        break;
+      case Types.DATE:
+        rtype = "date";
+        break;
+      default:
+        throw new SQLException("Unknown sql type  " + sqlType);
+    }
+    return rtype;
+  }
+
+}

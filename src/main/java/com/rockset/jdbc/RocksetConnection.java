@@ -6,6 +6,7 @@ import static java.nio.charset.StandardCharsets.US_ASCII;
 import static java.util.Objects.requireNonNull;
 
 import com.rockset.client.RocksetClient;
+import com.rockset.client.model.QueryParameter;
 import com.rockset.client.model.QueryRequest;
 import com.rockset.client.model.QueryRequestSql;
 import com.rockset.client.model.QueryResponse;
@@ -490,10 +491,16 @@ public class RocksetConnection implements Connection {
   //
   // This is invoked by the RocksetStatement to execute a query
   //
-  QueryResponse startQuery(String sql, Map<String, String> sessionPropertiesOverride)
+  QueryResponse startQuery(String sql, List<QueryParameter> params,
+          Map<String, String> sessionPropertiesOverride)
         throws Exception {
-    final  QueryRequest request = new QueryRequest()
-                                      .sql(new QueryRequestSql().query(sql));
+    final QueryRequestSql q = new QueryRequestSql().query(sql);
+
+    // Append any specified queries
+    if (params != null) {
+      q.parameters(params);
+    }
+    final  QueryRequest request = new QueryRequest().sql(q);
     return client.query(request);
   }
 
@@ -509,7 +516,7 @@ public class RocksetConnection implements Connection {
   //
   QueryResponse describeTable(String name) throws Exception {
     String sql = "describe \"" + name + "\";";
-    return startQuery(sql, null);
+    return startQuery(sql, null, null);
   }
 
   private void checkOpen() throws SQLException {

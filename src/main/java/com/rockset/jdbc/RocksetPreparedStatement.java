@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.sql.Array;
 import java.sql.Blob;
 import java.sql.Clob;
@@ -43,6 +44,9 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
+
+import com.rockset.client.model.QueryParameter;
 
 import static com.rockset.jdbc.ObjectCasts.castToBigDecimal;
 import static com.rockset.jdbc.ObjectCasts.castToBinary;
@@ -67,241 +71,237 @@ public class RocksetPreparedStatement
         extends RocksetStatement
         implements PreparedStatement
 {
-    private final Map<Integer, String> parameters = new HashMap<>();
-    private final String statementName;
-    private final String originalSql;
-
-    RocksetPreparedStatement(RocksetConnection connection, String statementName, String sql)
-            throws SQLException
-    {
-        super(connection);
-        this.statementName = requireNonNull(statementName, "statementName is null");
-        this.originalSql = requireNonNull(sql, "sql is null");
-        super.execute(sql);
+  // A temporary data structure to store query parameters
+  public class Params {
+    String type;
+    String value;
+    Params(String type, String value) {
+      this.type = type;
+      this.value = value;
     }
+  };
 
-    @Override
-    public void close()
-            throws SQLException
-    {
-        super.close();
+  private final Map<Integer, Params> parameters = new HashMap<>();
+  private final String statementName;
+  private final String originalSql;
+
+  // number of times this query was executed successfully
+  private final AtomicLong executeCount;
+
+  RocksetPreparedStatement(RocksetConnection connection, String statementName,
+      String sql) throws SQLException {
+    super(connection);
+    this.statementName = requireNonNull(statementName, "statementName is null");
+    this.originalSql = requireNonNull(sql, "sql is null");
+    this.executeCount = new AtomicLong(0);
+  }
+
+  @Override
+  public void close() throws SQLException {
+    RocksetDriver.log("Enter : RocksetPreparedStatement close");
+    super.close();
+    RocksetDriver.log("Exit : RocksetPreparedStatement close");
+  }
+
+  @Override
+  public ResultSet executeQuery() throws SQLException {
+    RocksetDriver.log("Enter : RocksetPreparedStatement executeQuery");
+    if (!getExecuteSql()) {
+      throw new SQLException("Prepared SQL statement is not a query: " + originalSql);
     }
+    RocksetDriver.log("Exit : RocksetPreparedStatement executeQuery");
+    return getResultSet();
+  }
 
-    @Override
-    public ResultSet executeQuery()
-            throws SQLException
-    {
-        if (!super.execute(getExecuteSql())) {
-            throw new SQLException("Prepared SQL statement is not a query: " + originalSql);
-        }
-        return getResultSet();
+  @Override
+  public int executeUpdate() throws SQLException {
+    RocksetDriver.log("Enter : RocksetPreparedStatement executeUpdate");
+    return Ints.saturatedCast(executeLargeUpdate());
+  }
+
+  @Override
+  public long executeLargeUpdate() throws SQLException {
+    RocksetDriver.log("Enter : RocksetPreparedStatement executeLargeUpdate");
+    if (!getExecuteSql()) {
+      throw new SQLException("Prepared SQL is not an update statement: " + originalSql);
     }
+    RocksetDriver.log("Exit : RocksetPreparedStatement executeLargeUpdate");
+    return getLargeUpdateCount();
+  }
 
-    @Override
-    public int executeUpdate()
-            throws SQLException
-    {
-        return Ints.saturatedCast(executeLargeUpdate());
+  @Override
+  public boolean execute() throws SQLException {
+    RocksetDriver.log("Enter : RocksetPreparedStatement execute");
+    boolean ret = getExecuteSql();
+    RocksetDriver.log("Exit : RocksetPreparedStatement execute");
+    return ret;
+  }
+
+  @Override
+  public void setNull(int parameterIndex, int sqlType) throws SQLException {
+    RocksetDriver.log("Enter : RocksetPreparedStatement setNull");
+    checkOpen();
+    setParameter(parameterIndex, RocksetUtils.sqlTypeToRocksetTypeNames(sqlType),
+                 typedNull(sqlType));
+    RocksetDriver.log("Exit : RocksetPreparedStatement setNull");
+  }
+
+  private void setNull(int parameterIndex, String rocksetType) throws SQLException {
+    checkOpen();
+    setParameter(parameterIndex, rocksetType, typedNull(rocksetType));
+  }
+
+  @Override
+  public void setBoolean(int parameterIndex, boolean x) throws SQLException {
+    RocksetDriver.log("Enter : RocksetPreparedStatement setBoolean");
+    checkOpen();
+    setParameter(parameterIndex, "bool", String.valueOf(x));
+    RocksetDriver.log("Exit : RocksetPreparedStatement setBoolean");
+  }
+
+  @Override
+  public void setByte(int parameterIndex, byte x) throws SQLException {
+    RocksetDriver.log("Enter : RocksetPreparedStatement setByte");
+    checkOpen();
+    setParameter(parameterIndex, "int", Byte.toString(x));
+    RocksetDriver.log("Exit : RocksetPreparedStatement setByte");
+  }
+
+  @Override
+  public void setShort(int parameterIndex, short x) throws SQLException {
+    RocksetDriver.log("Enter : RocksetPreparedStatement setShort");
+    checkOpen();
+    setParameter(parameterIndex, "int", Short.toString(x));
+    RocksetDriver.log("Exit : RocksetPreparedStatement setShort");
+  }
+
+  @Override
+  public void setInt(int parameterIndex, int x) throws SQLException {
+    RocksetDriver.log("Enter : RocksetPreparedStatement setInt");
+    checkOpen();
+    setParameter(parameterIndex, "int", Integer.toString(x));
+    RocksetDriver.log("Exit : RocksetPreparedStatement setInt");
+  }
+
+  @Override
+  public void setLong(int parameterIndex, long x) throws SQLException {
+    RocksetDriver.log("Enter : RocksetPreparedStatement setLong");
+    checkOpen();
+    setParameter(parameterIndex, "int", Long.toString(x));
+    RocksetDriver.log("Exit : RocksetPreparedStatement setLong");
+  }
+
+  @Override
+  public void setFloat(int parameterIndex, float x) throws SQLException {
+    RocksetDriver.log("Enter : RocksetPreparedStatement setFloat");
+    checkOpen();
+    setParameter(parameterIndex, "float", Float.toString(x));
+    RocksetDriver.log("Exit : RocksetPreparedStatement setFloat");
+  }
+
+  @Override
+  public void setDouble(int parameterIndex, double x) throws SQLException {
+    checkOpen();
+    setParameter(parameterIndex, "float", Double.toString(x));
+  }
+
+  @Override
+  public void setBigDecimal(int parameterIndex, BigDecimal x) throws SQLException {
+    checkOpen();
+    if (x == null) {
+      setNull(parameterIndex, "float");
+    } else {
+      setParameter(parameterIndex, "float", x.toString());
     }
+  }
 
-    @Override
-    public long executeLargeUpdate()
-            throws SQLException
-    {
-        if (super.execute(getExecuteSql())) {
-            throw new SQLException("Prepared SQL is not an update statement: " + originalSql);
-        }
-        return getLargeUpdateCount();
+  @Override
+  public void setString(int parameterIndex, String x) throws SQLException {
+    checkOpen();
+    if (x == null) {
+      setNull(parameterIndex, "string");
+    } else {
+      setParameter(parameterIndex, "string", x);
     }
+  }
 
-    @Override
-    public boolean execute()
-            throws SQLException
-    {
-        return super.execute(getExecuteSql());
+  @Override
+  public void setBytes(int parameterIndex, byte[] x) throws SQLException {
+    checkOpen();
+    if (x == null) {
+      setNull(parameterIndex, "bytes");
+    } else {
+      setParameter(parameterIndex, "bytes",
+                    new String(x,  StandardCharsets.UTF_8));
     }
+  }
 
-    @Override
-    public void setNull(int parameterIndex, int sqlType)
-            throws SQLException
-    {
-        checkOpen();
-        setParameter(parameterIndex, typedNull(sqlType));
+  @Override
+  public void setDate(int parameterIndex, Date x) throws SQLException {
+    checkOpen();
+    if (x == null) {
+      setNull(parameterIndex, "date");
+    } else {
+      setParameter(parameterIndex, "date",
+                    DATE_FORMATTER.print(x.getTime()));
     }
+  }
 
-    @Override
-    public void setBoolean(int parameterIndex, boolean x)
-            throws SQLException
-    {
-        checkOpen();
-        setParameter(parameterIndex, formatBooleanLiteral(x));
+  @Override
+  public void setTime(int parameterIndex, Time x) throws SQLException {
+    checkOpen();
+    if (x == null) {
+      setNull(parameterIndex, "time");
+    } else {
+      setParameter(parameterIndex, "time",
+                    TIME_FORMATTER.print(x.getTime()));
     }
+  }
 
-    @Override
-    public void setByte(int parameterIndex, byte x)
-            throws SQLException
-    {
-        checkOpen();
-        setParameter(parameterIndex, formatLiteral("TINYINT", Byte.toString(x)));
+  @Override
+  public void setTimestamp(int parameterIndex, Timestamp x) throws SQLException {
+    checkOpen();
+    if (x == null) {
+      setNull(parameterIndex, "timestamp");
+    } else {
+      setParameter(parameterIndex, "timestamp",
+                    TIMESTAMP_FORMATTER.print(x.getTime()));
     }
+  }
 
-    @Override
-    public void setShort(int parameterIndex, short x)
-            throws SQLException
-    {
-        checkOpen();
-        setParameter(parameterIndex, formatLiteral("SMALLINT", Short.toString(x)));
+  @Override
+  public void setAsciiStream(int parameterIndex, InputStream x, int length)
+      throws SQLException {
+    throw new NotImplementedException("PreparedStatement", "setAsciiStream");
+  }
+
+  @Override
+  public void setUnicodeStream(int parameterIndex, InputStream x, int length)
+      throws SQLException {
+    throw new SQLFeatureNotSupportedException("setUnicodeStream");
+  }
+
+  @Override
+  public void setBinaryStream(int parameterIndex, InputStream x, int length)
+      throws SQLException {
+    throw new NotImplementedException("PreparedStatement", "setBinaryStream");
+  }
+
+  @Override
+  public void clearParameters() throws SQLException {
+    checkOpen();
+    parameters.clear();
+  }
+
+  @Override
+  public void setObject(int parameterIndex, Object x, int targetSqlType)
+      throws SQLException {
+    checkOpen();
+    if (x == null) {
+      setNull(parameterIndex, targetSqlType);
+      return;
     }
-
-    @Override
-    public void setInt(int parameterIndex, int x)
-            throws SQLException
-    {
-        checkOpen();
-        setParameter(parameterIndex, formatLiteral("INTEGER", Integer.toString(x)));
-    }
-
-    @Override
-    public void setLong(int parameterIndex, long x)
-            throws SQLException
-    {
-        checkOpen();
-        setParameter(parameterIndex, formatLiteral("BIGINT", Long.toString(x)));
-    }
-
-    @Override
-    public void setFloat(int parameterIndex, float x)
-            throws SQLException
-    {
-        checkOpen();
-        setParameter(parameterIndex, formatLiteral("REAL", Float.toString(x)));
-    }
-
-    @Override
-    public void setDouble(int parameterIndex, double x)
-            throws SQLException
-    {
-        checkOpen();
-        setParameter(parameterIndex, formatLiteral("DOUBLE", Double.toString(x)));
-    }
-
-    @Override
-    public void setBigDecimal(int parameterIndex, BigDecimal x)
-            throws SQLException
-    {
-        checkOpen();
-        if (x == null) {
-            setNull(parameterIndex, Types.DECIMAL);
-        }
-        else {
-            setParameter(parameterIndex, formatLiteral("DECIMAL", x.toString()));
-        }
-    }
-
-    @Override
-    public void setString(int parameterIndex, String x)
-            throws SQLException
-    {
-        checkOpen();
-        if (x == null) {
-            setNull(parameterIndex, Types.VARCHAR);
-        }
-        else {
-            setParameter(parameterIndex, formatStringLiteral(x));
-        }
-    }
-
-    @Override
-    public void setBytes(int parameterIndex, byte[] x)
-            throws SQLException
-    {
-        checkOpen();
-        if (x == null) {
-            setNull(parameterIndex, Types.VARBINARY);
-        }
-        else {
-            setParameter(parameterIndex, formatBinaryLiteral(x));
-        }
-    }
-
-    @Override
-    public void setDate(int parameterIndex, Date x)
-            throws SQLException
-    {
-        checkOpen();
-        if (x == null) {
-            setNull(parameterIndex, Types.DATE);
-        }
-        else {
-            setParameter(parameterIndex, formatLiteral("DATE", DATE_FORMATTER.print(x.getTime())));
-        }
-    }
-
-    @Override
-    public void setTime(int parameterIndex, Time x)
-            throws SQLException
-    {
-        checkOpen();
-        if (x == null) {
-            setNull(parameterIndex, Types.TIME);
-        }
-        else {
-            setParameter(parameterIndex, formatLiteral("TIME", TIME_FORMATTER.print(x.getTime())));
-        }
-    }
-
-    @Override
-    public void setTimestamp(int parameterIndex, Timestamp x)
-            throws SQLException
-    {
-        checkOpen();
-        if (x == null) {
-            setNull(parameterIndex, Types.TIMESTAMP);
-        }
-        else {
-            setParameter(parameterIndex, formatLiteral("TIMESTAMP", TIMESTAMP_FORMATTER.print(x.getTime())));
-        }
-    }
-
-    @Override
-    public void setAsciiStream(int parameterIndex, InputStream x, int length)
-            throws SQLException
-    {
-        throw new NotImplementedException("PreparedStatement", "setAsciiStream");
-    }
-
-    @Override
-    public void setUnicodeStream(int parameterIndex, InputStream x, int length)
-            throws SQLException
-    {
-        throw new SQLFeatureNotSupportedException("setUnicodeStream");
-    }
-
-    @Override
-    public void setBinaryStream(int parameterIndex, InputStream x, int length)
-            throws SQLException
-    {
-        throw new NotImplementedException("PreparedStatement", "setBinaryStream");
-    }
-
-    @Override
-    public void clearParameters()
-            throws SQLException
-    {
-        checkOpen();
-        parameters.clear();
-    }
-
-    @Override
-    public void setObject(int parameterIndex, Object x, int targetSqlType)
-            throws SQLException
-    {
-        checkOpen();
-        if (x == null) {
-            setNull(parameterIndex, targetSqlType);
-            return;
-        }
-        switch (targetSqlType) {
+    switch (targetSqlType) {
             case Types.BOOLEAN:
             case Types.BIT:
                 setBoolean(parameterIndex, castToBoolean(x, targetSqlType));
@@ -353,8 +353,8 @@ public class RocksetPreparedStatement
                 return;
             // TODO Types.TIME_WITH_TIMEZONE
             // TODO Types.TIMESTAMP_WITH_TIMEZONE
-        }
-        throw new SQLException("Unsupported target SQL type: " + targetSqlType);
+      }
+      throw new SQLException("Unsupported target SQL type: " + targetSqlType);
     }
 
     @Override
@@ -462,7 +462,14 @@ public class RocksetPreparedStatement
     public ResultSetMetaData getMetaData()
             throws SQLException
     {
-        throw new SQLFeatureNotSupportedException("getMetaData");
+        RocksetDriver.log("Enter : RocksetPreparedStatement getMetaData");
+        // If we have never run the query, execeute it once to gather metadata
+        if (executeCount.get() == 0) {
+            getExecuteSql();
+        }
+        ResultSetMetaData meta =  getResultSet().getMetaData();
+        RocksetDriver.log("Exit : RocksetPreparedStatement getMetaData");
+        return meta;
     }
 
     @Override
@@ -738,57 +745,44 @@ public class RocksetPreparedStatement
         throw new SQLException("This method cannot be called on PreparedStatement");
     }
 
-    private void setParameter(int parameterIndex, String value)
+    private void setParameter(int parameterIndex, String type, String value)
             throws SQLException
     {
         if (parameterIndex < 1) {
             throw new SQLException("Parameter index out of bounds: " + parameterIndex);
         }
-        parameters.put(parameterIndex - 1, value);
+        parameters.put(parameterIndex - 1, new Params(type, value));
     }
 
-    private void formatParametersTo(StringBuilder builder)
-            throws SQLException
-    {
-        List<String> values = new ArrayList<>();
-        for (int index = 0; index < parameters.size(); index++) {
-            if (!parameters.containsKey(index)) {
-                throw new SQLException("No value specified for parameter " + (index + 1));
-            }
-            values.add(parameters.get(index));
+    //
+    // Convert a hashMap of Params to a list of QueryParameters
+    private List<QueryParameter> convertParameters() throws SQLException {
+      List<QueryParameter> values = new ArrayList<>();
+      for (int index = 0; index < parameters.size(); index++) {
+        if (!parameters.containsKey(index)) {
+          throw new SQLException("No value specified for parameter " + (index + 1));
         }
-        Joiner.on(", ").appendTo(builder, values);
+        Params params = parameters.get(index);
+        values.add(new QueryParameter()
+                   .name(String.valueOf(index + 1))
+                   .type(params.type)
+                   .value(params.value));
+      }
+      return values;
     }
 
-    private String getExecuteSql()
-            throws SQLException
-    {
-        return originalSql;
+    private boolean getExecuteSql() throws SQLException {
+      boolean ret =  super.executeWithParams(originalSql, convertParameters());
+
+      // increment counter to indicate the number of times this query was
+      // successfully executed.
+      if (ret) {
+        executeCount.incrementAndGet();
+      }
+      return ret;
     }
 
-    private static String formatLiteral(String type, String x)
-    {
-        return type + " " + formatStringLiteral(x);
-    }
-
-    private static String formatBooleanLiteral(boolean x)
-    {
-        return Boolean.toString(x);
-    }
-
-    private static String formatStringLiteral(String x)
-    {
-        return "'" + x.replace("'", "''") + "'";
-    }
-
-    private static String formatBinaryLiteral(byte[] x)
-    {
-        return "X'" + base16().encode(x) + "'";
-    }
-
-    private static String typedNull(int targetSqlType)
-            throws SQLException
-    {
+    private static String typedNull(int targetSqlType) throws SQLException {
         switch (targetSqlType) {
             case Types.BOOLEAN:
             case Types.BIT:
@@ -838,8 +832,7 @@ public class RocksetPreparedStatement
         throw new SQLException("Unsupported target SQL type: " + targetSqlType);
     }
 
-    private static String typedNull(String type)
-    {
+    private static String typedNull(String type) {
         return format("CAST(NULL AS %s)", type);
     }
 }

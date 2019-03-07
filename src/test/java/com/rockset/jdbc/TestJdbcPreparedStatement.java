@@ -41,6 +41,7 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
@@ -99,6 +100,9 @@ public class TestJdbcPreparedStatement
             statement.setInt(1, 123);
             statement.setString(2, "hello");
 
+            // find Metadata even before executing query
+            ResultSetMetaData meta = statement.getMetaData();
+
             try (ResultSet rs = statement.executeQuery()) {
                 assertTrue(rs.next());
                 assertEquals(rs.getInt(1), 1);
@@ -111,7 +115,7 @@ public class TestJdbcPreparedStatement
     public void testExecuteQuery()
             throws Exception
     {
-        String sql = "SELECT ?, ?";
+        String sql = "SELECT :1, :2";
 
         try (Connection connection = createConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
