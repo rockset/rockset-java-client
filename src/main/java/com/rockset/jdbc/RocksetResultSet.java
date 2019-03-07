@@ -33,13 +33,12 @@ import java.sql.SQLXML;
 import java.sql.Statement;
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -104,7 +103,6 @@ public class RocksetResultSet implements ResultSet {
     this.sessionTimeZone = DateTimeZone.forID(TimeZone.getDefault().getID());
     this.resultSetMetaData = new RocksetResultSetMetaData(this.columns);
   }
-
 
   RocksetResultSet() {
     this.resultSet = new LinkedList<Object>();
@@ -1235,7 +1233,6 @@ public class RocksetResultSet implements ResultSet {
       throw new SQLException("Invalid column index: " + index);
     }
     String columnName = columnInfo(index).getName();
-
     // extract the row
     try {
       ObjectMapper mapper = new ObjectMapper();
@@ -1302,7 +1299,8 @@ public class RocksetResultSet implements ResultSet {
     Column columnInfo = columnInfo(columnIndex);
     if (columnInfo.getType() == Column.ColumnTypes.TIMESTAMP) {
       try {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("uuuu-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
+        DateTimeFormatter format =
+                DateTimeFormatter.ofPattern("[uuuu-MM-dd'T'HH:mm:ss.SSS'Z'][uuuu-MM-dd'T'HH:mm:ss.SSSSSS'Z']");
         LocalDateTime dateTime = LocalDateTime.parse(((JsonNode) value).asText(), format);
         ZonedDateTime zonedDateTime = dateTime.atZone(ZoneId.of("UTC"));
         Instant instant = zonedDateTime.toInstant();
@@ -1364,11 +1362,12 @@ public class RocksetResultSet implements ResultSet {
           JsonNode value = field.getValue();
           Column.ColumnTypes type = Column.ColumnTypes.fromValue(value.getNodeType().toString());
           if (type.equals(Column.ColumnTypes.STRING)) {
-            SimpleDateFormat format = new SimpleDateFormat("uuuu-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
+            DateTimeFormatter format =
+                    DateTimeFormatter.ofPattern("uuuu-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
             try {
-              format.parse(value.asText());
+              LocalDateTime.parse(value.asText(), format);
               type = Column.ColumnTypes.TIMESTAMP;
-            } catch (ParseException e) {
+            } catch (DateTimeParseException e) {
               // ignore
             }
           }
