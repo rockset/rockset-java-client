@@ -37,7 +37,6 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -53,10 +52,40 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
 
 import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.DateTimeFormatterBuilder;
+import org.joda.time.format.DateTimeParser;
+import org.joda.time.format.ISODateTimeFormat;
 
 public class RocksetResultSet implements ResultSet {
 
   private static final Logger logger = Logger.getLogger(RocksetResultSet.class.getName());
+
+  static final DateTimeFormatter DATE_FORMATTER = ISODateTimeFormat.date();
+  static final DateTimeFormatter TIME_FORMATTER = DateTimeFormat.forPattern(
+          "HH:mm:ss.SSS");
+  private static final DateTimeFormatter TIME_WITH_TIME_ZONE_FORMATTER =
+      new DateTimeFormatterBuilder()
+      .append(DateTimeFormat.forPattern("HH:mm:ss.SSS ZZZ").getPrinter(),
+          new DateTimeParser[] {
+              DateTimeFormat.forPattern("HH:mm:ss.SSS Z").getParser(),
+              DateTimeFormat.forPattern("HH:mm:ss.SSS ZZZ").getParser(),
+          })
+      .toFormatter()
+      .withOffsetParsed();
+
+  static final DateTimeFormatter TIMESTAMP_FORMATTER =
+      DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS");
+  private static final DateTimeFormatter TIMESTAMP_WITH_TIME_ZONE_FORMATTER =
+      new DateTimeFormatterBuilder()
+      .append(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS ZZZ").getPrinter(),
+          new DateTimeParser[] {
+              DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS Z").getParser(),
+              DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS ZZZ").getParser(),
+          })
+      .toFormatter()
+      .withOffsetParsed();
 
   private static final int YEAR_FIELD = 0;
   private static final int MONTH_FIELD = 1;
@@ -1299,8 +1328,8 @@ public class RocksetResultSet implements ResultSet {
     Column columnInfo = columnInfo(columnIndex);
     if (columnInfo.getType() == Column.ColumnTypes.TIMESTAMP) {
       try {
-        DateTimeFormatter format =
-                DateTimeFormatter.ofPattern("[uuuu-MM-dd'T'HH:mm:ss.SSS'Z'][uuuu-MM-dd'T'HH:mm:ss.SSSSSS'Z']");
+        java.time.format.DateTimeFormatter format =
+                java.time.format.DateTimeFormatter.ofPattern("[uuuu-MM-dd'T'HH:mm:ss.SSS'Z'][uuuu-MM-dd'T'HH:mm:ss.SSSSSS'Z']");
         LocalDateTime dateTime = LocalDateTime.parse(((JsonNode) value).asText(), format);
         ZonedDateTime zonedDateTime = dateTime.atZone(ZoneId.of("UTC"));
         Instant instant = zonedDateTime.toInstant();
@@ -1362,8 +1391,8 @@ public class RocksetResultSet implements ResultSet {
           JsonNode value = field.getValue();
           Column.ColumnTypes type = Column.ColumnTypes.fromValue(value.getNodeType().toString());
           if (type.equals(Column.ColumnTypes.STRING)) {
-            DateTimeFormatter format =
-                    DateTimeFormatter.ofPattern("uuuu-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
+            java.time.format.DateTimeFormatter format =
+                    java.time.format.DateTimeFormatter.ofPattern("uuuu-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
             try {
               LocalDateTime.parse(value.asText(), format);
               type = Column.ColumnTypes.TIMESTAMP;

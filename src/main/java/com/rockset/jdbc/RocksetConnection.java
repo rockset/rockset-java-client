@@ -38,6 +38,7 @@ import java.util.TimeZone;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class RocksetConnection implements Connection {
@@ -55,6 +56,7 @@ public class RocksetConnection implements Connection {
   private final AtomicReference<String> schema = new AtomicReference<>();
   private final AtomicReference<String> timeZoneId = new AtomicReference<>();
   private final AtomicReference<Locale> locale = new AtomicReference<>();
+  private final AtomicLong nextStatementId = new AtomicLong(1);
 
   private final URI uri; // The JDBC URI
   private final String user;
@@ -99,7 +101,8 @@ public class RocksetConnection implements Connection {
   @Override
   public PreparedStatement prepareStatement(String sql) throws SQLException {
     checkOpen();
-    throw new NotImplementedException("Connection", "prepareStatement");
+    String name = "statement" + nextStatementId.getAndIncrement();
+    return new RocksetPreparedStatement(this, name, sql);
   }
 
   @Override

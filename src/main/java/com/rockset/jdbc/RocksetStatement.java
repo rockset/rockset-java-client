@@ -155,7 +155,8 @@ public class RocksetStatement implements Statement {
 
       return true;
     } catch (RuntimeException e) {
-      throw new SQLException("Error executing query, error =  " + e.getMessage(), e);
+      throw new SQLException("Error executing query '" + sql + "'"
+              + " error =  " + e.getMessage(), e);
     } catch (Exception e) {
       throw new SQLException(e.getMessage(), e);
     } finally {
@@ -380,7 +381,7 @@ public class RocksetStatement implements Statement {
     return iface.isInstance(this);
   }
 
-  private void checkOpen() throws SQLException {
+  protected void checkOpen() throws SQLException {
     connection();
   }
 
