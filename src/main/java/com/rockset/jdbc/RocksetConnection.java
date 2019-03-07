@@ -12,6 +12,7 @@ import com.rockset.client.model.QueryResponse;
 import com.rockset.client.model.Resource;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.charset.CharsetEncoder;
 import java.sql.Array;
 import java.sql.Blob;
@@ -46,8 +47,8 @@ public class RocksetConnection implements Connection {
   // A Catalog contains schemas
   public static final String DEFAULT_CATALOG = "rockset";
 
-  // A schema refers to a rockset's workspace.
-  // A workspace internallly contains a set of tables.
+  // A schema refers to a Rockset's workspace.
+  // A workspace internally contains a set of tables.
   public static final String DEFAULT_SCHEMA = "commons";
 
   private final AtomicBoolean closed = new AtomicBoolean();
@@ -71,20 +72,26 @@ public class RocksetConnection implements Connection {
     this.schema.set(DEFAULT_SCHEMA);
     this.catalog.set(DEFAULT_CATALOG);
 
-    // Create a rockset client connection.
+    String apiServer = "";
+    try {
+      URI hostURI = new URI(uri.toString().substring(RocksetDriver.JDBC_URL_START.length()));
+      apiServer = hostURI.getHost();
+    } catch (URISyntaxException e) {
+      // ignore
+    }
 
+    // Create a rockset client connection.
     String apiKey = info.getProperty("apikey");
     // if username and password provided, override the apikey
     if (info.getProperty("user") != null && info.getProperty("user").equals("apikey")) {
       apiKey = info.getProperty("password");
     }
 
-    String endpoint = "";
-    if (info.getProperty("endpoint") != null) {
-      endpoint = info.getProperty("endpoint");
+    if (apiServer.isEmpty() && info.getProperty("endpoint") != null) {
+      apiServer = info.getProperty("endpoint");
     }
 
-    this.client = new RocksetClient(apiKey, endpoint, "jdbc");
+    this.client = new RocksetClient(apiKey, apiServer, "jdbc");
 
     timeZoneId.set(TimeZone.getDefault().getID());
     locale.set(Locale.getDefault());

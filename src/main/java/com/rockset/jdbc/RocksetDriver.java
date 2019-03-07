@@ -27,7 +27,8 @@ public class RocksetDriver implements Driver, Closeable {
   static final int DRIVER_VERSION_MAJOR;
   static final int DRIVER_VERSION_MINOR;
 
-  private static final String ROCKSET_DRIVER_URL_START = "jdbc:rockset:";
+  public static final String JDBC_URL_START = "jdbc:";
+  private static final String ROCKSET_DRIVER_URL_START = JDBC_URL_START.concat("rockset:");
 
   // This is debug logging to trace the calls made to the rockset jdbc driver.
   private static boolean debugLogs = true;

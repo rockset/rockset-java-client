@@ -6,6 +6,7 @@ import static java.util.Locale.ENGLISH;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.BooleanNode;
+import com.fasterxml.jackson.databind.node.NullNode;
 import com.fasterxml.jackson.databind.node.NumericNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import com.google.common.collect.ImmutableMap;
@@ -33,6 +34,7 @@ import java.sql.SQLXML;
 import java.sql.Statement;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.sql.Types;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -1331,7 +1333,10 @@ public class RocksetResultSet implements ResultSet {
       if (val.isEmpty()) {
         return 0;
       }
-      return (Number) ((Integer.parseInt(val)));
+    }
+
+    if (value instanceof NullNode) {
+      return 0;
     }
 
     throw new SQLException("Value is not a number: " + value.getClass().getCanonicalName());
