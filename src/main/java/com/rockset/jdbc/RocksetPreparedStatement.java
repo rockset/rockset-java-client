@@ -763,8 +763,10 @@ public class RocksetPreparedStatement
           throw new SQLException("No value specified for parameter " + (index + 1));
         }
         Params params = parameters.get(index);
+        // do not specify the names of the parameters, just fill them up in the right
+        // order, the rockset service will automatically take them as positional
+        // parameters.
         values.add(new QueryParameter()
-                   .name(String.valueOf(index + 1))
                    .type(params.type)
                    .value(params.value));
       }
