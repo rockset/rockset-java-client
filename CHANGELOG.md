@@ -1,5 +1,9 @@
 # Rockset Java Client Changelog
 
+## v0.5.11 2019-03-07
+- JDBC driver now supports Tableau
+- Workspace support added in client
+
 ## v0.5.10 2019-01-23
 - Added support for Google Cloud Storage
 

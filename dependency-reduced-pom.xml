@@ -4,7 +4,7 @@
   <groupId>com.rockset</groupId>
   <artifactId>rockset-java</artifactId>
   <name>Rockset Java</name>
-  <version>0.5.10</version>
+  <version>0.5.11</version>
   <description>The official Rockset Java client library</description>
   <url>https://github.com/rockset/rockset-java-client</url>
   <developers>
@@ -204,6 +204,12 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.12.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

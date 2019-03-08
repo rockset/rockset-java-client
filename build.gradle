@@ -2,7 +2,7 @@ apply plugin: 'idea'
 apply plugin: 'eclipse'
 
 group = 'com.rockset'
-version = '0.5.10'
+version = '0.5.11'
 
 buildscript {
     repositories {
