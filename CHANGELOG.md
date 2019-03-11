@@ -1,5 +1,9 @@
 # Rockset Java Client Changelog
 
+## v0.5.12 2019-03-11
+- JDBC driver throws connect exception if unable to connect to rockset service
+- Workspace unit tests
+
 ## v0.5.11 2019-03-07
 - JDBC driver now supports Tableau
 - Workspace support added in client
