@@ -12,6 +12,7 @@ public class RocksetClient {
     private IntegrationsApi integration;
     private QueriesApi query;
     private UsersApi user;
+    private WorkspacesApi workspace;
 
     private void setUp(String apiKey, String apiServer, String application) {
       assert !apiKey.isEmpty();
@@ -42,6 +43,7 @@ public class RocksetClient {
       integration = new IntegrationsApi(this.apiClient);
       query = new QueriesApi(this.apiClient);
       user = new UsersApi(this.apiClient);
+      workspace = new WorkspacesApi(this.apiClient);
     }
 
     public RocksetClient(String apiKey, String apiServer) {
@@ -191,5 +193,44 @@ public class RocksetClient {
    */
     public QueryResponse query(QueryRequest request) throws Exception {
       return query.query(request);
+    }
+
+  /**
+   * Create a workspace in Rockset
+   * @param request CreateWorkspaceRequest object which contains the name and description for a workspace
+   * @return CreateWorkspaceResponse object which contains information about the workspace created
+   * @throws Exception
+   */
+    public CreateWorkspaceResponse createWorkspace(CreateWorkspaceRequest request) throws Exception {
+      return workspace.create(request);
+    }
+
+  /**
+   * List all workspaces in an organization
+   * @return List of Workspace object, one for each workspace
+   * @throws Exception
+   */
+    public  List<Workspace> listWorkspaces() throws Exception {
+      return workspace.list().getData();
+    }
+
+  /**
+   * Get workspace details
+   * @param name Name of the workspace
+   * @return GetWorkspaceResponse object with details about the desctribed workspace
+   * @throws Exception
+   */
+    public GetWorkspaceResponse getWorkspace(String workspaceName) throws Exception {
+      return workspace.get(workspaceName);
+    }
+
+  /**
+   * Delete a workspace
+   * @param name Name of the workspace to be deleted
+   * @return DeleteWorkspaceResponse object with details about the deleted workspace
+   * @throws Exception
+   */
+    public DeleteWorkspaceResponse deleteWorkspace(String workspaceName) throws Exception {
+      return workspace.delete(workspaceName);
     }
 }

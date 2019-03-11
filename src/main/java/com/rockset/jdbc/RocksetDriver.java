@@ -14,8 +14,10 @@ import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.DriverPropertyInfo;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
+import java.sql.Statement;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -64,16 +66,30 @@ public class RocksetDriver implements Driver, Closeable {
   public Connection connect(String url, Properties info) throws SQLException {
     log("Entry: Connect " + url);
     if (!acceptsURL(url)) {
-      log("Exit: Connect " + url);
-      return null;
+      log("Exit: Connect bad url" + url);
+      throw new SQLException("Bad url format " + url
+              + ". Url should start with " + ROCKSET_DRIVER_URL_START + ".");
     }
+    URI uri = null;
     try {
-      URI uri = new URI(url);
-      log("Exit: Connect " + url);
-      return new RocksetConnection(uri, info);
+      uri = new URI(url);
     } catch (URISyntaxException e) {
       throw new SQLException("Bad url format " + url + " exception " + e.getMessage());
     }
+
+    // create a connection to the rockset service
+    RocksetConnection conn = new RocksetConnection(uri, info);
+
+    // Make a SELECT 1 query to validate that credentials are good.
+    // This allows a client to early detect any potential problems with apikey
+    // and authentication.
+    Statement stmt = conn.createStatement();
+    ResultSet res = stmt.executeQuery("select 1");
+    res.close();
+    stmt.close();
+
+    log("Exit: Connect " + url);
+    return conn;
   }
 
   @Override

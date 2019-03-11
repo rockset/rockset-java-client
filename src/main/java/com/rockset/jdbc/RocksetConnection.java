@@ -508,15 +508,18 @@ public class RocksetConnection implements Connection {
   // List all collections
   //
   List<Resource> listCollections() throws Exception {
-    return client.listCollections(DEFAULT_SCHEMA);
+    return client.listCollections(getSchema());
   }
 
   //
   // Get schema for a table
   //
   QueryResponse describeTable(String name) throws Exception {
-    String sql = "describe \"" + name + "\";";
-    return startQuery(sql, null, null);
+    RocksetDriver.log("Entry: describeTable " + name);
+    String sql = "describe \"" + getSchema() + "." + name + "\";";
+    QueryResponse resp =  startQuery(sql, null, null);
+    RocksetDriver.log("Exit: describeTable " + name);
+    return resp;
   }
 
   private void checkOpen() throws SQLException {

@@ -161,8 +161,10 @@ public class RocksetStatement implements Statement {
       currentResult.set(resultSet);
       return true;
     } catch (RuntimeException e) {
-      throw new SQLException("Error executing query '" + sql + "'"
-              + " error =  " + e.getMessage(), e);
+      String msg = "Error executing query '" + sql + "'"
+                   + " error =  " + e.getMessage();
+      RocksetDriver.log(msg);
+      throw new SQLException(msg, e);
     } catch (Exception e) {
       throw new SQLException(e.getMessage(), e);
     } finally {
