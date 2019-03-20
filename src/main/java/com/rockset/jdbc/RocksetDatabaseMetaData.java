@@ -76,11 +76,13 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
 
   @Override
   public boolean nullsAreSortedAtStart() throws SQLException {
+    RocksetDriver.log("Entry: RocksetDatabaseMetaData nullsAreSortedAtStart false");
     return false;
   }
 
   @Override
   public boolean nullsAreSortedAtEnd() throws SQLException {
+    RocksetDriver.log("Entry: RocksetDatabaseMetaData nullsAreSortedAtEnd false");
     return true;
   }
 
@@ -126,44 +128,52 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
 
   @Override
   public boolean supportsMixedCaseIdentifiers() throws SQLException {
+    RocksetDriver.log("Entry: RocksetDatabaseMetaData supportsMixedCaseIdentifiers false");
     return false;
   }
 
   @Override
   public boolean storesUpperCaseIdentifiers() throws SQLException {
+    RocksetDriver.log("Entry: RocksetDatabaseMetaData storesUpperCaseIdentifiers false");
     return false;
   }
 
   @Override
   public boolean storesLowerCaseIdentifiers() throws SQLException {
+    RocksetDriver.log("Entry: RocksetDatabaseMetaData storesLowerCaseIdentifiers true");
     return true;
   }
 
   @Override
   public boolean storesMixedCaseIdentifiers() throws SQLException {
+    RocksetDriver.log("Entry: RocksetDatabaseMetaData storesMixedCaseIdentifiers false");
     return false;
   }
 
   @Override
   public boolean supportsMixedCaseQuotedIdentifiers() throws SQLException {
     // TODO: support quoted identifiers properly
+    RocksetDriver.log("Entry: RocksetDatabaseMetaData supportsMixedCaseQuotedIdentifiers false");
     return false;
   }
 
   @Override
   public boolean storesUpperCaseQuotedIdentifiers() throws SQLException {
+    RocksetDriver.log("Entry: RocksetDatabaseMetaData storesUpperCaseQuotedIdentifiers false");
     return false;
   }
 
   @Override
   public boolean storesLowerCaseQuotedIdentifiers() throws SQLException {
     // TODO: support quoted identifiers properly
+    RocksetDriver.log("Entry: RocksetDatabaseMetaData storesLowerCaseQuotedIdentifiers true");
     return true;
   }
 
   @Override
   public boolean storesMixedCaseQuotedIdentifiers() throws SQLException {
     // TODO: support quoted identifiers properly
+    RocksetDriver.log("Entry: RocksetDatabaseMetaData storesMixedCaseQuotedIdentifiers false");
     return false;
   }
 
@@ -174,6 +184,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
 
   @Override
   public String getSQLKeywords() throws SQLException {
+    RocksetDriver.log("Entry: RocksetDatabaseMetaData getSQLKeywords ");
     return "LIMIT";
   }
 
@@ -969,9 +980,9 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
       String str = "{\"TABLE_CAT\": \"" + RocksetConnection.DEFAULT_CATALOG + "\""
                     + ", \"TABLE_SCHEM\": \"" + RocksetConnection.DEFAULT_SCHEMA + "\""
                     + ", \"TABLE_NAME\": \"" + table  + "\""
-                    + ", \"COLUMN_NAME\": \"" + "" + "\""
-                    + ", \"KEY_SEQ\": " + 0
-                    + ", \"PK_NAME\": \"" + "" + "\"";
+                    + ", \"COLUMN_NAME\": \"" + "_id" + "\""
+                    + ", \"KEY_SEQ\": " + 1
+                    + ", \"PK_NAME\": \"" + "_id" + "\"";
 
       str += " }";
       JsonNode docRootNode = mapper.readTree(str);

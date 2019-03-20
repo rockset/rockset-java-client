@@ -397,7 +397,7 @@ public class TestTable {
         QueryRequestSql qs = new QueryRequestSql().query(sql);
         QueryResponse resp = testClient.query(new QueryRequest().sql(qs));
 
-        RocksetResultSet res = new RocksetResultSet(resp, 10);
+        RocksetResultSet res = new RocksetResultSet(sql, resp, 10);
         if (res.next()) {
           found = res.getInt("?COUNT");
         }

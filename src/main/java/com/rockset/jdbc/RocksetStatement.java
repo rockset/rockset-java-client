@@ -157,7 +157,7 @@ public class RocksetStatement implements Statement {
               getStatementSessionProperties());
 
       // store resuts in memory
-      resultSet = new RocksetResultSet(resp, maxRows.get());
+      resultSet = new RocksetResultSet(sql, resp, maxRows.get());
       currentResult.set(resultSet);
       return true;
     } catch (RuntimeException e) {

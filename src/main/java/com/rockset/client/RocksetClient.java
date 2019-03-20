@@ -216,7 +216,7 @@ public class RocksetClient {
 
   /**
    * Get workspace details
-   * @param name Name of the workspace
+   * @param workspaceName Name of the workspace
    * @return GetWorkspaceResponse object with details about the desctribed workspace
    * @throws Exception
    */
@@ -226,7 +226,7 @@ public class RocksetClient {
 
   /**
    * Delete a workspace
-   * @param name Name of the workspace to be deleted
+   * @param workspaceName Name of the workspace to be deleted
    * @return DeleteWorkspaceResponse object with details about the deleted workspace
    * @throws Exception
    */

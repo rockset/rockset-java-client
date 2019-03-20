@@ -64,4 +64,9 @@ class Column {
   public ColumnTypes getType() {
     return type;
   }
+
+  public String toString() {
+    return String.format("(name=%s, jsontype=%s sqltype=%s)",
+        getName(), getType().toString(), RocksetUtils.jsonToSqlType(getType()));
+  }
 }

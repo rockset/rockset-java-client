@@ -97,6 +97,11 @@ public class RocksetResultSet implements ResultSet {
   private static final int SECOND_FIELD = 6;
   private static final int MILLIS_FIELD = 7;
 
+  // This is debug logging to trace how applications retrieve the values
+  // from a ResultSet. If you enable this, you also have to enable entry-point
+  // tracing via RocksetDriver.debugLogs = true.
+  private static boolean debugLogs = false;
+
   private final List<Object> resultSet;
   private final DateTimeZone sessionTimeZone;
 
@@ -108,42 +113,46 @@ public class RocksetResultSet implements ResultSet {
   private final int columnCount;
   private final AtomicBoolean wasNull = new AtomicBoolean();
   private final AtomicBoolean closed = new AtomicBoolean(false);
-  private final long maxRows;
+  private final String prefix;
+  private static final AtomicInteger queryId = new AtomicInteger(0);
 
-  RocksetResultSet(QueryResponse response, long maxRows) throws SQLException {
-    this.maxRows = maxRows;
-
+  RocksetResultSet(String queryStr, QueryResponse response, long maxRows) throws SQLException {
     this.sessionTimeZone = DateTimeZone.forID(TimeZone.getDefault().getID());
-
     this.columns = getColumns(response);
     this.columnCount = this.columns.size();
     this.fieldMap = getFieldMap(columns);
     this.resultSet = response.getResults();
     this.resultSetMetaData = new RocksetResultSetMetaData(this.columns);
-
     this.totalRows = resultSet.size();
+    if (debugLogs) {
+      int myid = queryId.getAndIncrement();
+      this.prefix = String.format("RocksetResultSet[%d] ", myid);
+      log("RocksetResultSet " + "'" + queryStr + "'" + " id = " + myid
+          + " created with numrows = " + this.totalRows
+          + " " + this.resultSetMetaData.toString());
+    } else {
+      this.prefix = "";
+    }
   }
 
   RocksetResultSet(List<Column> columns, List<Object> resultSet) {
+
     this.resultSet = resultSet;
-    this.maxRows = resultSet.size();
     this.totalRows = resultSet.size();
     this.columnCount = columns.size();
     this.columns = columns;
     this.fieldMap = getFieldMap(columns);
     this.sessionTimeZone = DateTimeZone.forID(TimeZone.getDefault().getID());
     this.resultSetMetaData = new RocksetResultSetMetaData(this.columns);
-  }
-
-  RocksetResultSet() {
-    this.resultSet = new LinkedList<Object>();
-    this.maxRows = 0;
-    this.totalRows = 0;
-    this.columnCount = 0;
-    this.columns = new ArrayList<>();
-    this.fieldMap = getFieldMap(columns);
-    this.sessionTimeZone = DateTimeZone.forID(TimeZone.getDefault().getID());
-    this.resultSetMetaData = new RocksetResultSetMetaData();
+    if (debugLogs) {
+      int myid = queryId.getAndIncrement();
+      this.prefix = String.format("RocksetResultSet[%d] ", myid);
+      log("RocksetResultSet " + "'DescribeQuery'" + " id = " + myid
+          + " created with numrows = " + this.totalRows
+          + " " + this.resultSetMetaData.toString());
+    } else {
+      this.prefix = "";
+    }
   }
 
   @Override
@@ -151,65 +160,92 @@ public class RocksetResultSet implements ResultSet {
     checkOpen();
     rowIndex.getAndIncrement();
     if (rowIndex.get() >= this.totalRows) {
+      log(prefix + " Thread " + Thread.currentThread().getName()
+              + " no more data " + rowIndex.get());
       return false;
     }
+    log(prefix + " Thread " + Thread.currentThread().getName()
+            + " positioned at " + rowIndex.get());
     return true;
   }
 
   @Override
   public void close() throws SQLException {
+    log(prefix + "closed");
     closed.set(true);
   }
 
   @Override
   public boolean wasNull() throws SQLException {
+    log(prefix + "wasNull is false");
     return wasNull.get();
   }
 
   @Override
   public String getString(int columnIndex) throws SQLException {
+    log(prefix + "columnIndex getString " + columnIndex);
     JsonNode value = column(columnIndex);
-    return (value != null) ? value.asText() : null;
+    String ret = (value != null) ? value.asText() : null;
+    log(prefix + "columnIndex getString " + columnIndex +
+            " returning " + ret);
+    return ret;
   }
 
   @Override
   public boolean getBoolean(int columnIndex) throws SQLException {
+    log(prefix + "columnIndex getBoolean " + columnIndex);
     JsonNode value = column(columnIndex);
     return value != null && value.booleanValue();
   }
 
   @Override
   public byte getByte(int columnIndex) throws SQLException {
+    log(prefix + "columnIndex getByte " + columnIndex);
     return toNumber(column(columnIndex)).byteValue();
   }
 
   @Override
   public short getShort(int columnIndex) throws SQLException {
+    log(prefix + "columnIndex getShort " + columnIndex);
     return toNumber(column(columnIndex)).shortValue();
   }
 
   @Override
   public int getInt(int columnIndex) throws SQLException {
-    return toNumber(column(columnIndex)).intValue();
+    log(prefix + "columnIndex getInt " + columnIndex);
+    int ret =  toNumber(column(columnIndex)).intValue();
+    log(prefix + "columnIndex getInt " + columnIndex +
+            " returning " + Integer.toString(ret));
+    return ret;
   }
 
   @Override
   public long getLong(int columnIndex) throws SQLException {
-    return toNumber(column(columnIndex)).longValue();
+    log(prefix + "columnIndex getLong " + columnIndex);
+    long ret =  toNumber(column(columnIndex)).longValue();
+    log(prefix + "columnIndex getLong " + columnIndex +
+            " returning " + Long.toString(ret));
+    return ret;
   }
 
   @Override
   public float getFloat(int columnIndex) throws SQLException {
+    log(prefix + "columnIndex getFloat " + columnIndex);
     return toNumber(column(columnIndex)).floatValue();
   }
 
   @Override
   public double getDouble(int columnIndex) throws SQLException {
-    return toNumber(column(columnIndex)).doubleValue();
+    log(prefix + "columnIndex getDouble " + columnIndex);
+    double ret =  toNumber(column(columnIndex)).doubleValue();
+    log(prefix + "columnIndex getDouble " + columnIndex +
+            " returning " + Double.toString(ret));
+    return ret;
   }
 
   @Override
   public BigDecimal getBigDecimal(int columnIndex, int scale) throws SQLException {
+    log(prefix + "columnIndex getBigDecimal " + columnIndex);
     BigDecimal bigDecimal = getBigDecimal(columnIndex);
     if (bigDecimal != null) {
       bigDecimal = bigDecimal.setScale(scale, ROUND_HALF_UP);
@@ -219,6 +255,7 @@ public class RocksetResultSet implements ResultSet {
 
   @Override
   public byte[] getBytes(int columnIndex) throws SQLException {
+    log(prefix + "columnIndex getBytes " + columnIndex);
     try {
       return column(columnIndex).binaryValue();
     } catch (Exception e) {
@@ -230,11 +267,13 @@ public class RocksetResultSet implements ResultSet {
 
   @Override
   public Date getDate(int columnIndex) throws SQLException {
+    log(prefix + "columnIndex getDate " + columnIndex);
     return getDate(columnIndex, sessionTimeZone);
   }
 
   private Date getDate(int columnIndex, DateTimeZone localTimeZone)
       throws SQLException {
+    log(prefix + "columnIndex getDate " + columnIndex);
     JsonNode value = column(columnIndex);
     if (value == null) {
       return null;
@@ -266,69 +305,82 @@ public class RocksetResultSet implements ResultSet {
 
   @Override
   public InputStream getAsciiStream(int columnIndex) throws SQLException {
+    log(prefix + "getAsciiStream");
     throw new NotImplementedException("ResultSet", "getAsciiStream");
   }
 
   @Override
   public InputStream getUnicodeStream(int columnIndex) throws SQLException {
+    log(prefix + "getUnicodeStream");
     throw new SQLFeatureNotSupportedException("getUnicodeStream");
   }
 
   @Override
   public InputStream getBinaryStream(int columnIndex) throws SQLException {
+    log(prefix + "getBinaryStream");
     throw new NotImplementedException("ResultSet", "getBinaryStream");
   }
 
   @Override
   public String getString(String columnLabel) throws SQLException {
+    log(prefix + "columnLabel");
     JsonNode value = column(columnLabel);
     return (value != null) ? value.asText() : null;
   }
 
   @Override
   public boolean getBoolean(String columnLabel) throws SQLException {
+    log(prefix + "getBoolean " + columnLabel);
     JsonNode value = column(columnLabel);
     return (value != null) && value.booleanValue();
   }
 
   @Override
   public byte getByte(String columnLabel) throws SQLException {
+    log(prefix + "getByte " + columnLabel);
     return toNumber(column(columnLabel)).byteValue();
   }
 
   @Override
   public short getShort(String columnLabel) throws SQLException {
+    log(prefix + "getShort " + columnLabel);
     return toNumber(column(columnLabel)).shortValue();
   }
 
   @Override
   public int getInt(String columnLabel) throws SQLException {
+    log(prefix + "getInt " + columnLabel);
     return toNumber(column(columnLabel)).intValue();
   }
 
   @Override
   public long getLong(String columnLabel) throws SQLException {
+    log(prefix + "getLong " + columnLabel);
     return toNumber(column(columnLabel)).longValue();
   }
 
   @Override
   public float getFloat(String columnLabel) throws SQLException {
+    log(prefix + "getFloat " + columnLabel);
     return toNumber(column(columnLabel)).floatValue();
   }
 
   @Override
   public double getDouble(String columnLabel) throws SQLException {
+    log(prefix + "getDouble " + columnLabel);
     return toNumber(column(columnLabel)).doubleValue();
   }
 
   @Override
   public BigDecimal getBigDecimal(String columnLabel, int scale) throws SQLException {
+    log(prefix + "getBigDecimal " + columnLabel);
     return getBigDecimal(columnIndex(columnLabel), scale);
   }
 
   @Override
   public byte[] getBytes(String columnLabel) throws SQLException {
     try {
+      log(prefix + "getBytes " + columnLabel);
       return column(columnLabel).binaryValue();
     } catch (Exception e) {
       throw new SQLException("Error processing getBytes for column label "
@@ -339,11 +391,13 @@ public class RocksetResultSet implements ResultSet {
 
   @Override
   public Date getDate(String columnLabel) throws SQLException {
+    log(prefix + "getDate " + columnLabel);
     return getDate(columnIndex(columnLabel));
   }
 
   @Override
   public Time getTime(String columnLabel) throws SQLException {
+    log(prefix + "getTime " + columnLabel);
     return getTime(columnIndex(columnLabel));
   }
 
@@ -354,16 +408,19 @@ public class RocksetResultSet implements ResultSet {
 
   @Override
   public InputStream getAsciiStream(String columnLabel) throws SQLException {
+    log(prefix + "getAsciiStream " + columnLabel);
     throw new NotImplementedException("ResultSet", "getAsciiStream");
   }
 
   @Override
   public InputStream getUnicodeStream(String columnLabel) throws SQLException {
+    log(prefix + "getUnicodeStream " + columnLabel);
     throw new SQLFeatureNotSupportedException("getUnicodeStream");
   }
 
   @Override
   public InputStream getBinaryStream(String columnLabel) throws SQLException {
+    log(prefix + "getBinaryStream " + columnLabel);
     throw new NotImplementedException("ResultSet", "getBinaryStream");
   }
 
@@ -380,16 +437,19 @@ public class RocksetResultSet implements ResultSet {
 
   @Override
   public String getCursorName() throws SQLException {
+    log(prefix + "getCursorName ");
     throw new SQLFeatureNotSupportedException("getCursorName");
   }
 
   @Override
   public ResultSetMetaData getMetaData() throws SQLException {
+    log(prefix + "getMetaData ");
     return resultSetMetaData;
   }
 
   @Override
   public Object getObject(int columnIndex) throws SQLException {
+    log(prefix + "getObject columnIndex " + columnIndex);
     int sqlType = resultSetMetaData.getColumnType(columnIndex);
     switch (sqlType) {
       case java.sql.Types.DATE:
@@ -406,6 +466,8 @@ public class RocksetResultSet implements ResultSet {
       default:
         // XXX TODO
     }
+    log(prefix + "getObject columnIndex " + columnIndex +
+            " no Type " + sqlType);
     return column(columnIndex);
   }
 
@@ -422,16 +484,19 @@ public class RocksetResultSet implements ResultSet {
 
   @Override
   public Reader getCharacterStream(int columnIndex) throws SQLException {
+    log(prefix + "getCharacterStream columnIndex " + columnIndex);
     throw new NotImplementedException("ResultSet", "getCharacterStream");
   }
 
   @Override
   public Reader getCharacterStream(String columnLabel) throws SQLException {
+    log(prefix + "getCharacterStream columnLabel " + columnLabel);
     throw new NotImplementedException("ResultSet", "getCharacterStream");
   }
 
   @Override
   public BigDecimal getBigDecimal(int columnIndex) throws SQLException {
+    log(prefix + "getBigDecimal columnIndex " + columnIndex);
     Object value = column(columnIndex);
     if (value == null) {
       return null;
@@ -447,61 +512,73 @@ public class RocksetResultSet implements ResultSet {
 
   @Override
   public boolean isBeforeFirst() throws SQLException {
+    log("RocksetResultSet isBeforeFirst");
     throw new SQLFeatureNotSupportedException("isBeforeFirst");
   }
 
   @Override
   public boolean isAfterLast() throws SQLException {
+    log("RocksetResultSet isAfterLast");
     throw new SQLFeatureNotSupportedException("isAfterLast");
   }
 
   @Override
   public boolean isFirst() throws SQLException {
+    log("RocksetResultSet isFirst");
     throw new SQLFeatureNotSupportedException("isFirst");
   }
 
   @Override
   public boolean isLast() throws SQLException {
+    log("RocksetResultSet isLast");
     throw new SQLFeatureNotSupportedException("isLast");
   }
 
   @Override
   public void beforeFirst() throws SQLException {
+    log("RocksetResultSet beforeFirst");
     throw new SQLFeatureNotSupportedException("beforeFirst");
   }
 
   @Override
   public void afterLast() throws SQLException {
+    log("RocksetResultSet afterLast");
     throw new SQLFeatureNotSupportedException("afterLast");
   }
 
   @Override
   public boolean first() throws SQLException {
+    log("RocksetResultSet first");
     throw new SQLFeatureNotSupportedException("first");
   }
 
   @Override
   public boolean last() throws SQLException {
+    log("RocksetResultSet last");
     throw new SQLFeatureNotSupportedException("last");
   }
 
   @Override
   public int getRow() throws SQLException {
+    log("RocksetResultSet getRow");
     throw new SQLFeatureNotSupportedException("getRow");
   }
 
   @Override
   public boolean absolute(int row) throws SQLException {
+    log("RocksetResultSet absolute");
     throw new SQLFeatureNotSupportedException("absolute");
   }
 
   @Override
   public boolean relative(int rows) throws SQLException {
+    log("RocksetResultSet relative");
     throw new SQLFeatureNotSupportedException("relative");
   }
 
   @Override
   public boolean previous() throws SQLException {
+    log("RocksetResultSet previous");
     throw new SQLFeatureNotSupportedException("previous");
   }
 
@@ -509,8 +586,10 @@ public class RocksetResultSet implements ResultSet {
   public void setFetchDirection(int direction) throws SQLException {
     checkOpen();
     if (direction != FETCH_FORWARD) {
+      log("RocksetResultSet setFetchDirection error");
       throw new SQLException("Fetch direction must be FETCH_FORWARD");
     }
+    log("RocksetResultSet setFetchDirection");
   }
 
   @Override
@@ -526,12 +605,14 @@ public class RocksetResultSet implements ResultSet {
       throw new SQLException("Rows is negative");
     }
     // fetch size is ignored
+    log("RocksetResultSet setFetchSize ignored");
   }
 
   @Override
   public int getFetchSize() throws SQLException {
     checkOpen();
     // fetch size is ignored
+    log("RocksetResultSet getFetchSize ignored");
     return 0;
   }
 
@@ -782,6 +863,7 @@ public class RocksetResultSet implements ResultSet {
 
   @Override
   public void refreshRow() throws SQLException {
+    log("RocksetResultSet refreshRow");
     throw new SQLFeatureNotSupportedException("refreshRow");
   }
 
@@ -797,37 +879,45 @@ public class RocksetResultSet implements ResultSet {
 
   @Override
   public void moveToCurrentRow() throws SQLException {
+    log("RocksetResultSet moveToCurrentRow");
     throw new SQLFeatureNotSupportedException("moveToCurrentRow");
   }
 
   @Override
   public Statement getStatement() throws SQLException {
+    log("RocksetResultSet getStatement");
     throw new NotImplementedException("ResultSet", "getStatement");
   }
 
   @Override
   public Object getObject(int columnIndex, Map<String, Class<?>> map)
       throws SQLException {
+    log(prefix + "getObject with column index "
+        + columnIndex);
     throw new SQLFeatureNotSupportedException("getObject");
   }
 
   @Override
   public Ref getRef(int columnIndex) throws SQLException {
+    log(prefix + "getRef column index " + columnIndex);
     throw new SQLFeatureNotSupportedException("getRef");
   }
 
   @Override
   public Blob getBlob(int columnIndex) throws SQLException {
+    log(prefix + "getBlob column index " + columnIndex);
     throw new SQLFeatureNotSupportedException("getBlob");
   }
 
   @Override
   public Clob getClob(int columnIndex) throws SQLException {
+    log(prefix + "getClob column index " + columnIndex);
     throw new SQLFeatureNotSupportedException("getClob");
   }
 
   @Override
   public Array getArray(int columnIndex) throws SQLException {
+    log(prefix + "getArray column index " + columnIndex);
     JsonNode value = column(columnIndex);
     if (value == null) {
       return null;
@@ -843,21 +933,25 @@ public class RocksetResultSet implements ResultSet {
   @Override
   public Object getObject(String columnLabel, Map<String, Class<?>> map)
       throws SQLException {
+    log(prefix + "getObject columnLabel " + columnLabel);
     throw new SQLFeatureNotSupportedException("getObject");
   }
 
   @Override
   public Ref getRef(String columnLabel) throws SQLException {
+    log(prefix + "getRef column label " + columnLabel);
     throw new SQLFeatureNotSupportedException("getRef");
   }
 
   @Override
   public Blob getBlob(String columnLabel) throws SQLException {
+    log(prefix + "getBlob column label " + columnLabel);
     throw new SQLFeatureNotSupportedException("getBlob");
   }
 
   @Override
   public Clob getClob(String columnLabel) throws SQLException {
+    log(prefix + "getClob column label " + columnLabel);
     throw new SQLFeatureNotSupportedException("getClob");
   }
 
@@ -898,6 +992,7 @@ public class RocksetResultSet implements ResultSet {
 
   @Override
   public URL getURL(int columnIndex) throws SQLException {
+    log(prefix + "getUrl column index " + columnIndex);
     throw new SQLFeatureNotSupportedException("getURL");
   }
 
@@ -1368,7 +1463,14 @@ public class RocksetResultSet implements ResultSet {
       return 0;
     }
 
+    log("Value is not a number");
     throw new SQLException("Value is not a number: " + value.getClass().getCanonicalName());
+  }
+
+  private static void log(String msg) {
+    if (debugLogs) {
+      RocksetDriver.log(msg);
+    }
   }
 
   private static List<Column> getColumns(QueryResponse response) throws SQLException {

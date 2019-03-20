@@ -26,7 +26,7 @@ class RocksetUtils {
         stype = java.sql.Types.NULL;
         break;
       case NUMBER: 
-        stype = java.sql.Types.BIGINT;
+        stype = java.sql.Types.DOUBLE;
         break;
       case OBJECT: 
       case POJO: 
@@ -70,7 +70,7 @@ class RocksetUtils {
         stype = "null";
         break;
       case NUMBER: 
-        stype = "bigint";
+        stype = "double";
         break;
       case OBJECT: 
       case POJO: 

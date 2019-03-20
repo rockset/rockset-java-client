@@ -29,7 +29,7 @@ public class RocksetResultSetMetaData implements ResultSetMetaData {
   }
 
   @Override
-  public int getColumnCount() throws SQLException {
+  public int getColumnCount() {
     return columnInfo.size();
   }
 
@@ -193,5 +193,18 @@ public class RocksetResultSetMetaData implements ResultSetMetaData {
       throw new SQLException("Invalid column index: " + column);
     }
     return columnInfo.get(column - 1);
+  }
+
+  public String toString() {
+    StringBuffer buf = new StringBuffer();
+    int num = 0;
+    for (Column c: columnInfo) {
+      buf.append(c.toString());
+      num++;
+      if (num < getColumnCount()) {
+        buf.append(",");
+      }
+    }
+    return buf.toString();
   }
 }

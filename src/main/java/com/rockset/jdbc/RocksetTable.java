@@ -22,7 +22,6 @@ class RocksetTable {
   private String tableName;
   private QueryResponse response;
   private RocksetResultSet describe;
-  private ResultSetMetaData describeMeta;
   final ObjectMapper mapper;
 
   // column index to retriece type information in describe results
@@ -42,7 +41,6 @@ class RocksetTable {
     incol.add(new Column("occurrences", Column.ColumnTypes.NUMBER));
     incol.add(new Column("total", Column.ColumnTypes.NUMBER));
     this.describe = new RocksetResultSet(incol, response.getResults());
-    this.describeMeta = this.describe.getMetaData();
   }
 
   //
