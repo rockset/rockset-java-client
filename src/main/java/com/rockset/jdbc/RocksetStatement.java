@@ -193,6 +193,7 @@ public class RocksetStatement implements Statement {
 
   @Override
   public boolean getMoreResults() throws SQLException {
+    RocksetDriver.log("Entry: Statement getMoreResults");
     checkOpen();
     currentResult.get().close();
     return false;

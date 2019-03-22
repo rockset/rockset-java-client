@@ -1024,6 +1024,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
   @Override
   public ResultSet getTypeInfo() throws SQLException {
     // TODO: XXX
+    RocksetDriver.log("Entry : RocksetDatabaseMetaData getTypeInfo");
     return null;
   }
 
@@ -1332,6 +1333,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
 
   @Override
   public ResultSet getClientInfoProperties() throws SQLException {
+    RocksetDriver.log("Enter : RocksetDatabaseMetaData getClientInfoProperties");
     throw new NotImplementedException("DatabaseMetaData", "getClientInfoProperties");
   }
 
