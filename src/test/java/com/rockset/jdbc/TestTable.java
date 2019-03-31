@@ -253,6 +253,47 @@ public class TestTable {
   }
 
   //
+  // Create an emoty collection and ensure that we can handle an
+  // empty resultset in the query response.
+  //
+  @Test
+  public void testEmptyQuery() throws Exception {
+    System.out.println("testEmptyQuery");
+    Connection conn = null;
+    Statement stmt = null;
+    ResultSet rs = null;
+    // create 1 collection
+    int numCollections = 1;
+    List<String> colls = generateCollectionNames(numCollections);
+    final String collectionName = colls.get(0);
+
+    try {
+      // create collection
+      createCollections(colls);
+
+      // wait for all leaves to be ready to serve
+      waitCollections(colls);
+
+      conn = DriverManager.getConnection(DB_URL, property);
+
+      // Execute a query
+      System.out.println("Creating statement 1...");
+      stmt = conn.createStatement();
+      String sql = "select c1, c2, c3 from " + collectionName;
+      rs = stmt.executeQuery(sql);
+      int count = 0;
+
+      // Extract data from result set
+      while (rs.next()) {
+        count++;
+      }
+      Assert.assertEquals(count, 0);
+    } finally {
+      cleanup(colls, stmt, conn);
+    }
+  }
+
+  //
   // Invoked by all unit tests at the end to cleanup its mess
   //
   private void cleanup(List<String> colls, Statement stmt, Connection conn) {
