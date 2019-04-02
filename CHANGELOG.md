@@ -1,5 +1,9 @@
 # Rockset Java Client Changelog
 
+## v0.5.13 2019-04-02
+- Fixed issue where Tableau complains if query returns zero results using JDBC
+- More logging and unit tests
+
 ## v0.5.12 2019-03-11
 - JDBC driver throws connect exception if unable to connect to rockset service
 - Workspace unit tests
