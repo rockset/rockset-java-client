@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * ResourceStats
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-03-06T00:47:37.549Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-02T17:43:18.300Z")
 public class ResourceStats {
   @SerializedName("doc_count")
   private Long docCount = null;
@@ -37,6 +37,12 @@ public class ResourceStats {
 
   @SerializedName("fill_progress")
   private Double fillProgress = null;
+
+  @SerializedName("purged_doc_count")
+  private Long purgedDocCount = null;
+
+  @SerializedName("purged_doc_size")
+  private Long purgedDocSize = null;
 
   @SerializedName("last_updated_ms")
   private Long lastUpdatedMs = null;
@@ -98,6 +104,42 @@ public class ResourceStats {
     this.fillProgress = fillProgress;
   }
 
+  public ResourceStats purgedDocCount(Long purgedDocCount) {
+    this.purgedDocCount = purgedDocCount;
+    return this;
+  }
+
+   /**
+   * number of documents purged from the collection
+   * @return purgedDocCount
+  **/
+  @ApiModelProperty(example = "2145", value = "number of documents purged from the collection")
+  public Long getPurgedDocCount() {
+    return purgedDocCount;
+  }
+
+  public void setPurgedDocCount(Long purgedDocCount) {
+    this.purgedDocCount = purgedDocCount;
+  }
+
+  public ResourceStats purgedDocSize(Long purgedDocSize) {
+    this.purgedDocSize = purgedDocSize;
+    return this;
+  }
+
+   /**
+   * total collection size in bytes purged
+   * @return purgedDocSize
+  **/
+  @ApiModelProperty(example = "123456", value = "total collection size in bytes purged")
+  public Long getPurgedDocSize() {
+    return purgedDocSize;
+  }
+
+  public void setPurgedDocSize(Long purgedDocSize) {
+    this.purgedDocSize = purgedDocSize;
+  }
+
   public ResourceStats lastUpdatedMs(Long lastUpdatedMs) {
     this.lastUpdatedMs = lastUpdatedMs;
     return this;
@@ -147,13 +189,15 @@ public class ResourceStats {
     return Objects.equals(this.docCount, resourceStats.docCount) &&
         Objects.equals(this.totalSize, resourceStats.totalSize) &&
         Objects.equals(this.fillProgress, resourceStats.fillProgress) &&
+        Objects.equals(this.purgedDocCount, resourceStats.purgedDocCount) &&
+        Objects.equals(this.purgedDocSize, resourceStats.purgedDocSize) &&
         Objects.equals(this.lastUpdatedMs, resourceStats.lastUpdatedMs) &&
         Objects.equals(this.lastQueriedMs, resourceStats.lastQueriedMs);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(docCount, totalSize, fillProgress, lastUpdatedMs, lastQueriedMs);
+    return Objects.hash(docCount, totalSize, fillProgress, purgedDocCount, purgedDocSize, lastUpdatedMs, lastQueriedMs);
   }
 
 
@@ -165,6 +209,8 @@ public class ResourceStats {
     sb.append("    docCount: ").append(toIndentedString(docCount)).append("\n");
     sb.append("    totalSize: ").append(toIndentedString(totalSize)).append("\n");
     sb.append("    fillProgress: ").append(toIndentedString(fillProgress)).append("\n");
+    sb.append("    purgedDocCount: ").append(toIndentedString(purgedDocCount)).append("\n");
+    sb.append("    purgedDocSize: ").append(toIndentedString(purgedDocSize)).append("\n");
     sb.append("    lastUpdatedMs: ").append(toIndentedString(lastUpdatedMs)).append("\n");
     sb.append("    lastQueriedMs: ").append(toIndentedString(lastQueriedMs)).append("\n");
     sb.append("}");

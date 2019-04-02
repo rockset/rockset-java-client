@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * QueryResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-03-06T00:47:37.549Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-02T17:43:18.300Z")
 public class QueryResponse {
   @SerializedName("results")
   private List<Object> results = null;
@@ -41,6 +41,9 @@ public class QueryResponse {
 
   @SerializedName("stats")
   private QueryResponseStats stats = null;
+
+  @SerializedName("column_fields")
+  private List<QueryFieldType> columnFields = null;
 
   public QueryResponse results(List<Object> results) {
     this.results = results;
@@ -112,6 +115,32 @@ public class QueryResponse {
     this.stats = stats;
   }
 
+  public QueryResponse columnFields(List<QueryFieldType> columnFields) {
+    this.columnFields = columnFields;
+    return this;
+  }
+
+  public QueryResponse addColumnFieldsItem(QueryFieldType columnFieldsItem) {
+    if (this.columnFields == null) {
+      this.columnFields = new ArrayList<QueryFieldType>();
+    }
+    this.columnFields.add(columnFieldsItem);
+    return this;
+  }
+
+   /**
+   * meta information about each column in the result set
+   * @return columnFields
+  **/
+  @ApiModelProperty(value = "meta information about each column in the result set")
+  public List<QueryFieldType> getColumnFields() {
+    return columnFields;
+  }
+
+  public void setColumnFields(List<QueryFieldType> columnFields) {
+    this.columnFields = columnFields;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -124,12 +153,13 @@ public class QueryResponse {
     QueryResponse queryResponse = (QueryResponse) o;
     return Objects.equals(this.results, queryResponse.results) &&
         Objects.equals(this.fields, queryResponse.fields) &&
-        Objects.equals(this.stats, queryResponse.stats);
+        Objects.equals(this.stats, queryResponse.stats) &&
+        Objects.equals(this.columnFields, queryResponse.columnFields);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(results, fields, stats);
+    return Objects.hash(results, fields, stats, columnFields);
   }
 
 
@@ -141,6 +171,7 @@ public class QueryResponse {
     sb.append("    results: ").append(toIndentedString(results)).append("\n");
     sb.append("    fields: ").append(toIndentedString(fields)).append("\n");
     sb.append("    stats: ").append(toIndentedString(stats)).append("\n");
+    sb.append("    columnFields: ").append(toIndentedString(columnFields)).append("\n");
     sb.append("}");
     return sb.toString();
   }

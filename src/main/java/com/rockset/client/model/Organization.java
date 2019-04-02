@@ -28,26 +28,38 @@ import java.io.IOException;
  * An organization in Rockset is a container for users and collections.
  */
 @ApiModel(description = "An organization in Rockset is a container for users and collections.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-03-06T00:47:37.549Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-02T17:43:18.300Z")
 public class Organization {
   @SerializedName("id")
   private String id = null;
 
+  @SerializedName("created_at")
+  private String createdAt = null;
+
   @SerializedName("display_name")
   private String displayName = null;
+
+  @SerializedName("company_name")
+  private String companyName = null;
 
   /**
    * pricing tier
    */
   @JsonAdapter(TierEnum.Adapter.class)
   public enum TierEnum {
+    FREE("FREE"),
+    
+    BASIC("BASIC"),
+    
+    PRO("PRO"),
+    
+    ENTERPRISE("ENTERPRISE"),
+    
     STARTER("STARTER"),
     
     PROFESSIONAL("PROFESSIONAL"),
     
-    BUSINESS("BUSINESS"),
-    
-    ENTERPRISE("ENTERPRISE");
+    BUSINESS("BUSINESS");
 
     private String value;
 
@@ -90,16 +102,23 @@ public class Organization {
   @SerializedName("tier")
   private TierEnum tier = null;
 
+  @SerializedName("qcu")
+  private Integer qcu = null;
+
   /**
    * org state
    */
   @JsonAdapter(StateEnum.Adapter.class)
   public enum StateEnum {
-    NEW("NEW"),
-    
     ACTIVE("ACTIVE"),
     
-    DELETED("DELETED");
+    TRIAL("TRIAL"),
+    
+    TRIAL_EXPIRED("TRIAL_EXPIRED"),
+    
+    DELETED("DELETED"),
+    
+    NEW("NEW");
 
     private String value;
 
@@ -160,6 +179,24 @@ public class Organization {
     this.id = id;
   }
 
+  public Organization createdAt(String createdAt) {
+    this.createdAt = createdAt;
+    return this;
+  }
+
+   /**
+   * ISO-8601 date
+   * @return createdAt
+  **/
+  @ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date")
+  public String getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(String createdAt) {
+    this.createdAt = createdAt;
+  }
+
   public Organization displayName(String displayName) {
     this.displayName = displayName;
     return this;
@@ -178,6 +215,24 @@ public class Organization {
     this.displayName = displayName;
   }
 
+  public Organization companyName(String companyName) {
+    this.companyName = companyName;
+    return this;
+  }
+
+   /**
+   * name of the company
+   * @return companyName
+  **/
+  @ApiModelProperty(example = "Rockset, Inc", value = "name of the company")
+  public String getCompanyName() {
+    return companyName;
+  }
+
+  public void setCompanyName(String companyName) {
+    this.companyName = companyName;
+  }
+
   public Organization tier(TierEnum tier) {
     this.tier = tier;
     return this;
@@ -187,13 +242,31 @@ public class Organization {
    * pricing tier
    * @return tier
   **/
-  @ApiModelProperty(example = "STARTER", value = "pricing tier")
+  @ApiModelProperty(example = "BASIC", value = "pricing tier")
   public TierEnum getTier() {
     return tier;
   }
 
   public void setTier(TierEnum tier) {
     this.tier = tier;
+  }
+
+  public Organization qcu(Integer qcu) {
+    this.qcu = qcu;
+    return this;
+  }
+
+   /**
+   * number of QCUs
+   * @return qcu
+  **/
+  @ApiModelProperty(example = "2", value = "number of QCUs")
+  public Integer getQcu() {
+    return qcu;
+  }
+
+  public void setQcu(Integer qcu) {
+    this.qcu = qcu;
   }
 
   public Organization state(StateEnum state) {
@@ -225,14 +298,17 @@ public class Organization {
     }
     Organization organization = (Organization) o;
     return Objects.equals(this.id, organization.id) &&
+        Objects.equals(this.createdAt, organization.createdAt) &&
         Objects.equals(this.displayName, organization.displayName) &&
+        Objects.equals(this.companyName, organization.companyName) &&
         Objects.equals(this.tier, organization.tier) &&
+        Objects.equals(this.qcu, organization.qcu) &&
         Objects.equals(this.state, organization.state);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, displayName, tier, state);
+    return Objects.hash(id, createdAt, displayName, companyName, tier, qcu, state);
   }
 
 
@@ -242,8 +318,11 @@ public class Organization {
     sb.append("class Organization {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
+    sb.append("    companyName: ").append(toIndentedString(companyName)).append("\n");
     sb.append("    tier: ").append(toIndentedString(tier)).append("\n");
+    sb.append("    qcu: ").append(toIndentedString(qcu)).append("\n");
     sb.append("    state: ").append(toIndentedString(state)).append("\n");
     sb.append("}");
     return sb.toString();

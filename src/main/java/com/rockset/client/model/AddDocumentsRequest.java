@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * AddDocumentsRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-03-06T00:47:37.549Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-02T17:43:18.300Z")
 public class AddDocumentsRequest {
   @SerializedName("data")
   private List<Object> data = new ArrayList<Object>();

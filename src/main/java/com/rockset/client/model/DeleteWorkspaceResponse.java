@@ -28,7 +28,7 @@ import java.io.IOException;
 /**
  * DeleteWorkspaceResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-03-06T00:47:37.549Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-02T17:43:18.300Z")
 public class DeleteWorkspaceResponse {
   @SerializedName("data")
   private Workspace data = null;

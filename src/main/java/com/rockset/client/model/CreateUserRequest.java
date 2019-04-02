@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * CreateUserRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-03-06T00:47:37.549Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-02T17:43:18.300Z")
 public class CreateUserRequest {
   @SerializedName("email")
   private String email = null;

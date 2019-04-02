@@ -31,7 +31,7 @@ import java.io.IOException;
  * Integrations that can be associated with data sources to create collections. Only one type of integration may be specified.
  */
 @ApiModel(description = "Integrations that can be associated with data sources to create collections. Only one type of integration may be specified.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-03-06T00:47:37.549Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-02T17:43:18.300Z")
 public class Integration {
   @SerializedName("created_at")
   private String createdAt = null;

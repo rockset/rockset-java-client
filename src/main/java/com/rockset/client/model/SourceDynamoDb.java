@@ -27,10 +27,13 @@ import java.io.IOException;
 /**
  * SourceDynamoDb
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-03-06T00:47:37.549Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-02T17:43:18.300Z")
 public class SourceDynamoDb {
   @SerializedName("table_name")
   private String tableName = null;
+
+  @SerializedName("aws_region")
+  private String awsRegion = null;
 
   public SourceDynamoDb tableName(String tableName) {
     this.tableName = tableName;
@@ -50,6 +53,24 @@ public class SourceDynamoDb {
     this.tableName = tableName;
   }
 
+  public SourceDynamoDb awsRegion(String awsRegion) {
+    this.awsRegion = awsRegion;
+    return this;
+  }
+
+   /**
+   * AWS region name of DynamoDB table, by default us-west-2 is used
+   * @return awsRegion
+  **/
+  @ApiModelProperty(example = "us-east-2", value = "AWS region name of DynamoDB table, by default us-west-2 is used")
+  public String getAwsRegion() {
+    return awsRegion;
+  }
+
+  public void setAwsRegion(String awsRegion) {
+    this.awsRegion = awsRegion;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -60,12 +81,13 @@ public class SourceDynamoDb {
       return false;
     }
     SourceDynamoDb sourceDynamoDb = (SourceDynamoDb) o;
-    return Objects.equals(this.tableName, sourceDynamoDb.tableName);
+    return Objects.equals(this.tableName, sourceDynamoDb.tableName) &&
+        Objects.equals(this.awsRegion, sourceDynamoDb.awsRegion);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(tableName);
+    return Objects.hash(tableName, awsRegion);
   }
 
 
@@ -75,6 +97,7 @@ public class SourceDynamoDb {
     sb.append("class SourceDynamoDb {\n");
     
     sb.append("    tableName: ").append(toIndentedString(tableName)).append("\n");
+    sb.append("    awsRegion: ").append(toIndentedString(awsRegion)).append("\n");
     sb.append("}");
     return sb.toString();
   }

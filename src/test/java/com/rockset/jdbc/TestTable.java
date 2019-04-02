@@ -21,6 +21,7 @@ import java.sql.DatabaseMetaData;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -288,6 +289,20 @@ public class TestTable {
         count++;
       }
       Assert.assertEquals(count, 0);
+
+      // extract metadata from query results, c1 c2 and c3
+      ResultSetMetaData meta = rs.getMetaData();
+      Assert.assertEquals(meta.getColumnCount(), 3);
+
+      Assert.assertEquals(meta.getColumnName(1), "c1");
+      Assert.assertEquals(meta.getColumnName(2), "c2");
+      Assert.assertEquals(meta.getColumnName(3), "c3");
+
+      // The server does not fill up the types of fields
+      Assert.assertEquals(meta.getColumnType(1), java.sql.Types.VARCHAR);
+      Assert.assertEquals(meta.getColumnType(2), java.sql.Types.VARCHAR);
+      Assert.assertEquals(meta.getColumnType(3), java.sql.Types.VARCHAR);
+
     } finally {
       cleanup(colls, stmt, conn);
     }

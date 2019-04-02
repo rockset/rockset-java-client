@@ -1478,14 +1478,7 @@ public class RocksetResultSet implements ResultSet {
     ObjectMapper mapper = new ObjectMapper();
 
     try {
-      if (response.getFields() != null && response.getFields().size() > 0) {
-        logger.info("Extracting column information from explicit fields");
-        for (QueryFieldType field: response.getFields()) {
-          Column.ColumnTypes valueType = Column.ColumnTypes.fromValue(field.getType());
-          Column c = new Column(field.getName(), valueType);
-          out.add(c);
-        }
-      } else if (response.getResults().size() > 0) {
+      if (response.getResults().size() > 0) {
         // If the server has not filled up the field types, then extract it from
         // the first record in the result set.
         logger.info("Extracting column information from first record in resultset");
@@ -1514,6 +1507,18 @@ public class RocksetResultSet implements ResultSet {
           }
 
           Column c = new Column(field.getKey(), type);
+          out.add(c);
+        }
+      } else if (response.getColumnFields() != null && response.getColumnFields().size() > 0) {
+        logger.info("Extracting column information from explicit fields");
+        for (QueryFieldType field: response.getColumnFields()) {
+          Column.ColumnTypes valueType = Column.ColumnTypes.fromValue(field.getType());
+
+          // If the server is not sending a valid type, then use a default type
+          if (valueType == null) {
+            valueType = Column.ColumnTypes.STRING;
+          }
+          Column c = new Column(field.getName(), valueType);
           out.add(c);
         }
       }
