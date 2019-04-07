@@ -95,6 +95,9 @@ public class TestTable {
     List<String> colls = generateCollectionNames(numCollections);
     createCollections(colls);
 
+    // wait for all leaves to be ready to serve
+    waitCollections(colls);
+
     // now check these 3 collections are returned via the JDBC call
     Connection conn = null;
     Statement stmt = null;

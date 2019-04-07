@@ -1,6 +1,5 @@
 package com.rockset.client;
 
-import com.rockset.client.RocksetClient;
 import com.rockset.client.model.QueryRequest;
 import com.rockset.client.model.QueryRequestSql;
 import com.rockset.client.model.QueryResponse;

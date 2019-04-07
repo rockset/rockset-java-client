@@ -1,14 +1,14 @@
 package com.rockset.client;
 
-import com.rockset.client.ApiException;
-import com.rockset.client.RocksetClient;
+import static org.awaitility.Awaitility.await;
 import com.rockset.client.model.*;
-import org.
-    apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 
 public class TestCollection {
   private RocksetClient client;
@@ -49,6 +49,24 @@ public class TestCollection {
 
   @Test(dependsOnMethods = {"testGetCollection"})
   public void testDeleteCollection() throws Exception {
+
+    // wait for collection to be created successfully before deleting
+    await("testDeleteCollection querying").atMost(60, TimeUnit.SECONDS)
+        .until((Callable<Boolean>) () -> {
+
+          try {
+            QueryRequest request = new QueryRequest()
+                .sql(new QueryRequestSql()
+                    .query(String.format("select * from \"%s\"", collectionName)));
+
+            QueryResponse response = client.query(request);
+            Assert.assertTrue(response.getResults().size() == 0);
+            return true;
+          } catch (Exception e) {
+            return false;
+          }
+        });
+
     // delete collection
     DeleteCollectionResponse deleteCollectionResponse
         = client.deleteCollection("commons", collectionName);
