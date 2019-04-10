@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * CreateCollectionRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-02T17:43:18.300Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-10T00:35:16.099Z")
 public class CreateCollectionRequest {
   @SerializedName("name")
   private String name = null;

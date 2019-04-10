@@ -86,6 +86,9 @@ public class ApiClient {
      */
     public ApiClient() {
         httpClient = new OkHttpClient();
+		// socket timeout
+		httpClient.setConnectTimeout(140, TimeUnit.SECONDS);
+        httpClient.setReadTimeout(140, TimeUnit.SECONDS);
 
 
         verifyingSsl = true;

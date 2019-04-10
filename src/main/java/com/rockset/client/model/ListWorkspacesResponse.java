@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * ListWorkspacesResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-02T17:43:18.300Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-10T00:35:16.099Z")
 public class ListWorkspacesResponse {
   @SerializedName("data")
   private List<Workspace> data = null;

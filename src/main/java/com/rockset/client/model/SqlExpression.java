@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * SqlExpression
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-02T17:43:18.300Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-10T00:35:16.099Z")
 public class SqlExpression {
   @SerializedName("sql")
   private String sql = null;
