@@ -46,6 +46,10 @@ mvn test
 
 Feel free to log issues against this client through GitHub.
 
+## JDBC
+
+The Rockset JDBC driver is packaged as part of this java client. Here is an [one example](https://github.com/rockset/rockset-java-client/blob/master/src/test/java/com/rockset/jdbc/FirstExample.java) that shows how to use it.
+
 ## License
 
 The Rockset Java Client is licensed under the [Apache 2.0 License](https://github.com/rockset/rockset-java-client/blob/master/LICENSE)
