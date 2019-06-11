@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * SourceKinesis
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T18:52:18.700Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
 public class SourceKinesis {
   @SerializedName("stream_name")
   private String streamName = null;

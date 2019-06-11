@@ -13,20 +13,18 @@
 
 package com.rockset.client;
 
+import com.rockset.client.model.ErrorModel;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.squareup.okhttp.*;
 import com.squareup.okhttp.internal.http.HttpMethod;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
 import okio.BufferedSink;
 import okio.Okio;
-import org.apache.commons.lang3.NotImplementedException;
-import org.json.JSONObject;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.OffsetDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
 
-import javax.naming.AuthenticationException;
-import javax.naming.LimitExceededException;
 import javax.net.ssl.*;
 import java.io.File;
 import java.io.IOException;
@@ -35,7 +33,6 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.rmi.ServerException;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
 import java.security.SecureRandom;
@@ -47,14 +44,11 @@ import java.text.DateFormat;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.rockset.client.auth.Authentication;
 import com.rockset.client.auth.HttpBasicAuth;
-import com.rockset.client.auth.ApiKeyAuth;
-import com.rockset.client.auth.OAuth;
 
 public class ApiClient {
 
@@ -896,33 +890,21 @@ public class ApiClient {
                 return deserialize(response, returnType);
             }
         } else {
-            String respBody = null;
+            ErrorModel errorModel = null;
             if (response.body() != null) {
                 try {
-                    respBody = response.body().string();
-                } catch (IOException e) {
-                    throw new ApiException(response.message(), e, response.code(), response.headers().toMultimap());
+                    final String respBody = response.body().string();
+
+                    final ObjectMapper objectMapper = new ObjectMapper();
+                    errorModel = objectMapper.readValue(respBody, ErrorModel.class);
+
+                } catch (final IOException e) {
+                    throw new ApiException(response.message(), e, response.code(),
+                            response.headers().toMultimap());
                 }
             }
 
-			if (response.code() == 401) {
-                throw new AuthenticationException(respBody);
-            } else if (response.code() == 403 || response.code() == 413 || response.code() == 429) {
-                throw new LimitExceededException(respBody);
-            } else if (response.code() == 400) {
-                JSONObject jsonObject = new JSONObject(respBody);
-                throw new IllegalArgumentException(jsonObject.get("type") + " : " + jsonObject.get("message"));
-            } else if (response.code() == 501) {
-                throw new NotImplementedException(respBody);
-            } else if (response.code() == 502) {
-                throw new TimeoutException("error connecting to " + this.basePath);
-            } else if (response.code() > 400 && response.code() < 500) {
-                throw new IllegalArgumentException(respBody);
-            } else if (response.code() >= 500 || response.code() < 530) {
-                throw new ServerException(respBody);
-            } else {
-                throw new ApiException(response.message(), response.code(), response.headers().toMultimap(), respBody);
-            }
+            throw new ApiException(response.code(), errorModel);
         }
     }
 

@@ -28,7 +28,7 @@ import java.io.IOException;
  * An organization in Rockset is a container for users and collections.
  */
 @ApiModel(description = "An organization in Rockset is a container for users and collections.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T18:52:18.700Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
 public class Organization {
   @SerializedName("id")
   private String id = null;

@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * AddDocumentsResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T18:52:18.700Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
 public class AddDocumentsResponse {
   @SerializedName("data")
   private List<DocumentStatus> data = null;
