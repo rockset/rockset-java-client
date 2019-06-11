@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Splitter;
 
-import com.rockset.client.model.Resource;
+import com.rockset.client.model.Collection;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -780,9 +780,9 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
       columns.add(col10);
 
       // Fetch all collections and sort them.
-      List<Resource> collections =  connection.listCollections();
-      Collections.sort(collections, new Comparator<Resource>() {
-          public int compare(Resource r1, Resource r2) {
+      List<Collection> collections =  connection.listCollections();
+      Collections.sort(collections, new Comparator<Collection>() {
+          public int compare(Collection r1, Collection r2) {
             return r1.getName().compareTo(r2.getName());
           }
         });
@@ -790,7 +790,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
       // each row refers to a collection
       ObjectMapper mapper = new ObjectMapper();
       List<Object> data = new ArrayList<Object>();
-      for (Resource collection:  collections) {
+      for (Collection collection:  collections) {
         String str = "{\"TABLE_CAT\": \"" + RocksetConnection.DEFAULT_CATALOG + "\""
                     + ", \"TABLE_SCHEM\": \"" + RocksetConnection.DEFAULT_SCHEMA + "\""
                     + ", \"TABLE_NAME\": \"" + collection.getName()  + "\""
@@ -914,8 +914,8 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
     RocksetDriver.log("Entry : RocksetDatabaseMetaData getColumns");
 
     try {
-      List<Resource> collections =  connection.listCollections();
-      for (Resource collection: collections) {
+      List<Collection> collections =  connection.listCollections();
+      for (Collection collection: collections) {
         if (collection.getName().equals(tableNamePattern)) {
           RocksetTable table = new RocksetTable(tableNamePattern,
                 connection.describeTable(tableNamePattern));

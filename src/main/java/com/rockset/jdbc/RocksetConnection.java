@@ -10,7 +10,7 @@ import com.rockset.client.model.QueryParameter;
 import com.rockset.client.model.QueryRequest;
 import com.rockset.client.model.QueryRequestSql;
 import com.rockset.client.model.QueryResponse;
-import com.rockset.client.model.Resource;
+import com.rockset.client.model.Collection;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -534,7 +534,7 @@ public class RocksetConnection implements Connection {
   //
   // List all collections
   //
-  List<Resource> listCollections() throws Exception {
+  List<Collection> listCollections() throws Exception {
     return client.listCollections(getSchema());
   }
 

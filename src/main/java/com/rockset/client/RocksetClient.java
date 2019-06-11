@@ -95,10 +95,10 @@ public class RocksetClient {
 
   /**
    * List all collections in an organization
-   * @return List of Resource object, one for each collection
+   * @return List of Collection object, one for each collection
    * @throws Exception
    */
-    public List<Resource> listCollections(String workspace) throws Exception {
+    public List<Collection> listCollections(String workspace) throws Exception {
       return collection.list(workspace).getData();
     }
 

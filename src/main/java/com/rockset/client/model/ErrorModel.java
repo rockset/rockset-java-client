@@ -28,7 +28,7 @@ import java.io.IOException;
  * Describes details about an error
  */
 @ApiModel(description = "Describes details about an error")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-10T00:35:16.099Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T18:52:18.700Z")
 public class ErrorModel {
   @SerializedName("message")
   private String message = null;
@@ -48,11 +48,7 @@ public class ErrorModel {
     
     NOTIMPLEMENTEDYET("NOTIMPLEMENTEDYET"),
     
-    PROTOCOLERROR("PROTOCOLERROR"),
-    
     RESOURCEEXCEEDED("RESOURCEEXCEEDED"),
-    
-    RESOURCENAMETOOLONG("RESOURCENAMETOOLONG"),
     
     ALREADYEXISTS("ALREADYEXISTS"),
     
@@ -66,7 +62,11 @@ public class ErrorModel {
     
     FORBIDDEN("FORBIDDEN"),
     
-    QUERY_TIMEOUT("QUERY_TIMEOUT");
+    QUERY_TIMEOUT("QUERY_TIMEOUT"),
+    
+    INTEGRATION_NOT_FOUND("INTEGRATION_NOT_FOUND"),
+    
+    ROLE_NOT_FOUND("ROLE_NOT_FOUND");
 
     private String value;
 

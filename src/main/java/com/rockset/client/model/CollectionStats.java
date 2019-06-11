@@ -25,10 +25,10 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * ResourceStats
+ * CollectionStats
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-10T00:35:16.099Z")
-public class ResourceStats {
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T18:52:18.700Z")
+public class CollectionStats {
   @SerializedName("doc_count")
   private Long docCount = null;
 
@@ -50,7 +50,7 @@ public class ResourceStats {
   @SerializedName("last_queried_ms")
   private Long lastQueriedMs = null;
 
-  public ResourceStats docCount(Long docCount) {
+  public CollectionStats docCount(Long docCount) {
     this.docCount = docCount;
     return this;
   }
@@ -68,7 +68,7 @@ public class ResourceStats {
     this.docCount = docCount;
   }
 
-  public ResourceStats totalSize(Long totalSize) {
+  public CollectionStats totalSize(Long totalSize) {
     this.totalSize = totalSize;
     return this;
   }
@@ -86,7 +86,7 @@ public class ResourceStats {
     this.totalSize = totalSize;
   }
 
-  public ResourceStats fillProgress(Double fillProgress) {
+  public CollectionStats fillProgress(Double fillProgress) {
     this.fillProgress = fillProgress;
     return this;
   }
@@ -104,7 +104,7 @@ public class ResourceStats {
     this.fillProgress = fillProgress;
   }
 
-  public ResourceStats purgedDocCount(Long purgedDocCount) {
+  public CollectionStats purgedDocCount(Long purgedDocCount) {
     this.purgedDocCount = purgedDocCount;
     return this;
   }
@@ -122,7 +122,7 @@ public class ResourceStats {
     this.purgedDocCount = purgedDocCount;
   }
 
-  public ResourceStats purgedDocSize(Long purgedDocSize) {
+  public CollectionStats purgedDocSize(Long purgedDocSize) {
     this.purgedDocSize = purgedDocSize;
     return this;
   }
@@ -140,7 +140,7 @@ public class ResourceStats {
     this.purgedDocSize = purgedDocSize;
   }
 
-  public ResourceStats lastUpdatedMs(Long lastUpdatedMs) {
+  public CollectionStats lastUpdatedMs(Long lastUpdatedMs) {
     this.lastUpdatedMs = lastUpdatedMs;
     return this;
   }
@@ -158,7 +158,7 @@ public class ResourceStats {
     this.lastUpdatedMs = lastUpdatedMs;
   }
 
-  public ResourceStats lastQueriedMs(Long lastQueriedMs) {
+  public CollectionStats lastQueriedMs(Long lastQueriedMs) {
     this.lastQueriedMs = lastQueriedMs;
     return this;
   }
@@ -185,14 +185,14 @@ public class ResourceStats {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ResourceStats resourceStats = (ResourceStats) o;
-    return Objects.equals(this.docCount, resourceStats.docCount) &&
-        Objects.equals(this.totalSize, resourceStats.totalSize) &&
-        Objects.equals(this.fillProgress, resourceStats.fillProgress) &&
-        Objects.equals(this.purgedDocCount, resourceStats.purgedDocCount) &&
-        Objects.equals(this.purgedDocSize, resourceStats.purgedDocSize) &&
-        Objects.equals(this.lastUpdatedMs, resourceStats.lastUpdatedMs) &&
-        Objects.equals(this.lastQueriedMs, resourceStats.lastQueriedMs);
+    CollectionStats collectionStats = (CollectionStats) o;
+    return Objects.equals(this.docCount, collectionStats.docCount) &&
+        Objects.equals(this.totalSize, collectionStats.totalSize) &&
+        Objects.equals(this.fillProgress, collectionStats.fillProgress) &&
+        Objects.equals(this.purgedDocCount, collectionStats.purgedDocCount) &&
+        Objects.equals(this.purgedDocSize, collectionStats.purgedDocSize) &&
+        Objects.equals(this.lastUpdatedMs, collectionStats.lastUpdatedMs) &&
+        Objects.equals(this.lastQueriedMs, collectionStats.lastQueriedMs);
   }
 
   @Override
@@ -204,7 +204,7 @@ public class ResourceStats {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ResourceStats {\n");
+    sb.append("class CollectionStats {\n");
     
     sb.append("    docCount: ").append(toIndentedString(docCount)).append("\n");
     sb.append("    totalSize: ").append(toIndentedString(totalSize)).append("\n");

@@ -12,7 +12,7 @@ import com.rockset.client.model.DeleteCollectionResponse;
 import com.rockset.client.model.QueryRequest;
 import com.rockset.client.model.QueryRequestSql;
 import com.rockset.client.model.QueryResponse;
-import com.rockset.client.model.Resource;
+import com.rockset.client.model.Collection;
 
 import java.io.File;
 import java.io.IOException;
@@ -382,7 +382,7 @@ public class TestTable {
       CreateCollectionResponse response = testClient.createCollection("commons", request);
 
       Assert.assertEquals(response.getData().getName(), name);
-      Assert.assertEquals(response.getData().getStatus(), Resource.StatusEnum.CREATED);
+      Assert.assertEquals(response.getData().getStatus(), Collection.StatusEnum.CREATED);
     }
   }
 
@@ -395,7 +395,7 @@ public class TestTable {
                     = testClient.deleteCollection("commons", name);
       Assert.assertEquals(deleteCollectionResponse.getData().getName(), name);
       Assert.assertEquals(deleteCollectionResponse.getData().getStatus(),
-                          Resource.StatusEnum.DELETED);
+                          Collection.StatusEnum.DELETED);
     }
   }
 

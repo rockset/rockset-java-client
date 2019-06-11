@@ -23,6 +23,7 @@ import com.google.gson.stream.JsonWriter;
 import com.rockset.client.model.AwsExternalIdIntegration;
 import com.rockset.client.model.AwsKeyIntegration;
 import com.rockset.client.model.GcpServiceAccount;
+import com.rockset.client.model.RedshiftIntegration;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -30,7 +31,7 @@ import java.io.IOException;
 /**
  * CreateIntegrationRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-10T00:35:16.099Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T18:52:18.700Z")
 public class CreateIntegrationRequest {
   @SerializedName("name")
   private String name = null;
@@ -46,6 +47,9 @@ public class CreateIntegrationRequest {
 
   @SerializedName("gcp_service_account")
   private GcpServiceAccount gcpServiceAccount = null;
+
+  @SerializedName("redshift")
+  private RedshiftIntegration redshift = null;
 
   public CreateIntegrationRequest name(String name) {
     this.name = name;
@@ -128,6 +132,24 @@ public class CreateIntegrationRequest {
     this.gcpServiceAccount = gcpServiceAccount;
   }
 
+  public CreateIntegrationRequest redshift(RedshiftIntegration redshift) {
+    this.redshift = redshift;
+    return this;
+  }
+
+   /**
+   * details of AWS Redshift integration
+   * @return redshift
+  **/
+  @ApiModelProperty(value = "details of AWS Redshift integration")
+  public RedshiftIntegration getRedshift() {
+    return redshift;
+  }
+
+  public void setRedshift(RedshiftIntegration redshift) {
+    this.redshift = redshift;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -142,12 +164,13 @@ public class CreateIntegrationRequest {
         Objects.equals(this.description, createIntegrationRequest.description) &&
         Objects.equals(this.aws, createIntegrationRequest.aws) &&
         Objects.equals(this.awsExternalId, createIntegrationRequest.awsExternalId) &&
-        Objects.equals(this.gcpServiceAccount, createIntegrationRequest.gcpServiceAccount);
+        Objects.equals(this.gcpServiceAccount, createIntegrationRequest.gcpServiceAccount) &&
+        Objects.equals(this.redshift, createIntegrationRequest.redshift);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, description, aws, awsExternalId, gcpServiceAccount);
+    return Objects.hash(name, description, aws, awsExternalId, gcpServiceAccount, redshift);
   }
 
 
@@ -161,6 +184,7 @@ public class CreateIntegrationRequest {
     sb.append("    aws: ").append(toIndentedString(aws)).append("\n");
     sb.append("    awsExternalId: ").append(toIndentedString(awsExternalId)).append("\n");
     sb.append("    gcpServiceAccount: ").append(toIndentedString(gcpServiceAccount)).append("\n");
+    sb.append("    redshift: ").append(toIndentedString(redshift)).append("\n");
     sb.append("}");
     return sb.toString();
   }

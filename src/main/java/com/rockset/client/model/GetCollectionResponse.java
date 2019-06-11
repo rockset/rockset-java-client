@@ -20,7 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.rockset.client.model.Resource;
+import com.rockset.client.model.Collection;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -28,12 +28,12 @@ import java.io.IOException;
 /**
  * GetCollectionResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-10T00:35:16.099Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T18:52:18.700Z")
 public class GetCollectionResponse {
   @SerializedName("data")
-  private Resource data = null;
+  private Collection data = null;
 
-  public GetCollectionResponse data(Resource data) {
+  public GetCollectionResponse data(Collection data) {
     this.data = data;
     return this;
   }
@@ -43,11 +43,11 @@ public class GetCollectionResponse {
    * @return data
   **/
   @ApiModelProperty(value = "collection that was requested")
-  public Resource getData() {
+  public Collection getData() {
     return data;
   }
 
-  public void setData(Resource data) {
+  public void setData(Collection data) {
     this.data = data;
   }
 

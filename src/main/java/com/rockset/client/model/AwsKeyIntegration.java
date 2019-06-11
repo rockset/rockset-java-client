@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * AwsKeyIntegration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-10T00:35:16.099Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T18:52:18.700Z")
 public class AwsKeyIntegration {
   @SerializedName("aws_access_key_id")
   private String awsAccessKeyId = null;
@@ -62,7 +62,7 @@ public class AwsKeyIntegration {
    * AWS secret access key
    * @return awsSecretAccessKey
   **/
-  @ApiModelProperty(example = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY", required = true, value = "AWS secret access key")
+  @ApiModelProperty(example = "wJal....", required = true, value = "AWS secret access key")
   public String getAwsSecretAccessKey() {
     return awsSecretAccessKey;
   }

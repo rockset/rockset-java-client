@@ -22,17 +22,7 @@ import static org.testng.Assert.assertTrue;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import com.rockset.client.RocksetClient;
-import com.rockset.client.model.CreateCollectionRequest;
-import com.rockset.client.model.CreateCollectionResponse;
-import com.rockset.client.model.DeleteCollectionResponse;
-import com.rockset.client.model.QueryRequest;
-import com.rockset.client.model.QueryRequestSql;
-import com.rockset.client.model.QueryResponse;
-import com.rockset.client.model.Resource;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -43,7 +33,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.sql.Types;
@@ -55,7 +44,6 @@ import java.util.Properties;
 
 import static com.google.common.base.Strings.repeat;
 import static com.google.common.primitives.Ints.asList;
-import static java.lang.String.format;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class TestJdbcPreparedStatement

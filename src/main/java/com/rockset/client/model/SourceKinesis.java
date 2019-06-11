@@ -27,10 +27,13 @@ import java.io.IOException;
 /**
  * SourceKinesis
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-10T00:35:16.099Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T18:52:18.700Z")
 public class SourceKinesis {
   @SerializedName("stream_name")
   private String streamName = null;
+
+  @SerializedName("aws_region")
+  private String awsRegion = null;
 
   public SourceKinesis streamName(String streamName) {
     this.streamName = streamName;
@@ -50,6 +53,24 @@ public class SourceKinesis {
     this.streamName = streamName;
   }
 
+  public SourceKinesis awsRegion(String awsRegion) {
+    this.awsRegion = awsRegion;
+    return this;
+  }
+
+   /**
+   * AWS region name of Kinesis stream, by default us-west-2 is used
+   * @return awsRegion
+  **/
+  @ApiModelProperty(example = "us-east-2", value = "AWS region name of Kinesis stream, by default us-west-2 is used")
+  public String getAwsRegion() {
+    return awsRegion;
+  }
+
+  public void setAwsRegion(String awsRegion) {
+    this.awsRegion = awsRegion;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -60,12 +81,13 @@ public class SourceKinesis {
       return false;
     }
     SourceKinesis sourceKinesis = (SourceKinesis) o;
-    return Objects.equals(this.streamName, sourceKinesis.streamName);
+    return Objects.equals(this.streamName, sourceKinesis.streamName) &&
+        Objects.equals(this.awsRegion, sourceKinesis.awsRegion);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(streamName);
+    return Objects.hash(streamName, awsRegion);
   }
 
 
@@ -75,6 +97,7 @@ public class SourceKinesis {
     sb.append("class SourceKinesis {\n");
     
     sb.append("    streamName: ").append(toIndentedString(streamName)).append("\n");
+    sb.append("    awsRegion: ").append(toIndentedString(awsRegion)).append("\n");
     sb.append("}");
     return sb.toString();
   }

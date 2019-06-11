@@ -25,6 +25,7 @@ import com.rockset.client.model.SourceDynamoDb;
 import com.rockset.client.model.SourceFileUpload;
 import com.rockset.client.model.SourceGcs;
 import com.rockset.client.model.SourceKinesis;
+import com.rockset.client.model.SourceRedshift;
 import com.rockset.client.model.SourceS3;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -34,7 +35,7 @@ import java.io.IOException;
  * Details about the data source for the given collection. Only one of the following fields are allowed to be defined. Only collections can act as data sources for views. 
  */
 @ApiModel(description = "Details about the data source for the given collection. Only one of the following fields are allowed to be defined. Only collections can act as data sources for views. ")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-10T00:35:16.099Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T18:52:18.700Z")
 public class Source {
   @SerializedName("type")
   private String type = null;
@@ -53,6 +54,9 @@ public class Source {
 
   @SerializedName("gcs")
   private SourceGcs gcs = null;
+
+  @SerializedName("redshift")
+  private SourceRedshift redshift = null;
 
   @SerializedName("file_upload")
   private SourceFileUpload fileUpload = null;
@@ -78,7 +82,7 @@ public class Source {
    * name of integration to use
    * @return integrationName
   **/
-  @ApiModelProperty(required = true, value = "name of integration to use")
+  @ApiModelProperty(example = "aws-integration", required = true, value = "name of integration to use")
   public String getIntegrationName() {
     return integrationName;
   }
@@ -159,6 +163,24 @@ public class Source {
     this.gcs = gcs;
   }
 
+  public Source redshift(SourceRedshift redshift) {
+    this.redshift = redshift;
+    return this;
+  }
+
+   /**
+   * configuration for ingestion from Redshift
+   * @return redshift
+  **/
+  @ApiModelProperty(value = "configuration for ingestion from Redshift")
+  public SourceRedshift getRedshift() {
+    return redshift;
+  }
+
+  public void setRedshift(SourceRedshift redshift) {
+    this.redshift = redshift;
+  }
+
   public Source fileUpload(SourceFileUpload fileUpload) {
     this.fileUpload = fileUpload;
     return this;
@@ -211,13 +233,14 @@ public class Source {
         Objects.equals(this.kinesis, source.kinesis) &&
         Objects.equals(this.dynamodb, source.dynamodb) &&
         Objects.equals(this.gcs, source.gcs) &&
+        Objects.equals(this.redshift, source.redshift) &&
         Objects.equals(this.fileUpload, source.fileUpload) &&
         Objects.equals(this.formatParams, source.formatParams);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(type, integrationName, s3, kinesis, dynamodb, gcs, fileUpload, formatParams);
+    return Objects.hash(type, integrationName, s3, kinesis, dynamodb, gcs, redshift, fileUpload, formatParams);
   }
 
 
@@ -232,6 +255,7 @@ public class Source {
     sb.append("    kinesis: ").append(toIndentedString(kinesis)).append("\n");
     sb.append("    dynamodb: ").append(toIndentedString(dynamodb)).append("\n");
     sb.append("    gcs: ").append(toIndentedString(gcs)).append("\n");
+    sb.append("    redshift: ").append(toIndentedString(redshift)).append("\n");
     sb.append("    fileUpload: ").append(toIndentedString(fileUpload)).append("\n");
     sb.append("    formatParams: ").append(toIndentedString(formatParams)).append("\n");
     sb.append("}");

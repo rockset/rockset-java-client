@@ -20,8 +20,8 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.rockset.client.model.Collection;
 import com.rockset.client.model.Integration;
-import com.rockset.client.model.Resource;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -31,13 +31,13 @@ import java.util.List;
 /**
  * GetIntegrationResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-10T00:35:16.099Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T18:52:18.700Z")
 public class GetIntegrationResponse {
   @SerializedName("data")
   private Integration data = null;
 
   @SerializedName("collections")
-  private List<Resource> collections = null;
+  private List<Collection> collections = null;
 
   public GetIntegrationResponse data(Integration data) {
     this.data = data;
@@ -57,14 +57,14 @@ public class GetIntegrationResponse {
     this.data = data;
   }
 
-  public GetIntegrationResponse collections(List<Resource> collections) {
+  public GetIntegrationResponse collections(List<Collection> collections) {
     this.collections = collections;
     return this;
   }
 
-  public GetIntegrationResponse addCollectionsItem(Resource collectionsItem) {
+  public GetIntegrationResponse addCollectionsItem(Collection collectionsItem) {
     if (this.collections == null) {
-      this.collections = new ArrayList<Resource>();
+      this.collections = new ArrayList<Collection>();
     }
     this.collections.add(collectionsItem);
     return this;
@@ -75,11 +75,11 @@ public class GetIntegrationResponse {
    * @return collections
   **/
   @ApiModelProperty(value = "list of collections that use the integration")
-  public List<Resource> getCollections() {
+  public List<Collection> getCollections() {
     return collections;
   }
 
-  public void setCollections(List<Resource> collections) {
+  public void setCollections(List<Collection> collections) {
     this.collections = collections;
   }
 

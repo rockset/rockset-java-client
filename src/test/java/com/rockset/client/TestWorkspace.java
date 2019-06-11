@@ -1,14 +1,11 @@
 package com.rockset.client;
 
-import com.rockset.client.ApiException;
-import com.rockset.client.RocksetClient;
 import com.rockset.client.model.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.awaitility.Awaitility;
 import org.testng.Assert;
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
@@ -47,7 +44,7 @@ public class TestWorkspace {
         client.createCollection(workspaceName, request);
 
     Assert.assertEquals(response.getData().getName(), collectionName);
-    Assert.assertEquals(response.getData().getStatus(), Resource.StatusEnum.CREATED);
+    Assert.assertEquals(response.getData().getStatus(), Collection.StatusEnum.CREATED);
   }
 
   @Test(dependsOnMethods = {"testWorkspaceCreate"})
@@ -64,7 +61,7 @@ public class TestWorkspace {
     DeleteCollectionResponse deleteCollectionResponse
         = client.deleteCollection(workspaceName, collectionName);
     Assert.assertEquals(deleteCollectionResponse.getData().getName(), collectionName);
-    Assert.assertEquals(deleteCollectionResponse.getData().getStatus(), Resource.StatusEnum.DELETED);
+    Assert.assertEquals(deleteCollectionResponse.getData().getStatus(), Collection.StatusEnum.DELETED);
 
     // wait for collection to go away
     Awaitility.await("Waiting for collection to be cleaned up ")

@@ -36,7 +36,7 @@ public class TestCollection {
         client.createCollection("commons", request);
 
     Assert.assertEquals(response.getData().getName(), collectionName);
-    Assert.assertEquals(response.getData().getStatus(), Resource.StatusEnum.CREATED);
+    Assert.assertEquals(response.getData().getStatus(), Collection.StatusEnum.CREATED);
   }
 
   @Test(dependsOnMethods = {"testCollectionCreate"})
@@ -71,6 +71,6 @@ public class TestCollection {
     DeleteCollectionResponse deleteCollectionResponse
         = client.deleteCollection("commons", collectionName);
     Assert.assertEquals(deleteCollectionResponse.getData().getName(), collectionName);
-    Assert.assertEquals(deleteCollectionResponse.getData().getStatus(), Resource.StatusEnum.DELETED);
+    Assert.assertEquals(deleteCollectionResponse.getData().getStatus(), Collection.StatusEnum.DELETED);
   }
 }

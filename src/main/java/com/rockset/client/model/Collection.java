@@ -20,8 +20,8 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.rockset.client.model.CollectionStats;
 import com.rockset.client.model.FieldMappingV2;
-import com.rockset.client.model.ResourceStats;
 import com.rockset.client.model.Source;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -30,10 +30,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Resource
+ * Collection
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-10T00:35:16.099Z")
-public class Resource {
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T18:52:18.700Z")
+public class Collection {
   @SerializedName("created_at")
   private String createdAt = null;
 
@@ -58,7 +58,15 @@ public class Resource {
     
     READY("READY"),
     
+    PAUSED("PAUSED"),
+    
     DELETED("DELETED"),
+    
+    PAUSING("PAUSING"),
+    
+    RESUMING("RESUMING"),
+    
+    CATCHINGUP("CATCHINGUP"),
     
     UNKNOWN("UNKNOWN");
 
@@ -107,7 +115,7 @@ public class Resource {
   private List<Source> sources = null;
 
   @SerializedName("stats")
-  private ResourceStats stats = null;
+  private CollectionStats stats = null;
 
   @SerializedName("retention_secs")
   private Long retentionSecs = null;
@@ -115,7 +123,7 @@ public class Resource {
   @SerializedName("field_mappings")
   private List<FieldMappingV2> fieldMappings = null;
 
-  public Resource createdAt(String createdAt) {
+  public Collection createdAt(String createdAt) {
     this.createdAt = createdAt;
     return this;
   }
@@ -133,7 +141,7 @@ public class Resource {
     this.createdAt = createdAt;
   }
 
-  public Resource createdBy(String createdBy) {
+  public Collection createdBy(String createdBy) {
     this.createdBy = createdBy;
     return this;
   }
@@ -151,7 +159,7 @@ public class Resource {
     this.createdBy = createdBy;
   }
 
-  public Resource name(String name) {
+  public Collection name(String name) {
     this.name = name;
     return this;
   }
@@ -169,7 +177,7 @@ public class Resource {
     this.name = name;
   }
 
-  public Resource description(String description) {
+  public Collection description(String description) {
     this.description = description;
     return this;
   }
@@ -187,7 +195,7 @@ public class Resource {
     this.description = description;
   }
 
-  public Resource workspace(String workspace) {
+  public Collection workspace(String workspace) {
     this.workspace = workspace;
     return this;
   }
@@ -205,7 +213,7 @@ public class Resource {
     this.workspace = workspace;
   }
 
-  public Resource status(StatusEnum status) {
+  public Collection status(StatusEnum status) {
     this.status = status;
     return this;
   }
@@ -223,12 +231,12 @@ public class Resource {
     this.status = status;
   }
 
-  public Resource sources(List<Source> sources) {
+  public Collection sources(List<Source> sources) {
     this.sources = sources;
     return this;
   }
 
-  public Resource addSourcesItem(Source sourcesItem) {
+  public Collection addSourcesItem(Source sourcesItem) {
     if (this.sources == null) {
       this.sources = new ArrayList<Source>();
     }
@@ -249,7 +257,7 @@ public class Resource {
     this.sources = sources;
   }
 
-  public Resource stats(ResourceStats stats) {
+  public Collection stats(CollectionStats stats) {
     this.stats = stats;
     return this;
   }
@@ -259,15 +267,15 @@ public class Resource {
    * @return stats
   **/
   @ApiModelProperty(value = "metrics about the collection")
-  public ResourceStats getStats() {
+  public CollectionStats getStats() {
     return stats;
   }
 
-  public void setStats(ResourceStats stats) {
+  public void setStats(CollectionStats stats) {
     this.stats = stats;
   }
 
-  public Resource retentionSecs(Long retentionSecs) {
+  public Collection retentionSecs(Long retentionSecs) {
     this.retentionSecs = retentionSecs;
     return this;
   }
@@ -285,12 +293,12 @@ public class Resource {
     this.retentionSecs = retentionSecs;
   }
 
-  public Resource fieldMappings(List<FieldMappingV2> fieldMappings) {
+  public Collection fieldMappings(List<FieldMappingV2> fieldMappings) {
     this.fieldMappings = fieldMappings;
     return this;
   }
 
-  public Resource addFieldMappingsItem(FieldMappingV2 fieldMappingsItem) {
+  public Collection addFieldMappingsItem(FieldMappingV2 fieldMappingsItem) {
     if (this.fieldMappings == null) {
       this.fieldMappings = new ArrayList<FieldMappingV2>();
     }
@@ -320,17 +328,17 @@ public class Resource {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Resource resource = (Resource) o;
-    return Objects.equals(this.createdAt, resource.createdAt) &&
-        Objects.equals(this.createdBy, resource.createdBy) &&
-        Objects.equals(this.name, resource.name) &&
-        Objects.equals(this.description, resource.description) &&
-        Objects.equals(this.workspace, resource.workspace) &&
-        Objects.equals(this.status, resource.status) &&
-        Objects.equals(this.sources, resource.sources) &&
-        Objects.equals(this.stats, resource.stats) &&
-        Objects.equals(this.retentionSecs, resource.retentionSecs) &&
-        Objects.equals(this.fieldMappings, resource.fieldMappings);
+    Collection collection = (Collection) o;
+    return Objects.equals(this.createdAt, collection.createdAt) &&
+        Objects.equals(this.createdBy, collection.createdBy) &&
+        Objects.equals(this.name, collection.name) &&
+        Objects.equals(this.description, collection.description) &&
+        Objects.equals(this.workspace, collection.workspace) &&
+        Objects.equals(this.status, collection.status) &&
+        Objects.equals(this.sources, collection.sources) &&
+        Objects.equals(this.stats, collection.stats) &&
+        Objects.equals(this.retentionSecs, collection.retentionSecs) &&
+        Objects.equals(this.fieldMappings, collection.fieldMappings);
   }
 
   @Override
@@ -342,7 +350,7 @@ public class Resource {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Resource {\n");
+    sb.append("class Collection {\n");
     
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");

@@ -23,6 +23,7 @@ import com.google.gson.stream.JsonWriter;
 import com.rockset.client.model.AwsExternalIdIntegration;
 import com.rockset.client.model.AwsKeyIntegration;
 import com.rockset.client.model.GcpServiceAccount;
+import com.rockset.client.model.RedshiftIntegration;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -31,7 +32,7 @@ import java.io.IOException;
  * Integrations that can be associated with data sources to create collections. Only one type of integration may be specified.
  */
 @ApiModel(description = "Integrations that can be associated with data sources to create collections. Only one type of integration may be specified.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-10T00:35:16.099Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T18:52:18.700Z")
 public class Integration {
   @SerializedName("created_at")
   private String createdAt = null;
@@ -53,6 +54,9 @@ public class Integration {
 
   @SerializedName("gcp_service_account")
   private GcpServiceAccount gcpServiceAccount = null;
+
+  @SerializedName("redshift")
+  private RedshiftIntegration redshift = null;
 
   public Integration createdAt(String createdAt) {
     this.createdAt = createdAt;
@@ -180,6 +184,24 @@ public class Integration {
     this.gcpServiceAccount = gcpServiceAccount;
   }
 
+  public Integration redshift(RedshiftIntegration redshift) {
+    this.redshift = redshift;
+    return this;
+  }
+
+   /**
+   * details of an AWS Redshift integration
+   * @return redshift
+  **/
+  @ApiModelProperty(value = "details of an AWS Redshift integration")
+  public RedshiftIntegration getRedshift() {
+    return redshift;
+  }
+
+  public void setRedshift(RedshiftIntegration redshift) {
+    this.redshift = redshift;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -196,12 +218,13 @@ public class Integration {
         Objects.equals(this.description, integration.description) &&
         Objects.equals(this.aws, integration.aws) &&
         Objects.equals(this.awsExternalId, integration.awsExternalId) &&
-        Objects.equals(this.gcpServiceAccount, integration.gcpServiceAccount);
+        Objects.equals(this.gcpServiceAccount, integration.gcpServiceAccount) &&
+        Objects.equals(this.redshift, integration.redshift);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(createdAt, createdBy, name, description, aws, awsExternalId, gcpServiceAccount);
+    return Objects.hash(createdAt, createdBy, name, description, aws, awsExternalId, gcpServiceAccount, redshift);
   }
 
 
@@ -217,6 +240,7 @@ public class Integration {
     sb.append("    aws: ").append(toIndentedString(aws)).append("\n");
     sb.append("    awsExternalId: ").append(toIndentedString(awsExternalId)).append("\n");
     sb.append("    gcpServiceAccount: ").append(toIndentedString(gcpServiceAccount)).append("\n");
+    sb.append("    redshift: ").append(toIndentedString(redshift)).append("\n");
     sb.append("}");
     return sb.toString();
   }

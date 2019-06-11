@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * FieldMask
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-10T00:35:16.099Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T18:52:18.700Z")
 public class FieldMask {
   @SerializedName("input_path")
   private List<String> inputPath = new ArrayList<String>();

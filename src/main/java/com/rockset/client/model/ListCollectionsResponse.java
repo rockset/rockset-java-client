@@ -20,7 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.rockset.client.model.Resource;
+import com.rockset.client.model.Collection;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -30,19 +30,19 @@ import java.util.List;
 /**
  * ListCollectionsResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-04-10T00:35:16.099Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T18:52:18.700Z")
 public class ListCollectionsResponse {
   @SerializedName("data")
-  private List<Resource> data = null;
+  private List<Collection> data = null;
 
-  public ListCollectionsResponse data(List<Resource> data) {
+  public ListCollectionsResponse data(List<Collection> data) {
     this.data = data;
     return this;
   }
 
-  public ListCollectionsResponse addDataItem(Resource dataItem) {
+  public ListCollectionsResponse addDataItem(Collection dataItem) {
     if (this.data == null) {
-      this.data = new ArrayList<Resource>();
+      this.data = new ArrayList<Collection>();
     }
     this.data.add(dataItem);
     return this;
@@ -53,11 +53,11 @@ public class ListCollectionsResponse {
    * @return data
   **/
   @ApiModelProperty(value = "list of all collections")
-  public List<Resource> getData() {
+  public List<Collection> getData() {
     return data;
   }
 
-  public void setData(List<Resource> data) {
+  public void setData(List<Collection> data) {
     this.data = data;
   }
 
