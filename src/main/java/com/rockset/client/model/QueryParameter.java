@@ -24,10 +24,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * QueryParameter
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class QueryParameter {
   @SerializedName("name")
   private String name = null;
@@ -47,7 +49,9 @@ public class QueryParameter {
    * name of the field
    * @return name
   **/
-  @ApiModelProperty(example = "_id", required = true, value = "name of the field")
+
+@JsonProperty("name")
+@ApiModelProperty(example = "_id", required = true, value = "name of the field")
   public String getName() {
     return name;
   }
@@ -65,7 +69,9 @@ public class QueryParameter {
    * data type of the field
    * @return type
   **/
-  @ApiModelProperty(example = "string", required = true, value = "data type of the field")
+
+@JsonProperty("type")
+@ApiModelProperty(example = "string", required = true, value = "data type of the field")
   public String getType() {
     return type;
   }
@@ -83,7 +89,9 @@ public class QueryParameter {
    * literal value of the field
    * @return value
   **/
-  @ApiModelProperty(example = "85beb391", required = true, value = "literal value of the field")
+
+@JsonProperty("value")
+@ApiModelProperty(example = "85beb391", required = true, value = "literal value of the field")
   public String getValue() {
     return value;
   }

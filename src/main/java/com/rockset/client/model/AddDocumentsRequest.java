@@ -26,10 +26,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * AddDocumentsRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class AddDocumentsRequest {
   @SerializedName("data")
   private List<Object> data = new ArrayList<Object>();
@@ -48,7 +50,9 @@ public class AddDocumentsRequest {
    * Array of JSON documents
    * @return data
   **/
-  @ApiModelProperty(required = true, value = "Array of JSON documents")
+
+@JsonProperty("data")
+@ApiModelProperty(required = true, value = "Array of JSON documents")
   public List<Object> getData() {
     return data;
   }

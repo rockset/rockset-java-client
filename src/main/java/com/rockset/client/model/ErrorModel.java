@@ -24,11 +24,14 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Describes details about an error
  */
+
 @ApiModel(description = "Describes details about an error")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class ErrorModel {
   @SerializedName("message")
   private String message = null;
@@ -56,17 +59,17 @@ public class ErrorModel {
     
     DEPENDENTRESOURCES("DEPENDENTRESOURCES"),
     
-    QUERY_ERROR("QUERY_ERROR"),
+    QUERY_ERROR("QUERYERROR"),
     
-    NOT_READY("NOT_READY"),
+    NOT_READY("NOTREADY"),
     
     FORBIDDEN("FORBIDDEN"),
     
-    QUERY_TIMEOUT("QUERY_TIMEOUT"),
+    QUERY_TIMEOUT("QUERYTIMEOUT"),
     
-    INTEGRATION_NOT_FOUND("INTEGRATION_NOT_FOUND"),
+    INTEGRATION_NOT_FOUND("INTEGRATIONNOTFOUND"),
     
-    ROLE_NOT_FOUND("ROLE_NOT_FOUND");
+    ROLE_NOT_FOUND("ROLENOTFOUND");
 
     private String value;
 
@@ -127,7 +130,9 @@ public class ErrorModel {
    * descriptive message about the error
    * @return message
   **/
-  @ApiModelProperty(example = "collection not found", value = "descriptive message about the error")
+
+@JsonProperty("message")
+@ApiModelProperty(example = "collection not found", value = "descriptive message about the error")
   public String getMessage() {
     return message;
   }
@@ -145,7 +150,9 @@ public class ErrorModel {
    * category of the error
    * @return type
   **/
-  @ApiModelProperty(example = "InvalidInput", value = "category of the error")
+
+@JsonProperty("type")
+@ApiModelProperty(example = "InvalidInput", value = "category of the error")
   public TypeEnum getType() {
     return type;
   }
@@ -163,7 +170,9 @@ public class ErrorModel {
    * Line where the error happened (if applicable)
    * @return line
   **/
-  @ApiModelProperty(value = "Line where the error happened (if applicable)")
+
+@JsonProperty("line")
+@ApiModelProperty(value = "Line where the error happened (if applicable)")
   public Integer getLine() {
     return line;
   }
@@ -181,7 +190,9 @@ public class ErrorModel {
    * Column where the error happened (if applicable)
    * @return column
   **/
-  @ApiModelProperty(value = "Column where the error happened (if applicable)")
+
+@JsonProperty("column")
+@ApiModelProperty(value = "Column where the error happened (if applicable)")
   public Integer getColumn() {
     return column;
   }
@@ -199,7 +210,9 @@ public class ErrorModel {
    * Internal trace ID to help with debugging
    * @return traceId
   **/
-  @ApiModelProperty(value = "Internal trace ID to help with debugging")
+
+@JsonProperty("trace_id")
+@ApiModelProperty(value = "Internal trace ID to help with debugging")
   public String getTraceId() {
     return traceId;
   }

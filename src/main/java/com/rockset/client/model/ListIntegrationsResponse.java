@@ -27,10 +27,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * ListIntegrationsResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class ListIntegrationsResponse {
   @SerializedName("data")
   private List<Integration> data = null;
@@ -52,7 +54,9 @@ public class ListIntegrationsResponse {
    * list of integration objects
    * @return data
   **/
-  @ApiModelProperty(value = "list of integration objects")
+
+@JsonProperty("data")
+@ApiModelProperty(value = "list of integration objects")
   public List<Integration> getData() {
     return data;
   }

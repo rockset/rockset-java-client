@@ -28,10 +28,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * CreateIntegrationRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class CreateIntegrationRequest {
   @SerializedName("name")
   private String name = null;
@@ -60,7 +62,9 @@ public class CreateIntegrationRequest {
    * descriptive label
    * @return name
   **/
-  @ApiModelProperty(example = "event-logs", required = true, value = "descriptive label")
+
+@JsonProperty("name")
+@ApiModelProperty(example = "event-logs", required = true, value = "descriptive label")
   public String getName() {
     return name;
   }
@@ -78,7 +82,9 @@ public class CreateIntegrationRequest {
    * longer explanation for the integration
    * @return description
   **/
-  @ApiModelProperty(example = "AWS account with event data for the data science team.", value = "longer explanation for the integration")
+
+@JsonProperty("description")
+@ApiModelProperty(example = "AWS account with event data for the data science team.", value = "longer explanation for the integration")
   public String getDescription() {
     return description;
   }
@@ -96,7 +102,9 @@ public class CreateIntegrationRequest {
    * credentials for an AWS key integration
    * @return aws
   **/
-  @ApiModelProperty(value = "credentials for an AWS key integration")
+
+@JsonProperty("aws")
+@ApiModelProperty(value = "credentials for an AWS key integration")
   public AwsKeyIntegration getAws() {
     return aws;
   }
@@ -109,7 +117,9 @@ public class CreateIntegrationRequest {
    * details for an AWS External Id integration
    * @return awsExternalId
   **/
-  @ApiModelProperty(value = "details for an AWS External Id integration")
+
+@JsonProperty("aws_external_id")
+@ApiModelProperty(value = "details for an AWS External Id integration")
   public AwsExternalIdIntegration getAwsExternalId() {
     return awsExternalId;
   }
@@ -123,7 +133,9 @@ public class CreateIntegrationRequest {
    * details of a GCP Service Account integration
    * @return gcpServiceAccount
   **/
-  @ApiModelProperty(value = "details of a GCP Service Account integration")
+
+@JsonProperty("gcp_service_account")
+@ApiModelProperty(value = "details of a GCP Service Account integration")
   public GcpServiceAccount getGcpServiceAccount() {
     return gcpServiceAccount;
   }
@@ -141,7 +153,9 @@ public class CreateIntegrationRequest {
    * details of AWS Redshift integration
    * @return redshift
   **/
-  @ApiModelProperty(value = "details of AWS Redshift integration")
+
+@JsonProperty("redshift")
+@ApiModelProperty(value = "details of AWS Redshift integration")
   public RedshiftIntegration getRedshift() {
     return redshift;
   }

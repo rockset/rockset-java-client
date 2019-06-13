@@ -24,11 +24,14 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * API keys are used to authenticate requests to Rockset&#39;s API. An API key is tied to the user who creates it. A new API key can be created for each use case, with a maximum of 10 API keys per user.
  */
+
 @ApiModel(description = "API keys are used to authenticate requests to Rockset's API. An API key is tied to the user who creates it. A new API key can be created for each use case, with a maximum of 10 API keys per user.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class ApiKey {
   @SerializedName("type")
   private String type = null;
@@ -46,7 +49,9 @@ public class ApiKey {
    * has value &#x60;api_key&#x60; for an API key object
    * @return type
   **/
-  @ApiModelProperty(example = "api_key", value = "has value `api_key` for an API key object")
+
+@JsonProperty("type")
+@ApiModelProperty(example = "api_key", value = "has value `api_key` for an API key object")
   public String getType() {
     return type;
   }
@@ -60,7 +65,9 @@ public class ApiKey {
    * ISO-8601 date
    * @return createdAt
   **/
-  @ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date")
+
+@JsonProperty("created_at")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date")
   public String getCreatedAt() {
     return createdAt;
   }
@@ -78,7 +85,9 @@ public class ApiKey {
    * descriptive label
    * @return name
   **/
-  @ApiModelProperty(example = "my-event-logger-key", required = true, value = "descriptive label")
+
+@JsonProperty("name")
+@ApiModelProperty(example = "my-event-logger-key", required = true, value = "descriptive label")
   public String getName() {
     return name;
   }
@@ -96,7 +105,9 @@ public class ApiKey {
    * string of 64 alphanumeric characters
    * @return key
   **/
-  @ApiModelProperty(example = "aB35kDjg93J5nsf4GjwMeErAVd832F7ad4vhsW1S02kfZiab42sTsfW5Sxt25asT", required = true, value = "string of 64 alphanumeric characters")
+
+@JsonProperty("key")
+@ApiModelProperty(example = "aB35kDjg93J5nsf4GjwMeErAVd832F7ad4vhsW1S02kfZiab42sTsfW5Sxt25asT", required = true, value = "string of 64 alphanumeric characters")
   public String getKey() {
     return key;
   }

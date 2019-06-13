@@ -27,10 +27,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * DeleteDocumentsRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class DeleteDocumentsRequest {
   @SerializedName("data")
   private List<DeleteDocumentsRequestData> data = new ArrayList<DeleteDocumentsRequestData>();
@@ -49,7 +51,9 @@ public class DeleteDocumentsRequest {
    * array of document IDs
    * @return data
   **/
-  @ApiModelProperty(required = true, value = "array of document IDs")
+
+@JsonProperty("data")
+@ApiModelProperty(required = true, value = "array of document IDs")
   public List<DeleteDocumentsRequestData> getData() {
     return data;
   }

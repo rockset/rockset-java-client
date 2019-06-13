@@ -26,10 +26,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * User
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class User {
   @SerializedName("type")
   private String type = null;
@@ -56,7 +58,9 @@ public class User {
    * has value &#x60;user&#x60; for a user object
    * @return type
   **/
-  @ApiModelProperty(example = "user", value = "has value `user` for a user object")
+
+@JsonProperty("type")
+@ApiModelProperty(example = "user", value = "has value `user` for a user object")
   public String getType() {
     return type;
   }
@@ -70,7 +74,9 @@ public class User {
    * ISO-8601 date
    * @return createdAt
   **/
-  @ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date")
+
+@JsonProperty("created_at")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date")
   public String getCreatedAt() {
     return createdAt;
   }
@@ -88,7 +94,9 @@ public class User {
    * user email
    * @return email
   **/
-  @ApiModelProperty(example = "hello@rockset.com", required = true, value = "user email")
+
+@JsonProperty("email")
+@ApiModelProperty(example = "hello@rockset.com", required = true, value = "user email")
   public String getEmail() {
     return email;
   }
@@ -106,7 +114,9 @@ public class User {
    * user first name
    * @return firstName
   **/
-  @ApiModelProperty(example = "John", value = "user first name")
+
+@JsonProperty("first_name")
+@ApiModelProperty(example = "John", value = "user first name")
   public String getFirstName() {
     return firstName;
   }
@@ -124,7 +134,9 @@ public class User {
    * user last name
    * @return lastName
   **/
-  @ApiModelProperty(example = "Doe", value = "user last name")
+
+@JsonProperty("last_name")
+@ApiModelProperty(example = "Doe", value = "user last name")
   public String getLastName() {
     return lastName;
   }
@@ -150,7 +162,9 @@ public class User {
    * List of roles for a given user
    * @return roles
   **/
-  @ApiModelProperty(example = "\"[\\\"admin\\\", \\\"member\\\", \\\"read-only\\\"]\"", value = "List of roles for a given user")
+
+@JsonProperty("roles")
+@ApiModelProperty(example = "\"[\\\"admin\\\", \\\"member\\\", \\\"read-only\\\"]\"", value = "List of roles for a given user")
   public List<String> getRoles() {
     return roles;
   }
@@ -168,7 +182,9 @@ public class User {
    * state of user - NEW / ACTIVE
    * @return state
   **/
-  @ApiModelProperty(example = "ACTIVE", value = "state of user - NEW / ACTIVE")
+
+@JsonProperty("state")
+@ApiModelProperty(example = "ACTIVE", value = "state of user - NEW / ACTIVE")
   public String getState() {
     return state;
   }

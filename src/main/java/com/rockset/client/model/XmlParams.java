@@ -24,10 +24,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * XmlParams
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class XmlParams {
   @SerializedName("root_tag")
   private String rootTag = null;
@@ -53,7 +55,9 @@ public class XmlParams {
    * tag until which xml is ignored
    * @return rootTag
   **/
-  @ApiModelProperty(example = "root", value = "tag until which xml is ignored")
+
+@JsonProperty("root_tag")
+@ApiModelProperty(example = "root", value = "tag until which xml is ignored")
   public String getRootTag() {
     return rootTag;
   }
@@ -71,7 +75,9 @@ public class XmlParams {
    * encoding in which data source is encoded
    * @return encoding
   **/
-  @ApiModelProperty(example = "UTF-8", value = "encoding in which data source is encoded")
+
+@JsonProperty("encoding")
+@ApiModelProperty(example = "UTF-8", value = "encoding in which data source is encoded")
   public String getEncoding() {
     return encoding;
   }
@@ -89,7 +95,9 @@ public class XmlParams {
    * tags with which documents are identified
    * @return docTag
   **/
-  @ApiModelProperty(example = "row", value = "tags with which documents are identified")
+
+@JsonProperty("doc_tag")
+@ApiModelProperty(example = "row", value = "tags with which documents are identified")
   public String getDocTag() {
     return docTag;
   }
@@ -107,7 +115,9 @@ public class XmlParams {
    * tag used for the value when there are attributes in the element having no child
    * @return valueTag
   **/
-  @ApiModelProperty(example = "value", value = "tag used for the value when there are attributes in the element having no child")
+
+@JsonProperty("value_tag")
+@ApiModelProperty(example = "value", value = "tag used for the value when there are attributes in the element having no child")
   public String getValueTag() {
     return valueTag;
   }
@@ -125,7 +135,9 @@ public class XmlParams {
    * tag to differentiate between attributes and elements
    * @return attributePrefix
   **/
-  @ApiModelProperty(example = "_attr", value = "tag to differentiate between attributes and elements")
+
+@JsonProperty("attribute_prefix")
+@ApiModelProperty(example = "_attr", value = "tag to differentiate between attributes and elements")
   public String getAttributePrefix() {
     return attributePrefix;
   }

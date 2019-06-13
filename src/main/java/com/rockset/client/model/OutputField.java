@@ -25,10 +25,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * OutputField
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class OutputField {
   @SerializedName("field_name")
   private String fieldName = null;
@@ -95,7 +97,9 @@ public class OutputField {
    * The name of a field, parsed as a SQL qualified name 
    * @return fieldName
   **/
-  @ApiModelProperty(example = "zip_hash", value = "The name of a field, parsed as a SQL qualified name ")
+
+@JsonProperty("field_name")
+@ApiModelProperty(example = "zip_hash", value = "The name of a field, parsed as a SQL qualified name ")
   public String getFieldName() {
     return fieldName;
   }
@@ -113,7 +117,9 @@ public class OutputField {
    * The name of a sql function
    * @return value
   **/
-  @ApiModelProperty(value = "The name of a sql function")
+
+@JsonProperty("value")
+@ApiModelProperty(value = "The name of a sql function")
   public SqlExpression getValue() {
     return value;
   }
@@ -131,7 +137,9 @@ public class OutputField {
    * Error in Mapping execution: &#39;skip&#39; or &#39;fail&#39; 
    * @return onError
   **/
-  @ApiModelProperty(example = "['SKIP', 'FAIL']", value = "Error in Mapping execution: 'skip' or 'fail' ")
+
+@JsonProperty("on_error")
+@ApiModelProperty(example = "['SKIP', 'FAIL']", value = "Error in Mapping execution: 'skip' or 'fail' ")
   public OnErrorEnum getOnError() {
     return onError;
   }

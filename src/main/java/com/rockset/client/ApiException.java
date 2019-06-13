@@ -18,7 +18,7 @@ import com.rockset.client.model.ErrorModel;
 import java.util.Map;
 import java.util.List;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class ApiException extends Exception {
     private int code = 0;
     private Map<String, List<String>> responseHeaders = null;
@@ -67,6 +67,7 @@ public class ApiException extends Exception {
 
 
     public ApiException(int code, ErrorModel errorModel) {
+        this(code, errorModel.getMessage());
         this.code = code;
         this.errorModel = errorModel;
     }

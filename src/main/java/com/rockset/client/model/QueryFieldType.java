@@ -24,10 +24,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * QueryFieldType
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class QueryFieldType {
   @SerializedName("name")
   private String name = null;
@@ -44,7 +46,9 @@ public class QueryFieldType {
    * name of the field
    * @return name
   **/
-  @ApiModelProperty(example = "_id", required = true, value = "name of the field")
+
+@JsonProperty("name")
+@ApiModelProperty(example = "_id", required = true, value = "name of the field")
   public String getName() {
     return name;
   }
@@ -62,7 +66,9 @@ public class QueryFieldType {
    * data type of the field
    * @return type
   **/
-  @ApiModelProperty(example = "string", required = true, value = "data type of the field")
+
+@JsonProperty("type")
+@ApiModelProperty(example = "string", required = true, value = "data type of the field")
   public String getType() {
     return type;
   }

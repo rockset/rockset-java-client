@@ -24,10 +24,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * CreateWorkspaceRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class CreateWorkspaceRequest {
   @SerializedName("name")
   private String name = null;
@@ -44,7 +46,9 @@ public class CreateWorkspaceRequest {
    * descriptive label and unique identifier
    * @return name
   **/
-  @ApiModelProperty(example = "event_logs", required = true, value = "descriptive label and unique identifier")
+
+@JsonProperty("name")
+@ApiModelProperty(example = "event_logs", required = true, value = "descriptive label and unique identifier")
   public String getName() {
     return name;
   }
@@ -62,7 +66,9 @@ public class CreateWorkspaceRequest {
    * longer explanation for the workspace
    * @return description
   **/
-  @ApiModelProperty(example = "Datasets of system logs for the ops team.", value = "longer explanation for the workspace")
+
+@JsonProperty("description")
+@ApiModelProperty(example = "Datasets of system logs for the ops team.", value = "longer explanation for the workspace")
   public String getDescription() {
     return description;
   }

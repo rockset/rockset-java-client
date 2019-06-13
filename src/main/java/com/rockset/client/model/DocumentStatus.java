@@ -25,10 +25,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * DocumentStatus
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class DocumentStatus {
   @SerializedName("_collection")
   private String collection = null;
@@ -102,7 +104,9 @@ public class DocumentStatus {
    * collection name
    * @return collection
   **/
-  @ApiModelProperty(example = "customers", value = "collection name")
+
+@JsonProperty("_collection")
+@ApiModelProperty(example = "customers", value = "collection name")
   public String getCollection() {
     return collection;
   }
@@ -120,7 +124,9 @@ public class DocumentStatus {
    * error message, if any
    * @return error
   **/
-  @ApiModelProperty(value = "error message, if any")
+
+@JsonProperty("error")
+@ApiModelProperty(value = "error message, if any")
   public ErrorModel getError() {
     return error;
   }
@@ -138,7 +144,9 @@ public class DocumentStatus {
    * unique document ID
    * @return id
   **/
-  @ApiModelProperty(example = "2cd61e3b", value = "unique document ID")
+
+@JsonProperty("_id")
+@ApiModelProperty(example = "2cd61e3b", value = "unique document ID")
   public String getId() {
     return id;
   }
@@ -156,7 +164,9 @@ public class DocumentStatus {
    * status, one of ADDED, REPLACED, DELETED, ERROR
    * @return status
   **/
-  @ApiModelProperty(example = "ADDED", value = "status, one of ADDED, REPLACED, DELETED, ERROR")
+
+@JsonProperty("status")
+@ApiModelProperty(example = "ADDED", value = "status, one of ADDED, REPLACED, DELETED, ERROR")
   public StatusEnum getStatus() {
     return status;
   }

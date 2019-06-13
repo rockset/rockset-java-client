@@ -24,10 +24,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * SourceDynamoDb
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class SourceDynamoDb {
   @SerializedName("table_name")
   private String tableName = null;
@@ -44,7 +46,9 @@ public class SourceDynamoDb {
    * name of DynamoDB table containing data
    * @return tableName
   **/
-  @ApiModelProperty(example = "dynamodb_table_name", required = true, value = "name of DynamoDB table containing data")
+
+@JsonProperty("table_name")
+@ApiModelProperty(example = "dynamodb_table_name", required = true, value = "name of DynamoDB table containing data")
   public String getTableName() {
     return tableName;
   }
@@ -62,7 +66,9 @@ public class SourceDynamoDb {
    * AWS region name of DynamoDB table, by default us-west-2 is used
    * @return awsRegion
   **/
-  @ApiModelProperty(example = "us-east-2", value = "AWS region name of DynamoDB table, by default us-west-2 is used")
+
+@JsonProperty("aws_region")
+@ApiModelProperty(example = "us-east-2", value = "AWS region name of DynamoDB table, by default us-west-2 is used")
   public String getAwsRegion() {
     return awsRegion;
   }

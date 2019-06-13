@@ -24,10 +24,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * CreateApiKeyRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class CreateApiKeyRequest {
   @SerializedName("name")
   private String name = null;
@@ -41,7 +43,9 @@ public class CreateApiKeyRequest {
    * descriptive label
    * @return name
   **/
-  @ApiModelProperty(example = "event-logger", required = true, value = "descriptive label")
+
+@JsonProperty("name")
+@ApiModelProperty(example = "event-logger", required = true, value = "descriptive label")
   public String getName() {
     return name;
   }

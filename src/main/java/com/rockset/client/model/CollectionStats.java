@@ -24,10 +24,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * CollectionStats
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class CollectionStats {
   @SerializedName("doc_count")
   private Long docCount = null;
@@ -59,7 +61,9 @@ public class CollectionStats {
    * number of documents in the collection
    * @return docCount
   **/
-  @ApiModelProperty(example = "2145", value = "number of documents in the collection")
+
+@JsonProperty("doc_count")
+@ApiModelProperty(example = "2145", value = "number of documents in the collection")
   public Long getDocCount() {
     return docCount;
   }
@@ -77,7 +81,9 @@ public class CollectionStats {
    * total collection size in bytes
    * @return totalSize
   **/
-  @ApiModelProperty(example = "123456", value = "total collection size in bytes")
+
+@JsonProperty("total_size")
+@ApiModelProperty(example = "123456", value = "total collection size in bytes")
   public Long getTotalSize() {
     return totalSize;
   }
@@ -95,7 +101,9 @@ public class CollectionStats {
    * number between 0 and 1 that indicates progress of collection creation
    * @return fillProgress
   **/
-  @ApiModelProperty(example = "0.6", value = "number between 0 and 1 that indicates progress of collection creation")
+
+@JsonProperty("fill_progress")
+@ApiModelProperty(example = "0.6", value = "number between 0 and 1 that indicates progress of collection creation")
   public Double getFillProgress() {
     return fillProgress;
   }
@@ -113,7 +121,9 @@ public class CollectionStats {
    * number of documents purged from the collection
    * @return purgedDocCount
   **/
-  @ApiModelProperty(example = "2145", value = "number of documents purged from the collection")
+
+@JsonProperty("purged_doc_count")
+@ApiModelProperty(example = "2145", value = "number of documents purged from the collection")
   public Long getPurgedDocCount() {
     return purgedDocCount;
   }
@@ -131,7 +141,9 @@ public class CollectionStats {
    * total collection size in bytes purged
    * @return purgedDocSize
   **/
-  @ApiModelProperty(example = "123456", value = "total collection size in bytes purged")
+
+@JsonProperty("purged_doc_size")
+@ApiModelProperty(example = "123456", value = "total collection size in bytes purged")
   public Long getPurgedDocSize() {
     return purgedDocSize;
   }
@@ -149,7 +161,9 @@ public class CollectionStats {
    * milliseconds since Unix epoch Jan 1, 1970
    * @return lastUpdatedMs
   **/
-  @ApiModelProperty(example = "1535101094433", value = "milliseconds since Unix epoch Jan 1, 1970")
+
+@JsonProperty("last_updated_ms")
+@ApiModelProperty(example = "1535101094433", value = "milliseconds since Unix epoch Jan 1, 1970")
   public Long getLastUpdatedMs() {
     return lastUpdatedMs;
   }
@@ -167,7 +181,9 @@ public class CollectionStats {
    * milliseconds since Unix epoch Jan 1, 1970
    * @return lastQueriedMs
   **/
-  @ApiModelProperty(example = "1535101119334", value = "milliseconds since Unix epoch Jan 1, 1970")
+
+@JsonProperty("last_queried_ms")
+@ApiModelProperty(example = "1535101119334", value = "milliseconds since Unix epoch Jan 1, 1970")
   public Long getLastQueriedMs() {
     return lastQueriedMs;
   }

@@ -24,10 +24,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * AwsKeyIntegration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class AwsKeyIntegration {
   @SerializedName("aws_access_key_id")
   private String awsAccessKeyId = null;
@@ -44,7 +46,9 @@ public class AwsKeyIntegration {
    * AWS access key ID
    * @return awsAccessKeyId
   **/
-  @ApiModelProperty(example = "AKIAIOSFODNN7EXAMPLE", required = true, value = "AWS access key ID")
+
+@JsonProperty("aws_access_key_id")
+@ApiModelProperty(example = "AKIAIOSFODNN7EXAMPLE", required = true, value = "AWS access key ID")
   public String getAwsAccessKeyId() {
     return awsAccessKeyId;
   }
@@ -62,7 +66,9 @@ public class AwsKeyIntegration {
    * AWS secret access key
    * @return awsSecretAccessKey
   **/
-  @ApiModelProperty(example = "wJal....", required = true, value = "AWS secret access key")
+
+@JsonProperty("aws_secret_access_key")
+@ApiModelProperty(example = "wJal....", required = true, value = "AWS secret access key")
   public String getAwsSecretAccessKey() {
     return awsSecretAccessKey;
   }

@@ -28,10 +28,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * QueryResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class QueryResponse {
   @SerializedName("results")
   private List<Object> results = null;
@@ -62,7 +64,9 @@ public class QueryResponse {
    * list of objects returned by the query
    * @return results
   **/
-  @ApiModelProperty(value = "list of objects returned by the query")
+
+@JsonProperty("results")
+@ApiModelProperty(value = "list of objects returned by the query")
   public List<Object> getResults() {
     return results;
   }
@@ -88,7 +92,9 @@ public class QueryResponse {
    * list of fields returned by the query
    * @return fields
   **/
-  @ApiModelProperty(value = "list of fields returned by the query")
+
+@JsonProperty("fields")
+@ApiModelProperty(value = "list of fields returned by the query")
   public List<QueryFieldType> getFields() {
     return fields;
   }
@@ -106,7 +112,9 @@ public class QueryResponse {
    * meta information about the query
    * @return stats
   **/
-  @ApiModelProperty(value = "meta information about the query")
+
+@JsonProperty("stats")
+@ApiModelProperty(value = "meta information about the query")
   public QueryResponseStats getStats() {
     return stats;
   }
@@ -132,7 +140,9 @@ public class QueryResponse {
    * meta information about each column in the result set
    * @return columnFields
   **/
-  @ApiModelProperty(value = "meta information about each column in the result set")
+
+@JsonProperty("column_fields")
+@ApiModelProperty(value = "meta information about each column in the result set")
   public List<QueryFieldType> getColumnFields() {
     return columnFields;
   }

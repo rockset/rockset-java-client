@@ -31,11 +31,14 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Details about the data source for the given collection. Only one of the following fields are allowed to be defined. Only collections can act as data sources for views. 
  */
+
 @ApiModel(description = "Details about the data source for the given collection. Only one of the following fields are allowed to be defined. Only collections can act as data sources for views. ")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class Source {
   @SerializedName("type")
   private String type = null;
@@ -68,7 +71,9 @@ public class Source {
    * has value &#x60;source&#x60; for a source object
    * @return type
   **/
-  @ApiModelProperty(example = "user", value = "has value `source` for a source object")
+
+@JsonProperty("type")
+@ApiModelProperty(example = "user", value = "has value `source` for a source object")
   public String getType() {
     return type;
   }
@@ -82,7 +87,9 @@ public class Source {
    * name of integration to use
    * @return integrationName
   **/
-  @ApiModelProperty(example = "aws-integration", required = true, value = "name of integration to use")
+
+@JsonProperty("integration_name")
+@ApiModelProperty(example = "aws-integration", required = true, value = "name of integration to use")
   public String getIntegrationName() {
     return integrationName;
   }
@@ -100,7 +107,9 @@ public class Source {
    * configuration for ingestion from S3
    * @return s3
   **/
-  @ApiModelProperty(value = "configuration for ingestion from S3")
+
+@JsonProperty("s3")
+@ApiModelProperty(value = "configuration for ingestion from S3")
   public SourceS3 getS3() {
     return s3;
   }
@@ -118,7 +127,9 @@ public class Source {
    * configuration for ingestion from kinesis stream
    * @return kinesis
   **/
-  @ApiModelProperty(value = "configuration for ingestion from kinesis stream")
+
+@JsonProperty("kinesis")
+@ApiModelProperty(value = "configuration for ingestion from kinesis stream")
   public SourceKinesis getKinesis() {
     return kinesis;
   }
@@ -136,7 +147,9 @@ public class Source {
    * configuration for ingestion from  a dynamodb table
    * @return dynamodb
   **/
-  @ApiModelProperty(value = "configuration for ingestion from  a dynamodb table")
+
+@JsonProperty("dynamodb")
+@ApiModelProperty(value = "configuration for ingestion from  a dynamodb table")
   public SourceDynamoDb getDynamodb() {
     return dynamodb;
   }
@@ -154,7 +167,9 @@ public class Source {
    * configuration for ingestion from GCS
    * @return gcs
   **/
-  @ApiModelProperty(value = "configuration for ingestion from GCS")
+
+@JsonProperty("gcs")
+@ApiModelProperty(value = "configuration for ingestion from GCS")
   public SourceGcs getGcs() {
     return gcs;
   }
@@ -172,7 +187,9 @@ public class Source {
    * configuration for ingestion from Redshift
    * @return redshift
   **/
-  @ApiModelProperty(value = "configuration for ingestion from Redshift")
+
+@JsonProperty("redshift")
+@ApiModelProperty(value = "configuration for ingestion from Redshift")
   public SourceRedshift getRedshift() {
     return redshift;
   }
@@ -190,7 +207,9 @@ public class Source {
    * file upload details
    * @return fileUpload
   **/
-  @ApiModelProperty(value = "file upload details")
+
+@JsonProperty("file_upload")
+@ApiModelProperty(value = "file upload details")
   public SourceFileUpload getFileUpload() {
     return fileUpload;
   }
@@ -208,7 +227,9 @@ public class Source {
    * format parameters for data from this source
    * @return formatParams
   **/
-  @ApiModelProperty(value = "format parameters for data from this source")
+
+@JsonProperty("format_params")
+@ApiModelProperty(value = "format parameters for data from this source")
   public FormatParams getFormatParams() {
     return formatParams;
   }

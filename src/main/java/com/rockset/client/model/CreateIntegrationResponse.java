@@ -25,10 +25,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * CreateIntegrationResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class CreateIntegrationResponse {
   @SerializedName("data")
   private Integration data = null;
@@ -42,7 +44,9 @@ public class CreateIntegrationResponse {
    * integration object that was created
    * @return data
   **/
-  @ApiModelProperty(value = "integration object that was created")
+
+@JsonProperty("data")
+@ApiModelProperty(value = "integration object that was created")
   public Integration getData() {
     return data;
   }

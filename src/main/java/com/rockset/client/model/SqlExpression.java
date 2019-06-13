@@ -24,10 +24,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * SqlExpression
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class SqlExpression {
   @SerializedName("sql")
   private String sql = null;
@@ -41,7 +43,9 @@ public class SqlExpression {
    * The name of a sql function
    * @return sql
   **/
-  @ApiModelProperty(example = "SHA256()", value = "The name of a sql function")
+
+@JsonProperty("sql")
+@ApiModelProperty(example = "SHA256()", value = "The name of a sql function")
   public String getSql() {
     return sql;
   }

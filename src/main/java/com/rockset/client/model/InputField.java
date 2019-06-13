@@ -24,10 +24,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * InputField
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class InputField {
   @SerializedName("field_name")
   private String fieldName = null;
@@ -97,7 +99,9 @@ public class InputField {
    * The name of a field, parsed as a SQL qualified name
    * @return fieldName
   **/
-  @ApiModelProperty(example = "address.city.zipcode", value = "The name of a field, parsed as a SQL qualified name")
+
+@JsonProperty("field_name")
+@ApiModelProperty(example = "address.city.zipcode", value = "The name of a field, parsed as a SQL qualified name")
   public String getFieldName() {
     return fieldName;
   }
@@ -115,7 +119,9 @@ public class InputField {
    * Define the behaviour if fieldName is missing or is null
    * @return ifMissing
   **/
-  @ApiModelProperty(example = "['SKIP', 'PASS']", value = "Define the behaviour if fieldName is missing or is null")
+
+@JsonProperty("if_missing")
+@ApiModelProperty(example = "['SKIP', 'PASS']", value = "Define the behaviour if fieldName is missing or is null")
   public IfMissingEnum getIfMissing() {
     return ifMissing;
   }
@@ -133,7 +139,9 @@ public class InputField {
    * If true, then drop fieldName from the document
    * @return isDrop
   **/
-  @ApiModelProperty(example = "true", value = "If true, then drop fieldName from the document")
+
+@JsonProperty("is_drop")
+@ApiModelProperty(example = "true", value = "If true, then drop fieldName from the document")
   public Boolean isIsDrop() {
     return isDrop;
   }
@@ -151,7 +159,9 @@ public class InputField {
    * Sql parameter name
    * @return param
   **/
-  @ApiModelProperty(example = "zip", value = "Sql parameter name")
+
+@JsonProperty("param")
+@ApiModelProperty(example = "zip", value = "Sql parameter name")
   public String getParam() {
     return param;
   }

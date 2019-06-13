@@ -27,10 +27,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * FieldMask
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class FieldMask {
   @SerializedName("input_path")
   private List<String> inputPath = new ArrayList<String>();
@@ -52,7 +54,9 @@ public class FieldMask {
    * Get inputPath
    * @return inputPath
   **/
-  @ApiModelProperty(required = true, value = "")
+
+@JsonProperty("input_path")
+@ApiModelProperty(required = true, value = "")
   public List<String> getInputPath() {
     return inputPath;
   }
@@ -70,7 +74,9 @@ public class FieldMask {
    * Get mask
    * @return mask
   **/
-  @ApiModelProperty(value = "")
+
+@JsonProperty("mask")
+@ApiModelProperty(value = "")
   public FieldMaskMask getMask() {
     return mask;
   }

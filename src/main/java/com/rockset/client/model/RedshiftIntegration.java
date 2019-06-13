@@ -25,10 +25,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * RedshiftIntegration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class RedshiftIntegration {
   @SerializedName("aws_access_key")
   private AwsKeyIntegration awsAccessKey = null;
@@ -49,7 +51,9 @@ public class RedshiftIntegration {
    * AWS Access and Secret keys
    * @return awsAccessKey
   **/
-  @ApiModelProperty(value = "AWS Access and Secret keys")
+
+@JsonProperty("aws_access_key")
+@ApiModelProperty(value = "AWS Access and Secret keys")
   public AwsKeyIntegration getAwsAccessKey() {
     return awsAccessKey;
   }
@@ -58,7 +62,9 @@ public class RedshiftIntegration {
    * Username associated with Redshift cluster
    * @return username
   **/
-  @ApiModelProperty(example = "awsuser", required = true, value = "Username associated with Redshift cluster")
+
+@JsonProperty("username")
+@ApiModelProperty(example = "awsuser", required = true, value = "Username associated with Redshift cluster")
   public String getUsername() {
     return username;
   }
@@ -67,7 +73,9 @@ public class RedshiftIntegration {
    * Password associated with Redshift cluster
    * @return password
   **/
-  @ApiModelProperty(example = "pswd....", required = true, value = "Password associated with Redshift cluster")
+
+@JsonProperty("password")
+@ApiModelProperty(example = "pswd....", required = true, value = "Password associated with Redshift cluster")
   public String getPassword() {
     return password;
   }
@@ -76,7 +84,9 @@ public class RedshiftIntegration {
    * Redshift Cluster host
    * @return host
   **/
-  @ApiModelProperty(example = "test.yuyugt.us-west-2.redshift.amazonaws.com", required = true, value = "Redshift Cluster host")
+
+@JsonProperty("host")
+@ApiModelProperty(example = "test.yuyugt.us-west-2.redshift.amazonaws.com", required = true, value = "Redshift Cluster host")
   public String getHost() {
     return host;
   }
@@ -85,7 +95,9 @@ public class RedshiftIntegration {
    * Redshift Cluster port
    * @return port
   **/
-  @ApiModelProperty(example = "5439", required = true, value = "Redshift Cluster port")
+
+@JsonProperty("port")
+@ApiModelProperty(example = "5439", required = true, value = "Redshift Cluster port")
   public Integer getPort() {
     return port;
   }

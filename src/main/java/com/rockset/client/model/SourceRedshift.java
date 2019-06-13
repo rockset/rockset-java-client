@@ -24,10 +24,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * SourceRedshift
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class SourceRedshift {
   @SerializedName("database")
   private String database = null;
@@ -53,7 +55,9 @@ public class SourceRedshift {
    * name of the database in Redshift Cluster
    * @return database
   **/
-  @ApiModelProperty(example = "dev", required = true, value = "name of the database in Redshift Cluster")
+
+@JsonProperty("database")
+@ApiModelProperty(example = "dev", required = true, value = "name of the database in Redshift Cluster")
   public String getDatabase() {
     return database;
   }
@@ -71,7 +75,9 @@ public class SourceRedshift {
    * schema which contains the Redshift table
    * @return schema
   **/
-  @ApiModelProperty(example = "common", required = true, value = "schema which contains the Redshift table")
+
+@JsonProperty("schema")
+@ApiModelProperty(example = "common", required = true, value = "schema which contains the Redshift table")
   public String getSchema() {
     return schema;
   }
@@ -89,7 +95,9 @@ public class SourceRedshift {
    * name of Redshift table containing data
    * @return tableName
   **/
-  @ApiModelProperty(example = "redshift_table_name", required = true, value = "name of Redshift table containing data")
+
+@JsonProperty("table_name")
+@ApiModelProperty(example = "redshift_table_name", required = true, value = "name of Redshift table containing data")
   public String getTableName() {
     return tableName;
   }
@@ -107,7 +115,9 @@ public class SourceRedshift {
    * unload S3 bucket path
    * @return s3BucketPath
   **/
-  @ApiModelProperty(example = "s3://redshift-unload", required = true, value = "unload S3 bucket path")
+
+@JsonProperty("s3_bucket_path")
+@ApiModelProperty(example = "s3://redshift-unload", required = true, value = "unload S3 bucket path")
   public String getS3BucketPath() {
     return s3BucketPath;
   }
@@ -125,7 +135,9 @@ public class SourceRedshift {
    * field in Redshift source table to monitor for updates
    * @return incrementalField
   **/
-  @ApiModelProperty(example = "updated_at", value = "field in Redshift source table to monitor for updates")
+
+@JsonProperty("incremental_field")
+@ApiModelProperty(example = "updated_at", value = "field in Redshift source table to monitor for updates")
   public String getIncrementalField() {
     return incrementalField;
   }

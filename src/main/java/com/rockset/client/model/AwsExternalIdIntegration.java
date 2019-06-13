@@ -24,10 +24,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * AwsExternalIdIntegration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class AwsExternalIdIntegration {
   @SerializedName("aws_role_arn")
   private String awsRoleArn = null;
@@ -47,7 +49,9 @@ public class AwsExternalIdIntegration {
    * ARN of rockset-role created in your account
    * @return awsRoleArn
   **/
-  @ApiModelProperty(example = "arn:aws:iam::2378964092:role/rockset-role", required = true, value = "ARN of rockset-role created in your account")
+
+@JsonProperty("aws_role_arn")
+@ApiModelProperty(example = "arn:aws:iam::2378964092:role/rockset-role", required = true, value = "ARN of rockset-role created in your account")
   public String getAwsRoleArn() {
     return awsRoleArn;
   }
@@ -60,7 +64,9 @@ public class AwsExternalIdIntegration {
    * Get awsExternalId
    * @return awsExternalId
   **/
-  @ApiModelProperty(example = "adf98a7sdffkjh233rjh9a8sdf", value = "")
+
+@JsonProperty("aws_external_id")
+@ApiModelProperty(example = "adf98a7sdffkjh233rjh9a8sdf", value = "")
   public String getAwsExternalId() {
     return awsExternalId;
   }
@@ -69,7 +75,9 @@ public class AwsExternalIdIntegration {
    * Get rocksetIamUser
    * @return rocksetIamUser
   **/
-  @ApiModelProperty(example = "arn:aws:iam::983247598:root", value = "")
+
+@JsonProperty("rockset_iam_user")
+@ApiModelProperty(example = "arn:aws:iam::983247598:root", value = "")
   public String getRocksetIamUser() {
     return rocksetIamUser;
   }

@@ -24,10 +24,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * SourceGcs
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class SourceGcs {
   @SerializedName("bucket")
   private String bucket = null;
@@ -44,7 +46,9 @@ public class SourceGcs {
    * name of GCS bucket you want to ingest from
    * @return bucket
   **/
-  @ApiModelProperty(example = "server-logs", value = "name of GCS bucket you want to ingest from")
+
+@JsonProperty("bucket")
+@ApiModelProperty(example = "server-logs", value = "name of GCS bucket you want to ingest from")
   public String getBucket() {
     return bucket;
   }
@@ -62,7 +66,9 @@ public class SourceGcs {
    * Prefix that selects keys to ingest.
    * @return prefix
   **/
-  @ApiModelProperty(example = "prefix/to/keys", value = "Prefix that selects keys to ingest.")
+
+@JsonProperty("prefix")
+@ApiModelProperty(example = "prefix/to/keys", value = "Prefix that selects keys to ingest.")
   public String getPrefix() {
     return prefix;
   }

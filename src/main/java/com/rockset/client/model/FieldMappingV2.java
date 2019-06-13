@@ -28,10 +28,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * FieldMappingV2
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class FieldMappingV2 {
   @SerializedName("name")
   private String name = null;
@@ -51,7 +53,9 @@ public class FieldMappingV2 {
    * A user specified string that is a name for this mapping
    * @return name
   **/
-  @ApiModelProperty(example = "myTestMapping", value = "A user specified string that is a name for this mapping")
+
+@JsonProperty("name")
+@ApiModelProperty(example = "myTestMapping", value = "A user specified string that is a name for this mapping")
   public String getName() {
     return name;
   }
@@ -77,7 +81,9 @@ public class FieldMappingV2 {
    * A List of InputField for this mapping
    * @return inputFields
   **/
-  @ApiModelProperty(value = "A List of InputField for this mapping")
+
+@JsonProperty("input_fields")
+@ApiModelProperty(value = "A List of InputField for this mapping")
   public List<InputField> getInputFields() {
     return inputFields;
   }
@@ -95,7 +101,9 @@ public class FieldMappingV2 {
    * An OutputField for this mapping
    * @return outputField
   **/
-  @ApiModelProperty(value = "An OutputField for this mapping")
+
+@JsonProperty("output_field")
+@ApiModelProperty(value = "An OutputField for this mapping")
   public OutputField getOutputField() {
     return outputField;
   }

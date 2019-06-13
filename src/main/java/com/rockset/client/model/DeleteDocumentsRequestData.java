@@ -24,10 +24,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * DeleteDocumentsRequestData
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class DeleteDocumentsRequestData {
   @SerializedName("_id")
   private String id = null;
@@ -41,7 +43,9 @@ public class DeleteDocumentsRequestData {
    * unique document ID
    * @return id
   **/
-  @ApiModelProperty(example = "2cd61e3b", required = true, value = "unique document ID")
+
+@JsonProperty("_id")
+@ApiModelProperty(example = "2cd61e3b", required = true, value = "unique document ID")
   public String getId() {
     return id;
   }

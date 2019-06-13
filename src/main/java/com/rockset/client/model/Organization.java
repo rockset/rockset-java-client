@@ -24,11 +24,14 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * An organization in Rockset is a container for users and collections.
  */
+
 @ApiModel(description = "An organization in Rockset is a container for users and collections.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class Organization {
   @SerializedName("id")
   private String id = null;
@@ -108,7 +111,7 @@ public class Organization {
     
     TRIAL("TRIAL"),
     
-    TRIAL_EXPIRED("TRIAL_EXPIRED"),
+    TRIAL_EXPIRED("TRIALEXPIRED"),
     
     DELETED("DELETED");
 
@@ -162,7 +165,9 @@ public class Organization {
    * unique identifier for the organization
    * @return id
   **/
-  @ApiModelProperty(example = "rockset", value = "unique identifier for the organization")
+
+@JsonProperty("id")
+@ApiModelProperty(example = "rockset", value = "unique identifier for the organization")
   public String getId() {
     return id;
   }
@@ -180,7 +185,9 @@ public class Organization {
    * ISO-8601 date
    * @return createdAt
   **/
-  @ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date")
+
+@JsonProperty("created_at")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date")
   public String getCreatedAt() {
     return createdAt;
   }
@@ -198,7 +205,9 @@ public class Organization {
    * name of the organization
    * @return displayName
   **/
-  @ApiModelProperty(example = "Rockset, Inc", value = "name of the organization")
+
+@JsonProperty("display_name")
+@ApiModelProperty(example = "Rockset, Inc", value = "name of the organization")
   public String getDisplayName() {
     return displayName;
   }
@@ -216,7 +225,9 @@ public class Organization {
    * name of the company
    * @return companyName
   **/
-  @ApiModelProperty(example = "Rockset, Inc", value = "name of the company")
+
+@JsonProperty("company_name")
+@ApiModelProperty(example = "Rockset, Inc", value = "name of the company")
   public String getCompanyName() {
     return companyName;
   }
@@ -234,7 +245,9 @@ public class Organization {
    * pricing tier
    * @return tier
   **/
-  @ApiModelProperty(example = "BASIC", value = "pricing tier")
+
+@JsonProperty("tier")
+@ApiModelProperty(example = "BASIC", value = "pricing tier")
   public TierEnum getTier() {
     return tier;
   }
@@ -252,7 +265,9 @@ public class Organization {
    * number of QCUs
    * @return qcu
   **/
-  @ApiModelProperty(example = "2", value = "number of QCUs")
+
+@JsonProperty("qcu")
+@ApiModelProperty(example = "2", value = "number of QCUs")
   public Integer getQcu() {
     return qcu;
   }
@@ -270,7 +285,9 @@ public class Organization {
    * org state
    * @return state
   **/
-  @ApiModelProperty(example = "ACTIVE", value = "org state")
+
+@JsonProperty("state")
+@ApiModelProperty(example = "ACTIVE", value = "org state")
   public StateEnum getState() {
     return state;
   }

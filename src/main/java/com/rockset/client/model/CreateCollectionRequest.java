@@ -29,10 +29,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * CreateCollectionRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class CreateCollectionRequest {
   @SerializedName("name")
   private String name = null;
@@ -61,7 +63,9 @@ public class CreateCollectionRequest {
    * unique identifer for collection, can contain alphanumeric or dash characters
    * @return name
   **/
-  @ApiModelProperty(example = "global-transactions", required = true, value = "unique identifer for collection, can contain alphanumeric or dash characters")
+
+@JsonProperty("name")
+@ApiModelProperty(example = "global-transactions", required = true, value = "unique identifer for collection, can contain alphanumeric or dash characters")
   public String getName() {
     return name;
   }
@@ -79,7 +83,9 @@ public class CreateCollectionRequest {
    * text describing the collection
    * @return description
   **/
-  @ApiModelProperty(example = "transactions from stores worldwide", value = "text describing the collection")
+
+@JsonProperty("description")
+@ApiModelProperty(example = "transactions from stores worldwide", value = "text describing the collection")
   public String getDescription() {
     return description;
   }
@@ -105,7 +111,9 @@ public class CreateCollectionRequest {
    * list of sources from which to ingest data
    * @return sources
   **/
-  @ApiModelProperty(value = "list of sources from which to ingest data")
+
+@JsonProperty("sources")
+@ApiModelProperty(value = "list of sources from which to ingest data")
   public List<Source> getSources() {
     return sources;
   }
@@ -123,7 +131,9 @@ public class CreateCollectionRequest {
    * number of seconds after which data is purged, based on event time
    * @return retentionSecs
   **/
-  @ApiModelProperty(example = "1000000", value = "number of seconds after which data is purged, based on event time")
+
+@JsonProperty("retention_secs")
+@ApiModelProperty(example = "1000000", value = "number of seconds after which data is purged, based on event time")
   public Long getRetentionSecs() {
     return retentionSecs;
   }
@@ -141,7 +151,9 @@ public class CreateCollectionRequest {
    * configuration for event data
    * @return eventTimeInfo
   **/
-  @ApiModelProperty(value = "configuration for event data")
+
+@JsonProperty("event_time_info")
+@ApiModelProperty(value = "configuration for event data")
   public EventTimeInfo getEventTimeInfo() {
     return eventTimeInfo;
   }
@@ -167,7 +179,9 @@ public class CreateCollectionRequest {
    * list of mappings
    * @return fieldMappings
   **/
-  @ApiModelProperty(value = "list of mappings")
+
+@JsonProperty("field_mappings")
+@ApiModelProperty(value = "list of mappings")
   public List<FieldMappingV2> getFieldMappings() {
     return fieldMappings;
   }

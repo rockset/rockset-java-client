@@ -24,10 +24,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * SourceS3
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class SourceS3 {
   @SerializedName("prefix")
   private String prefix = null;
@@ -47,7 +49,9 @@ public class SourceS3 {
    * Prefix that selects keys to ingest.
    * @return prefix
   **/
-  @ApiModelProperty(example = "prefix/to/keys", value = "Prefix that selects keys to ingest.")
+
+@JsonProperty("prefix")
+@ApiModelProperty(example = "prefix/to/keys", value = "Prefix that selects keys to ingest.")
   public String getPrefix() {
     return prefix;
   }
@@ -65,7 +69,9 @@ public class SourceS3 {
    * Pattern that selects keys to ingest.
    * @return pattern
   **/
-  @ApiModelProperty(example = "prefix/to/_**_/keys/_*.format", value = "Pattern that selects keys to ingest.")
+
+@JsonProperty("pattern")
+@ApiModelProperty(example = "prefix/to/_**_/keys/_*.format", value = "Pattern that selects keys to ingest.")
   public String getPattern() {
     return pattern;
   }
@@ -83,7 +89,9 @@ public class SourceS3 {
    * address of S3 bucket containing data
    * @return bucket
   **/
-  @ApiModelProperty(example = "s3://customer-account-info", required = true, value = "address of S3 bucket containing data")
+
+@JsonProperty("bucket")
+@ApiModelProperty(example = "s3://customer-account-info", required = true, value = "address of S3 bucket containing data")
   public String getBucket() {
     return bucket;
   }

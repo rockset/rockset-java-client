@@ -29,10 +29,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Collection
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class Collection {
   @SerializedName("created_at")
   private String createdAt = null;
@@ -132,7 +134,9 @@ public class Collection {
    * ISO-8601 date
    * @return createdAt
   **/
-  @ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date")
+
+@JsonProperty("created_at")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date")
   public String getCreatedAt() {
     return createdAt;
   }
@@ -150,7 +154,9 @@ public class Collection {
    * email of user who created the collection
    * @return createdBy
   **/
-  @ApiModelProperty(example = "hello@rockset.com", value = "email of user who created the collection")
+
+@JsonProperty("created_by")
+@ApiModelProperty(example = "hello@rockset.com", value = "email of user who created the collection")
   public String getCreatedBy() {
     return createdBy;
   }
@@ -168,7 +174,9 @@ public class Collection {
    * unique identifer for collection, can contain alphanumeric or dash characters
    * @return name
   **/
-  @ApiModelProperty(example = "global-transactions", value = "unique identifer for collection, can contain alphanumeric or dash characters")
+
+@JsonProperty("name")
+@ApiModelProperty(example = "global-transactions", value = "unique identifer for collection, can contain alphanumeric or dash characters")
   public String getName() {
     return name;
   }
@@ -186,7 +194,9 @@ public class Collection {
    * text describing the collection
    * @return description
   **/
-  @ApiModelProperty(example = "transactions from stores worldwide", value = "text describing the collection")
+
+@JsonProperty("description")
+@ApiModelProperty(example = "transactions from stores worldwide", value = "text describing the collection")
   public String getDescription() {
     return description;
   }
@@ -204,7 +214,9 @@ public class Collection {
    * name of the workspace that the collection is in
    * @return workspace
   **/
-  @ApiModelProperty(example = "commons", value = "name of the workspace that the collection is in")
+
+@JsonProperty("workspace")
+@ApiModelProperty(example = "commons", value = "name of the workspace that the collection is in")
   public String getWorkspace() {
     return workspace;
   }
@@ -222,7 +234,9 @@ public class Collection {
    * current status of collection, one of: CREATED, READY, DELETED
    * @return status
   **/
-  @ApiModelProperty(example = "READY", value = "current status of collection, one of: CREATED, READY, DELETED")
+
+@JsonProperty("status")
+@ApiModelProperty(example = "READY", value = "current status of collection, one of: CREATED, READY, DELETED")
   public StatusEnum getStatus() {
     return status;
   }
@@ -248,7 +262,9 @@ public class Collection {
    * list of sources from which collection ingests
    * @return sources
   **/
-  @ApiModelProperty(value = "list of sources from which collection ingests")
+
+@JsonProperty("sources")
+@ApiModelProperty(value = "list of sources from which collection ingests")
   public List<Source> getSources() {
     return sources;
   }
@@ -266,7 +282,9 @@ public class Collection {
    * metrics about the collection
    * @return stats
   **/
-  @ApiModelProperty(value = "metrics about the collection")
+
+@JsonProperty("stats")
+@ApiModelProperty(value = "metrics about the collection")
   public CollectionStats getStats() {
     return stats;
   }
@@ -284,7 +302,9 @@ public class Collection {
    * number of seconds after which data is purged based on event time
    * @return retentionSecs
   **/
-  @ApiModelProperty(example = "2592000", value = "number of seconds after which data is purged based on event time")
+
+@JsonProperty("retention_secs")
+@ApiModelProperty(example = "2592000", value = "number of seconds after which data is purged based on event time")
   public Long getRetentionSecs() {
     return retentionSecs;
   }
@@ -310,7 +330,9 @@ public class Collection {
    * list of mappings applied on all documents in a collection
    * @return fieldMappings
   **/
-  @ApiModelProperty(value = "list of mappings applied on all documents in a collection")
+
+@JsonProperty("field_mappings")
+@ApiModelProperty(value = "list of mappings applied on all documents in a collection")
   public List<FieldMappingV2> getFieldMappings() {
     return fieldMappings;
   }

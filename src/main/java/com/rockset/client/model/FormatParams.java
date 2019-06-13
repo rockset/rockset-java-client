@@ -26,10 +26,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * FormatParams
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class FormatParams {
   @SerializedName("json")
   private Boolean json = null;
@@ -49,7 +51,9 @@ public class FormatParams {
    * source data is in json format
    * @return json
   **/
-  @ApiModelProperty(example = "true", value = "source data is in json format")
+
+@JsonProperty("json")
+@ApiModelProperty(example = "true", value = "source data is in json format")
   public Boolean isJson() {
     return json;
   }
@@ -67,7 +71,9 @@ public class FormatParams {
    * Get csv
    * @return csv
   **/
-  @ApiModelProperty(value = "")
+
+@JsonProperty("csv")
+@ApiModelProperty(value = "")
   public CsvParams getCsv() {
     return csv;
   }
@@ -85,7 +91,9 @@ public class FormatParams {
    * Get xml
    * @return xml
   **/
-  @ApiModelProperty(value = "")
+
+@JsonProperty("xml")
+@ApiModelProperty(value = "")
   public XmlParams getXml() {
     return xml;
   }

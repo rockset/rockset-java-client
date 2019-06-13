@@ -24,10 +24,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * QueryResponseStats
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class QueryResponseStats {
   @SerializedName("elapsed_time_ms")
   private Long elapsedTimeMs = null;
@@ -44,7 +46,9 @@ public class QueryResponseStats {
    * query time in milliseconds
    * @return elapsedTimeMs
   **/
-  @ApiModelProperty(example = "126", value = "query time in milliseconds")
+
+@JsonProperty("elapsed_time_ms")
+@ApiModelProperty(example = "126", value = "query time in milliseconds")
   public Long getElapsedTimeMs() {
     return elapsedTimeMs;
   }
@@ -62,7 +66,9 @@ public class QueryResponseStats {
    * rows scanned as part of query execution
    * @return rowsScanned
   **/
-  @ApiModelProperty(example = "25000", value = "rows scanned as part of query execution")
+
+@JsonProperty("rows_scanned")
+@ApiModelProperty(example = "25000", value = "rows scanned as part of query execution")
   public Long getRowsScanned() {
     return rowsScanned;
   }

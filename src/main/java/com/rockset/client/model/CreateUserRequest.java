@@ -26,10 +26,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * CreateUserRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class CreateUserRequest {
   @SerializedName("email")
   private String email = null;
@@ -46,7 +48,9 @@ public class CreateUserRequest {
    * user email, must be unique
    * @return email
   **/
-  @ApiModelProperty(example = "hello@rockset.com", required = true, value = "user email, must be unique")
+
+@JsonProperty("email")
+@ApiModelProperty(example = "hello@rockset.com", required = true, value = "user email, must be unique")
   public String getEmail() {
     return email;
   }
@@ -72,7 +76,9 @@ public class CreateUserRequest {
    * List of roles for a given user
    * @return roles
   **/
-  @ApiModelProperty(example = "\"[\\\"admin\\\", \\\"member\\\", \\\"read-only\\\"]\"", value = "List of roles for a given user")
+
+@JsonProperty("roles")
+@ApiModelProperty(example = "\"[\\\"admin\\\", \\\"member\\\", \\\"read-only\\\"]\"", value = "List of roles for a given user")
   public List<String> getRoles() {
     return roles;
   }

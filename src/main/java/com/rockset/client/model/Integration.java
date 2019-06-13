@@ -28,11 +28,14 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Integrations that can be associated with data sources to create collections. Only one type of integration may be specified.
  */
+
 @ApiModel(description = "Integrations that can be associated with data sources to create collections. Only one type of integration may be specified.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class Integration {
   @SerializedName("created_at")
   private String createdAt = null;
@@ -67,7 +70,9 @@ public class Integration {
    * ISO-8601 date
    * @return createdAt
   **/
-  @ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date")
+
+@JsonProperty("created_at")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date")
   public String getCreatedAt() {
     return createdAt;
   }
@@ -85,7 +90,9 @@ public class Integration {
    * email of user who created the integration
    * @return createdBy
   **/
-  @ApiModelProperty(example = "hello@rockset.com", required = true, value = "email of user who created the integration")
+
+@JsonProperty("created_by")
+@ApiModelProperty(example = "hello@rockset.com", required = true, value = "email of user who created the integration")
   public String getCreatedBy() {
     return createdBy;
   }
@@ -103,7 +110,9 @@ public class Integration {
    * descriptive label and unique identifier
    * @return name
   **/
-  @ApiModelProperty(example = "event-logs", required = true, value = "descriptive label and unique identifier")
+
+@JsonProperty("name")
+@ApiModelProperty(example = "event-logs", required = true, value = "descriptive label and unique identifier")
   public String getName() {
     return name;
   }
@@ -121,7 +130,9 @@ public class Integration {
    * longer explanation for the integration
    * @return description
   **/
-  @ApiModelProperty(example = "AWS account with event data for the data science team.", value = "longer explanation for the integration")
+
+@JsonProperty("description")
+@ApiModelProperty(example = "AWS account with event data for the data science team.", value = "longer explanation for the integration")
   public String getDescription() {
     return description;
   }
@@ -139,7 +150,9 @@ public class Integration {
    * credentials for an AWS key integration
    * @return aws
   **/
-  @ApiModelProperty(value = "credentials for an AWS key integration")
+
+@JsonProperty("aws")
+@ApiModelProperty(value = "credentials for an AWS key integration")
   public AwsKeyIntegration getAws() {
     return aws;
   }
@@ -157,7 +170,9 @@ public class Integration {
    * details of an AWS External Id integration
    * @return awsExternalId
   **/
-  @ApiModelProperty(value = "details of an AWS External Id integration")
+
+@JsonProperty("aws_external_id")
+@ApiModelProperty(value = "details of an AWS External Id integration")
   public AwsExternalIdIntegration getAwsExternalId() {
     return awsExternalId;
   }
@@ -175,7 +190,9 @@ public class Integration {
    * details of a GCP Service Account integration
    * @return gcpServiceAccount
   **/
-  @ApiModelProperty(value = "details of a GCP Service Account integration")
+
+@JsonProperty("gcp_service_account")
+@ApiModelProperty(value = "details of a GCP Service Account integration")
   public GcpServiceAccount getGcpServiceAccount() {
     return gcpServiceAccount;
   }
@@ -193,7 +210,9 @@ public class Integration {
    * details of an AWS Redshift integration
    * @return redshift
   **/
-  @ApiModelProperty(value = "details of an AWS Redshift integration")
+
+@JsonProperty("redshift")
+@ApiModelProperty(value = "details of an AWS Redshift integration")
   public RedshiftIntegration getRedshift() {
     return redshift;
   }

@@ -24,10 +24,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * SourceKinesis
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-11T23:06:26.380Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
 public class SourceKinesis {
   @SerializedName("stream_name")
   private String streamName = null;
@@ -44,7 +46,9 @@ public class SourceKinesis {
    * name of kinesis stream
    * @return streamName
   **/
-  @ApiModelProperty(example = "click_stream", required = true, value = "name of kinesis stream")
+
+@JsonProperty("stream_name")
+@ApiModelProperty(example = "click_stream", required = true, value = "name of kinesis stream")
   public String getStreamName() {
     return streamName;
   }
@@ -62,7 +66,9 @@ public class SourceKinesis {
    * AWS region name of Kinesis stream, by default us-west-2 is used
    * @return awsRegion
   **/
-  @ApiModelProperty(example = "us-east-2", value = "AWS region name of Kinesis stream, by default us-west-2 is used")
+
+@JsonProperty("aws_region")
+@ApiModelProperty(example = "us-east-2", value = "AWS region name of Kinesis stream, by default us-west-2 is used")
   public String getAwsRegion() {
     return awsRegion;
   }

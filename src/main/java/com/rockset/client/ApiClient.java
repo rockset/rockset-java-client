@@ -14,6 +14,7 @@
 package com.rockset.client;
 
 import com.rockset.client.model.ErrorModel;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.squareup.okhttp.*;
 import com.squareup.okhttp.internal.http.HttpMethod;
@@ -896,6 +897,7 @@ public class ApiClient {
                     final String respBody = response.body().string();
 
                     final ObjectMapper objectMapper = new ObjectMapper();
+                    objectMapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS, true);
                     errorModel = objectMapper.readValue(respBody, ErrorModel.class);
 
                 } catch (final IOException e) {
