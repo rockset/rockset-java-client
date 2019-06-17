@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * AwsExternalIdIntegration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-17T23:04:08.108Z")
 public class AwsExternalIdIntegration {
   @SerializedName("aws_role_arn")
   private String awsRoleArn = null;

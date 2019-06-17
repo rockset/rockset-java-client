@@ -20,7 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.rockset.client.model.AwsKeyIntegration;
+import com.rockset.client.model.AwsAccessKey;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -30,10 +30,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * RedshiftIntegration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-17T23:04:08.108Z")
 public class RedshiftIntegration {
   @SerializedName("aws_access_key")
-  private AwsKeyIntegration awsAccessKey = null;
+  private AwsAccessKey awsAccessKey = null;
 
   @SerializedName("username")
   private String username = null;
@@ -47,14 +47,17 @@ public class RedshiftIntegration {
   @SerializedName("port")
   private Integer port = null;
 
+  @SerializedName("s3_bucket_path")
+  private String s3BucketPath = null;
+
    /**
-   * AWS Access and Secret keys
+   * AWS access key credentials
    * @return awsAccessKey
   **/
 
 @JsonProperty("aws_access_key")
-@ApiModelProperty(value = "AWS Access and Secret keys")
-  public AwsKeyIntegration getAwsAccessKey() {
+@ApiModelProperty(value = "AWS access key credentials")
+  public AwsAccessKey getAwsAccessKey() {
     return awsAccessKey;
   }
 
@@ -102,6 +105,17 @@ public class RedshiftIntegration {
     return port;
   }
 
+   /**
+   * unload S3 bucket path
+   * @return s3BucketPath
+  **/
+
+@JsonProperty("s3_bucket_path")
+@ApiModelProperty(example = "s3://redshift-unload", required = true, value = "unload S3 bucket path")
+  public String getS3BucketPath() {
+    return s3BucketPath;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -116,12 +130,13 @@ public class RedshiftIntegration {
         Objects.equals(this.username, redshiftIntegration.username) &&
         Objects.equals(this.password, redshiftIntegration.password) &&
         Objects.equals(this.host, redshiftIntegration.host) &&
-        Objects.equals(this.port, redshiftIntegration.port);
+        Objects.equals(this.port, redshiftIntegration.port) &&
+        Objects.equals(this.s3BucketPath, redshiftIntegration.s3BucketPath);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(awsAccessKey, username, password, host, port);
+    return Objects.hash(awsAccessKey, username, password, host, port, s3BucketPath);
   }
 
 
@@ -135,6 +150,7 @@ public class RedshiftIntegration {
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
     sb.append("    host: ").append(toIndentedString(host)).append("\n");
     sb.append("    port: ").append(toIndentedString(port)).append("\n");
+    sb.append("    s3BucketPath: ").append(toIndentedString(s3BucketPath)).append("\n");
     sb.append("}");
     return sb.toString();
   }

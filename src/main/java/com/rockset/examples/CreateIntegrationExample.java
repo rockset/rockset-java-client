@@ -10,9 +10,9 @@ public class CreateIntegrationExample {
 
     CreateIntegrationRequest request = new CreateIntegrationRequest()
                                             .name("my-first-integration")
-                                            .aws(new AwsKeyIntegration()
-                                                    .awsAccessKeyId(".....")
-                                                    .awsSecretAccessKey("....."));
+                                            .s3(new S3Integration()
+                                                .awsRole(new AwsRole()
+                                                    .awsRoleArn("...")));
 
     try {
       CreateIntegrationResponse response = rs.createIntegration(request);

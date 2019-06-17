@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceRedshift
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-17T23:04:08.108Z")
 public class SourceRedshift {
   @SerializedName("database")
   private String database = null;
@@ -39,9 +39,6 @@ public class SourceRedshift {
 
   @SerializedName("table_name")
   private String tableName = null;
-
-  @SerializedName("s3_bucket_path")
-  private String s3BucketPath = null;
 
   @SerializedName("incremental_field")
   private String incrementalField = null;
@@ -106,26 +103,6 @@ public class SourceRedshift {
     this.tableName = tableName;
   }
 
-  public SourceRedshift s3BucketPath(String s3BucketPath) {
-    this.s3BucketPath = s3BucketPath;
-    return this;
-  }
-
-   /**
-   * unload S3 bucket path
-   * @return s3BucketPath
-  **/
-
-@JsonProperty("s3_bucket_path")
-@ApiModelProperty(example = "s3://redshift-unload", required = true, value = "unload S3 bucket path")
-  public String getS3BucketPath() {
-    return s3BucketPath;
-  }
-
-  public void setS3BucketPath(String s3BucketPath) {
-    this.s3BucketPath = s3BucketPath;
-  }
-
   public SourceRedshift incrementalField(String incrementalField) {
     this.incrementalField = incrementalField;
     return this;
@@ -159,13 +136,12 @@ public class SourceRedshift {
     return Objects.equals(this.database, sourceRedshift.database) &&
         Objects.equals(this.schema, sourceRedshift.schema) &&
         Objects.equals(this.tableName, sourceRedshift.tableName) &&
-        Objects.equals(this.s3BucketPath, sourceRedshift.s3BucketPath) &&
         Objects.equals(this.incrementalField, sourceRedshift.incrementalField);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(database, schema, tableName, s3BucketPath, incrementalField);
+    return Objects.hash(database, schema, tableName, incrementalField);
   }
 
 
@@ -177,7 +153,6 @@ public class SourceRedshift {
     sb.append("    database: ").append(toIndentedString(database)).append("\n");
     sb.append("    schema: ").append(toIndentedString(schema)).append("\n");
     sb.append("    tableName: ").append(toIndentedString(tableName)).append("\n");
-    sb.append("    s3BucketPath: ").append(toIndentedString(s3BucketPath)).append("\n");
     sb.append("    incrementalField: ").append(toIndentedString(incrementalField)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -27,54 +27,54 @@ import java.io.IOException;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * SourceGcs
+ * AwsAccessKey
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-17T23:04:08.108Z")
-public class SourceGcs {
-  @SerializedName("bucket")
-  private String bucket = null;
+public class AwsAccessKey {
+  @SerializedName("aws_access_key_id")
+  private String awsAccessKeyId = null;
 
-  @SerializedName("prefix")
-  private String prefix = null;
+  @SerializedName("aws_secret_access_key")
+  private String awsSecretAccessKey = null;
 
-  public SourceGcs bucket(String bucket) {
-    this.bucket = bucket;
+  public AwsAccessKey awsAccessKeyId(String awsAccessKeyId) {
+    this.awsAccessKeyId = awsAccessKeyId;
     return this;
   }
 
    /**
-   * name of GCS bucket you want to ingest from
-   * @return bucket
+   * AWS access key ID
+   * @return awsAccessKeyId
   **/
 
-@JsonProperty("bucket")
-@ApiModelProperty(example = "server-logs", value = "name of GCS bucket you want to ingest from")
-  public String getBucket() {
-    return bucket;
+@JsonProperty("aws_access_key_id")
+@ApiModelProperty(example = "AKIAIOSFODNN7EXAMPLE", required = true, value = "AWS access key ID")
+  public String getAwsAccessKeyId() {
+    return awsAccessKeyId;
   }
 
-  public void setBucket(String bucket) {
-    this.bucket = bucket;
+  public void setAwsAccessKeyId(String awsAccessKeyId) {
+    this.awsAccessKeyId = awsAccessKeyId;
   }
 
-  public SourceGcs prefix(String prefix) {
-    this.prefix = prefix;
+  public AwsAccessKey awsSecretAccessKey(String awsSecretAccessKey) {
+    this.awsSecretAccessKey = awsSecretAccessKey;
     return this;
   }
 
    /**
-   * Prefix that selects keys to ingest.
-   * @return prefix
+   * AWS secret access key
+   * @return awsSecretAccessKey
   **/
 
-@JsonProperty("prefix")
-@ApiModelProperty(example = "prefix/to/keys", value = "Prefix that selects keys to ingest.")
-  public String getPrefix() {
-    return prefix;
+@JsonProperty("aws_secret_access_key")
+@ApiModelProperty(example = "wJal....", required = true, value = "AWS secret access key")
+  public String getAwsSecretAccessKey() {
+    return awsSecretAccessKey;
   }
 
-  public void setPrefix(String prefix) {
-    this.prefix = prefix;
+  public void setAwsSecretAccessKey(String awsSecretAccessKey) {
+    this.awsSecretAccessKey = awsSecretAccessKey;
   }
 
 
@@ -86,24 +86,24 @@ public class SourceGcs {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SourceGcs sourceGcs = (SourceGcs) o;
-    return Objects.equals(this.bucket, sourceGcs.bucket) &&
-        Objects.equals(this.prefix, sourceGcs.prefix);
+    AwsAccessKey awsAccessKey = (AwsAccessKey) o;
+    return Objects.equals(this.awsAccessKeyId, awsAccessKey.awsAccessKeyId) &&
+        Objects.equals(this.awsSecretAccessKey, awsAccessKey.awsSecretAccessKey);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(bucket, prefix);
+    return Objects.hash(awsAccessKeyId, awsSecretAccessKey);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SourceGcs {\n");
+    sb.append("class AwsAccessKey {\n");
     
-    sb.append("    bucket: ").append(toIndentedString(bucket)).append("\n");
-    sb.append("    prefix: ").append(toIndentedString(prefix)).append("\n");
+    sb.append("    awsAccessKeyId: ").append(toIndentedString(awsAccessKeyId)).append("\n");
+    sb.append("    awsSecretAccessKey: ").append(toIndentedString(awsSecretAccessKey)).append("\n");
     sb.append("}");
     return sb.toString();
   }

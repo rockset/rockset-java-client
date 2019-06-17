@@ -20,6 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.rockset.client.model.AwsAccessKey;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -27,54 +28,31 @@ import java.io.IOException;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * SourceGcs
+ * DynamodbIntegration
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-17T23:04:08.108Z")
-public class SourceGcs {
-  @SerializedName("bucket")
-  private String bucket = null;
+public class DynamodbIntegration {
+  @SerializedName("aws_access_key")
+  private AwsAccessKey awsAccessKey = null;
 
-  @SerializedName("prefix")
-  private String prefix = null;
-
-  public SourceGcs bucket(String bucket) {
-    this.bucket = bucket;
+  public DynamodbIntegration awsAccessKey(AwsAccessKey awsAccessKey) {
+    this.awsAccessKey = awsAccessKey;
     return this;
   }
 
    /**
-   * name of GCS bucket you want to ingest from
-   * @return bucket
+   * credentials for an AWS access key integration
+   * @return awsAccessKey
   **/
 
-@JsonProperty("bucket")
-@ApiModelProperty(example = "server-logs", value = "name of GCS bucket you want to ingest from")
-  public String getBucket() {
-    return bucket;
+@JsonProperty("aws_access_key")
+@ApiModelProperty(value = "credentials for an AWS access key integration")
+  public AwsAccessKey getAwsAccessKey() {
+    return awsAccessKey;
   }
 
-  public void setBucket(String bucket) {
-    this.bucket = bucket;
-  }
-
-  public SourceGcs prefix(String prefix) {
-    this.prefix = prefix;
-    return this;
-  }
-
-   /**
-   * Prefix that selects keys to ingest.
-   * @return prefix
-  **/
-
-@JsonProperty("prefix")
-@ApiModelProperty(example = "prefix/to/keys", value = "Prefix that selects keys to ingest.")
-  public String getPrefix() {
-    return prefix;
-  }
-
-  public void setPrefix(String prefix) {
-    this.prefix = prefix;
+  public void setAwsAccessKey(AwsAccessKey awsAccessKey) {
+    this.awsAccessKey = awsAccessKey;
   }
 
 
@@ -86,24 +64,22 @@ public class SourceGcs {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SourceGcs sourceGcs = (SourceGcs) o;
-    return Objects.equals(this.bucket, sourceGcs.bucket) &&
-        Objects.equals(this.prefix, sourceGcs.prefix);
+    DynamodbIntegration dynamodbIntegration = (DynamodbIntegration) o;
+    return Objects.equals(this.awsAccessKey, dynamodbIntegration.awsAccessKey);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(bucket, prefix);
+    return Objects.hash(awsAccessKey);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SourceGcs {\n");
+    sb.append("class DynamodbIntegration {\n");
     
-    sb.append("    bucket: ").append(toIndentedString(bucket)).append("\n");
-    sb.append("    prefix: ").append(toIndentedString(prefix)).append("\n");
+    sb.append("    awsAccessKey: ").append(toIndentedString(awsAccessKey)).append("\n");
     sb.append("}");
     return sb.toString();
   }

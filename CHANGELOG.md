@@ -1,5 +1,8 @@
 # Rockset Java Client Changelog
 
+## v0.6.0 2019-06-17
+- move from cloud-level integrations to service-level integrations: DynamoDB, GCS, Kinesis, Redshift, S3
+
 ## v0.5.13 2019-04-02
 - Fixed issue where Tableau complains if query returns zero results using JDBC
 - More logging and unit tests

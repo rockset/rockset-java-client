@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "API keys are used to authenticate requests to Rockset's API. An API key is tied to the user who creates it. A new API key can be created for each use case, with a maximum of 10 API keys per user.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-17T23:04:08.108Z")
 public class ApiKey {
   @SerializedName("type")
   private String type = null;

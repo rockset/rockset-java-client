@@ -27,54 +27,31 @@ import java.io.IOException;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * SourceGcs
+ * AwsRole
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-17T23:04:08.108Z")
-public class SourceGcs {
-  @SerializedName("bucket")
-  private String bucket = null;
+public class AwsRole {
+  @SerializedName("aws_role_arn")
+  private String awsRoleArn = null;
 
-  @SerializedName("prefix")
-  private String prefix = null;
-
-  public SourceGcs bucket(String bucket) {
-    this.bucket = bucket;
+  public AwsRole awsRoleArn(String awsRoleArn) {
+    this.awsRoleArn = awsRoleArn;
     return this;
   }
 
    /**
-   * name of GCS bucket you want to ingest from
-   * @return bucket
+   * ARN of rockset-role created in your account
+   * @return awsRoleArn
   **/
 
-@JsonProperty("bucket")
-@ApiModelProperty(example = "server-logs", value = "name of GCS bucket you want to ingest from")
-  public String getBucket() {
-    return bucket;
+@JsonProperty("aws_role_arn")
+@ApiModelProperty(example = "arn:aws:iam::2378964092:role/rockset-role", required = true, value = "ARN of rockset-role created in your account")
+  public String getAwsRoleArn() {
+    return awsRoleArn;
   }
 
-  public void setBucket(String bucket) {
-    this.bucket = bucket;
-  }
-
-  public SourceGcs prefix(String prefix) {
-    this.prefix = prefix;
-    return this;
-  }
-
-   /**
-   * Prefix that selects keys to ingest.
-   * @return prefix
-  **/
-
-@JsonProperty("prefix")
-@ApiModelProperty(example = "prefix/to/keys", value = "Prefix that selects keys to ingest.")
-  public String getPrefix() {
-    return prefix;
-  }
-
-  public void setPrefix(String prefix) {
-    this.prefix = prefix;
+  public void setAwsRoleArn(String awsRoleArn) {
+    this.awsRoleArn = awsRoleArn;
   }
 
 
@@ -86,24 +63,22 @@ public class SourceGcs {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SourceGcs sourceGcs = (SourceGcs) o;
-    return Objects.equals(this.bucket, sourceGcs.bucket) &&
-        Objects.equals(this.prefix, sourceGcs.prefix);
+    AwsRole awsRole = (AwsRole) o;
+    return Objects.equals(this.awsRoleArn, awsRole.awsRoleArn);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(bucket, prefix);
+    return Objects.hash(awsRoleArn);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SourceGcs {\n");
+    sb.append("class AwsRole {\n");
     
-    sb.append("    bucket: ").append(toIndentedString(bucket)).append("\n");
-    sb.append("    prefix: ").append(toIndentedString(prefix)).append("\n");
+    sb.append("    awsRoleArn: ").append(toIndentedString(awsRoleArn)).append("\n");
     sb.append("}");
     return sb.toString();
   }

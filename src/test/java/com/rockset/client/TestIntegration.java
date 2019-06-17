@@ -37,14 +37,17 @@ public class TestIntegration {
     CreateIntegrationRequest request =
         new CreateIntegrationRequest()
             .name(integrationName)
-            .aws(new AwsKeyIntegration()
-                  .awsAccessKeyId(awsAccessKey)
-                  .awsSecretAccessKey(awsSecretkey));
+            .kinesis(new KinesisIntegration()
+                .awsAccessKey(new AwsAccessKey()
+                    .awsAccessKeyId(awsAccessKey)
+                    .awsSecretAccessKey(awsSecretkey)));
     CreateIntegrationResponse response =
         client.createIntegration(request);
     Assert.assertEquals(response.getData().getName(), integrationName);
-    Assert.assertEquals(response.getData().getAws().getAwsAccessKeyId().substring(0, 4), awsAccessKey);
-    Assert.assertEquals(response.getData().getAws().getAwsSecretAccessKey().substring(0, 4), awsSecretkey);
+    Assert.assertEquals(response.getData().getKinesis().getAwsAccessKey()
+        .getAwsAccessKeyId().substring(0, 4), awsAccessKey);
+    Assert.assertEquals(response.getData().getKinesis().getAwsAccessKey()
+        .getAwsSecretAccessKey().substring(0, 4), awsSecretkey);
   }
 
   @Test(dependsOnMethods = {"testIntegrationCreate"})
@@ -54,10 +57,10 @@ public class TestIntegration {
         = client.getIntegration(integrationName);
     Assert.assertEquals(getIntegrationResponse.getData().getName(), integrationName);
     Assert.assertEquals(
-        getIntegrationResponse.getData().getAws()
+        getIntegrationResponse.getData().getKinesis().getAwsAccessKey()
             .getAwsAccessKeyId().substring(0, 4), awsAccessKey);
     Assert.assertEquals(
-        getIntegrationResponse.getData().getAws()
+        getIntegrationResponse.getData().getKinesis().getAwsAccessKey()
             .getAwsSecretAccessKey().substring(0, 4), awsSecretkey);
   }
 

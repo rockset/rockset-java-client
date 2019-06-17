@@ -22,8 +22,12 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.rockset.client.model.AwsExternalIdIntegration;
 import com.rockset.client.model.AwsKeyIntegration;
+import com.rockset.client.model.DynamodbIntegration;
 import com.rockset.client.model.GcpServiceAccount;
+import com.rockset.client.model.GcsIntegration;
+import com.rockset.client.model.KinesisIntegration;
 import com.rockset.client.model.RedshiftIntegration;
+import com.rockset.client.model.S3Integration;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -35,7 +39,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "Integrations that can be associated with data sources to create collections. Only one type of integration may be specified.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-17T23:04:08.108Z")
 public class Integration {
   @SerializedName("created_at")
   private String createdAt = null;
@@ -49,6 +53,21 @@ public class Integration {
   @SerializedName("description")
   private String description = null;
 
+  @SerializedName("s3")
+  private S3Integration s3 = null;
+
+  @SerializedName("kinesis")
+  private KinesisIntegration kinesis = null;
+
+  @SerializedName("dynamodb")
+  private DynamodbIntegration dynamodb = null;
+
+  @SerializedName("redshift")
+  private RedshiftIntegration redshift = null;
+
+  @SerializedName("gcs")
+  private GcsIntegration gcs = null;
+
   @SerializedName("aws")
   private AwsKeyIntegration aws = null;
 
@@ -57,9 +76,6 @@ public class Integration {
 
   @SerializedName("gcp_service_account")
   private GcpServiceAccount gcpServiceAccount = null;
-
-  @SerializedName("redshift")
-  private RedshiftIntegration redshift = null;
 
   public Integration createdAt(String createdAt) {
     this.createdAt = createdAt;
@@ -141,6 +157,106 @@ public class Integration {
     this.description = description;
   }
 
+  public Integration s3(S3Integration s3) {
+    this.s3 = s3;
+    return this;
+  }
+
+   /**
+   * Amazon S3 details, must have one of aws_access_key or aws_role
+   * @return s3
+  **/
+
+@JsonProperty("s3")
+@ApiModelProperty(value = "Amazon S3 details, must have one of aws_access_key or aws_role")
+  public S3Integration getS3() {
+    return s3;
+  }
+
+  public void setS3(S3Integration s3) {
+    this.s3 = s3;
+  }
+
+  public Integration kinesis(KinesisIntegration kinesis) {
+    this.kinesis = kinesis;
+    return this;
+  }
+
+   /**
+   * Amazon Kinesis details, must have one of aws_access_key or aws_role
+   * @return kinesis
+  **/
+
+@JsonProperty("kinesis")
+@ApiModelProperty(value = "Amazon Kinesis details, must have one of aws_access_key or aws_role")
+  public KinesisIntegration getKinesis() {
+    return kinesis;
+  }
+
+  public void setKinesis(KinesisIntegration kinesis) {
+    this.kinesis = kinesis;
+  }
+
+  public Integration dynamodb(DynamodbIntegration dynamodb) {
+    this.dynamodb = dynamodb;
+    return this;
+  }
+
+   /**
+   * Amazon DynamoDB details, must have one of aws_access_key or aws_role
+   * @return dynamodb
+  **/
+
+@JsonProperty("dynamodb")
+@ApiModelProperty(value = "Amazon DynamoDB details, must have one of aws_access_key or aws_role")
+  public DynamodbIntegration getDynamodb() {
+    return dynamodb;
+  }
+
+  public void setDynamodb(DynamodbIntegration dynamodb) {
+    this.dynamodb = dynamodb;
+  }
+
+  public Integration redshift(RedshiftIntegration redshift) {
+    this.redshift = redshift;
+    return this;
+  }
+
+   /**
+   * Amazon Redshift details
+   * @return redshift
+  **/
+
+@JsonProperty("redshift")
+@ApiModelProperty(value = "Amazon Redshift details")
+  public RedshiftIntegration getRedshift() {
+    return redshift;
+  }
+
+  public void setRedshift(RedshiftIntegration redshift) {
+    this.redshift = redshift;
+  }
+
+  public Integration gcs(GcsIntegration gcs) {
+    this.gcs = gcs;
+    return this;
+  }
+
+   /**
+   * GCS details
+   * @return gcs
+  **/
+
+@JsonProperty("gcs")
+@ApiModelProperty(value = "GCS details")
+  public GcsIntegration getGcs() {
+    return gcs;
+  }
+
+  public void setGcs(GcsIntegration gcs) {
+    this.gcs = gcs;
+  }
+
   public Integration aws(AwsKeyIntegration aws) {
     this.aws = aws;
     return this;
@@ -201,26 +317,6 @@ public class Integration {
     this.gcpServiceAccount = gcpServiceAccount;
   }
 
-  public Integration redshift(RedshiftIntegration redshift) {
-    this.redshift = redshift;
-    return this;
-  }
-
-   /**
-   * details of an AWS Redshift integration
-   * @return redshift
-  **/
-
-@JsonProperty("redshift")
-@ApiModelProperty(value = "details of an AWS Redshift integration")
-  public RedshiftIntegration getRedshift() {
-    return redshift;
-  }
-
-  public void setRedshift(RedshiftIntegration redshift) {
-    this.redshift = redshift;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -235,15 +331,19 @@ public class Integration {
         Objects.equals(this.createdBy, integration.createdBy) &&
         Objects.equals(this.name, integration.name) &&
         Objects.equals(this.description, integration.description) &&
+        Objects.equals(this.s3, integration.s3) &&
+        Objects.equals(this.kinesis, integration.kinesis) &&
+        Objects.equals(this.dynamodb, integration.dynamodb) &&
+        Objects.equals(this.redshift, integration.redshift) &&
+        Objects.equals(this.gcs, integration.gcs) &&
         Objects.equals(this.aws, integration.aws) &&
         Objects.equals(this.awsExternalId, integration.awsExternalId) &&
-        Objects.equals(this.gcpServiceAccount, integration.gcpServiceAccount) &&
-        Objects.equals(this.redshift, integration.redshift);
+        Objects.equals(this.gcpServiceAccount, integration.gcpServiceAccount);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(createdAt, createdBy, name, description, aws, awsExternalId, gcpServiceAccount, redshift);
+    return Objects.hash(createdAt, createdBy, name, description, s3, kinesis, dynamodb, redshift, gcs, aws, awsExternalId, gcpServiceAccount);
   }
 
 
@@ -256,10 +356,14 @@ public class Integration {
     sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    s3: ").append(toIndentedString(s3)).append("\n");
+    sb.append("    kinesis: ").append(toIndentedString(kinesis)).append("\n");
+    sb.append("    dynamodb: ").append(toIndentedString(dynamodb)).append("\n");
+    sb.append("    redshift: ").append(toIndentedString(redshift)).append("\n");
+    sb.append("    gcs: ").append(toIndentedString(gcs)).append("\n");
     sb.append("    aws: ").append(toIndentedString(aws)).append("\n");
     sb.append("    awsExternalId: ").append(toIndentedString(awsExternalId)).append("\n");
     sb.append("    gcpServiceAccount: ").append(toIndentedString(gcpServiceAccount)).append("\n");
-    sb.append("    redshift: ").append(toIndentedString(redshift)).append("\n");
     sb.append("}");
     return sb.toString();
   }

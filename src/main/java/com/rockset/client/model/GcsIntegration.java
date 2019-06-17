@@ -20,6 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.rockset.client.model.GcpServiceAccount;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -27,54 +28,31 @@ import java.io.IOException;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * SourceGcs
+ * GcsIntegration
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-17T23:04:08.108Z")
-public class SourceGcs {
-  @SerializedName("bucket")
-  private String bucket = null;
+public class GcsIntegration {
+  @SerializedName("gcp_service_account")
+  private GcpServiceAccount gcpServiceAccount = null;
 
-  @SerializedName("prefix")
-  private String prefix = null;
-
-  public SourceGcs bucket(String bucket) {
-    this.bucket = bucket;
+  public GcsIntegration gcpServiceAccount(GcpServiceAccount gcpServiceAccount) {
+    this.gcpServiceAccount = gcpServiceAccount;
     return this;
   }
 
    /**
-   * name of GCS bucket you want to ingest from
-   * @return bucket
+   * credentials for an AWS key integration
+   * @return gcpServiceAccount
   **/
 
-@JsonProperty("bucket")
-@ApiModelProperty(example = "server-logs", value = "name of GCS bucket you want to ingest from")
-  public String getBucket() {
-    return bucket;
+@JsonProperty("gcp_service_account")
+@ApiModelProperty(value = "credentials for an AWS key integration")
+  public GcpServiceAccount getGcpServiceAccount() {
+    return gcpServiceAccount;
   }
 
-  public void setBucket(String bucket) {
-    this.bucket = bucket;
-  }
-
-  public SourceGcs prefix(String prefix) {
-    this.prefix = prefix;
-    return this;
-  }
-
-   /**
-   * Prefix that selects keys to ingest.
-   * @return prefix
-  **/
-
-@JsonProperty("prefix")
-@ApiModelProperty(example = "prefix/to/keys", value = "Prefix that selects keys to ingest.")
-  public String getPrefix() {
-    return prefix;
-  }
-
-  public void setPrefix(String prefix) {
-    this.prefix = prefix;
+  public void setGcpServiceAccount(GcpServiceAccount gcpServiceAccount) {
+    this.gcpServiceAccount = gcpServiceAccount;
   }
 
 
@@ -86,24 +64,22 @@ public class SourceGcs {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SourceGcs sourceGcs = (SourceGcs) o;
-    return Objects.equals(this.bucket, sourceGcs.bucket) &&
-        Objects.equals(this.prefix, sourceGcs.prefix);
+    GcsIntegration gcsIntegration = (GcsIntegration) o;
+    return Objects.equals(this.gcpServiceAccount, gcsIntegration.gcpServiceAccount);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(bucket, prefix);
+    return Objects.hash(gcpServiceAccount);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SourceGcs {\n");
+    sb.append("class GcsIntegration {\n");
     
-    sb.append("    bucket: ").append(toIndentedString(bucket)).append("\n");
-    sb.append("    prefix: ").append(toIndentedString(prefix)).append("\n");
+    sb.append("    gcpServiceAccount: ").append(toIndentedString(gcpServiceAccount)).append("\n");
     sb.append("}");
     return sb.toString();
   }

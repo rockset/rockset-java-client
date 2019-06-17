@@ -20,10 +20,11 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.rockset.client.model.AwsExternalIdIntegration;
-import com.rockset.client.model.AwsKeyIntegration;
-import com.rockset.client.model.GcpServiceAccount;
+import com.rockset.client.model.DynamodbIntegration;
+import com.rockset.client.model.GcsIntegration;
+import com.rockset.client.model.KinesisIntegration;
 import com.rockset.client.model.RedshiftIntegration;
+import com.rockset.client.model.S3Integration;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -33,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateIntegrationRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-13T17:30:07.788Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-17T23:04:08.108Z")
 public class CreateIntegrationRequest {
   @SerializedName("name")
   private String name = null;
@@ -41,17 +42,20 @@ public class CreateIntegrationRequest {
   @SerializedName("description")
   private String description = null;
 
-  @SerializedName("aws")
-  private AwsKeyIntegration aws = null;
+  @SerializedName("s3")
+  private S3Integration s3 = null;
 
-  @SerializedName("aws_external_id")
-  private AwsExternalIdIntegration awsExternalId = null;
+  @SerializedName("kinesis")
+  private KinesisIntegration kinesis = null;
 
-  @SerializedName("gcp_service_account")
-  private GcpServiceAccount gcpServiceAccount = null;
+  @SerializedName("dynamodb")
+  private DynamodbIntegration dynamodb = null;
 
   @SerializedName("redshift")
   private RedshiftIntegration redshift = null;
+
+  @SerializedName("gcs")
+  private GcsIntegration gcs = null;
 
   public CreateIntegrationRequest name(String name) {
     this.name = name;
@@ -93,55 +97,64 @@ public class CreateIntegrationRequest {
     this.description = description;
   }
 
-  public CreateIntegrationRequest aws(AwsKeyIntegration aws) {
-    this.aws = aws;
+  public CreateIntegrationRequest s3(S3Integration s3) {
+    this.s3 = s3;
     return this;
   }
 
    /**
-   * credentials for an AWS key integration
-   * @return aws
+   * Amazon S3 details, must have one of aws_access_key or aws_role
+   * @return s3
   **/
 
-@JsonProperty("aws")
-@ApiModelProperty(value = "credentials for an AWS key integration")
-  public AwsKeyIntegration getAws() {
-    return aws;
+@JsonProperty("s3")
+@ApiModelProperty(value = "Amazon S3 details, must have one of aws_access_key or aws_role")
+  public S3Integration getS3() {
+    return s3;
   }
 
-  public void setAws(AwsKeyIntegration aws) {
-    this.aws = aws;
+  public void setS3(S3Integration s3) {
+    this.s3 = s3;
   }
 
-   /**
-   * details for an AWS External Id integration
-   * @return awsExternalId
-  **/
-
-@JsonProperty("aws_external_id")
-@ApiModelProperty(value = "details for an AWS External Id integration")
-  public AwsExternalIdIntegration getAwsExternalId() {
-    return awsExternalId;
-  }
-
-  public CreateIntegrationRequest gcpServiceAccount(GcpServiceAccount gcpServiceAccount) {
-    this.gcpServiceAccount = gcpServiceAccount;
+  public CreateIntegrationRequest kinesis(KinesisIntegration kinesis) {
+    this.kinesis = kinesis;
     return this;
   }
 
    /**
-   * details of a GCP Service Account integration
-   * @return gcpServiceAccount
+   * Amazon Kinesis details, must have one of aws_access_key or aws_role
+   * @return kinesis
   **/
 
-@JsonProperty("gcp_service_account")
-@ApiModelProperty(value = "details of a GCP Service Account integration")
-  public GcpServiceAccount getGcpServiceAccount() {
-    return gcpServiceAccount;
+@JsonProperty("kinesis")
+@ApiModelProperty(value = "Amazon Kinesis details, must have one of aws_access_key or aws_role")
+  public KinesisIntegration getKinesis() {
+    return kinesis;
   }
 
-  public void setGcpServiceAccount(GcpServiceAccount gcpServiceAccount) {
-    this.gcpServiceAccount = gcpServiceAccount;
+  public void setKinesis(KinesisIntegration kinesis) {
+    this.kinesis = kinesis;
+  }
+
+  public CreateIntegrationRequest dynamodb(DynamodbIntegration dynamodb) {
+    this.dynamodb = dynamodb;
+    return this;
+  }
+
+   /**
+   * Amazon DynamoDB details, must have one of aws_access_key or aws_role
+   * @return dynamodb
+  **/
+
+@JsonProperty("dynamodb")
+@ApiModelProperty(value = "Amazon DynamoDB details, must have one of aws_access_key or aws_role")
+  public DynamodbIntegration getDynamodb() {
+    return dynamodb;
+  }
+
+  public void setDynamodb(DynamodbIntegration dynamodb) {
+    this.dynamodb = dynamodb;
   }
 
   public CreateIntegrationRequest redshift(RedshiftIntegration redshift) {
@@ -150,18 +163,38 @@ public class CreateIntegrationRequest {
   }
 
    /**
-   * details of AWS Redshift integration
+   * Amazon Redshift details
    * @return redshift
   **/
 
 @JsonProperty("redshift")
-@ApiModelProperty(value = "details of AWS Redshift integration")
+@ApiModelProperty(value = "Amazon Redshift details")
   public RedshiftIntegration getRedshift() {
     return redshift;
   }
 
   public void setRedshift(RedshiftIntegration redshift) {
     this.redshift = redshift;
+  }
+
+  public CreateIntegrationRequest gcs(GcsIntegration gcs) {
+    this.gcs = gcs;
+    return this;
+  }
+
+   /**
+   * GCS details
+   * @return gcs
+  **/
+
+@JsonProperty("gcs")
+@ApiModelProperty(value = "GCS details")
+  public GcsIntegration getGcs() {
+    return gcs;
+  }
+
+  public void setGcs(GcsIntegration gcs) {
+    this.gcs = gcs;
   }
 
 
@@ -176,15 +209,16 @@ public class CreateIntegrationRequest {
     CreateIntegrationRequest createIntegrationRequest = (CreateIntegrationRequest) o;
     return Objects.equals(this.name, createIntegrationRequest.name) &&
         Objects.equals(this.description, createIntegrationRequest.description) &&
-        Objects.equals(this.aws, createIntegrationRequest.aws) &&
-        Objects.equals(this.awsExternalId, createIntegrationRequest.awsExternalId) &&
-        Objects.equals(this.gcpServiceAccount, createIntegrationRequest.gcpServiceAccount) &&
-        Objects.equals(this.redshift, createIntegrationRequest.redshift);
+        Objects.equals(this.s3, createIntegrationRequest.s3) &&
+        Objects.equals(this.kinesis, createIntegrationRequest.kinesis) &&
+        Objects.equals(this.dynamodb, createIntegrationRequest.dynamodb) &&
+        Objects.equals(this.redshift, createIntegrationRequest.redshift) &&
+        Objects.equals(this.gcs, createIntegrationRequest.gcs);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, description, aws, awsExternalId, gcpServiceAccount, redshift);
+    return Objects.hash(name, description, s3, kinesis, dynamodb, redshift, gcs);
   }
 
 
@@ -195,10 +229,11 @@ public class CreateIntegrationRequest {
     
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
-    sb.append("    aws: ").append(toIndentedString(aws)).append("\n");
-    sb.append("    awsExternalId: ").append(toIndentedString(awsExternalId)).append("\n");
-    sb.append("    gcpServiceAccount: ").append(toIndentedString(gcpServiceAccount)).append("\n");
+    sb.append("    s3: ").append(toIndentedString(s3)).append("\n");
+    sb.append("    kinesis: ").append(toIndentedString(kinesis)).append("\n");
+    sb.append("    dynamodb: ").append(toIndentedString(dynamodb)).append("\n");
     sb.append("    redshift: ").append(toIndentedString(redshift)).append("\n");
+    sb.append("    gcs: ").append(toIndentedString(gcs)).append("\n");
     sb.append("}");
     return sb.toString();
   }
