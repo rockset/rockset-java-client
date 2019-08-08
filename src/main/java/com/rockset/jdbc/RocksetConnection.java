@@ -32,6 +32,7 @@ import java.sql.SQLXML;
 import java.sql.Savepoint;
 import java.sql.Statement;
 import java.sql.Struct;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -527,7 +528,8 @@ public class RocksetConnection implements Connection {
     if (params != null) {
       q.parameters(params);
     }
-    final  QueryRequest request = new QueryRequest().sql(q);
+
+    final QueryRequest request = new QueryRequest().sql(q);
     return client.query(request);
   }
 
@@ -538,12 +540,21 @@ public class RocksetConnection implements Connection {
     return client.listCollections(getSchema());
   }
 
+  // TODO also check for quotes withing string
+  String quoteIdentifier(String value) {
+    String result = "\"";
+    result += value;
+    result += "\"";
+    return result;
+  }
+
   //
   // Get schema for a table
   //
   QueryResponse describeTable(String name) throws Exception {
     RocksetDriver.log("Entry: describeTable " + name);
-    String sql = "describe \"" + getSchema() + "." + name + "\";";
+    String sql = String.format("describe %s.%s",
+        quoteIdentifier(getSchema()), quoteIdentifier(name));
     QueryResponse resp =  startQuery(sql, null, null);
     RocksetDriver.log("Exit: describeTable " + name);
     return resp;
