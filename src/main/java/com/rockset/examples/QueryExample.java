@@ -10,7 +10,7 @@ public class QueryExample {
 
     QueryRequest request = new QueryRequest()
                                 .sql(new QueryRequestSql()
-                                        .query("select * from \"_info.events\""));
+                                        .query("SELECT * FROM \"_events\" LIMIT 10"));
 
     try {
       QueryResponse response = rs.query(request);
