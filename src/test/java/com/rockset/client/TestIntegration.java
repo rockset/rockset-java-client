@@ -20,8 +20,9 @@ public class TestIntegration {
     String apiKey = System.getenv("ROCKSET_APIKEY");
     String apiServer = System.getenv("ROCKSET_APISERVER");
     if (apiKey == null || apiServer == null) {
-      throw new Exception("If you want to run unit tests "
-                          + "Please set ROCKSET_APIKEY and ROCKSET_APISERVER");
+      throw new Exception(
+              "To run unit tests, please set ROCKSET_APIKEY and ROCKSET_APISERVER " +
+                      "environment variables.");
     }
 
     this.client = new RocksetClient(apiKey, apiServer);

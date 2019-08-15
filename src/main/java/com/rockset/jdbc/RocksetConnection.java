@@ -76,25 +76,9 @@ public class RocksetConnection implements Connection {
     this.schema.set(DEFAULT_SCHEMA);
     this.catalog.set(DEFAULT_CATALOG);
 
-    String apiServer = "";
-    try {
-      URI hostURI = new URI(uri.toString().substring(RocksetDriver.JDBC_URL_START.length()));
-      apiServer = hostURI.getHost();
-    } catch (URISyntaxException e) {
-      // ignore
-    }
-
     // Create a rockset client connection.
-    String apiKey = info.getProperty("apikey");
-    // if username and password provided, override the apikey
-    if (info.getProperty("user") != null && info.getProperty("user").equals("apikey")) {
-      apiKey = info.getProperty("password");
-    }
-
-    if (apiServer.isEmpty() && info.getProperty("endpoint") != null) {
-      apiServer = info.getProperty("endpoint");
-    }
-
+    String apiKey = getApiKey(info);
+    String apiServer = getApiServer(uri, info);
     this.client = new RocksetClient(apiKey, apiServer, "jdbc");
 
     timeZoneId.set(TimeZone.getDefault().getID());
@@ -558,6 +542,44 @@ public class RocksetConnection implements Connection {
     QueryResponse resp =  startQuery(sql, null, null);
     RocksetDriver.log("Exit: describeTable " + name);
     return resp;
+  }
+
+  private static String getApiKey(Properties info) {
+    // TODO: We should stop supporting 'apikey' property after we are certain that no customer would
+    // ever use an older version.
+    String apiKey = info.getProperty("apiKey");
+    if (apiKey == null) {
+      apiKey = info.getProperty("apikey");
+    }
+    // If username and password provided, override the apikey.
+    if (info.getProperty("user") != null &&
+            info.getProperty("user").toLowerCase().equals("apikey")) {
+      apiKey = info.getProperty("password");
+    }
+    return apiKey;
+  }
+
+  private static String getApiServer(URI uri, Properties info) {
+    // TODO: We should stop supporting 'apiserver' and 'endpoint' properties after we are certain
+    // that no customer would ever use an older version.
+    String apiServer = "";
+    try {
+      URI hostURI = new URI(uri.toString().substring(RocksetDriver.JDBC_URL_START.length()));
+      apiServer = hostURI.getHost();
+    } catch (URISyntaxException e) {
+      // ignore
+    }
+
+    if (apiServer.isEmpty() && info.getProperty("apiserver") != null) {
+      apiServer = info.getProperty("apiserver");
+    }
+    if (apiServer.isEmpty() && info.getProperty("apiServer") != null) {
+      apiServer = info.getProperty("apiServer");
+    }
+    if (apiServer.isEmpty() && info.getProperty("endpoint") != null) {
+      apiServer = info.getProperty("endpoint");
+    }
+    return apiServer;
   }
 
   private void checkOpen() throws SQLException {

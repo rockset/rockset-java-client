@@ -60,19 +60,20 @@ public class TestJdbcPreparedStatement
 
   @BeforeSuite
   public void setUp() throws Exception {
-    String apikey = System.getenv("ROCKSET_APIKEY");
-    String endpoint = System.getenv("ROCKSET_APISERVER");
-    if (apikey == null || endpoint == null) {
-      throw new Exception("If you want to run unit tests "
-                          + "Please set ROCKSET_APIKEY and ROCKSET_APISERVER");
+    String apiKey = System.getenv("ROCKSET_APIKEY");
+    String apiServer = System.getenv("ROCKSET_APISERVER");
+    if (apiKey == null || apiServer == null) {
+      throw new Exception(
+              "To run unit tests, please set ROCKSET_APIKEY and ROCKSET_APISERVER " +
+                      "environment variables.");
     }
     this.property = new Properties();
-    this.property.setProperty("apikey", apikey);
-    this.property.setProperty("endpoint", endpoint);
+    this.property.setProperty("apiKey", apiKey);
+    this.property.setProperty("apiServer", apiServer);
 
     // create the Rockset test client
-    testClient = new RocksetClient(property.getProperty("apikey"),
-                                   property.getProperty("endpoint"));
+    testClient = new RocksetClient(property.getProperty("apiKey"),
+                                   property.getProperty("apiServer"));
     // Register JDBC driver
     Class.forName(JDBC_DRIVER);
   }
