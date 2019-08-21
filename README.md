@@ -34,7 +34,7 @@ Add this dependency to your project's POM:
 </dependency>
 ```
 
-You can see a few [sample examples](https://github.com/rockset/rockset-java-client/tree/dhruba_feedback/examples) of how to create a collection, how to put documents in a collection and how to use SQL to query your collections. There are also a set of [javadocs](http://docs.rockset.com/java-client/com/rockset/client/RocksetClient.html) that you can look to build your application.
+You can see a few [sample examples](https://github.com/rockset/rockset-java-client/blob/master/src/main/java/com/rockset/examples) of how to create a collection, how to put documents in a collection and how to use SQL to query your collections. There are also a set of [javadocs](http://docs.rockset.com/java-client/com/rockset/client/RocksetClient.html) that you can look to build your application.
 
 ## Testing
 Set ROCKSET_APIKEY with the API key in the environment variables. To run test:
