@@ -1454,7 +1454,7 @@ public class RocksetResultSet implements ResultSet {
       return 0;
     }
     if (value instanceof NumericNode) {
-      return (Number) (((NumericNode)value).longValue());
+      return (Number) (((NumericNode)value).doubleValue());
     }
     if (value instanceof BooleanNode) {
       BooleanNode n = (BooleanNode)(value);
