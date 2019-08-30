@@ -177,8 +177,9 @@ public class RocksetResultSet implements ResultSet {
 
   @Override
   public boolean wasNull() throws SQLException {
-    log(prefix + "wasNull is false");
-    return wasNull.get();
+    boolean result = wasNull.get();
+    log(prefix + "wasNull is " + result);
+    return result;
   }
 
   @Override
@@ -275,9 +276,11 @@ public class RocksetResultSet implements ResultSet {
       throws SQLException {
     log(prefix + "columnIndex getDate " + columnIndex);
     JsonNode value = column(columnIndex);
-    if (value == null) {
+    if (value == null || value.get("value") == null) {
+      wasNull.set(true);
       return null;
     }
+    wasNull.set(false);
 
     String date = value.get("value").asText();
 
@@ -1364,7 +1367,9 @@ public class RocksetResultSet implements ResultSet {
       ObjectMapper mapper = new ObjectMapper();
       Object onedoc = resultSet.get(rowIndex.get());
       JsonNode docRootNode = mapper.readTree(mapper.writeValueAsString(onedoc));
-      return docRootNode.get(columnName);
+      JsonNode value = docRootNode.get(columnName);
+      wasNull.set(value == null);
+      return value;
     } catch (Exception e) {
       throw new SQLException("Error processing column index " + index
           + " exception " + e.getMessage());
@@ -1397,14 +1402,16 @@ public class RocksetResultSet implements ResultSet {
 
   private Time getTime(int columnIndex, DateTimeZone localTimeZone) throws SQLException {
 
-    Object value = column(columnIndex);
-    if (value == null) {
+    JsonNode value = column(columnIndex);
+    if (value == null || value.get("value") == null) {
+      wasNull.set(true);
       return null;
     }
+    wasNull.set(false);
 
     Column columnInfo = columnInfo(columnIndex);
     if (columnInfo.getType() == Column.ColumnTypes.TIME) {
-      String time = ((JsonNode) value).get("value").asText();
+      String time = value.get("value").asText();
       try {
         return Time.valueOf(time);
       } catch (IllegalArgumentException e) {
@@ -1417,17 +1424,19 @@ public class RocksetResultSet implements ResultSet {
 
   private Timestamp getTimestamp(int columnIndex, DateTimeZone localTimeZone)
       throws SQLException {
-    Object value = column(columnIndex);
+    JsonNode value = column(columnIndex);
     if (value == null) {
+      wasNull.set(true);
       return null;
     }
+    wasNull.set(false);
 
     Column columnInfo = columnInfo(columnIndex);
     if (columnInfo.getType() == Column.ColumnTypes.TIMESTAMP) {
       try {
         java.time.format.DateTimeFormatter format =
                 java.time.format.DateTimeFormatter.ofPattern("[uuuu-MM-dd'T'HH:mm:ss.SSS'Z'][uuuu-MM-dd'T'HH:mm:ss.SSSSSS'Z']");
-        LocalDateTime dateTime = LocalDateTime.parse(((JsonNode) value).asText(), format);
+        LocalDateTime dateTime = LocalDateTime.parse(value.asText(), format);
         ZonedDateTime zonedDateTime = dateTime.atZone(ZoneId.of("UTC"));
         Instant instant = zonedDateTime.toInstant();
         return Timestamp.from(instant);
