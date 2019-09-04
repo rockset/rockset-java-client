@@ -44,7 +44,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
@@ -56,8 +55,6 @@ import java.util.logging.Logger;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.DateTimeFormatterBuilder;
-import org.joda.time.format.DateTimeParser;
 import org.joda.time.format.ISODateTimeFormat;
 
 public class RocksetResultSet implements ResultSet {
@@ -67,27 +64,13 @@ public class RocksetResultSet implements ResultSet {
   static final DateTimeFormatter DATE_FORMATTER = ISODateTimeFormat.date();
   static final DateTimeFormatter TIME_FORMATTER = DateTimeFormat.forPattern(
           "HH:mm:ss.SSS");
-  private static final DateTimeFormatter TIME_WITH_TIME_ZONE_FORMATTER =
-      new DateTimeFormatterBuilder()
-      .append(DateTimeFormat.forPattern("HH:mm:ss.SSS ZZZ").getPrinter(),
-          new DateTimeParser[] {
-              DateTimeFormat.forPattern("HH:mm:ss.SSS Z").getParser(),
-              DateTimeFormat.forPattern("HH:mm:ss.SSS ZZZ").getParser(),
-          })
-      .toFormatter()
-      .withOffsetParsed();
-
   static final DateTimeFormatter TIMESTAMP_FORMATTER =
       DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS");
-  private static final DateTimeFormatter TIMESTAMP_WITH_TIME_ZONE_FORMATTER =
-      new DateTimeFormatterBuilder()
-      .append(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS ZZZ").getPrinter(),
-          new DateTimeParser[] {
-              DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS Z").getParser(),
-              DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS ZZZ").getParser(),
-          })
-      .toFormatter()
-      .withOffsetParsed();
+
+  static final java.time.format.DateTimeFormatter DATETIME_PARSE_FORMAT =
+      java.time.format.DateTimeFormatter.ofPattern("[uuuu-MM-dd'T'HH:mm:ss][uuuu-MM-dd'T'HH:mm:ss.SSS]");
+  static final java.time.format.DateTimeFormatter TIMESTAMP_PARSE_FORMAT =
+      java.time.format.DateTimeFormatter.ofPattern("[uuuu-MM-dd'T'HH:mm:ss.SSS'Z'][uuuu-MM-dd'T'HH:mm:ss.SSSSSS'Z']");
 
   private static final int YEAR_FIELD = 0;
   private static final int MONTH_FIELD = 1;
@@ -283,12 +266,6 @@ public class RocksetResultSet implements ResultSet {
     wasNull.set(false);
 
     String date = value.get("value").asText();
-
-    // SQL doesn't have DATETIME, strip the TIME part and return just
-    // the date
-    if (date.indexOf('T') != -1) {
-      date = date.substring(0, date.indexOf('T'));
-    }
     try {
       return Date.valueOf(date);
     } catch (IllegalArgumentException e) {
@@ -460,6 +437,7 @@ public class RocksetResultSet implements ResultSet {
       case java.sql.Types.TIME:
         return getTime(columnIndex);
       case java.sql.Types.TIMESTAMP:
+      case Types.TIMESTAMP_WITH_TIMEZONE:
         return getTimestamp(columnIndex);
       case java.sql.Types.ARRAY:
         return getArray(columnIndex);
@@ -1401,7 +1379,7 @@ public class RocksetResultSet implements ResultSet {
   }
 
   private Time getTime(int columnIndex, DateTimeZone localTimeZone) throws SQLException {
-
+    log(prefix + "columnIndex getTime " + columnIndex);
     JsonNode value = column(columnIndex);
     if (value == null || value.get("value") == null) {
       wasNull.set(true);
@@ -1422,8 +1400,12 @@ public class RocksetResultSet implements ResultSet {
             + columnInfo.getType());
   }
 
+  // NOTE: This handles both SQL timestamps with timezones (aka Rockset timestamp type) and
+  // SQL timestamps without timezones (aka Rockset datetime type). This is because in both cases
+  // a JDBC client can call getTimestamp since the column type is timestamp.
   private Timestamp getTimestamp(int columnIndex, DateTimeZone localTimeZone)
       throws SQLException {
+    log(prefix + "columnIndex getTimestamp " + columnIndex);
     JsonNode value = column(columnIndex);
     if (value == null) {
       wasNull.set(true);
@@ -1432,11 +1414,24 @@ public class RocksetResultSet implements ResultSet {
     wasNull.set(false);
 
     Column columnInfo = columnInfo(columnIndex);
-    if (columnInfo.getType() == Column.ColumnTypes.TIMESTAMP) {
+    if (columnInfo.getType() == Column.ColumnTypes.DATETIME) {
+      if (value.get("value") == null) {
+        wasNull.set(true);
+        return null;
+      }
+
       try {
-        java.time.format.DateTimeFormatter format =
-                java.time.format.DateTimeFormatter.ofPattern("[uuuu-MM-dd'T'HH:mm:ss.SSS'Z'][uuuu-MM-dd'T'HH:mm:ss.SSSSSS'Z']");
-        LocalDateTime dateTime = LocalDateTime.parse(value.asText(), format);
+        LocalDateTime dateTime = LocalDateTime.parse(value.get("value").asText(), DATETIME_PARSE_FORMAT);
+        ZonedDateTime zonedDateTime = dateTime.atZone(ZoneId.of("UTC"));
+        Instant instant = zonedDateTime.toInstant();
+        return Timestamp.from(instant);
+      } catch (Exception e) {
+        throw new SQLException("Invalid datetime from server: " + value, e);
+      }
+    }
+    else if (columnInfo.getType() == Column.ColumnTypes.TIMESTAMP) {
+      try {
+        LocalDateTime dateTime = LocalDateTime.parse(value.asText(), TIMESTAMP_PARSE_FORMAT);
         ZonedDateTime zonedDateTime = dateTime.atZone(ZoneId.of("UTC"));
         Instant instant = zonedDateTime.toInstant();
         return Timestamp.from(instant);
@@ -1445,7 +1440,7 @@ public class RocksetResultSet implements ResultSet {
       }
     }
 
-    throw new IllegalArgumentException("Expected column to be a timestamp type but is "
+    throw new IllegalArgumentException("Expected column to be a datetime/timestamp type but is "
             + columnInfo.getType());
   }
 

@@ -184,14 +184,15 @@ class RocksetTable {
         sqlType = Types.DATE;
         sqlTypeName = "date";
       } else if (rockType.equals("datetime")) {
-        // No sql type DATETIME
-        sqlType = Types.DATE;
+        // Rockset datetime == SQL timestamp
+        sqlType = Types.TIMESTAMP;
         sqlTypeName = "datetime";
       } else if (rockType.equals("time")) {
         sqlType = Types.TIME;
         sqlTypeName = "time";
       } else if (rockType.equals("timestamp")) {
-        sqlType = Types.TIMESTAMP;
+        // Rockset timestamp == SQL timestamp with timezone
+        sqlType = Types.TIMESTAMP_WITH_TIMEZONE;
         sqlTypeName = "timestamp";
       } else if (rockType.equals("null_type")) {
         sqlType = Types.NULL;
