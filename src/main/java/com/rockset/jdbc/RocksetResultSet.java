@@ -43,11 +43,12 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
-
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
@@ -1346,7 +1347,7 @@ public class RocksetResultSet implements ResultSet {
       Object onedoc = resultSet.get(rowIndex.get());
       JsonNode docRootNode = mapper.readTree(mapper.writeValueAsString(onedoc));
       JsonNode value = docRootNode.get(columnName);
-      wasNull.set(value == null);
+      wasNull.set((value == null) || (value instanceof NullNode));
       return value;
     } catch (Exception e) {
       throw new SQLException("Error processing column index " + index
@@ -1483,52 +1484,77 @@ public class RocksetResultSet implements ResultSet {
 
     try {
       if (response.getResults().size() > 0) {
-        // If the server has not filled up the field types, then extract it from
-        // the first record in the result set.
-        logger.info("Extracting column information from first record in resultset");
-        Object onedoc = response.getResults().get(0);
-        JsonNode docRootNode = mapper.readTree(mapper.writeValueAsString(onedoc));
+          Set<String> fieldNames = new HashSet<>();
+          // Loop through all the rows to get the fields and (their first
+          // non-null) types.
+          for (int i = 0; i < response.getResults().size(); ++i) {
+            logger.info("Extracting column information from record " + i +
+                        " in resultset");
+            Object onedoc = response.getResults().get(i);
+            JsonNode docRootNode = mapper.
+                readTree(mapper.writeValueAsString(onedoc));
 
-        Iterator<Map.Entry<String,JsonNode>> fields = docRootNode.fields();
-        while (fields.hasNext()) {
-          Map.Entry<String, JsonNode> field = fields.next();
-          JsonNode value = field.getValue();
-          Column.ColumnTypes type = Column.ColumnTypes.fromValue(value.getNodeType().toString());
-          if (type.equals(Column.ColumnTypes.STRING)) {
-            java.time.format.DateTimeFormatter format =
-                    java.time.format.DateTimeFormatter.ofPattern("uuuu-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
-            try {
-              LocalDateTime.parse(value.asText(), format);
-              type = Column.ColumnTypes.TIMESTAMP;
-            } catch (DateTimeParseException e) {
-              // ignore
-            }
-          }
-          if (type.equals(Column.ColumnTypes.OBJECT)) {
-            if (value.get("__rockset_type") != null) {
-              type = Column.ColumnTypes.fromValue(value.get("__rockset_type").asText());
-            }
-          }
-
-          Column c = new Column(field.getKey(), type);
-          out.add(c);
+            Iterator<Map.Entry<String,JsonNode>> fields = docRootNode.fields();
+            while (fields.hasNext()) {
+                Map.Entry<String, JsonNode> field = fields.next();
+                String fieldName = field.getKey();
+                if (fieldNames.contains(fieldName)) {
+                    // This fieldname was already found to have a non-null type
+                    // in a previous record.
+                    continue;
+                }
+                JsonNode value = field.getValue();
+                Column.ColumnTypes type = Column.ColumnTypes.
+                    fromValue(value.getNodeType().toString());
+                log("getColumns::column name "+ fieldName +  " type: " +
+                    type.toString());
+                // Skip over the fields with null type unless all values for that
+                // field are null
+                if (type.equals(Column.ColumnTypes.NULL) &&
+                    i != response.getResults().size() - 1) {
+                    continue;
+                }
+                if (type.equals(Column.ColumnTypes.STRING)) {
+                    java.time.format.DateTimeFormatter format = TIMESTAMP_PARSE_FORMAT;
+                    try {
+                        LocalDateTime.parse(value.asText(), format);
+                        type = Column.ColumnTypes.TIMESTAMP;
+                    } catch (DateTimeParseException e) {
+                    // ignore
+                    }
+                }
+                if (type.equals(Column.ColumnTypes.OBJECT)) {
+                    if (value.get("__rockset_type") != null) {
+                    type = Column.ColumnTypes.
+                        fromValue(value.get("__rockset_type").asText());
+                    }
+                }
+                Column c = new Column(fieldName, type);
+                out.add(c);
+                fieldNames.add(fieldName);
+             }
         }
-      } else if (response.getColumnFields() != null && response.getColumnFields().size() > 0) {
-        logger.info("Extracting column information from explicit fields");
-        for (QueryFieldType field: response.getColumnFields()) {
-          Column.ColumnTypes valueType = Column.ColumnTypes.fromValue(field.getType());
-
-          // If the server is not sending a valid type, then use a default type
-          if (valueType == null) {
-            valueType = Column.ColumnTypes.STRING;
+      } else if (response.getColumnFields() != null &&
+                 response.getColumnFields().size() > 0) {
+          // If this is not a select star query, and has returned 0 rows.
+          // Extrapolate the fields from query response's getColumnFields
+          logger.info("Extracting column information from explicit fields");
+          for (QueryFieldType field: response.getColumnFields()) {
+              Column.ColumnTypes valueType = Column.ColumnTypes.
+                                           fromValue(field.getType());
+              // If the server is not sending a valid type, then use a default type
+              if (valueType == null) {
+                  valueType = Column.ColumnTypes.STRING;
+              }
+              Column c = new Column(field.getName(), valueType);
+              out.add(c);
           }
-          Column c = new Column(field.getName(), valueType);
-          out.add(c);
-        }
       }
       return out;
     } catch (Exception e) {
-      throw new SQLException("Error processing first row to extract column info "
+        log("Error processing row to extract column info "
+            + " exception " + e.getMessage());
+        throw new SQLException("Error processing row to extract column info "
           + " exception " + e.getMessage());
     }
   }

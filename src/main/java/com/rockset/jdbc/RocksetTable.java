@@ -24,7 +24,7 @@ class RocksetTable {
   private RocksetResultSet describe;
   final ObjectMapper mapper;
 
-  // column index to retriece type information in describe results
+  // column index to retrieve type information in describe results
   final int fieldNameIndex = 1;
   final int fieldTypeIndex = 2;
 
