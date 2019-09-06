@@ -95,11 +95,13 @@ public class RocksetResultSetMetaData implements ResultSetMetaData {
 
   @Override
   public String getSchemaName(int column) throws SQLException {
+    // TODO(ari): Don't just return the default
     return RocksetConnection.DEFAULT_SCHEMA;
   }
 
   @Override
   public String getCatalogName(int column) throws SQLException {
+    // TODO(ari): Don't just return the default
     return RocksetConnection.DEFAULT_CATALOG;
   }
 

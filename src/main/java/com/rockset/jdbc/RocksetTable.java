@@ -19,6 +19,8 @@ import java.util.Map;
 
 class RocksetTable {
 
+  private String catalog;
+  private String schema;
   private String tableName;
   private QueryResponse response;
   private RocksetResultSet describe;
@@ -28,7 +30,10 @@ class RocksetTable {
   final int fieldNameIndex = 1;
   final int fieldTypeIndex = 2;
 
-  public RocksetTable(String tableNamePattern, QueryResponse response) throws SQLException {
+  public RocksetTable(String catalog, String schema, String tableNamePattern,
+                      QueryResponse response) throws SQLException {
+    this.catalog = catalog;
+    this.schema = schema;
     this.tableName = requireNonNull(tableNamePattern, "tableName is null");
     this.response = requireNonNull(response, "tableName is null");
     this.mapper = new ObjectMapper();
@@ -201,8 +206,8 @@ class RocksetTable {
         throw new Exception("Unknown rockset type " + rockType);
       }
 
-      String str = "{\"TABLE_CAT\": \"" + RocksetConnection.DEFAULT_CATALOG + "\""
-                    + ", \"TABLE_SCHEM\": \"" + RocksetConnection.DEFAULT_SCHEMA + "\""
+      String str = "{\"TABLE_CAT\": \"" + this.catalog + "\""
+                    + ", \"TABLE_SCHEM\": \"" + this.schema + "\""
                     + ", \"TABLE_NAME\": \"" + tableName  + "\"";
       str += ", \"COLUMN_NAME\": \"" + fieldName  + "\"";
       str += ", \"DATA_TYPE\": " + sqlType;

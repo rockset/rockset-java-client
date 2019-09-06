@@ -6,11 +6,12 @@ import static java.nio.charset.StandardCharsets.US_ASCII;
 import static java.util.Objects.requireNonNull;
 
 import com.rockset.client.RocksetClient;
+import com.rockset.client.model.Collection;
 import com.rockset.client.model.QueryParameter;
 import com.rockset.client.model.QueryRequest;
 import com.rockset.client.model.QueryRequestSql;
 import com.rockset.client.model.QueryResponse;
-import com.rockset.client.model.Collection;
+import com.rockset.client.model.Workspace;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -43,6 +44,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 public class RocksetConnection implements Connection {
 
@@ -415,6 +417,7 @@ public class RocksetConnection implements Connection {
   @Override
   public void setSchema(String schema) throws SQLException {
     checkOpen();
+    RocksetDriver.log("setSchema() setting schema to " + schema);
     this.schema.set(schema);
   }
 
@@ -520,8 +523,12 @@ public class RocksetConnection implements Connection {
   //
   // List all collections
   //
+  List<Collection> listCollections(String schema) throws Exception {
+    return client.listCollections(schema);
+  }
+
   List<Collection> listCollections() throws Exception {
-    return client.listCollections(getSchema());
+    return listCollections(getSchema());
   }
 
   // TODO also check for quotes withing string
@@ -535,13 +542,23 @@ public class RocksetConnection implements Connection {
   //
   // Get schema for a table
   //
-  QueryResponse describeTable(String name) throws Exception {
+  QueryResponse describeTable(String schema, String name) throws Exception {
     RocksetDriver.log("Entry: describeTable " + name);
     String sql = String.format("describe %s.%s",
-        quoteIdentifier(getSchema()), quoteIdentifier(name));
+        quoteIdentifier(schema), quoteIdentifier(name));
     QueryResponse resp =  startQuery(sql, null, null);
     RocksetDriver.log("Exit: describeTable " + name);
     return resp;
+  }
+
+  QueryResponse describeTable(String name) throws Exception {
+    return describeTable(getSchema(), name);
+  }
+
+  List<String> getWorkspaces() throws Exception {
+    return client.listWorkspaces().stream()
+        .map(Workspace::getName)
+        .collect(Collectors.toList());
   }
 
   private static String getApiKey(Properties info) {

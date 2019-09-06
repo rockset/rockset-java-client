@@ -18,7 +18,6 @@ import java.sql.SQLFeatureNotSupportedException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class RocksetDatabaseMetaData implements DatabaseMetaData {
@@ -780,19 +779,14 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
       columns.add(col10);
 
       // Fetch all collections and sort them.
-      List<Collection> collections =  connection.listCollections();
-      Collections.sort(collections, new Comparator<Collection>() {
-          public int compare(Collection r1, Collection r2) {
-            return r1.getName().compareTo(r2.getName());
-          }
-        });
+      List<Collection> collections =  connection.listCollections(schemaPattern);
 
       // each row refers to a collection
       ObjectMapper mapper = new ObjectMapper();
       List<Object> data = new ArrayList<Object>();
       for (Collection collection:  collections) {
-        String str = "{\"TABLE_CAT\": \"" + RocksetConnection.DEFAULT_CATALOG + "\""
-                    + ", \"TABLE_SCHEM\": \"" + RocksetConnection.DEFAULT_SCHEMA + "\""
+        String str = "{\"TABLE_CAT\": \"" + catalog + "\""
+                    + ", \"TABLE_SCHEM\": \"" + schemaPattern + "\""
                     + ", \"TABLE_NAME\": \"" + collection.getName()  + "\""
                     + ", \"TABLE_TYPE\": \"" + "TABLE" + "\""
                     + ", \"TYPE_CAT\": \"\""
@@ -831,14 +825,19 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
     columns.add(col2);
 
     try {
-      ObjectMapper mapper = new ObjectMapper();
-      String str = "{\"TABLE_SCHEM\": \"" + RocksetConnection.DEFAULT_SCHEMA
-                    + "\", \"TABLE_CATALOG\": \""
-                    + RocksetConnection.DEFAULT_CATALOG
-                    + "\" }";
-      JsonNode docRootNode = mapper.readTree(str);
       List<Object> data = new ArrayList<Object>();
-      data.add(docRootNode);
+      ObjectMapper mapper = new ObjectMapper();
+
+      List<String> schemas = connection.getWorkspaces();
+      Collections.sort(schemas);
+      for (String workspace : schemas) {
+        String str = "{\"TABLE_SCHEM\": \"" + workspace
+            + "\", \"TABLE_CATALOG\": \""
+            + connection.getCatalog()
+            + "\" }";
+        JsonNode docRootNode = mapper.readTree(str);
+        data.add(docRootNode);
+      }
       RocksetDriver.log("Exit : RocksetDatabaseMetaData getSchemas");
       return new RocksetResultSet(columns, data);
     } catch (Exception e) {
@@ -860,7 +859,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
 
     try {
       ObjectMapper mapper = new ObjectMapper();
-      String str = "{\"TABLE_CAT\": \"" + RocksetConnection.DEFAULT_CATALOG
+      String str = "{\"TABLE_CAT\": \"" + connection.getCatalog()
                     + "\" }";
       JsonNode docRootNode = mapper.readTree(str);
       List<Object> data = new ArrayList<Object>();
@@ -914,11 +913,11 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
     RocksetDriver.log("Entry : RocksetDatabaseMetaData getColumns");
 
     try {
-      List<Collection> collections =  connection.listCollections();
+      List<Collection> collections =  connection.listCollections(schemaPattern);
       for (Collection collection: collections) {
         if (collection.getName().equals(tableNamePattern)) {
-          RocksetTable table = new RocksetTable(tableNamePattern,
-                connection.describeTable(tableNamePattern));
+          RocksetTable table = new RocksetTable(catalog, schemaPattern,
+              tableNamePattern, connection.describeTable(schemaPattern, tableNamePattern));
           ResultSet resultSet = table.getColumns();
           RocksetDriver.log("Exit : RocksetDatabaseMetaData getColumns");
           return resultSet;
@@ -977,8 +976,8 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
 
       ObjectMapper mapper = new ObjectMapper();
       List<Object> data = new ArrayList<Object>();
-      String str = "{\"TABLE_CAT\": \"" + RocksetConnection.DEFAULT_CATALOG + "\""
-                    + ", \"TABLE_SCHEM\": \"" + RocksetConnection.DEFAULT_SCHEMA + "\""
+      String str = "{\"TABLE_CAT\": \"" + catalog + "\""
+                    + ", \"TABLE_SCHEM\": \"" + schema + "\""
                     + ", \"TABLE_NAME\": \"" + table  + "\""
                     + ", \"COLUMN_NAME\": \"" + "_id" + "\""
                     + ", \"KEY_SEQ\": " + 1
