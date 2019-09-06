@@ -89,15 +89,16 @@ public class FirstExample {
       int colCatIndex = rs.findColumn("TABLE_CATALOG");
       int colSchemaIndex = rs.findColumn("TABLE_SCHEM");
 
-      int found = 0;
+      boolean foundCommons = false;
       while (rs.next()) {
-        found++;
         String value = rs.getString(colSchemaIndex);
-        Assert.assertTrue(value.equals("commons"));
+        if (value.equals("commons")) {
+          foundCommons = true;
+        }
         value = rs.getString(colCatIndex);
-        Assert.assertTrue(value.equals("rockset"));
+        Assert.assertEquals(value, "rockset");
       }
-      Assert.assertEquals(1, found);
+      Assert.assertTrue(foundCommons);
     } finally {
       cleanup(stmt, conn);
     }
