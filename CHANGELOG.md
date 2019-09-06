@@ -1,5 +1,12 @@
 # Rockset Java Client Changelog
 
+## v0.6.1 2019-09-06
+- Properly set ResultSet.wasNull for cleaner null handling in higher level applications
+- Fix bug where floats were truncated to ints
+- Map Rockset datetime to SQL timestamp type and Rockset timestamp to SQL timestamp with timezone type
+- Ignore nulls when determining column type for result set
+- Display all Rockset workspaces in the schema list
+
 ## v0.6.0 2019-06-17
 - move from cloud-level integrations to service-level integrations: DynamoDB, GCS, Kinesis, Redshift, S3
 

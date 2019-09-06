@@ -34,7 +34,7 @@ public class RocksetClient {
       apiClient = new ApiClient()
           .setApiKey(apiKey)
           .setApiServer(apiServer)
-          .setVersion("0.6.0")// TODO: figure out how we can set this dynamically.
+          .setVersion("0.6.1")// TODO: figure out how we can set this dynamically.
           .setUserAgent(userAgent);
 
       apiKeys = new ApiKeysApi(this.apiClient);
