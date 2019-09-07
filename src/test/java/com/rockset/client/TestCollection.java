@@ -52,7 +52,7 @@ public class TestCollection {
   public void testDeleteCollection() throws Exception {
 
     // wait for collection to be created successfully before deleting
-    await("testDeleteCollection querying").atMost(60, TimeUnit.SECONDS)
+    await("testDeleteCollection querying").atMost(120, TimeUnit.SECONDS)
         .until((Callable<Boolean>) () -> {
 
           try {
