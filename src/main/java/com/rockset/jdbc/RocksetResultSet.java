@@ -40,6 +40,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -69,9 +70,16 @@ public class RocksetResultSet implements ResultSet {
       DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS");
 
   static final java.time.format.DateTimeFormatter DATETIME_PARSE_FORMAT =
-      java.time.format.DateTimeFormatter.ofPattern("[uuuu-MM-dd'T'HH:mm:ss][uuuu-MM-dd'T'HH:mm:ss.SSS]");
+      new java.time.format.DateTimeFormatterBuilder()
+          .appendPattern("uuuu-MM-dd'T'HH:mm:ss")
+          .appendFraction(ChronoField.MICRO_OF_SECOND, 0, 6, true)
+          .toFormatter();
   static final java.time.format.DateTimeFormatter TIMESTAMP_PARSE_FORMAT =
-      java.time.format.DateTimeFormatter.ofPattern("[uuuu-MM-dd'T'HH:mm:ss.SSS'Z'][uuuu-MM-dd'T'HH:mm:ss.SSSSSS'Z']");
+      new java.time.format.DateTimeFormatterBuilder()
+          .appendPattern("uuuu-MM-dd'T'HH:mm:ss")
+          .appendFraction(ChronoField.MICRO_OF_SECOND, 0, 6, true)
+          .appendPattern("'Z'")
+          .toFormatter();
 
   private static final int YEAR_FIELD = 0;
   private static final int MONTH_FIELD = 1;
