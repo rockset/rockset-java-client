@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * InputField
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-17T23:04:08.108Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-09-24T21:00:33.445Z")
 public class InputField {
   @SerializedName("field_name")
   private String fieldName = null;
@@ -58,6 +58,7 @@ public class InputField {
       return String.valueOf(value);
     }
 
+    @com.fasterxml.jackson.annotation.JsonCreator
     public static IfMissingEnum fromValue(String text) {
       for (IfMissingEnum b : IfMissingEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {

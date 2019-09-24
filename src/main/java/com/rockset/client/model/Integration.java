@@ -20,14 +20,13 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.rockset.client.model.AwsExternalIdIntegration;
-import com.rockset.client.model.AwsKeyIntegration;
 import com.rockset.client.model.DynamodbIntegration;
-import com.rockset.client.model.GcpServiceAccount;
 import com.rockset.client.model.GcsIntegration;
+import com.rockset.client.model.KafkaIntegration;
 import com.rockset.client.model.KinesisIntegration;
 import com.rockset.client.model.RedshiftIntegration;
 import com.rockset.client.model.S3Integration;
+import com.rockset.client.model.SegmentIntegration;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -39,7 +38,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "Integrations that can be associated with data sources to create collections. Only one type of integration may be specified.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-17T23:04:08.108Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-09-24T21:00:33.445Z")
 public class Integration {
   @SerializedName("created_at")
   private String createdAt = null;
@@ -68,14 +67,11 @@ public class Integration {
   @SerializedName("gcs")
   private GcsIntegration gcs = null;
 
-  @SerializedName("aws")
-  private AwsKeyIntegration aws = null;
+  @SerializedName("segment")
+  private SegmentIntegration segment = null;
 
-  @SerializedName("aws_external_id")
-  private AwsExternalIdIntegration awsExternalId = null;
-
-  @SerializedName("gcp_service_account")
-  private GcpServiceAccount gcpServiceAccount = null;
+  @SerializedName("kafka")
+  private KafkaIntegration kafka = null;
 
   public Integration createdAt(String createdAt) {
     this.createdAt = createdAt;
@@ -257,64 +253,44 @@ public class Integration {
     this.gcs = gcs;
   }
 
-  public Integration aws(AwsKeyIntegration aws) {
-    this.aws = aws;
+  public Integration segment(SegmentIntegration segment) {
+    this.segment = segment;
     return this;
   }
 
    /**
-   * credentials for an AWS key integration
-   * @return aws
+   * Segment details
+   * @return segment
   **/
 
-@JsonProperty("aws")
-@ApiModelProperty(value = "credentials for an AWS key integration")
-  public AwsKeyIntegration getAws() {
-    return aws;
+@JsonProperty("segment")
+@ApiModelProperty(value = "Segment details")
+  public SegmentIntegration getSegment() {
+    return segment;
   }
 
-  public void setAws(AwsKeyIntegration aws) {
-    this.aws = aws;
+  public void setSegment(SegmentIntegration segment) {
+    this.segment = segment;
   }
 
-  public Integration awsExternalId(AwsExternalIdIntegration awsExternalId) {
-    this.awsExternalId = awsExternalId;
+  public Integration kafka(KafkaIntegration kafka) {
+    this.kafka = kafka;
     return this;
   }
 
    /**
-   * details of an AWS External Id integration
-   * @return awsExternalId
+   * Kafka details
+   * @return kafka
   **/
 
-@JsonProperty("aws_external_id")
-@ApiModelProperty(value = "details of an AWS External Id integration")
-  public AwsExternalIdIntegration getAwsExternalId() {
-    return awsExternalId;
+@JsonProperty("kafka")
+@ApiModelProperty(value = "Kafka details")
+  public KafkaIntegration getKafka() {
+    return kafka;
   }
 
-  public void setAwsExternalId(AwsExternalIdIntegration awsExternalId) {
-    this.awsExternalId = awsExternalId;
-  }
-
-  public Integration gcpServiceAccount(GcpServiceAccount gcpServiceAccount) {
-    this.gcpServiceAccount = gcpServiceAccount;
-    return this;
-  }
-
-   /**
-   * details of a GCP Service Account integration
-   * @return gcpServiceAccount
-  **/
-
-@JsonProperty("gcp_service_account")
-@ApiModelProperty(value = "details of a GCP Service Account integration")
-  public GcpServiceAccount getGcpServiceAccount() {
-    return gcpServiceAccount;
-  }
-
-  public void setGcpServiceAccount(GcpServiceAccount gcpServiceAccount) {
-    this.gcpServiceAccount = gcpServiceAccount;
+  public void setKafka(KafkaIntegration kafka) {
+    this.kafka = kafka;
   }
 
 
@@ -336,14 +312,13 @@ public class Integration {
         Objects.equals(this.dynamodb, integration.dynamodb) &&
         Objects.equals(this.redshift, integration.redshift) &&
         Objects.equals(this.gcs, integration.gcs) &&
-        Objects.equals(this.aws, integration.aws) &&
-        Objects.equals(this.awsExternalId, integration.awsExternalId) &&
-        Objects.equals(this.gcpServiceAccount, integration.gcpServiceAccount);
+        Objects.equals(this.segment, integration.segment) &&
+        Objects.equals(this.kafka, integration.kafka);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(createdAt, createdBy, name, description, s3, kinesis, dynamodb, redshift, gcs, aws, awsExternalId, gcpServiceAccount);
+    return Objects.hash(createdAt, createdBy, name, description, s3, kinesis, dynamodb, redshift, gcs, segment, kafka);
   }
 
 
@@ -361,9 +336,8 @@ public class Integration {
     sb.append("    dynamodb: ").append(toIndentedString(dynamodb)).append("\n");
     sb.append("    redshift: ").append(toIndentedString(redshift)).append("\n");
     sb.append("    gcs: ").append(toIndentedString(gcs)).append("\n");
-    sb.append("    aws: ").append(toIndentedString(aws)).append("\n");
-    sb.append("    awsExternalId: ").append(toIndentedString(awsExternalId)).append("\n");
-    sb.append("    gcpServiceAccount: ").append(toIndentedString(gcpServiceAccount)).append("\n");
+    sb.append("    segment: ").append(toIndentedString(segment)).append("\n");
+    sb.append("    kafka: ").append(toIndentedString(kafka)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -24,9 +24,11 @@ import com.rockset.client.model.FormatParams;
 import com.rockset.client.model.SourceDynamoDb;
 import com.rockset.client.model.SourceFileUpload;
 import com.rockset.client.model.SourceGcs;
+import com.rockset.client.model.SourceKafka;
 import com.rockset.client.model.SourceKinesis;
 import com.rockset.client.model.SourceRedshift;
 import com.rockset.client.model.SourceS3;
+import com.rockset.client.model.Status;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -38,11 +40,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "Details about the data source for the given collection. Only one of the following fields are allowed to be defined. Only collections can act as data sources for views. ")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-17T23:04:08.108Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-09-24T21:00:33.445Z")
 public class Source {
-  @SerializedName("type")
-  private String type = null;
-
   @SerializedName("integration_name")
   private String integrationName = null;
 
@@ -52,31 +51,26 @@ public class Source {
   @SerializedName("kinesis")
   private SourceKinesis kinesis = null;
 
-  @SerializedName("dynamodb")
-  private SourceDynamoDb dynamodb = null;
-
   @SerializedName("gcs")
   private SourceGcs gcs = null;
 
   @SerializedName("redshift")
   private SourceRedshift redshift = null;
 
+  @SerializedName("dynamodb")
+  private SourceDynamoDb dynamodb = null;
+
   @SerializedName("file_upload")
   private SourceFileUpload fileUpload = null;
 
+  @SerializedName("kafka")
+  private SourceKafka kafka = null;
+
+  @SerializedName("status")
+  private Status status = null;
+
   @SerializedName("format_params")
   private FormatParams formatParams = null;
-
-   /**
-   * has value &#x60;source&#x60; for a source object
-   * @return type
-  **/
-
-@JsonProperty("type")
-@ApiModelProperty(example = "user", value = "has value `source` for a source object")
-  public String getType() {
-    return type;
-  }
 
   public Source integrationName(String integrationName) {
     this.integrationName = integrationName;
@@ -138,26 +132,6 @@ public class Source {
     this.kinesis = kinesis;
   }
 
-  public Source dynamodb(SourceDynamoDb dynamodb) {
-    this.dynamodb = dynamodb;
-    return this;
-  }
-
-   /**
-   * configuration for ingestion from  a dynamodb table
-   * @return dynamodb
-  **/
-
-@JsonProperty("dynamodb")
-@ApiModelProperty(value = "configuration for ingestion from  a dynamodb table")
-  public SourceDynamoDb getDynamodb() {
-    return dynamodb;
-  }
-
-  public void setDynamodb(SourceDynamoDb dynamodb) {
-    this.dynamodb = dynamodb;
-  }
-
   public Source gcs(SourceGcs gcs) {
     this.gcs = gcs;
     return this;
@@ -198,6 +172,26 @@ public class Source {
     this.redshift = redshift;
   }
 
+  public Source dynamodb(SourceDynamoDb dynamodb) {
+    this.dynamodb = dynamodb;
+    return this;
+  }
+
+   /**
+   * configuration for ingestion from  a dynamodb table
+   * @return dynamodb
+  **/
+
+@JsonProperty("dynamodb")
+@ApiModelProperty(value = "configuration for ingestion from  a dynamodb table")
+  public SourceDynamoDb getDynamodb() {
+    return dynamodb;
+  }
+
+  public void setDynamodb(SourceDynamoDb dynamodb) {
+    this.dynamodb = dynamodb;
+  }
+
   public Source fileUpload(SourceFileUpload fileUpload) {
     this.fileUpload = fileUpload;
     return this;
@@ -216,6 +210,46 @@ public class Source {
 
   public void setFileUpload(SourceFileUpload fileUpload) {
     this.fileUpload = fileUpload;
+  }
+
+  public Source kafka(SourceKafka kafka) {
+    this.kafka = kafka;
+    return this;
+  }
+
+   /**
+   * Get kafka
+   * @return kafka
+  **/
+
+@JsonProperty("kafka")
+@ApiModelProperty(value = "")
+  public SourceKafka getKafka() {
+    return kafka;
+  }
+
+  public void setKafka(SourceKafka kafka) {
+    this.kafka = kafka;
+  }
+
+  public Source status(Status status) {
+    this.status = status;
+    return this;
+  }
+
+   /**
+   * the ingest status of this source
+   * @return status
+  **/
+
+@JsonProperty("status")
+@ApiModelProperty(value = "the ingest status of this source")
+  public Status getStatus() {
+    return status;
+  }
+
+  public void setStatus(Status status) {
+    this.status = status;
   }
 
   public Source formatParams(FormatParams formatParams) {
@@ -248,20 +282,21 @@ public class Source {
       return false;
     }
     Source source = (Source) o;
-    return Objects.equals(this.type, source.type) &&
-        Objects.equals(this.integrationName, source.integrationName) &&
+    return Objects.equals(this.integrationName, source.integrationName) &&
         Objects.equals(this.s3, source.s3) &&
         Objects.equals(this.kinesis, source.kinesis) &&
-        Objects.equals(this.dynamodb, source.dynamodb) &&
         Objects.equals(this.gcs, source.gcs) &&
         Objects.equals(this.redshift, source.redshift) &&
+        Objects.equals(this.dynamodb, source.dynamodb) &&
         Objects.equals(this.fileUpload, source.fileUpload) &&
+        Objects.equals(this.kafka, source.kafka) &&
+        Objects.equals(this.status, source.status) &&
         Objects.equals(this.formatParams, source.formatParams);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(type, integrationName, s3, kinesis, dynamodb, gcs, redshift, fileUpload, formatParams);
+    return Objects.hash(integrationName, s3, kinesis, gcs, redshift, dynamodb, fileUpload, kafka, status, formatParams);
   }
 
 
@@ -270,14 +305,15 @@ public class Source {
     StringBuilder sb = new StringBuilder();
     sb.append("class Source {\n");
     
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    integrationName: ").append(toIndentedString(integrationName)).append("\n");
     sb.append("    s3: ").append(toIndentedString(s3)).append("\n");
     sb.append("    kinesis: ").append(toIndentedString(kinesis)).append("\n");
-    sb.append("    dynamodb: ").append(toIndentedString(dynamodb)).append("\n");
     sb.append("    gcs: ").append(toIndentedString(gcs)).append("\n");
     sb.append("    redshift: ").append(toIndentedString(redshift)).append("\n");
+    sb.append("    dynamodb: ").append(toIndentedString(dynamodb)).append("\n");
     sb.append("    fileUpload: ").append(toIndentedString(fileUpload)).append("\n");
+    sb.append("    kafka: ").append(toIndentedString(kafka)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    formatParams: ").append(toIndentedString(formatParams)).append("\n");
     sb.append("}");
     return sb.toString();

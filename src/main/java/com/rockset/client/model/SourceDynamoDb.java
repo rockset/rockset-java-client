@@ -20,6 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.rockset.client.model.StatusDynamoDb;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -29,33 +30,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceDynamoDb
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-17T23:04:08.108Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-09-24T21:00:33.445Z")
 public class SourceDynamoDb {
-  @SerializedName("table_name")
-  private String tableName = null;
-
   @SerializedName("aws_region")
   private String awsRegion = null;
 
-  public SourceDynamoDb tableName(String tableName) {
-    this.tableName = tableName;
-    return this;
-  }
+  @SerializedName("table_name")
+  private String tableName = null;
 
-   /**
-   * name of DynamoDB table containing data
-   * @return tableName
-  **/
+  @SerializedName("status")
+  private StatusDynamoDb status = null;
 
-@JsonProperty("table_name")
-@ApiModelProperty(example = "dynamodb_table_name", required = true, value = "name of DynamoDB table containing data")
-  public String getTableName() {
-    return tableName;
-  }
-
-  public void setTableName(String tableName) {
-    this.tableName = tableName;
-  }
+  @SerializedName("rcu")
+  private Long rcu = null;
 
   public SourceDynamoDb awsRegion(String awsRegion) {
     this.awsRegion = awsRegion;
@@ -77,6 +64,57 @@ public class SourceDynamoDb {
     this.awsRegion = awsRegion;
   }
 
+  public SourceDynamoDb tableName(String tableName) {
+    this.tableName = tableName;
+    return this;
+  }
+
+   /**
+   * name of DynamoDB table containing data
+   * @return tableName
+  **/
+
+@JsonProperty("table_name")
+@ApiModelProperty(example = "dynamodb_table_name", required = true, value = "name of DynamoDB table containing data")
+  public String getTableName() {
+    return tableName;
+  }
+
+  public void setTableName(String tableName) {
+    this.tableName = tableName;
+  }
+
+   /**
+   * DynamoDB source status
+   * @return status
+  **/
+
+@JsonProperty("status")
+@ApiModelProperty(value = "DynamoDB source status")
+  public StatusDynamoDb getStatus() {
+    return status;
+  }
+
+  public SourceDynamoDb rcu(Long rcu) {
+    this.rcu = rcu;
+    return this;
+  }
+
+   /**
+   * Max RCU usage for scan
+   * @return rcu
+  **/
+
+@JsonProperty("rcu")
+@ApiModelProperty(example = "1000", value = "Max RCU usage for scan")
+  public Long getRcu() {
+    return rcu;
+  }
+
+  public void setRcu(Long rcu) {
+    this.rcu = rcu;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -87,13 +125,15 @@ public class SourceDynamoDb {
       return false;
     }
     SourceDynamoDb sourceDynamoDb = (SourceDynamoDb) o;
-    return Objects.equals(this.tableName, sourceDynamoDb.tableName) &&
-        Objects.equals(this.awsRegion, sourceDynamoDb.awsRegion);
+    return Objects.equals(this.awsRegion, sourceDynamoDb.awsRegion) &&
+        Objects.equals(this.tableName, sourceDynamoDb.tableName) &&
+        Objects.equals(this.status, sourceDynamoDb.status) &&
+        Objects.equals(this.rcu, sourceDynamoDb.rcu);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(tableName, awsRegion);
+    return Objects.hash(awsRegion, tableName, status, rcu);
   }
 
 
@@ -102,8 +142,10 @@ public class SourceDynamoDb {
     StringBuilder sb = new StringBuilder();
     sb.append("class SourceDynamoDb {\n");
     
-    sb.append("    tableName: ").append(toIndentedString(tableName)).append("\n");
     sb.append("    awsRegion: ").append(toIndentedString(awsRegion)).append("\n");
+    sb.append("    tableName: ").append(toIndentedString(tableName)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    rcu: ").append(toIndentedString(rcu)).append("\n");
     sb.append("}");
     return sb.toString();
   }

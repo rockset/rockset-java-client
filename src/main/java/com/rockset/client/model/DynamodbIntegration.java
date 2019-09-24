@@ -21,6 +21,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.rockset.client.model.AwsAccessKey;
+import com.rockset.client.model.AwsRole;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -30,10 +31,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * DynamodbIntegration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-17T23:04:08.108Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-09-24T21:00:33.445Z")
 public class DynamodbIntegration {
   @SerializedName("aws_access_key")
   private AwsAccessKey awsAccessKey = null;
+
+  @SerializedName("aws_role")
+  private AwsRole awsRole = null;
 
   public DynamodbIntegration awsAccessKey(AwsAccessKey awsAccessKey) {
     this.awsAccessKey = awsAccessKey;
@@ -55,6 +59,26 @@ public class DynamodbIntegration {
     this.awsAccessKey = awsAccessKey;
   }
 
+  public DynamodbIntegration awsRole(AwsRole awsRole) {
+    this.awsRole = awsRole;
+    return this;
+  }
+
+   /**
+   * role used for external id type authentication
+   * @return awsRole
+  **/
+
+@JsonProperty("aws_role")
+@ApiModelProperty(value = "role used for external id type authentication")
+  public AwsRole getAwsRole() {
+    return awsRole;
+  }
+
+  public void setAwsRole(AwsRole awsRole) {
+    this.awsRole = awsRole;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -65,12 +89,13 @@ public class DynamodbIntegration {
       return false;
     }
     DynamodbIntegration dynamodbIntegration = (DynamodbIntegration) o;
-    return Objects.equals(this.awsAccessKey, dynamodbIntegration.awsAccessKey);
+    return Objects.equals(this.awsAccessKey, dynamodbIntegration.awsAccessKey) &&
+        Objects.equals(this.awsRole, dynamodbIntegration.awsRole);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(awsAccessKey);
+    return Objects.hash(awsAccessKey, awsRole);
   }
 
 
@@ -80,6 +105,7 @@ public class DynamodbIntegration {
     sb.append("class DynamodbIntegration {\n");
     
     sb.append("    awsAccessKey: ").append(toIndentedString(awsAccessKey)).append("\n");
+    sb.append("    awsRole: ").append(toIndentedString(awsRole)).append("\n");
     sb.append("}");
     return sb.toString();
   }

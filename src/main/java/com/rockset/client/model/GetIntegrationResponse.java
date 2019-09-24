@@ -20,26 +20,20 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.rockset.client.model.Collection;
 import com.rockset.client.model.Integration;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * GetIntegrationResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-17T23:04:08.108Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-09-24T21:00:33.445Z")
 public class GetIntegrationResponse {
   @SerializedName("data")
   private Integration data = null;
-
-  @SerializedName("collections")
-  private List<Collection> collections = null;
 
   public GetIntegrationResponse data(Integration data) {
     this.data = data;
@@ -61,34 +55,6 @@ public class GetIntegrationResponse {
     this.data = data;
   }
 
-  public GetIntegrationResponse collections(List<Collection> collections) {
-    this.collections = collections;
-    return this;
-  }
-
-  public GetIntegrationResponse addCollectionsItem(Collection collectionsItem) {
-    if (this.collections == null) {
-      this.collections = new ArrayList<Collection>();
-    }
-    this.collections.add(collectionsItem);
-    return this;
-  }
-
-   /**
-   * list of collections that use the integration
-   * @return collections
-  **/
-
-@JsonProperty("collections")
-@ApiModelProperty(value = "list of collections that use the integration")
-  public List<Collection> getCollections() {
-    return collections;
-  }
-
-  public void setCollections(List<Collection> collections) {
-    this.collections = collections;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -99,13 +65,12 @@ public class GetIntegrationResponse {
       return false;
     }
     GetIntegrationResponse getIntegrationResponse = (GetIntegrationResponse) o;
-    return Objects.equals(this.data, getIntegrationResponse.data) &&
-        Objects.equals(this.collections, getIntegrationResponse.collections);
+    return Objects.equals(this.data, getIntegrationResponse.data);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data, collections);
+    return Objects.hash(data);
   }
 
 
@@ -115,7 +80,6 @@ public class GetIntegrationResponse {
     sb.append("class GetIntegrationResponse {\n");
     
     sb.append("    data: ").append(toIndentedString(data)).append("\n");
-    sb.append("    collections: ").append(toIndentedString(collections)).append("\n");
     sb.append("}");
     return sb.toString();
   }

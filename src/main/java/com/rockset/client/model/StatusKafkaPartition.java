@@ -20,8 +20,6 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.rockset.client.model.AwsAccessKey;
-import com.rockset.client.model.AwsRole;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -29,54 +27,54 @@ import java.io.IOException;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * S3Integration
+ * StatusKafkaPartition
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-09-24T21:00:33.445Z")
-public class S3Integration {
-  @SerializedName("aws_role")
-  private AwsRole awsRole = null;
+public class StatusKafkaPartition {
+  @SerializedName("partition_number")
+  private Integer partitionNumber = null;
 
-  @SerializedName("aws_access_key")
-  private AwsAccessKey awsAccessKey = null;
+  @SerializedName("num_documents_processed")
+  private Long numDocumentsProcessed = null;
 
-  public S3Integration awsRole(AwsRole awsRole) {
-    this.awsRole = awsRole;
+  public StatusKafkaPartition partitionNumber(Integer partitionNumber) {
+    this.partitionNumber = partitionNumber;
     return this;
   }
 
    /**
-   * details of an AWS cross-account role integration
-   * @return awsRole
+   * The number of this partition
+   * @return partitionNumber
   **/
 
-@JsonProperty("aws_role")
-@ApiModelProperty(value = "details of an AWS cross-account role integration")
-  public AwsRole getAwsRole() {
-    return awsRole;
+@JsonProperty("partition_number")
+@ApiModelProperty(example = "123", value = "The number of this partition")
+  public Integer getPartitionNumber() {
+    return partitionNumber;
   }
 
-  public void setAwsRole(AwsRole awsRole) {
-    this.awsRole = awsRole;
+  public void setPartitionNumber(Integer partitionNumber) {
+    this.partitionNumber = partitionNumber;
   }
 
-  public S3Integration awsAccessKey(AwsAccessKey awsAccessKey) {
-    this.awsAccessKey = awsAccessKey;
+  public StatusKafkaPartition numDocumentsProcessed(Long numDocumentsProcessed) {
+    this.numDocumentsProcessed = numDocumentsProcessed;
     return this;
   }
 
    /**
-   * credentials for an AWS access key integration
-   * @return awsAccessKey
+   * Number of documents consumed by this partition
+   * @return numDocumentsProcessed
   **/
 
-@JsonProperty("aws_access_key")
-@ApiModelProperty(value = "credentials for an AWS access key integration")
-  public AwsAccessKey getAwsAccessKey() {
-    return awsAccessKey;
+@JsonProperty("num_documents_processed")
+@ApiModelProperty(example = "1337", value = "Number of documents consumed by this partition")
+  public Long getNumDocumentsProcessed() {
+    return numDocumentsProcessed;
   }
 
-  public void setAwsAccessKey(AwsAccessKey awsAccessKey) {
-    this.awsAccessKey = awsAccessKey;
+  public void setNumDocumentsProcessed(Long numDocumentsProcessed) {
+    this.numDocumentsProcessed = numDocumentsProcessed;
   }
 
 
@@ -88,24 +86,24 @@ public class S3Integration {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    S3Integration s3Integration = (S3Integration) o;
-    return Objects.equals(this.awsRole, s3Integration.awsRole) &&
-        Objects.equals(this.awsAccessKey, s3Integration.awsAccessKey);
+    StatusKafkaPartition statusKafkaPartition = (StatusKafkaPartition) o;
+    return Objects.equals(this.partitionNumber, statusKafkaPartition.partitionNumber) &&
+        Objects.equals(this.numDocumentsProcessed, statusKafkaPartition.numDocumentsProcessed);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(awsRole, awsAccessKey);
+    return Objects.hash(partitionNumber, numDocumentsProcessed);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class S3Integration {\n");
+    sb.append("class StatusKafkaPartition {\n");
     
-    sb.append("    awsRole: ").append(toIndentedString(awsRole)).append("\n");
-    sb.append("    awsAccessKey: ").append(toIndentedString(awsAccessKey)).append("\n");
+    sb.append("    partitionNumber: ").append(toIndentedString(partitionNumber)).append("\n");
+    sb.append("    numDocumentsProcessed: ").append(toIndentedString(numDocumentsProcessed)).append("\n");
     sb.append("}");
     return sb.toString();
   }

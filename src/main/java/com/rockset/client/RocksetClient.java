@@ -94,12 +94,13 @@ public class RocksetClient {
     }
 
   /**
-   * List all collections in an organization
+   * List all collections in the specified workspace
+   * @param workspace The Rockset workspace name
    * @return List of Collection object, one for each collection
    * @throws Exception
    */
     public List<Collection> listCollections(String workspace) throws Exception {
-      return collection.list(workspace).getData();
+      return collection.workspace(workspace).getData();
     }
 
   /**

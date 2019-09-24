@@ -20,7 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.rockset.client.model.Workspace;
+import com.rockset.client.model.StatusKafkaPartition;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -30,39 +30,62 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * ListWorkspacesResponse
+ * StatusKafka
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-09-24T21:00:33.445Z")
-public class ListWorkspacesResponse {
-  @SerializedName("data")
-  private List<Workspace> data = null;
+public class StatusKafka {
+  @SerializedName("last_consumed_time")
+  private String lastConsumedTime = null;
 
-  public ListWorkspacesResponse data(List<Workspace> data) {
-    this.data = data;
-    return this;
-  }
+  @SerializedName("kafka_partitions")
+  private List<StatusKafkaPartition> kafkaPartitions = null;
 
-  public ListWorkspacesResponse addDataItem(Workspace dataItem) {
-    if (this.data == null) {
-      this.data = new ArrayList<Workspace>();
-    }
-    this.data.add(dataItem);
+  public StatusKafka lastConsumedTime(String lastConsumedTime) {
+    this.lastConsumedTime = lastConsumedTime;
     return this;
   }
 
    /**
-   * list of workspaces
-   * @return data
+   * Time at which the last document was consumed from Kafka
+   * @return lastConsumedTime
   **/
 
-@JsonProperty("data")
-@ApiModelProperty(value = "list of workspaces")
-  public List<Workspace> getData() {
-    return data;
+@JsonProperty("last_consumed_time")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "Time at which the last document was consumed from Kafka")
+  public String getLastConsumedTime() {
+    return lastConsumedTime;
   }
 
-  public void setData(List<Workspace> data) {
-    this.data = data;
+  public void setLastConsumedTime(String lastConsumedTime) {
+    this.lastConsumedTime = lastConsumedTime;
+  }
+
+  public StatusKafka kafkaPartitions(List<StatusKafkaPartition> kafkaPartitions) {
+    this.kafkaPartitions = kafkaPartitions;
+    return this;
+  }
+
+  public StatusKafka addKafkaPartitionsItem(StatusKafkaPartition kafkaPartitionsItem) {
+    if (this.kafkaPartitions == null) {
+      this.kafkaPartitions = new ArrayList<StatusKafkaPartition>();
+    }
+    this.kafkaPartitions.add(kafkaPartitionsItem);
+    return this;
+  }
+
+   /**
+   * Status info per partition
+   * @return kafkaPartitions
+  **/
+
+@JsonProperty("kafka_partitions")
+@ApiModelProperty(value = "Status info per partition")
+  public List<StatusKafkaPartition> getKafkaPartitions() {
+    return kafkaPartitions;
+  }
+
+  public void setKafkaPartitions(List<StatusKafkaPartition> kafkaPartitions) {
+    this.kafkaPartitions = kafkaPartitions;
   }
 
 
@@ -74,22 +97,24 @@ public class ListWorkspacesResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ListWorkspacesResponse listWorkspacesResponse = (ListWorkspacesResponse) o;
-    return Objects.equals(this.data, listWorkspacesResponse.data);
+    StatusKafka statusKafka = (StatusKafka) o;
+    return Objects.equals(this.lastConsumedTime, statusKafka.lastConsumedTime) &&
+        Objects.equals(this.kafkaPartitions, statusKafka.kafkaPartitions);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data);
+    return Objects.hash(lastConsumedTime, kafkaPartitions);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ListWorkspacesResponse {\n");
+    sb.append("class StatusKafka {\n");
     
-    sb.append("    data: ").append(toIndentedString(data)).append("\n");
+    sb.append("    lastConsumedTime: ").append(toIndentedString(lastConsumedTime)).append("\n");
+    sb.append("    kafkaPartitions: ").append(toIndentedString(kafkaPartitions)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -26,7 +26,6 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
-import com.rockset.client.model.ListCollectionsResponse;
 import com.rockset.client.model.OrganizationResponse;
 
 import java.lang.reflect.Type;
@@ -164,119 +163,6 @@ public class OrganizationsApi {
 
         com.squareup.okhttp.Call call = getValidateBeforeCall(progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<OrganizationResponse>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
-        return call;
-    }
-    /**
-     * Build call for list
-     * @param progressListener Progress listener
-     * @param progressRequestListener Progress request listener
-     * @return Call to execute
-     * @throws Exception If fail to serialize the request body object
-     */
-    public com.squareup.okhttp.Call listCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/v1/orgs/self/collections";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
-
-        if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
-                @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
-                    return originalResponse.newBuilder()
-                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
-                    .build();
-                }
-            });
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call listValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
-        
-
-        com.squareup.okhttp.Call call = listCall(progressListener, progressRequestListener);
-        return call;
-
-    }
-
-    /**
-     * List All Collections
-     * Retrieve all collections in an organization.
-     * @return ListCollectionsResponse
-     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
-     */
-    public ListCollectionsResponse list() throws Exception {
-        ApiResponse<ListCollectionsResponse> resp = listWithHttpInfo();
-        return resp.getData();
-    }
-
-    /**
-     * List All Collections
-     * Retrieve all collections in an organization.
-     * @return ApiResponse&lt;ListCollectionsResponse&gt;
-     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
-     */
-    public ApiResponse<ListCollectionsResponse> listWithHttpInfo() throws Exception {
-        com.squareup.okhttp.Call call = listValidateBeforeCall(null, null);
-        Type localVarReturnType = new TypeToken<ListCollectionsResponse>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
-    }
-
-    /**
-     * List All Collections (asynchronously)
-     * Retrieve all collections in an organization.
-     * @param callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws Exception If fail to process the API call, e.g. serializing the request body object
-     */
-    public com.squareup.okhttp.Call listAsync(final ApiCallback<ListCollectionsResponse> callback) throws Exception {
-
-        ProgressResponseBody.ProgressListener progressListener = null;
-        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
-
-        if (callback != null) {
-            progressListener = new ProgressResponseBody.ProgressListener() {
-                @Override
-                public void update(long bytesRead, long contentLength, boolean done) {
-                    callback.onDownloadProgress(bytesRead, contentLength, done);
-                }
-            };
-
-            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
-                @Override
-                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
-                    callback.onUploadProgress(bytesWritten, contentLength, done);
-                }
-            };
-        }
-
-        com.squareup.okhttp.Call call = listValidateBeforeCall(progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<ListCollectionsResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }

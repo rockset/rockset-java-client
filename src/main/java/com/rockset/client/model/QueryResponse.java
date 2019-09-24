@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-17T23:04:08.108Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-09-24T21:00:33.445Z")
 public class QueryResponse {
   @SerializedName("results")
   private List<Object> results = null;
@@ -43,6 +43,9 @@ public class QueryResponse {
 
   @SerializedName("stats")
   private QueryResponseStats stats = null;
+
+  @SerializedName("collections")
+  private List<String> collections = null;
 
   @SerializedName("column_fields")
   private List<QueryFieldType> columnFields = null;
@@ -123,17 +126,32 @@ public class QueryResponse {
     this.stats = stats;
   }
 
-  public QueryResponse columnFields(List<QueryFieldType> columnFields) {
-    this.columnFields = columnFields;
+  public QueryResponse collections(List<String> collections) {
+    this.collections = collections;
     return this;
   }
 
-  public QueryResponse addColumnFieldsItem(QueryFieldType columnFieldsItem) {
-    if (this.columnFields == null) {
-      this.columnFields = new ArrayList<QueryFieldType>();
+  public QueryResponse addCollectionsItem(String collectionsItem) {
+    if (this.collections == null) {
+      this.collections = new ArrayList<String>();
     }
-    this.columnFields.add(columnFieldsItem);
+    this.collections.add(collectionsItem);
     return this;
+  }
+
+   /**
+   * list of collections queried by the query
+   * @return collections
+  **/
+
+@JsonProperty("collections")
+@ApiModelProperty(value = "list of collections queried by the query")
+  public List<String> getCollections() {
+    return collections;
+  }
+
+  public void setCollections(List<String> collections) {
+    this.collections = collections;
   }
 
    /**
@@ -145,10 +163,6 @@ public class QueryResponse {
 @ApiModelProperty(value = "meta information about each column in the result set")
   public List<QueryFieldType> getColumnFields() {
     return columnFields;
-  }
-
-  public void setColumnFields(List<QueryFieldType> columnFields) {
-    this.columnFields = columnFields;
   }
 
 
@@ -164,12 +178,13 @@ public class QueryResponse {
     return Objects.equals(this.results, queryResponse.results) &&
         Objects.equals(this.fields, queryResponse.fields) &&
         Objects.equals(this.stats, queryResponse.stats) &&
+        Objects.equals(this.collections, queryResponse.collections) &&
         Objects.equals(this.columnFields, queryResponse.columnFields);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(results, fields, stats, columnFields);
+    return Objects.hash(results, fields, stats, collections, columnFields);
   }
 
 
@@ -181,6 +196,7 @@ public class QueryResponse {
     sb.append("    results: ").append(toIndentedString(results)).append("\n");
     sb.append("    fields: ").append(toIndentedString(fields)).append("\n");
     sb.append("    stats: ").append(toIndentedString(stats)).append("\n");
+    sb.append("    collections: ").append(toIndentedString(collections)).append("\n");
     sb.append("    columnFields: ").append(toIndentedString(columnFields)).append("\n");
     sb.append("}");
     return sb.toString();

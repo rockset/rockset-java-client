@@ -31,11 +31,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * User
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-17T23:04:08.108Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-09-24T21:00:33.445Z")
 public class User {
-  @SerializedName("type")
-  private String type = null;
-
   @SerializedName("created_at")
   private String createdAt = null;
 
@@ -53,17 +50,6 @@ public class User {
 
   @SerializedName("state")
   private String state = null;
-
-   /**
-   * has value &#x60;user&#x60; for a user object
-   * @return type
-  **/
-
-@JsonProperty("type")
-@ApiModelProperty(example = "user", value = "has value `user` for a user object")
-  public String getType() {
-    return type;
-  }
 
   public User createdAt(String createdAt) {
     this.createdAt = createdAt;
@@ -203,8 +189,7 @@ public class User {
       return false;
     }
     User user = (User) o;
-    return Objects.equals(this.type, user.type) &&
-        Objects.equals(this.createdAt, user.createdAt) &&
+    return Objects.equals(this.createdAt, user.createdAt) &&
         Objects.equals(this.email, user.email) &&
         Objects.equals(this.firstName, user.firstName) &&
         Objects.equals(this.lastName, user.lastName) &&
@@ -214,7 +199,7 @@ public class User {
 
   @Override
   public int hashCode() {
-    return Objects.hash(type, createdAt, email, firstName, lastName, roles, state);
+    return Objects.hash(createdAt, email, firstName, lastName, roles, state);
   }
 
 
@@ -223,7 +208,6 @@ public class User {
     StringBuilder sb = new StringBuilder();
     sb.append("class User {\n");
     
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");

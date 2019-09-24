@@ -20,8 +20,6 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.rockset.client.model.AwsAccessKey;
-import com.rockset.client.model.AwsRole;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -29,54 +27,22 @@ import java.io.IOException;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * S3Integration
+ * SegmentIntegration
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-09-24T21:00:33.445Z")
-public class S3Integration {
-  @SerializedName("aws_role")
-  private AwsRole awsRole = null;
-
-  @SerializedName("aws_access_key")
-  private AwsAccessKey awsAccessKey = null;
-
-  public S3Integration awsRole(AwsRole awsRole) {
-    this.awsRole = awsRole;
-    return this;
-  }
+public class SegmentIntegration {
+  @SerializedName("connection_string")
+  private String connectionString = null;
 
    /**
-   * details of an AWS cross-account role integration
-   * @return awsRole
+   * segment connection string
+   * @return connectionString
   **/
 
-@JsonProperty("aws_role")
-@ApiModelProperty(value = "details of an AWS cross-account role integration")
-  public AwsRole getAwsRole() {
-    return awsRole;
-  }
-
-  public void setAwsRole(AwsRole awsRole) {
-    this.awsRole = awsRole;
-  }
-
-  public S3Integration awsAccessKey(AwsAccessKey awsAccessKey) {
-    this.awsAccessKey = awsAccessKey;
-    return this;
-  }
-
-   /**
-   * credentials for an AWS access key integration
-   * @return awsAccessKey
-  **/
-
-@JsonProperty("aws_access_key")
-@ApiModelProperty(value = "credentials for an AWS access key integration")
-  public AwsAccessKey getAwsAccessKey() {
-    return awsAccessKey;
-  }
-
-  public void setAwsAccessKey(AwsAccessKey awsAccessKey) {
-    this.awsAccessKey = awsAccessKey;
+@JsonProperty("connection_string")
+@ApiModelProperty(value = "segment connection string")
+  public String getConnectionString() {
+    return connectionString;
   }
 
 
@@ -88,24 +54,22 @@ public class S3Integration {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    S3Integration s3Integration = (S3Integration) o;
-    return Objects.equals(this.awsRole, s3Integration.awsRole) &&
-        Objects.equals(this.awsAccessKey, s3Integration.awsAccessKey);
+    SegmentIntegration segmentIntegration = (SegmentIntegration) o;
+    return Objects.equals(this.connectionString, segmentIntegration.connectionString);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(awsRole, awsAccessKey);
+    return Objects.hash(connectionString);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class S3Integration {\n");
+    sb.append("class SegmentIntegration {\n");
     
-    sb.append("    awsRole: ").append(toIndentedString(awsRole)).append("\n");
-    sb.append("    awsAccessKey: ").append(toIndentedString(awsAccessKey)).append("\n");
+    sb.append("    connectionString: ").append(toIndentedString(connectionString)).append("\n");
     sb.append("}");
     return sb.toString();
   }

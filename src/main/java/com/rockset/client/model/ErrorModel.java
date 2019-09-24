@@ -14,7 +14,7 @@
 package com.rockset.client.model;
 
 import java.util.Objects;
-
+import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -24,7 +24,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -32,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "Describes details about an error")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-17T23:04:08.108Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-09-24T21:00:33.445Z")
 public class ErrorModel {
   @SerializedName("message")
   private String message = null;
@@ -70,7 +69,11 @@ public class ErrorModel {
     
     INTEGRATION_NOT_FOUND("INTEGRATIONNOTFOUND"),
     
-    ROLE_NOT_FOUND("ROLENOTFOUND");
+    ROLE_NOT_FOUND("ROLENOTFOUND"),
+    
+    CONNECTION_ERROR("CONNECTIONERROR"),
+    
+    CREATING("CREATING");
 
     private String value;
 
@@ -87,10 +90,10 @@ public class ErrorModel {
       return String.valueOf(value);
     }
 
-    @JsonCreator
+    @com.fasterxml.jackson.annotation.JsonCreator
     public static TypeEnum fromValue(String text) {
       for (TypeEnum b : TypeEnum.values()) {
-        if (String.valueOf(b.value).equalsIgnoreCase(text)) {
+        if (String.valueOf(b.value).equals(text)) {
           return b;
         }
       }

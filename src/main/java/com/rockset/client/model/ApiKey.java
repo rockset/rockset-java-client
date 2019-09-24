@@ -31,11 +31,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "API keys are used to authenticate requests to Rockset's API. An API key is tied to the user who creates it. A new API key can be created for each use case, with a maximum of 10 API keys per user.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-17T23:04:08.108Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-09-24T21:00:33.445Z")
 public class ApiKey {
-  @SerializedName("type")
-  private String type = null;
-
   @SerializedName("created_at")
   private String createdAt = null;
 
@@ -44,17 +41,6 @@ public class ApiKey {
 
   @SerializedName("key")
   private String key = null;
-
-   /**
-   * has value &#x60;api_key&#x60; for an API key object
-   * @return type
-  **/
-
-@JsonProperty("type")
-@ApiModelProperty(example = "api_key", value = "has value `api_key` for an API key object")
-  public String getType() {
-    return type;
-  }
 
   public ApiKey createdAt(String createdAt) {
     this.createdAt = createdAt;
@@ -126,15 +112,14 @@ public class ApiKey {
       return false;
     }
     ApiKey apiKey = (ApiKey) o;
-    return Objects.equals(this.type, apiKey.type) &&
-        Objects.equals(this.createdAt, apiKey.createdAt) &&
+    return Objects.equals(this.createdAt, apiKey.createdAt) &&
         Objects.equals(this.name, apiKey.name) &&
         Objects.equals(this.key, apiKey.key);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(type, createdAt, name, key);
+    return Objects.hash(createdAt, name, key);
   }
 
 
@@ -143,7 +128,6 @@ public class ApiKey {
     StringBuilder sb = new StringBuilder();
     sb.append("class ApiKey {\n");
     
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    key: ").append(toIndentedString(key)).append("\n");

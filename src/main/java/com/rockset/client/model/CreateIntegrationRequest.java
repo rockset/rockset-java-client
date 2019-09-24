@@ -22,9 +22,11 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.rockset.client.model.DynamodbIntegration;
 import com.rockset.client.model.GcsIntegration;
+import com.rockset.client.model.KafkaIntegration;
 import com.rockset.client.model.KinesisIntegration;
 import com.rockset.client.model.RedshiftIntegration;
 import com.rockset.client.model.S3Integration;
+import com.rockset.client.model.SegmentIntegration;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -34,7 +36,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateIntegrationRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-06-17T23:04:08.108Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-09-24T21:00:33.445Z")
 public class CreateIntegrationRequest {
   @SerializedName("name")
   private String name = null;
@@ -56,6 +58,12 @@ public class CreateIntegrationRequest {
 
   @SerializedName("gcs")
   private GcsIntegration gcs = null;
+
+  @SerializedName("segment")
+  private SegmentIntegration segment = null;
+
+  @SerializedName("kafka")
+  private KafkaIntegration kafka = null;
 
   public CreateIntegrationRequest name(String name) {
     this.name = name;
@@ -197,6 +205,46 @@ public class CreateIntegrationRequest {
     this.gcs = gcs;
   }
 
+  public CreateIntegrationRequest segment(SegmentIntegration segment) {
+    this.segment = segment;
+    return this;
+  }
+
+   /**
+   * Get segment
+   * @return segment
+  **/
+
+@JsonProperty("segment")
+@ApiModelProperty(value = "")
+  public SegmentIntegration getSegment() {
+    return segment;
+  }
+
+  public void setSegment(SegmentIntegration segment) {
+    this.segment = segment;
+  }
+
+  public CreateIntegrationRequest kafka(KafkaIntegration kafka) {
+    this.kafka = kafka;
+    return this;
+  }
+
+   /**
+   * Get kafka
+   * @return kafka
+  **/
+
+@JsonProperty("kafka")
+@ApiModelProperty(value = "")
+  public KafkaIntegration getKafka() {
+    return kafka;
+  }
+
+  public void setKafka(KafkaIntegration kafka) {
+    this.kafka = kafka;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -213,12 +261,14 @@ public class CreateIntegrationRequest {
         Objects.equals(this.kinesis, createIntegrationRequest.kinesis) &&
         Objects.equals(this.dynamodb, createIntegrationRequest.dynamodb) &&
         Objects.equals(this.redshift, createIntegrationRequest.redshift) &&
-        Objects.equals(this.gcs, createIntegrationRequest.gcs);
+        Objects.equals(this.gcs, createIntegrationRequest.gcs) &&
+        Objects.equals(this.segment, createIntegrationRequest.segment) &&
+        Objects.equals(this.kafka, createIntegrationRequest.kafka);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, description, s3, kinesis, dynamodb, redshift, gcs);
+    return Objects.hash(name, description, s3, kinesis, dynamodb, redshift, gcs, segment, kafka);
   }
 
 
@@ -234,6 +284,8 @@ public class CreateIntegrationRequest {
     sb.append("    dynamodb: ").append(toIndentedString(dynamodb)).append("\n");
     sb.append("    redshift: ").append(toIndentedString(redshift)).append("\n");
     sb.append("    gcs: ").append(toIndentedString(gcs)).append("\n");
+    sb.append("    segment: ").append(toIndentedString(segment)).append("\n");
+    sb.append("    kafka: ").append(toIndentedString(kafka)).append("\n");
     sb.append("}");
     return sb.toString();
   }
