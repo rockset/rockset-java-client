@@ -196,8 +196,7 @@ class RocksetTable {
         sqlType = Types.TIME;
         sqlTypeName = "time";
       } else if (rockType.equals("timestamp")) {
-        // Rockset timestamp == SQL timestamp with timezone
-        sqlType = Types.TIMESTAMP_WITH_TIMEZONE;
+        sqlType = Types.TIMESTAMP;
         sqlTypeName = "timestamp";
       } else if (rockType.equals("null_type")) {
         sqlType = Types.NULL;
