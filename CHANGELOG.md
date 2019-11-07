@@ -1,5 +1,8 @@
 # Rockset Java Client Changelog
 
+## v0.6.2 2019-11-07
+- Undo mapping from Rockset timestamp to SQL timestamp with timezone type (Tableau compatibility issue)
+
 ## v0.6.1 2019-09-06
 - Properly set ResultSet.wasNull for cleaner null handling in higher level applications
 - Fix bug where floats were truncated to ints
