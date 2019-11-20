@@ -52,7 +52,6 @@ import java.util.Map;
 import java.util.TimeZone;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Logger;
 
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
@@ -60,8 +59,6 @@ import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 
 public class RocksetResultSet implements ResultSet {
-
-  private static final Logger logger = Logger.getLogger(RocksetResultSet.class.getName());
 
   static final DateTimeFormatter DATE_FORMATTER = ISODateTimeFormat.date();
   static final DateTimeFormatter TIME_FORMATTER = DateTimeFormat.forPattern(
@@ -1496,7 +1493,7 @@ public class RocksetResultSet implements ResultSet {
           // Loop through all the rows to get the fields and (their first
           // non-null) types.
           for (int i = 0; i < response.getResults().size(); ++i) {
-            logger.info("Extracting column information from record " + i +
+            log("Extracting column information from record " + i +
                         " in resultset");
             Object onedoc = response.getResults().get(i);
             JsonNode docRootNode = mapper.
@@ -1546,7 +1543,7 @@ public class RocksetResultSet implements ResultSet {
                  response.getColumnFields().size() > 0) {
           // If this is not a select star query, and has returned 0 rows.
           // Extrapolate the fields from query response's getColumnFields
-          logger.info("Extracting column information from explicit fields");
+          log("Extracting column information from explicit fields");
           for (QueryFieldType field: response.getColumnFields()) {
               Column.ColumnTypes valueType = Column.ColumnTypes.
                                            fromValue(field.getType());
@@ -1573,7 +1570,6 @@ public class RocksetResultSet implements ResultSet {
       String name = columns.get(i).getName().toLowerCase(ENGLISH);
       if (!map.containsKey(name)) {
         map.put(name, i + 1);
-        // logger.info("Column " + name + " index " + i);
       }
     }
     return ImmutableMap.copyOf(map);
