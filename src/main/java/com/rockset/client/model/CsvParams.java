@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CsvParams
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-09-24T21:00:33.445Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-11-21T00:10:08.979Z")
 public class CsvParams {
   @SerializedName("firstLineAsColumnNames")
   private Boolean firstLineAsColumnNames = null;
@@ -87,7 +87,6 @@ public class CsvParams {
       return String.valueOf(value);
     }
 
-    @com.fasterxml.jackson.annotation.JsonCreator
     public static ColumnTypesEnum fromValue(String text) {
       for (ColumnTypesEnum b : ColumnTypesEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -116,6 +115,9 @@ public class CsvParams {
 
   @SerializedName("quoteChar")
   private String quoteChar = null;
+
+  @SerializedName("escapeChar")
+  private String escapeChar = null;
 
   public CsvParams firstLineAsColumnNames(Boolean firstLineAsColumnNames) {
     this.firstLineAsColumnNames = firstLineAsColumnNames;
@@ -253,6 +255,26 @@ public class CsvParams {
     this.quoteChar = quoteChar;
   }
 
+  public CsvParams escapeChar(String escapeChar) {
+    this.escapeChar = escapeChar;
+    return this;
+  }
+
+   /**
+   * escape character removes any special meaning from the following character,default is &#39;\\&#39;
+   * @return escapeChar
+  **/
+
+@JsonProperty("escapeChar")
+@ApiModelProperty(example = "\\", value = "escape character removes any special meaning from the following character,default is '\\'")
+  public String getEscapeChar() {
+    return escapeChar;
+  }
+
+  public void setEscapeChar(String escapeChar) {
+    this.escapeChar = escapeChar;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -268,12 +290,13 @@ public class CsvParams {
         Objects.equals(this.encoding, csvParams.encoding) &&
         Objects.equals(this.columnNames, csvParams.columnNames) &&
         Objects.equals(this.columnTypes, csvParams.columnTypes) &&
-        Objects.equals(this.quoteChar, csvParams.quoteChar);
+        Objects.equals(this.quoteChar, csvParams.quoteChar) &&
+        Objects.equals(this.escapeChar, csvParams.escapeChar);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(firstLineAsColumnNames, separator, encoding, columnNames, columnTypes, quoteChar);
+    return Objects.hash(firstLineAsColumnNames, separator, encoding, columnNames, columnTypes, quoteChar, escapeChar);
   }
 
 
@@ -288,6 +311,7 @@ public class CsvParams {
     sb.append("    columnNames: ").append(toIndentedString(columnNames)).append("\n");
     sb.append("    columnTypes: ").append(toIndentedString(columnTypes)).append("\n");
     sb.append("    quoteChar: ").append(toIndentedString(quoteChar)).append("\n");
+    sb.append("    escapeChar: ").append(toIndentedString(escapeChar)).append("\n");
     sb.append("}");
     return sb.toString();
   }

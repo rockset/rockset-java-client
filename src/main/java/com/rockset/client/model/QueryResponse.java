@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-09-24T21:00:33.445Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-11-21T00:10:08.979Z")
 public class QueryResponse {
   @SerializedName("results")
   private List<Object> results = null;
@@ -43,6 +43,9 @@ public class QueryResponse {
 
   @SerializedName("stats")
   private QueryResponseStats stats = null;
+
+  @SerializedName("warnings")
+  private List<String> warnings = null;
 
   @SerializedName("collections")
   private List<String> collections = null;
@@ -126,6 +129,34 @@ public class QueryResponse {
     this.stats = stats;
   }
 
+  public QueryResponse warnings(List<String> warnings) {
+    this.warnings = warnings;
+    return this;
+  }
+
+  public QueryResponse addWarningsItem(String warningsItem) {
+    if (this.warnings == null) {
+      this.warnings = new ArrayList<String>();
+    }
+    this.warnings.add(warningsItem);
+    return this;
+  }
+
+   /**
+   * warnings received from the query
+   * @return warnings
+  **/
+
+@JsonProperty("warnings")
+@ApiModelProperty(value = "warnings received from the query")
+  public List<String> getWarnings() {
+    return warnings;
+  }
+
+  public void setWarnings(List<String> warnings) {
+    this.warnings = warnings;
+  }
+
   public QueryResponse collections(List<String> collections) {
     this.collections = collections;
     return this;
@@ -178,13 +209,14 @@ public class QueryResponse {
     return Objects.equals(this.results, queryResponse.results) &&
         Objects.equals(this.fields, queryResponse.fields) &&
         Objects.equals(this.stats, queryResponse.stats) &&
+        Objects.equals(this.warnings, queryResponse.warnings) &&
         Objects.equals(this.collections, queryResponse.collections) &&
         Objects.equals(this.columnFields, queryResponse.columnFields);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(results, fields, stats, collections, columnFields);
+    return Objects.hash(results, fields, stats, warnings, collections, columnFields);
   }
 
 
@@ -196,6 +228,7 @@ public class QueryResponse {
     sb.append("    results: ").append(toIndentedString(results)).append("\n");
     sb.append("    fields: ").append(toIndentedString(fields)).append("\n");
     sb.append("    stats: ").append(toIndentedString(stats)).append("\n");
+    sb.append("    warnings: ").append(toIndentedString(warnings)).append("\n");
     sb.append("    collections: ").append(toIndentedString(collections)).append("\n");
     sb.append("    columnFields: ").append(toIndentedString(columnFields)).append("\n");
     sb.append("}");

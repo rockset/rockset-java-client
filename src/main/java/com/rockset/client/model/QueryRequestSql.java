@@ -32,13 +32,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryRequestSql
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-09-24T21:00:33.445Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-11-21T00:10:08.979Z")
 public class QueryRequestSql {
   @SerializedName("query")
   private String query = null;
 
   @SerializedName("parameters")
   private List<QueryParameter> parameters = null;
+
+  @SerializedName("default_row_limit")
+  private Integer defaultRowLimit = null;
+
+  @SerializedName("generate_warnings")
+  private Boolean generateWarnings = null;
 
   public QueryRequestSql query(String query) {
     this.query = query;
@@ -88,6 +94,46 @@ public class QueryRequestSql {
     this.parameters = parameters;
   }
 
+  public QueryRequestSql defaultRowLimit(Integer defaultRowLimit) {
+    this.defaultRowLimit = defaultRowLimit;
+    return this;
+  }
+
+   /**
+   * Row limit to use if no limit specified in the query
+   * @return defaultRowLimit
+  **/
+
+@JsonProperty("default_row_limit")
+@ApiModelProperty(value = "Row limit to use if no limit specified in the query")
+  public Integer getDefaultRowLimit() {
+    return defaultRowLimit;
+  }
+
+  public void setDefaultRowLimit(Integer defaultRowLimit) {
+    this.defaultRowLimit = defaultRowLimit;
+  }
+
+  public QueryRequestSql generateWarnings(Boolean generateWarnings) {
+    this.generateWarnings = generateWarnings;
+    return this;
+  }
+
+   /**
+   * Whether to generate warnings
+   * @return generateWarnings
+  **/
+
+@JsonProperty("generate_warnings")
+@ApiModelProperty(value = "Whether to generate warnings")
+  public Boolean isGenerateWarnings() {
+    return generateWarnings;
+  }
+
+  public void setGenerateWarnings(Boolean generateWarnings) {
+    this.generateWarnings = generateWarnings;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -99,12 +145,14 @@ public class QueryRequestSql {
     }
     QueryRequestSql queryRequestSql = (QueryRequestSql) o;
     return Objects.equals(this.query, queryRequestSql.query) &&
-        Objects.equals(this.parameters, queryRequestSql.parameters);
+        Objects.equals(this.parameters, queryRequestSql.parameters) &&
+        Objects.equals(this.defaultRowLimit, queryRequestSql.defaultRowLimit) &&
+        Objects.equals(this.generateWarnings, queryRequestSql.generateWarnings);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(query, parameters);
+    return Objects.hash(query, parameters, defaultRowLimit, generateWarnings);
   }
 
 
@@ -115,6 +163,8 @@ public class QueryRequestSql {
     
     sb.append("    query: ").append(toIndentedString(query)).append("\n");
     sb.append("    parameters: ").append(toIndentedString(parameters)).append("\n");
+    sb.append("    defaultRowLimit: ").append(toIndentedString(defaultRowLimit)).append("\n");
+    sb.append("    generateWarnings: ").append(toIndentedString(generateWarnings)).append("\n");
     sb.append("}");
     return sb.toString();
   }

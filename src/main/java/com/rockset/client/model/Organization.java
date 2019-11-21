@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "An organization in Rockset is a container for users and collections.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-09-24T21:00:33.445Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-11-21T00:10:08.979Z")
 public class Organization {
   @SerializedName("id")
   private String id = null;
@@ -73,7 +73,6 @@ public class Organization {
       return String.valueOf(value);
     }
 
-    @com.fasterxml.jackson.annotation.JsonCreator
     public static TierEnum fromValue(String text) {
       for (TierEnum b : TierEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -100,19 +99,20 @@ public class Organization {
   @SerializedName("tier")
   private TierEnum tier = null;
 
-  @SerializedName("qcu")
-  private Integer qcu = null;
-
   /**
    * org state
    */
   @JsonAdapter(StateEnum.Adapter.class)
   public enum StateEnum {
-    ACTIVE("ACTIVE"),
+    FREE("FREE"),
+    
+    PAID("PAID"),
     
     TRIAL("TRIAL"),
     
     TRIAL_EXPIRED("TRIALEXPIRED"),
+    
+    TRIAL_DEPLETED("TRIALDEPLETED"),
     
     DELETED("DELETED");
 
@@ -131,7 +131,6 @@ public class Organization {
       return String.valueOf(value);
     }
 
-    @com.fasterxml.jackson.annotation.JsonCreator
     public static StateEnum fromValue(String text) {
       for (StateEnum b : StateEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -258,26 +257,6 @@ public class Organization {
     this.tier = tier;
   }
 
-  public Organization qcu(Integer qcu) {
-    this.qcu = qcu;
-    return this;
-  }
-
-   /**
-   * number of QCUs
-   * @return qcu
-  **/
-
-@JsonProperty("qcu")
-@ApiModelProperty(example = "2", value = "number of QCUs")
-  public Integer getQcu() {
-    return qcu;
-  }
-
-  public void setQcu(Integer qcu) {
-    this.qcu = qcu;
-  }
-
   public Organization state(StateEnum state) {
     this.state = state;
     return this;
@@ -289,7 +268,7 @@ public class Organization {
   **/
 
 @JsonProperty("state")
-@ApiModelProperty(example = "ACTIVE", value = "org state")
+@ApiModelProperty(example = "TRIAL", value = "org state")
   public StateEnum getState() {
     return state;
   }
@@ -313,13 +292,12 @@ public class Organization {
         Objects.equals(this.displayName, organization.displayName) &&
         Objects.equals(this.companyName, organization.companyName) &&
         Objects.equals(this.tier, organization.tier) &&
-        Objects.equals(this.qcu, organization.qcu) &&
         Objects.equals(this.state, organization.state);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, createdAt, displayName, companyName, tier, qcu, state);
+    return Objects.hash(id, createdAt, displayName, companyName, tier, state);
   }
 
 
@@ -333,7 +311,6 @@ public class Organization {
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
     sb.append("    companyName: ").append(toIndentedString(companyName)).append("\n");
     sb.append("    tier: ").append(toIndentedString(tier)).append("\n");
-    sb.append("    qcu: ").append(toIndentedString(qcu)).append("\n");
     sb.append("    state: ").append(toIndentedString(state)).append("\n");
     sb.append("}");
     return sb.toString();

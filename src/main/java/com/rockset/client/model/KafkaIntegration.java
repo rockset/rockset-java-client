@@ -20,18 +20,21 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.rockset.client.model.StatusKafka;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * KafkaIntegration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-09-24T21:00:33.445Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-11-21T00:10:08.979Z")
 public class KafkaIntegration {
   @SerializedName("kafka_topic_names")
   private List<String> kafkaTopicNames = new ArrayList<String>();
@@ -60,7 +63,6 @@ public class KafkaIntegration {
       return String.valueOf(value);
     }
 
-    @com.fasterxml.jackson.annotation.JsonCreator
     public static KafkaDataFormatEnum fromValue(String text) {
       for (KafkaDataFormatEnum b : KafkaDataFormatEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -86,6 +88,9 @@ public class KafkaIntegration {
 
   @SerializedName("kafka_data_format")
   private KafkaDataFormatEnum kafkaDataFormat = null;
+
+  @SerializedName("source_status_by_topic")
+  private Map<String, StatusKafka> sourceStatusByTopic = null;
 
   @SerializedName("connection_string")
   private String connectionString = null;
@@ -136,6 +141,17 @@ public class KafkaIntegration {
   }
 
    /**
+   * The status of the Kafka source by topic
+   * @return sourceStatusByTopic
+  **/
+
+@JsonProperty("source_status_by_topic")
+@ApiModelProperty(example = "\"topic-a:DORMANT\"", value = "The status of the Kafka source by topic")
+  public Map<String, StatusKafka> getSourceStatusByTopic() {
+    return sourceStatusByTopic;
+  }
+
+   /**
    * segment connection string
    * @return connectionString
   **/
@@ -158,12 +174,13 @@ public class KafkaIntegration {
     KafkaIntegration kafkaIntegration = (KafkaIntegration) o;
     return Objects.equals(this.kafkaTopicNames, kafkaIntegration.kafkaTopicNames) &&
         Objects.equals(this.kafkaDataFormat, kafkaIntegration.kafkaDataFormat) &&
+        Objects.equals(this.sourceStatusByTopic, kafkaIntegration.sourceStatusByTopic) &&
         Objects.equals(this.connectionString, kafkaIntegration.connectionString);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(kafkaTopicNames, kafkaDataFormat, connectionString);
+    return Objects.hash(kafkaTopicNames, kafkaDataFormat, sourceStatusByTopic, connectionString);
   }
 
 
@@ -174,6 +191,7 @@ public class KafkaIntegration {
     
     sb.append("    kafkaTopicNames: ").append(toIndentedString(kafkaTopicNames)).append("\n");
     sb.append("    kafkaDataFormat: ").append(toIndentedString(kafkaDataFormat)).append("\n");
+    sb.append("    sourceStatusByTopic: ").append(toIndentedString(sourceStatusByTopic)).append("\n");
     sb.append("    connectionString: ").append(toIndentedString(connectionString)).append("\n");
     sb.append("}");
     return sb.toString();

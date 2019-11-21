@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * OutputField
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-09-24T21:00:33.445Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-11-21T00:10:08.979Z")
 public class OutputField {
   @SerializedName("field_name")
   private String fieldName = null;
@@ -62,7 +62,6 @@ public class OutputField {
       return String.valueOf(value);
     }
 
-    @com.fasterxml.jackson.annotation.JsonCreator
     public static OnErrorEnum fromValue(String text) {
       for (OnErrorEnum b : OnErrorEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {

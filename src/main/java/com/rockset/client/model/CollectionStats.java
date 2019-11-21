@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CollectionStats
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-09-24T21:00:33.445Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-11-21T00:10:08.979Z")
 public class CollectionStats {
   @SerializedName("doc_count")
   private Long docCount = null;
@@ -51,6 +51,12 @@ public class CollectionStats {
 
   @SerializedName("last_queried_ms")
   private Long lastQueriedMs = null;
+
+  @SerializedName("bytes_inserted")
+  private Long bytesInserted = null;
+
+  @SerializedName("bytes_overwritten")
+  private Long bytesOverwritten = null;
 
   public CollectionStats docCount(Long docCount) {
     this.docCount = docCount;
@@ -192,6 +198,46 @@ public class CollectionStats {
     this.lastQueriedMs = lastQueriedMs;
   }
 
+  public CollectionStats bytesInserted(Long bytesInserted) {
+    this.bytesInserted = bytesInserted;
+    return this;
+  }
+
+   /**
+   * total number of bytes inserted into the collection
+   * @return bytesInserted
+  **/
+
+@JsonProperty("bytes_inserted")
+@ApiModelProperty(example = "123456", value = "total number of bytes inserted into the collection")
+  public Long getBytesInserted() {
+    return bytesInserted;
+  }
+
+  public void setBytesInserted(Long bytesInserted) {
+    this.bytesInserted = bytesInserted;
+  }
+
+  public CollectionStats bytesOverwritten(Long bytesOverwritten) {
+    this.bytesOverwritten = bytesOverwritten;
+    return this;
+  }
+
+   /**
+   * total number of bytes overwritten in writing into the collection
+   * @return bytesOverwritten
+  **/
+
+@JsonProperty("bytes_overwritten")
+@ApiModelProperty(example = "123456", value = "total number of bytes overwritten in writing into the collection")
+  public Long getBytesOverwritten() {
+    return bytesOverwritten;
+  }
+
+  public void setBytesOverwritten(Long bytesOverwritten) {
+    this.bytesOverwritten = bytesOverwritten;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -208,12 +254,14 @@ public class CollectionStats {
         Objects.equals(this.purgedDocCount, collectionStats.purgedDocCount) &&
         Objects.equals(this.purgedDocSize, collectionStats.purgedDocSize) &&
         Objects.equals(this.lastUpdatedMs, collectionStats.lastUpdatedMs) &&
-        Objects.equals(this.lastQueriedMs, collectionStats.lastQueriedMs);
+        Objects.equals(this.lastQueriedMs, collectionStats.lastQueriedMs) &&
+        Objects.equals(this.bytesInserted, collectionStats.bytesInserted) &&
+        Objects.equals(this.bytesOverwritten, collectionStats.bytesOverwritten);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(docCount, totalSize, fillProgress, purgedDocCount, purgedDocSize, lastUpdatedMs, lastQueriedMs);
+    return Objects.hash(docCount, totalSize, fillProgress, purgedDocCount, purgedDocSize, lastUpdatedMs, lastQueriedMs, bytesInserted, bytesOverwritten);
   }
 
 
@@ -229,6 +277,8 @@ public class CollectionStats {
     sb.append("    purgedDocSize: ").append(toIndentedString(purgedDocSize)).append("\n");
     sb.append("    lastUpdatedMs: ").append(toIndentedString(lastUpdatedMs)).append("\n");
     sb.append("    lastQueriedMs: ").append(toIndentedString(lastQueriedMs)).append("\n");
+    sb.append("    bytesInserted: ").append(toIndentedString(bytesInserted)).append("\n");
+    sb.append("    bytesOverwritten: ").append(toIndentedString(bytesOverwritten)).append("\n");
     sb.append("}");
     return sb.toString();
   }

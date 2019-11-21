@@ -1,5 +1,8 @@
 # Rockset Java Client Changelog
 
+## v0.6.3 2019-11-20
+- Don't write any logs to stdout (fixes Tableau 2019.3+ compatibility issue)
+
 ## v0.6.2 2019-11-07
 - Undo mapping from Rockset timestamp to SQL timestamp with timezone type (Tableau compatibility issue)
 
