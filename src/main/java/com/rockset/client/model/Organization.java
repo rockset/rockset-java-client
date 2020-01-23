@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "An organization in Rockset is a container for users and collections.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-11-21T00:10:08.979Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-01-21T23:08:54.250Z")
 public class Organization {
   @SerializedName("id")
   private String id = null;
@@ -45,59 +45,11 @@ public class Organization {
   @SerializedName("company_name")
   private String companyName = null;
 
-  /**
-   * pricing tier
-   */
-  @JsonAdapter(TierEnum.Adapter.class)
-  public enum TierEnum {
-    FREE("FREE"),
-    
-    BASIC("BASIC"),
-    
-    PRO("PRO"),
-    
-    ENTERPRISE("ENTERPRISE");
+  @SerializedName("external_id")
+  private String externalId = null;
 
-    private String value;
-
-    TierEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TierEnum fromValue(String text) {
-      for (TierEnum b : TierEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-
-    public static class Adapter extends TypeAdapter<TierEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TierEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TierEnum read(final JsonReader jsonReader) throws IOException {
-        String value = jsonReader.nextString();
-        return TierEnum.fromValue(String.valueOf(value));
-      }
-    }
-  }
-
-  @SerializedName("tier")
-  private TierEnum tier = null;
+  @SerializedName("rockset_user")
+  private String rocksetUser = null;
 
   /**
    * org state
@@ -237,24 +189,44 @@ public class Organization {
     this.companyName = companyName;
   }
 
-  public Organization tier(TierEnum tier) {
-    this.tier = tier;
+  public Organization externalId(String externalId) {
+    this.externalId = externalId;
     return this;
   }
 
    /**
-   * pricing tier
-   * @return tier
+   * Get externalId
+   * @return externalId
   **/
 
-@JsonProperty("tier")
-@ApiModelProperty(example = "BASIC", value = "pricing tier")
-  public TierEnum getTier() {
-    return tier;
+@JsonProperty("external_id")
+@ApiModelProperty(value = "")
+  public String getExternalId() {
+    return externalId;
   }
 
-  public void setTier(TierEnum tier) {
-    this.tier = tier;
+  public void setExternalId(String externalId) {
+    this.externalId = externalId;
+  }
+
+  public Organization rocksetUser(String rocksetUser) {
+    this.rocksetUser = rocksetUser;
+    return this;
+  }
+
+   /**
+   * Get rocksetUser
+   * @return rocksetUser
+  **/
+
+@JsonProperty("rockset_user")
+@ApiModelProperty(value = "")
+  public String getRocksetUser() {
+    return rocksetUser;
+  }
+
+  public void setRocksetUser(String rocksetUser) {
+    this.rocksetUser = rocksetUser;
   }
 
   public Organization state(StateEnum state) {
@@ -291,13 +263,14 @@ public class Organization {
         Objects.equals(this.createdAt, organization.createdAt) &&
         Objects.equals(this.displayName, organization.displayName) &&
         Objects.equals(this.companyName, organization.companyName) &&
-        Objects.equals(this.tier, organization.tier) &&
+        Objects.equals(this.externalId, organization.externalId) &&
+        Objects.equals(this.rocksetUser, organization.rocksetUser) &&
         Objects.equals(this.state, organization.state);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, createdAt, displayName, companyName, tier, state);
+    return Objects.hash(id, createdAt, displayName, companyName, externalId, rocksetUser, state);
   }
 
 
@@ -310,7 +283,8 @@ public class Organization {
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
     sb.append("    companyName: ").append(toIndentedString(companyName)).append("\n");
-    sb.append("    tier: ").append(toIndentedString(tier)).append("\n");
+    sb.append("    externalId: ").append(toIndentedString(externalId)).append("\n");
+    sb.append("    rocksetUser: ").append(toIndentedString(rocksetUser)).append("\n");
     sb.append("    state: ").append(toIndentedString(state)).append("\n");
     sb.append("}");
     return sb.toString();

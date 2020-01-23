@@ -31,33 +31,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * KinesisIntegration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-11-21T00:10:08.979Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-01-21T23:08:54.250Z")
 public class KinesisIntegration {
-  @SerializedName("aws_role")
-  private AwsRole awsRole = null;
-
   @SerializedName("aws_access_key")
   private AwsAccessKey awsAccessKey = null;
 
-  public KinesisIntegration awsRole(AwsRole awsRole) {
-    this.awsRole = awsRole;
-    return this;
-  }
-
-   /**
-   * details of an AWS cross-account role integration
-   * @return awsRole
-  **/
-
-@JsonProperty("aws_role")
-@ApiModelProperty(value = "details of an AWS cross-account role integration")
-  public AwsRole getAwsRole() {
-    return awsRole;
-  }
-
-  public void setAwsRole(AwsRole awsRole) {
-    this.awsRole = awsRole;
-  }
+  @SerializedName("aws_role")
+  private AwsRole awsRole = null;
 
   public KinesisIntegration awsAccessKey(AwsAccessKey awsAccessKey) {
     this.awsAccessKey = awsAccessKey;
@@ -79,6 +59,26 @@ public class KinesisIntegration {
     this.awsAccessKey = awsAccessKey;
   }
 
+  public KinesisIntegration awsRole(AwsRole awsRole) {
+    this.awsRole = awsRole;
+    return this;
+  }
+
+   /**
+   * details of an AWS cross-account role integration
+   * @return awsRole
+  **/
+
+@JsonProperty("aws_role")
+@ApiModelProperty(value = "details of an AWS cross-account role integration")
+  public AwsRole getAwsRole() {
+    return awsRole;
+  }
+
+  public void setAwsRole(AwsRole awsRole) {
+    this.awsRole = awsRole;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -89,13 +89,13 @@ public class KinesisIntegration {
       return false;
     }
     KinesisIntegration kinesisIntegration = (KinesisIntegration) o;
-    return Objects.equals(this.awsRole, kinesisIntegration.awsRole) &&
-        Objects.equals(this.awsAccessKey, kinesisIntegration.awsAccessKey);
+    return Objects.equals(this.awsAccessKey, kinesisIntegration.awsAccessKey) &&
+        Objects.equals(this.awsRole, kinesisIntegration.awsRole);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(awsRole, awsAccessKey);
+    return Objects.hash(awsAccessKey, awsRole);
   }
 
 
@@ -104,8 +104,8 @@ public class KinesisIntegration {
     StringBuilder sb = new StringBuilder();
     sb.append("class KinesisIntegration {\n");
     
-    sb.append("    awsRole: ").append(toIndentedString(awsRole)).append("\n");
     sb.append("    awsAccessKey: ").append(toIndentedString(awsAccessKey)).append("\n");
+    sb.append("    awsRole: ").append(toIndentedString(awsRole)).append("\n");
     sb.append("}");
     return sb.toString();
   }

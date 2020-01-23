@@ -1,5 +1,10 @@
 # Rockset Java Client Changelog
 
+## v0.7.0 2020-01-21
+- introduce saved queries
+- add document patch ability
+- misc fixes and improvements
+
 ## v0.6.3 2019-11-20
 - Don't write any logs to stdout (fixes Tableau 2019.3+ compatibility issue)
 

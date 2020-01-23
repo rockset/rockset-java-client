@@ -38,19 +38,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "Integrations that can be associated with data sources to create collections. Only one type of integration may be specified.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-11-21T00:10:08.979Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-01-21T23:08:54.250Z")
 public class Integration {
-  @SerializedName("created_at")
-  private String createdAt = null;
-
-  @SerializedName("created_by")
-  private String createdBy = null;
-
   @SerializedName("name")
   private String name = null;
 
   @SerializedName("description")
   private String description = null;
+
+  @SerializedName("created_by")
+  private String createdBy = null;
+
+  @SerializedName("created_at")
+  private String createdAt = null;
 
   @SerializedName("s3")
   private S3Integration s3 = null;
@@ -72,46 +72,6 @@ public class Integration {
 
   @SerializedName("kafka")
   private KafkaIntegration kafka = null;
-
-  public Integration createdAt(String createdAt) {
-    this.createdAt = createdAt;
-    return this;
-  }
-
-   /**
-   * ISO-8601 date
-   * @return createdAt
-  **/
-
-@JsonProperty("created_at")
-@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date")
-  public String getCreatedAt() {
-    return createdAt;
-  }
-
-  public void setCreatedAt(String createdAt) {
-    this.createdAt = createdAt;
-  }
-
-  public Integration createdBy(String createdBy) {
-    this.createdBy = createdBy;
-    return this;
-  }
-
-   /**
-   * email of user who created the integration
-   * @return createdBy
-  **/
-
-@JsonProperty("created_by")
-@ApiModelProperty(example = "hello@rockset.com", required = true, value = "email of user who created the integration")
-  public String getCreatedBy() {
-    return createdBy;
-  }
-
-  public void setCreatedBy(String createdBy) {
-    this.createdBy = createdBy;
-  }
 
   public Integration name(String name) {
     this.name = name;
@@ -151,6 +111,46 @@ public class Integration {
 
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  public Integration createdBy(String createdBy) {
+    this.createdBy = createdBy;
+    return this;
+  }
+
+   /**
+   * email of user who created the integration
+   * @return createdBy
+  **/
+
+@JsonProperty("created_by")
+@ApiModelProperty(example = "hello@rockset.com", required = true, value = "email of user who created the integration")
+  public String getCreatedBy() {
+    return createdBy;
+  }
+
+  public void setCreatedBy(String createdBy) {
+    this.createdBy = createdBy;
+  }
+
+  public Integration createdAt(String createdAt) {
+    this.createdAt = createdAt;
+    return this;
+  }
+
+   /**
+   * ISO-8601 date
+   * @return createdAt
+  **/
+
+@JsonProperty("created_at")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date")
+  public String getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(String createdAt) {
+    this.createdAt = createdAt;
   }
 
   public Integration s3(S3Integration s3) {
@@ -303,10 +303,10 @@ public class Integration {
       return false;
     }
     Integration integration = (Integration) o;
-    return Objects.equals(this.createdAt, integration.createdAt) &&
-        Objects.equals(this.createdBy, integration.createdBy) &&
-        Objects.equals(this.name, integration.name) &&
+    return Objects.equals(this.name, integration.name) &&
         Objects.equals(this.description, integration.description) &&
+        Objects.equals(this.createdBy, integration.createdBy) &&
+        Objects.equals(this.createdAt, integration.createdAt) &&
         Objects.equals(this.s3, integration.s3) &&
         Objects.equals(this.kinesis, integration.kinesis) &&
         Objects.equals(this.dynamodb, integration.dynamodb) &&
@@ -318,7 +318,7 @@ public class Integration {
 
   @Override
   public int hashCode() {
-    return Objects.hash(createdAt, createdBy, name, description, s3, kinesis, dynamodb, redshift, gcs, segment, kafka);
+    return Objects.hash(name, description, createdBy, createdAt, s3, kinesis, dynamodb, redshift, gcs, segment, kafka);
   }
 
 
@@ -327,10 +327,10 @@ public class Integration {
     StringBuilder sb = new StringBuilder();
     sb.append("class Integration {\n");
     
-    sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
-    sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
+    sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    s3: ").append(toIndentedString(s3)).append("\n");
     sb.append("    kinesis: ").append(toIndentedString(kinesis)).append("\n");
     sb.append("    dynamodb: ").append(toIndentedString(dynamodb)).append("\n");

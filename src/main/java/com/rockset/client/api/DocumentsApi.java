@@ -30,6 +30,8 @@ import com.rockset.client.model.AddDocumentsRequest;
 import com.rockset.client.model.AddDocumentsResponse;
 import com.rockset.client.model.DeleteDocumentsRequest;
 import com.rockset.client.model.DeleteDocumentsResponse;
+import com.rockset.client.model.PatchDocumentsRequest;
+import com.rockset.client.model.PatchDocumentsResponse;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -337,6 +339,148 @@ public class DocumentsApi {
 
         com.squareup.okhttp.Call call = deleteValidateBeforeCall(workspace, collection, body, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<DeleteDocumentsResponse>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for patch
+     * @param workspace name of the workspace (required)
+     * @param collection name of the collection (required)
+     * @param body JSON Patch objects (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws Exception If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call patchCall(String workspace, String collection, PatchDocumentsRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/v1/orgs/self/ws/{workspace}/collections/{collection}/docs"
+            .replaceAll("\\{" + "workspace" + "\\}", apiClient.escapeString(workspace.toString()))
+            .replaceAll("\\{" + "collection" + "\\}", apiClient.escapeString(collection.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return apiClient.buildCall(localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call patchValidateBeforeCall(String workspace, String collection, PatchDocumentsRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        
+        // verify the required parameter 'workspace' is set
+        if (workspace == null) {
+            throw new Exception("Missing the required parameter 'workspace' when calling patch(Async)");
+        }
+        
+        // verify the required parameter 'collection' is set
+        if (collection == null) {
+            throw new Exception("Missing the required parameter 'collection' when calling patch(Async)");
+        }
+        
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new Exception("Missing the required parameter 'body' when calling patch(Async)");
+        }
+        
+
+        com.squareup.okhttp.Call call = patchCall(workspace, collection, body, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Patch Documents
+     * Patch documents in a collection
+     * @param workspace name of the workspace (required)
+     * @param collection name of the collection (required)
+     * @param body JSON Patch objects (required)
+     * @return PatchDocumentsResponse
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public PatchDocumentsResponse patch(String workspace, String collection, PatchDocumentsRequest body) throws Exception {
+        ApiResponse<PatchDocumentsResponse> resp = patchWithHttpInfo(workspace, collection, body);
+        return resp.getData();
+    }
+
+    /**
+     * Patch Documents
+     * Patch documents in a collection
+     * @param workspace name of the workspace (required)
+     * @param collection name of the collection (required)
+     * @param body JSON Patch objects (required)
+     * @return ApiResponse&lt;PatchDocumentsResponse&gt;
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<PatchDocumentsResponse> patchWithHttpInfo(String workspace, String collection, PatchDocumentsRequest body) throws Exception {
+        com.squareup.okhttp.Call call = patchValidateBeforeCall(workspace, collection, body, null, null);
+        Type localVarReturnType = new TypeToken<PatchDocumentsResponse>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Patch Documents (asynchronously)
+     * Patch documents in a collection
+     * @param workspace name of the workspace (required)
+     * @param collection name of the collection (required)
+     * @param body JSON Patch objects (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call patchAsync(String workspace, String collection, PatchDocumentsRequest body, final ApiCallback<PatchDocumentsResponse> callback) throws Exception {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = patchValidateBeforeCall(workspace, collection, body, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<PatchDocumentsResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }

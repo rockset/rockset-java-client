@@ -31,33 +31,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * S3Integration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-11-21T00:10:08.979Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-01-21T23:08:54.250Z")
 public class S3Integration {
-  @SerializedName("aws_role")
-  private AwsRole awsRole = null;
-
   @SerializedName("aws_access_key")
   private AwsAccessKey awsAccessKey = null;
 
-  public S3Integration awsRole(AwsRole awsRole) {
-    this.awsRole = awsRole;
-    return this;
-  }
-
-   /**
-   * details of an AWS cross-account role integration
-   * @return awsRole
-  **/
-
-@JsonProperty("aws_role")
-@ApiModelProperty(value = "details of an AWS cross-account role integration")
-  public AwsRole getAwsRole() {
-    return awsRole;
-  }
-
-  public void setAwsRole(AwsRole awsRole) {
-    this.awsRole = awsRole;
-  }
+  @SerializedName("aws_role")
+  private AwsRole awsRole = null;
 
   public S3Integration awsAccessKey(AwsAccessKey awsAccessKey) {
     this.awsAccessKey = awsAccessKey;
@@ -79,6 +59,26 @@ public class S3Integration {
     this.awsAccessKey = awsAccessKey;
   }
 
+  public S3Integration awsRole(AwsRole awsRole) {
+    this.awsRole = awsRole;
+    return this;
+  }
+
+   /**
+   * details of an AWS cross-account role integration
+   * @return awsRole
+  **/
+
+@JsonProperty("aws_role")
+@ApiModelProperty(value = "details of an AWS cross-account role integration")
+  public AwsRole getAwsRole() {
+    return awsRole;
+  }
+
+  public void setAwsRole(AwsRole awsRole) {
+    this.awsRole = awsRole;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -89,13 +89,13 @@ public class S3Integration {
       return false;
     }
     S3Integration s3Integration = (S3Integration) o;
-    return Objects.equals(this.awsRole, s3Integration.awsRole) &&
-        Objects.equals(this.awsAccessKey, s3Integration.awsAccessKey);
+    return Objects.equals(this.awsAccessKey, s3Integration.awsAccessKey) &&
+        Objects.equals(this.awsRole, s3Integration.awsRole);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(awsRole, awsAccessKey);
+    return Objects.hash(awsAccessKey, awsRole);
   }
 
 
@@ -104,8 +104,8 @@ public class S3Integration {
     StringBuilder sb = new StringBuilder();
     sb.append("class S3Integration {\n");
     
-    sb.append("    awsRole: ").append(toIndentedString(awsRole)).append("\n");
     sb.append("    awsAccessKey: ").append(toIndentedString(awsAccessKey)).append("\n");
+    sb.append("    awsRole: ").append(toIndentedString(awsRole)).append("\n");
     sb.append("}");
     return sb.toString();
   }

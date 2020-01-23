@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * RedshiftIntegration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-11-21T00:10:08.979Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-01-21T23:08:54.250Z")
 public class RedshiftIntegration {
   @SerializedName("aws_access_key")
   private AwsAccessKey awsAccessKey = null;
@@ -50,6 +50,11 @@ public class RedshiftIntegration {
   @SerializedName("s3_bucket_path")
   private String s3BucketPath = null;
 
+  public RedshiftIntegration awsAccessKey(AwsAccessKey awsAccessKey) {
+    this.awsAccessKey = awsAccessKey;
+    return this;
+  }
+
    /**
    * AWS access key credentials
    * @return awsAccessKey
@@ -59,6 +64,15 @@ public class RedshiftIntegration {
 @ApiModelProperty(value = "AWS access key credentials")
   public AwsAccessKey getAwsAccessKey() {
     return awsAccessKey;
+  }
+
+  public void setAwsAccessKey(AwsAccessKey awsAccessKey) {
+    this.awsAccessKey = awsAccessKey;
+  }
+
+  public RedshiftIntegration username(String username) {
+    this.username = username;
+    return this;
   }
 
    /**
@@ -72,6 +86,15 @@ public class RedshiftIntegration {
     return username;
   }
 
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  public RedshiftIntegration password(String password) {
+    this.password = password;
+    return this;
+  }
+
    /**
    * Password associated with Redshift cluster
    * @return password
@@ -81,6 +104,15 @@ public class RedshiftIntegration {
 @ApiModelProperty(example = "pswd....", required = true, value = "Password associated with Redshift cluster")
   public String getPassword() {
     return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  public RedshiftIntegration host(String host) {
+    this.host = host;
+    return this;
   }
 
    /**
@@ -94,6 +126,15 @@ public class RedshiftIntegration {
     return host;
   }
 
+  public void setHost(String host) {
+    this.host = host;
+  }
+
+  public RedshiftIntegration port(Integer port) {
+    this.port = port;
+    return this;
+  }
+
    /**
    * Redshift Cluster port
    * @return port
@@ -105,6 +146,15 @@ public class RedshiftIntegration {
     return port;
   }
 
+  public void setPort(Integer port) {
+    this.port = port;
+  }
+
+  public RedshiftIntegration s3BucketPath(String s3BucketPath) {
+    this.s3BucketPath = s3BucketPath;
+    return this;
+  }
+
    /**
    * unload S3 bucket path
    * @return s3BucketPath
@@ -114,6 +164,10 @@ public class RedshiftIntegration {
 @ApiModelProperty(example = "s3://redshift-unload", required = true, value = "unload S3 bucket path")
   public String getS3BucketPath() {
     return s3BucketPath;
+  }
+
+  public void setS3BucketPath(String s3BucketPath) {
+    this.s3BucketPath = s3BucketPath;
   }
 
 

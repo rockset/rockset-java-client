@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * DocumentStatus
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-11-21T00:10:08.979Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-01-21T23:08:54.250Z")
 public class DocumentStatus {
   @SerializedName("_collection")
   private String collection = null;
@@ -51,6 +51,8 @@ public class DocumentStatus {
     REPLACED("REPLACED"),
     
     DELETED("DELETED"),
+    
+    PATCHED("PATCHED"),
     
     ERROR("ERROR");
 
@@ -94,6 +96,9 @@ public class DocumentStatus {
 
   @SerializedName("status")
   private StatusEnum status = null;
+
+  @SerializedName("patch_id")
+  private String patchId = null;
 
   public DocumentStatus collection(String collection) {
     this.collection = collection;
@@ -175,6 +180,26 @@ public class DocumentStatus {
     this.status = status;
   }
 
+  public DocumentStatus patchId(String patchId) {
+    this.patchId = patchId;
+    return this;
+  }
+
+   /**
+   * unique id used to represent each patch request
+   * @return patchId
+  **/
+
+@JsonProperty("patch_id")
+@ApiModelProperty(example = "486gsg8", value = "unique id used to represent each patch request")
+  public String getPatchId() {
+    return patchId;
+  }
+
+  public void setPatchId(String patchId) {
+    this.patchId = patchId;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -188,12 +213,13 @@ public class DocumentStatus {
     return Objects.equals(this.collection, documentStatus.collection) &&
         Objects.equals(this.error, documentStatus.error) &&
         Objects.equals(this.id, documentStatus.id) &&
-        Objects.equals(this.status, documentStatus.status);
+        Objects.equals(this.status, documentStatus.status) &&
+        Objects.equals(this.patchId, documentStatus.patchId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(collection, error, id, status);
+    return Objects.hash(collection, error, id, status, patchId);
   }
 
 
@@ -206,6 +232,7 @@ public class DocumentStatus {
     sb.append("    error: ").append(toIndentedString(error)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    patchId: ").append(toIndentedString(patchId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

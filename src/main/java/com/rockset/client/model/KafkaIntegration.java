@@ -34,10 +34,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * KafkaIntegration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-11-21T00:10:08.979Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-01-21T23:08:54.250Z")
 public class KafkaIntegration {
   @SerializedName("kafka_topic_names")
   private List<String> kafkaTopicNames = new ArrayList<String>();
+
+  @SerializedName("source_status_by_topic")
+  private Map<String, StatusKafka> sourceStatusByTopic = null;
 
   /**
    * The format of the Kafka topics being tailed
@@ -89,9 +92,6 @@ public class KafkaIntegration {
   @SerializedName("kafka_data_format")
   private KafkaDataFormatEnum kafkaDataFormat = null;
 
-  @SerializedName("source_status_by_topic")
-  private Map<String, StatusKafka> sourceStatusByTopic = null;
-
   @SerializedName("connection_string")
   private String connectionString = null;
 
@@ -120,6 +120,17 @@ public class KafkaIntegration {
     this.kafkaTopicNames = kafkaTopicNames;
   }
 
+   /**
+   * The status of the Kafka source by topic
+   * @return sourceStatusByTopic
+  **/
+
+@JsonProperty("source_status_by_topic")
+@ApiModelProperty(example = "\"topic-a:DORMANT\"", value = "The status of the Kafka source by topic")
+  public Map<String, StatusKafka> getSourceStatusByTopic() {
+    return sourceStatusByTopic;
+  }
+
   public KafkaIntegration kafkaDataFormat(KafkaDataFormatEnum kafkaDataFormat) {
     this.kafkaDataFormat = kafkaDataFormat;
     return this;
@@ -138,17 +149,6 @@ public class KafkaIntegration {
 
   public void setKafkaDataFormat(KafkaDataFormatEnum kafkaDataFormat) {
     this.kafkaDataFormat = kafkaDataFormat;
-  }
-
-   /**
-   * The status of the Kafka source by topic
-   * @return sourceStatusByTopic
-  **/
-
-@JsonProperty("source_status_by_topic")
-@ApiModelProperty(example = "\"topic-a:DORMANT\"", value = "The status of the Kafka source by topic")
-  public Map<String, StatusKafka> getSourceStatusByTopic() {
-    return sourceStatusByTopic;
   }
 
    /**
@@ -173,14 +173,14 @@ public class KafkaIntegration {
     }
     KafkaIntegration kafkaIntegration = (KafkaIntegration) o;
     return Objects.equals(this.kafkaTopicNames, kafkaIntegration.kafkaTopicNames) &&
-        Objects.equals(this.kafkaDataFormat, kafkaIntegration.kafkaDataFormat) &&
         Objects.equals(this.sourceStatusByTopic, kafkaIntegration.sourceStatusByTopic) &&
+        Objects.equals(this.kafkaDataFormat, kafkaIntegration.kafkaDataFormat) &&
         Objects.equals(this.connectionString, kafkaIntegration.connectionString);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(kafkaTopicNames, kafkaDataFormat, sourceStatusByTopic, connectionString);
+    return Objects.hash(kafkaTopicNames, sourceStatusByTopic, kafkaDataFormat, connectionString);
   }
 
 
@@ -190,8 +190,8 @@ public class KafkaIntegration {
     sb.append("class KafkaIntegration {\n");
     
     sb.append("    kafkaTopicNames: ").append(toIndentedString(kafkaTopicNames)).append("\n");
-    sb.append("    kafkaDataFormat: ").append(toIndentedString(kafkaDataFormat)).append("\n");
     sb.append("    sourceStatusByTopic: ").append(toIndentedString(sourceStatusByTopic)).append("\n");
+    sb.append("    kafkaDataFormat: ").append(toIndentedString(kafkaDataFormat)).append("\n");
     sb.append("    connectionString: ").append(toIndentedString(connectionString)).append("\n");
     sb.append("}");
     return sb.toString();

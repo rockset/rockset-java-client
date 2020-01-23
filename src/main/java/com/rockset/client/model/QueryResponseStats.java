@@ -20,22 +20,28 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.rockset.client.model.OperatorStats;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * QueryResponseStats
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-11-21T00:10:08.979Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-01-21T23:08:54.250Z")
 public class QueryResponseStats {
   @SerializedName("elapsed_time_ms")
   private Long elapsedTimeMs = null;
 
   @SerializedName("rows_scanned")
   private Long rowsScanned = null;
+
+  @SerializedName("operators")
+  private List<OperatorStats> operators = null;
 
   public QueryResponseStats elapsedTimeMs(Long elapsedTimeMs) {
     this.elapsedTimeMs = elapsedTimeMs;
@@ -77,6 +83,34 @@ public class QueryResponseStats {
     this.rowsScanned = rowsScanned;
   }
 
+  public QueryResponseStats operators(List<OperatorStats> operators) {
+    this.operators = operators;
+    return this;
+  }
+
+  public QueryResponseStats addOperatorsItem(OperatorStats operatorsItem) {
+    if (this.operators == null) {
+      this.operators = new ArrayList<OperatorStats>();
+    }
+    this.operators.add(operatorsItem);
+    return this;
+  }
+
+   /**
+   * Statistics for each operator from query execution
+   * @return operators
+  **/
+
+@JsonProperty("operators")
+@ApiModelProperty(value = "Statistics for each operator from query execution")
+  public List<OperatorStats> getOperators() {
+    return operators;
+  }
+
+  public void setOperators(List<OperatorStats> operators) {
+    this.operators = operators;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -88,12 +122,13 @@ public class QueryResponseStats {
     }
     QueryResponseStats queryResponseStats = (QueryResponseStats) o;
     return Objects.equals(this.elapsedTimeMs, queryResponseStats.elapsedTimeMs) &&
-        Objects.equals(this.rowsScanned, queryResponseStats.rowsScanned);
+        Objects.equals(this.rowsScanned, queryResponseStats.rowsScanned) &&
+        Objects.equals(this.operators, queryResponseStats.operators);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(elapsedTimeMs, rowsScanned);
+    return Objects.hash(elapsedTimeMs, rowsScanned, operators);
   }
 
 
@@ -104,6 +139,7 @@ public class QueryResponseStats {
     
     sb.append("    elapsedTimeMs: ").append(toIndentedString(elapsedTimeMs)).append("\n");
     sb.append("    rowsScanned: ").append(toIndentedString(rowsScanned)).append("\n");
+    sb.append("    operators: ").append(toIndentedString(operators)).append("\n");
     sb.append("}");
     return sb.toString();
   }

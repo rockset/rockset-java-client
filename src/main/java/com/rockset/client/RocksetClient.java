@@ -34,7 +34,7 @@ public class RocksetClient {
       apiClient = new ApiClient()
           .setApiKey(apiKey)
           .setApiServer(apiServer)
-          .setVersion("0.6.3")// TODO: figure out how we can set this dynamically.
+          .setVersion("0.7.0")// TODO: figure out how we can set this dynamically.
           .setUserAgent(userAgent);
 
       apiKeys = new ApiKeysApi(this.apiClient);
@@ -234,4 +234,93 @@ public class RocksetClient {
     public DeleteWorkspaceResponse deleteWorkspace(String workspaceName) throws Exception {
       return workspace.delete(workspaceName);
     }
+
+  /**
+   * Create a saved query in Rockset
+   * @param workspaceName Name of the workspace
+   * @param request CreateSavedQueryRequest object which contains information about the saved query
+   * @return CreateSavedQueryResponse object which contains information about the saved query created
+   * @throws Exception
+   */
+  public CreateSavedQueryResponse createSavedQuery(
+          String workspaceName, CreateSavedQueryRequest request) throws Exception {
+    return query.create(workspaceName, request);
+  }
+
+  /**
+   * Create a saved query in Rockset
+   * @param workspaceName Name of the workspace
+   * @param queryName Name of the query to be updated
+   * @param request UpdateSavedQueryRequest object which contains information about the saved query
+   * @return UpdateSavedQueryResponse object which contains information about the saved query updated
+   * @throws Exception
+   */
+  public UpdateSavedQueryResponse updateSavedQuery(
+          String workspaceName, String queryName, UpdateSavedQueryRequest request) throws Exception {
+    return query.update(workspaceName, queryName, request);
+  }
+
+  /**
+   * List all saved queries in a workspace
+   * @param workspaceName Name of the workspace
+   * @return List of SavedQuery objects in that workspace
+   * @throws Exception
+   */
+  public List<SavedQuery> listSavedQueries(String workspaceName) throws Exception {
+    return query.list_0(workspaceName).getData();
+  }
+
+  /**
+   * List all saved queries in a workspace
+   * @param workspaceName Name of the workspace
+   * @param queryName Name of the saved query
+   * @return List of SavedQuery objects in queries version history
+   * @throws Exception
+   */
+  public List<SavedQuery> listSavedQueriesVersions(
+          String workspaceName, String queryName) throws Exception {
+    return query.list_1(workspaceName, queryName).getData();
+  }
+
+  /**
+   * Get saved query details
+   * @param workspaceName Name of the workspace
+   * @param queryName Name of the saved query
+   * @param version Version number of saved query
+   * @return GetSavedQueryResponse object with details about the saved query version
+   * @throws Exception
+   */
+  public GetSavedQueryResponse getSavedQueryVersion(
+          String workspaceName, String queryName, int version) throws Exception {
+    return query.get(workspaceName, queryName, version);
+  }
+
+  /**
+   * Run a saved query
+   * @param workspaceName Name of the workspace
+   * @param queryName Name of the saved query
+   * @param version Version number of saved query
+   * @param request ExecuteSavedQueryRequest object with additional run options
+   * @return QueryResponse object with query results
+   * @throws Exception
+   */
+  public QueryResponse runSavedQuery(String workspaceName, String queryName,
+                                     int version, ExecuteSavedQueryRequest request) throws Exception {
+    return query.run(workspaceName, queryName, version, request);
+  }
+
+
+  /**
+   * Delete a saved query
+   * @param workspaceName Name of the workspace
+   * @param queryName Name of query to be deleted
+   * @return DeleteSavedQueryResponse object with details about the deleted saved query
+   * @throws Exception
+   */
+  public DeleteSavedQueryResponse deleteSavedQuery(String workspaceName, String queryName)
+          throws Exception {
+    return query.delete(workspaceName, queryName);
+  }
+
+
 }
