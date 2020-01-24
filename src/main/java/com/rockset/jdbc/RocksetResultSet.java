@@ -1493,8 +1493,7 @@ public class RocksetResultSet implements ResultSet {
           // Loop through all the rows to get the fields and (their first
           // non-null) types.
           for (int i = 0; i < response.getResults().size(); ++i) {
-            log("Extracting column information from record " + i +
-                        " in resultset");
+            log("Extracting column information from record " + i + " in resultset");
             Object onedoc = response.getResults().get(i);
             JsonNode docRootNode = mapper.
                 readTree(mapper.writeValueAsString(onedoc));
@@ -1511,8 +1510,6 @@ public class RocksetResultSet implements ResultSet {
                 JsonNode value = field.getValue();
                 Column.ColumnTypes type = Column.ColumnTypes.
                     fromValue(value.getNodeType().toString());
-                log("getColumns::column name "+ fieldName +  " type: " +
-                    type.toString());
                 // Skip over the fields with null type unless all values for that
                 // field are null
                 if (type.equals(Column.ColumnTypes.NULL) &&
@@ -1534,6 +1531,7 @@ public class RocksetResultSet implements ResultSet {
                         fromValue(value.get("__rockset_type").asText());
                     }
                 }
+                log("getColumns::column name "+ fieldName + " type: " + type.toString());
                 Column c = new Column(fieldName, type);
                 out.add(c);
                 fieldNames.add(fieldName);

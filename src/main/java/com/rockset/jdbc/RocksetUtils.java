@@ -36,7 +36,7 @@ class RocksetUtils {
         stype = java.sql.Types.VARCHAR;
         break;
       case TIMESTAMP:
-        stype = Types.TIMESTAMP_WITH_TIMEZONE;
+        stype = Types.TIMESTAMP;
         break;
       case DATETIME:
         stype = Types.TIMESTAMP;
