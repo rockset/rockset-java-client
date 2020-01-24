@@ -544,7 +544,7 @@ public class RocksetConnection implements Connection {
   //
   QueryResponse describeTable(String schema, String name) throws Exception {
     RocksetDriver.log("Entry: describeTable " + name);
-    String sql = String.format("describe %s.%s",
+    String sql = String.format("describe %s.%s OPTION(max_field_depth=1)",
         quoteIdentifier(schema), quoteIdentifier(name));
     QueryResponse resp =  startQuery(sql, null, null);
     RocksetDriver.log("Exit: describeTable " + name);
