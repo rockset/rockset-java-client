@@ -1,10 +1,12 @@
 # Rockset Java Client Changelog
 
+## v0.7.1 2020-01-24
+- only describe top-level fields for collections to speed up clients
+
 ## v0.7.0 2020-01-21
 - introduce saved queries
 - add document patch ability
 - bug fix for Tableau where timestamp fields could appear as strings or nulls
-- only describe top-level fields for collections to speed up clients
 - misc fixes and improvements
 
 ## v0.6.3 2019-11-20
