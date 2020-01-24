@@ -3,6 +3,7 @@
 ## v0.7.0 2020-01-21
 - introduce saved queries
 - add document patch ability
+- bug fix for Tableau where timestamp fields could appear as strings or nulls
 - misc fixes and improvements
 
 ## v0.6.3 2019-11-20
