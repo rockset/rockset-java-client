@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "An organization in Rockset is a container for users and collections.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-01-24T17:41:10.748Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
 public class Organization {
   @SerializedName("id")
   private String id = null;
@@ -195,12 +195,12 @@ public class Organization {
   }
 
    /**
-   * Get externalId
+   * organization&#39;s unique external ID within Rockset
    * @return externalId
   **/
 
 @JsonProperty("external_id")
-@ApiModelProperty(value = "")
+@ApiModelProperty(example = "<hash>", value = "organization's unique external ID within Rockset")
   public String getExternalId() {
     return externalId;
   }

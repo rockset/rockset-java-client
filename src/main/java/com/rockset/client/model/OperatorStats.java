@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * OperatorStats
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-01-24T17:41:10.748Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
 public class OperatorStats {
   @SerializedName("worker")
   private String worker = null;
@@ -66,6 +66,9 @@ public class OperatorStats {
 
   @SerializedName("output_rows")
   private Long outputRows = null;
+
+  @SerializedName("processing_time_us")
+  private Long processingTimeUs = null;
 
   public OperatorStats worker(String worker) {
     this.worker = worker;
@@ -307,6 +310,26 @@ public class OperatorStats {
     this.outputRows = outputRows;
   }
 
+  public OperatorStats processingTimeUs(Long processingTimeUs) {
+    this.processingTimeUs = processingTimeUs;
+    return this;
+  }
+
+   /**
+   * Total time in microseconds spent doing useful work
+   * @return processingTimeUs
+  **/
+
+@JsonProperty("processing_time_us")
+@ApiModelProperty(example = "2500", value = "Total time in microseconds spent doing useful work")
+  public Long getProcessingTimeUs() {
+    return processingTimeUs;
+  }
+
+  public void setProcessingTimeUs(Long processingTimeUs) {
+    this.processingTimeUs = processingTimeUs;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -328,12 +351,13 @@ public class OperatorStats {
         Objects.equals(this.inputBytes, operatorStats.inputBytes) &&
         Objects.equals(this.inputRows, operatorStats.inputRows) &&
         Objects.equals(this.outputBytes, operatorStats.outputBytes) &&
-        Objects.equals(this.outputRows, operatorStats.outputRows);
+        Objects.equals(this.outputRows, operatorStats.outputRows) &&
+        Objects.equals(this.processingTimeUs, operatorStats.processingTimeUs);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(worker, fragment, task, operatorId, operatorName, startTimeUs, endTimeUs, maxMemory, inputBytes, inputRows, outputBytes, outputRows);
+    return Objects.hash(worker, fragment, task, operatorId, operatorName, startTimeUs, endTimeUs, maxMemory, inputBytes, inputRows, outputBytes, outputRows, processingTimeUs);
   }
 
 
@@ -354,6 +378,7 @@ public class OperatorStats {
     sb.append("    inputRows: ").append(toIndentedString(inputRows)).append("\n");
     sb.append("    outputBytes: ").append(toIndentedString(outputBytes)).append("\n");
     sb.append("    outputRows: ").append(toIndentedString(outputRows)).append("\n");
+    sb.append("    processingTimeUs: ").append(toIndentedString(processingTimeUs)).append("\n");
     sb.append("}");
     return sb.toString();
   }

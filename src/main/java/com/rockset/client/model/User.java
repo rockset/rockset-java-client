@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * User
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-01-24T17:41:10.748Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
 public class User {
   @SerializedName("created_at")
   private String createdAt = null;
@@ -50,6 +50,9 @@ public class User {
 
   @SerializedName("state")
   private String state = null;
+
+  @SerializedName("org")
+  private String org = null;
 
   public User createdAt(String createdAt) {
     this.createdAt = createdAt;
@@ -179,6 +182,26 @@ public class User {
     this.state = state;
   }
 
+  public User org(String org) {
+    this.org = org;
+    return this;
+  }
+
+   /**
+   * Get org
+   * @return org
+  **/
+
+@JsonProperty("org")
+@ApiModelProperty(value = "")
+  public String getOrg() {
+    return org;
+  }
+
+  public void setOrg(String org) {
+    this.org = org;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -194,12 +217,13 @@ public class User {
         Objects.equals(this.firstName, user.firstName) &&
         Objects.equals(this.lastName, user.lastName) &&
         Objects.equals(this.roles, user.roles) &&
-        Objects.equals(this.state, user.state);
+        Objects.equals(this.state, user.state) &&
+        Objects.equals(this.org, user.org);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(createdAt, email, firstName, lastName, roles, state);
+    return Objects.hash(createdAt, email, firstName, lastName, roles, state, org);
   }
 
 
@@ -214,6 +238,7 @@ public class User {
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
     sb.append("    roles: ").append(toIndentedString(roles)).append("\n");
     sb.append("    state: ").append(toIndentedString(state)).append("\n");
+    sb.append("    org: ").append(toIndentedString(org)).append("\n");
     sb.append("}");
     return sb.toString();
   }
