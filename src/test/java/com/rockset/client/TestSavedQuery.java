@@ -1,12 +1,12 @@
 package com.rockset.client;
 
 import com.google.gson.internal.LinkedTreeMap;
-import com.rockset.client.model.CreateSavedQueryRequest;
-import com.rockset.client.model.CreateSavedQueryResponse;
-import com.rockset.client.model.ExecuteSavedQueryParameter;
-import com.rockset.client.model.ExecuteSavedQueryRequest;
+import com.rockset.client.model.CreateQueryLambdaRequest;
+import com.rockset.client.model.CreateQueryLambdaResponse;
+import com.rockset.client.model.ExecuteQueryLambdaRequest;
+import com.rockset.client.model.QueryLambdaSql;
 import com.rockset.client.model.QueryResponse;
-import com.rockset.client.model.SavedQueryParameter;
+import com.rockset.client.model.QueryParameter;
 import org.testng.Assert;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
@@ -24,6 +24,7 @@ public class TestSavedQuery {
   public void setUp() throws Exception {
     String apiKey = System.getenv("ROCKSET_APIKEY");
     String apiServer = System.getenv("ROCKSET_APISERVER");
+    
     if (apiKey == null || apiServer == null) {
       throw new Exception(
               "To run unit tests, please set ROCKSET_APIKEY and ROCKSET_APISERVER " +
@@ -34,35 +35,42 @@ public class TestSavedQuery {
 
   @Test
   public void testSavedQueryCrud() throws Exception {
-    CreateSavedQueryRequest req = new CreateSavedQueryRequest();
+    String queryName = "myQuery";
+    CreateQueryLambdaRequest req = new CreateQueryLambdaRequest();
     req.setName(queryName);
-    req.setQuerySql("SELECT :param as echo");
-    SavedQueryParameter param = new SavedQueryParameter();
+    QueryLambdaSql sql = new QueryLambdaSql();
+    sql.setQuery("SELECT :param as echo");
+    QueryParameter param = new QueryParameter();
     param.setName("param");
     param.setType("string");
-    param.setDefaultValue("Hello, world!");
-    List<SavedQueryParameter> savedQueryParameters = new ArrayList<>();
-    savedQueryParameters.add(param);
-    req.setParameters(savedQueryParameters);
+    param.setValue("Hello, world!");
+    List<QueryParameter> defaultParameters = new ArrayList<>();
+    defaultParameters.add(param);
+    sql.setDefaultParameters(defaultParameters);
+    req.setSql(sql);
 
-    CreateSavedQueryResponse resp = client.createSavedQuery("commons", req);
+
+    CreateQueryLambdaResponse resp = client.createQueryLambda("commons", req);
     Assert.assertEquals(resp.getData().getName(), this.queryName);
 
-    // Run saved query with default parameters
-    QueryResponse qr = client.runSavedQuery("commons", queryName, 1, null);
+
+    // Run Query Lambda with default parameters
+    QueryResponse qr = client.runQueryLambda("commons", queryName, 1, null);
     Map<String, String> result = (LinkedTreeMap) qr.getResults().get(0);
     Assert.assertEquals(result.get("echo"), "Hello, world!");
 
-    // Run saved query with overidden parameters
-    ExecuteSavedQueryParameter exParam = new ExecuteSavedQueryParameter();
+    // Run Query Lambda with custom parameters
+    QueryParameter exParam = new QueryParameter();
     exParam.setName("param");
+    exParam.setType("string");
     exParam.setValue("All work and no play makes Jack a dull boy");
-    ExecuteSavedQueryRequest exReq = new ExecuteSavedQueryRequest();
+    ExecuteQueryLambdaRequest exReq = new ExecuteQueryLambdaRequest();
     exReq.addParametersItem(exParam);
-    qr = client.runSavedQuery("commons", queryName, 1, exReq);
+    qr = client.runQueryLambda("commons", queryName, 1, exReq);
     result = (LinkedTreeMap) qr.getResults().get(0);
     Assert.assertEquals(result.get("echo"), "All work and no play makes Jack a dull boy");
 
-    client.deleteSavedQuery("commons", this.queryName);
+
+    client.deleteQueryLambda("commons", queryName);
   }
 }

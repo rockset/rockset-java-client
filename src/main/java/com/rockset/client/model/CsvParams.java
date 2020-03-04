@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CsvParams
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-01-24T17:41:10.748Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
 public class CsvParams {
   @SerializedName("firstLineAsColumnNames")
   private Boolean firstLineAsColumnNames = null;
@@ -145,12 +145,12 @@ public class CsvParams {
   }
 
    /**
-   * a single character that is the column seperator
+   * a single character that is the column separator
    * @return separator
   **/
 
 @JsonProperty("separator")
-@ApiModelProperty(example = ",", value = "a single character that is the column seperator")
+@ApiModelProperty(example = ",", value = "a single character that is the column separator")
   public String getSeparator() {
     return separator;
   }

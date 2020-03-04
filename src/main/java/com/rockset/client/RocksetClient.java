@@ -12,6 +12,7 @@ public class RocksetClient {
     private IntegrationsApi integration;
     private QueriesApi query;
     private UsersApi user;
+    private QueryLambdasApi queryLambda;
     private WorkspacesApi workspace;
 
     private void setUp(String apiKey, String apiServer, String application) {
@@ -34,7 +35,7 @@ public class RocksetClient {
       apiClient = new ApiClient()
           .setApiKey(apiKey)
           .setApiServer(apiServer)
-          .setVersion("0.7.1")// TODO: figure out how we can set this dynamically.
+          .setVersion("0.8.0")// TODO: figure out how we can set this dynamically.
           .setUserAgent(userAgent);
 
       apiKeys = new ApiKeysApi(this.apiClient);
@@ -44,6 +45,7 @@ public class RocksetClient {
       query = new QueriesApi(this.apiClient);
       user = new UsersApi(this.apiClient);
       workspace = new WorkspacesApi(this.apiClient);
+      queryLambda = new QueryLambdasApi(this.apiClient);
     }
 
     public RocksetClient(String apiKey, String apiServer) {
@@ -236,90 +238,90 @@ public class RocksetClient {
     }
 
   /**
-   * Create a saved query in Rockset
+   * Create a Query Lambda in Rockset
    * @param workspaceName Name of the workspace
-   * @param request CreateSavedQueryRequest object which contains information about the saved query
-   * @return CreateSavedQueryResponse object which contains information about the saved query created
+   * @param request CreateQueryLambdaRequest object which contains information about the Query Lambda
+   * @return CreateQueryLambdaResponse object which contains information about the Query Lambda created
    * @throws Exception
    */
-  public CreateSavedQueryResponse createSavedQuery(
-          String workspaceName, CreateSavedQueryRequest request) throws Exception {
-    return query.create(workspaceName, request);
+  public CreateQueryLambdaResponse createQueryLambda(
+          String workspaceName, CreateQueryLambdaRequest request) throws Exception {
+      return queryLambda.create(workspaceName, request);
   }
 
   /**
-   * Create a saved query in Rockset
+   * Create a Query Lambda in Rockset
    * @param workspaceName Name of the workspace
-   * @param queryName Name of the query to be updated
-   * @param request UpdateSavedQueryRequest object which contains information about the saved query
-   * @return UpdateSavedQueryResponse object which contains information about the saved query updated
+   * @param queryName Name of the Query Lambda to be updated
+   * @param request UpdateQueryLambdaRequest object which contains information about the Query Lambda
+   * @return UpdateQueryLambdaResponse object which contains information about the Query Lambda updated
    * @throws Exception
    */
-  public UpdateSavedQueryResponse updateSavedQuery(
-          String workspaceName, String queryName, UpdateSavedQueryRequest request) throws Exception {
-    return query.update(workspaceName, queryName, request);
-  }
-
-  /**
-   * List all saved queries in a workspace
-   * @param workspaceName Name of the workspace
-   * @return List of SavedQuery objects in that workspace
-   * @throws Exception
-   */
-  public List<SavedQuery> listSavedQueries(String workspaceName) throws Exception {
-    return query.list_0(workspaceName).getData();
+  public UpdateQueryLambdaResponse updateQueryLambda(
+          String workspaceName, String queryName, UpdateQueryLambdaRequest request) throws Exception {
+    return queryLambda.update(workspaceName, queryName, request);
   }
 
   /**
    * List all saved queries in a workspace
    * @param workspaceName Name of the workspace
-   * @param queryName Name of the saved query
-   * @return List of SavedQuery objects in queries version history
+   * @return List of QueryLambda objects in that workspace
    * @throws Exception
    */
-  public List<SavedQuery> listSavedQueriesVersions(
+  public List<QueryLambda> listSavedQueries(String workspaceName) throws Exception {
+    return queryLambda.list_0(workspaceName).getData();
+  }
+
+  /**
+   * List all saved queries in a workspace
+   * @param workspaceName Name of the workspace
+   * @param queryName Name of the Query Lambda
+   * @return List of QueryLambda objects in queries version history
+   * @throws Exception
+   */
+  public List<QueryLambda> listSavedQueriesVersions(
           String workspaceName, String queryName) throws Exception {
-    return query.list_1(workspaceName, queryName).getData();
+    return queryLambda.list_1(workspaceName, queryName).getData();
   }
 
   /**
-   * Get saved query details
+   * Get Query Lambda details
    * @param workspaceName Name of the workspace
-   * @param queryName Name of the saved query
-   * @param version Version number of saved query
-   * @return GetSavedQueryResponse object with details about the saved query version
+   * @param queryName Name of the Query Lambda
+   * @param version Version number of Query Lambda
+   * @return GetQueryLambdaResponse object with details about the Query Lambda version
    * @throws Exception
    */
-  public GetSavedQueryResponse getSavedQueryVersion(
+  public GetQueryLambdaResponse getQueryLambdaVersion(
           String workspaceName, String queryName, int version) throws Exception {
-    return query.get(workspaceName, queryName, version);
+    return queryLambda.get(workspaceName, queryName, version);
   }
 
   /**
-   * Run a saved query
+   * Run a Query Lambda
    * @param workspaceName Name of the workspace
-   * @param queryName Name of the saved query
-   * @param version Version number of saved query
-   * @param request ExecuteSavedQueryRequest object with additional run options
+   * @param queryName Name of the Query Lambda
+   * @param version Version number of Query Lambda
+   * @param request ExecuteQueryLambdaRequest object with additional run options
    * @return QueryResponse object with query results
    * @throws Exception
    */
-  public QueryResponse runSavedQuery(String workspaceName, String queryName,
-                                     int version, ExecuteSavedQueryRequest request) throws Exception {
-    return query.run(workspaceName, queryName, version, request);
+  public QueryResponse runQueryLambda(String workspaceName, String queryName,
+                                     int version, ExecuteQueryLambdaRequest request) throws Exception {
+    return queryLambda.execute(workspaceName, queryName, version, request);
   }
 
 
   /**
-   * Delete a saved query
+   * Delete a Query Lambda
    * @param workspaceName Name of the workspace
    * @param queryName Name of query to be deleted
-   * @return DeleteSavedQueryResponse object with details about the deleted saved query
+   * @return DeleteQueryLambdaResponse object with details about the deleted Query Lambda
    * @throws Exception
    */
-  public DeleteSavedQueryResponse deleteSavedQuery(String workspaceName, String queryName)
+  public DeleteQueryLambdaResponse deleteQueryLambda(String workspaceName, String queryName)
           throws Exception {
-    return query.delete(workspaceName, queryName);
+    return queryLambda.delete(workspaceName, queryName);
   }
 
 

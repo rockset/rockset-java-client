@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * GcsIntegration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-01-24T17:41:10.748Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
 public class GcsIntegration {
   @SerializedName("gcp_service_account")
   private GcpServiceAccount gcpServiceAccount = null;

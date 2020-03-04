@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryResponseStats
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-01-24T17:41:10.748Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
 public class QueryResponseStats {
   @SerializedName("elapsed_time_ms")
   private Long elapsedTimeMs = null;
@@ -40,8 +40,14 @@ public class QueryResponseStats {
   @SerializedName("rows_scanned")
   private Long rowsScanned = null;
 
+  @SerializedName("rows_returned")
+  private Long rowsReturned = null;
+
   @SerializedName("operators")
   private List<OperatorStats> operators = null;
+
+  @SerializedName("execution_graph")
+  private String executionGraph = null;
 
   public QueryResponseStats elapsedTimeMs(Long elapsedTimeMs) {
     this.elapsedTimeMs = elapsedTimeMs;
@@ -83,6 +89,26 @@ public class QueryResponseStats {
     this.rowsScanned = rowsScanned;
   }
 
+  public QueryResponseStats rowsReturned(Long rowsReturned) {
+    this.rowsReturned = rowsReturned;
+    return this;
+  }
+
+   /**
+   * number of rows returned from the query
+   * @return rowsReturned
+  **/
+
+@JsonProperty("rows_returned")
+@ApiModelProperty(example = "100", value = "number of rows returned from the query")
+  public Long getRowsReturned() {
+    return rowsReturned;
+  }
+
+  public void setRowsReturned(Long rowsReturned) {
+    this.rowsReturned = rowsReturned;
+  }
+
   public QueryResponseStats operators(List<OperatorStats> operators) {
     this.operators = operators;
     return this;
@@ -111,6 +137,26 @@ public class QueryResponseStats {
     this.operators = operators;
   }
 
+  public QueryResponseStats executionGraph(String executionGraph) {
+    this.executionGraph = executionGraph;
+    return this;
+  }
+
+   /**
+   * DOT graph representing the execution steps of this query
+   * @return executionGraph
+  **/
+
+@JsonProperty("execution_graph")
+@ApiModelProperty(value = "DOT graph representing the execution steps of this query")
+  public String getExecutionGraph() {
+    return executionGraph;
+  }
+
+  public void setExecutionGraph(String executionGraph) {
+    this.executionGraph = executionGraph;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -123,12 +169,14 @@ public class QueryResponseStats {
     QueryResponseStats queryResponseStats = (QueryResponseStats) o;
     return Objects.equals(this.elapsedTimeMs, queryResponseStats.elapsedTimeMs) &&
         Objects.equals(this.rowsScanned, queryResponseStats.rowsScanned) &&
-        Objects.equals(this.operators, queryResponseStats.operators);
+        Objects.equals(this.rowsReturned, queryResponseStats.rowsReturned) &&
+        Objects.equals(this.operators, queryResponseStats.operators) &&
+        Objects.equals(this.executionGraph, queryResponseStats.executionGraph);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(elapsedTimeMs, rowsScanned, operators);
+    return Objects.hash(elapsedTimeMs, rowsScanned, rowsReturned, operators, executionGraph);
   }
 
 
@@ -139,7 +187,9 @@ public class QueryResponseStats {
     
     sb.append("    elapsedTimeMs: ").append(toIndentedString(elapsedTimeMs)).append("\n");
     sb.append("    rowsScanned: ").append(toIndentedString(rowsScanned)).append("\n");
+    sb.append("    rowsReturned: ").append(toIndentedString(rowsReturned)).append("\n");
     sb.append("    operators: ").append(toIndentedString(operators)).append("\n");
+    sb.append("    executionGraph: ").append(toIndentedString(executionGraph)).append("\n");
     sb.append("}");
     return sb.toString();
   }

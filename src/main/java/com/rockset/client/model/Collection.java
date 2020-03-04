@@ -34,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Collection
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-01-24T17:41:10.748Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
 public class Collection {
   @SerializedName("created_at")
   private String createdAt = null;
@@ -56,6 +56,8 @@ public class Collection {
    */
   @JsonAdapter(StatusEnum.Adapter.class)
   public enum StatusEnum {
+    INITIALIZED("INITIALIZED"),
+    
     CREATED("CREATED"),
     
     READY("READY"),
