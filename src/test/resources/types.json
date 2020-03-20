@@ -1,0 +1,24 @@
+{
+  "_id": "1",
+  "int_col": 1,
+  "float_col": 1.2,
+  "bool_col": false,
+  "string_col": "str",
+  "null_col": null,
+  "array_col":    [1, 2.2, "3", {"4": "5"}, false],
+  "object_col":   { "foo": "bar" },
+  "date_col":     {"__rockset_type": "date",      "value": "2020/03/02" },
+  "datetime_col": {"__rockset_type": "datetime",  "value": "2020/03/02T10:49:33"},
+  "time_col":     {"__rockset_type": "time",      "value": "08:08:28.615226"},
+  "timestamp_col":{"__rockset_type": "timestamp", "value": 1584691545374000}
+}
+{
+  "_id": "2",
+  "description_col": "Another doc with some missing fields and some extra fields",
+  "string_col": "str",
+  "array_col":    [1, 2.2, "3", {"4": "5"}, false],
+  "datetime_col": {"__rockset_type": "datetime",  "value": "2020/03/02T10:49:33"},
+  "point_col":        {"__rockset_type":"GEOGRAPHY","value":{"type":"Point","coordinates":[34.00000000000001,12]}},
+  "linestring_col":   {"__rockset_type":"GEOGRAPHY","value":{"type":"LineString","coordinates":[[34.00000000000001,12],[78,56],[42,42]]}},
+  "polygon_col":      {"__rockset_type":"GEOGRAPHY","value":{"type":"Polygon","coordinates":[[[0,0],[0,10],[10.000000000000004,10],[10,0]]]}}
+}

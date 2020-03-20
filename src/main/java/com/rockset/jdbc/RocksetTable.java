@@ -198,9 +198,12 @@ class RocksetTable {
       } else if (rockType.equals("timestamp")) {
         sqlType = Types.TIMESTAMP;
         sqlTypeName = "timestamp";
-      } else if (rockType.equals("null_type")) {
+      } else if (rockType.equals("null")) {
         sqlType = Types.NULL;
         sqlTypeName = "null";
+      } else if (rockType.equals("geography")) {
+        sqlType = Types.JAVA_OBJECT;
+        sqlTypeName = "object";
       } else {
         throw new Exception("Unknown rockset type " + rockType);
       }

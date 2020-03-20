@@ -1,6 +1,8 @@
 package com.rockset.jdbc;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,6 +28,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import java.sql.Time;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -311,6 +314,59 @@ public class TestTable {
       cleanup(colls, stmt, conn);
     }
   }
+
+  @Test
+  public void testGetColumnsAllTypes() throws Exception {
+    List<String> collections = generateCollectionNames(/*numCollections*/ 1);
+    Connection conn = null;
+    try {
+      createCollections(collections);
+      waitCollections(collections);
+
+      String collection = collections.get(0);
+      uploadFile(collection, "src/test/resources/types.json", null);
+      waitNumberDocs(collection, 2);
+
+      conn = DriverManager.getConnection(DB_URL, property);
+      DatabaseMetaData dbMeta = conn.getMetaData();
+      ResultSet rs = dbMeta.getColumns(RocksetConnection.DEFAULT_CATALOG,
+          RocksetConnection.DEFAULT_SCHEMA, collection, null);
+
+      assertNextEquals(rs, "_event_time", Types.TIMESTAMP);
+      assertNextEquals(rs, "_id", Types.VARCHAR);
+      assertNextEquals(rs, "_meta", Types.JAVA_OBJECT);
+      assertNextEquals(rs, "array_col", Types.ARRAY);
+      assertNextEquals(rs, "bool_col", Types.BOOLEAN);
+      assertNextEquals(rs, "date_col", Types.DATE);
+      assertNextEquals(rs, "datetime_col", Types.TIMESTAMP);
+      assertNextEquals(rs, "description_col", Types.VARCHAR);
+      assertNextEquals(rs, "float_col", Types.DOUBLE);
+      assertNextEquals(rs, "int_col", Types.BIGINT);
+      assertNextEquals(rs, "linestring_col", Types.JAVA_OBJECT);
+      assertNextEquals(rs, "null_col", Types.NULL);
+      assertNextEquals(rs, "object_col", Types.JAVA_OBJECT);
+      assertNextEquals(rs, "point_col", Types.JAVA_OBJECT);
+      assertNextEquals(rs, "polygon_col", Types.JAVA_OBJECT);
+      assertNextEquals(rs, "string_col", Types.VARCHAR);
+      assertNextEquals(rs, "time_col", Types.TIME);
+      assertNextEquals(rs, "timestamp_col", Types.TIMESTAMP);
+      assertFalse(rs.next());
+
+    } finally {
+      cleanup(collections, null, conn);
+    }
+  }
+
+  private void assertNextEquals(ResultSet rs, String expectedColumnName, int expectedType)
+      throws SQLException {
+    int columnNameIndex = rs.findColumn("COLUMN_NAME");
+    int dataTypeIndex = rs.findColumn("DATA_TYPE");
+
+    assertTrue(rs.next());
+    assertEquals(rs.getString(columnNameIndex), expectedColumnName);
+    assertEquals(rs.getInt(dataTypeIndex), expectedType);
+  }
+
 
   //
   // Invoked by all unit tests at the end to cleanup its mess
