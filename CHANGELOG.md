@@ -1,5 +1,8 @@
 # Rockset Java Client Changelog
 
+## v0.8.1 2020-03-26
+- Handle `null` case in table metadata
+
 ## v0.8.0 2020-03-03
 - update models and logic for Query Lambdas
 
