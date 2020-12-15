@@ -17,6 +17,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import java.io.IOException;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 class RocksetTable {
 
   private String catalog;
@@ -45,7 +49,40 @@ class RocksetTable {
     incol.add(new Column("type", Column.ColumnTypes.STRING));
     incol.add(new Column("occurrences", Column.ColumnTypes.NUMBER));
     incol.add(new Column("total", Column.ColumnTypes.NUMBER));
-    this.describe = new RocksetResultSet(incol, response.getResults());
+	
+	//Skip over the field description row with column of null type where the same column has a valid type
+    //As of now moving all the null type rows to the last.
+    List<Object> fieldsDescription= response.getResults();
+
+    //Get all non null type rows
+    List<Object>fieldsDescriptionWithTypeAsNonNull = fieldsDescription.stream()
+    .filter(fieldName -> {
+      try {
+        return !mapper.readTree(mapper.writeValueAsString(fieldName)).get("type").asText().equals("null");
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      return false;
+    })
+    .collect(Collectors.toList());
+
+    //Get all null type rows
+    List<Object>fieldsDescriptionWithTypeAsNull = fieldsDescription.stream()
+            .filter(fieldName -> {
+              try {
+                return mapper.readTree(mapper.writeValueAsString(fieldName)).get("type").asText().equals("null");
+              } catch (IOException e) {
+                e.printStackTrace();
+              }
+              return false;
+            })
+            .collect(Collectors.toList());
+
+    //Combine them back
+    fieldsDescription= Stream.concat(fieldsDescriptionWithTypeAsNonNull.stream(), fieldsDescriptionWithTypeAsNull.stream())
+            .collect(Collectors.toList());
+	
+    this.describe = new RocksetResultSet(incol, fieldsDescription);
   }
 
   //
