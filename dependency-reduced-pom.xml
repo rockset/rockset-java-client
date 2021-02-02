@@ -4,7 +4,7 @@
   <groupId>com.rockset</groupId>
   <artifactId>rockset-java</artifactId>
   <name>Rockset Java</name>
-  <version>0.7.1</version>
+  <version>0.8.1</version>
   <description>The official Rockset Java client library</description>
   <url>https://github.com/rockset/rockset-java-client</url>
   <developers>
@@ -203,7 +203,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.12</version>
+      <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -227,7 +227,7 @@
     <swagger-core-version>1.5.18</swagger-core-version>
     <java.version>1.8</java.version>
     <threetenbp-version>1.3.5</threetenbp-version>
-    <junit-version>4.12</junit-version>
+    <junit-version>4.13.1</junit-version>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <gson-version>2.8.1</gson-version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -117,7 +117,7 @@ final class RocksetDriverUri {
   private URI buildHttpUri() {
     String scheme = useSecureConnection ? "https" : "http";
     try {
-      return new URI(scheme, null, address.getHostText(),
+      return new URI(scheme, null, address.getHost(),
                      address.getPort(), null, null, null);
     } catch (URISyntaxException e) {
       throw new RuntimeException(e);
