@@ -43,46 +43,7 @@ class RocksetTable {
     this.mapper = new ObjectMapper();
     dump(response);
 
-    // convert the response into a ResultSet with four columns
-    ArrayList<Column> incol = new ArrayList<Column>();
-    incol.add(new Column("field", Column.ColumnTypes.ARRAY));
-    incol.add(new Column("type", Column.ColumnTypes.STRING));
-    incol.add(new Column("occurrences", Column.ColumnTypes.NUMBER));
-    incol.add(new Column("total", Column.ColumnTypes.NUMBER));
-	
-	//Skip over the field description row with column of null type where the same column has a valid type
-    //As of now moving all the null type rows to the last.
-    List<Object> fieldsDescription= response.getResults();
-
-    //Get all non null type rows
-    List<Object>fieldsDescriptionWithTypeAsNonNull = fieldsDescription.stream()
-    .filter(fieldName -> {
-      try {
-        return !mapper.readTree(mapper.writeValueAsString(fieldName)).get("type").asText().equals("null");
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-      return false;
-    })
-    .collect(Collectors.toList());
-
-    //Get all null type rows
-    List<Object>fieldsDescriptionWithTypeAsNull = fieldsDescription.stream()
-            .filter(fieldName -> {
-              try {
-                return mapper.readTree(mapper.writeValueAsString(fieldName)).get("type").asText().equals("null");
-              } catch (IOException e) {
-                e.printStackTrace();
-              }
-              return false;
-            })
-            .collect(Collectors.toList());
-
-    //Combine them back
-    fieldsDescription= Stream.concat(fieldsDescriptionWithTypeAsNonNull.stream(), fieldsDescriptionWithTypeAsNull.stream())
-            .collect(Collectors.toList());
-	
-    this.describe = new RocksetResultSet(incol, fieldsDescription);
+    this.describe = null;
   }
 
   //
@@ -95,6 +56,53 @@ class RocksetTable {
   // SOURCE_DATA_TYPE, IS_AUTOINCREMENT, IS_GENERATEDCOLUMN
   //
   public ResultSet getColumns() throws Exception {
+
+    if (describe == null)
+    {
+      // convert the response into a ResultSet with four columns
+      ArrayList<Column> incol = new ArrayList<Column>();
+      incol.add(new Column("field", Column.ColumnTypes.ARRAY));
+      incol.add(new Column("type", Column.ColumnTypes.STRING));
+      incol.add(new Column("occurrences", Column.ColumnTypes.NUMBER));
+      incol.add(new Column("total", Column.ColumnTypes.NUMBER));
+
+      //Skip over the field description row with column of null type where the same column has a valid type
+      //As of now moving all the null type rows to the last.
+      List<Object> fieldsDescription= response.getResults();
+
+      //Get all non null type rows
+      List<Object>fieldsDescriptionWithTypeAsNonNull = fieldsDescription.stream()
+                                                      .filter(fieldName -> {
+                                                        try {
+                                                          return !mapper.readTree(mapper.writeValueAsString(fieldName)).get("type").asText().equals("null");
+                                                        } catch (IOException e) {
+                                                        }
+                                                        return false;
+                                                      })
+                                                      .collect(Collectors.toList());
+
+      //Get all null type rows
+      List<Object>fieldsDescriptionWithTypeAsNull = fieldsDescription.stream()
+                                                    .filter(fieldName -> {
+                                                      try {
+                                                        return mapper.readTree(mapper.writeValueAsString(fieldName)).get("type").asText().equals("null");
+                                                      } catch (IOException e) {
+                                                      }
+                                                      return false;
+                                                    })
+                                                    .collect(Collectors.toList());
+
+      //Combine them back
+      List<Object> fieldsDescriptionNew = Stream.concat(fieldsDescriptionWithTypeAsNonNull.stream(), fieldsDescriptionWithTypeAsNull.stream())
+                        .collect(Collectors.toList());
+
+      //Handle worst case. If any exception happened while re-arranging, retain the original response resultset
+      if(fieldsDescriptionNew.size() == fieldsDescription.size())
+        fieldsDescription = fieldsDescriptionNew;
+
+      describe = new RocksetResultSet(incol, fieldsDescription);
+    }
+
     Column col1 = new Column("TABLE_CAT", Column.ColumnTypes.STRING);
     Column col2 = new Column("TABLE_SCHEM", Column.ColumnTypes.STRING);
     Column col3 = new Column("TABLE_NAME", Column.ColumnTypes.STRING);
