@@ -71,7 +71,7 @@ class RocksetTable {
       List<Object> fieldsDescription= response.getResults();
 
       //Get all non null type rows
-      List<Object>fieldsDescriptionWithTypeAsNonNull = fieldsDescription.stream()
+      List<Object> fieldsDescriptionWithTypeAsNonNull = fieldsDescription.stream()
                                                       .filter(fieldName -> {
                                                         try {
                                                           return !mapper.readTree(mapper.writeValueAsString(fieldName)).get("type").asText().equals("null");
@@ -82,7 +82,7 @@ class RocksetTable {
                                                       .collect(Collectors.toList());
 
       //Get all null type rows
-      List<Object>fieldsDescriptionWithTypeAsNull = fieldsDescription.stream()
+      List<Object> fieldsDescriptionWithTypeAsNull = fieldsDescription.stream()
                                                     .filter(fieldName -> {
                                                       try {
                                                         return mapper.readTree(mapper.writeValueAsString(fieldName)).get("type").asText().equals("null");
@@ -94,7 +94,7 @@ class RocksetTable {
 
       //Combine them back
       List<Object> fieldsDescriptionNew = Stream.concat(fieldsDescriptionWithTypeAsNonNull.stream(), fieldsDescriptionWithTypeAsNull.stream())
-                        .collect(Collectors.toList());
+                                          .collect(Collectors.toList());
 
       //Handle worst case. If any exception happened while re-arranging, retain the original response resultset
       if(fieldsDescriptionNew.size() == fieldsDescription.size())
