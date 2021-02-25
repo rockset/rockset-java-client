@@ -24,6 +24,7 @@ import com.rockset.client.model.DynamodbIntegration;
 import com.rockset.client.model.GcsIntegration;
 import com.rockset.client.model.KafkaIntegration;
 import com.rockset.client.model.KinesisIntegration;
+import com.rockset.client.model.MongoDbIntegration;
 import com.rockset.client.model.RedshiftIntegration;
 import com.rockset.client.model.S3Integration;
 import com.rockset.client.model.SegmentIntegration;
@@ -36,7 +37,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateIntegrationRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-02-25T08:10:23.542Z")
 public class CreateIntegrationRequest {
   @SerializedName("name")
   private String name = null;
@@ -64,6 +65,9 @@ public class CreateIntegrationRequest {
 
   @SerializedName("kafka")
   private KafkaIntegration kafka = null;
+
+  @SerializedName("mongodb")
+  private MongoDbIntegration mongodb = null;
 
   public CreateIntegrationRequest name(String name) {
     this.name = name;
@@ -245,6 +249,26 @@ public class CreateIntegrationRequest {
     this.kafka = kafka;
   }
 
+  public CreateIntegrationRequest mongodb(MongoDbIntegration mongodb) {
+    this.mongodb = mongodb;
+    return this;
+  }
+
+   /**
+   * MongoDb details
+   * @return mongodb
+  **/
+
+@JsonProperty("mongodb")
+@ApiModelProperty(value = "MongoDb details")
+  public MongoDbIntegration getMongodb() {
+    return mongodb;
+  }
+
+  public void setMongodb(MongoDbIntegration mongodb) {
+    this.mongodb = mongodb;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -263,12 +287,13 @@ public class CreateIntegrationRequest {
         Objects.equals(this.redshift, createIntegrationRequest.redshift) &&
         Objects.equals(this.gcs, createIntegrationRequest.gcs) &&
         Objects.equals(this.segment, createIntegrationRequest.segment) &&
-        Objects.equals(this.kafka, createIntegrationRequest.kafka);
+        Objects.equals(this.kafka, createIntegrationRequest.kafka) &&
+        Objects.equals(this.mongodb, createIntegrationRequest.mongodb);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, description, s3, kinesis, dynamodb, redshift, gcs, segment, kafka);
+    return Objects.hash(name, description, s3, kinesis, dynamodb, redshift, gcs, segment, kafka, mongodb);
   }
 
 
@@ -286,6 +311,7 @@ public class CreateIntegrationRequest {
     sb.append("    gcs: ").append(toIndentedString(gcs)).append("\n");
     sb.append("    segment: ").append(toIndentedString(segment)).append("\n");
     sb.append("    kafka: ").append(toIndentedString(kafka)).append("\n");
+    sb.append("    mongodb: ").append(toIndentedString(mongodb)).append("\n");
     sb.append("}");
     return sb.toString();
   }

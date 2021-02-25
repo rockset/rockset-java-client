@@ -20,8 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.rockset.client.model.QueryLambdaSql;
-import com.rockset.client.model.QueryLambdaStats;
+import com.rockset.client.model.QueryLambdaVersion;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -33,84 +32,28 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryLambda
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-02-25T08:10:23.542Z")
 public class QueryLambda {
   @SerializedName("workspace")
   private String workspace = null;
 
-  @SerializedName("created_by")
-  private String createdBy = null;
+  @SerializedName("last_updated_by")
+  private String lastUpdatedBy = null;
 
-  @SerializedName("created_at")
-  private String createdAt = null;
+  @SerializedName("last_updated")
+  private String lastUpdated = null;
 
   @SerializedName("name")
   private String name = null;
 
-  @SerializedName("version")
-  private Integer version = null;
-
-  @SerializedName("description")
-  private String description = null;
-
-  @SerializedName("sql")
-  private QueryLambdaSql sql = null;
+  @SerializedName("version_count")
+  private Integer versionCount = null;
 
   @SerializedName("collections")
   private List<String> collections = null;
 
-  /**
-   * status of this Query Lambda
-   */
-  @JsonAdapter(StateEnum.Adapter.class)
-  public enum StateEnum {
-    ACTIVE("ACTIVE"),
-    
-    ARCHIVED("ARCHIVED");
-
-    private String value;
-
-    StateEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StateEnum fromValue(String text) {
-      for (StateEnum b : StateEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-
-    public static class Adapter extends TypeAdapter<StateEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StateEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StateEnum read(final JsonReader jsonReader) throws IOException {
-        String value = jsonReader.nextString();
-        return StateEnum.fromValue(String.valueOf(value));
-      }
-    }
-  }
-
-  @SerializedName("state")
-  private StateEnum state = null;
-
-  @SerializedName("stats")
-  private QueryLambdaStats stats = null;
+  @SerializedName("latest_version")
+  private QueryLambdaVersion latestVersion = null;
 
   public QueryLambda workspace(String workspace) {
     this.workspace = workspace;
@@ -132,44 +75,44 @@ public class QueryLambda {
     this.workspace = workspace;
   }
 
-  public QueryLambda createdBy(String createdBy) {
-    this.createdBy = createdBy;
+  public QueryLambda lastUpdatedBy(String lastUpdatedBy) {
+    this.lastUpdatedBy = lastUpdatedBy;
     return this;
   }
 
    /**
    * user that created this Query Lambda
-   * @return createdBy
+   * @return lastUpdatedBy
   **/
 
-@JsonProperty("created_by")
+@JsonProperty("last_updated_by")
 @ApiModelProperty(example = "..@rockset.com", value = "user that created this Query Lambda")
-  public String getCreatedBy() {
-    return createdBy;
+  public String getLastUpdatedBy() {
+    return lastUpdatedBy;
   }
 
-  public void setCreatedBy(String createdBy) {
-    this.createdBy = createdBy;
+  public void setLastUpdatedBy(String lastUpdatedBy) {
+    this.lastUpdatedBy = lastUpdatedBy;
   }
 
-  public QueryLambda createdAt(String createdAt) {
-    this.createdAt = createdAt;
+  public QueryLambda lastUpdated(String lastUpdated) {
+    this.lastUpdated = lastUpdated;
     return this;
   }
 
    /**
-   * ISO-8601 date of when Query Lambda was created
-   * @return createdAt
+   * ISO-8601 date of when Query Lambda was last updated
+   * @return lastUpdated
   **/
 
-@JsonProperty("created_at")
-@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date of when Query Lambda was created")
-  public String getCreatedAt() {
-    return createdAt;
+@JsonProperty("last_updated")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date of when Query Lambda was last updated")
+  public String getLastUpdated() {
+    return lastUpdated;
   }
 
-  public void setCreatedAt(String createdAt) {
-    this.createdAt = createdAt;
+  public void setLastUpdated(String lastUpdated) {
+    this.lastUpdated = lastUpdated;
   }
 
   public QueryLambda name(String name) {
@@ -192,64 +135,24 @@ public class QueryLambda {
     this.name = name;
   }
 
-  public QueryLambda version(Integer version) {
-    this.version = version;
+  public QueryLambda versionCount(Integer versionCount) {
+    this.versionCount = versionCount;
     return this;
   }
 
    /**
-   * Query Lambda version
-   * @return version
+   * number of Query Lambda versions
+   * @return versionCount
   **/
 
-@JsonProperty("version")
-@ApiModelProperty(example = "1", value = "Query Lambda version")
-  public Integer getVersion() {
-    return version;
+@JsonProperty("version_count")
+@ApiModelProperty(example = "1", value = "number of Query Lambda versions")
+  public Integer getVersionCount() {
+    return versionCount;
   }
 
-  public void setVersion(Integer version) {
-    this.version = version;
-  }
-
-  public QueryLambda description(String description) {
-    this.description = description;
-    return this;
-  }
-
-   /**
-   * optional description
-   * @return description
-  **/
-
-@JsonProperty("description")
-@ApiModelProperty(example = "production version foo", value = "optional description")
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public QueryLambda sql(QueryLambdaSql sql) {
-    this.sql = sql;
-    return this;
-  }
-
-   /**
-   * Query Lambda SQL query
-   * @return sql
-  **/
-
-@JsonProperty("sql")
-@ApiModelProperty(value = "Query Lambda SQL query")
-  public QueryLambdaSql getSql() {
-    return sql;
-  }
-
-  public void setSql(QueryLambdaSql sql) {
-    this.sql = sql;
+  public void setVersionCount(Integer versionCount) {
+    this.versionCount = versionCount;
   }
 
   public QueryLambda collections(List<String> collections) {
@@ -266,12 +169,12 @@ public class QueryLambda {
   }
 
    /**
-   * collections queried by underlying SQL query
+   * collections/aliases queried by underlying SQL query
    * @return collections
   **/
 
 @JsonProperty("collections")
-@ApiModelProperty(value = "collections queried by underlying SQL query")
+@ApiModelProperty(value = "collections/aliases queried by underlying SQL query")
   public List<String> getCollections() {
     return collections;
   }
@@ -280,44 +183,24 @@ public class QueryLambda {
     this.collections = collections;
   }
 
-  public QueryLambda state(StateEnum state) {
-    this.state = state;
+  public QueryLambda latestVersion(QueryLambdaVersion latestVersion) {
+    this.latestVersion = latestVersion;
     return this;
   }
 
    /**
-   * status of this Query Lambda
-   * @return state
+   * Query Lambda version details for most recently created version
+   * @return latestVersion
   **/
 
-@JsonProperty("state")
-@ApiModelProperty(example = "ACTIVE", value = "status of this Query Lambda")
-  public StateEnum getState() {
-    return state;
+@JsonProperty("latest_version")
+@ApiModelProperty(value = "Query Lambda version details for most recently created version")
+  public QueryLambdaVersion getLatestVersion() {
+    return latestVersion;
   }
 
-  public void setState(StateEnum state) {
-    this.state = state;
-  }
-
-  public QueryLambda stats(QueryLambdaStats stats) {
-    this.stats = stats;
-    return this;
-  }
-
-   /**
-   * stats related to this Query Lambda
-   * @return stats
-  **/
-
-@JsonProperty("stats")
-@ApiModelProperty(value = "stats related to this Query Lambda")
-  public QueryLambdaStats getStats() {
-    return stats;
-  }
-
-  public void setStats(QueryLambdaStats stats) {
-    this.stats = stats;
+  public void setLatestVersion(QueryLambdaVersion latestVersion) {
+    this.latestVersion = latestVersion;
   }
 
 
@@ -331,20 +214,17 @@ public class QueryLambda {
     }
     QueryLambda queryLambda = (QueryLambda) o;
     return Objects.equals(this.workspace, queryLambda.workspace) &&
-        Objects.equals(this.createdBy, queryLambda.createdBy) &&
-        Objects.equals(this.createdAt, queryLambda.createdAt) &&
+        Objects.equals(this.lastUpdatedBy, queryLambda.lastUpdatedBy) &&
+        Objects.equals(this.lastUpdated, queryLambda.lastUpdated) &&
         Objects.equals(this.name, queryLambda.name) &&
-        Objects.equals(this.version, queryLambda.version) &&
-        Objects.equals(this.description, queryLambda.description) &&
-        Objects.equals(this.sql, queryLambda.sql) &&
+        Objects.equals(this.versionCount, queryLambda.versionCount) &&
         Objects.equals(this.collections, queryLambda.collections) &&
-        Objects.equals(this.state, queryLambda.state) &&
-        Objects.equals(this.stats, queryLambda.stats);
+        Objects.equals(this.latestVersion, queryLambda.latestVersion);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(workspace, createdBy, createdAt, name, version, description, sql, collections, state, stats);
+    return Objects.hash(workspace, lastUpdatedBy, lastUpdated, name, versionCount, collections, latestVersion);
   }
 
 
@@ -354,15 +234,12 @@ public class QueryLambda {
     sb.append("class QueryLambda {\n");
     
     sb.append("    workspace: ").append(toIndentedString(workspace)).append("\n");
-    sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
-    sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
+    sb.append("    lastUpdatedBy: ").append(toIndentedString(lastUpdatedBy)).append("\n");
+    sb.append("    lastUpdated: ").append(toIndentedString(lastUpdated)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    version: ").append(toIndentedString(version)).append("\n");
-    sb.append("    description: ").append(toIndentedString(description)).append("\n");
-    sb.append("    sql: ").append(toIndentedString(sql)).append("\n");
+    sb.append("    versionCount: ").append(toIndentedString(versionCount)).append("\n");
     sb.append("    collections: ").append(toIndentedString(collections)).append("\n");
-    sb.append("    state: ").append(toIndentedString(state)).append("\n");
-    sb.append("    stats: ").append(toIndentedString(stats)).append("\n");
+    sb.append("    latestVersion: ").append(toIndentedString(latestVersion)).append("\n");
     sb.append("}");
     return sb.toString();
   }

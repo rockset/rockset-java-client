@@ -29,6 +29,7 @@ import java.io.IOException;
 import com.rockset.client.model.CreateWorkspaceRequest;
 import com.rockset.client.model.CreateWorkspaceResponse;
 import com.rockset.client.model.DeleteWorkspaceResponse;
+import com.rockset.client.model.ErrorModel;
 import com.rockset.client.model.GetWorkspaceResponse;
 import com.rockset.client.model.ListWorkspacesResponse;
 
@@ -122,7 +123,7 @@ public class WorkspacesApi {
     }
 
     /**
-     * List Workspaces
+     * List Workspaces in Workspace
      * List workspaces under given workspace.
      * @param workspace name of the workspace (required)
      * @return ListWorkspacesResponse
@@ -134,7 +135,7 @@ public class WorkspacesApi {
     }
 
     /**
-     * List Workspaces
+     * List Workspaces in Workspace
      * List workspaces under given workspace.
      * @param workspace name of the workspace (required)
      * @return ApiResponse&lt;ListWorkspacesResponse&gt;
@@ -147,7 +148,7 @@ public class WorkspacesApi {
     }
 
     /**
-     * List Workspaces (asynchronously)
+     * List Workspaces in Workspace (asynchronously)
      * List workspaces under given workspace.
      * @param workspace name of the workspace (required)
      * @param callback The callback to be executed when the API call finishes
@@ -245,7 +246,7 @@ public class WorkspacesApi {
 
     /**
      * Create Workspace
-     * Create a new workspace in your org.
+     * Create a new workspace.
      * @param body workspace details (required)
      * @return CreateWorkspaceResponse
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -257,7 +258,7 @@ public class WorkspacesApi {
 
     /**
      * Create Workspace
-     * Create a new workspace in your org.
+     * Create a new workspace.
      * @param body workspace details (required)
      * @return ApiResponse&lt;CreateWorkspaceResponse&gt;
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -270,7 +271,7 @@ public class WorkspacesApi {
 
     /**
      * Create Workspace (asynchronously)
-     * Create a new workspace in your org.
+     * Create a new workspace.
      * @param body workspace details (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
@@ -607,7 +608,7 @@ public class WorkspacesApi {
 
     /**
      * List Workspaces
-     * List all workspaces.
+     * List all workspaces in an organization.
      * @return ListWorkspacesResponse
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -618,7 +619,7 @@ public class WorkspacesApi {
 
     /**
      * List Workspaces
-     * List all workspaces.
+     * List all workspaces in an organization.
      * @return ApiResponse&lt;ListWorkspacesResponse&gt;
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -630,7 +631,7 @@ public class WorkspacesApi {
 
     /**
      * List Workspaces (asynchronously)
-     * List all workspaces.
+     * List all workspaces in an organization.
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object

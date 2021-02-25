@@ -30,6 +30,7 @@ import com.rockset.client.model.AddDocumentsRequest;
 import com.rockset.client.model.AddDocumentsResponse;
 import com.rockset.client.model.DeleteDocumentsRequest;
 import com.rockset.client.model.DeleteDocumentsResponse;
+import com.rockset.client.model.ErrorModel;
 import com.rockset.client.model.PatchDocumentsRequest;
 import com.rockset.client.model.PatchDocumentsResponse;
 
@@ -137,7 +138,7 @@ public class DocumentsApi {
 
     /**
      * Add Documents
-     * Add documents to a collection in Rockset.
+     * Add documents to a collection.
      * @param workspace name of the workspace (required)
      * @param collection name of the collection (required)
      * @param body JSON object (required)
@@ -151,7 +152,7 @@ public class DocumentsApi {
 
     /**
      * Add Documents
-     * Add documents to a collection in Rockset.
+     * Add documents to a collection.
      * @param workspace name of the workspace (required)
      * @param collection name of the collection (required)
      * @param body JSON object (required)
@@ -166,7 +167,7 @@ public class DocumentsApi {
 
     /**
      * Add Documents (asynchronously)
-     * Add documents to a collection in Rockset.
+     * Add documents to a collection.
      * @param workspace name of the workspace (required)
      * @param collection name of the collection (required)
      * @param body JSON object (required)
@@ -279,7 +280,7 @@ public class DocumentsApi {
 
     /**
      * Delete Documents
-     * Delete documents from a collection in Rockset.
+     * Delete documents from a collection.
      * @param workspace name of the workspace (required)
      * @param collection name of the collection (required)
      * @param body JSON object (required)
@@ -293,7 +294,7 @@ public class DocumentsApi {
 
     /**
      * Delete Documents
-     * Delete documents from a collection in Rockset.
+     * Delete documents from a collection.
      * @param workspace name of the workspace (required)
      * @param collection name of the collection (required)
      * @param body JSON object (required)
@@ -308,7 +309,7 @@ public class DocumentsApi {
 
     /**
      * Delete Documents (asynchronously)
-     * Delete documents from a collection in Rockset.
+     * Delete documents from a collection.
      * @param workspace name of the workspace (required)
      * @param collection name of the collection (required)
      * @param body JSON object (required)
@@ -421,7 +422,7 @@ public class DocumentsApi {
 
     /**
      * Patch Documents
-     * Patch documents in a collection
+     * Update existing documents in a collection.
      * @param workspace name of the workspace (required)
      * @param collection name of the collection (required)
      * @param body JSON Patch objects (required)
@@ -435,7 +436,7 @@ public class DocumentsApi {
 
     /**
      * Patch Documents
-     * Patch documents in a collection
+     * Update existing documents in a collection.
      * @param workspace name of the workspace (required)
      * @param collection name of the collection (required)
      * @param body JSON Patch objects (required)
@@ -450,7 +451,7 @@ public class DocumentsApi {
 
     /**
      * Patch Documents (asynchronously)
-     * Patch documents in a collection
+     * Update existing documents in a collection.
      * @param workspace name of the workspace (required)
      * @param collection name of the collection (required)
      * @param body JSON Patch objects (required)

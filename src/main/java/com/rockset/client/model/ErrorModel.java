@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "Describes details about an error")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-02-25T08:10:23.542Z")
 public class ErrorModel {
   @SerializedName("message")
   private String message = null;
@@ -55,6 +55,12 @@ public class ErrorModel {
     
     ALREADYEXISTS("ALREADYEXISTS"),
     
+    NOTALLOWED("NOTALLOWED"),
+    
+    NOTACCEPTABLE("NOTACCEPTABLE"),
+    
+    NOTSUPPORTED("NOTSUPPORTED"),
+    
     NOTFOUND("NOTFOUND"),
     
     DEPENDENTRESOURCES("DEPENDENTRESOURCES"),
@@ -66,8 +72,6 @@ public class ErrorModel {
     FORBIDDEN("FORBIDDEN"),
     
     QUERY_TIMEOUT("QUERYTIMEOUT"),
-    
-    INTEGRATION_NOT_FOUND("INTEGRATIONNOTFOUND"),
     
     ROLE_NOT_FOUND("ROLENOTFOUND"),
     
@@ -128,6 +132,9 @@ public class ErrorModel {
 
   @SerializedName("trace_id")
   private String traceId = null;
+
+  @SerializedName("error_id")
+  private String errorId = null;
 
   public ErrorModel message(String message) {
     this.message = message;
@@ -229,6 +236,26 @@ public class ErrorModel {
     this.traceId = traceId;
   }
 
+  public ErrorModel errorId(String errorId) {
+    this.errorId = errorId;
+    return this;
+  }
+
+   /**
+   * ID of the error
+   * @return errorId
+  **/
+
+@JsonProperty("error_id")
+@ApiModelProperty(value = "ID of the error")
+  public String getErrorId() {
+    return errorId;
+  }
+
+  public void setErrorId(String errorId) {
+    this.errorId = errorId;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -243,12 +270,13 @@ public class ErrorModel {
         Objects.equals(this.type, errorModel.type) &&
         Objects.equals(this.line, errorModel.line) &&
         Objects.equals(this.column, errorModel.column) &&
-        Objects.equals(this.traceId, errorModel.traceId);
+        Objects.equals(this.traceId, errorModel.traceId) &&
+        Objects.equals(this.errorId, errorModel.errorId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(message, type, line, column, traceId);
+    return Objects.hash(message, type, line, column, traceId, errorId);
   }
 
 
@@ -262,6 +290,7 @@ public class ErrorModel {
     sb.append("    line: ").append(toIndentedString(line)).append("\n");
     sb.append("    column: ").append(toIndentedString(column)).append("\n");
     sb.append("    traceId: ").append(toIndentedString(traceId)).append("\n");
+    sb.append("    errorId: ").append(toIndentedString(errorId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
