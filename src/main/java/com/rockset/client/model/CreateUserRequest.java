@@ -31,13 +31,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateUserRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-02-25T08:10:23.542Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
 public class CreateUserRequest {
   @SerializedName("email")
   private String email = null;
 
   @SerializedName("roles")
-  private List<String> roles = new ArrayList<String>();
+  private List<String> roles = null;
 
   public CreateUserRequest email(String email) {
     this.email = email;
@@ -65,6 +65,9 @@ public class CreateUserRequest {
   }
 
   public CreateUserRequest addRolesItem(String rolesItem) {
+    if (this.roles == null) {
+      this.roles = new ArrayList<String>();
+    }
     this.roles.add(rolesItem);
     return this;
   }
@@ -75,7 +78,7 @@ public class CreateUserRequest {
   **/
 
 @JsonProperty("roles")
-@ApiModelProperty(example = "\"[\\\"admin\\\", \\\"member\\\", \\\"read-only\\\"]\"", required = true, value = "List of roles for a given user")
+@ApiModelProperty(example = "\"[\\\"admin\\\", \\\"member\\\", \\\"read-only\\\"]\"", value = "List of roles for a given user")
   public List<String> getRoles() {
     return roles;
   }

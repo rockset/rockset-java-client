@@ -26,7 +26,6 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
-import com.rockset.client.model.ErrorModel;
 import com.rockset.client.model.OrganizationResponse;
 
 import java.lang.reflect.Type;

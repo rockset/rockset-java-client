@@ -29,43 +29,28 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CollectionStats
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-02-25T08:10:23.542Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
 public class CollectionStats {
   @SerializedName("doc_count")
   private Long docCount = null;
 
-  @SerializedName("purged_doc_count")
-  private Long purgedDocCount = null;
+  @SerializedName("total_size")
+  private Long totalSize = null;
 
   @SerializedName("fill_progress")
   private Double fillProgress = null;
 
-  @SerializedName("last_queried_ms")
-  private Long lastQueriedMs = null;
+  @SerializedName("purged_doc_count")
+  private Long purgedDocCount = null;
+
+  @SerializedName("purged_doc_size")
+  private Long purgedDocSize = null;
 
   @SerializedName("last_updated_ms")
   private Long lastUpdatedMs = null;
 
-  @SerializedName("total_size")
-  private Long totalSize = null;
-
-  @SerializedName("total_index_size")
-  private Long totalIndexSize = null;
-
-  @SerializedName("row_index_size")
-  private Long rowIndexSize = null;
-
-  @SerializedName("column_index_size")
-  private Long columnIndexSize = null;
-
-  @SerializedName("inverted_index_size")
-  private Long invertedIndexSize = null;
-
-  @SerializedName("range_index_size")
-  private Long rangeIndexSize = null;
-
-  @SerializedName("purged_doc_size")
-  private Long purgedDocSize = null;
+  @SerializedName("last_queried_ms")
+  private Long lastQueriedMs = null;
 
   @SerializedName("bytes_inserted")
   private Long bytesInserted = null;
@@ -93,24 +78,24 @@ public class CollectionStats {
     this.docCount = docCount;
   }
 
-  public CollectionStats purgedDocCount(Long purgedDocCount) {
-    this.purgedDocCount = purgedDocCount;
+  public CollectionStats totalSize(Long totalSize) {
+    this.totalSize = totalSize;
     return this;
   }
 
    /**
-   * number of documents purged from the collection
-   * @return purgedDocCount
+   * total collection size in bytes
+   * @return totalSize
   **/
 
-@JsonProperty("purged_doc_count")
-@ApiModelProperty(example = "2145", value = "number of documents purged from the collection")
-  public Long getPurgedDocCount() {
-    return purgedDocCount;
+@JsonProperty("total_size")
+@ApiModelProperty(example = "123456", value = "total collection size in bytes")
+  public Long getTotalSize() {
+    return totalSize;
   }
 
-  public void setPurgedDocCount(Long purgedDocCount) {
-    this.purgedDocCount = purgedDocCount;
+  public void setTotalSize(Long totalSize) {
+    this.totalSize = totalSize;
   }
 
   public CollectionStats fillProgress(Double fillProgress) {
@@ -133,24 +118,44 @@ public class CollectionStats {
     this.fillProgress = fillProgress;
   }
 
-  public CollectionStats lastQueriedMs(Long lastQueriedMs) {
-    this.lastQueriedMs = lastQueriedMs;
+  public CollectionStats purgedDocCount(Long purgedDocCount) {
+    this.purgedDocCount = purgedDocCount;
     return this;
   }
 
    /**
-   * milliseconds since Unix epoch Jan 1, 1970
-   * @return lastQueriedMs
+   * number of documents purged from the collection
+   * @return purgedDocCount
   **/
 
-@JsonProperty("last_queried_ms")
-@ApiModelProperty(example = "1535101119334", value = "milliseconds since Unix epoch Jan 1, 1970")
-  public Long getLastQueriedMs() {
-    return lastQueriedMs;
+@JsonProperty("purged_doc_count")
+@ApiModelProperty(example = "2145", value = "number of documents purged from the collection")
+  public Long getPurgedDocCount() {
+    return purgedDocCount;
   }
 
-  public void setLastQueriedMs(Long lastQueriedMs) {
-    this.lastQueriedMs = lastQueriedMs;
+  public void setPurgedDocCount(Long purgedDocCount) {
+    this.purgedDocCount = purgedDocCount;
+  }
+
+  public CollectionStats purgedDocSize(Long purgedDocSize) {
+    this.purgedDocSize = purgedDocSize;
+    return this;
+  }
+
+   /**
+   * total collection size in bytes purged
+   * @return purgedDocSize
+  **/
+
+@JsonProperty("purged_doc_size")
+@ApiModelProperty(example = "123456", value = "total collection size in bytes purged")
+  public Long getPurgedDocSize() {
+    return purgedDocSize;
+  }
+
+  public void setPurgedDocSize(Long purgedDocSize) {
+    this.purgedDocSize = purgedDocSize;
   }
 
   public CollectionStats lastUpdatedMs(Long lastUpdatedMs) {
@@ -173,144 +178,24 @@ public class CollectionStats {
     this.lastUpdatedMs = lastUpdatedMs;
   }
 
-  public CollectionStats totalSize(Long totalSize) {
-    this.totalSize = totalSize;
+  public CollectionStats lastQueriedMs(Long lastQueriedMs) {
+    this.lastQueriedMs = lastQueriedMs;
     return this;
   }
 
    /**
-   * total collection size in bytes
-   * @return totalSize
+   * milliseconds since Unix epoch Jan 1, 1970
+   * @return lastQueriedMs
   **/
 
-@JsonProperty("total_size")
-@ApiModelProperty(example = "123456", value = "total collection size in bytes")
-  public Long getTotalSize() {
-    return totalSize;
+@JsonProperty("last_queried_ms")
+@ApiModelProperty(example = "1535101119334", value = "milliseconds since Unix epoch Jan 1, 1970")
+  public Long getLastQueriedMs() {
+    return lastQueriedMs;
   }
 
-  public void setTotalSize(Long totalSize) {
-    this.totalSize = totalSize;
-  }
-
-  public CollectionStats totalIndexSize(Long totalIndexSize) {
-    this.totalIndexSize = totalIndexSize;
-    return this;
-  }
-
-   /**
-   * total collection index size in bytes
-   * @return totalIndexSize
-  **/
-
-@JsonProperty("total_index_size")
-@ApiModelProperty(example = "123456", value = "total collection index size in bytes")
-  public Long getTotalIndexSize() {
-    return totalIndexSize;
-  }
-
-  public void setTotalIndexSize(Long totalIndexSize) {
-    this.totalIndexSize = totalIndexSize;
-  }
-
-  public CollectionStats rowIndexSize(Long rowIndexSize) {
-    this.rowIndexSize = rowIndexSize;
-    return this;
-  }
-
-   /**
-   * total collection row index size in bytes
-   * @return rowIndexSize
-  **/
-
-@JsonProperty("row_index_size")
-@ApiModelProperty(example = "123456", value = "total collection row index size in bytes")
-  public Long getRowIndexSize() {
-    return rowIndexSize;
-  }
-
-  public void setRowIndexSize(Long rowIndexSize) {
-    this.rowIndexSize = rowIndexSize;
-  }
-
-  public CollectionStats columnIndexSize(Long columnIndexSize) {
-    this.columnIndexSize = columnIndexSize;
-    return this;
-  }
-
-   /**
-   * total collection column index size in bytes
-   * @return columnIndexSize
-  **/
-
-@JsonProperty("column_index_size")
-@ApiModelProperty(example = "123456", value = "total collection column index size in bytes")
-  public Long getColumnIndexSize() {
-    return columnIndexSize;
-  }
-
-  public void setColumnIndexSize(Long columnIndexSize) {
-    this.columnIndexSize = columnIndexSize;
-  }
-
-  public CollectionStats invertedIndexSize(Long invertedIndexSize) {
-    this.invertedIndexSize = invertedIndexSize;
-    return this;
-  }
-
-   /**
-   * total collection inverted index size in bytes
-   * @return invertedIndexSize
-  **/
-
-@JsonProperty("inverted_index_size")
-@ApiModelProperty(example = "123456", value = "total collection inverted index size in bytes")
-  public Long getInvertedIndexSize() {
-    return invertedIndexSize;
-  }
-
-  public void setInvertedIndexSize(Long invertedIndexSize) {
-    this.invertedIndexSize = invertedIndexSize;
-  }
-
-  public CollectionStats rangeIndexSize(Long rangeIndexSize) {
-    this.rangeIndexSize = rangeIndexSize;
-    return this;
-  }
-
-   /**
-   * total collection range index size in bytes
-   * @return rangeIndexSize
-  **/
-
-@JsonProperty("range_index_size")
-@ApiModelProperty(example = "123456", value = "total collection range index size in bytes")
-  public Long getRangeIndexSize() {
-    return rangeIndexSize;
-  }
-
-  public void setRangeIndexSize(Long rangeIndexSize) {
-    this.rangeIndexSize = rangeIndexSize;
-  }
-
-  public CollectionStats purgedDocSize(Long purgedDocSize) {
-    this.purgedDocSize = purgedDocSize;
-    return this;
-  }
-
-   /**
-   * total size of bytes purged in bytes
-   * @return purgedDocSize
-  **/
-
-@JsonProperty("purged_doc_size")
-@ApiModelProperty(example = "123456", value = "total size of bytes purged in bytes")
-  public Long getPurgedDocSize() {
-    return purgedDocSize;
-  }
-
-  public void setPurgedDocSize(Long purgedDocSize) {
-    this.purgedDocSize = purgedDocSize;
+  public void setLastQueriedMs(Long lastQueriedMs) {
+    this.lastQueriedMs = lastQueriedMs;
   }
 
   public CollectionStats bytesInserted(Long bytesInserted) {
@@ -364,24 +249,19 @@ public class CollectionStats {
     }
     CollectionStats collectionStats = (CollectionStats) o;
     return Objects.equals(this.docCount, collectionStats.docCount) &&
-        Objects.equals(this.purgedDocCount, collectionStats.purgedDocCount) &&
-        Objects.equals(this.fillProgress, collectionStats.fillProgress) &&
-        Objects.equals(this.lastQueriedMs, collectionStats.lastQueriedMs) &&
-        Objects.equals(this.lastUpdatedMs, collectionStats.lastUpdatedMs) &&
         Objects.equals(this.totalSize, collectionStats.totalSize) &&
-        Objects.equals(this.totalIndexSize, collectionStats.totalIndexSize) &&
-        Objects.equals(this.rowIndexSize, collectionStats.rowIndexSize) &&
-        Objects.equals(this.columnIndexSize, collectionStats.columnIndexSize) &&
-        Objects.equals(this.invertedIndexSize, collectionStats.invertedIndexSize) &&
-        Objects.equals(this.rangeIndexSize, collectionStats.rangeIndexSize) &&
+        Objects.equals(this.fillProgress, collectionStats.fillProgress) &&
+        Objects.equals(this.purgedDocCount, collectionStats.purgedDocCount) &&
         Objects.equals(this.purgedDocSize, collectionStats.purgedDocSize) &&
+        Objects.equals(this.lastUpdatedMs, collectionStats.lastUpdatedMs) &&
+        Objects.equals(this.lastQueriedMs, collectionStats.lastQueriedMs) &&
         Objects.equals(this.bytesInserted, collectionStats.bytesInserted) &&
         Objects.equals(this.bytesOverwritten, collectionStats.bytesOverwritten);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(docCount, purgedDocCount, fillProgress, lastQueriedMs, lastUpdatedMs, totalSize, totalIndexSize, rowIndexSize, columnIndexSize, invertedIndexSize, rangeIndexSize, purgedDocSize, bytesInserted, bytesOverwritten);
+    return Objects.hash(docCount, totalSize, fillProgress, purgedDocCount, purgedDocSize, lastUpdatedMs, lastQueriedMs, bytesInserted, bytesOverwritten);
   }
 
 
@@ -391,17 +271,12 @@ public class CollectionStats {
     sb.append("class CollectionStats {\n");
     
     sb.append("    docCount: ").append(toIndentedString(docCount)).append("\n");
-    sb.append("    purgedDocCount: ").append(toIndentedString(purgedDocCount)).append("\n");
-    sb.append("    fillProgress: ").append(toIndentedString(fillProgress)).append("\n");
-    sb.append("    lastQueriedMs: ").append(toIndentedString(lastQueriedMs)).append("\n");
-    sb.append("    lastUpdatedMs: ").append(toIndentedString(lastUpdatedMs)).append("\n");
     sb.append("    totalSize: ").append(toIndentedString(totalSize)).append("\n");
-    sb.append("    totalIndexSize: ").append(toIndentedString(totalIndexSize)).append("\n");
-    sb.append("    rowIndexSize: ").append(toIndentedString(rowIndexSize)).append("\n");
-    sb.append("    columnIndexSize: ").append(toIndentedString(columnIndexSize)).append("\n");
-    sb.append("    invertedIndexSize: ").append(toIndentedString(invertedIndexSize)).append("\n");
-    sb.append("    rangeIndexSize: ").append(toIndentedString(rangeIndexSize)).append("\n");
+    sb.append("    fillProgress: ").append(toIndentedString(fillProgress)).append("\n");
+    sb.append("    purgedDocCount: ").append(toIndentedString(purgedDocCount)).append("\n");
     sb.append("    purgedDocSize: ").append(toIndentedString(purgedDocSize)).append("\n");
+    sb.append("    lastUpdatedMs: ").append(toIndentedString(lastUpdatedMs)).append("\n");
+    sb.append("    lastQueriedMs: ").append(toIndentedString(lastQueriedMs)).append("\n");
     sb.append("    bytesInserted: ").append(toIndentedString(bytesInserted)).append("\n");
     sb.append("    bytesOverwritten: ").append(toIndentedString(bytesOverwritten)).append("\n");
     sb.append("}");

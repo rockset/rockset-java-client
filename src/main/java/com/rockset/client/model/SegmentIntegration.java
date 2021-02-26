@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SegmentIntegration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-02-25T08:10:23.542Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
 public class SegmentIntegration {
   @SerializedName("connection_string")
   private String connectionString = null;

@@ -29,7 +29,6 @@ import java.io.IOException;
 import com.rockset.client.model.CreateApiKeyRequest;
 import com.rockset.client.model.CreateApiKeyResponse;
 import com.rockset.client.model.DeleteApiKeyResponse;
-import com.rockset.client.model.ErrorModel;
 import com.rockset.client.model.ListApiKeysResponse;
 
 import java.lang.reflect.Type;
@@ -182,7 +181,7 @@ public class ApiKeysApi {
     /**
      * Build call for create_0
      * @param body JSON object (required)
-     * @param user user email (required)
+     * @param user  (required)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
@@ -250,10 +249,10 @@ public class ApiKeysApi {
     }
 
     /**
-     * Create API Key (any user)
-     * Create a new API key for any user in your organization. Accessible to Admin users only.
+     * Create API Key for any user (admin only)
+     * Create a new API key for any user (admin only).
      * @param body JSON object (required)
-     * @param user user email (required)
+     * @param user  (required)
      * @return CreateApiKeyResponse
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -263,10 +262,10 @@ public class ApiKeysApi {
     }
 
     /**
-     * Create API Key (any user)
-     * Create a new API key for any user in your organization. Accessible to Admin users only.
+     * Create API Key for any user (admin only)
+     * Create a new API key for any user (admin only).
      * @param body JSON object (required)
-     * @param user user email (required)
+     * @param user  (required)
      * @return ApiResponse&lt;CreateApiKeyResponse&gt;
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -277,10 +276,10 @@ public class ApiKeysApi {
     }
 
     /**
-     * Create API Key (any user) (asynchronously)
-     * Create a new API key for any user in your organization. Accessible to Admin users only.
+     * Create API Key for any user (admin only) (asynchronously)
+     * Create a new API key for any user (admin only).
      * @param body JSON object (required)
-     * @param user user email (required)
+     * @param user  (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
@@ -437,7 +436,7 @@ public class ApiKeysApi {
     /**
      * Build call for delete_0
      * @param name name of the API key (required)
-     * @param user user email (required)
+     * @param user  (required)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
@@ -506,10 +505,10 @@ public class ApiKeysApi {
     }
 
     /**
-     * Delete API Key (any user)
-     * Delete an API key for any user in your organization. Accessible to Admin users only.
+     * Delete API Key for any user (admin only)
+     * Delete an API key for any user (admin only).
      * @param name name of the API key (required)
-     * @param user user email (required)
+     * @param user  (required)
      * @return DeleteApiKeyResponse
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -519,10 +518,10 @@ public class ApiKeysApi {
     }
 
     /**
-     * Delete API Key (any user)
-     * Delete an API key for any user in your organization. Accessible to Admin users only.
+     * Delete API Key for any user (admin only)
+     * Delete an API key for any user (admin only).
      * @param name name of the API key (required)
-     * @param user user email (required)
+     * @param user  (required)
      * @return ApiResponse&lt;DeleteApiKeyResponse&gt;
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -533,10 +532,10 @@ public class ApiKeysApi {
     }
 
     /**
-     * Delete API Key (any user) (asynchronously)
-     * Delete an API key for any user in your organization. Accessible to Admin users only.
+     * Delete API Key for any user (admin only) (asynchronously)
+     * Delete an API key for any user (admin only).
      * @param name name of the API key (required)
-     * @param user user email (required)
+     * @param user  (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
@@ -682,7 +681,7 @@ public class ApiKeysApi {
     }
     /**
      * Build call for list_0
-     * @param user user email (required)
+     * @param user  (required)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
@@ -745,9 +744,9 @@ public class ApiKeysApi {
     }
 
     /**
-     * List API Keys (any user)
-     * List all API keys for any user in your organization. Accessible to Admin users only.
-     * @param user user email (required)
+     * List API Keys for any user (admin only)
+     * List all API keys for any user (admin only).
+     * @param user  (required)
      * @return ListApiKeysResponse
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -757,9 +756,9 @@ public class ApiKeysApi {
     }
 
     /**
-     * List API Keys (any user)
-     * List all API keys for any user in your organization. Accessible to Admin users only.
-     * @param user user email (required)
+     * List API Keys for any user (admin only)
+     * List all API keys for any user (admin only).
+     * @param user  (required)
      * @return ApiResponse&lt;ListApiKeysResponse&gt;
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -770,9 +769,9 @@ public class ApiKeysApi {
     }
 
     /**
-     * List API Keys (any user) (asynchronously)
-     * List all API keys for any user in your organization. Accessible to Admin users only.
-     * @param user user email (required)
+     * List API Keys for any user (admin only) (asynchronously)
+     * List all API keys for any user (admin only).
+     * @param user  (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object

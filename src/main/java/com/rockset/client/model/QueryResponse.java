@@ -20,7 +20,6 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.rockset.client.model.QueryError;
 import com.rockset.client.model.QueryFieldType;
 import com.rockset.client.model.QueryResponseStats;
 import io.swagger.annotations.ApiModel;
@@ -34,16 +33,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-02-25T08:10:23.542Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
 public class QueryResponse {
-  @SerializedName("query_id")
-  private String queryId = null;
-
-  @SerializedName("collections")
-  private List<String> collections = null;
-
   @SerializedName("results")
   private List<Object> results = null;
+
+  @SerializedName("fields")
+  private List<QueryFieldType> fields = null;
 
   @SerializedName("stats")
   private QueryResponseStats stats = null;
@@ -51,59 +47,11 @@ public class QueryResponse {
   @SerializedName("warnings")
   private List<String> warnings = null;
 
-  @SerializedName("query_errors")
-  private List<QueryError> queryErrors = null;
+  @SerializedName("collections")
+  private List<String> collections = null;
 
   @SerializedName("column_fields")
   private List<QueryFieldType> columnFields = null;
-
-  public QueryResponse queryId(String queryId) {
-    this.queryId = queryId;
-    return this;
-  }
-
-   /**
-   * unique id for this query
-   * @return queryId
-  **/
-
-@JsonProperty("query_id")
-@ApiModelProperty(value = "unique id for this query")
-  public String getQueryId() {
-    return queryId;
-  }
-
-  public void setQueryId(String queryId) {
-    this.queryId = queryId;
-  }
-
-  public QueryResponse collections(List<String> collections) {
-    this.collections = collections;
-    return this;
-  }
-
-  public QueryResponse addCollectionsItem(String collectionsItem) {
-    if (this.collections == null) {
-      this.collections = new ArrayList<String>();
-    }
-    this.collections.add(collectionsItem);
-    return this;
-  }
-
-   /**
-   * list of collections queried by the query
-   * @return collections
-  **/
-
-@JsonProperty("collections")
-@ApiModelProperty(value = "list of collections queried by the query")
-  public List<String> getCollections() {
-    return collections;
-  }
-
-  public void setCollections(List<String> collections) {
-    this.collections = collections;
-  }
 
   public QueryResponse results(List<Object> results) {
     this.results = results;
@@ -131,6 +79,34 @@ public class QueryResponse {
 
   public void setResults(List<Object> results) {
     this.results = results;
+  }
+
+  public QueryResponse fields(List<QueryFieldType> fields) {
+    this.fields = fields;
+    return this;
+  }
+
+  public QueryResponse addFieldsItem(QueryFieldType fieldsItem) {
+    if (this.fields == null) {
+      this.fields = new ArrayList<QueryFieldType>();
+    }
+    this.fields.add(fieldsItem);
+    return this;
+  }
+
+   /**
+   * list of fields returned by the query
+   * @return fields
+  **/
+
+@JsonProperty("fields")
+@ApiModelProperty(value = "list of fields returned by the query")
+  public List<QueryFieldType> getFields() {
+    return fields;
+  }
+
+  public void setFields(List<QueryFieldType> fields) {
+    this.fields = fields;
   }
 
   public QueryResponse stats(QueryResponseStats stats) {
@@ -181,45 +157,32 @@ public class QueryResponse {
     this.warnings = warnings;
   }
 
-  public QueryResponse queryErrors(List<QueryError> queryErrors) {
-    this.queryErrors = queryErrors;
+  public QueryResponse collections(List<String> collections) {
+    this.collections = collections;
     return this;
   }
 
-  public QueryResponse addQueryErrorsItem(QueryError queryErrorsItem) {
-    if (this.queryErrors == null) {
-      this.queryErrors = new ArrayList<QueryError>();
+  public QueryResponse addCollectionsItem(String collectionsItem) {
+    if (this.collections == null) {
+      this.collections = new ArrayList<String>();
     }
-    this.queryErrors.add(queryErrorsItem);
+    this.collections.add(collectionsItem);
     return this;
   }
 
    /**
-   * errors encountered while streaming the query
-   * @return queryErrors
+   * list of collections queried by the query
+   * @return collections
   **/
 
-@JsonProperty("query_errors")
-@ApiModelProperty(value = "errors encountered while streaming the query")
-  public List<QueryError> getQueryErrors() {
-    return queryErrors;
+@JsonProperty("collections")
+@ApiModelProperty(value = "list of collections queried by the query")
+  public List<String> getCollections() {
+    return collections;
   }
 
-  public void setQueryErrors(List<QueryError> queryErrors) {
-    this.queryErrors = queryErrors;
-  }
-
-  public QueryResponse columnFields(List<QueryFieldType> columnFields) {
-    this.columnFields = columnFields;
-    return this;
-  }
-
-  public QueryResponse addColumnFieldsItem(QueryFieldType columnFieldsItem) {
-    if (this.columnFields == null) {
-      this.columnFields = new ArrayList<QueryFieldType>();
-    }
-    this.columnFields.add(columnFieldsItem);
-    return this;
+  public void setCollections(List<String> collections) {
+    this.collections = collections;
   }
 
    /**
@@ -233,10 +196,6 @@ public class QueryResponse {
     return columnFields;
   }
 
-  public void setColumnFields(List<QueryFieldType> columnFields) {
-    this.columnFields = columnFields;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -247,18 +206,17 @@ public class QueryResponse {
       return false;
     }
     QueryResponse queryResponse = (QueryResponse) o;
-    return Objects.equals(this.queryId, queryResponse.queryId) &&
-        Objects.equals(this.collections, queryResponse.collections) &&
-        Objects.equals(this.results, queryResponse.results) &&
+    return Objects.equals(this.results, queryResponse.results) &&
+        Objects.equals(this.fields, queryResponse.fields) &&
         Objects.equals(this.stats, queryResponse.stats) &&
         Objects.equals(this.warnings, queryResponse.warnings) &&
-        Objects.equals(this.queryErrors, queryResponse.queryErrors) &&
+        Objects.equals(this.collections, queryResponse.collections) &&
         Objects.equals(this.columnFields, queryResponse.columnFields);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(queryId, collections, results, stats, warnings, queryErrors, columnFields);
+    return Objects.hash(results, fields, stats, warnings, collections, columnFields);
   }
 
 
@@ -267,12 +225,11 @@ public class QueryResponse {
     StringBuilder sb = new StringBuilder();
     sb.append("class QueryResponse {\n");
     
-    sb.append("    queryId: ").append(toIndentedString(queryId)).append("\n");
-    sb.append("    collections: ").append(toIndentedString(collections)).append("\n");
     sb.append("    results: ").append(toIndentedString(results)).append("\n");
+    sb.append("    fields: ").append(toIndentedString(fields)).append("\n");
     sb.append("    stats: ").append(toIndentedString(stats)).append("\n");
     sb.append("    warnings: ").append(toIndentedString(warnings)).append("\n");
-    sb.append("    queryErrors: ").append(toIndentedString(queryErrors)).append("\n");
+    sb.append("    collections: ").append(toIndentedString(collections)).append("\n");
     sb.append("    columnFields: ").append(toIndentedString(columnFields)).append("\n");
     sb.append("}");
     return sb.toString();

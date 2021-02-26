@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * PatchOperation
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-02-25T08:10:23.542Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
 public class PatchOperation {
   /**
    * Operation to be performed in this patch
@@ -46,9 +46,7 @@ public class PatchOperation {
     
     MOVE("MOVE"),
     
-    TEST("TEST"),
-    
-    INCREMENT("INCREMENT");
+    TEST("TEST");
 
     private String value;
 
@@ -146,12 +144,12 @@ public class PatchOperation {
   }
 
    /**
-   * Value used in the patch operation. Required for add, replace, test, and increment operations
+   * Value used in the patch operation. Required for add, replace and test operations
    * @return value
   **/
 
 @JsonProperty("value")
-@ApiModelProperty(example = "\"baz\"", value = "Value used in the patch operation. Required for add, replace, test, and increment operations")
+@ApiModelProperty(example = "\"baz\"", value = "Value used in the patch operation. Required for add, replace and test operations")
   public Object getValue() {
     return value;
   }

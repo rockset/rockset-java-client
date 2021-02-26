@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "API keys are used to authenticate requests to Rockset's API. An API key is tied to the user who creates it. A new API key can be created for each use case, with a maximum of 10 API keys per user.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-02-25T08:10:23.542Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
 public class ApiKey {
   @SerializedName("created_at")
   private String createdAt = null;
@@ -41,12 +41,6 @@ public class ApiKey {
 
   @SerializedName("key")
   private String key = null;
-
-  @SerializedName("last_access_time")
-  private String lastAccessTime = null;
-
-  @SerializedName("created_by")
-  private String createdBy = null;
 
   public ApiKey createdAt(String createdAt) {
     this.createdAt = createdAt;
@@ -108,46 +102,6 @@ public class ApiKey {
     this.key = key;
   }
 
-  public ApiKey lastAccessTime(String lastAccessTime) {
-    this.lastAccessTime = lastAccessTime;
-    return this;
-  }
-
-   /**
-   * ISO-8601 date
-   * @return lastAccessTime
-  **/
-
-@JsonProperty("last_access_time")
-@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date")
-  public String getLastAccessTime() {
-    return lastAccessTime;
-  }
-
-  public void setLastAccessTime(String lastAccessTime) {
-    this.lastAccessTime = lastAccessTime;
-  }
-
-  public ApiKey createdBy(String createdBy) {
-    this.createdBy = createdBy;
-    return this;
-  }
-
-   /**
-   * Get createdBy
-   * @return createdBy
-  **/
-
-@JsonProperty("created_by")
-@ApiModelProperty(value = "")
-  public String getCreatedBy() {
-    return createdBy;
-  }
-
-  public void setCreatedBy(String createdBy) {
-    this.createdBy = createdBy;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -160,14 +114,12 @@ public class ApiKey {
     ApiKey apiKey = (ApiKey) o;
     return Objects.equals(this.createdAt, apiKey.createdAt) &&
         Objects.equals(this.name, apiKey.name) &&
-        Objects.equals(this.key, apiKey.key) &&
-        Objects.equals(this.lastAccessTime, apiKey.lastAccessTime) &&
-        Objects.equals(this.createdBy, apiKey.createdBy);
+        Objects.equals(this.key, apiKey.key);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(createdAt, name, key, lastAccessTime, createdBy);
+    return Objects.hash(createdAt, name, key);
   }
 
 
@@ -179,8 +131,6 @@ public class ApiKey {
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    key: ").append(toIndentedString(key)).append("\n");
-    sb.append("    lastAccessTime: ").append(toIndentedString(lastAccessTime)).append("\n");
-    sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
     sb.append("}");
     return sb.toString();
   }

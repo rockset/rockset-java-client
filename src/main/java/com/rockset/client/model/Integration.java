@@ -20,20 +20,16 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.rockset.client.model.Collection;
 import com.rockset.client.model.DynamodbIntegration;
 import com.rockset.client.model.GcsIntegration;
 import com.rockset.client.model.KafkaIntegration;
 import com.rockset.client.model.KinesisIntegration;
-import com.rockset.client.model.MongoDbIntegration;
 import com.rockset.client.model.RedshiftIntegration;
 import com.rockset.client.model.S3Integration;
 import com.rockset.client.model.SegmentIntegration;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -42,16 +38,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "Integrations that can be associated with data sources to create collections. Only one type of integration may be specified.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-02-25T08:10:23.542Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
 public class Integration {
   @SerializedName("name")
   private String name = null;
 
   @SerializedName("description")
   private String description = null;
-
-  @SerializedName("collections")
-  private List<Collection> collections = null;
 
   @SerializedName("created_by")
   private String createdBy = null;
@@ -79,9 +72,6 @@ public class Integration {
 
   @SerializedName("kafka")
   private KafkaIntegration kafka = null;
-
-  @SerializedName("mongodb")
-  private MongoDbIntegration mongodb = null;
 
   public Integration name(String name) {
     this.name = name;
@@ -121,34 +111,6 @@ public class Integration {
 
   public void setDescription(String description) {
     this.description = description;
-  }
-
-  public Integration collections(List<Collection> collections) {
-    this.collections = collections;
-    return this;
-  }
-
-  public Integration addCollectionsItem(Collection collectionsItem) {
-    if (this.collections == null) {
-      this.collections = new ArrayList<Collection>();
-    }
-    this.collections.add(collectionsItem);
-    return this;
-  }
-
-   /**
-   * list of collections that use the integration
-   * @return collections
-  **/
-
-@JsonProperty("collections")
-@ApiModelProperty(value = "list of collections that use the integration")
-  public List<Collection> getCollections() {
-    return collections;
-  }
-
-  public void setCollections(List<Collection> collections) {
-    this.collections = collections;
   }
 
   public Integration createdBy(String createdBy) {
@@ -331,26 +293,6 @@ public class Integration {
     this.kafka = kafka;
   }
 
-  public Integration mongodb(MongoDbIntegration mongodb) {
-    this.mongodb = mongodb;
-    return this;
-  }
-
-   /**
-   * MongoDb details
-   * @return mongodb
-  **/
-
-@JsonProperty("mongodb")
-@ApiModelProperty(value = "MongoDb details")
-  public MongoDbIntegration getMongodb() {
-    return mongodb;
-  }
-
-  public void setMongodb(MongoDbIntegration mongodb) {
-    this.mongodb = mongodb;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -363,7 +305,6 @@ public class Integration {
     Integration integration = (Integration) o;
     return Objects.equals(this.name, integration.name) &&
         Objects.equals(this.description, integration.description) &&
-        Objects.equals(this.collections, integration.collections) &&
         Objects.equals(this.createdBy, integration.createdBy) &&
         Objects.equals(this.createdAt, integration.createdAt) &&
         Objects.equals(this.s3, integration.s3) &&
@@ -372,13 +313,12 @@ public class Integration {
         Objects.equals(this.redshift, integration.redshift) &&
         Objects.equals(this.gcs, integration.gcs) &&
         Objects.equals(this.segment, integration.segment) &&
-        Objects.equals(this.kafka, integration.kafka) &&
-        Objects.equals(this.mongodb, integration.mongodb);
+        Objects.equals(this.kafka, integration.kafka);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, description, collections, createdBy, createdAt, s3, kinesis, dynamodb, redshift, gcs, segment, kafka, mongodb);
+    return Objects.hash(name, description, createdBy, createdAt, s3, kinesis, dynamodb, redshift, gcs, segment, kafka);
   }
 
 
@@ -389,7 +329,6 @@ public class Integration {
     
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
-    sb.append("    collections: ").append(toIndentedString(collections)).append("\n");
     sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    s3: ").append(toIndentedString(s3)).append("\n");
@@ -399,7 +338,6 @@ public class Integration {
     sb.append("    gcs: ").append(toIndentedString(gcs)).append("\n");
     sb.append("    segment: ").append(toIndentedString(segment)).append("\n");
     sb.append("    kafka: ").append(toIndentedString(kafka)).append("\n");
-    sb.append("    mongodb: ").append(toIndentedString(mongodb)).append("\n");
     sb.append("}");
     return sb.toString();
   }

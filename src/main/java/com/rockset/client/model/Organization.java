@@ -20,12 +20,9 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.rockset.client.model.Cluster;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -34,11 +31,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "An organization in Rockset is a container for users and collections.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-02-25T08:10:23.542Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
 public class Organization {
-  @SerializedName("deletionScheduledAt")
-  private String deletionScheduledAt = null;
-
   @SerializedName("id")
   private String id = null;
 
@@ -71,8 +65,6 @@ public class Organization {
     TRIAL_EXPIRED("TRIALEXPIRED"),
     
     TRIAL_DEPLETED("TRIALDEPLETED"),
-    
-    INACTIVE("INACTIVE"),
     
     DELETED("DELETED");
 
@@ -116,29 +108,6 @@ public class Organization {
 
   @SerializedName("state")
   private StateEnum state = null;
-
-  @SerializedName("clusters")
-  private List<Cluster> clusters = null;
-
-  public Organization deletionScheduledAt(String deletionScheduledAt) {
-    this.deletionScheduledAt = deletionScheduledAt;
-    return this;
-  }
-
-   /**
-   * Get deletionScheduledAt
-   * @return deletionScheduledAt
-  **/
-
-@JsonProperty("deletionScheduledAt")
-@ApiModelProperty(value = "")
-  public String getDeletionScheduledAt() {
-    return deletionScheduledAt;
-  }
-
-  public void setDeletionScheduledAt(String deletionScheduledAt) {
-    this.deletionScheduledAt = deletionScheduledAt;
-  }
 
   public Organization id(String id) {
     this.id = id;
@@ -280,34 +249,6 @@ public class Organization {
     this.state = state;
   }
 
-  public Organization clusters(List<Cluster> clusters) {
-    this.clusters = clusters;
-    return this;
-  }
-
-  public Organization addClustersItem(Cluster clustersItem) {
-    if (this.clusters == null) {
-      this.clusters = new ArrayList<Cluster>();
-    }
-    this.clusters.add(clustersItem);
-    return this;
-  }
-
-   /**
-   * Get clusters
-   * @return clusters
-  **/
-
-@JsonProperty("clusters")
-@ApiModelProperty(value = "")
-  public List<Cluster> getClusters() {
-    return clusters;
-  }
-
-  public void setClusters(List<Cluster> clusters) {
-    this.clusters = clusters;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -318,20 +259,18 @@ public class Organization {
       return false;
     }
     Organization organization = (Organization) o;
-    return Objects.equals(this.deletionScheduledAt, organization.deletionScheduledAt) &&
-        Objects.equals(this.id, organization.id) &&
+    return Objects.equals(this.id, organization.id) &&
         Objects.equals(this.createdAt, organization.createdAt) &&
         Objects.equals(this.displayName, organization.displayName) &&
         Objects.equals(this.companyName, organization.companyName) &&
         Objects.equals(this.externalId, organization.externalId) &&
         Objects.equals(this.rocksetUser, organization.rocksetUser) &&
-        Objects.equals(this.state, organization.state) &&
-        Objects.equals(this.clusters, organization.clusters);
+        Objects.equals(this.state, organization.state);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(deletionScheduledAt, id, createdAt, displayName, companyName, externalId, rocksetUser, state, clusters);
+    return Objects.hash(id, createdAt, displayName, companyName, externalId, rocksetUser, state);
   }
 
 
@@ -340,7 +279,6 @@ public class Organization {
     StringBuilder sb = new StringBuilder();
     sb.append("class Organization {\n");
     
-    sb.append("    deletionScheduledAt: ").append(toIndentedString(deletionScheduledAt)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
@@ -348,7 +286,6 @@ public class Organization {
     sb.append("    externalId: ").append(toIndentedString(externalId)).append("\n");
     sb.append("    rocksetUser: ").append(toIndentedString(rocksetUser)).append("\n");
     sb.append("    state: ").append(toIndentedString(state)).append("\n");
-    sb.append("    clusters: ").append(toIndentedString(clusters)).append("\n");
     sb.append("}");
     return sb.toString();
   }

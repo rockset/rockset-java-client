@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateQueryLambdaRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-02-25T08:10:23.542Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
 public class CreateQueryLambdaRequest {
   @SerializedName("name")
   private String name = null;
@@ -92,7 +92,7 @@ public class CreateQueryLambdaRequest {
   **/
 
 @JsonProperty("sql")
-@ApiModelProperty(required = true, value = "Query Lambda SQL query")
+@ApiModelProperty(value = "Query Lambda SQL query")
   public QueryLambdaSql getSql() {
     return sql;
   }

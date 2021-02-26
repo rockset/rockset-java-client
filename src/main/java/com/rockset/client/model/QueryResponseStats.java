@@ -20,22 +20,34 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.rockset.client.model.OperatorStats;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * QueryResponseStats
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-02-25T08:10:23.542Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
 public class QueryResponseStats {
   @SerializedName("elapsed_time_ms")
   private Long elapsedTimeMs = null;
 
-  @SerializedName("throttled_time_micros")
-  private Long throttledTimeMicros = null;
+  @SerializedName("rows_scanned")
+  private Long rowsScanned = null;
+
+  @SerializedName("rows_returned")
+  private Long rowsReturned = null;
+
+  @SerializedName("operators")
+  private List<OperatorStats> operators = null;
+
+  @SerializedName("execution_graph")
+  private String executionGraph = null;
 
   public QueryResponseStats elapsedTimeMs(Long elapsedTimeMs) {
     this.elapsedTimeMs = elapsedTimeMs;
@@ -57,24 +69,92 @@ public class QueryResponseStats {
     this.elapsedTimeMs = elapsedTimeMs;
   }
 
-  public QueryResponseStats throttledTimeMicros(Long throttledTimeMicros) {
-    this.throttledTimeMicros = throttledTimeMicros;
+  public QueryResponseStats rowsScanned(Long rowsScanned) {
+    this.rowsScanned = rowsScanned;
     return this;
   }
 
    /**
-   * time query was throttled by admission control
-   * @return throttledTimeMicros
+   * rows scanned as part of query execution
+   * @return rowsScanned
   **/
 
-@JsonProperty("throttled_time_micros")
-@ApiModelProperty(example = "126", value = "time query was throttled by admission control")
-  public Long getThrottledTimeMicros() {
-    return throttledTimeMicros;
+@JsonProperty("rows_scanned")
+@ApiModelProperty(example = "25000", value = "rows scanned as part of query execution")
+  public Long getRowsScanned() {
+    return rowsScanned;
   }
 
-  public void setThrottledTimeMicros(Long throttledTimeMicros) {
-    this.throttledTimeMicros = throttledTimeMicros;
+  public void setRowsScanned(Long rowsScanned) {
+    this.rowsScanned = rowsScanned;
+  }
+
+  public QueryResponseStats rowsReturned(Long rowsReturned) {
+    this.rowsReturned = rowsReturned;
+    return this;
+  }
+
+   /**
+   * number of rows returned from the query
+   * @return rowsReturned
+  **/
+
+@JsonProperty("rows_returned")
+@ApiModelProperty(example = "100", value = "number of rows returned from the query")
+  public Long getRowsReturned() {
+    return rowsReturned;
+  }
+
+  public void setRowsReturned(Long rowsReturned) {
+    this.rowsReturned = rowsReturned;
+  }
+
+  public QueryResponseStats operators(List<OperatorStats> operators) {
+    this.operators = operators;
+    return this;
+  }
+
+  public QueryResponseStats addOperatorsItem(OperatorStats operatorsItem) {
+    if (this.operators == null) {
+      this.operators = new ArrayList<OperatorStats>();
+    }
+    this.operators.add(operatorsItem);
+    return this;
+  }
+
+   /**
+   * Statistics for each operator from query execution
+   * @return operators
+  **/
+
+@JsonProperty("operators")
+@ApiModelProperty(value = "Statistics for each operator from query execution")
+  public List<OperatorStats> getOperators() {
+    return operators;
+  }
+
+  public void setOperators(List<OperatorStats> operators) {
+    this.operators = operators;
+  }
+
+  public QueryResponseStats executionGraph(String executionGraph) {
+    this.executionGraph = executionGraph;
+    return this;
+  }
+
+   /**
+   * DOT graph representing the execution steps of this query
+   * @return executionGraph
+  **/
+
+@JsonProperty("execution_graph")
+@ApiModelProperty(value = "DOT graph representing the execution steps of this query")
+  public String getExecutionGraph() {
+    return executionGraph;
+  }
+
+  public void setExecutionGraph(String executionGraph) {
+    this.executionGraph = executionGraph;
   }
 
 
@@ -88,12 +168,15 @@ public class QueryResponseStats {
     }
     QueryResponseStats queryResponseStats = (QueryResponseStats) o;
     return Objects.equals(this.elapsedTimeMs, queryResponseStats.elapsedTimeMs) &&
-        Objects.equals(this.throttledTimeMicros, queryResponseStats.throttledTimeMicros);
+        Objects.equals(this.rowsScanned, queryResponseStats.rowsScanned) &&
+        Objects.equals(this.rowsReturned, queryResponseStats.rowsReturned) &&
+        Objects.equals(this.operators, queryResponseStats.operators) &&
+        Objects.equals(this.executionGraph, queryResponseStats.executionGraph);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(elapsedTimeMs, throttledTimeMicros);
+    return Objects.hash(elapsedTimeMs, rowsScanned, rowsReturned, operators, executionGraph);
   }
 
 
@@ -103,7 +186,10 @@ public class QueryResponseStats {
     sb.append("class QueryResponseStats {\n");
     
     sb.append("    elapsedTimeMs: ").append(toIndentedString(elapsedTimeMs)).append("\n");
-    sb.append("    throttledTimeMicros: ").append(toIndentedString(throttledTimeMicros)).append("\n");
+    sb.append("    rowsScanned: ").append(toIndentedString(rowsScanned)).append("\n");
+    sb.append("    rowsReturned: ").append(toIndentedString(rowsReturned)).append("\n");
+    sb.append("    operators: ").append(toIndentedString(operators)).append("\n");
+    sb.append("    executionGraph: ").append(toIndentedString(executionGraph)).append("\n");
     sb.append("}");
     return sb.toString();
   }

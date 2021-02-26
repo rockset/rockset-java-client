@@ -29,7 +29,6 @@ import java.io.IOException;
 import com.rockset.client.model.CreateIntegrationRequest;
 import com.rockset.client.model.CreateIntegrationResponse;
 import com.rockset.client.model.DeleteIntegrationResponse;
-import com.rockset.client.model.ErrorModel;
 import com.rockset.client.model.GetIntegrationResponse;
 import com.rockset.client.model.ListIntegrationsResponse;
 
@@ -123,7 +122,7 @@ public class IntegrationsApi {
 
     /**
      * Create Integration
-     * Create a new integration.
+     * Create a new integration with Rockset.
      * @param body integration credentials (required)
      * @return CreateIntegrationResponse
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -135,7 +134,7 @@ public class IntegrationsApi {
 
     /**
      * Create Integration
-     * Create a new integration.
+     * Create a new integration with Rockset.
      * @param body integration credentials (required)
      * @return ApiResponse&lt;CreateIntegrationResponse&gt;
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -148,7 +147,7 @@ public class IntegrationsApi {
 
     /**
      * Create Integration (asynchronously)
-     * Create a new integration.
+     * Create a new integration with Rockset.
      * @param body integration credentials (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
@@ -485,7 +484,7 @@ public class IntegrationsApi {
 
     /**
      * List Integrations
-     * List all integrations in an organization.
+     * List all integrations for organization.
      * @return ListIntegrationsResponse
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -496,7 +495,7 @@ public class IntegrationsApi {
 
     /**
      * List Integrations
-     * List all integrations in an organization.
+     * List all integrations for organization.
      * @return ApiResponse&lt;ListIntegrationsResponse&gt;
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -508,7 +507,7 @@ public class IntegrationsApi {
 
     /**
      * List Integrations (asynchronously)
-     * List all integrations in an organization.
+     * List all integrations for organization.
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
