@@ -1436,6 +1436,11 @@ public class RocksetResultSet implements ResultSet {
       }
     }
     else if (columnInfo.getType() == Column.ColumnTypes.TIMESTAMP) {
+      if (value.asText().equals("null")) {
+        wasNull.set(true);
+        return null;
+      }
+      
       try {
         LocalDateTime dateTime = LocalDateTime.parse(value.asText(), TIMESTAMP_PARSE_FORMAT);
         ZonedDateTime zonedDateTime = dateTime.atZone(ZoneId.of("UTC"));

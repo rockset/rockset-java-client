@@ -69,6 +69,9 @@ public class TestJdbcPreparedStatement
     }
     this.property = new Properties();
     this.property.setProperty("apiKey", apiKey);
+   
+    if(apiServer.toLowerCase().contains("https://"))
+     apiServer = apiServer.replace("https://","");
     this.property.setProperty("apiServer", apiServer);
 
     // create the Rockset test client

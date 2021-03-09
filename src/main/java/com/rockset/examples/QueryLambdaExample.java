@@ -26,12 +26,12 @@ public class QueryLambdaExample {
     sql.setDefaultParameters(defaultParameters);
     req.setSql(sql);
 
-
-    CreateQueryLambdaResponse resp = rs.createQueryLambda("commons", req);
+    QueryLambdaVersionResponse resp = rs.createQueryLambda("commons", req);
     System.out.println(resp.toString());
+    String version = resp.getData().getVersion();
 
     // Run Query Lambda with default parameters
-    QueryResponse qr = rs.runQueryLambda("commons", queryName, 1, null);
+    QueryResponse qr = rs.runQueryLambdaByTag("commons", queryName, version, null);
     Map<String, String> result = (LinkedTreeMap) qr.getResults().get(0);
     System.out.println(result.toString());
 
@@ -42,7 +42,17 @@ public class QueryLambdaExample {
     exParam.setValue("All work and no play makes Jack a dull boy");
     ExecuteQueryLambdaRequest exReq = new ExecuteQueryLambdaRequest();
     exReq.addParametersItem(exParam);
-    qr = rs.runQueryLambda("commons", queryName, 1, exReq);
+    
+    qr = rs.runQueryLambdaByTag("commons", queryName, version, exReq); 
+    result = (LinkedTreeMap) qr.getResults().get(0);
+    System.out.println(result.toString());
+
+    //Get Query Lambda Version by tag
+    QueryLambdaTagResponse qt= rs.getQueryLambdaVersionByTag("commons", queryName, version);
+    version = qt.getData().getVersion().getVersion(); 
+    System.out.println(version);
+
+    qr = rs.runQueryLambdaByVersion("commons", queryName, version, exReq);
     result = (LinkedTreeMap) qr.getResults().get(0);
     System.out.println(result.toString());
 

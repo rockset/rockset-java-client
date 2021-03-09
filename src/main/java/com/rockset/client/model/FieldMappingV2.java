@@ -33,10 +33,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * FieldMappingV2
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-02-26T17:46:04.637Z")
 public class FieldMappingV2 {
   @SerializedName("name")
   private String name = null;
+
+  @SerializedName("is_drop_all_fields")
+  private Boolean isDropAllFields = null;
 
   @SerializedName("input_fields")
   private List<InputField> inputFields = null;
@@ -62,6 +65,26 @@ public class FieldMappingV2 {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public FieldMappingV2 isDropAllFields(Boolean isDropAllFields) {
+    this.isDropAllFields = isDropAllFields;
+    return this;
+  }
+
+   /**
+   * A boolean that determines whether to drop all fields in this document. If set, input and output fields should not be set
+   * @return isDropAllFields
+  **/
+
+@JsonProperty("is_drop_all_fields")
+@ApiModelProperty(example = "true", value = "A boolean that determines whether to drop all fields in this document. If set, input and output fields should not be set")
+  public Boolean isIsDropAllFields() {
+    return isDropAllFields;
+  }
+
+  public void setIsDropAllFields(Boolean isDropAllFields) {
+    this.isDropAllFields = isDropAllFields;
   }
 
   public FieldMappingV2 inputFields(List<InputField> inputFields) {
@@ -123,13 +146,14 @@ public class FieldMappingV2 {
     }
     FieldMappingV2 fieldMappingV2 = (FieldMappingV2) o;
     return Objects.equals(this.name, fieldMappingV2.name) &&
+        Objects.equals(this.isDropAllFields, fieldMappingV2.isDropAllFields) &&
         Objects.equals(this.inputFields, fieldMappingV2.inputFields) &&
         Objects.equals(this.outputField, fieldMappingV2.outputField);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, inputFields, outputField);
+    return Objects.hash(name, isDropAllFields, inputFields, outputField);
   }
 
 
@@ -139,6 +163,7 @@ public class FieldMappingV2 {
     sb.append("class FieldMappingV2 {\n");
     
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    isDropAllFields: ").append(toIndentedString(isDropAllFields)).append("\n");
     sb.append("    inputFields: ").append(toIndentedString(inputFields)).append("\n");
     sb.append("    outputField: ").append(toIndentedString(outputField)).append("\n");
     sb.append("}");

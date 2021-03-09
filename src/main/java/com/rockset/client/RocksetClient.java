@@ -241,10 +241,10 @@ public class RocksetClient {
    * Create a Query Lambda in Rockset
    * @param workspaceName Name of the workspace
    * @param request CreateQueryLambdaRequest object which contains information about the Query Lambda
-   * @return CreateQueryLambdaResponse object which contains information about the Query Lambda created
+   * @return QueryLambdaVersionResponse object which contains information about the Query Lambda created
    * @throws Exception
    */
-  public CreateQueryLambdaResponse createQueryLambda(
+  public QueryLambdaVersionResponse createQueryLambda(
           String workspaceName, CreateQueryLambdaRequest request) throws Exception {
       return queryLambda.create(workspaceName, request);
   }
@@ -254,60 +254,74 @@ public class RocksetClient {
    * @param workspaceName Name of the workspace
    * @param queryName Name of the Query Lambda to be updated
    * @param request UpdateQueryLambdaRequest object which contains information about the Query Lambda
-   * @return UpdateQueryLambdaResponse object which contains information about the Query Lambda updated
+   * @param create Create if missing
+   * @return QueryLambdaVersionResponse object which contains information about the Query Lambda updated
    * @throws Exception
    */
-  public UpdateQueryLambdaResponse updateQueryLambda(
-          String workspaceName, String queryName, UpdateQueryLambdaRequest request) throws Exception {
-    return queryLambda.update(workspaceName, queryName, request);
+  public QueryLambdaVersionResponse updateQueryLambda(
+          String workspaceName, String queryName, UpdateQueryLambdaRequest request, Boolean create) throws Exception {
+    return queryLambda.update(workspaceName, queryName, request, create);
   }
 
   /**
-   * List all saved queries in a workspace
-   * @param workspaceName Name of the workspace
-   * @return List of QueryLambda objects in that workspace
+   * List all Query Lambdas
+   * @return List of QueryLambdaTag objects 
    * @throws Exception
    */
-  public List<QueryLambda> listSavedQueries(String workspaceName) throws Exception {
-    return queryLambda.list_0(workspaceName).getData();
+  public List<QueryLambdaTag> listQueryLambdas() throws Exception {
+    return queryLambda.list_0().getData();
   }
 
   /**
-   * List all saved queries in a workspace
+   * List all Query Lambda Versions associated with a given tag"
+   * @param tag name of the tag
+   * @return List of QueryLambdaVersion objects
+   * @throws Exception
+   */
+  public List<QueryLambdaVersion> listQueryLambdaVersions(
+          String tag) throws Exception {
+    return queryLambda.list_1(tag).getData();
+  }
+
+  /**
+   * Get Query Lambda Version details
    * @param workspaceName Name of the workspace
    * @param queryName Name of the Query Lambda
-   * @return List of QueryLambda objects in queries version history
+   * @param tag Tag of the Query Lambda
+   * @return QueryLambdaTagResponse object with details about the Query Lambda Version
    * @throws Exception
    */
-  public List<QueryLambda> listSavedQueriesVersions(
-          String workspaceName, String queryName) throws Exception {
-    return queryLambda.list_1(workspaceName, queryName).getData();
-  }
-
-  /**
-   * Get Query Lambda details
-   * @param workspaceName Name of the workspace
-   * @param queryName Name of the Query Lambda
-   * @param version Version number of Query Lambda
-   * @return GetQueryLambdaResponse object with details about the Query Lambda version
-   * @throws Exception
-   */
-  public GetQueryLambdaResponse getQueryLambdaVersion(
-          String workspaceName, String queryName, int version) throws Exception {
-    return queryLambda.get(workspaceName, queryName, version);
+  public QueryLambdaTagResponse getQueryLambdaVersionByTag(
+          String workspaceName, String queryName, String tag) throws Exception {
+    return queryLambda.get(workspaceName, queryName, tag);
   }
 
   /**
    * Run a Query Lambda
    * @param workspaceName Name of the workspace
    * @param queryName Name of the Query Lambda
-   * @param version Version number of Query Lambda
+   * @param tag Tag of the Query Lambda
    * @param request ExecuteQueryLambdaRequest object with additional run options
    * @return QueryResponse object with query results
    * @throws Exception
    */
-  public QueryResponse runQueryLambda(String workspaceName, String queryName,
-                                     int version, ExecuteQueryLambdaRequest request) throws Exception {
+  public QueryResponse runQueryLambdaByTag(String workspaceName, String queryName,
+                                     String tag, ExecuteQueryLambdaRequest request) throws Exception {
+    return queryLambda.execute(workspaceName, queryName, tag, request);
+  }
+
+
+  /**
+   * Run a Query Lambda
+   * @param workspaceName Name of the workspace
+   * @param queryName Name of the Query Lambda
+   * @param version Version of the Query Lambda
+   * @param request ExecuteQueryLambdaRequest object with additional run options
+   * @return QueryResponse object with query results
+   * @throws Exception
+   */
+  public QueryResponse runQueryLambdaByVersion(String workspaceName, String queryName,
+                                     String version, ExecuteQueryLambdaRequest request) throws Exception {
     return queryLambda.execute(workspaceName, queryName, version, request);
   }
 

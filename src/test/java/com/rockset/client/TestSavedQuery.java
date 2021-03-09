@@ -3,6 +3,7 @@ package com.rockset.client;
 import com.google.gson.internal.LinkedTreeMap;
 import com.rockset.client.model.CreateQueryLambdaRequest;
 import com.rockset.client.model.CreateQueryLambdaResponse;
+import com.rockset.client.model.QueryLambdaVersionResponse;
 import com.rockset.client.model.ExecuteQueryLambdaRequest;
 import com.rockset.client.model.QueryLambdaSql;
 import com.rockset.client.model.QueryResponse;
@@ -50,12 +51,12 @@ public class TestSavedQuery {
     req.setSql(sql);
 
 
-    CreateQueryLambdaResponse resp = client.createQueryLambda("commons", req);
+    QueryLambdaVersionResponse resp = client.createQueryLambda("commons", req);
     Assert.assertEquals(resp.getData().getName(), this.queryName);
 
-
+    String version = resp.getData().getVersion();
     // Run Query Lambda with default parameters
-    QueryResponse qr = client.runQueryLambda("commons", queryName, 1, null);
+    QueryResponse qr = client.runQueryLambdaByVersion("commons", queryName, version, null);
     Map<String, String> result = (LinkedTreeMap) qr.getResults().get(0);
     Assert.assertEquals(result.get("echo"), "Hello, world!");
 
@@ -66,7 +67,7 @@ public class TestSavedQuery {
     exParam.setValue("All work and no play makes Jack a dull boy");
     ExecuteQueryLambdaRequest exReq = new ExecuteQueryLambdaRequest();
     exReq.addParametersItem(exParam);
-    qr = client.runQueryLambda("commons", queryName, 1, exReq);
+    qr = client.runQueryLambdaByVersion("commons", queryName, version, exReq);
     result = (LinkedTreeMap) qr.getResults().get(0);
     Assert.assertEquals(result.get("echo"), "All work and no play makes Jack a dull boy");
 

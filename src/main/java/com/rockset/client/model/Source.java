@@ -26,6 +26,7 @@ import com.rockset.client.model.SourceFileUpload;
 import com.rockset.client.model.SourceGcs;
 import com.rockset.client.model.SourceKafka;
 import com.rockset.client.model.SourceKinesis;
+import com.rockset.client.model.SourceMongoDb;
 import com.rockset.client.model.SourceRedshift;
 import com.rockset.client.model.SourceS3;
 import com.rockset.client.model.Status;
@@ -40,7 +41,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "Details about the data source for the given collection. Only one of the following fields are allowed to be defined. Only collections can act as data sources for views. ")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-02-26T17:46:04.637Z")
 public class Source {
   @SerializedName("integration_name")
   private String integrationName = null;
@@ -65,6 +66,9 @@ public class Source {
 
   @SerializedName("kafka")
   private SourceKafka kafka = null;
+
+  @SerializedName("mongodb")
+  private SourceMongoDb mongodb = null;
 
   @SerializedName("status")
   private Status status = null;
@@ -218,18 +222,38 @@ public class Source {
   }
 
    /**
-   * Get kafka
+   * kafka collection identifier
    * @return kafka
   **/
 
 @JsonProperty("kafka")
-@ApiModelProperty(value = "")
+@ApiModelProperty(value = "kafka collection identifier")
   public SourceKafka getKafka() {
     return kafka;
   }
 
   public void setKafka(SourceKafka kafka) {
     this.kafka = kafka;
+  }
+
+  public Source mongodb(SourceMongoDb mongodb) {
+    this.mongodb = mongodb;
+    return this;
+  }
+
+   /**
+   * MongoDB collection details
+   * @return mongodb
+  **/
+
+@JsonProperty("mongodb")
+@ApiModelProperty(value = "MongoDB collection details")
+  public SourceMongoDb getMongodb() {
+    return mongodb;
+  }
+
+  public void setMongodb(SourceMongoDb mongodb) {
+    this.mongodb = mongodb;
   }
 
   public Source status(Status status) {
@@ -290,13 +314,14 @@ public class Source {
         Objects.equals(this.dynamodb, source.dynamodb) &&
         Objects.equals(this.fileUpload, source.fileUpload) &&
         Objects.equals(this.kafka, source.kafka) &&
+        Objects.equals(this.mongodb, source.mongodb) &&
         Objects.equals(this.status, source.status) &&
         Objects.equals(this.formatParams, source.formatParams);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(integrationName, s3, kinesis, gcs, redshift, dynamodb, fileUpload, kafka, status, formatParams);
+    return Objects.hash(integrationName, s3, kinesis, gcs, redshift, dynamodb, fileUpload, kafka, mongodb, status, formatParams);
   }
 
 
@@ -313,6 +338,7 @@ public class Source {
     sb.append("    dynamodb: ").append(toIndentedString(dynamodb)).append("\n");
     sb.append("    fileUpload: ").append(toIndentedString(fileUpload)).append("\n");
     sb.append("    kafka: ").append(toIndentedString(kafka)).append("\n");
+    sb.append("    mongodb: ").append(toIndentedString(mongodb)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    formatParams: ").append(toIndentedString(formatParams)).append("\n");
     sb.append("}");

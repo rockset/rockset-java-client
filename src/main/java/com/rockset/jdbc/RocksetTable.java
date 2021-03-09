@@ -17,10 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import java.io.IOException;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 class RocksetTable {
 
   private String catalog;
@@ -66,40 +62,7 @@ class RocksetTable {
       incol.add(new Column("occurrences", Column.ColumnTypes.NUMBER));
       incol.add(new Column("total", Column.ColumnTypes.NUMBER));
 
-      //Skip over the field description row with column of null type where the same column has a valid type
-      //As of now moving all the null type rows to the last.
       List<Object> fieldsDescription= response.getResults();
-
-      //Get all non null type rows
-      List<Object> fieldsDescriptionWithTypeAsNonNull = fieldsDescription.stream()
-                                                      .filter(fieldName -> {
-                                                        try {
-                                                          return !mapper.readTree(mapper.writeValueAsString(fieldName)).get("type").asText().equals("null");
-                                                        } catch (IOException e) {
-                                                        }
-                                                        return false;
-                                                      })
-                                                      .collect(Collectors.toList());
-
-      //Get all null type rows
-      List<Object> fieldsDescriptionWithTypeAsNull = fieldsDescription.stream()
-                                                    .filter(fieldName -> {
-                                                      try {
-                                                        return mapper.readTree(mapper.writeValueAsString(fieldName)).get("type").asText().equals("null");
-                                                      } catch (IOException e) {
-                                                      }
-                                                      return false;
-                                                    })
-                                                    .collect(Collectors.toList());
-
-      //Combine them back
-      List<Object> fieldsDescriptionNew = Stream.concat(fieldsDescriptionWithTypeAsNonNull.stream(), fieldsDescriptionWithTypeAsNull.stream())
-                                          .collect(Collectors.toList());
-
-      //Handle worst case. If any exception happened while re-arranging, retain the original response resultset
-      if(fieldsDescriptionNew.size() == fieldsDescription.size())
-        fieldsDescription = fieldsDescriptionNew;
-
       describe = new RocksetResultSet(incol, fieldsDescription);
     }
 
@@ -161,12 +124,17 @@ class RocksetTable {
     List<Object> data = new ArrayList<Object>();
 
     int position = 0;
+    String fieldName ="";
+    String prevFieldName = "";
+    List<JsonNode> fieldNameGroupedList = new ArrayList<JsonNode>();
+    JsonNode docRootNodeOfNullDataType = null;
+
     while (describe.next()) {
       // The "field" tag has to be an array.
       RocksetArray arr = (RocksetArray)describe.getObject("field");
 
       JsonNode[] nodes = (JsonNode[])arr.getArray(1, 1);
-      String fieldName = nodes[0].asText();
+      fieldName = nodes[0].asText();
 
       // If this is not a top-level field for an array, then ignore it
       if (arr.size() > 1 && arrayAndObjectFields.containsKey(fieldName)) {
@@ -275,10 +243,38 @@ class RocksetTable {
       str += ", \"IS_AUTOINCREMENT\": \"\"";
       str += ", \"IS_GENERATEDCOLUMN\": \"\"";
       str += " }";
-      JsonNode docRootNode = mapper.readTree(str);
-      data.add(docRootNode);
+      
+      if(!fieldName.equals(prevFieldName))
+      {
+         docRootNodeOfNullDataType = null;
+         //Iterate docRootNode JsonNode list and add to data list with NULL datatype node as last.
+         for ( JsonNode docRootNode  : fieldNameGroupedList) {
+            if(docRootNode.get("DATA_TYPE").asInt()==Types.NULL)
+              docRootNodeOfNullDataType = docRootNode;
+            else
+              data.add(docRootNode);
+         }      
+         if(docRootNodeOfNullDataType!=null) data.add(docRootNodeOfNullDataType);
+   
+         prevFieldName = fieldName; 
+         fieldNameGroupedList.clear();
+      }
+      
+      fieldNameGroupedList.add(mapper.readTree(str));
       position++;
     }
+
+    //Handle the last fieldName and when only one fieldName.
+    docRootNodeOfNullDataType = null;
+    //Iterate docRootNode JsonNode list and add to data list with NULL datatype node as last.
+    for ( JsonNode docRootNode  : fieldNameGroupedList) {
+      if(docRootNode.get("DATA_TYPE").asInt()==Types.NULL)
+        docRootNodeOfNullDataType = docRootNode;
+      else
+        data.add(docRootNode);
+    }      
+    if(docRootNodeOfNullDataType!=null) data.add(docRootNodeOfNullDataType);
+
     return new RocksetResultSet(columns, data);
   }
 

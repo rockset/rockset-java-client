@@ -29,6 +29,7 @@ import java.io.IOException;
 import com.rockset.client.model.CreateUserRequest;
 import com.rockset.client.model.CreateUserResponse;
 import com.rockset.client.model.DeleteUserResponse;
+import com.rockset.client.model.ErrorModel;
 import com.rockset.client.model.ListUsersResponse;
 import com.rockset.client.model.User;
 
@@ -361,7 +362,7 @@ public class UsersApi {
 
     /**
      * Get Current User
-     * Retrieve currently active user.
+     * Retrieve currently authenticated user.
      * @return User
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -372,7 +373,7 @@ public class UsersApi {
 
     /**
      * Get Current User
-     * Retrieve currently active user.
+     * Retrieve currently authenticated user.
      * @return ApiResponse&lt;User&gt;
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -384,7 +385,7 @@ public class UsersApi {
 
     /**
      * Get Current User (asynchronously)
-     * Retrieve currently active user.
+     * Retrieve currently authenticated user.
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object

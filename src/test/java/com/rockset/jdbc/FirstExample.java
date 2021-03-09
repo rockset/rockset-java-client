@@ -37,6 +37,9 @@ public class FirstExample {
     }
     property = new Properties();
     property.setProperty("apiKey", apiKey);
+   
+    if(apiServer.toLowerCase().contains("https://"))
+     apiServer = apiServer.replace("https://","");
     property.setProperty("apiServer", apiServer);
 
     // Register JDBC driver

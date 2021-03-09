@@ -32,13 +32,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryRequestSql
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-02-26T17:46:04.637Z")
 public class QueryRequestSql {
-  @SerializedName("query")
-  private String query = null;
-
   @SerializedName("parameters")
   private List<QueryParameter> parameters = null;
+
+  @SerializedName("query")
+  private String query = null;
 
   @SerializedName("default_row_limit")
   private Integer defaultRowLimit = null;
@@ -46,25 +46,8 @@ public class QueryRequestSql {
   @SerializedName("generate_warnings")
   private Boolean generateWarnings = null;
 
-  public QueryRequestSql query(String query) {
-    this.query = query;
-    return this;
-  }
-
-   /**
-   * SQL query as a string
-   * @return query
-  **/
-
-@JsonProperty("query")
-@ApiModelProperty(example = "SELECT * FROM foo where _id = :_id", required = true, value = "SQL query as a string")
-  public String getQuery() {
-    return query;
-  }
-
-  public void setQuery(String query) {
-    this.query = query;
-  }
+  @SerializedName("profiling_enabled")
+  private Boolean profilingEnabled = null;
 
   public QueryRequestSql parameters(List<QueryParameter> parameters) {
     this.parameters = parameters;
@@ -92,6 +75,26 @@ public class QueryRequestSql {
 
   public void setParameters(List<QueryParameter> parameters) {
     this.parameters = parameters;
+  }
+
+  public QueryRequestSql query(String query) {
+    this.query = query;
+    return this;
+  }
+
+   /**
+   * SQL query as a string
+   * @return query
+  **/
+
+@JsonProperty("query")
+@ApiModelProperty(example = "SELECT * FROM foo where _id = :_id", required = true, value = "SQL query as a string")
+  public String getQuery() {
+    return query;
+  }
+
+  public void setQuery(String query) {
+    this.query = query;
   }
 
   public QueryRequestSql defaultRowLimit(Integer defaultRowLimit) {
@@ -134,6 +137,26 @@ public class QueryRequestSql {
     this.generateWarnings = generateWarnings;
   }
 
+  public QueryRequestSql profilingEnabled(Boolean profilingEnabled) {
+    this.profilingEnabled = profilingEnabled;
+    return this;
+  }
+
+   /**
+   * Whether to generate a performance profile for this query
+   * @return profilingEnabled
+  **/
+
+@JsonProperty("profiling_enabled")
+@ApiModelProperty(value = "Whether to generate a performance profile for this query")
+  public Boolean isProfilingEnabled() {
+    return profilingEnabled;
+  }
+
+  public void setProfilingEnabled(Boolean profilingEnabled) {
+    this.profilingEnabled = profilingEnabled;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -144,15 +167,16 @@ public class QueryRequestSql {
       return false;
     }
     QueryRequestSql queryRequestSql = (QueryRequestSql) o;
-    return Objects.equals(this.query, queryRequestSql.query) &&
-        Objects.equals(this.parameters, queryRequestSql.parameters) &&
+    return Objects.equals(this.parameters, queryRequestSql.parameters) &&
+        Objects.equals(this.query, queryRequestSql.query) &&
         Objects.equals(this.defaultRowLimit, queryRequestSql.defaultRowLimit) &&
-        Objects.equals(this.generateWarnings, queryRequestSql.generateWarnings);
+        Objects.equals(this.generateWarnings, queryRequestSql.generateWarnings) &&
+        Objects.equals(this.profilingEnabled, queryRequestSql.profilingEnabled);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(query, parameters, defaultRowLimit, generateWarnings);
+    return Objects.hash(parameters, query, defaultRowLimit, generateWarnings, profilingEnabled);
   }
 
 
@@ -161,10 +185,11 @@ public class QueryRequestSql {
     StringBuilder sb = new StringBuilder();
     sb.append("class QueryRequestSql {\n");
     
-    sb.append("    query: ").append(toIndentedString(query)).append("\n");
     sb.append("    parameters: ").append(toIndentedString(parameters)).append("\n");
+    sb.append("    query: ").append(toIndentedString(query)).append("\n");
     sb.append("    defaultRowLimit: ").append(toIndentedString(defaultRowLimit)).append("\n");
     sb.append("    generateWarnings: ").append(toIndentedString(generateWarnings)).append("\n");
+    sb.append("    profilingEnabled: ").append(toIndentedString(profilingEnabled)).append("\n");
     sb.append("}");
     return sb.toString();
   }

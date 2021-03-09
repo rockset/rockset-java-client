@@ -20,8 +20,12 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.rockset.client.model.Alias;
 import com.rockset.client.model.CollectionStats;
 import com.rockset.client.model.FieldMappingV2;
+import com.rockset.client.model.FieldPartition;
+import com.rockset.client.model.FieldSchema;
+import com.rockset.client.model.InvertedIndexGroupEncodingOptions;
 import com.rockset.client.model.Source;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -34,7 +38,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Collection
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-02-26T17:46:04.637Z")
 public class Collection {
   @SerializedName("created_at")
   private String createdAt = null;
@@ -69,6 +73,8 @@ public class Collection {
     PAUSING("PAUSING"),
     
     RESUMING("RESUMING"),
+    
+    PREPARING_BULK("PREPARINGBULK"),
     
     BULK_INGEST_MODE("BULKINGESTMODE"),
     
@@ -128,6 +134,21 @@ public class Collection {
 
   @SerializedName("field_mappings")
   private List<FieldMappingV2> fieldMappings = null;
+
+  @SerializedName("clustering_key")
+  private List<FieldPartition> clusteringKey = null;
+
+  @SerializedName("aliases")
+  private List<Alias> aliases = null;
+
+  @SerializedName("field_schemas")
+  private List<FieldSchema> fieldSchemas = null;
+
+  @SerializedName("inverted_index_group_encoding_options")
+  private InvertedIndexGroupEncodingOptions invertedIndexGroupEncodingOptions = null;
+
+  @SerializedName("fieldPartitions")
+  private List<FieldPartition> fieldPartitions = null;
 
   public Collection createdAt(String createdAt) {
     this.createdAt = createdAt;
@@ -345,6 +366,138 @@ public class Collection {
     this.fieldMappings = fieldMappings;
   }
 
+  public Collection clusteringKey(List<FieldPartition> clusteringKey) {
+    this.clusteringKey = clusteringKey;
+    return this;
+  }
+
+  public Collection addClusteringKeyItem(FieldPartition clusteringKeyItem) {
+    if (this.clusteringKey == null) {
+      this.clusteringKey = new ArrayList<FieldPartition>();
+    }
+    this.clusteringKey.add(clusteringKeyItem);
+    return this;
+  }
+
+   /**
+   * list of clustering fields for a collection
+   * @return clusteringKey
+  **/
+
+@JsonProperty("clustering_key")
+@ApiModelProperty(value = "list of clustering fields for a collection")
+  public List<FieldPartition> getClusteringKey() {
+    return clusteringKey;
+  }
+
+  public void setClusteringKey(List<FieldPartition> clusteringKey) {
+    this.clusteringKey = clusteringKey;
+  }
+
+  public Collection aliases(List<Alias> aliases) {
+    this.aliases = aliases;
+    return this;
+  }
+
+  public Collection addAliasesItem(Alias aliasesItem) {
+    if (this.aliases == null) {
+      this.aliases = new ArrayList<Alias>();
+    }
+    this.aliases.add(aliasesItem);
+    return this;
+  }
+
+   /**
+   * list of aliases for a collection
+   * @return aliases
+  **/
+
+@JsonProperty("aliases")
+@ApiModelProperty(value = "list of aliases for a collection")
+  public List<Alias> getAliases() {
+    return aliases;
+  }
+
+  public void setAliases(List<Alias> aliases) {
+    this.aliases = aliases;
+  }
+
+  public Collection fieldSchemas(List<FieldSchema> fieldSchemas) {
+    this.fieldSchemas = fieldSchemas;
+    return this;
+  }
+
+  public Collection addFieldSchemasItem(FieldSchema fieldSchemasItem) {
+    if (this.fieldSchemas == null) {
+      this.fieldSchemas = new ArrayList<FieldSchema>();
+    }
+    this.fieldSchemas.add(fieldSchemasItem);
+    return this;
+  }
+
+   /**
+   * list of field schemas 
+   * @return fieldSchemas
+  **/
+
+@JsonProperty("field_schemas")
+@ApiModelProperty(value = "list of field schemas ")
+  public List<FieldSchema> getFieldSchemas() {
+    return fieldSchemas;
+  }
+
+  public void setFieldSchemas(List<FieldSchema> fieldSchemas) {
+    this.fieldSchemas = fieldSchemas;
+  }
+
+  public Collection invertedIndexGroupEncodingOptions(InvertedIndexGroupEncodingOptions invertedIndexGroupEncodingOptions) {
+    this.invertedIndexGroupEncodingOptions = invertedIndexGroupEncodingOptions;
+    return this;
+  }
+
+   /**
+   * inverted index group encoding options
+   * @return invertedIndexGroupEncodingOptions
+  **/
+
+@JsonProperty("inverted_index_group_encoding_options")
+@ApiModelProperty(value = "inverted index group encoding options")
+  public InvertedIndexGroupEncodingOptions getInvertedIndexGroupEncodingOptions() {
+    return invertedIndexGroupEncodingOptions;
+  }
+
+  public void setInvertedIndexGroupEncodingOptions(InvertedIndexGroupEncodingOptions invertedIndexGroupEncodingOptions) {
+    this.invertedIndexGroupEncodingOptions = invertedIndexGroupEncodingOptions;
+  }
+
+  public Collection fieldPartitions(List<FieldPartition> fieldPartitions) {
+    this.fieldPartitions = fieldPartitions;
+    return this;
+  }
+
+  public Collection addFieldPartitionsItem(FieldPartition fieldPartitionsItem) {
+    if (this.fieldPartitions == null) {
+      this.fieldPartitions = new ArrayList<FieldPartition>();
+    }
+    this.fieldPartitions.add(fieldPartitionsItem);
+    return this;
+  }
+
+   /**
+   * Get fieldPartitions
+   * @return fieldPartitions
+  **/
+
+@JsonProperty("fieldPartitions")
+@ApiModelProperty(value = "")
+  public List<FieldPartition> getFieldPartitions() {
+    return fieldPartitions;
+  }
+
+  public void setFieldPartitions(List<FieldPartition> fieldPartitions) {
+    this.fieldPartitions = fieldPartitions;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -364,12 +517,17 @@ public class Collection {
         Objects.equals(this.sources, collection.sources) &&
         Objects.equals(this.stats, collection.stats) &&
         Objects.equals(this.retentionSecs, collection.retentionSecs) &&
-        Objects.equals(this.fieldMappings, collection.fieldMappings);
+        Objects.equals(this.fieldMappings, collection.fieldMappings) &&
+        Objects.equals(this.clusteringKey, collection.clusteringKey) &&
+        Objects.equals(this.aliases, collection.aliases) &&
+        Objects.equals(this.fieldSchemas, collection.fieldSchemas) &&
+        Objects.equals(this.invertedIndexGroupEncodingOptions, collection.invertedIndexGroupEncodingOptions) &&
+        Objects.equals(this.fieldPartitions, collection.fieldPartitions);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(createdAt, createdBy, name, description, workspace, status, sources, stats, retentionSecs, fieldMappings);
+    return Objects.hash(createdAt, createdBy, name, description, workspace, status, sources, stats, retentionSecs, fieldMappings, clusteringKey, aliases, fieldSchemas, invertedIndexGroupEncodingOptions, fieldPartitions);
   }
 
 
@@ -388,6 +546,11 @@ public class Collection {
     sb.append("    stats: ").append(toIndentedString(stats)).append("\n");
     sb.append("    retentionSecs: ").append(toIndentedString(retentionSecs)).append("\n");
     sb.append("    fieldMappings: ").append(toIndentedString(fieldMappings)).append("\n");
+    sb.append("    clusteringKey: ").append(toIndentedString(clusteringKey)).append("\n");
+    sb.append("    aliases: ").append(toIndentedString(aliases)).append("\n");
+    sb.append("    fieldSchemas: ").append(toIndentedString(fieldSchemas)).append("\n");
+    sb.append("    invertedIndexGroupEncodingOptions: ").append(toIndentedString(invertedIndexGroupEncodingOptions)).append("\n");
+    sb.append("    fieldPartitions: ").append(toIndentedString(fieldPartitions)).append("\n");
     sb.append("}");
     return sb.toString();
   }

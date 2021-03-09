@@ -69,7 +69,7 @@
               </excludes>
             </filter>
           </filters>
-          <finalName>${artifactId}-${version}</finalName>
+          <finalName>${project.artifactId}-${project.version}</finalName>
         </configuration>
       </plugin>
       <plugin>

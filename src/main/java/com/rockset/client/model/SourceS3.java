@@ -20,25 +20,113 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.rockset.client.model.FieldMask;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * SourceS3
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-02-26T17:46:04.637Z")
 public class SourceS3 {
+  @SerializedName("access_key")
+  private String accessKey = null;
+
+  @SerializedName("secret_access")
+  private String secretAccess = null;
+
   @SerializedName("prefix")
   private String prefix = null;
 
   @SerializedName("pattern")
   private String pattern = null;
 
+  @SerializedName("region")
+  private String region = null;
+
   @SerializedName("bucket")
   private String bucket = null;
+
+  @SerializedName("prefixes")
+  private List<String> prefixes = new ArrayList<String>();
+
+  /**
+   * do not use
+   */
+  @JsonAdapter(FormatEnum.Adapter.class)
+  public enum FormatEnum {
+    JSON("JSON");
+
+    private String value;
+
+    FormatEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static FormatEnum fromValue(String text) {
+      for (FormatEnum b : FormatEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+
+    public static class Adapter extends TypeAdapter<FormatEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final FormatEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public FormatEnum read(final JsonReader jsonReader) throws IOException {
+        String value = jsonReader.nextString();
+        return FormatEnum.fromValue(String.valueOf(value));
+      }
+    }
+  }
+
+  @SerializedName("format")
+  private FormatEnum format = null;
+
+  @SerializedName("mappings")
+  private List<FieldMask> mappings = null;
+
+   /**
+   * AWS credential with ListObjects and GetObject access
+   * @return accessKey
+  **/
+
+@JsonProperty("access_key")
+@ApiModelProperty(example = "AKIAIOSFODNN7EXAMPLE", value = "AWS credential with ListObjects and GetObject access")
+  public String getAccessKey() {
+    return accessKey;
+  }
+
+   /**
+   * AWS credential with ListObjects and GetObject access
+   * @return secretAccess
+  **/
+
+@JsonProperty("secret_access")
+@ApiModelProperty(example = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY", value = "AWS credential with ListObjects and GetObject access")
+  public String getSecretAccess() {
+    return secretAccess;
+  }
 
   public SourceS3 prefix(String prefix) {
     this.prefix = prefix;
@@ -80,6 +168,26 @@ public class SourceS3 {
     this.pattern = pattern;
   }
 
+  public SourceS3 region(String region) {
+    this.region = region;
+    return this;
+  }
+
+   /**
+   * AWS region containing source bucket
+   * @return region
+  **/
+
+@JsonProperty("region")
+@ApiModelProperty(example = "us-west-2", value = "AWS region containing source bucket")
+  public String getRegion() {
+    return region;
+  }
+
+  public void setRegion(String region) {
+    this.region = region;
+  }
+
   public SourceS3 bucket(String bucket) {
     this.bucket = bucket;
     return this;
@@ -100,6 +208,65 @@ public class SourceS3 {
     this.bucket = bucket;
   }
 
+   /**
+   * list of prefixes to paths from which data should be ingested
+   * @return prefixes
+  **/
+
+@JsonProperty("prefixes")
+@ApiModelProperty(example = "\"['/transactions', '/stores']\"", required = true, value = "list of prefixes to paths from which data should be ingested")
+  public List<String> getPrefixes() {
+    return prefixes;
+  }
+
+  public SourceS3 format(FormatEnum format) {
+    this.format = format;
+    return this;
+  }
+
+   /**
+   * do not use
+   * @return format
+  **/
+
+@JsonProperty("format")
+@ApiModelProperty(example = "none", value = "do not use")
+  public FormatEnum getFormat() {
+    return format;
+  }
+
+  public void setFormat(FormatEnum format) {
+    this.format = format;
+  }
+
+  public SourceS3 mappings(List<FieldMask> mappings) {
+    this.mappings = mappings;
+    return this;
+  }
+
+  public SourceS3 addMappingsItem(FieldMask mappingsItem) {
+    if (this.mappings == null) {
+      this.mappings = new ArrayList<FieldMask>();
+    }
+    this.mappings.add(mappingsItem);
+    return this;
+  }
+
+   /**
+   * custom transformation on data field
+   * @return mappings
+  **/
+
+@JsonProperty("mappings")
+@ApiModelProperty(value = "custom transformation on data field")
+  public List<FieldMask> getMappings() {
+    return mappings;
+  }
+
+  public void setMappings(List<FieldMask> mappings) {
+    this.mappings = mappings;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -110,14 +277,20 @@ public class SourceS3 {
       return false;
     }
     SourceS3 sourceS3 = (SourceS3) o;
-    return Objects.equals(this.prefix, sourceS3.prefix) &&
+    return Objects.equals(this.accessKey, sourceS3.accessKey) &&
+        Objects.equals(this.secretAccess, sourceS3.secretAccess) &&
+        Objects.equals(this.prefix, sourceS3.prefix) &&
         Objects.equals(this.pattern, sourceS3.pattern) &&
-        Objects.equals(this.bucket, sourceS3.bucket);
+        Objects.equals(this.region, sourceS3.region) &&
+        Objects.equals(this.bucket, sourceS3.bucket) &&
+        Objects.equals(this.prefixes, sourceS3.prefixes) &&
+        Objects.equals(this.format, sourceS3.format) &&
+        Objects.equals(this.mappings, sourceS3.mappings);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(prefix, pattern, bucket);
+    return Objects.hash(accessKey, secretAccess, prefix, pattern, region, bucket, prefixes, format, mappings);
   }
 
 
@@ -126,9 +299,15 @@ public class SourceS3 {
     StringBuilder sb = new StringBuilder();
     sb.append("class SourceS3 {\n");
     
+    sb.append("    accessKey: ").append(toIndentedString(accessKey)).append("\n");
+    sb.append("    secretAccess: ").append(toIndentedString(secretAccess)).append("\n");
     sb.append("    prefix: ").append(toIndentedString(prefix)).append("\n");
     sb.append("    pattern: ").append(toIndentedString(pattern)).append("\n");
+    sb.append("    region: ").append(toIndentedString(region)).append("\n");
     sb.append("    bucket: ").append(toIndentedString(bucket)).append("\n");
+    sb.append("    prefixes: ").append(toIndentedString(prefixes)).append("\n");
+    sb.append("    format: ").append(toIndentedString(format)).append("\n");
+    sb.append("    mappings: ").append(toIndentedString(mappings)).append("\n");
     sb.append("}");
     return sb.toString();
   }

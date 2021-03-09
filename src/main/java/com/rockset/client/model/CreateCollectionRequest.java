@@ -22,6 +22,9 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.rockset.client.model.EventTimeInfo;
 import com.rockset.client.model.FieldMappingV2;
+import com.rockset.client.model.FieldPartition;
+import com.rockset.client.model.FieldSchema;
+import com.rockset.client.model.InvertedIndexGroupEncodingOptions;
 import com.rockset.client.model.Source;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -34,7 +37,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateCollectionRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-03-04T00:00:49.700Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-02-26T17:46:04.637Z")
 public class CreateCollectionRequest {
   @SerializedName("name")
   private String name = null;
@@ -54,18 +57,27 @@ public class CreateCollectionRequest {
   @SerializedName("field_mappings")
   private List<FieldMappingV2> fieldMappings = null;
 
+  @SerializedName("clustering_key")
+  private List<FieldPartition> clusteringKey = null;
+
+  @SerializedName("field_schemas")
+  private List<FieldSchema> fieldSchemas = null;
+
+  @SerializedName("inverted_index_group_encoding_options")
+  private InvertedIndexGroupEncodingOptions invertedIndexGroupEncodingOptions = null;
+
   public CreateCollectionRequest name(String name) {
     this.name = name;
     return this;
   }
 
    /**
-   * unique identifer for collection, can contain alphanumeric or dash characters
+   * unique identifier for collection, can contain alphanumeric or dash characters
    * @return name
   **/
 
 @JsonProperty("name")
-@ApiModelProperty(example = "global-transactions", required = true, value = "unique identifer for collection, can contain alphanumeric or dash characters")
+@ApiModelProperty(example = "global-transactions", required = true, value = "unique identifier for collection, can contain alphanumeric or dash characters")
   public String getName() {
     return name;
   }
@@ -190,6 +202,82 @@ public class CreateCollectionRequest {
     this.fieldMappings = fieldMappings;
   }
 
+  public CreateCollectionRequest clusteringKey(List<FieldPartition> clusteringKey) {
+    this.clusteringKey = clusteringKey;
+    return this;
+  }
+
+  public CreateCollectionRequest addClusteringKeyItem(FieldPartition clusteringKeyItem) {
+    if (this.clusteringKey == null) {
+      this.clusteringKey = new ArrayList<FieldPartition>();
+    }
+    this.clusteringKey.add(clusteringKeyItem);
+    return this;
+  }
+
+   /**
+   * list of clustering fields
+   * @return clusteringKey
+  **/
+
+@JsonProperty("clustering_key")
+@ApiModelProperty(value = "list of clustering fields")
+  public List<FieldPartition> getClusteringKey() {
+    return clusteringKey;
+  }
+
+  public void setClusteringKey(List<FieldPartition> clusteringKey) {
+    this.clusteringKey = clusteringKey;
+  }
+
+  public CreateCollectionRequest fieldSchemas(List<FieldSchema> fieldSchemas) {
+    this.fieldSchemas = fieldSchemas;
+    return this;
+  }
+
+  public CreateCollectionRequest addFieldSchemasItem(FieldSchema fieldSchemasItem) {
+    if (this.fieldSchemas == null) {
+      this.fieldSchemas = new ArrayList<FieldSchema>();
+    }
+    this.fieldSchemas.add(fieldSchemasItem);
+    return this;
+  }
+
+   /**
+   * list of field schemas
+   * @return fieldSchemas
+  **/
+
+@JsonProperty("field_schemas")
+@ApiModelProperty(value = "list of field schemas")
+  public List<FieldSchema> getFieldSchemas() {
+    return fieldSchemas;
+  }
+
+  public void setFieldSchemas(List<FieldSchema> fieldSchemas) {
+    this.fieldSchemas = fieldSchemas;
+  }
+
+  public CreateCollectionRequest invertedIndexGroupEncodingOptions(InvertedIndexGroupEncodingOptions invertedIndexGroupEncodingOptions) {
+    this.invertedIndexGroupEncodingOptions = invertedIndexGroupEncodingOptions;
+    return this;
+  }
+
+   /**
+   * inverted index group encoding options
+   * @return invertedIndexGroupEncodingOptions
+  **/
+
+@JsonProperty("inverted_index_group_encoding_options")
+@ApiModelProperty(value = "inverted index group encoding options")
+  public InvertedIndexGroupEncodingOptions getInvertedIndexGroupEncodingOptions() {
+    return invertedIndexGroupEncodingOptions;
+  }
+
+  public void setInvertedIndexGroupEncodingOptions(InvertedIndexGroupEncodingOptions invertedIndexGroupEncodingOptions) {
+    this.invertedIndexGroupEncodingOptions = invertedIndexGroupEncodingOptions;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -205,12 +293,15 @@ public class CreateCollectionRequest {
         Objects.equals(this.sources, createCollectionRequest.sources) &&
         Objects.equals(this.retentionSecs, createCollectionRequest.retentionSecs) &&
         Objects.equals(this.eventTimeInfo, createCollectionRequest.eventTimeInfo) &&
-        Objects.equals(this.fieldMappings, createCollectionRequest.fieldMappings);
+        Objects.equals(this.fieldMappings, createCollectionRequest.fieldMappings) &&
+        Objects.equals(this.clusteringKey, createCollectionRequest.clusteringKey) &&
+        Objects.equals(this.fieldSchemas, createCollectionRequest.fieldSchemas) &&
+        Objects.equals(this.invertedIndexGroupEncodingOptions, createCollectionRequest.invertedIndexGroupEncodingOptions);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, description, sources, retentionSecs, eventTimeInfo, fieldMappings);
+    return Objects.hash(name, description, sources, retentionSecs, eventTimeInfo, fieldMappings, clusteringKey, fieldSchemas, invertedIndexGroupEncodingOptions);
   }
 
 
@@ -225,6 +316,9 @@ public class CreateCollectionRequest {
     sb.append("    retentionSecs: ").append(toIndentedString(retentionSecs)).append("\n");
     sb.append("    eventTimeInfo: ").append(toIndentedString(eventTimeInfo)).append("\n");
     sb.append("    fieldMappings: ").append(toIndentedString(fieldMappings)).append("\n");
+    sb.append("    clusteringKey: ").append(toIndentedString(clusteringKey)).append("\n");
+    sb.append("    fieldSchemas: ").append(toIndentedString(fieldSchemas)).append("\n");
+    sb.append("    invertedIndexGroupEncodingOptions: ").append(toIndentedString(invertedIndexGroupEncodingOptions)).append("\n");
     sb.append("}");
     return sb.toString();
   }
