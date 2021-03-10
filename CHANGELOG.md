@@ -1,5 +1,9 @@
 # Rockset Java Client Changelog
 
+## v0.9.0 2021-03-10
+- Introduce Aliases, IP Allowlist and Virtual Instances
+- Fix a bug to ignore unknown properties in response from server
+
 ## v0.8.1 2020-03-26
 - Handle `null` case in table metadata
 
