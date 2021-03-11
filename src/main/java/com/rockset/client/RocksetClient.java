@@ -250,6 +250,19 @@ public class RocksetClient {
   }
 
   /**
+   * Create a Query Lambda Tag in Rockset
+   * @param workspaceName Name of the workspace
+   * @param queryLambdaName Name of the Query Lambda
+   * @param request CreateQueryLambdaTagRequest object which contains information about the Query Lambda Tag
+   * @return QueryLambdaTagResponse object which contains information about the Query Lambda Tag created
+   * @throws Exception
+   */
+  public QueryLambdaTagResponse createQueryLambdaTag(
+          String workspaceName, String queryLambdaName, CreateQueryLambdaTagRequest request) throws Exception {
+      return queryLambda.create_0(workspaceName, queryLambdaName, request);
+  }
+
+  /**
    * Create a Query Lambda in Rockset
    * @param workspaceName Name of the workspace
    * @param queryName Name of the Query Lambda to be updated
@@ -322,7 +335,7 @@ public class RocksetClient {
    */
   public QueryResponse runQueryLambdaByVersion(String workspaceName, String queryName,
                                      String version, ExecuteQueryLambdaRequest request) throws Exception {
-    return queryLambda.execute(workspaceName, queryName, version, request);
+    return queryLambda.execute_0(workspaceName, queryName, version, request);
   }
 
 

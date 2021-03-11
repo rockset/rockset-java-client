@@ -3,7 +3,9 @@ package com.rockset.client;
 import com.google.gson.internal.LinkedTreeMap;
 import com.rockset.client.model.CreateQueryLambdaRequest;
 import com.rockset.client.model.CreateQueryLambdaResponse;
+import com.rockset.client.model.CreateQueryLambdaTagRequest;
 import com.rockset.client.model.QueryLambdaVersionResponse;
+import com.rockset.client.model.QueryLambdaTagResponse;
 import com.rockset.client.model.ExecuteQueryLambdaRequest;
 import com.rockset.client.model.QueryLambdaSql;
 import com.rockset.client.model.QueryResponse;
@@ -60,6 +62,14 @@ public class TestSavedQuery {
     Map<String, String> result = (LinkedTreeMap) qr.getResults().get(0);
     Assert.assertEquals(result.get("echo"), "Hello, world!");
 
+    // Create a tag for a Query Lambda version
+    String queryLambdaTag = "production";
+    CreateQueryLambdaTagRequest reqQLTag = new CreateQueryLambdaTagRequest();
+    reqQLTag.setTagName(queryLambdaTag);
+    reqQLTag.setVersion(version);
+    QueryLambdaTagResponse respQLTag = client.createQueryLambdaTag("commons", queryName, reqQLTag);
+    Assert.assertEquals(respQLTag.getData().getTagName(), queryLambdaTag);
+
     // Run Query Lambda with custom parameters
     QueryParameter exParam = new QueryParameter();
     exParam.setName("param");
@@ -67,7 +77,7 @@ public class TestSavedQuery {
     exParam.setValue("All work and no play makes Jack a dull boy");
     ExecuteQueryLambdaRequest exReq = new ExecuteQueryLambdaRequest();
     exReq.addParametersItem(exParam);
-    qr = client.runQueryLambdaByVersion("commons", queryName, version, exReq);
+    qr = client.runQueryLambdaByTag("commons", queryName, queryLambdaTag, exReq);
     result = (LinkedTreeMap) qr.getResults().get(0);
     Assert.assertEquals(result.get("echo"), "All work and no play makes Jack a dull boy");
 
