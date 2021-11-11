@@ -57,6 +57,33 @@ public class RocksetClient {
     setUp(apiKey, apiServer, application);
   }
 
+  public int getConnectTimeout() {
+    return apiClient.getConnectTimeout();
+  }
+
+  public RocksetClient setConnectTimeout(int connectTimeout) {
+    apiClient.setConnectTimeout(connectTimeout);
+    return this;
+  }
+
+  public int getReadTimeout() {
+    return apiClient.getReadTimeout();
+  }
+
+  public RocksetClient setReadTimeout(int readTimeout) {
+    apiClient.setReadTimeout(readTimeout);
+    return this;
+  }
+
+  public int getWriteTimeout() {
+    return apiClient.getWriteTimeout();
+  }
+
+  public RocksetClient setWriteTimeout(int writeTimeout) {
+    apiClient.setWriteTimeout(writeTimeout);
+    return this;
+  }
+
   /**
    * Create a Rockset API key to create and query collections
    *
