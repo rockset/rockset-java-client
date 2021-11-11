@@ -1,6 +1,5 @@
 package com.rockset.examples;
 
-import com.rockset.client.ApiException;
 import com.rockset.client.RocksetClient;
 import com.rockset.client.model.*;
 

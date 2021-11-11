@@ -12,7 +12,6 @@ import com.rockset.client.model.QueryRequest;
 import com.rockset.client.model.QueryRequestSql;
 import com.rockset.client.model.QueryResponse;
 import com.rockset.client.model.Workspace;
-
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.CharsetEncoder;
@@ -33,7 +32,6 @@ import java.sql.SQLXML;
 import java.sql.Savepoint;
 import java.sql.Statement;
 import java.sql.Struct;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -186,8 +184,7 @@ public class RocksetConnection implements Connection {
   @Override
   public void setTransactionIsolation(int level) throws SQLException {
     checkOpen();
-    throw new SQLFeatureNotSupportedException(
-        "Dhruba says that you are crazy cool!");
+    throw new SQLFeatureNotSupportedException("Dhruba says that you are crazy cool!");
   }
 
   @Override
@@ -210,27 +207,34 @@ public class RocksetConnection implements Connection {
   @Override
   public Statement createStatement(int resultSetType, int resultSetConcurrency)
       throws SQLException {
-    RocksetDriver.log("Entry: createStatement "
-            + " resultSetType " + resultSetType
-            + " resultSetConcurrency " + resultSetConcurrency);
+    RocksetDriver.log(
+        "Entry: createStatement "
+            + " resultSetType "
+            + resultSetType
+            + " resultSetConcurrency "
+            + resultSetConcurrency);
     checkResultSet(resultSetType, resultSetConcurrency);
     return createStatement();
   }
 
   @Override
-  public PreparedStatement prepareStatement(String sql, int resultSetType,
-      int resultSetConcurrency) throws SQLException {
-    RocksetDriver.log("Entry: prepareStatement "
-            + " sql " + sql
-            + " resultSetType " + resultSetType
-            + " resultSetConcurrency " + resultSetConcurrency);
+  public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency)
+      throws SQLException {
+    RocksetDriver.log(
+        "Entry: prepareStatement "
+            + " sql "
+            + sql
+            + " resultSetType "
+            + resultSetType
+            + " resultSetConcurrency "
+            + resultSetConcurrency);
     checkResultSet(resultSetType, resultSetConcurrency);
     return prepareStatement(sql);
   }
 
   @Override
-  public CallableStatement prepareCall(String sql, int resultSetType,
-      int resultSetConcurrency) throws SQLException {
+  public CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency)
+      throws SQLException {
     checkResultSet(resultSetType, resultSetConcurrency);
     throw new SQLFeatureNotSupportedException("prepareCall");
   }
@@ -280,43 +284,50 @@ public class RocksetConnection implements Connection {
   }
 
   @Override
-  public Statement createStatement(int resultSetType,
-      int resultSetConcurrency, int resultSetHoldability) throws SQLException {
-    RocksetDriver.log("Entry: createStatement "
-            + " resultSetType " + resultSetType
-            + " resultSetConcurrency " + resultSetConcurrency
-            + " resultSetHoldability " + resultSetHoldability);
+  public Statement createStatement(
+      int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
+    RocksetDriver.log(
+        "Entry: createStatement "
+            + " resultSetType "
+            + resultSetType
+            + " resultSetConcurrency "
+            + resultSetConcurrency
+            + " resultSetHoldability "
+            + resultSetHoldability);
     checkHoldability(resultSetHoldability);
     return createStatement(resultSetType, resultSetConcurrency);
   }
 
   @Override
-  public PreparedStatement prepareStatement(String sql, int resultSetType,
-      int resultSetConcurrency,
-      int resultSetHoldability) throws SQLException {
-    RocksetDriver.log("Entry: prepareStatement "
-            + " sql " + sql
-            + " resultSetType " + resultSetType
-            + " resultSetConcurrency " + resultSetConcurrency
-            + " resultSetHoldability " + resultSetHoldability);
+  public PreparedStatement prepareStatement(
+      String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability)
+      throws SQLException {
+    RocksetDriver.log(
+        "Entry: prepareStatement "
+            + " sql "
+            + sql
+            + " resultSetType "
+            + resultSetType
+            + " resultSetConcurrency "
+            + resultSetConcurrency
+            + " resultSetHoldability "
+            + resultSetHoldability);
     checkHoldability(resultSetHoldability);
     return prepareStatement(sql, resultSetType, resultSetConcurrency);
   }
 
   @Override
-  public CallableStatement prepareCall(String sql, int resultSetType,
-      int resultSetConcurrency, int resultSetHoldability)
+  public CallableStatement prepareCall(
+      String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability)
       throws SQLException {
     checkHoldability(resultSetHoldability);
     return prepareCall(sql, resultSetType, resultSetConcurrency);
   }
 
   @Override
-  public PreparedStatement prepareStatement(String sql, int autoGeneratedKeys)
-      throws SQLException {
-    RocksetDriver.log("Entry: prepareStatement "
-            + " sql " + sql
-            + " autoGeneratedKeys " + autoGeneratedKeys);
+  public PreparedStatement prepareStatement(String sql, int autoGeneratedKeys) throws SQLException {
+    RocksetDriver.log(
+        "Entry: prepareStatement " + " sql " + sql + " autoGeneratedKeys " + autoGeneratedKeys);
     if (autoGeneratedKeys != Statement.RETURN_GENERATED_KEYS) {
       throw new SQLFeatureNotSupportedException("Auto generated keys must be NO_GENERATED_KEYS");
     }
@@ -324,20 +335,14 @@ public class RocksetConnection implements Connection {
   }
 
   @Override
-  public PreparedStatement prepareStatement(String sql, int[] columnIndexes)
-      throws SQLException {
-    RocksetDriver.log("Entry: prepareStatement "
-            + " sql " + sql
-            + " columnIndexes ");
+  public PreparedStatement prepareStatement(String sql, int[] columnIndexes) throws SQLException {
+    RocksetDriver.log("Entry: prepareStatement " + " sql " + sql + " columnIndexes ");
     throw new SQLFeatureNotSupportedException("prepareStatement");
   }
 
   @Override
-  public PreparedStatement prepareStatement(String sql, String[] columnNames)
-      throws SQLException {
-    RocksetDriver.log("Entry: prepareStatement "
-            + " sql " + sql
-            + " columnNames ");
+  public PreparedStatement prepareStatement(String sql, String[] columnNames) throws SQLException {
+    RocksetDriver.log("Entry: prepareStatement " + " sql " + sql + " columnNames ");
     throw new SQLFeatureNotSupportedException("prepareStatement");
   }
 
@@ -370,8 +375,7 @@ public class RocksetConnection implements Connection {
   }
 
   @Override
-  public void setClientInfo(String name, String value)
-      throws SQLClientInfoException {
+  public void setClientInfo(String name, String value) throws SQLClientInfoException {
     requireNonNull(name, "name is null");
     if (value != null) {
       clientInfo.put(name, value);
@@ -381,20 +385,17 @@ public class RocksetConnection implements Connection {
   }
 
   @Override
-  public void setClientInfo(Properties properties)
-      throws SQLClientInfoException {
+  public void setClientInfo(Properties properties) throws SQLClientInfoException {
     clientInfo.putAll(fromProperties(properties));
   }
 
   @Override
-  public String getClientInfo(String name)
-      throws SQLException {
+  public String getClientInfo(String name) throws SQLException {
     return clientInfo.get(name);
   }
 
   @Override
-  public Properties getClientInfo()
-      throws SQLException {
+  public Properties getClientInfo() throws SQLException {
     Properties properties = new Properties();
     for (Map.Entry<String, String> entry : clientInfo.entrySet()) {
       properties.setProperty(entry.getKey(), entry.getValue());
@@ -403,14 +404,12 @@ public class RocksetConnection implements Connection {
   }
 
   @Override
-  public Array createArrayOf(String typeName, Object[] elements)
-      throws SQLException {
+  public Array createArrayOf(String typeName, Object[] elements) throws SQLException {
     throw new SQLFeatureNotSupportedException("createArrayOf");
   }
 
   @Override
-  public Struct createStruct(String typeName, Object[] attributes)
-      throws SQLException {
+  public Struct createStruct(String typeName, Object[] attributes) throws SQLException {
     throw new SQLFeatureNotSupportedException("createStruct");
   }
 
@@ -444,21 +443,18 @@ public class RocksetConnection implements Connection {
     this.locale.set(locale);
   }
 
-  /**
-   * Adds a session property (experimental).
-   */
+  /** Adds a session property (experimental). */
   public void setSessionProperty(String name, String value) {
     requireNonNull(name, "name is null");
     requireNonNull(value, "value is null");
     checkArgument(!name.isEmpty(), "name is empty");
 
     CharsetEncoder charsetEncoder = US_ASCII.newEncoder();
-    checkArgument(name.indexOf('=') < 0,
-                  "Session property name must not contain '=': %s", name);
-    checkArgument(charsetEncoder.canEncode(name),
-                  "Session property name is not US_ASCII: %s", name);
-    checkArgument(charsetEncoder.canEncode(value),
-                  "Session property value is not US_ASCII: %s", value);
+    checkArgument(name.indexOf('=') < 0, "Session property name must not contain '=': %s", name);
+    checkArgument(
+        charsetEncoder.canEncode(name), "Session property name is not US_ASCII: %s", name);
+    checkArgument(
+        charsetEncoder.canEncode(value), "Session property value is not US_ASCII: %s", value);
 
     sessionProperties.put(name, value);
   }
@@ -469,8 +465,7 @@ public class RocksetConnection implements Connection {
   }
 
   @Override
-  public void setNetworkTimeout(Executor executor, int milliseconds)
-      throws SQLException {
+  public void setNetworkTimeout(Executor executor, int milliseconds) throws SQLException {
     throw new SQLFeatureNotSupportedException("setNetworkTimeout");
   }
 
@@ -481,8 +476,7 @@ public class RocksetConnection implements Connection {
 
   @SuppressWarnings("unchecked")
   @Override
-  public <T> T unwrap(Class<T> iface)
-      throws SQLException {
+  public <T> T unwrap(Class<T> iface) throws SQLException {
     if (isWrapperFor(iface)) {
       return (T) this;
     }
@@ -490,8 +484,7 @@ public class RocksetConnection implements Connection {
   }
 
   @Override
-  public boolean isWrapperFor(Class<?> iface)
-      throws SQLException {
+  public boolean isWrapperFor(Class<?> iface) throws SQLException {
     return iface.isInstance(this);
   }
 
@@ -506,9 +499,9 @@ public class RocksetConnection implements Connection {
   //
   // This is invoked by the RocksetStatement to execute a query
   //
-  QueryResponse startQuery(String sql, List<QueryParameter> params,
-          Map<String, String> sessionPropertiesOverride)
-        throws Exception {
+  QueryResponse startQuery(
+      String sql, List<QueryParameter> params, Map<String, String> sessionPropertiesOverride)
+      throws Exception {
     final QueryRequestSql q = new QueryRequestSql().query(sql);
 
     // Append any specified queries
@@ -544,9 +537,11 @@ public class RocksetConnection implements Connection {
   //
   QueryResponse describeTable(String schema, String name) throws Exception {
     RocksetDriver.log("Entry: describeTable " + name);
-    String sql = String.format("describe %s.%s OPTION(max_field_depth=1)",
-        quoteIdentifier(schema), quoteIdentifier(name));
-    QueryResponse resp =  startQuery(sql, null, null);
+    String sql =
+        String.format(
+            "describe %s.%s OPTION(max_field_depth=1)",
+            quoteIdentifier(schema), quoteIdentifier(name));
+    QueryResponse resp = startQuery(sql, null, null);
     RocksetDriver.log("Exit: describeTable " + name);
     return resp;
   }
@@ -556,9 +551,7 @@ public class RocksetConnection implements Connection {
   }
 
   List<String> getWorkspaces() throws Exception {
-    return client.listWorkspaces().stream()
-        .map(Workspace::getName)
-        .collect(Collectors.toList());
+    return client.listWorkspaces().stream().map(Workspace::getName).collect(Collectors.toList());
   }
 
   private static String getApiKey(Properties info) {
@@ -569,8 +562,8 @@ public class RocksetConnection implements Connection {
       apiKey = info.getProperty("apikey");
     }
     // If username and password provided, override the apikey.
-    if (info.getProperty("user") != null &&
-            info.getProperty("user").toLowerCase().equals("apikey")) {
+    if (info.getProperty("user") != null
+        && info.getProperty("user").toLowerCase().equals("apikey")) {
       apiKey = info.getProperty("password");
     }
     return apiKey;
@@ -619,7 +612,7 @@ public class RocksetConnection implements Connection {
       throws SQLFeatureNotSupportedException {
     if (resultSetHoldability != ResultSet.HOLD_CURSORS_OVER_COMMIT) {
       throw new SQLFeatureNotSupportedException(
-              "Result set holdability must be HOLD_CURSORS_OVER_COMMIT");
+          "Result set holdability must be HOLD_CURSORS_OVER_COMMIT");
     }
   }
 }

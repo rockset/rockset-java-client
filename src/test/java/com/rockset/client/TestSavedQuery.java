@@ -2,21 +2,19 @@ package com.rockset.client;
 
 import com.google.gson.internal.LinkedTreeMap;
 import com.rockset.client.model.CreateQueryLambdaRequest;
-import com.rockset.client.model.CreateQueryLambdaResponse;
 import com.rockset.client.model.CreateQueryLambdaTagRequest;
-import com.rockset.client.model.QueryLambdaVersionResponse;
-import com.rockset.client.model.QueryLambdaTagResponse;
 import com.rockset.client.model.ExecuteQueryLambdaRequest;
 import com.rockset.client.model.QueryLambdaSql;
-import com.rockset.client.model.QueryResponse;
+import com.rockset.client.model.QueryLambdaTagResponse;
+import com.rockset.client.model.QueryLambdaVersionResponse;
 import com.rockset.client.model.QueryParameter;
-import org.testng.Assert;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
-
+import com.rockset.client.model.QueryResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import org.testng.Assert;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Test;
 
 public class TestSavedQuery {
 
@@ -27,11 +25,11 @@ public class TestSavedQuery {
   public void setUp() throws Exception {
     String apiKey = System.getenv("ROCKSET_APIKEY");
     String apiServer = System.getenv("ROCKSET_APISERVER");
-    
+
     if (apiKey == null || apiServer == null) {
       throw new Exception(
-              "To run unit tests, please set ROCKSET_APIKEY and ROCKSET_APISERVER " +
-                      "environment variables.");
+          "To run unit tests, please set ROCKSET_APIKEY and ROCKSET_APISERVER "
+              + "environment variables.");
     }
     this.client = new RocksetClient(apiKey, apiServer);
   }
@@ -51,7 +49,6 @@ public class TestSavedQuery {
     defaultParameters.add(param);
     sql.setDefaultParameters(defaultParameters);
     req.setSql(sql);
-
 
     QueryLambdaVersionResponse resp = client.createQueryLambda("commons", req);
     Assert.assertEquals(resp.getData().getName(), this.queryName);
@@ -80,7 +77,6 @@ public class TestSavedQuery {
     qr = client.runQueryLambdaByTag("commons", queryName, queryLambdaTag, exReq);
     result = (LinkedTreeMap) qr.getResults().get(0);
     Assert.assertEquals(result.get("echo"), "All work and no play makes Jack a dull boy");
-
 
     client.deleteQueryLambda("commons", queryName);
   }

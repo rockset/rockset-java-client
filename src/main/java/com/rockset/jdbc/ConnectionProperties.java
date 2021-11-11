@@ -8,7 +8,6 @@ import static java.util.stream.Collectors.toMap;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.net.HostAndPort;
-
 import java.util.Map;
 import java.util.Optional;
 import java.util.Properties;
@@ -21,25 +20,24 @@ final class ConnectionProperties {
   public static final ConnectionProperty<HostAndPort> SOCKS_PROXY = new SocksProxy();
   public static final ConnectionProperty<HostAndPort> HTTP_PROXY = new HttpProxy();
   public static final ConnectionProperty<Boolean> SSL = new Ssl();
-  public static final ConnectionProperty<String> SSL_TRUST_STORE_PATH =
-      new SslTrustStorePath();
+  public static final ConnectionProperty<String> SSL_TRUST_STORE_PATH = new SslTrustStorePath();
   public static final ConnectionProperty<String> SSL_TRUST_STORE_PASSWORD =
       new SslTrustStorePassword();
 
   private static final Set<ConnectionProperty<?>> ALL_PROPERTIES =
       ImmutableSet.<ConnectionProperty<?>>builder()
-      .add(USER)
-      .add(PASSWORD)
-      .add(SOCKS_PROXY)
-      .add(HTTP_PROXY)
-      .add(SSL)
-      .add(SSL_TRUST_STORE_PATH)
-      .add(SSL_TRUST_STORE_PASSWORD)
-      .build();
+          .add(USER)
+          .add(PASSWORD)
+          .add(SOCKS_PROXY)
+          .add(HTTP_PROXY)
+          .add(SSL)
+          .add(SSL_TRUST_STORE_PATH)
+          .add(SSL_TRUST_STORE_PASSWORD)
+          .build();
 
   private static final Map<String, ConnectionProperty<?>> KEY_LOOKUP =
-      unmodifiableMap(ALL_PROPERTIES.stream()
-      .collect(toMap(ConnectionProperty::getKey, identity())));
+      unmodifiableMap(
+          ALL_PROPERTIES.stream().collect(toMap(ConnectionProperty::getKey, identity())));
 
   private static final Map<String, String> DEFAULTS;
 

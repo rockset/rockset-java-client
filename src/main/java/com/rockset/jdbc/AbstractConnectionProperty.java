@@ -84,8 +84,8 @@ abstract class AbstractConnectionProperty<T> implements ConnectionProperty<T> {
       if (value.isEmpty()) {
         throw new SQLException(format("Connection property '%s' value is empty", key), e);
       }
-      throw new SQLException(format(
-                  "Connection property '%s' value is invalid: %s", key, value), e);
+      throw new SQLException(
+          format("Connection property '%s' value is invalid: %s", key, value), e);
     }
   }
 
@@ -108,27 +108,28 @@ abstract class AbstractConnectionProperty<T> implements ConnectionProperty<T> {
 
   protected static final Converter<String> STRING_CONVERTER = value -> value;
 
-  protected static final Converter<String> NON_EMPTY_STRING_CONVERTER = value -> {
-    checkArgument(!value.isEmpty(), "value is empty");
-    return value;
-  };
+  protected static final Converter<String> NON_EMPTY_STRING_CONVERTER =
+      value -> {
+        checkArgument(!value.isEmpty(), "value is empty");
+        return value;
+      };
 
   protected static final Converter<File> FILE_CONVERTER = File::new;
 
-  protected static final Converter<Boolean> BOOLEAN_CONVERTER = value -> {
-    switch (value.toLowerCase(ENGLISH)) {
-      case "true":
-        return true;
-      case "false":
-      default:
-        break;
-    }
-    throw new IllegalArgumentException("value must be 'true' or 'false'");
-  };
+  protected static final Converter<Boolean> BOOLEAN_CONVERTER =
+      value -> {
+        switch (value.toLowerCase(ENGLISH)) {
+          case "true":
+            return true;
+          case "false":
+          default:
+            break;
+        }
+        throw new IllegalArgumentException("value must be 'true' or 'false'");
+      };
 
   protected interface CheckedPredicate<T> {
-    boolean test(T t)
-        throws SQLException;
+    boolean test(T t) throws SQLException;
   }
 
   protected static <T> Predicate<T> checkedPredicate(CheckedPredicate<T> predicate) {

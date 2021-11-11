@@ -3,9 +3,7 @@ package com.rockset.jdbc;
 import static java.util.Objects.requireNonNull;
 
 import com.fasterxml.jackson.databind.JsonNode;
-
 import com.google.common.primitives.Ints;
-
 import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -67,15 +65,14 @@ class RocksetArray implements Array {
     }
     final JsonNode[] tmp = new JsonNode[count];
     index--; // array indices start from 0 where sql indices starts from 1
-    for (int i = (int)index; i < (int)(index + count); i++) {
+    for (int i = (int) index; i < (int) (index + count); i++) {
       tmp[i] = array[i].deepCopy();
     }
     return tmp;
   }
 
   @Override
-  public Object getArray(long index, int count, Map<String, Class<?>> map)
-      throws SQLException {
+  public Object getArray(long index, int count, Map<String, Class<?>> map) throws SQLException {
     throw new SQLFeatureNotSupportedException("getArray not supported");
   }
 
@@ -85,14 +82,12 @@ class RocksetArray implements Array {
   }
 
   @Override
-  public ResultSet getResultSet(Map<String, Class<?>> map)
-      throws SQLException {
+  public ResultSet getResultSet(Map<String, Class<?>> map) throws SQLException {
     throw new SQLFeatureNotSupportedException("getResultSet not supported");
   }
 
   @Override
-  public ResultSet getResultSet(long index, int count)
-      throws SQLException {
+  public ResultSet getResultSet(long index, int count) throws SQLException {
     throw new SQLFeatureNotSupportedException("getResultSet not supported");
   }
 

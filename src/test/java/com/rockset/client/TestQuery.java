@@ -17,20 +17,18 @@ public class TestQuery {
     String apiServer = System.getenv("ROCKSET_APISERVER");
     if (apiKey == null || apiServer == null) {
       throw new Exception(
-              "To run unit tests, please set ROCKSET_APIKEY and ROCKSET_APISERVER " +
-                      "environment variables.");
+          "To run unit tests, please set ROCKSET_APIKEY and ROCKSET_APISERVER "
+              + "environment variables.");
     }
     this.client = new RocksetClient(apiKey, apiServer);
   }
-  
+
   @Test
   public void testQuery() throws Exception {
-    QueryRequest request = new QueryRequest()
-        .sql(new QueryRequestSql()
-            .query("select * from \"_events\" limit 1"));
+    QueryRequest request =
+        new QueryRequest().sql(new QueryRequestSql().query("select * from \"_events\" limit 1"));
 
     QueryResponse response = client.query(request);
-    Assert.assertTrue(response.getResults().size() == 1
-                      || response.getResults().size() == 0);
+    Assert.assertTrue(response.getResults().size() == 1 || response.getResults().size() == 0);
   }
 }

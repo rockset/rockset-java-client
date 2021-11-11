@@ -1,11 +1,9 @@
 package com.rockset.examples;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.rockset.client.ApiException;
 import com.rockset.client.RocksetClient;
 import com.rockset.client.model.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreateS3CollectionExample {
   public static void main(String[] args) {
@@ -17,9 +15,8 @@ public class CreateS3CollectionExample {
     List<Source> sources = new ArrayList<Source>();
     sources.add(new Source().s3(sourceS3).integrationName("<integration>"));
 
-    CreateCollectionRequest request = new CreateCollectionRequest()
-                                            .name("my-first-s3-collection")
-                                            .sources(sources);
+    CreateCollectionRequest request =
+        new CreateCollectionRequest().name("my-first-s3-collection").sources(sources);
 
     try {
       CreateCollectionResponse response = rs.createCollection("commons", request);

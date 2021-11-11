@@ -1,7 +1,7 @@
 package com.rockset.jdbc;
 
-import java.sql.Types;
 import java.sql.SQLException;
+import java.sql.Types;
 
 class RocksetUtils {
 
@@ -12,27 +12,27 @@ class RocksetUtils {
     int stype = java.sql.Types.OTHER;
 
     switch (type) {
-      case ARRAY: 
+      case ARRAY:
         stype = java.sql.Types.ARRAY;
         break;
-      case BINARY: 
+      case BINARY:
         stype = java.sql.Types.BINARY;
         break;
-      case BOOLEAN: 
+      case BOOLEAN:
         stype = java.sql.Types.BOOLEAN;
         break;
-      case MISSING: 
+      case MISSING:
       case NULL:
         stype = java.sql.Types.NULL;
         break;
-      case NUMBER: 
+      case NUMBER:
         stype = java.sql.Types.DOUBLE;
         break;
-      case OBJECT: 
-      case POJO: 
+      case OBJECT:
+      case POJO:
         stype = java.sql.Types.JAVA_OBJECT;
         break;
-      case STRING: 
+      case STRING:
         stype = java.sql.Types.VARCHAR;
         break;
       case TIMESTAMP:
@@ -56,27 +56,27 @@ class RocksetUtils {
   static String jsonToSqlTypeName(Column.ColumnTypes type) {
     String stype = "other";
     switch (type) {
-      case ARRAY: 
+      case ARRAY:
         stype = "array";
         break;
-      case BINARY: 
+      case BINARY:
         stype = "binary";
         break;
-      case BOOLEAN: 
+      case BOOLEAN:
         stype = "boolean";
         break;
-      case MISSING: 
+      case MISSING:
       case NULL:
         stype = "null";
         break;
-      case NUMBER: 
+      case NUMBER:
         stype = "bigint";
         break;
-      case OBJECT: 
-      case POJO: 
+      case OBJECT:
+      case POJO:
         stype = "object";
         break;
-      case STRING: 
+      case STRING:
         stype = "varchar";
         break;
       case DATE:
@@ -101,22 +101,22 @@ class RocksetUtils {
     String rtype = "";
 
     switch (sqlType) {
-      case Types.ARRAY: 
+      case Types.ARRAY:
         rtype = "array";
         break;
-      case Types.BINARY: 
+      case Types.BINARY:
         rtype = "bytes";
         break;
-      case Types.BOOLEAN: 
+      case Types.BOOLEAN:
         rtype = "bool";
         break;
       case Types.NULL:
         rtype = "null";
         break;
-      case Types.NUMERIC: 
+      case Types.NUMERIC:
         rtype = "int";
         break;
-      case Types.VARCHAR: 
+      case Types.VARCHAR:
         rtype = "string";
         break;
       case Types.TIMESTAMP:
@@ -133,5 +133,4 @@ class RocksetUtils {
     }
     return rtype;
   }
-
 }

@@ -48,9 +48,7 @@ class Column {
   private ColumnTypes type;
 
   @JsonCreator
-  public Column(
-      @JsonProperty("name") String name,
-      @JsonProperty("type") ColumnTypes type) {
+  public Column(@JsonProperty("name") String name, @JsonProperty("type") ColumnTypes type) {
     this.name = requireNonNull(name, "name is null");
     this.type = requireNonNull(type, "type is null");
   }
@@ -66,7 +64,8 @@ class Column {
   }
 
   public String toString() {
-    return String.format("(name=%s, jsontype=%s sqltype=%s)",
+    return String.format(
+        "(name=%s, jsontype=%s sqltype=%s)",
         getName(), getType().toString(), RocksetUtils.jsonToSqlType(getType()));
   }
 }

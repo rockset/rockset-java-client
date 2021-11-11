@@ -3,7 +3,6 @@ package com.rockset.jdbc;
 import static java.util.Objects.requireNonNull;
 
 import com.google.common.collect.ImmutableList;
-
 import java.math.BigDecimal;
 import java.sql.Array;
 import java.sql.Blob;
@@ -200,7 +199,7 @@ public class RocksetResultSetMetaData implements ResultSetMetaData {
   public String toString() {
     StringBuffer buf = new StringBuffer();
     int num = 0;
-    for (Column c: columnInfo) {
+    for (Column c : columnInfo) {
       buf.append(c.toString());
       num++;
       if (num < getColumnCount()) {

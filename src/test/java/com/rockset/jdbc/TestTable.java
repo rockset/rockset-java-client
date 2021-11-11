@@ -6,16 +6,14 @@ import static org.testng.Assert.assertTrue;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import com.rockset.client.RocksetClient;
+import com.rockset.client.model.Collection;
 import com.rockset.client.model.CreateCollectionRequest;
 import com.rockset.client.model.CreateCollectionResponse;
 import com.rockset.client.model.DeleteCollectionResponse;
 import com.rockset.client.model.QueryRequest;
 import com.rockset.client.model.QueryRequestSql;
 import com.rockset.client.model.QueryResponse;
-import com.rockset.client.model.Collection;
-
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
@@ -26,20 +24,17 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import java.sql.Time;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
 import org.testng.annotations.BeforeSuite;
@@ -71,19 +66,18 @@ public class TestTable {
     String apiServer = System.getenv("ROCKSET_APISERVER");
     if (apiKey == null || apiServer == null) {
       throw new Exception(
-              "To run unit tests, please set ROCKSET_APIKEY and ROCKSET_APISERVER " +
-                      "environment variables.");
+          "To run unit tests, please set ROCKSET_APIKEY and ROCKSET_APISERVER "
+              + "environment variables.");
     }
     property = new Properties();
     property.setProperty("apiKey", apiKey);
-       
-    if(apiServer.toLowerCase().contains("https://"))
-     apiServer = apiServer.replace("https://","");
+
+    if (apiServer.toLowerCase().contains("https://")) apiServer = apiServer.replace("https://", "");
     property.setProperty("apiServer", apiServer);
 
     // create the Rockset test client
-    testClient = new RocksetClient(property.getProperty("apiKey"),
-                                   property.getProperty("apiServer"));
+    testClient =
+        new RocksetClient(property.getProperty("apiKey"), property.getProperty("apiServer"));
     // Register JDBC driver
     Class.forName(JDBC_DRIVER);
   }
@@ -112,9 +106,9 @@ public class TestTable {
       conn = DriverManager.getConnection(DB_URL, property);
 
       DatabaseMetaData meta = conn.getMetaData();
-      ResultSet rs = meta.getTables(RocksetConnection.DEFAULT_CATALOG,
-                                    RocksetConnection.DEFAULT_SCHEMA,
-                                    "*", null);
+      ResultSet rs =
+          meta.getTables(
+              RocksetConnection.DEFAULT_CATALOG, RocksetConnection.DEFAULT_SCHEMA, "*", null);
       int colCatIndex = rs.findColumn("TABLE_CAT");
       int colSchemaIndex = rs.findColumn("TABLE_SCHEM");
       int colNameIndex = rs.findColumn("TABLE_NAME");
@@ -159,8 +153,8 @@ public class TestTable {
       waitCollections(colls);
 
       String csvParams =
-              "{ \"csv\": { \"columnNames\": [\"c1\", \"c2\", \"c3\"], "
-                      + "\"columnTypes\": [\"DATE\", \"TIME\", \"TIMESTAMP\"] } }";
+          "{ \"csv\": { \"columnNames\": [\"c1\", \"c2\", \"c3\"], "
+              + "\"columnTypes\": [\"DATE\", \"TIME\", \"TIMESTAMP\"] } }";
 
       uploadFile(collectionName, "src/test/resources/basic.csv", csvParams);
       waitNumberDocs(collectionName, 1);
@@ -175,15 +169,13 @@ public class TestTable {
 
       // Extract data from result set
       while (rs.next()) {
-        //Retrieve by column name
+        // Retrieve by column name
         Date c1 = rs.getDate("c1");
         Time c2 = rs.getTime("c2");
         String c3 = rs.getString("c3");
 
-        //Display values
-        System.out.println("c1: " + c1.toString()
-                + " c2: " + c2.toString()
-                + " c3: " + c3);
+        // Display values
+        System.out.println("c1: " + c1.toString() + " c2: " + c2.toString() + " c3: " + c3);
       }
     } finally {
       cleanup(colls, stmt, conn);
@@ -219,9 +211,12 @@ public class TestTable {
       conn = DriverManager.getConnection(DB_URL, property);
 
       DatabaseMetaData meta = conn.getMetaData();
-      ResultSet rs = meta.getColumns(RocksetConnection.DEFAULT_CATALOG,
-                                     RocksetConnection.DEFAULT_SCHEMA,
-                                     collectionName, null);
+      ResultSet rs =
+          meta.getColumns(
+              RocksetConnection.DEFAULT_CATALOG,
+              RocksetConnection.DEFAULT_SCHEMA,
+              collectionName,
+              null);
       int colCatIndex = rs.findColumn("TABLE_CAT");
       int colSchemaIndex = rs.findColumn("TABLE_SCHEM");
       int colNameIndex = rs.findColumn("TABLE_NAME");
@@ -332,8 +327,12 @@ public class TestTable {
 
       conn = DriverManager.getConnection(DB_URL, property);
       DatabaseMetaData dbMeta = conn.getMetaData();
-      ResultSet rs = dbMeta.getColumns(RocksetConnection.DEFAULT_CATALOG,
-          RocksetConnection.DEFAULT_SCHEMA, collection, null);
+      ResultSet rs =
+          dbMeta.getColumns(
+              RocksetConnection.DEFAULT_CATALOG,
+              RocksetConnection.DEFAULT_SCHEMA,
+              collection,
+              null);
 
       assertNextEquals(rs, "_event_time", Types.TIMESTAMP);
       assertNextEquals(rs, "_id", Types.VARCHAR);
@@ -370,7 +369,6 @@ public class TestTable {
     assertEquals(rs.getInt(dataTypeIndex), expectedType);
   }
 
-
   //
   // Invoked by all unit tests at the end to cleanup its mess
   //
@@ -385,14 +383,14 @@ public class TestTable {
     try {
       if (stmt != null) {
         stmt.close();
-      } 
+      }
     } catch (SQLException se2) {
       // nothing we can do
     }
     try {
       if (conn != null) {
         conn.close();
-      } 
+      }
     } catch (SQLException se) {
       se.printStackTrace();
     }
@@ -403,8 +401,7 @@ public class TestTable {
   //
   private List<String> generateCollectionNames(int num) {
     List<String> names = new ArrayList<String>(num);
-    String prefix  = "jdbctestcollection"
-                + RandomStringUtils.randomAlphanumeric(5);
+    String prefix = "jdbctestcollection" + RandomStringUtils.randomAlphanumeric(5);
     for (int i = 0; i < num; i++) {
       names.add(prefix + i);
     }
@@ -414,8 +411,8 @@ public class TestTable {
   //
   // Wait for all collections to be ready
   //
-  private void waitCollections(List<String> names)  throws Exception {
-    for (String name: names) {
+  private void waitCollections(List<String> names) throws Exception {
+    for (String name : names) {
       String sql = "describe \"" + name + "\";";
       while (true) {
         try {
@@ -423,8 +420,7 @@ public class TestTable {
           testClient.query(new QueryRequest().sql(qs));
           break;
         } catch (Exception e) {
-          System.out.println(String.format("Waiting for collection %s to be describable",
-                      name));
+          System.out.println(String.format("Waiting for collection %s to be describable", name));
           Thread.sleep(1000);
         }
       }
@@ -435,10 +431,9 @@ public class TestTable {
   // Create the list of collections. Fail if any of the collection
   // already exists
   //
-  private void createCollections(List<String> names)  throws Exception {
-    for (String name: names) {
-      CreateCollectionRequest request =
-                        new CreateCollectionRequest().name(name);
+  private void createCollections(List<String> names) throws Exception {
+    for (String name : names) {
+      CreateCollectionRequest request = new CreateCollectionRequest().name(name);
       CreateCollectionResponse response = testClient.createCollection("commons", request);
 
       Assert.assertEquals(response.getData().getName(), name);
@@ -449,12 +444,12 @@ public class TestTable {
   //
   // Delete all specified collections
   //
-  private void deleteCollections(List<String> names)  throws Exception {
-    for (String name: names) {
-      DeleteCollectionResponse deleteCollectionResponse
-                    = testClient.deleteCollection("commons", name);
+  private void deleteCollections(List<String> names) throws Exception {
+    for (String name : names) {
+      DeleteCollectionResponse deleteCollectionResponse =
+          testClient.deleteCollection("commons", name);
       Assert.assertEquals(deleteCollectionResponse.getData().getName(), name);
-      //Assert.assertEquals(deleteCollectionResponse.getData().getStatus(),
+      // Assert.assertEquals(deleteCollectionResponse.getData().getStatus(),
       //                     Collection.StatusEnum.DELETED);
     }
   }
@@ -467,11 +462,11 @@ public class TestTable {
     final MediaType mt = MediaType.parse("text/json; charset=utf-8");
 
     // create multipart request
-    MultipartBody.Builder multipartBuilder = new MultipartBody.Builder()
-        .setType(MultipartBody.FORM)
-        .addFormDataPart("file", file.getName(),
-          RequestBody.create(mt, file))
-        .addFormDataPart("size", String.valueOf(file.length()));
+    MultipartBody.Builder multipartBuilder =
+        new MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart("file", file.getName(), RequestBody.create(mt, file))
+            .addFormDataPart("size", String.valueOf(file.length()));
 
     if (params != null) {
       multipartBuilder.addFormDataPart("params", params);
@@ -480,17 +475,18 @@ public class TestTable {
     RequestBody body = multipartBuilder.build();
 
     // send the file upload request
-    String url = String.format(
+    String url =
+        String.format(
             "https://%s/v1/orgs/self/ws/commons/collections/%s/uploads",
             property.getProperty("apiServer"), collectionName);
     System.out.println("Uploading test file to  " + url);
 
-    Request request = new Request.Builder()
-        .url(url)
-        .addHeader("Authorization",
-                String.format("ApiKey %s", property.getProperty("apiKey")))
-        .post(body)
-        .build();
+    Request request =
+        new Request.Builder()
+            .url(url)
+            .addHeader("Authorization", String.format("ApiKey %s", property.getProperty("apiKey")))
+            .post(body)
+            .build();
 
     Response response = null;
     try {
@@ -509,7 +505,7 @@ public class TestTable {
   //
   // Wait for the specified docs to appear in the collection
   //
-  private void waitNumberDocs(String collectionName, int expectedDocs)  throws Exception {
+  private void waitNumberDocs(String collectionName, int expectedDocs) throws Exception {
     String sql = "select count(*) from \"" + collectionName + "\";";
     int found = 0;
     while (found < expectedDocs) {
@@ -522,11 +518,11 @@ public class TestTable {
           found = res.getInt("?COUNT");
         }
       } catch (Exception e) {
-        System.out.println("Exception in query " + sql
-                + "exception " + e.getMessage());
+        System.out.println("Exception in query " + sql + "exception " + e.getMessage());
       }
-      System.out.println(String.format("Collection %s found %d docs, waiting for %d",
-                    collectionName, found, expectedDocs));
+      System.out.println(
+          String.format(
+              "Collection %s found %d docs, waiting for %d", collectionName, found, expectedDocs));
       Thread.sleep(1000);
     }
   }

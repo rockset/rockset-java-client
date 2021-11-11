@@ -9,7 +9,6 @@ import static java.util.Objects.requireNonNull;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Maps;
 import com.google.common.net.HostAndPort;
-
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
@@ -19,9 +18,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 
-/**
- * Parses and extracts parameters from a Rockset JDBC URL.
- */
+/** Parses and extracts parameters from a Rockset JDBC URL. */
 final class RocksetDriverUri {
   private static final String JDBC_URL_START = "jdbc:";
 
@@ -86,9 +83,8 @@ final class RocksetDriverUri {
       for (String queryArg : queryArgs) {
         List<String> parts = ARG_SPLITTER.splitToList(queryArg);
         if (result.put(parts.get(0), parts.get(1)) != null) {
-          throw new SQLException(format(
-                      "Connection property '%s' is in URL multiple times",
-                      parts.get(0)));
+          throw new SQLException(
+              format("Connection property '%s' is in URL multiple times", parts.get(0)));
         }
       }
     }
@@ -117,8 +113,7 @@ final class RocksetDriverUri {
   private URI buildHttpUri() {
     String scheme = useSecureConnection ? "https" : "http";
     try {
-      return new URI(scheme, null, address.getHost(),
-                     address.getPort(), null, null, null);
+      return new URI(scheme, null, address.getHost(), address.getPort(), null, null, null);
     } catch (URISyntaxException e) {
       throw new RuntimeException(e);
     }
@@ -167,8 +162,8 @@ final class RocksetDriverUri {
 
     for (String key : urlProperties.keySet()) {
       if (suppliedProperties.containsKey(key)) {
-        throw new SQLException(format(
-                    "Connection property '%s' is both in the URL and an argument", key));
+        throw new SQLException(
+            format("Connection property '%s' is both in the URL and an argument", key));
       }
     }
 

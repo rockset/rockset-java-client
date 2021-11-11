@@ -13,9 +13,26 @@
  */
 package com.rockset.jdbc;
 
-import com.google.common.base.Joiner;
-import com.google.common.primitives.Ints;
+import static com.rockset.jdbc.ObjectCasts.castToBigDecimal;
+import static com.rockset.jdbc.ObjectCasts.castToBinary;
+import static com.rockset.jdbc.ObjectCasts.castToBoolean;
+import static com.rockset.jdbc.ObjectCasts.castToByte;
+import static com.rockset.jdbc.ObjectCasts.castToDate;
+import static com.rockset.jdbc.ObjectCasts.castToDouble;
+import static com.rockset.jdbc.ObjectCasts.castToFloat;
+import static com.rockset.jdbc.ObjectCasts.castToInt;
+import static com.rockset.jdbc.ObjectCasts.castToLong;
+import static com.rockset.jdbc.ObjectCasts.castToShort;
+import static com.rockset.jdbc.ObjectCasts.castToTime;
+import static com.rockset.jdbc.ObjectCasts.castToTimestamp;
+import static com.rockset.jdbc.RocksetResultSet.DATE_FORMATTER;
+import static com.rockset.jdbc.RocksetResultSet.TIMESTAMP_FORMATTER;
+import static com.rockset.jdbc.RocksetResultSet.TIME_FORMATTER;
+import static java.lang.String.format;
+import static java.util.Objects.requireNonNull;
 
+import com.google.common.primitives.Ints;
+import com.rockset.client.model.QueryParameter;
 import java.io.InputStream;
 import java.io.Reader;
 import java.math.BigDecimal;
@@ -46,35 +63,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.rockset.client.model.QueryParameter;
-
-import static com.rockset.jdbc.ObjectCasts.castToBigDecimal;
-import static com.rockset.jdbc.ObjectCasts.castToBinary;
-import static com.rockset.jdbc.ObjectCasts.castToBoolean;
-import static com.rockset.jdbc.ObjectCasts.castToByte;
-import static com.rockset.jdbc.ObjectCasts.castToDate;
-import static com.rockset.jdbc.ObjectCasts.castToDouble;
-import static com.rockset.jdbc.ObjectCasts.castToFloat;
-import static com.rockset.jdbc.ObjectCasts.castToInt;
-import static com.rockset.jdbc.ObjectCasts.castToLong;
-import static com.rockset.jdbc.ObjectCasts.castToShort;
-import static com.rockset.jdbc.ObjectCasts.castToTime;
-import static com.rockset.jdbc.ObjectCasts.castToTimestamp;
-import static com.rockset.jdbc.RocksetResultSet.DATE_FORMATTER;
-import static com.rockset.jdbc.RocksetResultSet.TIMESTAMP_FORMATTER;
-import static com.rockset.jdbc.RocksetResultSet.TIME_FORMATTER;
-import static com.google.common.io.BaseEncoding.base16;
-import static java.lang.String.format;
-import static java.util.Objects.requireNonNull;
-
-public class RocksetPreparedStatement
-        extends RocksetStatement
-        implements PreparedStatement
-{
+public class RocksetPreparedStatement extends RocksetStatement implements PreparedStatement {
   // A temporary data structure to store query parameters
   public class Params {
     String type;
     String value;
+
     Params(String type, String value) {
       this.type = type;
       this.value = value;
@@ -88,8 +82,8 @@ public class RocksetPreparedStatement
   // number of times this query was executed successfully
   private final AtomicLong executeCount;
 
-  RocksetPreparedStatement(RocksetConnection connection, String statementName,
-      String sql) throws SQLException {
+  RocksetPreparedStatement(RocksetConnection connection, String statementName, String sql)
+      throws SQLException {
     super(connection);
     this.statementName = requireNonNull(statementName, "statementName is null");
     this.originalSql = requireNonNull(sql, "sql is null");
@@ -141,8 +135,8 @@ public class RocksetPreparedStatement
   public void setNull(int parameterIndex, int sqlType) throws SQLException {
     RocksetDriver.log("Enter : RocksetPreparedStatement setNull");
     checkOpen();
-    setParameter(parameterIndex, RocksetUtils.sqlTypeToRocksetTypeNames(sqlType),
-                 typedNull(sqlType));
+    setParameter(
+        parameterIndex, RocksetUtils.sqlTypeToRocksetTypeNames(sqlType), typedNull(sqlType));
     RocksetDriver.log("Exit : RocksetPreparedStatement setNull");
   }
 
@@ -231,8 +225,7 @@ public class RocksetPreparedStatement
     if (x == null) {
       setNull(parameterIndex, "bytes");
     } else {
-      setParameter(parameterIndex, "bytes",
-                    new String(x,  StandardCharsets.UTF_8));
+      setParameter(parameterIndex, "bytes", new String(x, StandardCharsets.UTF_8));
     }
   }
 
@@ -242,8 +235,7 @@ public class RocksetPreparedStatement
     if (x == null) {
       setNull(parameterIndex, "date");
     } else {
-      setParameter(parameterIndex, "date",
-                    DATE_FORMATTER.print(x.getTime()));
+      setParameter(parameterIndex, "date", DATE_FORMATTER.print(x.getTime()));
     }
   }
 
@@ -253,8 +245,7 @@ public class RocksetPreparedStatement
     if (x == null) {
       setNull(parameterIndex, "time");
     } else {
-      setParameter(parameterIndex, "time",
-                    TIME_FORMATTER.print(x.getTime()));
+      setParameter(parameterIndex, "time", TIME_FORMATTER.print(x.getTime()));
     }
   }
 
@@ -264,26 +255,22 @@ public class RocksetPreparedStatement
     if (x == null) {
       setNull(parameterIndex, "timestamp");
     } else {
-      setParameter(parameterIndex, "timestamp",
-                    TIMESTAMP_FORMATTER.print(x.getTime()));
+      setParameter(parameterIndex, "timestamp", TIMESTAMP_FORMATTER.print(x.getTime()));
     }
   }
 
   @Override
-  public void setAsciiStream(int parameterIndex, InputStream x, int length)
-      throws SQLException {
+  public void setAsciiStream(int parameterIndex, InputStream x, int length) throws SQLException {
     throw new NotImplementedException("PreparedStatement", "setAsciiStream");
   }
 
   @Override
-  public void setUnicodeStream(int parameterIndex, InputStream x, int length)
-      throws SQLException {
+  public void setUnicodeStream(int parameterIndex, InputStream x, int length) throws SQLException {
     throw new SQLFeatureNotSupportedException("setUnicodeStream");
   }
 
   @Override
-  public void setBinaryStream(int parameterIndex, InputStream x, int length)
-      throws SQLException {
+  public void setBinaryStream(int parameterIndex, InputStream x, int length) throws SQLException {
     throw new NotImplementedException("PreparedStatement", "setBinaryStream");
   }
 
@@ -294,547 +281,437 @@ public class RocksetPreparedStatement
   }
 
   @Override
-  public void setObject(int parameterIndex, Object x, int targetSqlType)
-      throws SQLException {
+  public void setObject(int parameterIndex, Object x, int targetSqlType) throws SQLException {
     checkOpen();
     if (x == null) {
       setNull(parameterIndex, targetSqlType);
       return;
     }
     switch (targetSqlType) {
-            case Types.BOOLEAN:
-            case Types.BIT:
-                setBoolean(parameterIndex, castToBoolean(x, targetSqlType));
-                return;
-            case Types.TINYINT:
-                setByte(parameterIndex, castToByte(x, targetSqlType));
-                return;
-            case Types.SMALLINT:
-                setShort(parameterIndex, castToShort(x, targetSqlType));
-                return;
-            case Types.INTEGER:
-                setInt(parameterIndex, castToInt(x, targetSqlType));
-                return;
-            case Types.BIGINT:
-                setLong(parameterIndex, castToLong(x, targetSqlType));
-                return;
-            case Types.FLOAT:
-            case Types.REAL:
-                setFloat(parameterIndex, castToFloat(x, targetSqlType));
-                return;
-            case Types.DOUBLE:
-                setDouble(parameterIndex, castToDouble(x, targetSqlType));
-                return;
-            case Types.DECIMAL:
-            case Types.NUMERIC:
-                setBigDecimal(parameterIndex, castToBigDecimal(x, targetSqlType));
-                return;
-            case Types.CHAR:
-            case Types.NCHAR:
-            case Types.VARCHAR:
-            case Types.NVARCHAR:
-            case Types.LONGVARCHAR:
-            case Types.LONGNVARCHAR:
-                setString(parameterIndex, x.toString());
-                return;
-            case Types.BINARY:
-            case Types.VARBINARY:
-            case Types.LONGVARBINARY:
-                setBytes(parameterIndex, castToBinary(x, targetSqlType));
-                return;
-            case Types.DATE:
-                setDate(parameterIndex, castToDate(x, targetSqlType));
-                return;
-            case Types.TIME:
-                setTime(parameterIndex, castToTime(x, targetSqlType));
-                return;
-            case Types.TIMESTAMP:
-                setTimestamp(parameterIndex, castToTimestamp(x, targetSqlType));
-                return;
-            // TODO Types.TIME_WITH_TIMEZONE
-            // TODO Types.TIMESTAMP_WITH_TIMEZONE
+      case Types.BOOLEAN:
+      case Types.BIT:
+        setBoolean(parameterIndex, castToBoolean(x, targetSqlType));
+        return;
+      case Types.TINYINT:
+        setByte(parameterIndex, castToByte(x, targetSqlType));
+        return;
+      case Types.SMALLINT:
+        setShort(parameterIndex, castToShort(x, targetSqlType));
+        return;
+      case Types.INTEGER:
+        setInt(parameterIndex, castToInt(x, targetSqlType));
+        return;
+      case Types.BIGINT:
+        setLong(parameterIndex, castToLong(x, targetSqlType));
+        return;
+      case Types.FLOAT:
+      case Types.REAL:
+        setFloat(parameterIndex, castToFloat(x, targetSqlType));
+        return;
+      case Types.DOUBLE:
+        setDouble(parameterIndex, castToDouble(x, targetSqlType));
+        return;
+      case Types.DECIMAL:
+      case Types.NUMERIC:
+        setBigDecimal(parameterIndex, castToBigDecimal(x, targetSqlType));
+        return;
+      case Types.CHAR:
+      case Types.NCHAR:
+      case Types.VARCHAR:
+      case Types.NVARCHAR:
+      case Types.LONGVARCHAR:
+      case Types.LONGNVARCHAR:
+        setString(parameterIndex, x.toString());
+        return;
+      case Types.BINARY:
+      case Types.VARBINARY:
+      case Types.LONGVARBINARY:
+        setBytes(parameterIndex, castToBinary(x, targetSqlType));
+        return;
+      case Types.DATE:
+        setDate(parameterIndex, castToDate(x, targetSqlType));
+        return;
+      case Types.TIME:
+        setTime(parameterIndex, castToTime(x, targetSqlType));
+        return;
+      case Types.TIMESTAMP:
+        setTimestamp(parameterIndex, castToTimestamp(x, targetSqlType));
+        return;
+        // TODO Types.TIME_WITH_TIMEZONE
+        // TODO Types.TIMESTAMP_WITH_TIMEZONE
+    }
+    throw new SQLException("Unsupported target SQL type: " + targetSqlType);
+  }
+
+  @Override
+  public void setObject(int parameterIndex, Object x, SQLType targetSqlType) throws SQLException {
+    setObject(parameterIndex, x, targetSqlType.getVendorTypeNumber());
+  }
+
+  @Override
+  public void setObject(int parameterIndex, Object x) throws SQLException {
+    checkOpen();
+    if (x == null) {
+      setNull(parameterIndex, Types.NULL);
+    } else if (x instanceof Boolean) {
+      setBoolean(parameterIndex, (Boolean) x);
+    } else if (x instanceof Byte) {
+      setByte(parameterIndex, (Byte) x);
+    } else if (x instanceof Short) {
+      setShort(parameterIndex, (Short) x);
+    } else if (x instanceof Integer) {
+      setInt(parameterIndex, (Integer) x);
+    } else if (x instanceof Long) {
+      setLong(parameterIndex, (Long) x);
+    } else if (x instanceof Float) {
+      setFloat(parameterIndex, (Float) x);
+    } else if (x instanceof Double) {
+      setDouble(parameterIndex, (Double) x);
+    } else if (x instanceof BigDecimal) {
+      setBigDecimal(parameterIndex, (BigDecimal) x);
+    } else if (x instanceof String) {
+      setString(parameterIndex, (String) x);
+    } else if (x instanceof byte[]) {
+      setBytes(parameterIndex, (byte[]) x);
+    } else if (x instanceof Date) {
+      setDate(parameterIndex, (Date) x);
+    } else if (x instanceof Time) {
+      setTime(parameterIndex, (Time) x);
+    } else if (x instanceof Timestamp) {
+      setTimestamp(parameterIndex, (Timestamp) x);
+    } else {
+      throw new SQLException("Unsupported object type: " + x.getClass().getName());
+    }
+  }
+
+  @Override
+  public void addBatch() throws SQLException {
+    throw new NotImplementedException("PreparedStatement", "addBatch");
+  }
+
+  @Override
+  public void setCharacterStream(int parameterIndex, Reader reader, int length)
+      throws SQLException {
+    throw new NotImplementedException("PreparedStatement", "setCharacterStream");
+  }
+
+  @Override
+  public void setRef(int parameterIndex, Ref x) throws SQLException {
+    throw new SQLFeatureNotSupportedException("setRef");
+  }
+
+  @Override
+  public void setBlob(int parameterIndex, Blob x) throws SQLException {
+    throw new SQLFeatureNotSupportedException("setBlob");
+  }
+
+  @Override
+  public void setClob(int parameterIndex, Clob x) throws SQLException {
+    throw new SQLFeatureNotSupportedException("setClob");
+  }
+
+  @Override
+  public void setArray(int parameterIndex, Array x) throws SQLException {
+    throw new SQLFeatureNotSupportedException("setArray");
+  }
+
+  @Override
+  public ResultSetMetaData getMetaData() throws SQLException {
+    RocksetDriver.log("Enter : RocksetPreparedStatement getMetaData");
+    // If we have never run the query, execeute it once to gather metadata
+    if (executeCount.get() == 0) {
+      getExecuteSql();
+    }
+    ResultSetMetaData meta = getResultSet().getMetaData();
+    RocksetDriver.log("Exit : RocksetPreparedStatement getMetaData");
+    return meta;
+  }
+
+  @Override
+  public void setDate(int parameterIndex, Date x, Calendar cal) throws SQLException {
+    throw new NotImplementedException("PreparedStatement", "setDate");
+  }
+
+  @Override
+  public void setTime(int parameterIndex, Time x, Calendar cal) throws SQLException {
+    throw new NotImplementedException("PreparedStatement", "setTime");
+  }
+
+  @Override
+  public void setTimestamp(int parameterIndex, Timestamp x, Calendar cal) throws SQLException {
+    throw new NotImplementedException("PreparedStatement", "setTimestamp");
+  }
+
+  @Override
+  public void setNull(int parameterIndex, int sqlType, String typeName) throws SQLException {
+    setNull(parameterIndex, sqlType);
+  }
+
+  @Override
+  public void setURL(int parameterIndex, URL x) throws SQLException {
+    throw new SQLFeatureNotSupportedException("setURL");
+  }
+
+  @Override
+  public ParameterMetaData getParameterMetaData() throws SQLException {
+    throw new NotImplementedException("PreparedStatement", "getParameterMetaData");
+  }
+
+  @Override
+  public void setRowId(int parameterIndex, RowId x) throws SQLException {
+    throw new SQLFeatureNotSupportedException("setRowId");
+  }
+
+  @Override
+  public void setNString(int parameterIndex, String value) throws SQLException {
+    setString(parameterIndex, value);
+  }
+
+  @Override
+  public void setNCharacterStream(int parameterIndex, Reader value, long length)
+      throws SQLException {
+    throw new SQLFeatureNotSupportedException("setNCharacterStream");
+  }
+
+  @Override
+  public void setNClob(int parameterIndex, NClob value) throws SQLException {
+    throw new SQLFeatureNotSupportedException("setNClob");
+  }
+
+  @Override
+  public void setClob(int parameterIndex, Reader reader, long length) throws SQLException {
+    throw new SQLFeatureNotSupportedException("setClob");
+  }
+
+  @Override
+  public void setBlob(int parameterIndex, InputStream inputStream, long length)
+      throws SQLException {
+    throw new SQLFeatureNotSupportedException("setBlob");
+  }
+
+  @Override
+  public void setNClob(int parameterIndex, Reader reader, long length) throws SQLException {
+    throw new SQLFeatureNotSupportedException("setNClob");
+  }
+
+  @Override
+  public void setSQLXML(int parameterIndex, SQLXML xmlObject) throws SQLException {
+    throw new SQLFeatureNotSupportedException("setSQLXML");
+  }
+
+  @Override
+  public void setObject(int parameterIndex, Object x, int targetSqlType, int scaleOrLength)
+      throws SQLException {
+    throw new SQLFeatureNotSupportedException("setObject");
+  }
+
+  @Override
+  public void setAsciiStream(int parameterIndex, InputStream x, long length) throws SQLException {
+    throw new NotImplementedException("PreparedStatement", "setAsciiStream");
+  }
+
+  @Override
+  public void setBinaryStream(int parameterIndex, InputStream x, long length) throws SQLException {
+    throw new NotImplementedException("PreparedStatement", "setBinaryStream");
+  }
+
+  @Override
+  public void setCharacterStream(int parameterIndex, Reader reader, long length)
+      throws SQLException {
+    throw new NotImplementedException("PreparedStatement", "setCharacterStream");
+  }
+
+  @Override
+  public void setAsciiStream(int parameterIndex, InputStream x) throws SQLException {
+    throw new SQLFeatureNotSupportedException("setAsciiStream");
+  }
+
+  @Override
+  public void setBinaryStream(int parameterIndex, InputStream x) throws SQLException {
+    throw new SQLFeatureNotSupportedException("setBinaryStream");
+  }
+
+  @Override
+  public void setCharacterStream(int parameterIndex, Reader reader) throws SQLException {
+    throw new SQLFeatureNotSupportedException("setCharacterStream");
+  }
+
+  @Override
+  public void setNCharacterStream(int parameterIndex, Reader value) throws SQLException {
+    throw new SQLFeatureNotSupportedException("setNCharacterStream");
+  }
+
+  @Override
+  public void setClob(int parameterIndex, Reader reader) throws SQLException {
+    throw new SQLFeatureNotSupportedException("setClob");
+  }
+
+  @Override
+  public void setBlob(int parameterIndex, InputStream inputStream) throws SQLException {
+    throw new SQLFeatureNotSupportedException("setBlob");
+  }
+
+  @Override
+  public void setNClob(int parameterIndex, Reader reader) throws SQLException {
+    throw new SQLFeatureNotSupportedException("setNClob");
+  }
+
+  @Override
+  public ResultSet executeQuery(String sql) throws SQLException {
+    throw new SQLException("This method cannot be called on PreparedStatement");
+  }
+
+  @Override
+  public int executeUpdate(String sql) throws SQLException {
+    throw new SQLException("This method cannot be called on PreparedStatement");
+  }
+
+  @Override
+  public int executeUpdate(String sql, int autoGeneratedKeys) throws SQLException {
+    throw new SQLException("This method cannot be called on PreparedStatement");
+  }
+
+  @Override
+  public int executeUpdate(String sql, int[] columnIndexes) throws SQLException {
+    throw new SQLException("This method cannot be called on PreparedStatement");
+  }
+
+  @Override
+  public int executeUpdate(String sql, String[] columnNames) throws SQLException {
+    throw new SQLException("This method cannot be called on PreparedStatement");
+  }
+
+  @Override
+  public long executeLargeUpdate(String sql) throws SQLException {
+    throw new SQLException("This method cannot be called on PreparedStatement");
+  }
+
+  @Override
+  public long executeLargeUpdate(String sql, int autoGeneratedKeys) throws SQLException {
+    throw new SQLException("This method cannot be called on PreparedStatement");
+  }
+
+  @Override
+  public long executeLargeUpdate(String sql, int[] columnIndexes) throws SQLException {
+    throw new SQLException("This method cannot be called on PreparedStatement");
+  }
+
+  @Override
+  public long executeLargeUpdate(String sql, String[] columnNames) throws SQLException {
+    throw new SQLException("This method cannot be called on PreparedStatement");
+  }
+
+  @Override
+  public boolean execute(String sql) throws SQLException {
+    throw new SQLException("This method cannot be called on PreparedStatement");
+  }
+
+  @Override
+  public boolean execute(String sql, int autoGeneratedKeys) throws SQLException {
+    throw new SQLException("This method cannot be called on PreparedStatement");
+  }
+
+  @Override
+  public boolean execute(String sql, int[] columnIndexes) throws SQLException {
+    throw new SQLException("This method cannot be called on PreparedStatement");
+  }
+
+  @Override
+  public boolean execute(String sql, String[] columnNames) throws SQLException {
+    throw new SQLException("This method cannot be called on PreparedStatement");
+  }
+
+  @Override
+  public void addBatch(String sql) throws SQLException {
+    throw new SQLException("This method cannot be called on PreparedStatement");
+  }
+
+  private void setParameter(int parameterIndex, String type, String value) throws SQLException {
+    if (parameterIndex < 1) {
+      throw new SQLException("Parameter index out of bounds: " + parameterIndex);
+    }
+    parameters.put(parameterIndex - 1, new Params(type, value));
+  }
+
+  //
+  // Convert a hashMap of Params to a list of QueryParameters
+  private List<QueryParameter> convertParameters() throws SQLException {
+    List<QueryParameter> values = new ArrayList<>();
+    for (int index = 0; index < parameters.size(); index++) {
+      if (!parameters.containsKey(index)) {
+        throw new SQLException("No value specified for parameter " + (index + 1));
       }
-      throw new SQLException("Unsupported target SQL type: " + targetSqlType);
+      Params params = parameters.get(index);
+      // do not specify the names of the parameters, just fill them up in the right
+      // order, the rockset service will automatically take them as positional
+      // parameters.
+      values.add(new QueryParameter().type(params.type).value(params.value));
     }
+    return values;
+  }
 
-    @Override
-    public void setObject(int parameterIndex, Object x, SQLType targetSqlType)
-            throws SQLException
-    {
-        setObject(parameterIndex, x, targetSqlType.getVendorTypeNumber());
+  private boolean getExecuteSql() throws SQLException {
+    boolean ret = super.executeWithParams(originalSql, convertParameters());
+
+    // increment counter to indicate the number of times this query was
+    // successfully executed.
+    if (ret) {
+      executeCount.incrementAndGet();
     }
+    return ret;
+  }
 
-    @Override
-    public void setObject(int parameterIndex, Object x)
-            throws SQLException
-    {
-        checkOpen();
-        if (x == null) {
-            setNull(parameterIndex, Types.NULL);
-        }
-        else if (x instanceof Boolean) {
-            setBoolean(parameterIndex, (Boolean) x);
-        }
-        else if (x instanceof Byte) {
-            setByte(parameterIndex, (Byte) x);
-        }
-        else if (x instanceof Short) {
-            setShort(parameterIndex, (Short) x);
-        }
-        else if (x instanceof Integer) {
-            setInt(parameterIndex, (Integer) x);
-        }
-        else if (x instanceof Long) {
-            setLong(parameterIndex, (Long) x);
-        }
-        else if (x instanceof Float) {
-            setFloat(parameterIndex, (Float) x);
-        }
-        else if (x instanceof Double) {
-            setDouble(parameterIndex, (Double) x);
-        }
-        else if (x instanceof BigDecimal) {
-            setBigDecimal(parameterIndex, (BigDecimal) x);
-        }
-        else if (x instanceof String) {
-            setString(parameterIndex, (String) x);
-        }
-        else if (x instanceof byte[]) {
-            setBytes(parameterIndex, (byte[]) x);
-        }
-        else if (x instanceof Date) {
-            setDate(parameterIndex, (Date) x);
-        }
-        else if (x instanceof Time) {
-            setTime(parameterIndex, (Time) x);
-        }
-        else if (x instanceof Timestamp) {
-            setTimestamp(parameterIndex, (Timestamp) x);
-        }
-        else {
-            throw new SQLException("Unsupported object type: " + x.getClass().getName());
-        }
+  private static String typedNull(int targetSqlType) throws SQLException {
+    switch (targetSqlType) {
+      case Types.BOOLEAN:
+      case Types.BIT:
+        return typedNull("BOOLEAN");
+      case Types.TINYINT:
+        return typedNull("TINYINT");
+      case Types.SMALLINT:
+        return typedNull("SMALLINT");
+      case Types.INTEGER:
+        return typedNull("INTEGER");
+      case Types.BIGINT:
+        return typedNull("BIGINT");
+      case Types.FLOAT:
+      case Types.REAL:
+        return typedNull("REAL");
+      case Types.DOUBLE:
+        return typedNull("DOUBLE");
+      case Types.DECIMAL:
+      case Types.NUMERIC:
+        return typedNull("DECIMAL");
+      case Types.CHAR:
+      case Types.NCHAR:
+        return typedNull("CHAR");
+      case Types.VARCHAR:
+      case Types.NVARCHAR:
+      case Types.LONGVARCHAR:
+      case Types.LONGNVARCHAR:
+      case Types.CLOB:
+      case Types.NCLOB:
+        return typedNull("VARCHAR");
+      case Types.BINARY:
+      case Types.VARBINARY:
+      case Types.LONGVARBINARY:
+      case Types.BLOB:
+        return typedNull("VARBINARY");
+      case Types.DATE:
+        return typedNull("DATE");
+      case Types.TIME:
+        return typedNull("TIME");
+      case Types.TIMESTAMP:
+        return typedNull("TIMESTAMP");
+        // TODO Types.TIME_WITH_TIMEZONE
+        // TODO Types.TIMESTAMP_WITH_TIMEZONE
+      case Types.NULL:
+        return "NULL";
     }
+    throw new SQLException("Unsupported target SQL type: " + targetSqlType);
+  }
 
-    @Override
-    public void addBatch()
-            throws SQLException
-    {
-        throw new NotImplementedException("PreparedStatement", "addBatch");
-    }
-
-    @Override
-    public void setCharacterStream(int parameterIndex, Reader reader, int length)
-            throws SQLException
-    {
-        throw new NotImplementedException("PreparedStatement", "setCharacterStream");
-    }
-
-    @Override
-    public void setRef(int parameterIndex, Ref x)
-            throws SQLException
-    {
-        throw new SQLFeatureNotSupportedException("setRef");
-    }
-
-    @Override
-    public void setBlob(int parameterIndex, Blob x)
-            throws SQLException
-    {
-        throw new SQLFeatureNotSupportedException("setBlob");
-    }
-
-    @Override
-    public void setClob(int parameterIndex, Clob x)
-            throws SQLException
-    {
-        throw new SQLFeatureNotSupportedException("setClob");
-    }
-
-    @Override
-    public void setArray(int parameterIndex, Array x)
-            throws SQLException
-    {
-        throw new SQLFeatureNotSupportedException("setArray");
-    }
-
-    @Override
-    public ResultSetMetaData getMetaData()
-            throws SQLException
-    {
-        RocksetDriver.log("Enter : RocksetPreparedStatement getMetaData");
-        // If we have never run the query, execeute it once to gather metadata
-        if (executeCount.get() == 0) {
-            getExecuteSql();
-        }
-        ResultSetMetaData meta =  getResultSet().getMetaData();
-        RocksetDriver.log("Exit : RocksetPreparedStatement getMetaData");
-        return meta;
-    }
-
-    @Override
-    public void setDate(int parameterIndex, Date x, Calendar cal)
-            throws SQLException
-    {
-        throw new NotImplementedException("PreparedStatement", "setDate");
-    }
-
-    @Override
-    public void setTime(int parameterIndex, Time x, Calendar cal)
-            throws SQLException
-    {
-        throw new NotImplementedException("PreparedStatement", "setTime");
-    }
-
-    @Override
-    public void setTimestamp(int parameterIndex, Timestamp x, Calendar cal)
-            throws SQLException
-    {
-        throw new NotImplementedException("PreparedStatement", "setTimestamp");
-    }
-
-    @Override
-    public void setNull(int parameterIndex, int sqlType, String typeName)
-            throws SQLException
-    {
-        setNull(parameterIndex, sqlType);
-    }
-
-    @Override
-    public void setURL(int parameterIndex, URL x)
-            throws SQLException
-    {
-        throw new SQLFeatureNotSupportedException("setURL");
-    }
-
-    @Override
-    public ParameterMetaData getParameterMetaData()
-            throws SQLException
-    {
-        throw new NotImplementedException("PreparedStatement", "getParameterMetaData");
-    }
-
-    @Override
-    public void setRowId(int parameterIndex, RowId x)
-            throws SQLException
-    {
-        throw new SQLFeatureNotSupportedException("setRowId");
-    }
-
-    @Override
-    public void setNString(int parameterIndex, String value)
-            throws SQLException
-    {
-        setString(parameterIndex, value);
-    }
-
-    @Override
-    public void setNCharacterStream(int parameterIndex, Reader value, long length)
-            throws SQLException
-    {
-        throw new SQLFeatureNotSupportedException("setNCharacterStream");
-    }
-
-    @Override
-    public void setNClob(int parameterIndex, NClob value)
-            throws SQLException
-    {
-        throw new SQLFeatureNotSupportedException("setNClob");
-    }
-
-    @Override
-    public void setClob(int parameterIndex, Reader reader, long length)
-            throws SQLException
-    {
-        throw new SQLFeatureNotSupportedException("setClob");
-    }
-
-    @Override
-    public void setBlob(int parameterIndex, InputStream inputStream, long length)
-            throws SQLException
-    {
-        throw new SQLFeatureNotSupportedException("setBlob");
-    }
-
-    @Override
-    public void setNClob(int parameterIndex, Reader reader, long length)
-            throws SQLException
-    {
-        throw new SQLFeatureNotSupportedException("setNClob");
-    }
-
-    @Override
-    public void setSQLXML(int parameterIndex, SQLXML xmlObject)
-            throws SQLException
-    {
-        throw new SQLFeatureNotSupportedException("setSQLXML");
-    }
-
-    @Override
-    public void setObject(int parameterIndex, Object x, int targetSqlType, int scaleOrLength)
-            throws SQLException
-    {
-        throw new SQLFeatureNotSupportedException("setObject");
-    }
-
-    @Override
-    public void setAsciiStream(int parameterIndex, InputStream x, long length)
-            throws SQLException
-    {
-        throw new NotImplementedException("PreparedStatement", "setAsciiStream");
-    }
-
-    @Override
-    public void setBinaryStream(int parameterIndex, InputStream x, long length)
-            throws SQLException
-    {
-        throw new NotImplementedException("PreparedStatement", "setBinaryStream");
-    }
-
-    @Override
-    public void setCharacterStream(int parameterIndex, Reader reader, long length)
-            throws SQLException
-    {
-        throw new NotImplementedException("PreparedStatement", "setCharacterStream");
-    }
-
-    @Override
-    public void setAsciiStream(int parameterIndex, InputStream x)
-            throws SQLException
-    {
-        throw new SQLFeatureNotSupportedException("setAsciiStream");
-    }
-
-    @Override
-    public void setBinaryStream(int parameterIndex, InputStream x)
-            throws SQLException
-    {
-        throw new SQLFeatureNotSupportedException("setBinaryStream");
-    }
-
-    @Override
-    public void setCharacterStream(int parameterIndex, Reader reader)
-            throws SQLException
-    {
-        throw new SQLFeatureNotSupportedException("setCharacterStream");
-    }
-
-    @Override
-    public void setNCharacterStream(int parameterIndex, Reader value)
-            throws SQLException
-    {
-        throw new SQLFeatureNotSupportedException("setNCharacterStream");
-    }
-
-    @Override
-    public void setClob(int parameterIndex, Reader reader)
-            throws SQLException
-    {
-        throw new SQLFeatureNotSupportedException("setClob");
-    }
-
-    @Override
-    public void setBlob(int parameterIndex, InputStream inputStream)
-            throws SQLException
-    {
-        throw new SQLFeatureNotSupportedException("setBlob");
-    }
-
-    @Override
-    public void setNClob(int parameterIndex, Reader reader)
-            throws SQLException
-    {
-        throw new SQLFeatureNotSupportedException("setNClob");
-    }
-
-    @Override
-    public ResultSet executeQuery(String sql)
-            throws SQLException
-    {
-        throw new SQLException("This method cannot be called on PreparedStatement");
-    }
-
-    @Override
-    public int executeUpdate(String sql)
-            throws SQLException
-    {
-        throw new SQLException("This method cannot be called on PreparedStatement");
-    }
-
-    @Override
-    public int executeUpdate(String sql, int autoGeneratedKeys)
-            throws SQLException
-    {
-        throw new SQLException("This method cannot be called on PreparedStatement");
-    }
-
-    @Override
-    public int executeUpdate(String sql, int[] columnIndexes)
-            throws SQLException
-    {
-        throw new SQLException("This method cannot be called on PreparedStatement");
-    }
-
-    @Override
-    public int executeUpdate(String sql, String[] columnNames)
-            throws SQLException
-    {
-        throw new SQLException("This method cannot be called on PreparedStatement");
-    }
-
-    @Override
-    public long executeLargeUpdate(String sql)
-            throws SQLException
-    {
-        throw new SQLException("This method cannot be called on PreparedStatement");
-    }
-
-    @Override
-    public long executeLargeUpdate(String sql, int autoGeneratedKeys)
-            throws SQLException
-    {
-        throw new SQLException("This method cannot be called on PreparedStatement");
-    }
-
-    @Override
-    public long executeLargeUpdate(String sql, int[] columnIndexes)
-            throws SQLException
-    {
-        throw new SQLException("This method cannot be called on PreparedStatement");
-    }
-
-    @Override
-    public long executeLargeUpdate(String sql, String[] columnNames)
-            throws SQLException
-    {
-        throw new SQLException("This method cannot be called on PreparedStatement");
-    }
-
-    @Override
-    public boolean execute(String sql)
-            throws SQLException
-    {
-        throw new SQLException("This method cannot be called on PreparedStatement");
-    }
-
-    @Override
-    public boolean execute(String sql, int autoGeneratedKeys)
-            throws SQLException
-    {
-        throw new SQLException("This method cannot be called on PreparedStatement");
-    }
-
-    @Override
-    public boolean execute(String sql, int[] columnIndexes)
-            throws SQLException
-    {
-        throw new SQLException("This method cannot be called on PreparedStatement");
-    }
-
-    @Override
-    public boolean execute(String sql, String[] columnNames)
-            throws SQLException
-    {
-        throw new SQLException("This method cannot be called on PreparedStatement");
-    }
-
-    @Override
-    public void addBatch(String sql)
-            throws SQLException
-    {
-        throw new SQLException("This method cannot be called on PreparedStatement");
-    }
-
-    private void setParameter(int parameterIndex, String type, String value)
-            throws SQLException
-    {
-        if (parameterIndex < 1) {
-            throw new SQLException("Parameter index out of bounds: " + parameterIndex);
-        }
-        parameters.put(parameterIndex - 1, new Params(type, value));
-    }
-
-    //
-    // Convert a hashMap of Params to a list of QueryParameters
-    private List<QueryParameter> convertParameters() throws SQLException {
-      List<QueryParameter> values = new ArrayList<>();
-      for (int index = 0; index < parameters.size(); index++) {
-        if (!parameters.containsKey(index)) {
-          throw new SQLException("No value specified for parameter " + (index + 1));
-        }
-        Params params = parameters.get(index);
-        // do not specify the names of the parameters, just fill them up in the right
-        // order, the rockset service will automatically take them as positional
-        // parameters.
-        values.add(new QueryParameter()
-                   .type(params.type)
-                   .value(params.value));
-      }
-      return values;
-    }
-
-    private boolean getExecuteSql() throws SQLException {
-      boolean ret =  super.executeWithParams(originalSql, convertParameters());
-
-      // increment counter to indicate the number of times this query was
-      // successfully executed.
-      if (ret) {
-        executeCount.incrementAndGet();
-      }
-      return ret;
-    }
-
-    private static String typedNull(int targetSqlType) throws SQLException {
-        switch (targetSqlType) {
-            case Types.BOOLEAN:
-            case Types.BIT:
-                return typedNull("BOOLEAN");
-            case Types.TINYINT:
-                return typedNull("TINYINT");
-            case Types.SMALLINT:
-                return typedNull("SMALLINT");
-            case Types.INTEGER:
-                return typedNull("INTEGER");
-            case Types.BIGINT:
-                return typedNull("BIGINT");
-            case Types.FLOAT:
-            case Types.REAL:
-                return typedNull("REAL");
-            case Types.DOUBLE:
-                return typedNull("DOUBLE");
-            case Types.DECIMAL:
-            case Types.NUMERIC:
-                return typedNull("DECIMAL");
-            case Types.CHAR:
-            case Types.NCHAR:
-                return typedNull("CHAR");
-            case Types.VARCHAR:
-            case Types.NVARCHAR:
-            case Types.LONGVARCHAR:
-            case Types.LONGNVARCHAR:
-            case Types.CLOB:
-            case Types.NCLOB:
-                return typedNull("VARCHAR");
-            case Types.BINARY:
-            case Types.VARBINARY:
-            case Types.LONGVARBINARY:
-            case Types.BLOB:
-                return typedNull("VARBINARY");
-            case Types.DATE:
-                return typedNull("DATE");
-            case Types.TIME:
-                return typedNull("TIME");
-            case Types.TIMESTAMP:
-                return typedNull("TIMESTAMP");
-            // TODO Types.TIME_WITH_TIMEZONE
-            // TODO Types.TIMESTAMP_WITH_TIMEZONE
-            case Types.NULL:
-                return "NULL";
-        }
-        throw new SQLException("Unsupported target SQL type: " + targetSqlType);
-    }
-
-    private static String typedNull(String type) {
-        return format("CAST(NULL AS %s)", type);
-    }
+  private static String typedNull(String type) {
+    return format("CAST(NULL AS %s)", type);
+  }
 }

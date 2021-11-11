@@ -10,10 +10,8 @@ import com.fasterxml.jackson.databind.node.NullNode;
 import com.fasterxml.jackson.databind.node.NumericNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import com.google.common.collect.ImmutableMap;
-
 import com.rockset.client.model.QueryFieldType;
 import com.rockset.client.model.QueryResponse;
-
 import java.io.InputStream;
 import java.io.Reader;
 import java.math.BigDecimal;
@@ -45,14 +43,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TimeZone;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
-
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -61,8 +58,7 @@ import org.joda.time.format.ISODateTimeFormat;
 public class RocksetResultSet implements ResultSet {
 
   static final DateTimeFormatter DATE_FORMATTER = ISODateTimeFormat.date();
-  static final DateTimeFormatter TIME_FORMATTER = DateTimeFormat.forPattern(
-          "HH:mm:ss.SSS");
+  static final DateTimeFormatter TIME_FORMATTER = DateTimeFormat.forPattern("HH:mm:ss.SSS");
   static final DateTimeFormatter TIMESTAMP_FORMATTER =
       DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS");
 
@@ -116,9 +112,17 @@ public class RocksetResultSet implements ResultSet {
     if (debugLogs) {
       int myid = queryId.getAndIncrement();
       this.prefix = String.format("RocksetResultSet[%d] ", myid);
-      log("RocksetResultSet " + "'" + queryStr + "'" + " id = " + myid
-          + " created with numrows = " + this.totalRows
-          + " " + this.resultSetMetaData.toString());
+      log(
+          "RocksetResultSet "
+              + "'"
+              + queryStr
+              + "'"
+              + " id = "
+              + myid
+              + " created with numrows = "
+              + this.totalRows
+              + " "
+              + this.resultSetMetaData.toString());
     } else {
       this.prefix = "";
     }
@@ -136,9 +140,15 @@ public class RocksetResultSet implements ResultSet {
     if (debugLogs) {
       int myid = queryId.getAndIncrement();
       this.prefix = String.format("RocksetResultSet[%d] ", myid);
-      log("RocksetResultSet " + "'DescribeQuery'" + " id = " + myid
-          + " created with numrows = " + this.totalRows
-          + " " + this.resultSetMetaData.toString());
+      log(
+          "RocksetResultSet "
+              + "'DescribeQuery'"
+              + " id = "
+              + myid
+              + " created with numrows = "
+              + this.totalRows
+              + " "
+              + this.resultSetMetaData.toString());
     } else {
       this.prefix = "";
     }
@@ -149,12 +159,20 @@ public class RocksetResultSet implements ResultSet {
     checkOpen();
     rowIndex.getAndIncrement();
     if (rowIndex.get() >= this.totalRows) {
-      log(prefix + " Thread " + Thread.currentThread().getName()
-              + " no more data " + rowIndex.get());
+      log(
+          prefix
+              + " Thread "
+              + Thread.currentThread().getName()
+              + " no more data "
+              + rowIndex.get());
       return false;
     }
-    log(prefix + " Thread " + Thread.currentThread().getName()
-            + " positioned at " + rowIndex.get());
+    log(
+        prefix
+            + " Thread "
+            + Thread.currentThread().getName()
+            + " positioned at "
+            + rowIndex.get());
     return true;
   }
 
@@ -176,8 +194,7 @@ public class RocksetResultSet implements ResultSet {
     log(prefix + "columnIndex getString " + columnIndex);
     JsonNode value = column(columnIndex);
     String ret = (value != null) ? value.asText() : null;
-    log(prefix + "columnIndex getString " + columnIndex +
-            " returning " + ret);
+    log(prefix + "columnIndex getString " + columnIndex + " returning " + ret);
     return ret;
   }
 
@@ -203,18 +220,16 @@ public class RocksetResultSet implements ResultSet {
   @Override
   public int getInt(int columnIndex) throws SQLException {
     log(prefix + "columnIndex getInt " + columnIndex);
-    int ret =  toNumber(column(columnIndex)).intValue();
-    log(prefix + "columnIndex getInt " + columnIndex +
-            " returning " + Integer.toString(ret));
+    int ret = toNumber(column(columnIndex)).intValue();
+    log(prefix + "columnIndex getInt " + columnIndex + " returning " + Integer.toString(ret));
     return ret;
   }
 
   @Override
   public long getLong(int columnIndex) throws SQLException {
     log(prefix + "columnIndex getLong " + columnIndex);
-    long ret =  toNumber(column(columnIndex)).longValue();
-    log(prefix + "columnIndex getLong " + columnIndex +
-            " returning " + Long.toString(ret));
+    long ret = toNumber(column(columnIndex)).longValue();
+    log(prefix + "columnIndex getLong " + columnIndex + " returning " + Long.toString(ret));
     return ret;
   }
 
@@ -227,9 +242,8 @@ public class RocksetResultSet implements ResultSet {
   @Override
   public double getDouble(int columnIndex) throws SQLException {
     log(prefix + "columnIndex getDouble " + columnIndex);
-    double ret =  toNumber(column(columnIndex)).doubleValue();
-    log(prefix + "columnIndex getDouble " + columnIndex +
-            " returning " + Double.toString(ret));
+    double ret = toNumber(column(columnIndex)).doubleValue();
+    log(prefix + "columnIndex getDouble " + columnIndex + " returning " + Double.toString(ret));
     return ret;
   }
 
@@ -249,9 +263,11 @@ public class RocksetResultSet implements ResultSet {
     try {
       return column(columnIndex).binaryValue();
     } catch (Exception e) {
-      throw new SQLException("Error processing getBytes for column index "
-                             + columnIndex
-                             + " exception " + e.getMessage());
+      throw new SQLException(
+          "Error processing getBytes for column index "
+              + columnIndex
+              + " exception "
+              + e.getMessage());
     }
   }
 
@@ -261,8 +277,7 @@ public class RocksetResultSet implements ResultSet {
     return getDate(columnIndex, sessionTimeZone);
   }
 
-  private Date getDate(int columnIndex, DateTimeZone localTimeZone)
-      throws SQLException {
+  private Date getDate(int columnIndex, DateTimeZone localTimeZone) throws SQLException {
     log(prefix + "columnIndex getDate " + columnIndex);
     JsonNode value = column(columnIndex);
     if (value == null || value.get("value") == null) {
@@ -369,9 +384,11 @@ public class RocksetResultSet implements ResultSet {
       log(prefix + "getBytes " + columnLabel);
       return column(columnLabel).binaryValue();
     } catch (Exception e) {
-      throw new SQLException("Error processing getBytes for column label "
-                             + columnLabel
-                             + " exception " + e.getMessage());
+      throw new SQLException(
+          "Error processing getBytes for column label "
+              + columnLabel
+              + " exception "
+              + e.getMessage());
     }
   }
 
@@ -453,8 +470,7 @@ public class RocksetResultSet implements ResultSet {
       default:
         // XXX TODO
     }
-    log(prefix + "getObject columnIndex " + columnIndex +
-            " no Type " + sqlType);
+    log(prefix + "getObject columnIndex " + columnIndex + " no Type " + sqlType);
     return column(columnIndex);
   }
 
@@ -701,44 +717,37 @@ public class RocksetResultSet implements ResultSet {
   }
 
   @Override
-  public void updateAsciiStream(int columnIndex, InputStream x, int length)
-      throws SQLException {
+  public void updateAsciiStream(int columnIndex, InputStream x, int length) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateAsciiStream");
   }
 
   @Override
-  public void updateBinaryStream(int columnIndex, InputStream x, int length)
-      throws SQLException {
+  public void updateBinaryStream(int columnIndex, InputStream x, int length) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateBinaryStream");
   }
 
   @Override
-  public void updateCharacterStream(int columnIndex, Reader x, int length)
-      throws SQLException {
+  public void updateCharacterStream(int columnIndex, Reader x, int length) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateCharacterStream");
   }
 
   @Override
-  public void updateObject(int columnIndex, Object x, int scaleOrLength)
-      throws SQLException {
+  public void updateObject(int columnIndex, Object x, int scaleOrLength) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateObject");
   }
 
   @Override
-  public void updateObject(int columnIndex, Object x)
-      throws SQLException {
+  public void updateObject(int columnIndex, Object x) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateObject");
   }
 
   @Override
-  public void updateNull(String columnLabel)
-      throws SQLException {
+  public void updateNull(String columnLabel) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateNull");
   }
 
   @Override
-  public void updateBoolean(String columnLabel, boolean x)
-      throws SQLException {
+  public void updateBoolean(String columnLabel, boolean x) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateBoolean");
   }
 
@@ -803,8 +812,7 @@ public class RocksetResultSet implements ResultSet {
   }
 
   @Override
-  public void updateAsciiStream(String columnLabel, InputStream x, int length)
-      throws SQLException {
+  public void updateAsciiStream(String columnLabel, InputStream x, int length) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateAsciiStream");
   }
 
@@ -821,20 +829,17 @@ public class RocksetResultSet implements ResultSet {
   }
 
   @Override
-  public void updateObject(String columnLabel, Object x, int scaleOrLength)
-      throws SQLException {
+  public void updateObject(String columnLabel, Object x, int scaleOrLength) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateObject");
   }
 
   @Override
-  public void updateObject(String columnLabel, Object x)
-      throws SQLException {
+  public void updateObject(String columnLabel, Object x) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateObject");
   }
 
   @Override
-  public void insertRow()
-      throws SQLException {
+  public void insertRow() throws SQLException {
     throw new SQLFeatureNotSupportedException("insertRow");
   }
 
@@ -877,10 +882,8 @@ public class RocksetResultSet implements ResultSet {
   }
 
   @Override
-  public Object getObject(int columnIndex, Map<String, Class<?>> map)
-      throws SQLException {
-    log(prefix + "getObject with column index "
-        + columnIndex);
+  public Object getObject(int columnIndex, Map<String, Class<?>> map) throws SQLException {
+    log(prefix + "getObject with column index " + columnIndex);
     throw new SQLFeatureNotSupportedException("getObject");
   }
 
@@ -918,8 +921,7 @@ public class RocksetResultSet implements ResultSet {
   }
 
   @Override
-  public Object getObject(String columnLabel, Map<String, Class<?>> map)
-      throws SQLException {
+  public Object getObject(String columnLabel, Map<String, Class<?>> map) throws SQLException {
     log(prefix + "getObject columnLabel " + columnLabel);
     throw new SQLFeatureNotSupportedException("getObject");
   }
@@ -1130,8 +1132,7 @@ public class RocksetResultSet implements ResultSet {
   }
 
   @Override
-  public void updateNCharacterStream(int columnIndex, Reader x, long length)
-      throws SQLException {
+  public void updateNCharacterStream(int columnIndex, Reader x, long length) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateNCharacterStream");
   }
 
@@ -1142,20 +1143,17 @@ public class RocksetResultSet implements ResultSet {
   }
 
   @Override
-  public void updateAsciiStream(int columnIndex, InputStream x, long length)
-      throws SQLException {
+  public void updateAsciiStream(int columnIndex, InputStream x, long length) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateAsciiStream");
   }
 
   @Override
-  public void updateBinaryStream(int columnIndex, InputStream x, long length)
-      throws SQLException {
+  public void updateBinaryStream(int columnIndex, InputStream x, long length) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateBinaryStream");
   }
 
   @Override
-  public void updateCharacterStream(int columnIndex, Reader x, long length)
-      throws SQLException {
+  public void updateCharacterStream(int columnIndex, Reader x, long length) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateCharacterStream");
   }
 
@@ -1190,129 +1188,108 @@ public class RocksetResultSet implements ResultSet {
   }
 
   @Override
-  public void updateClob(int columnIndex, Reader reader, long length)
-      throws SQLException {
+  public void updateClob(int columnIndex, Reader reader, long length) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateClob");
   }
 
   @Override
-  public void updateClob(String columnLabel, Reader reader, long length)
-      throws SQLException {
+  public void updateClob(String columnLabel, Reader reader, long length) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateClob");
   }
 
   @Override
-  public void updateNClob(int columnIndex, Reader reader, long length)
-      throws SQLException {
+  public void updateNClob(int columnIndex, Reader reader, long length) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateNClob");
   }
 
   @Override
-  public void updateNClob(String columnLabel, Reader reader, long length)
-      throws SQLException {
+  public void updateNClob(String columnLabel, Reader reader, long length) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateNClob");
   }
 
   @Override
-  public void updateNCharacterStream(int columnIndex, Reader x)
-      throws SQLException {
+  public void updateNCharacterStream(int columnIndex, Reader x) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateNCharacterStream");
   }
 
   @Override
-  public void updateNCharacterStream(String columnLabel, Reader reader)
-      throws SQLException {
+  public void updateNCharacterStream(String columnLabel, Reader reader) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateNCharacterStream");
   }
 
   @Override
-  public void updateAsciiStream(int columnIndex, InputStream x)
-      throws SQLException {
+  public void updateAsciiStream(int columnIndex, InputStream x) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateAsciiStream");
   }
 
   @Override
-  public void updateBinaryStream(int columnIndex, InputStream x)
-      throws SQLException {
+  public void updateBinaryStream(int columnIndex, InputStream x) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateBinaryStream");
   }
 
   @Override
-  public void updateCharacterStream(int columnIndex, Reader x)
-      throws SQLException {
+  public void updateCharacterStream(int columnIndex, Reader x) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateCharacterStream");
   }
 
   @Override
-  public void updateAsciiStream(String columnLabel, InputStream x)
-      throws SQLException {
+  public void updateAsciiStream(String columnLabel, InputStream x) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateAsciiStream");
   }
 
   @Override
-  public void updateBinaryStream(String columnLabel, InputStream x)
-      throws SQLException {
+  public void updateBinaryStream(String columnLabel, InputStream x) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateBinaryStream");
   }
 
   @Override
-  public void updateCharacterStream(String columnLabel, Reader reader)
-      throws SQLException {
+  public void updateCharacterStream(String columnLabel, Reader reader) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateCharacterStream");
   }
 
   @Override
-  public void updateBlob(int columnIndex, InputStream inputStream)
-      throws SQLException {
+  public void updateBlob(int columnIndex, InputStream inputStream) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateBlob");
   }
 
   @Override
-  public void updateBlob(String columnLabel, InputStream inputStream)
-      throws SQLException {
+  public void updateBlob(String columnLabel, InputStream inputStream) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateBlob");
   }
 
   @Override
-  public void updateClob(int columnIndex, Reader reader)
-      throws SQLException {
+  public void updateClob(int columnIndex, Reader reader) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateClob");
   }
 
   @Override
-  public void updateClob(String columnLabel, Reader reader)
-      throws SQLException {
+  public void updateClob(String columnLabel, Reader reader) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateClob");
   }
 
   @Override
-  public void updateNClob(int columnIndex, Reader reader)
-      throws SQLException {
+  public void updateNClob(int columnIndex, Reader reader) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateNClob");
   }
 
   @Override
-  public void updateNClob(String columnLabel, Reader reader)
-      throws SQLException {
+  public void updateNClob(String columnLabel, Reader reader) throws SQLException {
     throw new SQLFeatureNotSupportedException("updateNClob");
   }
 
   @Override
-  public <T> T getObject(int columnIndex, Class<T> type)
-      throws SQLException {
+  public <T> T getObject(int columnIndex, Class<T> type) throws SQLException {
     throw new SQLFeatureNotSupportedException("getObject");
   }
 
   @Override
-  public <T> T getObject(String columnLabel, Class<T> type)
-      throws SQLException {
+  public <T> T getObject(String columnLabel, Class<T> type) throws SQLException {
     throw new SQLFeatureNotSupportedException("getObject");
   }
 
   @SuppressWarnings("unchecked")
   @Override
-  public <T> T unwrap(Class<T> iface)
-      throws SQLException {
+  public <T> T unwrap(Class<T> iface) throws SQLException {
     if (isWrapperFor(iface)) {
       return (T) this;
     }
@@ -1320,8 +1297,7 @@ public class RocksetResultSet implements ResultSet {
   }
 
   @Override
-  public boolean isWrapperFor(Class<?> iface)
-      throws SQLException {
+  public boolean isWrapperFor(Class<?> iface) throws SQLException {
     return iface.isInstance(this);
   }
 
@@ -1334,8 +1310,8 @@ public class RocksetResultSet implements ResultSet {
   private void checkValidRow() throws SQLException {
     int cur = rowIndex.get();
     if (cur >= this.totalRows) {
-      throw new SQLException("Not on a valid row "
-          + " current row " + cur + " total " + this.totalRows);
+      throw new SQLException(
+          "Not on a valid row " + " current row " + cur + " total " + this.totalRows);
     }
   }
 
@@ -1355,8 +1331,8 @@ public class RocksetResultSet implements ResultSet {
       wasNull.set((value == null) || (value instanceof NullNode));
       return value;
     } catch (Exception e) {
-      throw new SQLException("Error processing column index " + index
-          + " exception " + e.getMessage());
+      throw new SQLException(
+          "Error processing column index " + index + " exception " + e.getMessage());
     }
   }
 
@@ -1402,15 +1378,14 @@ public class RocksetResultSet implements ResultSet {
         throw new SQLException("Invalid time from server: " + time, e);
       }
     }
-    throw new IllegalArgumentException("Expected column to be a time type but is "
-            + columnInfo.getType());
+    throw new IllegalArgumentException(
+        "Expected column to be a time type but is " + columnInfo.getType());
   }
 
   // NOTE: This handles both SQL timestamps with timezones (aka Rockset timestamp type) and
   // SQL timestamps without timezones (aka Rockset datetime type). This is because in both cases
   // a JDBC client can call getTimestamp since the column type is timestamp.
-  private Timestamp getTimestamp(int columnIndex, DateTimeZone localTimeZone)
-      throws SQLException {
+  private Timestamp getTimestamp(int columnIndex, DateTimeZone localTimeZone) throws SQLException {
     log(prefix + "columnIndex getTimestamp " + columnIndex);
     JsonNode value = column(columnIndex);
     if (value == null) {
@@ -1427,20 +1402,20 @@ public class RocksetResultSet implements ResultSet {
       }
 
       try {
-        LocalDateTime dateTime = LocalDateTime.parse(value.get("value").asText(), DATETIME_PARSE_FORMAT);
+        LocalDateTime dateTime =
+            LocalDateTime.parse(value.get("value").asText(), DATETIME_PARSE_FORMAT);
         ZonedDateTime zonedDateTime = dateTime.atZone(ZoneId.of("UTC"));
         Instant instant = zonedDateTime.toInstant();
         return Timestamp.from(instant);
       } catch (Exception e) {
         throw new SQLException("Invalid datetime from server: " + value, e);
       }
-    }
-    else if (columnInfo.getType() == Column.ColumnTypes.TIMESTAMP) {
+    } else if (columnInfo.getType() == Column.ColumnTypes.TIMESTAMP) {
       if (value.asText().equals("null")) {
         wasNull.set(true);
         return null;
       }
-      
+
       try {
         LocalDateTime dateTime = LocalDateTime.parse(value.asText(), TIMESTAMP_PARSE_FORMAT);
         ZonedDateTime zonedDateTime = dateTime.atZone(ZoneId.of("UTC"));
@@ -1451,8 +1426,8 @@ public class RocksetResultSet implements ResultSet {
       }
     }
 
-    throw new IllegalArgumentException("Expected column to be a datetime/timestamp type but is "
-            + columnInfo.getType());
+    throw new IllegalArgumentException(
+        "Expected column to be a datetime/timestamp type but is " + columnInfo.getType());
   }
 
   private static Number toNumber(Object value) throws SQLException {
@@ -1460,10 +1435,10 @@ public class RocksetResultSet implements ResultSet {
       return 0;
     }
     if (value instanceof NumericNode) {
-      return (Number) (((NumericNode)value).doubleValue());
+      return (Number) (((NumericNode) value).doubleValue());
     }
     if (value instanceof BooleanNode) {
-      BooleanNode n = (BooleanNode)(value);
+      BooleanNode n = (BooleanNode) (value);
       return (Number) (n.asBoolean() ? 1 : 0);
     }
 
@@ -1494,76 +1469,69 @@ public class RocksetResultSet implements ResultSet {
 
     try {
       if (response.getResults().size() > 0) {
-          Set<String> fieldNames = new HashSet<>();
-          // Loop through all the rows to get the fields and (their first
-          // non-null) types.
-          for (int i = 0; i < response.getResults().size(); ++i) {
-            log("Extracting column information from record " + i + " in resultset");
-            Object onedoc = response.getResults().get(i);
-            JsonNode docRootNode = mapper.
-                readTree(mapper.writeValueAsString(onedoc));
+        Set<String> fieldNames = new HashSet<>();
+        // Loop through all the rows to get the fields and (their first
+        // non-null) types.
+        for (int i = 0; i < response.getResults().size(); ++i) {
+          log("Extracting column information from record " + i + " in resultset");
+          Object onedoc = response.getResults().get(i);
+          JsonNode docRootNode = mapper.readTree(mapper.writeValueAsString(onedoc));
 
-            Iterator<Map.Entry<String,JsonNode>> fields = docRootNode.fields();
-            while (fields.hasNext()) {
-                Map.Entry<String, JsonNode> field = fields.next();
-                String fieldName = field.getKey();
-                if (fieldNames.contains(fieldName)) {
-                    // This fieldname was already found to have a non-null type
-                    // in a previous record.
-                    continue;
-                }
-                JsonNode value = field.getValue();
-                Column.ColumnTypes type = Column.ColumnTypes.
-                    fromValue(value.getNodeType().toString());
-                // Skip over the fields with null type unless all values for that
-                // field are null
-                if (type.equals(Column.ColumnTypes.NULL) &&
-                    i != response.getResults().size() - 1) {
-                    continue;
-                }
-                if (type.equals(Column.ColumnTypes.STRING)) {
-                    java.time.format.DateTimeFormatter format = TIMESTAMP_PARSE_FORMAT;
-                    try {
-                        LocalDateTime.parse(value.asText(), format);
-                        type = Column.ColumnTypes.TIMESTAMP;
-                    } catch (DateTimeParseException e) {
-                    // ignore
-                    }
-                }
-                if (type.equals(Column.ColumnTypes.OBJECT)) {
-                    if (value.get("__rockset_type") != null) {
-                    type = Column.ColumnTypes.
-                        fromValue(value.get("__rockset_type").asText());
-                    }
-                }
-                log("getColumns::column name "+ fieldName + " type: " + type.toString());
-                Column c = new Column(fieldName, type);
-                out.add(c);
-                fieldNames.add(fieldName);
-             }
-        }
-      } else if (response.getColumnFields() != null &&
-                 response.getColumnFields().size() > 0) {
-          // If this is not a select star query, and has returned 0 rows.
-          // Extrapolate the fields from query response's getColumnFields
-          log("Extracting column information from explicit fields");
-          for (QueryFieldType field: response.getColumnFields()) {
-              Column.ColumnTypes valueType = Column.ColumnTypes.
-                                           fromValue(field.getType());
-              // If the server is not sending a valid type, then use a default type
-              if (valueType == null) {
-                  valueType = Column.ColumnTypes.STRING;
+          Iterator<Map.Entry<String, JsonNode>> fields = docRootNode.fields();
+          while (fields.hasNext()) {
+            Map.Entry<String, JsonNode> field = fields.next();
+            String fieldName = field.getKey();
+            if (fieldNames.contains(fieldName)) {
+              // This fieldname was already found to have a non-null type
+              // in a previous record.
+              continue;
+            }
+            JsonNode value = field.getValue();
+            Column.ColumnTypes type = Column.ColumnTypes.fromValue(value.getNodeType().toString());
+            // Skip over the fields with null type unless all values for that
+            // field are null
+            if (type.equals(Column.ColumnTypes.NULL) && i != response.getResults().size() - 1) {
+              continue;
+            }
+            if (type.equals(Column.ColumnTypes.STRING)) {
+              java.time.format.DateTimeFormatter format = TIMESTAMP_PARSE_FORMAT;
+              try {
+                LocalDateTime.parse(value.asText(), format);
+                type = Column.ColumnTypes.TIMESTAMP;
+              } catch (DateTimeParseException e) {
+                // ignore
               }
-              Column c = new Column(field.getName(), valueType);
-              out.add(c);
+            }
+            if (type.equals(Column.ColumnTypes.OBJECT)) {
+              if (value.get("__rockset_type") != null) {
+                type = Column.ColumnTypes.fromValue(value.get("__rockset_type").asText());
+              }
+            }
+            log("getColumns::column name " + fieldName + " type: " + type.toString());
+            Column c = new Column(fieldName, type);
+            out.add(c);
+            fieldNames.add(fieldName);
           }
+        }
+      } else if (response.getColumnFields() != null && response.getColumnFields().size() > 0) {
+        // If this is not a select star query, and has returned 0 rows.
+        // Extrapolate the fields from query response's getColumnFields
+        log("Extracting column information from explicit fields");
+        for (QueryFieldType field : response.getColumnFields()) {
+          Column.ColumnTypes valueType = Column.ColumnTypes.fromValue(field.getType());
+          // If the server is not sending a valid type, then use a default type
+          if (valueType == null) {
+            valueType = Column.ColumnTypes.STRING;
+          }
+          Column c = new Column(field.getName(), valueType);
+          out.add(c);
+        }
       }
       return out;
     } catch (Exception e) {
-        log("Error processing row to extract column info "
-            + " exception " + e.getMessage());
-        throw new SQLException("Error processing row to extract column info "
-          + " exception " + e.getMessage());
+      log("Error processing row to extract column info " + " exception " + e.getMessage());
+      throw new SQLException(
+          "Error processing row to extract column info " + " exception " + e.getMessage());
     }
   }
 

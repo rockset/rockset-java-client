@@ -7,9 +7,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import java.util.Properties;
-
 import org.testng.Assert;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
@@ -20,7 +18,7 @@ import org.testng.annotations.Test;
 public class FirstExample {
 
   // JDBC driver name and database URL
-  static final String JDBC_DRIVER = "com.rockset.jdbc.RocksetDriver";  
+  static final String JDBC_DRIVER = "com.rockset.jdbc.RocksetDriver";
   static final String DB_URL = "jdbc:rockset://";
 
   // store credentials for accessing rockset service
@@ -32,14 +30,13 @@ public class FirstExample {
     String apiServer = System.getenv("ROCKSET_APISERVER");
     if (apiKey == null || apiServer == null) {
       throw new Exception(
-              "To run unit tests, please set ROCKSET_APIKEY and ROCKSET_APISERVER " +
-                      "environment variables.");
+          "To run unit tests, please set ROCKSET_APIKEY and ROCKSET_APISERVER "
+              + "environment variables.");
     }
     property = new Properties();
     property.setProperty("apiKey", apiKey);
-   
-    if(apiServer.toLowerCase().contains("https://"))
-     apiServer = apiServer.replace("https://","");
+
+    if (apiServer.toLowerCase().contains("https://")) apiServer = apiServer.replace("https://", "");
     property.setProperty("apiServer", apiServer);
 
     // Register JDBC driver
@@ -150,9 +147,9 @@ public class FirstExample {
       conn = DriverManager.getConnection(DB_URL, property);
 
       DatabaseMetaData meta = conn.getMetaData();
-      ResultSet rs = meta.getProcedures(RocksetConnection.DEFAULT_CATALOG,
-                     RocksetConnection.DEFAULT_SCHEMA,
-                     "*");
+      ResultSet rs =
+          meta.getProcedures(
+              RocksetConnection.DEFAULT_CATALOG, RocksetConnection.DEFAULT_SCHEMA, "*");
       int c1 = rs.findColumn("PROCEDURE_CAT");
       int c2 = rs.findColumn("PROCEDURE_SCHEM");
       int c3 = rs.findColumn("PROCEDURE_NAME");
@@ -185,9 +182,9 @@ public class FirstExample {
       conn = DriverManager.getConnection(DB_URL, property);
 
       DatabaseMetaData meta = conn.getMetaData();
-      ResultSet rs = meta.getProcedureColumns(RocksetConnection.DEFAULT_CATALOG,
-                     RocksetConnection.DEFAULT_SCHEMA,
-                     "*", "*");
+      ResultSet rs =
+          meta.getProcedureColumns(
+              RocksetConnection.DEFAULT_CATALOG, RocksetConnection.DEFAULT_SCHEMA, "*", "*");
       int c1 = rs.findColumn("PROCEDURE_CAT");
       int c2 = rs.findColumn("PROCEDURE_SCHEM");
       int c3 = rs.findColumn("PROCEDURE_NAME");
@@ -220,9 +217,9 @@ public class FirstExample {
       conn = DriverManager.getConnection(DB_URL, property);
 
       DatabaseMetaData meta = conn.getMetaData();
-      ResultSet rs = meta.getUDTs(RocksetConnection.DEFAULT_CATALOG,
-                     RocksetConnection.DEFAULT_SCHEMA,
-                     "*", null);
+      ResultSet rs =
+          meta.getUDTs(
+              RocksetConnection.DEFAULT_CATALOG, RocksetConnection.DEFAULT_SCHEMA, "*", null);
       int c1 = rs.findColumn("TYPE_CAT");
       int c2 = rs.findColumn("TYPE_SCHEM");
       int c3 = rs.findColumn("TYPE_NAME");
@@ -256,9 +253,9 @@ public class FirstExample {
       conn = DriverManager.getConnection(DB_URL, property);
 
       DatabaseMetaData meta = conn.getMetaData();
-      ResultSet rs = meta.getSuperTypes(RocksetConnection.DEFAULT_CATALOG,
-                     RocksetConnection.DEFAULT_SCHEMA,
-                     "*");
+      ResultSet rs =
+          meta.getSuperTypes(
+              RocksetConnection.DEFAULT_CATALOG, RocksetConnection.DEFAULT_SCHEMA, "*");
       int c1 = rs.findColumn("TYPE_CAT");
       int c2 = rs.findColumn("TYPE_SCHEM");
       int c3 = rs.findColumn("TYPE_NAME");
@@ -291,9 +288,9 @@ public class FirstExample {
       conn = DriverManager.getConnection(DB_URL, property);
 
       DatabaseMetaData meta = conn.getMetaData();
-      ResultSet rs = meta.getSuperTables(RocksetConnection.DEFAULT_CATALOG,
-                     RocksetConnection.DEFAULT_SCHEMA,
-                     "*");
+      ResultSet rs =
+          meta.getSuperTables(
+              RocksetConnection.DEFAULT_CATALOG, RocksetConnection.DEFAULT_SCHEMA, "*");
       int c1 = rs.findColumn("TABLE_CAT");
       int c2 = rs.findColumn("TABLE_SCHEM");
       int c3 = rs.findColumn("TABLE_NAME");
@@ -324,9 +321,9 @@ public class FirstExample {
       conn = DriverManager.getConnection(DB_URL, property);
 
       DatabaseMetaData meta = conn.getMetaData();
-      ResultSet rs = meta.getAttributes(RocksetConnection.DEFAULT_CATALOG,
-                     RocksetConnection.DEFAULT_SCHEMA,
-                     "*", "*");
+      ResultSet rs =
+          meta.getAttributes(
+              RocksetConnection.DEFAULT_CATALOG, RocksetConnection.DEFAULT_SCHEMA, "*", "*");
       int c1 = rs.findColumn("TYPE_CAT");
       int c2 = rs.findColumn("TYPE_SCHEM");
       int c3 = rs.findColumn("TYPE_NAME");
@@ -357,9 +354,9 @@ public class FirstExample {
       conn = DriverManager.getConnection(DB_URL, property);
 
       DatabaseMetaData meta = conn.getMetaData();
-      ResultSet rs = meta.getPseudoColumns(RocksetConnection.DEFAULT_CATALOG,
-                     RocksetConnection.DEFAULT_SCHEMA,
-                     "*", "*");
+      ResultSet rs =
+          meta.getPseudoColumns(
+              RocksetConnection.DEFAULT_CATALOG, RocksetConnection.DEFAULT_SCHEMA, "*", "*");
       int c1 = rs.findColumn("TABLE_CAT");
       int c2 = rs.findColumn("TABLE_SCHEM");
       int c3 = rs.findColumn("TABLE_NAME");
@@ -395,8 +392,7 @@ public class FirstExample {
     Statement stmt = null;
     String tableName = System.getenv("ROCKSET_TABLENAME");
     if (tableName == null) {
-      throw new Exception("If you want to run unit tests "
-              + "Please set ROCKSET_TABLENAME");
+      throw new Exception("If you want to run unit tests " + "Please set ROCKSET_TABLENAME");
     }
     try {
       // Open a connection
@@ -406,21 +402,18 @@ public class FirstExample {
       System.out.println("Creating statement 1...");
       stmt = conn.createStatement();
       String sql;
-      sql = "select _id, created_at, founded_year  from "
-              + tableName + " limit 1";
+      sql = "select _id, created_at, founded_year  from " + tableName + " limit 1";
       ResultSet rs = stmt.executeQuery(sql);
 
       // Extract data from result set
       while (rs.next()) {
-        //Retrieve by column name
+        // Retrieve by column name
         String createdAt = rs.getString("created_at");
         String id = rs.getString("_id");
         int year = rs.getInt("founded_year");
 
-        //Display values
-        System.out.println("ID: " + id
-                + " created_at: " + createdAt
-                + " year: " + year);
+        // Display values
+        System.out.println("ID: " + id + " created_at: " + createdAt + " year: " + year);
       }
       stmt.close();
       rs.close();
@@ -434,8 +427,7 @@ public class FirstExample {
       System.out.println("No. of columns : " + rsmd.getColumnCount());
       System.out.println("FIELD\t\tTYPE");
       for (int i = 0; i < rsmd.getColumnCount(); i++) {
-        System.out.println(rsmd.getColumnName(i + 1) + "\t\t"
-                + rsmd.getColumnTypeName(i + 1));
+        System.out.println(rsmd.getColumnName(i + 1) + "\t\t" + rsmd.getColumnTypeName(i + 1));
       }
 
       // Clean-up environment
@@ -454,14 +446,14 @@ public class FirstExample {
     try {
       if (stmt != null) {
         stmt.close();
-      } 
+      }
     } catch (SQLException se2) {
       // nothing we can do
     }
     try {
       if (conn != null) {
         conn.close();
-      } 
+      }
     } catch (SQLException se) {
       se.printStackTrace();
     }

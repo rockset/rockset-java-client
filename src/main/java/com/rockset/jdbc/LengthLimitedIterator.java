@@ -7,8 +7,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * This {@code Iterator} is like Guava's {@code Iterators.limit()} but
- * uses a {@code long} limit instead of {@code int}.
+ * This {@code Iterator} is like Guava's {@code Iterators.limit()} but uses a {@code long} limit
+ * instead of {@code int}.
  */
 final class LengthLimitedIterator<T> implements Iterator<T> {
   private final Iterator<T> iterator;

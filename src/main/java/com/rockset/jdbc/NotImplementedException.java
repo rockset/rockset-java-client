@@ -4,9 +4,7 @@ import static java.lang.String.format;
 
 import java.sql.SQLNonTransientException;
 
-/**
- * Thrown when a required JDBC method is not yet implemented.
- */
+/** Thrown when a required JDBC method is not yet implemented. */
 class NotImplementedException extends SQLNonTransientException {
   NotImplementedException(String reason) {
     super(reason);

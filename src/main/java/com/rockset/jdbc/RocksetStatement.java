@@ -5,10 +5,8 @@ import static java.util.Objects.requireNonNull;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.primitives.Ints;
-
 import com.rockset.client.model.QueryParameter;
 import com.rockset.client.model.QueryResponse;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -144,8 +142,7 @@ public class RocksetStatement implements Statement {
     return executeWithParams(sql, null);
   }
 
-  protected boolean executeWithParams(String sql, List<QueryParameter> params)
-      throws SQLException {
+  protected boolean executeWithParams(String sql, List<QueryParameter> params) throws SQLException {
     clearCurrentResults();
     checkOpen();
 
@@ -153,16 +150,14 @@ public class RocksetStatement implements Statement {
     try {
       // Make query to rockset service. We do not use queryTimeoutSeconds
       // because rockset queries do not yet have a client-side timeout.
-      QueryResponse resp = connection().startQuery(sql, params,
-              getStatementSessionProperties());
+      QueryResponse resp = connection().startQuery(sql, params, getStatementSessionProperties());
 
       // store resuts in memory
       resultSet = new RocksetResultSet(sql, resp, maxRows.get());
       currentResult.set(resultSet);
       return true;
     } catch (RuntimeException e) {
-      String msg = "Error executing query '" + sql + "'"
-                   + " error =  " + e.getMessage();
+      String msg = "Error executing query '" + sql + "'" + " error =  " + e.getMessage();
       RocksetDriver.log(msg);
       throw new SQLException(msg, e);
     } catch (Exception e) {
@@ -414,8 +409,7 @@ public class RocksetStatement implements Statement {
   private Map<String, String> getStatementSessionProperties() {
     ImmutableMap.Builder<String, String> sessionProperties = ImmutableMap.builder();
     if (queryTimeoutSeconds.get() > 0) {
-      sessionProperties.put("query_max_run_time",
-              queryTimeoutSeconds.get() + "s");
+      sessionProperties.put("query_max_run_time", queryTimeoutSeconds.get() + "s");
     }
     return sessionProperties.build();
   }

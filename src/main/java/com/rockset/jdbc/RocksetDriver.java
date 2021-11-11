@@ -4,7 +4,6 @@ import static com.google.common.base.Strings.nullToEmpty;
 import static java.lang.Integer.parseInt;
 
 import com.google.common.base.Throwables;
-
 import java.io.BufferedWriter;
 import java.io.Closeable;
 import java.io.FileWriter;
@@ -67,8 +66,8 @@ public class RocksetDriver implements Driver, Closeable {
     log("Entry: Connect " + url);
     if (!acceptsURL(url)) {
       log("Exit: Connect bad url" + url);
-      throw new SQLException("Bad url format " + url
-              + ". Url should start with " + ROCKSET_DRIVER_URL_START + ".");
+      throw new SQLException(
+          "Bad url format " + url + ". Url should start with " + ROCKSET_DRIVER_URL_START + ".");
     }
     URI uri = null;
     try {
@@ -99,8 +98,7 @@ public class RocksetDriver implements Driver, Closeable {
   }
 
   @Override
-  public DriverPropertyInfo[] getPropertyInfo(String url, Properties info)
-      throws SQLException {
+  public DriverPropertyInfo[] getPropertyInfo(String url, Properties info) throws SQLException {
     log("Entry: getPropertyInfo " + url);
     Properties properties = new RocksetDriverUri(url, info).getProperties();
 
@@ -128,8 +126,7 @@ public class RocksetDriver implements Driver, Closeable {
   }
 
   @Override
-  public java.util.logging.Logger getParentLogger()
-      throws SQLFeatureNotSupportedException {
+  public java.util.logging.Logger getParentLogger() throws SQLFeatureNotSupportedException {
     throw new SQLFeatureNotSupportedException();
   }
 
@@ -148,7 +145,7 @@ public class RocksetDriver implements Driver, Closeable {
       debugWriter.write(msg + "\n");
       debugWriter.flush();
     } catch (Exception e) {
-      System.out.println("Unable to log to file "  + logfile);
+      System.out.println("Unable to log to file " + logfile);
     }
   }
 }

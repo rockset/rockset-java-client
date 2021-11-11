@@ -4,13 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import com.rockset.client.model.QueryResponse;
-
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,8 +27,9 @@ class RocksetTable {
   final int fieldNameIndex = 1;
   final int fieldTypeIndex = 2;
 
-  public RocksetTable(String catalog, String schema, String tableNamePattern,
-                      QueryResponse response) throws SQLException {
+  public RocksetTable(
+      String catalog, String schema, String tableNamePattern, QueryResponse response)
+      throws SQLException {
     this.catalog = catalog;
     this.schema = schema;
     this.tableName = requireNonNull(tableNamePattern, "tableName is null");
@@ -53,8 +51,7 @@ class RocksetTable {
   //
   public ResultSet getColumns() throws Exception {
 
-    if (describe == null)
-    {
+    if (describe == null) {
       // convert the response into a ResultSet with four columns
       ArrayList<Column> incol = new ArrayList<Column>();
       incol.add(new Column("field", Column.ColumnTypes.ARRAY));
@@ -62,7 +59,7 @@ class RocksetTable {
       incol.add(new Column("occurrences", Column.ColumnTypes.NUMBER));
       incol.add(new Column("total", Column.ColumnTypes.NUMBER));
 
-      List<Object> fieldsDescription= response.getResults();
+      List<Object> fieldsDescription = response.getResults();
       describe = new RocksetResultSet(incol, fieldsDescription);
     }
 
@@ -124,16 +121,16 @@ class RocksetTable {
     List<Object> data = new ArrayList<Object>();
 
     int position = 0;
-    String fieldName ="";
+    String fieldName = "";
     String prevFieldName = "";
     List<JsonNode> fieldNameGroupedList = new ArrayList<JsonNode>();
     JsonNode docRootNodeOfNullDataType = null;
 
     while (describe.next()) {
       // The "field" tag has to be an array.
-      RocksetArray arr = (RocksetArray)describe.getObject("field");
+      RocksetArray arr = (RocksetArray) describe.getObject("field");
 
-      JsonNode[] nodes = (JsonNode[])arr.getArray(1, 1);
+      JsonNode[] nodes = (JsonNode[]) arr.getArray(1, 1);
       fieldName = nodes[0].asText();
 
       // If this is not a top-level field for an array, then ignore it
@@ -162,11 +159,11 @@ class RocksetTable {
 
       // Read the rockset type from the response. It can be one of
       // "int", "string", object", "array"
-      String rockType = ((JsonNode)describe.getObject("type")).asText();
+      String rockType = ((JsonNode) describe.getObject("type")).asText();
       int sqlType = java.sql.Types.OTHER;
       String sqlTypeName = "";
 
-      // map rockset types as defined in 
+      // map rockset types as defined in
       // https://github.com/rockset/rs/blob/master/cpp/compiler/util/types.cc#L11
 
       boolean isChar = false;
@@ -221,12 +218,19 @@ class RocksetTable {
         throw new Exception("Unknown rockset type " + rockType);
       }
 
-      String str = "{\"TABLE_CAT\": \"" + this.catalog + "\""
-                    + ", \"TABLE_SCHEM\": \"" + this.schema + "\""
-                    + ", \"TABLE_NAME\": \"" + tableName  + "\"";
-      str += ", \"COLUMN_NAME\": \"" + fieldName  + "\"";
+      String str =
+          "{\"TABLE_CAT\": \""
+              + this.catalog
+              + "\""
+              + ", \"TABLE_SCHEM\": \""
+              + this.schema
+              + "\""
+              + ", \"TABLE_NAME\": \""
+              + tableName
+              + "\"";
+      str += ", \"COLUMN_NAME\": \"" + fieldName + "\"";
       str += ", \"DATA_TYPE\": " + sqlType;
-      str += ", \"TYPE_NAME\": \"" + sqlTypeName  + "\"";
+      str += ", \"TYPE_NAME\": \"" + sqlTypeName + "\"";
       str += ", \"COLUMN_SIZE\": " + 255;
       str += ", \"DECIMAL_DIGITS\": " + (isNumber ? 2 : 0);
       str += ", \"NUM_PREC_RADIX\": " + 2;
@@ -243,37 +247,34 @@ class RocksetTable {
       str += ", \"IS_AUTOINCREMENT\": \"\"";
       str += ", \"IS_GENERATEDCOLUMN\": \"\"";
       str += " }";
-      
-      if(!fieldName.equals(prevFieldName))
-      {
-         docRootNodeOfNullDataType = null;
-         //Iterate docRootNode JsonNode list and add to data list with NULL datatype node as last.
-         for ( JsonNode docRootNode  : fieldNameGroupedList) {
-            if(docRootNode.get("DATA_TYPE").asInt()==Types.NULL)
-              docRootNodeOfNullDataType = docRootNode;
-            else
-              data.add(docRootNode);
-         }      
-         if(docRootNodeOfNullDataType!=null) data.add(docRootNodeOfNullDataType);
-   
-         prevFieldName = fieldName; 
-         fieldNameGroupedList.clear();
+
+      if (!fieldName.equals(prevFieldName)) {
+        docRootNodeOfNullDataType = null;
+        // Iterate docRootNode JsonNode list and add to data list with NULL datatype node as last.
+        for (JsonNode docRootNode : fieldNameGroupedList) {
+          if (docRootNode.get("DATA_TYPE").asInt() == Types.NULL)
+            docRootNodeOfNullDataType = docRootNode;
+          else data.add(docRootNode);
+        }
+        if (docRootNodeOfNullDataType != null) data.add(docRootNodeOfNullDataType);
+
+        prevFieldName = fieldName;
+        fieldNameGroupedList.clear();
       }
-      
+
       fieldNameGroupedList.add(mapper.readTree(str));
       position++;
     }
 
-    //Handle the last fieldName and when only one fieldName.
+    // Handle the last fieldName and when only one fieldName.
     docRootNodeOfNullDataType = null;
-    //Iterate docRootNode JsonNode list and add to data list with NULL datatype node as last.
-    for ( JsonNode docRootNode  : fieldNameGroupedList) {
-      if(docRootNode.get("DATA_TYPE").asInt()==Types.NULL)
+    // Iterate docRootNode JsonNode list and add to data list with NULL datatype node as last.
+    for (JsonNode docRootNode : fieldNameGroupedList) {
+      if (docRootNode.get("DATA_TYPE").asInt() == Types.NULL)
         docRootNodeOfNullDataType = docRootNode;
-      else
-        data.add(docRootNode);
-    }      
-    if(docRootNodeOfNullDataType!=null) data.add(docRootNodeOfNullDataType);
+      else data.add(docRootNode);
+    }
+    if (docRootNodeOfNullDataType != null) data.add(docRootNodeOfNullDataType);
 
     return new RocksetResultSet(columns, data);
   }
@@ -282,7 +283,7 @@ class RocksetTable {
     try {
       List<Object> results = resp.getResults();
       int i = 0;
-      for (Object onerow: results) {
+      for (Object onerow : results) {
         System.err.println(String.format("[%d] %s", i, mapper.writeValueAsString(onerow)));
         i++;
       }

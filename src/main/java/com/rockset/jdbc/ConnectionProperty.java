@@ -21,8 +21,9 @@ interface ConnectionProperty<T> {
   Optional<T> getValue(Properties properties) throws SQLException;
 
   default T getRequiredValue(Properties properties) throws SQLException {
-    return getValue(properties).orElseThrow(() ->
-        new SQLException(format("Connection property '%s' is required", getKey())));
+    return getValue(properties)
+        .orElseThrow(
+            () -> new SQLException(format("Connection property '%s' is required", getKey())));
   }
 
   void validate(Properties properties) throws SQLException;
