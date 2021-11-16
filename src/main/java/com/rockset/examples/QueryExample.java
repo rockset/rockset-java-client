@@ -11,7 +11,7 @@ public class QueryExample {
         new QueryRequest().sql(new QueryRequestSql().query("SELECT * FROM \"_events\" LIMIT 10"));
 
     try {
-      QueryResponse response = rs.query(request);
+      QueryResponse response = rs.queries.query(request);
       System.out.println(response);
     } catch (Exception e) {
       e.printStackTrace();

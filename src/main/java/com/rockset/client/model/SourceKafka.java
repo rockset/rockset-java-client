@@ -13,20 +13,77 @@
 package com.rockset.client.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.Objects;
 
 /** SourceKafka */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class SourceKafka {
   @SerializedName("kafka_topic_name")
   private String kafkaTopicName = null;
 
   @SerializedName("status")
   private StatusKafka status = null;
+
+  @SerializedName("use_v3")
+  private Boolean useV3 = null;
+
+  /** Gets or Sets offsetResetPolicy */
+  @JsonAdapter(OffsetResetPolicyEnum.Adapter.class)
+  public enum OffsetResetPolicyEnum {
+    LATEST("LATEST"),
+
+    EARLIEST("EARLIEST");
+
+    private String value;
+
+    OffsetResetPolicyEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static OffsetResetPolicyEnum fromValue(String text) {
+      for (OffsetResetPolicyEnum b : OffsetResetPolicyEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+
+    public static class Adapter extends TypeAdapter<OffsetResetPolicyEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final OffsetResetPolicyEnum enumeration)
+          throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public OffsetResetPolicyEnum read(final JsonReader jsonReader) throws IOException {
+        String value = jsonReader.nextString();
+        return OffsetResetPolicyEnum.fromValue(String.valueOf(value));
+      }
+    }
+  }
+
+  @SerializedName("offset_reset_policy")
+  private OffsetResetPolicyEnum offsetResetPolicy = null;
 
   public SourceKafka kafkaTopicName(String kafkaTopicName) {
     this.kafkaTopicName = kafkaTopicName;
@@ -62,6 +119,46 @@ public class SourceKafka {
     return status;
   }
 
+  public SourceKafka useV3(Boolean useV3) {
+    this.useV3 = useV3;
+    return this;
+  }
+
+  /**
+   * Get useV3
+   *
+   * @return useV3
+   */
+  @JsonProperty("use_v3")
+  @ApiModelProperty(value = "")
+  public Boolean isUseV3() {
+    return useV3;
+  }
+
+  public void setUseV3(Boolean useV3) {
+    this.useV3 = useV3;
+  }
+
+  public SourceKafka offsetResetPolicy(OffsetResetPolicyEnum offsetResetPolicy) {
+    this.offsetResetPolicy = offsetResetPolicy;
+    return this;
+  }
+
+  /**
+   * Get offsetResetPolicy
+   *
+   * @return offsetResetPolicy
+   */
+  @JsonProperty("offset_reset_policy")
+  @ApiModelProperty(value = "")
+  public OffsetResetPolicyEnum getOffsetResetPolicy() {
+    return offsetResetPolicy;
+  }
+
+  public void setOffsetResetPolicy(OffsetResetPolicyEnum offsetResetPolicy) {
+    this.offsetResetPolicy = offsetResetPolicy;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -72,12 +169,14 @@ public class SourceKafka {
     }
     SourceKafka sourceKafka = (SourceKafka) o;
     return Objects.equals(this.kafkaTopicName, sourceKafka.kafkaTopicName)
-        && Objects.equals(this.status, sourceKafka.status);
+        && Objects.equals(this.status, sourceKafka.status)
+        && Objects.equals(this.useV3, sourceKafka.useV3)
+        && Objects.equals(this.offsetResetPolicy, sourceKafka.offsetResetPolicy);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(kafkaTopicName, status);
+    return Objects.hash(kafkaTopicName, status, useV3, offsetResetPolicy);
   }
 
   @Override
@@ -87,6 +186,8 @@ public class SourceKafka {
 
     sb.append("    kafkaTopicName: ").append(toIndentedString(kafkaTopicName)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    useV3: ").append(toIndentedString(useV3)).append("\n");
+    sb.append("    offsetResetPolicy: ").append(toIndentedString(offsetResetPolicy)).append("\n");
     sb.append("}");
     return sb.toString();
   }

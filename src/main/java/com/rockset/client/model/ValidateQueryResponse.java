@@ -22,7 +22,7 @@ import java.util.Objects;
 /** ValidateQueryResponse */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class ValidateQueryResponse {
   @SerializedName("name")
   private List<String> name = new ArrayList<String>();
@@ -50,7 +50,7 @@ public class ValidateQueryResponse {
    */
   @JsonProperty("name")
   @ApiModelProperty(
-      example = "\"['commons.foo']\"",
+      example = "\"[\\\"commons.foo\\\"]\"",
       required = true,
       value = "list of collection specified in query")
   public List<String> getName() {
@@ -78,7 +78,7 @@ public class ValidateQueryResponse {
    */
   @JsonProperty("collections")
   @ApiModelProperty(
-      example = "\"['commons.foo']\"",
+      example = "\"[\\\"commons.foo\\\"]\"",
       required = true,
       value = "list of collection specified in query")
   public List<String> getCollections() {
@@ -106,7 +106,7 @@ public class ValidateQueryResponse {
    */
   @JsonProperty("parameters")
   @ApiModelProperty(
-      example = "\"['foo']\"",
+      example = "\"[\\\"foo\\\"]\"",
       required = true,
       value = "list of parameters specified in query")
   public List<String> getParameters() {

@@ -8,7 +8,7 @@ public class GetCollectionExample {
     RocksetClient rs = new RocksetClient("<apiKey>", "<apiServer>");
 
     try {
-      GetCollectionResponse response = rs.getCollection("commons", "_info.events");
+      GetCollectionResponse response = rs.collections.get("commons", "commons._events");
       System.out.println(response);
     } catch (Exception e) {
       e.printStackTrace();

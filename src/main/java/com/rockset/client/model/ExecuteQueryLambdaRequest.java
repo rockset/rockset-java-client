@@ -22,7 +22,7 @@ import java.util.Objects;
 /** ExecuteQueryLambdaRequest */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class ExecuteQueryLambdaRequest {
   @SerializedName("parameters")
   private List<QueryParameter> parameters = null;
@@ -32,6 +32,12 @@ public class ExecuteQueryLambdaRequest {
 
   @SerializedName("generate_warnings")
   private Boolean generateWarnings = null;
+
+  @SerializedName("paginate")
+  private Boolean paginate = null;
+
+  @SerializedName("initial_paginate_response_doc_count")
+  private Integer initialPaginateResponseDocCount = null;
 
   public ExecuteQueryLambdaRequest parameters(List<QueryParameter> parameters) {
     this.parameters = parameters;
@@ -101,6 +107,52 @@ public class ExecuteQueryLambdaRequest {
     this.generateWarnings = generateWarnings;
   }
 
+  public ExecuteQueryLambdaRequest paginate(Boolean paginate) {
+    this.paginate = paginate;
+    return this;
+  }
+
+  /**
+   * Flag to paginate and store the results of this query for later / sequential retrieval.
+   *
+   * @return paginate
+   */
+  @JsonProperty("paginate")
+  @ApiModelProperty(
+      value =
+          "Flag to paginate and store the results of this query for later / sequential retrieval.")
+  public Boolean isPaginate() {
+    return paginate;
+  }
+
+  public void setPaginate(Boolean paginate) {
+    this.paginate = paginate;
+  }
+
+  public ExecuteQueryLambdaRequest initialPaginateResponseDocCount(
+      Integer initialPaginateResponseDocCount) {
+    this.initialPaginateResponseDocCount = initialPaginateResponseDocCount;
+    return this;
+  }
+
+  /**
+   * Number of documents to return in addition to paginating for this query call. Only relevant if
+   * &#x60;paginate&#x60; flag is also set.
+   *
+   * @return initialPaginateResponseDocCount
+   */
+  @JsonProperty("initial_paginate_response_doc_count")
+  @ApiModelProperty(
+      value =
+          "Number of documents to return in addition to paginating for this query call. Only relevant if `paginate` flag is also set.")
+  public Integer getInitialPaginateResponseDocCount() {
+    return initialPaginateResponseDocCount;
+  }
+
+  public void setInitialPaginateResponseDocCount(Integer initialPaginateResponseDocCount) {
+    this.initialPaginateResponseDocCount = initialPaginateResponseDocCount;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -112,12 +164,17 @@ public class ExecuteQueryLambdaRequest {
     ExecuteQueryLambdaRequest executeQueryLambdaRequest = (ExecuteQueryLambdaRequest) o;
     return Objects.equals(this.parameters, executeQueryLambdaRequest.parameters)
         && Objects.equals(this.defaultRowLimit, executeQueryLambdaRequest.defaultRowLimit)
-        && Objects.equals(this.generateWarnings, executeQueryLambdaRequest.generateWarnings);
+        && Objects.equals(this.generateWarnings, executeQueryLambdaRequest.generateWarnings)
+        && Objects.equals(this.paginate, executeQueryLambdaRequest.paginate)
+        && Objects.equals(
+            this.initialPaginateResponseDocCount,
+            executeQueryLambdaRequest.initialPaginateResponseDocCount);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(parameters, defaultRowLimit, generateWarnings);
+    return Objects.hash(
+        parameters, defaultRowLimit, generateWarnings, paginate, initialPaginateResponseDocCount);
   }
 
   @Override
@@ -128,6 +185,10 @@ public class ExecuteQueryLambdaRequest {
     sb.append("    parameters: ").append(toIndentedString(parameters)).append("\n");
     sb.append("    defaultRowLimit: ").append(toIndentedString(defaultRowLimit)).append("\n");
     sb.append("    generateWarnings: ").append(toIndentedString(generateWarnings)).append("\n");
+    sb.append("    paginate: ").append(toIndentedString(paginate)).append("\n");
+    sb.append("    initialPaginateResponseDocCount: ")
+        .append(toIndentedString(initialPaginateResponseDocCount))
+        .append("\n");
     sb.append("}");
     return sb.toString();
   }

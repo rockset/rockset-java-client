@@ -25,7 +25,7 @@ import java.util.Objects;
 /** VirtualInstance */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class VirtualInstance {
   /** virtual instance state */
   @JsonAdapter(StateEnum.Adapter.class)
@@ -340,6 +340,15 @@ public class VirtualInstance {
   @SerializedName("desired_size")
   private DesiredSizeEnum desiredSize = null;
 
+  @SerializedName("last_updated")
+  private String lastUpdated = null;
+
+  @SerializedName("estimated_switch_duration_minutes")
+  private Long estimatedSwitchDurationMinutes = null;
+
+  @SerializedName("monitoring_enabled")
+  private Boolean monitoringEnabled = null;
+
   @SerializedName("default_pod_count")
   private Integer defaultPodCount = null;
 
@@ -431,6 +440,70 @@ public class VirtualInstance {
     return desiredSize;
   }
 
+  public VirtualInstance lastUpdated(String lastUpdated) {
+    this.lastUpdated = lastUpdated;
+    return this;
+  }
+
+  /**
+   * ISO-8601 date of when virtual instance size was last updated
+   *
+   * @return lastUpdated
+   */
+  @JsonProperty("last_updated")
+  @ApiModelProperty(
+      example = "2001-08-28T00:23:41Z",
+      value = "ISO-8601 date of when virtual instance size was last updated")
+  public String getLastUpdated() {
+    return lastUpdated;
+  }
+
+  public void setLastUpdated(String lastUpdated) {
+    this.lastUpdated = lastUpdated;
+  }
+
+  public VirtualInstance estimatedSwitchDurationMinutes(Long estimatedSwitchDurationMinutes) {
+    this.estimatedSwitchDurationMinutes = estimatedSwitchDurationMinutes;
+    return this;
+  }
+
+  /**
+   * estimated duration in minutes of last virtual instance size update
+   *
+   * @return estimatedSwitchDurationMinutes
+   */
+  @JsonProperty("estimated_switch_duration_minutes")
+  @ApiModelProperty(
+      example = "20",
+      value = "estimated duration in minutes of last virtual instance size update")
+  public Long getEstimatedSwitchDurationMinutes() {
+    return estimatedSwitchDurationMinutes;
+  }
+
+  public void setEstimatedSwitchDurationMinutes(Long estimatedSwitchDurationMinutes) {
+    this.estimatedSwitchDurationMinutes = estimatedSwitchDurationMinutes;
+  }
+
+  public VirtualInstance monitoringEnabled(Boolean monitoringEnabled) {
+    this.monitoringEnabled = monitoringEnabled;
+    return this;
+  }
+
+  /**
+   * Get monitoringEnabled
+   *
+   * @return monitoringEnabled
+   */
+  @JsonProperty("monitoring_enabled")
+  @ApiModelProperty(value = "")
+  public Boolean isMonitoringEnabled() {
+    return monitoringEnabled;
+  }
+
+  public void setMonitoringEnabled(Boolean monitoringEnabled) {
+    this.monitoringEnabled = monitoringEnabled;
+  }
+
   public VirtualInstance defaultPodCount(Integer defaultPodCount) {
     this.defaultPodCount = defaultPodCount;
     return this;
@@ -507,6 +580,10 @@ public class VirtualInstance {
         && Objects.equals(this.desiredType, virtualInstance.desiredType)
         && Objects.equals(this.currentSize, virtualInstance.currentSize)
         && Objects.equals(this.desiredSize, virtualInstance.desiredSize)
+        && Objects.equals(this.lastUpdated, virtualInstance.lastUpdated)
+        && Objects.equals(
+            this.estimatedSwitchDurationMinutes, virtualInstance.estimatedSwitchDurationMinutes)
+        && Objects.equals(this.monitoringEnabled, virtualInstance.monitoringEnabled)
         && Objects.equals(this.defaultPodCount, virtualInstance.defaultPodCount)
         && Objects.equals(this.scaledPodCount, virtualInstance.scaledPodCount)
         && Objects.equals(this.id, virtualInstance.id);
@@ -520,6 +597,9 @@ public class VirtualInstance {
         desiredType,
         currentSize,
         desiredSize,
+        lastUpdated,
+        estimatedSwitchDurationMinutes,
+        monitoringEnabled,
         defaultPodCount,
         scaledPodCount,
         id);
@@ -535,6 +615,11 @@ public class VirtualInstance {
     sb.append("    desiredType: ").append(toIndentedString(desiredType)).append("\n");
     sb.append("    currentSize: ").append(toIndentedString(currentSize)).append("\n");
     sb.append("    desiredSize: ").append(toIndentedString(desiredSize)).append("\n");
+    sb.append("    lastUpdated: ").append(toIndentedString(lastUpdated)).append("\n");
+    sb.append("    estimatedSwitchDurationMinutes: ")
+        .append(toIndentedString(estimatedSwitchDurationMinutes))
+        .append("\n");
+    sb.append("    monitoringEnabled: ").append(toIndentedString(monitoringEnabled)).append("\n");
     sb.append("    defaultPodCount: ").append(toIndentedString(defaultPodCount)).append("\n");
     sb.append("    scaledPodCount: ").append(toIndentedString(scaledPodCount)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");

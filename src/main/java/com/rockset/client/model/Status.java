@@ -25,7 +25,7 @@ import java.util.Objects;
 /** Status */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class Status {
   /**
    * Status of the Source&#39;s ingestion, one of: INITIALIZING, WATCHING, PROCESSING, COMPLETED,
@@ -85,9 +85,6 @@ public class Status {
   @SerializedName("state")
   private StateEnum state = null;
 
-  @SerializedName("since")
-  private String since = null;
-
   @SerializedName("message")
   private String message = null;
 
@@ -99,18 +96,6 @@ public class Status {
 
   @SerializedName("total_processed_items")
   private Long totalProcessedItems = null;
-
-  @SerializedName("last_error_at")
-  private String lastErrorAt = null;
-
-  @SerializedName("last_error_item")
-  private String lastErrorItem = null;
-
-  @SerializedName("last_error_reason")
-  private String lastErrorReason = null;
-
-  @SerializedName("total_error_items")
-  private Long totalErrorItems = null;
 
   public Status state(StateEnum state) {
     this.state = state;
@@ -134,28 +119,6 @@ public class Status {
 
   public void setState(StateEnum state) {
     this.state = state;
-  }
-
-  public Status since(String since) {
-    this.since = since;
-    return this;
-  }
-
-  /**
-   * ISO-8601 date when state was triggered
-   *
-   * @return since
-   */
-  @JsonProperty("since")
-  @ApiModelProperty(
-      example = "2019-01-15T21:48:23Z",
-      value = "ISO-8601 date when state was triggered")
-  public String getSince() {
-    return since;
-  }
-
-  public void setSince(String since) {
-    this.since = since;
   }
 
   public Status message(String message) {
@@ -242,88 +205,6 @@ public class Status {
     this.totalProcessedItems = totalProcessedItems;
   }
 
-  public Status lastErrorAt(String lastErrorAt) {
-    this.lastErrorAt = lastErrorAt;
-    return this;
-  }
-
-  /**
-   * ISO-8601 date when last error occurred
-   *
-   * @return lastErrorAt
-   */
-  @JsonProperty("last_error_at")
-  @ApiModelProperty(
-      example = "2019-01-15T21:48:23Z",
-      value = "ISO-8601 date when last error occurred")
-  public String getLastErrorAt() {
-    return lastErrorAt;
-  }
-
-  public void setLastErrorAt(String lastErrorAt) {
-    this.lastErrorAt = lastErrorAt;
-  }
-
-  public Status lastErrorItem(String lastErrorItem) {
-    this.lastErrorItem = lastErrorItem;
-    return this;
-  }
-
-  /**
-   * last source item that errored
-   *
-   * @return lastErrorItem
-   */
-  @JsonProperty("last_error_item")
-  @ApiModelProperty(example = "/path/to/some/object", value = "last source item that errored")
-  public String getLastErrorItem() {
-    return lastErrorItem;
-  }
-
-  public void setLastErrorItem(String lastErrorItem) {
-    this.lastErrorItem = lastErrorItem;
-  }
-
-  public Status lastErrorReason(String lastErrorReason) {
-    this.lastErrorReason = lastErrorReason;
-    return this;
-  }
-
-  /**
-   * reason for the last error
-   *
-   * @return lastErrorReason
-   */
-  @JsonProperty("last_error_reason")
-  @ApiModelProperty(example = "invalid format .docx", value = "reason for the last error")
-  public String getLastErrorReason() {
-    return lastErrorReason;
-  }
-
-  public void setLastErrorReason(String lastErrorReason) {
-    this.lastErrorReason = lastErrorReason;
-  }
-
-  public Status totalErrorItems(Long totalErrorItems) {
-    this.totalErrorItems = totalErrorItems;
-    return this;
-  }
-
-  /**
-   * Total items that errored
-   *
-   * @return totalErrorItems
-   */
-  @JsonProperty("total_error_items")
-  @ApiModelProperty(example = "32849023", value = "Total items that errored")
-  public Long getTotalErrorItems() {
-    return totalErrorItems;
-  }
-
-  public void setTotalErrorItems(Long totalErrorItems) {
-    this.totalErrorItems = totalErrorItems;
-  }
-
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -334,30 +215,15 @@ public class Status {
     }
     Status status = (Status) o;
     return Objects.equals(this.state, status.state)
-        && Objects.equals(this.since, status.since)
         && Objects.equals(this.message, status.message)
         && Objects.equals(this.lastProcessedAt, status.lastProcessedAt)
         && Objects.equals(this.lastProcessedItem, status.lastProcessedItem)
-        && Objects.equals(this.totalProcessedItems, status.totalProcessedItems)
-        && Objects.equals(this.lastErrorAt, status.lastErrorAt)
-        && Objects.equals(this.lastErrorItem, status.lastErrorItem)
-        && Objects.equals(this.lastErrorReason, status.lastErrorReason)
-        && Objects.equals(this.totalErrorItems, status.totalErrorItems);
+        && Objects.equals(this.totalProcessedItems, status.totalProcessedItems);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(
-        state,
-        since,
-        message,
-        lastProcessedAt,
-        lastProcessedItem,
-        totalProcessedItems,
-        lastErrorAt,
-        lastErrorItem,
-        lastErrorReason,
-        totalErrorItems);
+    return Objects.hash(state, message, lastProcessedAt, lastProcessedItem, totalProcessedItems);
   }
 
   @Override
@@ -366,17 +232,12 @@ public class Status {
     sb.append("class Status {\n");
 
     sb.append("    state: ").append(toIndentedString(state)).append("\n");
-    sb.append("    since: ").append(toIndentedString(since)).append("\n");
     sb.append("    message: ").append(toIndentedString(message)).append("\n");
     sb.append("    lastProcessedAt: ").append(toIndentedString(lastProcessedAt)).append("\n");
     sb.append("    lastProcessedItem: ").append(toIndentedString(lastProcessedItem)).append("\n");
     sb.append("    totalProcessedItems: ")
         .append(toIndentedString(totalProcessedItems))
         .append("\n");
-    sb.append("    lastErrorAt: ").append(toIndentedString(lastErrorAt)).append("\n");
-    sb.append("    lastErrorItem: ").append(toIndentedString(lastErrorItem)).append("\n");
-    sb.append("    lastErrorReason: ").append(toIndentedString(lastErrorReason)).append("\n");
-    sb.append("    totalErrorItems: ").append(toIndentedString(totalErrorItems)).append("\n");
     sb.append("}");
     return sb.toString();
   }

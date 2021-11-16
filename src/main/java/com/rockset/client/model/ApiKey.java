@@ -13,22 +13,26 @@
 package com.rockset.client.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.Objects;
 
 /**
  * API keys are used to authenticate requests to Rockset&#39;s API. An API key is tied to the user
- * who creates it. A new API key can be created for each use case, with a maximum of 10 API keys per
- * user.
+ * who creates it.
  */
 @ApiModel(
     description =
-        "API keys are used to authenticate requests to Rockset's API. An API key is tied to the user who creates it. A new API key can be created for each use case, with a maximum of 10 API keys per user.")
+        "API keys are used to authenticate requests to Rockset's API. An API key is tied to the user who creates it.")
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class ApiKey {
   @SerializedName("created_at")
   private String createdAt = null;
@@ -42,8 +46,60 @@ public class ApiKey {
   @SerializedName("last_access_time")
   private String lastAccessTime = null;
 
+  @SerializedName("role")
+  private String role = null;
+
   @SerializedName("created_by")
   private String createdBy = null;
+
+  /** current state of this key */
+  @JsonAdapter(StateEnum.Adapter.class)
+  public enum StateEnum {
+    ACTIVE("ACTIVE"),
+
+    SUSPENDED("SUSPENDED");
+
+    private String value;
+
+    StateEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static StateEnum fromValue(String text) {
+      for (StateEnum b : StateEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+
+    public static class Adapter extends TypeAdapter<StateEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final StateEnum enumeration)
+          throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public StateEnum read(final JsonReader jsonReader) throws IOException {
+        String value = jsonReader.nextString();
+        return StateEnum.fromValue(String.valueOf(value));
+      }
+    }
+  }
+
+  @SerializedName("state")
+  private StateEnum state = null;
 
   public ApiKey createdAt(String createdAt) {
     this.createdAt = createdAt;
@@ -51,12 +107,14 @@ public class ApiKey {
   }
 
   /**
-   * ISO-8601 date
+   * Date that API key was created (ISO-8601 format).
    *
    * @return createdAt
    */
   @JsonProperty("created_at")
-  @ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date")
+  @ApiModelProperty(
+      example = "2001-08-28T00:23:41Z",
+      value = "Date that API key was created (ISO-8601 format).")
   public String getCreatedAt() {
     return createdAt;
   }
@@ -71,12 +129,12 @@ public class ApiKey {
   }
 
   /**
-   * descriptive label
+   * Name of the API key.
    *
    * @return name
    */
   @JsonProperty("name")
-  @ApiModelProperty(example = "my-event-logger-key", required = true, value = "descriptive label")
+  @ApiModelProperty(example = "my-key", required = true, value = "Name of the API key.")
   public String getName() {
     return name;
   }
@@ -91,15 +149,15 @@ public class ApiKey {
   }
 
   /**
-   * string of 64 alphanumeric characters
+   * API key string of 64 alphanumeric characters.
    *
    * @return key
    */
   @JsonProperty("key")
   @ApiModelProperty(
-      example = "aB35kDjg93J5nsf4GjwMeErAVd832F7ad4vhsW1S02kfZiab42sTsfW5Sxt25asT",
+      example = "aB35kDjg*******************************",
       required = true,
-      value = "string of 64 alphanumeric characters")
+      value = "API key string of 64 alphanumeric characters.")
   public String getKey() {
     return key;
   }
@@ -114,12 +172,14 @@ public class ApiKey {
   }
 
   /**
-   * ISO-8601 date
+   * Date that API key was most recently used (ISO-8601 format).
    *
    * @return lastAccessTime
    */
   @JsonProperty("last_access_time")
-  @ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date")
+  @ApiModelProperty(
+      example = "2001-08-28T00:23:41Z",
+      value = "Date that API key was most recently used (ISO-8601 format).")
   public String getLastAccessTime() {
     return lastAccessTime;
   }
@@ -128,24 +188,64 @@ public class ApiKey {
     this.lastAccessTime = lastAccessTime;
   }
 
+  public ApiKey role(String role) {
+    this.role = role;
+    return this;
+  }
+
+  /**
+   * Get role
+   *
+   * @return role
+   */
+  @JsonProperty("role")
+  @ApiModelProperty(value = "")
+  public String getRole() {
+    return role;
+  }
+
+  public void setRole(String role) {
+    this.role = role;
+  }
+
   public ApiKey createdBy(String createdBy) {
     this.createdBy = createdBy;
     return this;
   }
 
   /**
-   * Get createdBy
+   * Email of API key owner.
    *
    * @return createdBy
    */
   @JsonProperty("created_by")
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "test@example.com", value = "Email of API key owner.")
   public String getCreatedBy() {
     return createdBy;
   }
 
   public void setCreatedBy(String createdBy) {
     this.createdBy = createdBy;
+  }
+
+  public ApiKey state(StateEnum state) {
+    this.state = state;
+    return this;
+  }
+
+  /**
+   * current state of this key
+   *
+   * @return state
+   */
+  @JsonProperty("state")
+  @ApiModelProperty(example = "ACTIVE", value = "current state of this key")
+  public StateEnum getState() {
+    return state;
+  }
+
+  public void setState(StateEnum state) {
+    this.state = state;
   }
 
   @Override
@@ -161,12 +261,14 @@ public class ApiKey {
         && Objects.equals(this.name, apiKey.name)
         && Objects.equals(this.key, apiKey.key)
         && Objects.equals(this.lastAccessTime, apiKey.lastAccessTime)
-        && Objects.equals(this.createdBy, apiKey.createdBy);
+        && Objects.equals(this.role, apiKey.role)
+        && Objects.equals(this.createdBy, apiKey.createdBy)
+        && Objects.equals(this.state, apiKey.state);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(createdAt, name, key, lastAccessTime, createdBy);
+    return Objects.hash(createdAt, name, key, lastAccessTime, role, createdBy, state);
   }
 
   @Override
@@ -178,7 +280,9 @@ public class ApiKey {
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    key: ").append(toIndentedString(key)).append("\n");
     sb.append("    lastAccessTime: ").append(toIndentedString(lastAccessTime)).append("\n");
+    sb.append("    role: ").append(toIndentedString(role)).append("\n");
     sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
+    sb.append("    state: ").append(toIndentedString(state)).append("\n");
     sb.append("}");
     return sb.toString();
   }

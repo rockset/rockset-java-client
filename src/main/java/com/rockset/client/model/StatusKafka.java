@@ -20,12 +20,14 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /** StatusKafka */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class StatusKafka {
   /** State of the Kafka source */
   @JsonAdapter(StateEnum.Adapter.class)
@@ -83,6 +85,9 @@ public class StatusKafka {
 
   @SerializedName("num_documents_processed")
   private Long numDocumentsProcessed = null;
+
+  @SerializedName("kafka_partitions")
+  private List<StatusKafkaPartition> kafkaPartitions = null;
 
   public StatusKafka state(StateEnum state) {
     this.state = state;
@@ -146,6 +151,34 @@ public class StatusKafka {
     this.numDocumentsProcessed = numDocumentsProcessed;
   }
 
+  public StatusKafka kafkaPartitions(List<StatusKafkaPartition> kafkaPartitions) {
+    this.kafkaPartitions = kafkaPartitions;
+    return this;
+  }
+
+  public StatusKafka addKafkaPartitionsItem(StatusKafkaPartition kafkaPartitionsItem) {
+    if (this.kafkaPartitions == null) {
+      this.kafkaPartitions = new ArrayList<StatusKafkaPartition>();
+    }
+    this.kafkaPartitions.add(kafkaPartitionsItem);
+    return this;
+  }
+
+  /**
+   * Status info per partition
+   *
+   * @return kafkaPartitions
+   */
+  @JsonProperty("kafka_partitions")
+  @ApiModelProperty(value = "Status info per partition")
+  public List<StatusKafkaPartition> getKafkaPartitions() {
+    return kafkaPartitions;
+  }
+
+  public void setKafkaPartitions(List<StatusKafkaPartition> kafkaPartitions) {
+    this.kafkaPartitions = kafkaPartitions;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -157,12 +190,13 @@ public class StatusKafka {
     StatusKafka statusKafka = (StatusKafka) o;
     return Objects.equals(this.state, statusKafka.state)
         && Objects.equals(this.lastConsumedTime, statusKafka.lastConsumedTime)
-        && Objects.equals(this.numDocumentsProcessed, statusKafka.numDocumentsProcessed);
+        && Objects.equals(this.numDocumentsProcessed, statusKafka.numDocumentsProcessed)
+        && Objects.equals(this.kafkaPartitions, statusKafka.kafkaPartitions);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(state, lastConsumedTime, numDocumentsProcessed);
+    return Objects.hash(state, lastConsumedTime, numDocumentsProcessed, kafkaPartitions);
   }
 
   @Override
@@ -175,6 +209,7 @@ public class StatusKafka {
     sb.append("    numDocumentsProcessed: ")
         .append(toIndentedString(numDocumentsProcessed))
         .append("\n");
+    sb.append("    kafkaPartitions: ").append(toIndentedString(kafkaPartitions)).append("\n");
     sb.append("}");
     return sb.toString();
   }

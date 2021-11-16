@@ -32,11 +32,11 @@ public class TestWorkspace {
   public void testWorkspaceCreate() throws Exception {
     // create workspace
     CreateWorkspaceRequest wsRequest = new CreateWorkspaceRequest().name(workspaceName);
-    CreateWorkspaceResponse wsResponse = client.createWorkspace(wsRequest);
+    CreateWorkspaceResponse wsResponse = client.workspaces.create(wsRequest);
 
     // create collection
     CreateCollectionRequest request = new CreateCollectionRequest().name(collectionName);
-    CreateCollectionResponse response = client.createCollection(workspaceName, request);
+    CreateCollectionResponse response = client.collections.create(workspaceName, request);
 
     Assert.assertEquals(response.getData().getName(), collectionName);
     Assert.assertEquals(response.getData().getStatus(), Collection.StatusEnum.CREATED);
@@ -45,7 +45,7 @@ public class TestWorkspace {
   @Test(dependsOnMethods = {"testWorkspaceCreate"})
   public void testGetWorkspace() throws Exception {
     // describe workspace
-    GetWorkspaceResponse getWorkspaceResponse = client.getWorkspace(workspaceName);
+    GetWorkspaceResponse getWorkspaceResponse = client.workspaces.get(workspaceName);
     Assert.assertEquals(getWorkspaceResponse.getData().getName(), workspaceName);
   }
 
@@ -53,7 +53,7 @@ public class TestWorkspace {
   public void testDeleteWorkspace() throws Exception {
     // delete collection
     DeleteCollectionResponse deleteCollectionResponse =
-        client.deleteCollection(workspaceName, collectionName);
+        client.collections.delete(workspaceName, collectionName);
     Assert.assertEquals(deleteCollectionResponse.getData().getName(), collectionName);
     // Assert.assertEquals(deleteCollectionResponse.getData().getStatus(),
     // Collection.StatusEnum.DELETED);
@@ -66,7 +66,7 @@ public class TestWorkspace {
                 () -> {
                   try {
                     GetCollectionResponse getCollectionResponse =
-                        client.getCollection(workspaceName, collectionName);
+                        client.collections.get(workspaceName, collectionName);
                   } catch (Exception e) {
                     return true; // collection deleted
                   }
@@ -75,7 +75,7 @@ public class TestWorkspace {
                 });
 
     // delete workspace
-    DeleteWorkspaceResponse deleteWorkspaceResponse = client.deleteWorkspace(workspaceName);
+    DeleteWorkspaceResponse deleteWorkspaceResponse = client.workspaces.delete(workspaceName);
     Assert.assertEquals(deleteWorkspaceResponse.getData().getName(), workspaceName);
   }
 }

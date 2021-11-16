@@ -22,7 +22,7 @@ import java.util.Objects;
 @ApiModel(description = "Workspaces are organizational containers for collections.")
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class Workspace {
   @SerializedName("created_at")
   private String createdAt = null;

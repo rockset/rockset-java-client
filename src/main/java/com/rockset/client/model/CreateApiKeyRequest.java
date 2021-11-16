@@ -20,10 +20,13 @@ import java.util.Objects;
 /** CreateApiKeyRequest */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class CreateApiKeyRequest {
   @SerializedName("name")
   private String name = null;
+
+  @SerializedName("role")
+  private String role = null;
 
   public CreateApiKeyRequest name(String name) {
     this.name = name;
@@ -31,18 +34,38 @@ public class CreateApiKeyRequest {
   }
 
   /**
-   * descriptive label
+   * Name for this API key.
    *
    * @return name
    */
   @JsonProperty("name")
-  @ApiModelProperty(example = "event-logger", required = true, value = "descriptive label")
+  @ApiModelProperty(example = "my-app", required = true, value = "Name for this API key.")
   public String getName() {
     return name;
   }
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public CreateApiKeyRequest role(String role) {
+    this.role = role;
+    return this;
+  }
+
+  /**
+   * Get role
+   *
+   * @return role
+   */
+  @JsonProperty("role")
+  @ApiModelProperty(value = "")
+  public String getRole() {
+    return role;
+  }
+
+  public void setRole(String role) {
+    this.role = role;
   }
 
   @Override
@@ -54,12 +77,13 @@ public class CreateApiKeyRequest {
       return false;
     }
     CreateApiKeyRequest createApiKeyRequest = (CreateApiKeyRequest) o;
-    return Objects.equals(this.name, createApiKeyRequest.name);
+    return Objects.equals(this.name, createApiKeyRequest.name)
+        && Objects.equals(this.role, createApiKeyRequest.role);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name);
+    return Objects.hash(name, role);
   }
 
   @Override
@@ -68,6 +92,7 @@ public class CreateApiKeyRequest {
     sb.append("class CreateApiKeyRequest {\n");
 
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    role: ").append(toIndentedString(role)).append("\n");
     sb.append("}");
     return sb.toString();
   }

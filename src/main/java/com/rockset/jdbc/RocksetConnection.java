@@ -510,14 +510,14 @@ public class RocksetConnection implements Connection {
     }
 
     final QueryRequest request = new QueryRequest().sql(q);
-    return client.query(request);
+    return client.queries.query(request);
   }
 
   //
   // List all collections
   //
   List<Collection> listCollections(String schema) throws Exception {
-    return client.listCollections(schema);
+    return client.collections.workspace(schema).getData();
   }
 
   List<Collection> listCollections() throws Exception {
@@ -551,7 +551,9 @@ public class RocksetConnection implements Connection {
   }
 
   List<String> getWorkspaces() throws Exception {
-    return client.listWorkspaces().stream().map(Workspace::getName).collect(Collectors.toList());
+    return client.workspaces.list(true).getData().stream()
+        .map(Workspace::getName)
+        .collect(Collectors.toList());
   }
 
   private static String getApiKey(Properties info) {

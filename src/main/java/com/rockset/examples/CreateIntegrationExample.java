@@ -13,7 +13,7 @@ public class CreateIntegrationExample {
             .s3(new S3Integration().awsRole(new AwsRole().awsRoleArn("...")));
 
     try {
-      CreateIntegrationResponse response = rs.createIntegration(request);
+      CreateIntegrationResponse response = rs.integrations.create(request);
       System.out.println(response);
     } catch (Exception e) {
       e.printStackTrace();

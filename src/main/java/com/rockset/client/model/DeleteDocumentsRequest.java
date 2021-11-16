@@ -22,7 +22,7 @@ import java.util.Objects;
 /** DeleteDocumentsRequest */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class DeleteDocumentsRequest {
   @SerializedName("data")
   private List<DeleteDocumentsRequestData> data = new ArrayList<DeleteDocumentsRequestData>();
@@ -38,12 +38,12 @@ public class DeleteDocumentsRequest {
   }
 
   /**
-   * array of document IDs
+   * Array of IDs of documents to be deleted
    *
    * @return data
    */
   @JsonProperty("data")
-  @ApiModelProperty(required = true, value = "array of document IDs")
+  @ApiModelProperty(required = true, value = "Array of IDs of documents to be deleted")
   public List<DeleteDocumentsRequestData> getData() {
     return data;
   }

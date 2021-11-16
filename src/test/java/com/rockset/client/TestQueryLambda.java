@@ -16,7 +16,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-public class TestSavedQuery {
+public class TestQueryLambda {
 
   private RocksetClient client;
   private static final String queryName = "myQuery";
@@ -50,12 +50,12 @@ public class TestSavedQuery {
     sql.setDefaultParameters(defaultParameters);
     req.setSql(sql);
 
-    QueryLambdaVersionResponse resp = client.createQueryLambda("commons", req);
+    QueryLambdaVersionResponse resp = client.queryLambdas.create("commons", req);
     Assert.assertEquals(resp.getData().getName(), this.queryName);
 
     String version = resp.getData().getVersion();
     // Run Query Lambda with default parameters
-    QueryResponse qr = client.runQueryLambdaByVersion("commons", queryName, version, null);
+    QueryResponse qr = client.queryLambdas.execute_0("commons", queryName, version, null);
     Map<String, String> result = (LinkedTreeMap) qr.getResults().get(0);
     Assert.assertEquals(result.get("echo"), "Hello, world!");
 
@@ -64,7 +64,7 @@ public class TestSavedQuery {
     CreateQueryLambdaTagRequest reqQLTag = new CreateQueryLambdaTagRequest();
     reqQLTag.setTagName(queryLambdaTag);
     reqQLTag.setVersion(version);
-    QueryLambdaTagResponse respQLTag = client.createQueryLambdaTag("commons", queryName, reqQLTag);
+    QueryLambdaTagResponse respQLTag = client.queryLambdas.create_0("commons", queryName, reqQLTag);
     Assert.assertEquals(respQLTag.getData().getTagName(), queryLambdaTag);
 
     // Run Query Lambda with custom parameters
@@ -74,10 +74,10 @@ public class TestSavedQuery {
     exParam.setValue("All work and no play makes Jack a dull boy");
     ExecuteQueryLambdaRequest exReq = new ExecuteQueryLambdaRequest();
     exReq.addParametersItem(exParam);
-    qr = client.runQueryLambdaByTag("commons", queryName, queryLambdaTag, exReq);
+    qr = client.queryLambdas.execute("commons", queryName, queryLambdaTag, exReq);
     result = (LinkedTreeMap) qr.getResults().get(0);
     Assert.assertEquals(result.get("echo"), "All work and no play makes Jack a dull boy");
 
-    client.deleteQueryLambda("commons", queryName);
+    client.queryLambdas.delete("commons", queryName);
   }
 }

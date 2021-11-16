@@ -28,10 +28,10 @@ import java.util.Objects;
 /** KafkaIntegration */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class KafkaIntegration {
   @SerializedName("kafka_topic_names")
-  private List<String> kafkaTopicNames = new ArrayList<String>();
+  private List<String> kafkaTopicNames = null;
 
   @SerializedName("source_status_by_topic")
   private Map<String, StatusKafka> sourceStatusByTopic = null;
@@ -88,12 +88,24 @@ public class KafkaIntegration {
   @SerializedName("connection_string")
   private String connectionString = null;
 
+  @SerializedName("use_v3")
+  private Boolean useV3 = null;
+
+  @SerializedName("bootstrap_servers")
+  private String bootstrapServers = null;
+
+  @SerializedName("security_config")
+  private KafkaV3SecurityConfig securityConfig = null;
+
   public KafkaIntegration kafkaTopicNames(List<String> kafkaTopicNames) {
     this.kafkaTopicNames = kafkaTopicNames;
     return this;
   }
 
   public KafkaIntegration addKafkaTopicNamesItem(String kafkaTopicNamesItem) {
+    if (this.kafkaTopicNames == null) {
+      this.kafkaTopicNames = new ArrayList<String>();
+    }
     this.kafkaTopicNames.add(kafkaTopicNamesItem);
     return this;
   }
@@ -104,7 +116,7 @@ public class KafkaIntegration {
    * @return kafkaTopicNames
    */
   @JsonProperty("kafka_topic_names")
-  @ApiModelProperty(required = true, value = "Kafka topics to tail")
+  @ApiModelProperty(value = "Kafka topics to tail")
   public List<String> getKafkaTopicNames() {
     return kafkaTopicNames;
   }
@@ -137,10 +149,7 @@ public class KafkaIntegration {
    * @return kafkaDataFormat
    */
   @JsonProperty("kafka_data_format")
-  @ApiModelProperty(
-      example = "json",
-      required = true,
-      value = "The format of the Kafka topics being tailed")
+  @ApiModelProperty(example = "json", value = "The format of the Kafka topics being tailed")
   public KafkaDataFormatEnum getKafkaDataFormat() {
     return kafkaDataFormat;
   }
@@ -160,6 +169,66 @@ public class KafkaIntegration {
     return connectionString;
   }
 
+  public KafkaIntegration useV3(Boolean useV3) {
+    this.useV3 = useV3;
+    return this;
+  }
+
+  /**
+   * Get useV3
+   *
+   * @return useV3
+   */
+  @JsonProperty("use_v3")
+  @ApiModelProperty(value = "")
+  public Boolean isUseV3() {
+    return useV3;
+  }
+
+  public void setUseV3(Boolean useV3) {
+    this.useV3 = useV3;
+  }
+
+  public KafkaIntegration bootstrapServers(String bootstrapServers) {
+    this.bootstrapServers = bootstrapServers;
+    return this;
+  }
+
+  /**
+   * Get bootstrapServers
+   *
+   * @return bootstrapServers
+   */
+  @JsonProperty("bootstrap_servers")
+  @ApiModelProperty(value = "")
+  public String getBootstrapServers() {
+    return bootstrapServers;
+  }
+
+  public void setBootstrapServers(String bootstrapServers) {
+    this.bootstrapServers = bootstrapServers;
+  }
+
+  public KafkaIntegration securityConfig(KafkaV3SecurityConfig securityConfig) {
+    this.securityConfig = securityConfig;
+    return this;
+  }
+
+  /**
+   * Get securityConfig
+   *
+   * @return securityConfig
+   */
+  @JsonProperty("security_config")
+  @ApiModelProperty(value = "")
+  public KafkaV3SecurityConfig getSecurityConfig() {
+    return securityConfig;
+  }
+
+  public void setSecurityConfig(KafkaV3SecurityConfig securityConfig) {
+    this.securityConfig = securityConfig;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -172,12 +241,22 @@ public class KafkaIntegration {
     return Objects.equals(this.kafkaTopicNames, kafkaIntegration.kafkaTopicNames)
         && Objects.equals(this.sourceStatusByTopic, kafkaIntegration.sourceStatusByTopic)
         && Objects.equals(this.kafkaDataFormat, kafkaIntegration.kafkaDataFormat)
-        && Objects.equals(this.connectionString, kafkaIntegration.connectionString);
+        && Objects.equals(this.connectionString, kafkaIntegration.connectionString)
+        && Objects.equals(this.useV3, kafkaIntegration.useV3)
+        && Objects.equals(this.bootstrapServers, kafkaIntegration.bootstrapServers)
+        && Objects.equals(this.securityConfig, kafkaIntegration.securityConfig);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(kafkaTopicNames, sourceStatusByTopic, kafkaDataFormat, connectionString);
+    return Objects.hash(
+        kafkaTopicNames,
+        sourceStatusByTopic,
+        kafkaDataFormat,
+        connectionString,
+        useV3,
+        bootstrapServers,
+        securityConfig);
   }
 
   @Override
@@ -191,6 +270,9 @@ public class KafkaIntegration {
         .append("\n");
     sb.append("    kafkaDataFormat: ").append(toIndentedString(kafkaDataFormat)).append("\n");
     sb.append("    connectionString: ").append(toIndentedString(connectionString)).append("\n");
+    sb.append("    useV3: ").append(toIndentedString(useV3)).append("\n");
+    sb.append("    bootstrapServers: ").append(toIndentedString(bootstrapServers)).append("\n");
+    sb.append("    securityConfig: ").append(toIndentedString(securityConfig)).append("\n");
     sb.append("}");
     return sb.toString();
   }

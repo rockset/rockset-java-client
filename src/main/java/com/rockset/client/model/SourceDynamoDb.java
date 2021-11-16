@@ -20,7 +20,7 @@ import java.util.Objects;
 /** SourceDynamoDb */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class SourceDynamoDb {
   @SerializedName("aws_region")
   private String awsRegion = null;
@@ -28,11 +28,17 @@ public class SourceDynamoDb {
   @SerializedName("table_name")
   private String tableName = null;
 
-  @SerializedName("status")
-  private StatusDynamoDb status = null;
+  @SerializedName("current_status")
+  private StatusDynamoDbV2 currentStatus = null;
 
   @SerializedName("rcu")
   private Long rcu = null;
+
+  @SerializedName("status")
+  private StatusDynamoDb status = null;
+
+  @SerializedName("use_scan_api")
+  private Boolean useScanApi = null;
 
   public SourceDynamoDb awsRegion(String awsRegion) {
     this.awsRegion = awsRegion;
@@ -80,14 +86,14 @@ public class SourceDynamoDb {
   }
 
   /**
-   * DynamoDB source status
+   * DynamoDB source status v2
    *
-   * @return status
+   * @return currentStatus
    */
-  @JsonProperty("status")
-  @ApiModelProperty(value = "DynamoDB source status")
-  public StatusDynamoDb getStatus() {
-    return status;
+  @JsonProperty("current_status")
+  @ApiModelProperty(value = "DynamoDB source status v2")
+  public StatusDynamoDbV2 getCurrentStatus() {
+    return currentStatus;
   }
 
   public SourceDynamoDb rcu(Long rcu) {
@@ -110,6 +116,37 @@ public class SourceDynamoDb {
     this.rcu = rcu;
   }
 
+  /**
+   * DynamoDB source status
+   *
+   * @return status
+   */
+  @JsonProperty("status")
+  @ApiModelProperty(value = "DynamoDB source status")
+  public StatusDynamoDb getStatus() {
+    return status;
+  }
+
+  public SourceDynamoDb useScanApi(Boolean useScanApi) {
+    this.useScanApi = useScanApi;
+    return this;
+  }
+
+  /**
+   * Whether to use DynamoDB Scan API for the initial scan
+   *
+   * @return useScanApi
+   */
+  @JsonProperty("use_scan_api")
+  @ApiModelProperty(value = "Whether to use DynamoDB Scan API for the initial scan")
+  public Boolean isUseScanApi() {
+    return useScanApi;
+  }
+
+  public void setUseScanApi(Boolean useScanApi) {
+    this.useScanApi = useScanApi;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -121,13 +158,15 @@ public class SourceDynamoDb {
     SourceDynamoDb sourceDynamoDb = (SourceDynamoDb) o;
     return Objects.equals(this.awsRegion, sourceDynamoDb.awsRegion)
         && Objects.equals(this.tableName, sourceDynamoDb.tableName)
+        && Objects.equals(this.currentStatus, sourceDynamoDb.currentStatus)
+        && Objects.equals(this.rcu, sourceDynamoDb.rcu)
         && Objects.equals(this.status, sourceDynamoDb.status)
-        && Objects.equals(this.rcu, sourceDynamoDb.rcu);
+        && Objects.equals(this.useScanApi, sourceDynamoDb.useScanApi);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(awsRegion, tableName, status, rcu);
+    return Objects.hash(awsRegion, tableName, currentStatus, rcu, status, useScanApi);
   }
 
   @Override
@@ -137,8 +176,10 @@ public class SourceDynamoDb {
 
     sb.append("    awsRegion: ").append(toIndentedString(awsRegion)).append("\n");
     sb.append("    tableName: ").append(toIndentedString(tableName)).append("\n");
-    sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    currentStatus: ").append(toIndentedString(currentStatus)).append("\n");
     sb.append("    rcu: ").append(toIndentedString(rcu)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    useScanApi: ").append(toIndentedString(useScanApi)).append("\n");
     sb.append("}");
     return sb.toString();
   }

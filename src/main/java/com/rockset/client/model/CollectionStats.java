@@ -20,7 +20,7 @@ import java.util.Objects;
 /** CollectionStats */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class CollectionStats {
   @SerializedName("doc_count")
   private Long docCount = null;
@@ -63,6 +63,12 @@ public class CollectionStats {
 
   @SerializedName("bytes_overwritten")
   private Long bytesOverwritten = null;
+
+  @SerializedName("bulk_bytes_inserted")
+  private Long bulkBytesInserted = null;
+
+  @SerializedName("bulk_bytes_overwritten")
+  private Long bulkBytesOverwritten = null;
 
   public CollectionStats docCount(Long docCount) {
     this.docCount = docCount;
@@ -350,6 +356,47 @@ public class CollectionStats {
     this.bytesOverwritten = bytesOverwritten;
   }
 
+  public CollectionStats bulkBytesInserted(Long bulkBytesInserted) {
+    this.bulkBytesInserted = bulkBytesInserted;
+    return this;
+  }
+
+  /**
+   * total number of bytes inserted into the collection during bulk
+   *
+   * @return bulkBytesInserted
+   */
+  @JsonProperty("bulk_bytes_inserted")
+  @ApiModelProperty(value = "total number of bytes inserted into the collection during bulk")
+  public Long getBulkBytesInserted() {
+    return bulkBytesInserted;
+  }
+
+  public void setBulkBytesInserted(Long bulkBytesInserted) {
+    this.bulkBytesInserted = bulkBytesInserted;
+  }
+
+  public CollectionStats bulkBytesOverwritten(Long bulkBytesOverwritten) {
+    this.bulkBytesOverwritten = bulkBytesOverwritten;
+    return this;
+  }
+
+  /**
+   * total number of bytes overwritten in writing into the collection during bulk
+   *
+   * @return bulkBytesOverwritten
+   */
+  @JsonProperty("bulk_bytes_overwritten")
+  @ApiModelProperty(
+      value = "total number of bytes overwritten in writing into the collection during bulk")
+  public Long getBulkBytesOverwritten() {
+    return bulkBytesOverwritten;
+  }
+
+  public void setBulkBytesOverwritten(Long bulkBytesOverwritten) {
+    this.bulkBytesOverwritten = bulkBytesOverwritten;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -372,7 +419,9 @@ public class CollectionStats {
         && Objects.equals(this.rangeIndexSize, collectionStats.rangeIndexSize)
         && Objects.equals(this.purgedDocSize, collectionStats.purgedDocSize)
         && Objects.equals(this.bytesInserted, collectionStats.bytesInserted)
-        && Objects.equals(this.bytesOverwritten, collectionStats.bytesOverwritten);
+        && Objects.equals(this.bytesOverwritten, collectionStats.bytesOverwritten)
+        && Objects.equals(this.bulkBytesInserted, collectionStats.bulkBytesInserted)
+        && Objects.equals(this.bulkBytesOverwritten, collectionStats.bulkBytesOverwritten);
   }
 
   @Override
@@ -391,7 +440,9 @@ public class CollectionStats {
         rangeIndexSize,
         purgedDocSize,
         bytesInserted,
-        bytesOverwritten);
+        bytesOverwritten,
+        bulkBytesInserted,
+        bulkBytesOverwritten);
   }
 
   @Override
@@ -413,6 +464,10 @@ public class CollectionStats {
     sb.append("    purgedDocSize: ").append(toIndentedString(purgedDocSize)).append("\n");
     sb.append("    bytesInserted: ").append(toIndentedString(bytesInserted)).append("\n");
     sb.append("    bytesOverwritten: ").append(toIndentedString(bytesOverwritten)).append("\n");
+    sb.append("    bulkBytesInserted: ").append(toIndentedString(bulkBytesInserted)).append("\n");
+    sb.append("    bulkBytesOverwritten: ")
+        .append(toIndentedString(bulkBytesOverwritten))
+        .append("\n");
     sb.append("}");
     return sb.toString();
   }

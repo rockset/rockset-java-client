@@ -31,7 +31,7 @@ public class TestCollection {
   public void testCollectionCreate() throws Exception {
     // create collection
     CreateCollectionRequest request = new CreateCollectionRequest().name(collectionName);
-    CreateCollectionResponse response = client.createCollection("commons", request);
+    CreateCollectionResponse response = client.collections.create("commons", request);
 
     Assert.assertEquals(response.getData().getName(), collectionName);
     Assert.assertEquals(response.getData().getStatus(), Collection.StatusEnum.CREATED);
@@ -40,7 +40,7 @@ public class TestCollection {
   @Test(dependsOnMethods = {"testCollectionCreate"})
   public void testGetCollection() throws Exception {
     // describe collection
-    GetCollectionResponse getCollectionResponse = client.getCollection("commons", collectionName);
+    GetCollectionResponse getCollectionResponse = client.collections.get("commons", collectionName);
     Assert.assertEquals(getCollectionResponse.getData().getName(), collectionName);
   }
 
@@ -60,7 +60,7 @@ public class TestCollection {
                                 new QueryRequestSql()
                                     .query(String.format("select * from \"%s\"", collectionName)));
 
-                    QueryResponse response = client.query(request);
+                    QueryResponse response = client.queries.query(request);
                     Assert.assertTrue(response.getResults().size() == 0);
                     return true;
                   } catch (Exception e) {
@@ -70,7 +70,7 @@ public class TestCollection {
 
     // delete collection
     DeleteCollectionResponse deleteCollectionResponse =
-        client.deleteCollection("commons", collectionName);
+        client.collections.delete("commons", collectionName);
     Assert.assertEquals(deleteCollectionResponse.getData().getName(), collectionName);
     // Assert.assertEquals(deleteCollectionResponse.getData().getStatus(),
     // Collection.StatusEnum.DELETED);

@@ -28,7 +28,7 @@ public class TestQuery {
     QueryRequest request =
         new QueryRequest().sql(new QueryRequestSql().query("select * from \"_events\" limit 1"));
 
-    QueryResponse response = client.query(request);
+    QueryResponse response = client.queries.query(request);
     Assert.assertTrue(response.getResults().size() == 1 || response.getResults().size() == 0);
   }
 }

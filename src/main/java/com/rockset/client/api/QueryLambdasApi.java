@@ -578,197 +578,13 @@ public class QueryLambdasApi {
    *
    * @param workspace name of the workspace (required)
    * @param queryLambda name of the Query Lambda (required)
-   * @param tag name of the tag (required)
-   * @param progressListener Progress listener
-   * @param progressRequestListener Progress request listener
-   * @return Call to execute
-   * @throws Exception If fail to serialize the request body object
-   */
-  public com.squareup.okhttp.Call delete_0Call(
-      String workspace,
-      String queryLambda,
-      String tag,
-      final ProgressResponseBody.ProgressListener progressListener,
-      final ProgressRequestBody.ProgressRequestListener progressRequestListener)
-      throws Exception {
-    Object localVarPostBody = null;
-
-    // create path and map variables
-    String localVarPath =
-        "/v1/orgs/self/ws/{workspace}/lambdas/{queryLambda}/tags/{tag}"
-            .replaceAll("\\{" + "workspace" + "\\}", apiClient.escapeString(workspace.toString()))
-            .replaceAll(
-                "\\{" + "queryLambda" + "\\}", apiClient.escapeString(queryLambda.toString()))
-            .replaceAll("\\{" + "tag" + "\\}", apiClient.escapeString(tag.toString()));
-
-    List<Pair> localVarQueryParams = new ArrayList<Pair>();
-    List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-
-    Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-
-    Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-    final String[] localVarAccepts = {"application/json"};
-    final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
-    if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
-
-    final String[] localVarContentTypes = {"application/json"};
-    final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
-    localVarHeaderParams.put("Content-Type", localVarContentType);
-
-    if (progressListener != null) {
-      apiClient
-          .getHttpClient()
-          .networkInterceptors()
-          .add(
-              new com.squareup.okhttp.Interceptor() {
-                @Override
-                public com.squareup.okhttp.Response intercept(
-                    com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                  com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
-                  return originalResponse
-                      .newBuilder()
-                      .body(new ProgressResponseBody(originalResponse.body(), progressListener))
-                      .build();
-                }
-              });
-    }
-
-    String[] localVarAuthNames = new String[] {};
-    return apiClient.buildCall(
-        localVarPath,
-        "DELETE",
-        localVarQueryParams,
-        localVarCollectionQueryParams,
-        localVarPostBody,
-        localVarHeaderParams,
-        localVarFormParams,
-        localVarAuthNames,
-        progressRequestListener);
-  }
-
-  @SuppressWarnings("rawtypes")
-  private com.squareup.okhttp.Call delete_0ValidateBeforeCall(
-      String workspace,
-      String queryLambda,
-      String tag,
-      final ProgressResponseBody.ProgressListener progressListener,
-      final ProgressRequestBody.ProgressRequestListener progressRequestListener)
-      throws Exception {
-
-    // verify the required parameter 'workspace' is set
-    if (workspace == null) {
-      throw new Exception(
-          "Missing the required parameter 'workspace' when calling delete_0(Async)");
-    }
-
-    // verify the required parameter 'queryLambda' is set
-    if (queryLambda == null) {
-      throw new Exception(
-          "Missing the required parameter 'queryLambda' when calling delete_0(Async)");
-    }
-
-    // verify the required parameter 'tag' is set
-    if (tag == null) {
-      throw new Exception("Missing the required parameter 'tag' when calling delete_0(Async)");
-    }
-
-    com.squareup.okhttp.Call call =
-        delete_0Call(workspace, queryLambda, tag, progressListener, progressRequestListener);
-    return call;
-  }
-
-  /**
-   * Delete Query Lambda Tag Version Delete a tag for a specific Query Lambda
-   *
-   * @param workspace name of the workspace (required)
-   * @param queryLambda name of the Query Lambda (required)
-   * @param tag name of the tag (required)
-   * @return QueryLambdaTagResponse
-   * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
-   *     body
-   */
-  public QueryLambdaTagResponse delete_0(String workspace, String queryLambda, String tag)
-      throws Exception {
-    ApiResponse<QueryLambdaTagResponse> resp = delete_0WithHttpInfo(workspace, queryLambda, tag);
-    return resp.getData();
-  }
-
-  /**
-   * Delete Query Lambda Tag Version Delete a tag for a specific Query Lambda
-   *
-   * @param workspace name of the workspace (required)
-   * @param queryLambda name of the Query Lambda (required)
-   * @param tag name of the tag (required)
-   * @return ApiResponse&lt;QueryLambdaTagResponse&gt;
-   * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
-   *     body
-   */
-  public ApiResponse<QueryLambdaTagResponse> delete_0WithHttpInfo(
-      String workspace, String queryLambda, String tag) throws Exception {
-    com.squareup.okhttp.Call call =
-        delete_0ValidateBeforeCall(workspace, queryLambda, tag, null, null);
-    Type localVarReturnType = new TypeToken<QueryLambdaTagResponse>() {}.getType();
-    return apiClient.execute(call, localVarReturnType);
-  }
-
-  /**
-   * Delete Query Lambda Tag Version (asynchronously) Delete a tag for a specific Query Lambda
-   *
-   * @param workspace name of the workspace (required)
-   * @param queryLambda name of the Query Lambda (required)
-   * @param tag name of the tag (required)
-   * @param callback The callback to be executed when the API call finishes
-   * @return The request call
-   * @throws Exception If fail to process the API call, e.g. serializing the request body object
-   */
-  public com.squareup.okhttp.Call delete_0Async(
-      String workspace,
-      String queryLambda,
-      String tag,
-      final ApiCallback<QueryLambdaTagResponse> callback)
-      throws Exception {
-
-    ProgressResponseBody.ProgressListener progressListener = null;
-    ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
-
-    if (callback != null) {
-      progressListener =
-          new ProgressResponseBody.ProgressListener() {
-            @Override
-            public void update(long bytesRead, long contentLength, boolean done) {
-              callback.onDownloadProgress(bytesRead, contentLength, done);
-            }
-          };
-
-      progressRequestListener =
-          new ProgressRequestBody.ProgressRequestListener() {
-            @Override
-            public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
-              callback.onUploadProgress(bytesWritten, contentLength, done);
-            }
-          };
-    }
-
-    com.squareup.okhttp.Call call =
-        delete_0ValidateBeforeCall(
-            workspace, queryLambda, tag, progressListener, progressRequestListener);
-    Type localVarReturnType = new TypeToken<QueryLambdaTagResponse>() {}.getType();
-    apiClient.executeAsync(call, localVarReturnType, callback);
-    return call;
-  }
-  /**
-   * Build call for delete_1
-   *
-   * @param workspace name of the workspace (required)
-   * @param queryLambda name of the Query Lambda (required)
    * @param version version (required)
    * @param progressListener Progress listener
    * @param progressRequestListener Progress request listener
    * @return Call to execute
    * @throws Exception If fail to serialize the request body object
    */
-  public com.squareup.okhttp.Call delete_1Call(
+  public com.squareup.okhttp.Call delete_0Call(
       String workspace,
       String queryLambda,
       String version,
@@ -832,7 +648,7 @@ public class QueryLambdasApi {
   }
 
   @SuppressWarnings("rawtypes")
-  private com.squareup.okhttp.Call delete_1ValidateBeforeCall(
+  private com.squareup.okhttp.Call delete_0ValidateBeforeCall(
       String workspace,
       String queryLambda,
       String version,
@@ -843,22 +659,22 @@ public class QueryLambdasApi {
     // verify the required parameter 'workspace' is set
     if (workspace == null) {
       throw new Exception(
-          "Missing the required parameter 'workspace' when calling delete_1(Async)");
+          "Missing the required parameter 'workspace' when calling delete_0(Async)");
     }
 
     // verify the required parameter 'queryLambda' is set
     if (queryLambda == null) {
       throw new Exception(
-          "Missing the required parameter 'queryLambda' when calling delete_1(Async)");
+          "Missing the required parameter 'queryLambda' when calling delete_0(Async)");
     }
 
     // verify the required parameter 'version' is set
     if (version == null) {
-      throw new Exception("Missing the required parameter 'version' when calling delete_1(Async)");
+      throw new Exception("Missing the required parameter 'version' when calling delete_0(Async)");
     }
 
     com.squareup.okhttp.Call call =
-        delete_1Call(workspace, queryLambda, version, progressListener, progressRequestListener);
+        delete_0Call(workspace, queryLambda, version, progressListener, progressRequestListener);
     return call;
   }
 
@@ -872,10 +688,10 @@ public class QueryLambdasApi {
    * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
    *     body
    */
-  public QueryLambdaVersionResponse delete_1(String workspace, String queryLambda, String version)
+  public QueryLambdaVersionResponse delete_0(String workspace, String queryLambda, String version)
       throws Exception {
     ApiResponse<QueryLambdaVersionResponse> resp =
-        delete_1WithHttpInfo(workspace, queryLambda, version);
+        delete_0WithHttpInfo(workspace, queryLambda, version);
     return resp.getData();
   }
 
@@ -889,10 +705,10 @@ public class QueryLambdasApi {
    * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
    *     body
    */
-  public ApiResponse<QueryLambdaVersionResponse> delete_1WithHttpInfo(
+  public ApiResponse<QueryLambdaVersionResponse> delete_0WithHttpInfo(
       String workspace, String queryLambda, String version) throws Exception {
     com.squareup.okhttp.Call call =
-        delete_1ValidateBeforeCall(workspace, queryLambda, version, null, null);
+        delete_0ValidateBeforeCall(workspace, queryLambda, version, null, null);
     Type localVarReturnType = new TypeToken<QueryLambdaVersionResponse>() {}.getType();
     return apiClient.execute(call, localVarReturnType);
   }
@@ -907,7 +723,7 @@ public class QueryLambdasApi {
    * @return The request call
    * @throws Exception If fail to process the API call, e.g. serializing the request body object
    */
-  public com.squareup.okhttp.Call delete_1Async(
+  public com.squareup.okhttp.Call delete_0Async(
       String workspace,
       String queryLambda,
       String version,
@@ -936,7 +752,7 @@ public class QueryLambdasApi {
     }
 
     com.squareup.okhttp.Call call =
-        delete_1ValidateBeforeCall(
+        delete_0ValidateBeforeCall(
             workspace, queryLambda, version, progressListener, progressRequestListener);
     Type localVarReturnType = new TypeToken<QueryLambdaVersionResponse>() {}.getType();
     apiClient.executeAsync(call, localVarReturnType, callback);
@@ -1245,7 +1061,7 @@ public class QueryLambdasApi {
   }
 
   /**
-   * Execute Query Lambda Execute a particular version of a Query Lambda.
+   * Execute Query Lambda By Version Execute a particular version of a Query Lambda.
    *
    * @param workspace name of the workspace (required)
    * @param queryLambda name of the Query Lambda (required)
@@ -1263,7 +1079,7 @@ public class QueryLambdasApi {
   }
 
   /**
-   * Execute Query Lambda Execute a particular version of a Query Lambda.
+   * Execute Query Lambda By Version Execute a particular version of a Query Lambda.
    *
    * @param workspace name of the workspace (required)
    * @param queryLambda name of the Query Lambda (required)
@@ -1283,7 +1099,8 @@ public class QueryLambdasApi {
   }
 
   /**
-   * Execute Query Lambda (asynchronously) Execute a particular version of a Query Lambda.
+   * Execute Query Lambda By Version (asynchronously) Execute a particular version of a Query
+   * Lambda.
    *
    * @param workspace name of the workspace (required)
    * @param queryLambda name of the Query Lambda (required)
@@ -1433,7 +1250,7 @@ public class QueryLambdasApi {
   }
 
   /**
-   * Get Query Lambda Tag Get the Query Lambda version associated with a given tag.
+   * Retrieve Query Lambda Tag Retrieve the Query Lambda version associated with a given tag.
    *
    * @param workspace name of the workspace (required)
    * @param queryLambda name of the Query Lambda (required)
@@ -1449,7 +1266,7 @@ public class QueryLambdasApi {
   }
 
   /**
-   * Get Query Lambda Tag Get the Query Lambda version associated with a given tag.
+   * Retrieve Query Lambda Tag Retrieve the Query Lambda version associated with a given tag.
    *
    * @param workspace name of the workspace (required)
    * @param queryLambda name of the Query Lambda (required)
@@ -1466,7 +1283,8 @@ public class QueryLambdasApi {
   }
 
   /**
-   * Get Query Lambda Tag (asynchronously) Get the Query Lambda version associated with a given tag.
+   * Retrieve Query Lambda Tag (asynchronously) Retrieve the Query Lambda version associated with a
+   * given tag.
    *
    * @param workspace name of the workspace (required)
    * @param queryLambda name of the Query Lambda (required)
@@ -1614,7 +1432,7 @@ public class QueryLambdasApi {
   }
 
   /**
-   * Get Query Lambda Version Get details for a specified version of a Query Lambda.
+   * Retrieve Query Lambda Version Retrieve details for a specified version of a Query Lambda.
    *
    * @param workspace name of the workspace (required)
    * @param queryLambda name of the Query Lambda (required)
@@ -1631,7 +1449,7 @@ public class QueryLambdasApi {
   }
 
   /**
-   * Get Query Lambda Version Get details for a specified version of a Query Lambda.
+   * Retrieve Query Lambda Version Retrieve details for a specified version of a Query Lambda.
    *
    * @param workspace name of the workspace (required)
    * @param queryLambda name of the Query Lambda (required)
@@ -1649,8 +1467,8 @@ public class QueryLambdasApi {
   }
 
   /**
-   * Get Query Lambda Version (asynchronously) Get details for a specified version of a Query
-   * Lambda.
+   * Retrieve Query Lambda Version (asynchronously) Retrieve details for a specified version of a
+   * Query Lambda.
    *
    * @param workspace name of the workspace (required)
    * @param queryLambda name of the Query Lambda (required)
@@ -1832,299 +1650,13 @@ public class QueryLambdasApi {
   /**
    * Build call for list_0
    *
-   * @param progressListener Progress listener
-   * @param progressRequestListener Progress request listener
-   * @return Call to execute
-   * @throws Exception If fail to serialize the request body object
-   */
-  public com.squareup.okhttp.Call list_0Call(
-      final ProgressResponseBody.ProgressListener progressListener,
-      final ProgressRequestBody.ProgressRequestListener progressRequestListener)
-      throws Exception {
-    Object localVarPostBody = null;
-
-    // create path and map variables
-    String localVarPath = "/v1/orgs/self/lambdas/tags";
-
-    List<Pair> localVarQueryParams = new ArrayList<Pair>();
-    List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-
-    Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-
-    Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-    final String[] localVarAccepts = {"application/json"};
-    final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
-    if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
-
-    final String[] localVarContentTypes = {"application/json"};
-    final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
-    localVarHeaderParams.put("Content-Type", localVarContentType);
-
-    if (progressListener != null) {
-      apiClient
-          .getHttpClient()
-          .networkInterceptors()
-          .add(
-              new com.squareup.okhttp.Interceptor() {
-                @Override
-                public com.squareup.okhttp.Response intercept(
-                    com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                  com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
-                  return originalResponse
-                      .newBuilder()
-                      .body(new ProgressResponseBody(originalResponse.body(), progressListener))
-                      .build();
-                }
-              });
-    }
-
-    String[] localVarAuthNames = new String[] {};
-    return apiClient.buildCall(
-        localVarPath,
-        "GET",
-        localVarQueryParams,
-        localVarCollectionQueryParams,
-        localVarPostBody,
-        localVarHeaderParams,
-        localVarFormParams,
-        localVarAuthNames,
-        progressRequestListener);
-  }
-
-  @SuppressWarnings("rawtypes")
-  private com.squareup.okhttp.Call list_0ValidateBeforeCall(
-      final ProgressResponseBody.ProgressListener progressListener,
-      final ProgressRequestBody.ProgressRequestListener progressRequestListener)
-      throws Exception {
-
-    com.squareup.okhttp.Call call = list_0Call(progressListener, progressRequestListener);
-    return call;
-  }
-
-  /**
-   * List All Query Lambda Tags List all distinct Query Lambda tags in an organization.
-   *
-   * @return ListQueryLambdaTagsResponse
-   * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
-   *     body
-   */
-  public ListQueryLambdaTagsResponse list_0() throws Exception {
-    ApiResponse<ListQueryLambdaTagsResponse> resp = list_0WithHttpInfo();
-    return resp.getData();
-  }
-
-  /**
-   * List All Query Lambda Tags List all distinct Query Lambda tags in an organization.
-   *
-   * @return ApiResponse&lt;ListQueryLambdaTagsResponse&gt;
-   * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
-   *     body
-   */
-  public ApiResponse<ListQueryLambdaTagsResponse> list_0WithHttpInfo() throws Exception {
-    com.squareup.okhttp.Call call = list_0ValidateBeforeCall(null, null);
-    Type localVarReturnType = new TypeToken<ListQueryLambdaTagsResponse>() {}.getType();
-    return apiClient.execute(call, localVarReturnType);
-  }
-
-  /**
-   * List All Query Lambda Tags (asynchronously) List all distinct Query Lambda tags in an
-   * organization.
-   *
-   * @param callback The callback to be executed when the API call finishes
-   * @return The request call
-   * @throws Exception If fail to process the API call, e.g. serializing the request body object
-   */
-  public com.squareup.okhttp.Call list_0Async(
-      final ApiCallback<ListQueryLambdaTagsResponse> callback) throws Exception {
-
-    ProgressResponseBody.ProgressListener progressListener = null;
-    ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
-
-    if (callback != null) {
-      progressListener =
-          new ProgressResponseBody.ProgressListener() {
-            @Override
-            public void update(long bytesRead, long contentLength, boolean done) {
-              callback.onDownloadProgress(bytesRead, contentLength, done);
-            }
-          };
-
-      progressRequestListener =
-          new ProgressRequestBody.ProgressRequestListener() {
-            @Override
-            public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
-              callback.onUploadProgress(bytesWritten, contentLength, done);
-            }
-          };
-    }
-
-    com.squareup.okhttp.Call call =
-        list_0ValidateBeforeCall(progressListener, progressRequestListener);
-    Type localVarReturnType = new TypeToken<ListQueryLambdaTagsResponse>() {}.getType();
-    apiClient.executeAsync(call, localVarReturnType, callback);
-    return call;
-  }
-  /**
-   * Build call for list_1
-   *
-   * @param tag name of the tag (required)
-   * @param progressListener Progress listener
-   * @param progressRequestListener Progress request listener
-   * @return Call to execute
-   * @throws Exception If fail to serialize the request body object
-   */
-  public com.squareup.okhttp.Call list_1Call(
-      String tag,
-      final ProgressResponseBody.ProgressListener progressListener,
-      final ProgressRequestBody.ProgressRequestListener progressRequestListener)
-      throws Exception {
-    Object localVarPostBody = null;
-
-    // create path and map variables
-    String localVarPath =
-        "/v1/orgs/self/lambdas/tags/{tag}"
-            .replaceAll("\\{" + "tag" + "\\}", apiClient.escapeString(tag.toString()));
-
-    List<Pair> localVarQueryParams = new ArrayList<Pair>();
-    List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-
-    Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-
-    Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-    final String[] localVarAccepts = {"application/json"};
-    final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
-    if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
-
-    final String[] localVarContentTypes = {"application/json"};
-    final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
-    localVarHeaderParams.put("Content-Type", localVarContentType);
-
-    if (progressListener != null) {
-      apiClient
-          .getHttpClient()
-          .networkInterceptors()
-          .add(
-              new com.squareup.okhttp.Interceptor() {
-                @Override
-                public com.squareup.okhttp.Response intercept(
-                    com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                  com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
-                  return originalResponse
-                      .newBuilder()
-                      .body(new ProgressResponseBody(originalResponse.body(), progressListener))
-                      .build();
-                }
-              });
-    }
-
-    String[] localVarAuthNames = new String[] {};
-    return apiClient.buildCall(
-        localVarPath,
-        "GET",
-        localVarQueryParams,
-        localVarCollectionQueryParams,
-        localVarPostBody,
-        localVarHeaderParams,
-        localVarFormParams,
-        localVarAuthNames,
-        progressRequestListener);
-  }
-
-  @SuppressWarnings("rawtypes")
-  private com.squareup.okhttp.Call list_1ValidateBeforeCall(
-      String tag,
-      final ProgressResponseBody.ProgressListener progressListener,
-      final ProgressRequestBody.ProgressRequestListener progressRequestListener)
-      throws Exception {
-
-    // verify the required parameter 'tag' is set
-    if (tag == null) {
-      throw new Exception("Missing the required parameter 'tag' when calling list_1(Async)");
-    }
-
-    com.squareup.okhttp.Call call = list_1Call(tag, progressListener, progressRequestListener);
-    return call;
-  }
-
-  /**
-   * List Query Lambda Tag Versions List all Query Lambda versions associated with a given tag.
-   *
-   * @param tag name of the tag (required)
-   * @return ListQueryLambdaVersionsResponse
-   * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
-   *     body
-   */
-  public ListQueryLambdaVersionsResponse list_1(String tag) throws Exception {
-    ApiResponse<ListQueryLambdaVersionsResponse> resp = list_1WithHttpInfo(tag);
-    return resp.getData();
-  }
-
-  /**
-   * List Query Lambda Tag Versions List all Query Lambda versions associated with a given tag.
-   *
-   * @param tag name of the tag (required)
-   * @return ApiResponse&lt;ListQueryLambdaVersionsResponse&gt;
-   * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
-   *     body
-   */
-  public ApiResponse<ListQueryLambdaVersionsResponse> list_1WithHttpInfo(String tag)
-      throws Exception {
-    com.squareup.okhttp.Call call = list_1ValidateBeforeCall(tag, null, null);
-    Type localVarReturnType = new TypeToken<ListQueryLambdaVersionsResponse>() {}.getType();
-    return apiClient.execute(call, localVarReturnType);
-  }
-
-  /**
-   * List Query Lambda Tag Versions (asynchronously) List all Query Lambda versions associated with
-   * a given tag.
-   *
-   * @param tag name of the tag (required)
-   * @param callback The callback to be executed when the API call finishes
-   * @return The request call
-   * @throws Exception If fail to process the API call, e.g. serializing the request body object
-   */
-  public com.squareup.okhttp.Call list_1Async(
-      String tag, final ApiCallback<ListQueryLambdaVersionsResponse> callback) throws Exception {
-
-    ProgressResponseBody.ProgressListener progressListener = null;
-    ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
-
-    if (callback != null) {
-      progressListener =
-          new ProgressResponseBody.ProgressListener() {
-            @Override
-            public void update(long bytesRead, long contentLength, boolean done) {
-              callback.onDownloadProgress(bytesRead, contentLength, done);
-            }
-          };
-
-      progressRequestListener =
-          new ProgressRequestBody.ProgressRequestListener() {
-            @Override
-            public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
-              callback.onUploadProgress(bytesWritten, contentLength, done);
-            }
-          };
-    }
-
-    com.squareup.okhttp.Call call =
-        list_1ValidateBeforeCall(tag, progressListener, progressRequestListener);
-    Type localVarReturnType = new TypeToken<ListQueryLambdaVersionsResponse>() {}.getType();
-    apiClient.executeAsync(call, localVarReturnType, callback);
-    return call;
-  }
-  /**
-   * Build call for list_2
-   *
    * @param workspace name of the workspace (required)
    * @param progressListener Progress listener
    * @param progressRequestListener Progress request listener
    * @return Call to execute
    * @throws Exception If fail to serialize the request body object
    */
-  public com.squareup.okhttp.Call list_2Call(
+  public com.squareup.okhttp.Call list_0Call(
       String workspace,
       final ProgressResponseBody.ProgressListener progressListener,
       final ProgressRequestBody.ProgressRequestListener progressRequestListener)
@@ -2183,7 +1715,7 @@ public class QueryLambdasApi {
   }
 
   @SuppressWarnings("rawtypes")
-  private com.squareup.okhttp.Call list_2ValidateBeforeCall(
+  private com.squareup.okhttp.Call list_0ValidateBeforeCall(
       String workspace,
       final ProgressResponseBody.ProgressListener progressListener,
       final ProgressRequestBody.ProgressRequestListener progressRequestListener)
@@ -2191,11 +1723,11 @@ public class QueryLambdasApi {
 
     // verify the required parameter 'workspace' is set
     if (workspace == null) {
-      throw new Exception("Missing the required parameter 'workspace' when calling list_2(Async)");
+      throw new Exception("Missing the required parameter 'workspace' when calling list_0(Async)");
     }
 
     com.squareup.okhttp.Call call =
-        list_2Call(workspace, progressListener, progressRequestListener);
+        list_0Call(workspace, progressListener, progressRequestListener);
     return call;
   }
 
@@ -2207,8 +1739,8 @@ public class QueryLambdasApi {
    * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
    *     body
    */
-  public ListQueryLambdasResponse list_2(String workspace) throws Exception {
-    ApiResponse<ListQueryLambdasResponse> resp = list_2WithHttpInfo(workspace);
+  public ListQueryLambdasResponse list_0(String workspace) throws Exception {
+    ApiResponse<ListQueryLambdasResponse> resp = list_0WithHttpInfo(workspace);
     return resp.getData();
   }
 
@@ -2220,9 +1752,9 @@ public class QueryLambdasApi {
    * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
    *     body
    */
-  public ApiResponse<ListQueryLambdasResponse> list_2WithHttpInfo(String workspace)
+  public ApiResponse<ListQueryLambdasResponse> list_0WithHttpInfo(String workspace)
       throws Exception {
-    com.squareup.okhttp.Call call = list_2ValidateBeforeCall(workspace, null, null);
+    com.squareup.okhttp.Call call = list_0ValidateBeforeCall(workspace, null, null);
     Type localVarReturnType = new TypeToken<ListQueryLambdasResponse>() {}.getType();
     return apiClient.execute(call, localVarReturnType);
   }
@@ -2235,7 +1767,7 @@ public class QueryLambdasApi {
    * @return The request call
    * @throws Exception If fail to process the API call, e.g. serializing the request body object
    */
-  public com.squareup.okhttp.Call list_2Async(
+  public com.squareup.okhttp.Call list_0Async(
       String workspace, final ApiCallback<ListQueryLambdasResponse> callback) throws Exception {
 
     ProgressResponseBody.ProgressListener progressListener = null;
@@ -2260,13 +1792,13 @@ public class QueryLambdasApi {
     }
 
     com.squareup.okhttp.Call call =
-        list_2ValidateBeforeCall(workspace, progressListener, progressRequestListener);
+        list_0ValidateBeforeCall(workspace, progressListener, progressRequestListener);
     Type localVarReturnType = new TypeToken<ListQueryLambdasResponse>() {}.getType();
     apiClient.executeAsync(call, localVarReturnType, callback);
     return call;
   }
   /**
-   * Build call for list_3
+   * Build call for list_1
    *
    * @param workspace name of the workspace (required)
    * @param queryLambda name of the Query Lambda (required)
@@ -2275,7 +1807,7 @@ public class QueryLambdasApi {
    * @return Call to execute
    * @throws Exception If fail to serialize the request body object
    */
-  public com.squareup.okhttp.Call list_3Call(
+  public com.squareup.okhttp.Call list_1Call(
       String workspace,
       String queryLambda,
       final ProgressResponseBody.ProgressListener progressListener,
@@ -2337,7 +1869,7 @@ public class QueryLambdasApi {
   }
 
   @SuppressWarnings("rawtypes")
-  private com.squareup.okhttp.Call list_3ValidateBeforeCall(
+  private com.squareup.okhttp.Call list_1ValidateBeforeCall(
       String workspace,
       String queryLambda,
       final ProgressResponseBody.ProgressListener progressListener,
@@ -2346,17 +1878,17 @@ public class QueryLambdasApi {
 
     // verify the required parameter 'workspace' is set
     if (workspace == null) {
-      throw new Exception("Missing the required parameter 'workspace' when calling list_3(Async)");
+      throw new Exception("Missing the required parameter 'workspace' when calling list_1(Async)");
     }
 
     // verify the required parameter 'queryLambda' is set
     if (queryLambda == null) {
       throw new Exception(
-          "Missing the required parameter 'queryLambda' when calling list_3(Async)");
+          "Missing the required parameter 'queryLambda' when calling list_1(Async)");
     }
 
     com.squareup.okhttp.Call call =
-        list_3Call(workspace, queryLambda, progressListener, progressRequestListener);
+        list_1Call(workspace, queryLambda, progressListener, progressRequestListener);
     return call;
   }
 
@@ -2369,8 +1901,8 @@ public class QueryLambdasApi {
    * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
    *     body
    */
-  public ListQueryLambdaTagsResponse list_3(String workspace, String queryLambda) throws Exception {
-    ApiResponse<ListQueryLambdaTagsResponse> resp = list_3WithHttpInfo(workspace, queryLambda);
+  public ListQueryLambdaTagsResponse list_1(String workspace, String queryLambda) throws Exception {
+    ApiResponse<ListQueryLambdaTagsResponse> resp = list_1WithHttpInfo(workspace, queryLambda);
     return resp.getData();
   }
 
@@ -2383,9 +1915,9 @@ public class QueryLambdasApi {
    * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
    *     body
    */
-  public ApiResponse<ListQueryLambdaTagsResponse> list_3WithHttpInfo(
+  public ApiResponse<ListQueryLambdaTagsResponse> list_1WithHttpInfo(
       String workspace, String queryLambda) throws Exception {
-    com.squareup.okhttp.Call call = list_3ValidateBeforeCall(workspace, queryLambda, null, null);
+    com.squareup.okhttp.Call call = list_1ValidateBeforeCall(workspace, queryLambda, null, null);
     Type localVarReturnType = new TypeToken<ListQueryLambdaTagsResponse>() {}.getType();
     return apiClient.execute(call, localVarReturnType);
   }
@@ -2399,7 +1931,7 @@ public class QueryLambdasApi {
    * @return The request call
    * @throws Exception If fail to process the API call, e.g. serializing the request body object
    */
-  public com.squareup.okhttp.Call list_3Async(
+  public com.squareup.okhttp.Call list_1Async(
       String workspace, String queryLambda, final ApiCallback<ListQueryLambdaTagsResponse> callback)
       throws Exception {
 
@@ -2425,13 +1957,13 @@ public class QueryLambdasApi {
     }
 
     com.squareup.okhttp.Call call =
-        list_3ValidateBeforeCall(workspace, queryLambda, progressListener, progressRequestListener);
+        list_1ValidateBeforeCall(workspace, queryLambda, progressListener, progressRequestListener);
     Type localVarReturnType = new TypeToken<ListQueryLambdaTagsResponse>() {}.getType();
     apiClient.executeAsync(call, localVarReturnType, callback);
     return call;
   }
   /**
-   * Build call for list_4
+   * Build call for list_2
    *
    * @param workspace name of the workspace (required)
    * @param queryLambda name of the Query Lambda (required)
@@ -2440,7 +1972,7 @@ public class QueryLambdasApi {
    * @return Call to execute
    * @throws Exception If fail to serialize the request body object
    */
-  public com.squareup.okhttp.Call list_4Call(
+  public com.squareup.okhttp.Call list_2Call(
       String workspace,
       String queryLambda,
       final ProgressResponseBody.ProgressListener progressListener,
@@ -2502,7 +2034,7 @@ public class QueryLambdasApi {
   }
 
   @SuppressWarnings("rawtypes")
-  private com.squareup.okhttp.Call list_4ValidateBeforeCall(
+  private com.squareup.okhttp.Call list_2ValidateBeforeCall(
       String workspace,
       String queryLambda,
       final ProgressResponseBody.ProgressListener progressListener,
@@ -2511,17 +2043,17 @@ public class QueryLambdasApi {
 
     // verify the required parameter 'workspace' is set
     if (workspace == null) {
-      throw new Exception("Missing the required parameter 'workspace' when calling list_4(Async)");
+      throw new Exception("Missing the required parameter 'workspace' when calling list_2(Async)");
     }
 
     // verify the required parameter 'queryLambda' is set
     if (queryLambda == null) {
       throw new Exception(
-          "Missing the required parameter 'queryLambda' when calling list_4(Async)");
+          "Missing the required parameter 'queryLambda' when calling list_2(Async)");
     }
 
     com.squareup.okhttp.Call call =
-        list_4Call(workspace, queryLambda, progressListener, progressRequestListener);
+        list_2Call(workspace, queryLambda, progressListener, progressRequestListener);
     return call;
   }
 
@@ -2534,9 +2066,9 @@ public class QueryLambdasApi {
    * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
    *     body
    */
-  public ListQueryLambdaVersionsResponse list_4(String workspace, String queryLambda)
+  public ListQueryLambdaVersionsResponse list_2(String workspace, String queryLambda)
       throws Exception {
-    ApiResponse<ListQueryLambdaVersionsResponse> resp = list_4WithHttpInfo(workspace, queryLambda);
+    ApiResponse<ListQueryLambdaVersionsResponse> resp = list_2WithHttpInfo(workspace, queryLambda);
     return resp.getData();
   }
 
@@ -2549,9 +2081,9 @@ public class QueryLambdasApi {
    * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
    *     body
    */
-  public ApiResponse<ListQueryLambdaVersionsResponse> list_4WithHttpInfo(
+  public ApiResponse<ListQueryLambdaVersionsResponse> list_2WithHttpInfo(
       String workspace, String queryLambda) throws Exception {
-    com.squareup.okhttp.Call call = list_4ValidateBeforeCall(workspace, queryLambda, null, null);
+    com.squareup.okhttp.Call call = list_2ValidateBeforeCall(workspace, queryLambda, null, null);
     Type localVarReturnType = new TypeToken<ListQueryLambdaVersionsResponse>() {}.getType();
     return apiClient.execute(call, localVarReturnType);
   }
@@ -2565,7 +2097,7 @@ public class QueryLambdasApi {
    * @return The request call
    * @throws Exception If fail to process the API call, e.g. serializing the request body object
    */
-  public com.squareup.okhttp.Call list_4Async(
+  public com.squareup.okhttp.Call list_2Async(
       String workspace,
       String queryLambda,
       final ApiCallback<ListQueryLambdaVersionsResponse> callback)
@@ -2593,7 +2125,7 @@ public class QueryLambdasApi {
     }
 
     com.squareup.okhttp.Call call =
-        list_4ValidateBeforeCall(workspace, queryLambda, progressListener, progressRequestListener);
+        list_2ValidateBeforeCall(workspace, queryLambda, progressListener, progressRequestListener);
     Type localVarReturnType = new TypeToken<ListQueryLambdaVersionsResponse>() {}.getType();
     apiClient.executeAsync(call, localVarReturnType, callback);
     return call;

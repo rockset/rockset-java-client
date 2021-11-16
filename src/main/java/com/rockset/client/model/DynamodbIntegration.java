@@ -20,13 +20,16 @@ import java.util.Objects;
 /** DynamodbIntegration */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class DynamodbIntegration {
   @SerializedName("aws_access_key")
   private AwsAccessKey awsAccessKey = null;
 
   @SerializedName("aws_role")
   private AwsRole awsRole = null;
+
+  @SerializedName("s3_export_bucket_name")
+  private String s3ExportBucketName = null;
 
   public DynamodbIntegration awsAccessKey(AwsAccessKey awsAccessKey) {
     this.awsAccessKey = awsAccessKey;
@@ -68,6 +71,26 @@ public class DynamodbIntegration {
     this.awsRole = awsRole;
   }
 
+  public DynamodbIntegration s3ExportBucketName(String s3ExportBucketName) {
+    this.s3ExportBucketName = s3ExportBucketName;
+    return this;
+  }
+
+  /**
+   * Get s3ExportBucketName
+   *
+   * @return s3ExportBucketName
+   */
+  @JsonProperty("s3_export_bucket_name")
+  @ApiModelProperty(value = "")
+  public String getS3ExportBucketName() {
+    return s3ExportBucketName;
+  }
+
+  public void setS3ExportBucketName(String s3ExportBucketName) {
+    this.s3ExportBucketName = s3ExportBucketName;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -78,12 +101,13 @@ public class DynamodbIntegration {
     }
     DynamodbIntegration dynamodbIntegration = (DynamodbIntegration) o;
     return Objects.equals(this.awsAccessKey, dynamodbIntegration.awsAccessKey)
-        && Objects.equals(this.awsRole, dynamodbIntegration.awsRole);
+        && Objects.equals(this.awsRole, dynamodbIntegration.awsRole)
+        && Objects.equals(this.s3ExportBucketName, dynamodbIntegration.s3ExportBucketName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(awsAccessKey, awsRole);
+    return Objects.hash(awsAccessKey, awsRole, s3ExportBucketName);
   }
 
   @Override
@@ -93,6 +117,7 @@ public class DynamodbIntegration {
 
     sb.append("    awsAccessKey: ").append(toIndentedString(awsAccessKey)).append("\n");
     sb.append("    awsRole: ").append(toIndentedString(awsRole)).append("\n");
+    sb.append("    s3ExportBucketName: ").append(toIndentedString(s3ExportBucketName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

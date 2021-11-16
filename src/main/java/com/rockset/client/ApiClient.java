@@ -12,7 +12,6 @@
 
 package com.rockset.client;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rockset.client.auth.Authentication;
@@ -881,7 +880,6 @@ public class ApiClient {
 
           final ObjectMapper objectMapper = new ObjectMapper();
           objectMapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS, true);
-          objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
           errorModel = objectMapper.readValue(respBody, ErrorModel.class);
 
         } catch (final IOException e) {

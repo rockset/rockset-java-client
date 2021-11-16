@@ -581,7 +581,7 @@ public class WorkspacesApi {
   }
 
   /**
-   * Get Workspace Get information about a single workspace.
+   * Retrieve Workspace Get information about a single workspace.
    *
    * @param workspace name of the workspace (required)
    * @return GetWorkspaceResponse
@@ -594,7 +594,7 @@ public class WorkspacesApi {
   }
 
   /**
-   * Get Workspace Get information about a single workspace.
+   * Retrieve Workspace Get information about a single workspace.
    *
    * @param workspace name of the workspace (required)
    * @return ApiResponse&lt;GetWorkspaceResponse&gt;
@@ -608,7 +608,7 @@ public class WorkspacesApi {
   }
 
   /**
-   * Get Workspace (asynchronously) Get information about a single workspace.
+   * Retrieve Workspace (asynchronously) Get information about a single workspace.
    *
    * @param workspace name of the workspace (required)
    * @param callback The callback to be executed when the API call finishes
@@ -648,12 +648,14 @@ public class WorkspacesApi {
   /**
    * Build call for list
    *
+   * @param fetchAcrossRegions (optional)
    * @param progressListener Progress listener
    * @param progressRequestListener Progress request listener
    * @return Call to execute
    * @throws Exception If fail to serialize the request body object
    */
   public com.squareup.okhttp.Call listCall(
+      Boolean fetchAcrossRegions,
       final ProgressResponseBody.ProgressListener progressListener,
       final ProgressRequestBody.ProgressRequestListener progressRequestListener)
       throws Exception {
@@ -664,6 +666,9 @@ public class WorkspacesApi {
 
     List<Pair> localVarQueryParams = new ArrayList<Pair>();
     List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+    if (fetchAcrossRegions != null)
+      localVarQueryParams.addAll(
+          apiClient.parameterToPair("fetch_across_regions", fetchAcrossRegions));
 
     Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -710,35 +715,40 @@ public class WorkspacesApi {
 
   @SuppressWarnings("rawtypes")
   private com.squareup.okhttp.Call listValidateBeforeCall(
+      Boolean fetchAcrossRegions,
       final ProgressResponseBody.ProgressListener progressListener,
       final ProgressRequestBody.ProgressRequestListener progressRequestListener)
       throws Exception {
 
-    com.squareup.okhttp.Call call = listCall(progressListener, progressRequestListener);
+    com.squareup.okhttp.Call call =
+        listCall(fetchAcrossRegions, progressListener, progressRequestListener);
     return call;
   }
 
   /**
    * List Workspaces List all workspaces in an organization.
    *
+   * @param fetchAcrossRegions (optional)
    * @return ListWorkspacesResponse
    * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
    *     body
    */
-  public ListWorkspacesResponse list() throws Exception {
-    ApiResponse<ListWorkspacesResponse> resp = listWithHttpInfo();
+  public ListWorkspacesResponse list(Boolean fetchAcrossRegions) throws Exception {
+    ApiResponse<ListWorkspacesResponse> resp = listWithHttpInfo(fetchAcrossRegions);
     return resp.getData();
   }
 
   /**
    * List Workspaces List all workspaces in an organization.
    *
+   * @param fetchAcrossRegions (optional)
    * @return ApiResponse&lt;ListWorkspacesResponse&gt;
    * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
    *     body
    */
-  public ApiResponse<ListWorkspacesResponse> listWithHttpInfo() throws Exception {
-    com.squareup.okhttp.Call call = listValidateBeforeCall(null, null);
+  public ApiResponse<ListWorkspacesResponse> listWithHttpInfo(Boolean fetchAcrossRegions)
+      throws Exception {
+    com.squareup.okhttp.Call call = listValidateBeforeCall(fetchAcrossRegions, null, null);
     Type localVarReturnType = new TypeToken<ListWorkspacesResponse>() {}.getType();
     return apiClient.execute(call, localVarReturnType);
   }
@@ -746,11 +756,13 @@ public class WorkspacesApi {
   /**
    * List Workspaces (asynchronously) List all workspaces in an organization.
    *
+   * @param fetchAcrossRegions (optional)
    * @param callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws Exception If fail to process the API call, e.g. serializing the request body object
    */
-  public com.squareup.okhttp.Call listAsync(final ApiCallback<ListWorkspacesResponse> callback)
+  public com.squareup.okhttp.Call listAsync(
+      Boolean fetchAcrossRegions, final ApiCallback<ListWorkspacesResponse> callback)
       throws Exception {
 
     ProgressResponseBody.ProgressListener progressListener = null;
@@ -775,7 +787,7 @@ public class WorkspacesApi {
     }
 
     com.squareup.okhttp.Call call =
-        listValidateBeforeCall(progressListener, progressRequestListener);
+        listValidateBeforeCall(fetchAcrossRegions, progressListener, progressRequestListener);
     Type localVarReturnType = new TypeToken<ListWorkspacesResponse>() {}.getType();
     apiClient.executeAsync(call, localVarReturnType, callback);
     return call;

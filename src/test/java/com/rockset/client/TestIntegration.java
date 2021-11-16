@@ -41,7 +41,7 @@ public class TestIntegration {
                         new AwsAccessKey()
                             .awsAccessKeyId(awsAccessKey)
                             .awsSecretAccessKey(awsSecretkey)));
-    CreateIntegrationResponse response = client.createIntegration(request);
+    CreateIntegrationResponse response = client.integrations.create(request);
     Assert.assertEquals(response.getData().getName(), integrationName);
     Assert.assertEquals(
         response.getData().getKinesis().getAwsAccessKey().getAwsAccessKeyId().substring(0, 4),
@@ -54,7 +54,7 @@ public class TestIntegration {
   @Test(dependsOnMethods = {"testIntegrationCreate"})
   public void testGetIntegration() throws Exception {
     // describe integration
-    GetIntegrationResponse getIntegrationResponse = client.getIntegration(integrationName);
+    GetIntegrationResponse getIntegrationResponse = client.integrations.get(integrationName);
     Assert.assertEquals(getIntegrationResponse.getData().getName(), integrationName);
     Assert.assertEquals(
         getIntegrationResponse
@@ -77,7 +77,8 @@ public class TestIntegration {
   @Test(dependsOnMethods = {"testGetIntegration"})
   public void testDeleteIntegration() throws Exception {
     // delete integration
-    DeleteIntegrationResponse deleteIntegrationResponse = client.deleteIntegration(integrationName);
+    DeleteIntegrationResponse deleteIntegrationResponse =
+        client.integrations.delete(integrationName);
     Assert.assertEquals(deleteIntegrationResponse.getData().getName(), integrationName);
   }
 }

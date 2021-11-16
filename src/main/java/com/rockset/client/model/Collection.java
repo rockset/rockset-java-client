@@ -27,7 +27,7 @@ import java.util.Objects;
 /** Collection */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class Collection {
   @SerializedName("created_at")
   private String createdAt = null;
@@ -123,6 +123,9 @@ public class Collection {
   @SerializedName("field_mappings")
   private List<FieldMappingV2> fieldMappings = null;
 
+  @SerializedName("field_mapping_query")
+  private FieldMappingQuery fieldMappingQuery = null;
+
   @SerializedName("clustering_key")
   private List<FieldPartition> clusteringKey = null;
 
@@ -137,6 +140,12 @@ public class Collection {
 
   @SerializedName("fieldPartitions")
   private List<FieldPartition> fieldPartitions = null;
+
+  @SerializedName("insert_only")
+  private Boolean insertOnly = null;
+
+  @SerializedName("enable_exactly_once_writes")
+  private Boolean enableExactlyOnceWrites = null;
 
   public Collection createdAt(String createdAt) {
     this.createdAt = createdAt;
@@ -364,6 +373,26 @@ public class Collection {
     this.fieldMappings = fieldMappings;
   }
 
+  public Collection fieldMappingQuery(FieldMappingQuery fieldMappingQuery) {
+    this.fieldMappingQuery = fieldMappingQuery;
+    return this;
+  }
+
+  /**
+   * Field mapping for a collection
+   *
+   * @return fieldMappingQuery
+   */
+  @JsonProperty("field_mapping_query")
+  @ApiModelProperty(value = "Field mapping for a collection")
+  public FieldMappingQuery getFieldMappingQuery() {
+    return fieldMappingQuery;
+  }
+
+  public void setFieldMappingQuery(FieldMappingQuery fieldMappingQuery) {
+    this.fieldMappingQuery = fieldMappingQuery;
+  }
+
   public Collection clusteringKey(List<FieldPartition> clusteringKey) {
     this.clusteringKey = clusteringKey;
     return this;
@@ -498,6 +527,46 @@ public class Collection {
     this.fieldPartitions = fieldPartitions;
   }
 
+  public Collection insertOnly(Boolean insertOnly) {
+    this.insertOnly = insertOnly;
+    return this;
+  }
+
+  /**
+   * Whether the collection is insert only or not
+   *
+   * @return insertOnly
+   */
+  @JsonProperty("insert_only")
+  @ApiModelProperty(value = "Whether the collection is insert only or not")
+  public Boolean isInsertOnly() {
+    return insertOnly;
+  }
+
+  public void setInsertOnly(Boolean insertOnly) {
+    this.insertOnly = insertOnly;
+  }
+
+  public Collection enableExactlyOnceWrites(Boolean enableExactlyOnceWrites) {
+    this.enableExactlyOnceWrites = enableExactlyOnceWrites;
+    return this;
+  }
+
+  /**
+   * If true, exactly-once write semantics is enabled.
+   *
+   * @return enableExactlyOnceWrites
+   */
+  @JsonProperty("enable_exactly_once_writes")
+  @ApiModelProperty(value = "If true, exactly-once write semantics is enabled.")
+  public Boolean isEnableExactlyOnceWrites() {
+    return enableExactlyOnceWrites;
+  }
+
+  public void setEnableExactlyOnceWrites(Boolean enableExactlyOnceWrites) {
+    this.enableExactlyOnceWrites = enableExactlyOnceWrites;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -517,12 +586,15 @@ public class Collection {
         && Objects.equals(this.stats, collection.stats)
         && Objects.equals(this.retentionSecs, collection.retentionSecs)
         && Objects.equals(this.fieldMappings, collection.fieldMappings)
+        && Objects.equals(this.fieldMappingQuery, collection.fieldMappingQuery)
         && Objects.equals(this.clusteringKey, collection.clusteringKey)
         && Objects.equals(this.aliases, collection.aliases)
         && Objects.equals(this.fieldSchemas, collection.fieldSchemas)
         && Objects.equals(
             this.invertedIndexGroupEncodingOptions, collection.invertedIndexGroupEncodingOptions)
-        && Objects.equals(this.fieldPartitions, collection.fieldPartitions);
+        && Objects.equals(this.fieldPartitions, collection.fieldPartitions)
+        && Objects.equals(this.insertOnly, collection.insertOnly)
+        && Objects.equals(this.enableExactlyOnceWrites, collection.enableExactlyOnceWrites);
   }
 
   @Override
@@ -538,11 +610,14 @@ public class Collection {
         stats,
         retentionSecs,
         fieldMappings,
+        fieldMappingQuery,
         clusteringKey,
         aliases,
         fieldSchemas,
         invertedIndexGroupEncodingOptions,
-        fieldPartitions);
+        fieldPartitions,
+        insertOnly,
+        enableExactlyOnceWrites);
   }
 
   @Override
@@ -560,6 +635,7 @@ public class Collection {
     sb.append("    stats: ").append(toIndentedString(stats)).append("\n");
     sb.append("    retentionSecs: ").append(toIndentedString(retentionSecs)).append("\n");
     sb.append("    fieldMappings: ").append(toIndentedString(fieldMappings)).append("\n");
+    sb.append("    fieldMappingQuery: ").append(toIndentedString(fieldMappingQuery)).append("\n");
     sb.append("    clusteringKey: ").append(toIndentedString(clusteringKey)).append("\n");
     sb.append("    aliases: ").append(toIndentedString(aliases)).append("\n");
     sb.append("    fieldSchemas: ").append(toIndentedString(fieldSchemas)).append("\n");
@@ -567,6 +643,10 @@ public class Collection {
         .append(toIndentedString(invertedIndexGroupEncodingOptions))
         .append("\n");
     sb.append("    fieldPartitions: ").append(toIndentedString(fieldPartitions)).append("\n");
+    sb.append("    insertOnly: ").append(toIndentedString(insertOnly)).append("\n");
+    sb.append("    enableExactlyOnceWrites: ")
+        .append(toIndentedString(enableExactlyOnceWrites))
+        .append("\n");
     sb.append("}");
     return sb.toString();
   }

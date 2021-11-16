@@ -20,7 +20,7 @@ import java.util.Objects;
 /** CreateApiKeyResponse */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class CreateApiKeyResponse {
   @SerializedName("data")
   private ApiKey data = null;
@@ -31,12 +31,12 @@ public class CreateApiKeyResponse {
   }
 
   /**
-   * the API key that was created
+   * The API key that was created.
    *
    * @return data
    */
   @JsonProperty("data")
-  @ApiModelProperty(value = "the API key that was created")
+  @ApiModelProperty(value = "The API key that was created.")
   public ApiKey getData() {
     return data;
   }

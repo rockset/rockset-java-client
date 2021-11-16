@@ -15,38 +15,23 @@ package com.rockset.client.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /** SourceKinesis */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class SourceKinesis {
-  @SerializedName("stream_name")
-  private String streamName = null;
-
   @SerializedName("aws_region")
   private String awsRegion = null;
 
-  public SourceKinesis streamName(String streamName) {
-    this.streamName = streamName;
-    return this;
-  }
+  @SerializedName("stream_name")
+  private String streamName = null;
 
-  /**
-   * name of kinesis stream
-   *
-   * @return streamName
-   */
-  @JsonProperty("stream_name")
-  @ApiModelProperty(example = "click_stream", required = true, value = "name of kinesis stream")
-  public String getStreamName() {
-    return streamName;
-  }
-
-  public void setStreamName(String streamName) {
-    this.streamName = streamName;
-  }
+  @SerializedName("dms_primary_key")
+  private List<String> dmsPrimaryKey = null;
 
   public SourceKinesis awsRegion(String awsRegion) {
     this.awsRegion = awsRegion;
@@ -70,6 +55,54 @@ public class SourceKinesis {
     this.awsRegion = awsRegion;
   }
 
+  public SourceKinesis streamName(String streamName) {
+    this.streamName = streamName;
+    return this;
+  }
+
+  /**
+   * name of kinesis stream
+   *
+   * @return streamName
+   */
+  @JsonProperty("stream_name")
+  @ApiModelProperty(example = "click_stream", required = true, value = "name of kinesis stream")
+  public String getStreamName() {
+    return streamName;
+  }
+
+  public void setStreamName(String streamName) {
+    this.streamName = streamName;
+  }
+
+  public SourceKinesis dmsPrimaryKey(List<String> dmsPrimaryKey) {
+    this.dmsPrimaryKey = dmsPrimaryKey;
+    return this;
+  }
+
+  public SourceKinesis addDmsPrimaryKeyItem(String dmsPrimaryKeyItem) {
+    if (this.dmsPrimaryKey == null) {
+      this.dmsPrimaryKey = new ArrayList<String>();
+    }
+    this.dmsPrimaryKey.add(dmsPrimaryKeyItem);
+    return this;
+  }
+
+  /**
+   * set of fields that correspond to a DMS primary key
+   *
+   * @return dmsPrimaryKey
+   */
+  @JsonProperty("dms_primary_key")
+  @ApiModelProperty(value = "set of fields that correspond to a DMS primary key")
+  public List<String> getDmsPrimaryKey() {
+    return dmsPrimaryKey;
+  }
+
+  public void setDmsPrimaryKey(List<String> dmsPrimaryKey) {
+    this.dmsPrimaryKey = dmsPrimaryKey;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -79,13 +112,14 @@ public class SourceKinesis {
       return false;
     }
     SourceKinesis sourceKinesis = (SourceKinesis) o;
-    return Objects.equals(this.streamName, sourceKinesis.streamName)
-        && Objects.equals(this.awsRegion, sourceKinesis.awsRegion);
+    return Objects.equals(this.awsRegion, sourceKinesis.awsRegion)
+        && Objects.equals(this.streamName, sourceKinesis.streamName)
+        && Objects.equals(this.dmsPrimaryKey, sourceKinesis.dmsPrimaryKey);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(streamName, awsRegion);
+    return Objects.hash(awsRegion, streamName, dmsPrimaryKey);
   }
 
   @Override
@@ -93,8 +127,9 @@ public class SourceKinesis {
     StringBuilder sb = new StringBuilder();
     sb.append("class SourceKinesis {\n");
 
-    sb.append("    streamName: ").append(toIndentedString(streamName)).append("\n");
     sb.append("    awsRegion: ").append(toIndentedString(awsRegion)).append("\n");
+    sb.append("    streamName: ").append(toIndentedString(streamName)).append("\n");
+    sb.append("    dmsPrimaryKey: ").append(toIndentedString(dmsPrimaryKey)).append("\n");
     sb.append("}");
     return sb.toString();
   }

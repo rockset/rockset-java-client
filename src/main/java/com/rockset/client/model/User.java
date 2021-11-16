@@ -13,13 +13,8 @@
 package com.rockset.client.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModelProperty;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -27,7 +22,7 @@ import java.util.Objects;
 /** User */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class User {
   @SerializedName("created_at")
   private String createdAt = null;
@@ -46,68 +41,6 @@ public class User {
 
   @SerializedName("state")
   private String state = null;
-
-  @SerializedName("org")
-  private String org = null;
-
-  /** Gets or Sets inviteState */
-  @JsonAdapter(InviteStateEnum.Adapter.class)
-  public enum InviteStateEnum {
-    PENDING("PENDING"),
-
-    ACCEPTED("ACCEPTED"),
-
-    EXPIRED("EXPIRED"),
-
-    CANCELLED("CANCELLED");
-
-    private String value;
-
-    InviteStateEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static InviteStateEnum fromValue(String text) {
-      for (InviteStateEnum b : InviteStateEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-
-    public static class Adapter extends TypeAdapter<InviteStateEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final InviteStateEnum enumeration)
-          throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public InviteStateEnum read(final JsonReader jsonReader) throws IOException {
-        String value = jsonReader.nextString();
-        return InviteStateEnum.fromValue(String.valueOf(value));
-      }
-    }
-  }
-
-  @SerializedName("invite_state")
-  private InviteStateEnum inviteState = null;
-
-  @SerializedName("orgs")
-  private List<Organization> orgs = null;
-
-  @SerializedName("org_memberships")
-  private List<OrgMembership> orgMemberships = null;
 
   public User createdAt(String createdAt) {
     this.createdAt = createdAt;
@@ -239,102 +172,6 @@ public class User {
     this.state = state;
   }
 
-  public User org(String org) {
-    this.org = org;
-    return this;
-  }
-
-  /**
-   * Get org
-   *
-   * @return org
-   */
-  @JsonProperty("org")
-  @ApiModelProperty(value = "")
-  public String getOrg() {
-    return org;
-  }
-
-  public void setOrg(String org) {
-    this.org = org;
-  }
-
-  public User inviteState(InviteStateEnum inviteState) {
-    this.inviteState = inviteState;
-    return this;
-  }
-
-  /**
-   * Get inviteState
-   *
-   * @return inviteState
-   */
-  @JsonProperty("invite_state")
-  @ApiModelProperty(value = "")
-  public InviteStateEnum getInviteState() {
-    return inviteState;
-  }
-
-  public void setInviteState(InviteStateEnum inviteState) {
-    this.inviteState = inviteState;
-  }
-
-  public User orgs(List<Organization> orgs) {
-    this.orgs = orgs;
-    return this;
-  }
-
-  public User addOrgsItem(Organization orgsItem) {
-    if (this.orgs == null) {
-      this.orgs = new ArrayList<Organization>();
-    }
-    this.orgs.add(orgsItem);
-    return this;
-  }
-
-  /**
-   * Get orgs
-   *
-   * @return orgs
-   */
-  @JsonProperty("orgs")
-  @ApiModelProperty(value = "")
-  public List<Organization> getOrgs() {
-    return orgs;
-  }
-
-  public void setOrgs(List<Organization> orgs) {
-    this.orgs = orgs;
-  }
-
-  public User orgMemberships(List<OrgMembership> orgMemberships) {
-    this.orgMemberships = orgMemberships;
-    return this;
-  }
-
-  public User addOrgMembershipsItem(OrgMembership orgMembershipsItem) {
-    if (this.orgMemberships == null) {
-      this.orgMemberships = new ArrayList<OrgMembership>();
-    }
-    this.orgMemberships.add(orgMembershipsItem);
-    return this;
-  }
-
-  /**
-   * Get orgMemberships
-   *
-   * @return orgMemberships
-   */
-  @JsonProperty("org_memberships")
-  @ApiModelProperty(value = "")
-  public List<OrgMembership> getOrgMemberships() {
-    return orgMemberships;
-  }
-
-  public void setOrgMemberships(List<OrgMembership> orgMemberships) {
-    this.orgMemberships = orgMemberships;
-  }
-
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -349,26 +186,12 @@ public class User {
         && Objects.equals(this.firstName, user.firstName)
         && Objects.equals(this.lastName, user.lastName)
         && Objects.equals(this.roles, user.roles)
-        && Objects.equals(this.state, user.state)
-        && Objects.equals(this.org, user.org)
-        && Objects.equals(this.inviteState, user.inviteState)
-        && Objects.equals(this.orgs, user.orgs)
-        && Objects.equals(this.orgMemberships, user.orgMemberships);
+        && Objects.equals(this.state, user.state);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(
-        createdAt,
-        email,
-        firstName,
-        lastName,
-        roles,
-        state,
-        org,
-        inviteState,
-        orgs,
-        orgMemberships);
+    return Objects.hash(createdAt, email, firstName, lastName, roles, state);
   }
 
   @Override
@@ -382,10 +205,6 @@ public class User {
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
     sb.append("    roles: ").append(toIndentedString(roles)).append("\n");
     sb.append("    state: ").append(toIndentedString(state)).append("\n");
-    sb.append("    org: ").append(toIndentedString(org)).append("\n");
-    sb.append("    inviteState: ").append(toIndentedString(inviteState)).append("\n");
-    sb.append("    orgs: ").append(toIndentedString(orgs)).append("\n");
-    sb.append("    orgMemberships: ").append(toIndentedString(orgMemberships)).append("\n");
     sb.append("}");
     return sb.toString();
   }

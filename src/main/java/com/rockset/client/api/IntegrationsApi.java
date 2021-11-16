@@ -436,7 +436,7 @@ public class IntegrationsApi {
   }
 
   /**
-   * Get Integration Get information about a single integration.
+   * Retrieve Integration Retrieve information about a single integration.
    *
    * @param integration name of the integration (required)
    * @return GetIntegrationResponse
@@ -449,7 +449,7 @@ public class IntegrationsApi {
   }
 
   /**
-   * Get Integration Get information about a single integration.
+   * Retrieve Integration Retrieve information about a single integration.
    *
    * @param integration name of the integration (required)
    * @return ApiResponse&lt;GetIntegrationResponse&gt;
@@ -463,7 +463,7 @@ public class IntegrationsApi {
   }
 
   /**
-   * Get Integration (asynchronously) Get information about a single integration.
+   * Retrieve Integration (asynchronously) Retrieve information about a single integration.
    *
    * @param integration name of the integration (required)
    * @param callback The callback to be executed when the API call finishes

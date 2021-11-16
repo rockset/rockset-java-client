@@ -22,7 +22,7 @@ import java.util.Objects;
 /** PatchDocumentsRequest */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class PatchDocumentsRequest {
   @SerializedName("data")
   private List<PatchDocument> data = new ArrayList<PatchDocument>();
@@ -38,12 +38,12 @@ public class PatchDocumentsRequest {
   }
 
   /**
-   * List of JSON Patch Documents
+   * List of patches to be applied.
    *
    * @return data
    */
   @JsonProperty("data")
-  @ApiModelProperty(required = true, value = "List of JSON Patch Documents")
+  @ApiModelProperty(required = true, value = "List of patches to be applied.")
   public List<PatchDocument> getData() {
     return data;
   }

@@ -22,7 +22,7 @@ import java.util.Objects;
 /** PatchDocument */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class PatchDocument {
   @SerializedName("_id")
   private String id = null;
@@ -36,7 +36,7 @@ public class PatchDocument {
   }
 
   /**
-   * Unique id of the document which is being patched
+   * Unique ID of the document to be patched.
    *
    * @return id
    */
@@ -44,7 +44,7 @@ public class PatchDocument {
   @ApiModelProperty(
       example = "ca2d6832-1bfd-f88f-0620-d2aa27a5d86c",
       required = true,
-      value = "Unique id of the document which is being patched")
+      value = "Unique ID of the document to be patched.")
   public String getId() {
     return id;
   }
@@ -64,12 +64,12 @@ public class PatchDocument {
   }
 
   /**
-   * List of patch operations
+   * List of patch operations.
    *
    * @return patch
    */
   @JsonProperty("patch")
-  @ApiModelProperty(required = true, value = "List of patch operations")
+  @ApiModelProperty(required = true, value = "List of patch operations.")
   public List<PatchOperation> getPatch() {
     return patch;
   }

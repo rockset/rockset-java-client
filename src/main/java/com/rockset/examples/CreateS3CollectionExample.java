@@ -19,7 +19,7 @@ public class CreateS3CollectionExample {
         new CreateCollectionRequest().name("my-first-s3-collection").sources(sources);
 
     try {
-      CreateCollectionResponse response = rs.createCollection("commons", request);
+      CreateCollectionResponse response = rs.collections.create("commons", request);
       System.out.println(response);
     } catch (Exception e) {
       e.printStackTrace();

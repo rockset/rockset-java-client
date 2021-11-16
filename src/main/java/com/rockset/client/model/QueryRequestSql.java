@@ -22,22 +22,94 @@ import java.util.Objects;
 /** QueryRequestSql */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class QueryRequestSql {
-  @SerializedName("parameters")
-  private List<QueryParameter> parameters = null;
-
   @SerializedName("query")
   private String query = null;
-
-  @SerializedName("default_row_limit")
-  private Integer defaultRowLimit = null;
 
   @SerializedName("generate_warnings")
   private Boolean generateWarnings = null;
 
   @SerializedName("profiling_enabled")
   private Boolean profilingEnabled = null;
+
+  @SerializedName("parameters")
+  private List<QueryParameter> parameters = null;
+
+  @SerializedName("default_row_limit")
+  private Integer defaultRowLimit = null;
+
+  @SerializedName("paginate")
+  private Boolean paginate = null;
+
+  @SerializedName("initial_paginate_response_doc_count")
+  private Integer initialPaginateResponseDocCount = null;
+
+  public QueryRequestSql query(String query) {
+    this.query = query;
+    return this;
+  }
+
+  /**
+   * SQL query string.
+   *
+   * @return query
+   */
+  @JsonProperty("query")
+  @ApiModelProperty(
+      example = "SELECT * FROM foo where _id = :_id",
+      required = true,
+      value = "SQL query string.")
+  public String getQuery() {
+    return query;
+  }
+
+  public void setQuery(String query) {
+    this.query = query;
+  }
+
+  public QueryRequestSql generateWarnings(Boolean generateWarnings) {
+    this.generateWarnings = generateWarnings;
+    return this;
+  }
+
+  /**
+   * Flag to enable warnings. Warnings can help debug query issues but negatively affect
+   * performance.
+   *
+   * @return generateWarnings
+   */
+  @JsonProperty("generate_warnings")
+  @ApiModelProperty(
+      value =
+          "Flag to enable warnings. Warnings can help debug query issues but negatively affect performance.")
+  public Boolean isGenerateWarnings() {
+    return generateWarnings;
+  }
+
+  public void setGenerateWarnings(Boolean generateWarnings) {
+    this.generateWarnings = generateWarnings;
+  }
+
+  public QueryRequestSql profilingEnabled(Boolean profilingEnabled) {
+    this.profilingEnabled = profilingEnabled;
+    return this;
+  }
+
+  /**
+   * Flag to generate a performance profile for this query.
+   *
+   * @return profilingEnabled
+   */
+  @JsonProperty("profiling_enabled")
+  @ApiModelProperty(value = "Flag to generate a performance profile for this query.")
+  public Boolean isProfilingEnabled() {
+    return profilingEnabled;
+  }
+
+  public void setProfilingEnabled(Boolean profilingEnabled) {
+    this.profilingEnabled = profilingEnabled;
+  }
 
   public QueryRequestSql parameters(List<QueryParameter> parameters) {
     this.parameters = parameters;
@@ -53,12 +125,12 @@ public class QueryRequestSql {
   }
 
   /**
-   * list of named parameters
+   * List of named parameters.
    *
    * @return parameters
    */
   @JsonProperty("parameters")
-  @ApiModelProperty(value = "list of named parameters")
+  @ApiModelProperty(value = "List of named parameters.")
   public List<QueryParameter> getParameters() {
     return parameters;
   }
@@ -67,41 +139,19 @@ public class QueryRequestSql {
     this.parameters = parameters;
   }
 
-  public QueryRequestSql query(String query) {
-    this.query = query;
-    return this;
-  }
-
-  /**
-   * SQL query as a string
-   *
-   * @return query
-   */
-  @JsonProperty("query")
-  @ApiModelProperty(
-      example = "SELECT * FROM foo where _id = :_id",
-      required = true,
-      value = "SQL query as a string")
-  public String getQuery() {
-    return query;
-  }
-
-  public void setQuery(String query) {
-    this.query = query;
-  }
-
   public QueryRequestSql defaultRowLimit(Integer defaultRowLimit) {
     this.defaultRowLimit = defaultRowLimit;
     return this;
   }
 
   /**
-   * Row limit to use if no limit specified in the query
+   * Row limit to use. Limits specified in the query text will override this default.
    *
    * @return defaultRowLimit
    */
   @JsonProperty("default_row_limit")
-  @ApiModelProperty(value = "Row limit to use if no limit specified in the query")
+  @ApiModelProperty(
+      value = "Row limit to use. Limits specified in the query text will override this default.")
   public Integer getDefaultRowLimit() {
     return defaultRowLimit;
   }
@@ -110,44 +160,49 @@ public class QueryRequestSql {
     this.defaultRowLimit = defaultRowLimit;
   }
 
-  public QueryRequestSql generateWarnings(Boolean generateWarnings) {
-    this.generateWarnings = generateWarnings;
+  public QueryRequestSql paginate(Boolean paginate) {
+    this.paginate = paginate;
     return this;
   }
 
   /**
-   * Whether to generate warnings
+   * Flag to paginate and store the results of this query for later / sequential retrieval.
    *
-   * @return generateWarnings
+   * @return paginate
    */
-  @JsonProperty("generate_warnings")
-  @ApiModelProperty(value = "Whether to generate warnings")
-  public Boolean isGenerateWarnings() {
-    return generateWarnings;
+  @JsonProperty("paginate")
+  @ApiModelProperty(
+      value =
+          "Flag to paginate and store the results of this query for later / sequential retrieval.")
+  public Boolean isPaginate() {
+    return paginate;
   }
 
-  public void setGenerateWarnings(Boolean generateWarnings) {
-    this.generateWarnings = generateWarnings;
+  public void setPaginate(Boolean paginate) {
+    this.paginate = paginate;
   }
 
-  public QueryRequestSql profilingEnabled(Boolean profilingEnabled) {
-    this.profilingEnabled = profilingEnabled;
+  public QueryRequestSql initialPaginateResponseDocCount(Integer initialPaginateResponseDocCount) {
+    this.initialPaginateResponseDocCount = initialPaginateResponseDocCount;
     return this;
   }
 
   /**
-   * Whether to generate a performance profile for this query
+   * Number of documents to return in addition to paginating for this query call. Only relevant if
+   * &#x60;paginate&#x60; flag is also set.
    *
-   * @return profilingEnabled
+   * @return initialPaginateResponseDocCount
    */
-  @JsonProperty("profiling_enabled")
-  @ApiModelProperty(value = "Whether to generate a performance profile for this query")
-  public Boolean isProfilingEnabled() {
-    return profilingEnabled;
+  @JsonProperty("initial_paginate_response_doc_count")
+  @ApiModelProperty(
+      value =
+          "Number of documents to return in addition to paginating for this query call. Only relevant if `paginate` flag is also set.")
+  public Integer getInitialPaginateResponseDocCount() {
+    return initialPaginateResponseDocCount;
   }
 
-  public void setProfilingEnabled(Boolean profilingEnabled) {
-    this.profilingEnabled = profilingEnabled;
+  public void setInitialPaginateResponseDocCount(Integer initialPaginateResponseDocCount) {
+    this.initialPaginateResponseDocCount = initialPaginateResponseDocCount;
   }
 
   @Override
@@ -159,16 +214,26 @@ public class QueryRequestSql {
       return false;
     }
     QueryRequestSql queryRequestSql = (QueryRequestSql) o;
-    return Objects.equals(this.parameters, queryRequestSql.parameters)
-        && Objects.equals(this.query, queryRequestSql.query)
-        && Objects.equals(this.defaultRowLimit, queryRequestSql.defaultRowLimit)
+    return Objects.equals(this.query, queryRequestSql.query)
         && Objects.equals(this.generateWarnings, queryRequestSql.generateWarnings)
-        && Objects.equals(this.profilingEnabled, queryRequestSql.profilingEnabled);
+        && Objects.equals(this.profilingEnabled, queryRequestSql.profilingEnabled)
+        && Objects.equals(this.parameters, queryRequestSql.parameters)
+        && Objects.equals(this.defaultRowLimit, queryRequestSql.defaultRowLimit)
+        && Objects.equals(this.paginate, queryRequestSql.paginate)
+        && Objects.equals(
+            this.initialPaginateResponseDocCount, queryRequestSql.initialPaginateResponseDocCount);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(parameters, query, defaultRowLimit, generateWarnings, profilingEnabled);
+    return Objects.hash(
+        query,
+        generateWarnings,
+        profilingEnabled,
+        parameters,
+        defaultRowLimit,
+        paginate,
+        initialPaginateResponseDocCount);
   }
 
   @Override
@@ -176,11 +241,15 @@ public class QueryRequestSql {
     StringBuilder sb = new StringBuilder();
     sb.append("class QueryRequestSql {\n");
 
-    sb.append("    parameters: ").append(toIndentedString(parameters)).append("\n");
     sb.append("    query: ").append(toIndentedString(query)).append("\n");
-    sb.append("    defaultRowLimit: ").append(toIndentedString(defaultRowLimit)).append("\n");
     sb.append("    generateWarnings: ").append(toIndentedString(generateWarnings)).append("\n");
     sb.append("    profilingEnabled: ").append(toIndentedString(profilingEnabled)).append("\n");
+    sb.append("    parameters: ").append(toIndentedString(parameters)).append("\n");
+    sb.append("    defaultRowLimit: ").append(toIndentedString(defaultRowLimit)).append("\n");
+    sb.append("    paginate: ").append(toIndentedString(paginate)).append("\n");
+    sb.append("    initialPaginateResponseDocCount: ")
+        .append(toIndentedString(initialPaginateResponseDocCount))
+        .append("\n");
     sb.append("}");
     return sb.toString();
   }

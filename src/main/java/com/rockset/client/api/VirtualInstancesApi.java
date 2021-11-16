@@ -138,7 +138,7 @@ public class VirtualInstancesApi {
   }
 
   /**
-   * Get Virtual Instance Get details about a virtual instance.
+   * Retrieve Virtual Instance Get details about a virtual instance.
    *
    * @param virtualInstanceId uuid of the virtual instance (required)
    * @return GetVirtualInstanceResponse
@@ -151,7 +151,7 @@ public class VirtualInstancesApi {
   }
 
   /**
-   * Get Virtual Instance Get details about a virtual instance.
+   * Retrieve Virtual Instance Get details about a virtual instance.
    *
    * @param virtualInstanceId uuid of the virtual instance (required)
    * @return ApiResponse&lt;GetVirtualInstanceResponse&gt;
@@ -166,7 +166,7 @@ public class VirtualInstancesApi {
   }
 
   /**
-   * Get Virtual Instance (asynchronously) Get details about a virtual instance.
+   * Retrieve Virtual Instance (asynchronously) Get details about a virtual instance.
    *
    * @param virtualInstanceId uuid of the virtual instance (required)
    * @param callback The callback to be executed when the API call finishes
@@ -435,7 +435,7 @@ public class VirtualInstancesApi {
   }
 
   /**
-   * Update Virtual Instance Update the size of a virtual instance.
+   * Update Virtual Instance Update the properties of a virtual instance.
    *
    * @param virtualInstanceId uuid of the virtual instance (required)
    * @param body JSON object (required)
@@ -450,7 +450,7 @@ public class VirtualInstancesApi {
   }
 
   /**
-   * Update Virtual Instance Update the size of a virtual instance.
+   * Update Virtual Instance Update the properties of a virtual instance.
    *
    * @param virtualInstanceId uuid of the virtual instance (required)
    * @param body JSON object (required)
@@ -466,7 +466,7 @@ public class VirtualInstancesApi {
   }
 
   /**
-   * Update Virtual Instance (asynchronously) Update the size of a virtual instance.
+   * Update Virtual Instance (asynchronously) Update the properties of a virtual instance.
    *
    * @param virtualInstanceId uuid of the virtual instance (required)
    * @param body JSON object (required)

@@ -20,7 +20,7 @@ import java.util.Objects;
 /** EventTimeInfo */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class EventTimeInfo {
   @SerializedName("field")
   private String field = null;

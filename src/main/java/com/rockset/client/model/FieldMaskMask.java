@@ -22,7 +22,7 @@ import java.util.Objects;
 @ApiModel(description = "Field masking function name + args. The args is a JSON object.")
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class FieldMaskMask {
   @SerializedName("name")
   private String name = null;

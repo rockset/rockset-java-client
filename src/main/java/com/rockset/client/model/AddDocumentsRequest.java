@@ -22,7 +22,7 @@ import java.util.Objects;
 /** AddDocumentsRequest */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class AddDocumentsRequest {
   @SerializedName("data")
   private List<Object> data = new ArrayList<Object>();
@@ -38,12 +38,15 @@ public class AddDocumentsRequest {
   }
 
   /**
-   * Array of JSON documents
+   * Array of documents to be added to the collection.
    *
    * @return data
    */
   @JsonProperty("data")
-  @ApiModelProperty(required = true, value = "Array of JSON documents")
+  @ApiModelProperty(
+      example = "\"[{ \\\"field\\\": \\\"value\\\" }]\"",
+      required = true,
+      value = "Array of documents to be added to the collection.")
   public List<Object> getData() {
     return data;
   }

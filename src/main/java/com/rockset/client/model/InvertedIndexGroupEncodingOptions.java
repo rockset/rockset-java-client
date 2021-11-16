@@ -20,8 +20,11 @@ import java.util.Objects;
 /** InvertedIndexGroupEncodingOptions */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class InvertedIndexGroupEncodingOptions {
+  @SerializedName("format_version")
+  private Long formatVersion = null;
+
   @SerializedName("group_size")
   private Long groupSize = null;
 
@@ -33,6 +36,26 @@ public class InvertedIndexGroupEncodingOptions {
 
   @SerializedName("doc_id_codec")
   private String docIdCodec = null;
+
+  public InvertedIndexGroupEncodingOptions formatVersion(Long formatVersion) {
+    this.formatVersion = formatVersion;
+    return this;
+  }
+
+  /**
+   * Get formatVersion
+   *
+   * @return formatVersion
+   */
+  @JsonProperty("format_version")
+  @ApiModelProperty(value = "")
+  public Long getFormatVersion() {
+    return formatVersion;
+  }
+
+  public void setFormatVersion(Long formatVersion) {
+    this.formatVersion = formatVersion;
+  }
 
   public InvertedIndexGroupEncodingOptions groupSize(Long groupSize) {
     this.groupSize = groupSize;
@@ -124,7 +147,8 @@ public class InvertedIndexGroupEncodingOptions {
     }
     InvertedIndexGroupEncodingOptions invertedIndexGroupEncodingOptions =
         (InvertedIndexGroupEncodingOptions) o;
-    return Objects.equals(this.groupSize, invertedIndexGroupEncodingOptions.groupSize)
+    return Objects.equals(this.formatVersion, invertedIndexGroupEncodingOptions.formatVersion)
+        && Objects.equals(this.groupSize, invertedIndexGroupEncodingOptions.groupSize)
         && Objects.equals(this.restartLength, invertedIndexGroupEncodingOptions.restartLength)
         && Objects.equals(this.eventTimeCodec, invertedIndexGroupEncodingOptions.eventTimeCodec)
         && Objects.equals(this.docIdCodec, invertedIndexGroupEncodingOptions.docIdCodec);
@@ -132,7 +156,7 @@ public class InvertedIndexGroupEncodingOptions {
 
   @Override
   public int hashCode() {
-    return Objects.hash(groupSize, restartLength, eventTimeCodec, docIdCodec);
+    return Objects.hash(formatVersion, groupSize, restartLength, eventTimeCodec, docIdCodec);
   }
 
   @Override
@@ -140,6 +164,7 @@ public class InvertedIndexGroupEncodingOptions {
     StringBuilder sb = new StringBuilder();
     sb.append("class InvertedIndexGroupEncodingOptions {\n");
 
+    sb.append("    formatVersion: ").append(toIndentedString(formatVersion)).append("\n");
     sb.append("    groupSize: ").append(toIndentedString(groupSize)).append("\n");
     sb.append("    restartLength: ").append(toIndentedString(restartLength)).append("\n");
     sb.append("    eventTimeCodec: ").append(toIndentedString(eventTimeCodec)).append("\n");

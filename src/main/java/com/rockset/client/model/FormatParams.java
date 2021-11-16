@@ -20,7 +20,7 @@ import java.util.Objects;
 /** FormatParams */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class FormatParams {
   @SerializedName("json")
   private Boolean json = null;
@@ -30,6 +30,12 @@ public class FormatParams {
 
   @SerializedName("xml")
   private XmlParams xml = null;
+
+  @SerializedName("mysql_dms")
+  private Boolean mysqlDms = null;
+
+  @SerializedName("postgres_dms")
+  private Boolean postgresDms = null;
 
   public FormatParams json(Boolean json) {
     this.json = json;
@@ -91,6 +97,46 @@ public class FormatParams {
     this.xml = xml;
   }
 
+  public FormatParams mysqlDms(Boolean mysqlDms) {
+    this.mysqlDms = mysqlDms;
+    return this;
+  }
+
+  /**
+   * Get mysqlDms
+   *
+   * @return mysqlDms
+   */
+  @JsonProperty("mysql_dms")
+  @ApiModelProperty(value = "")
+  public Boolean isMysqlDms() {
+    return mysqlDms;
+  }
+
+  public void setMysqlDms(Boolean mysqlDms) {
+    this.mysqlDms = mysqlDms;
+  }
+
+  public FormatParams postgresDms(Boolean postgresDms) {
+    this.postgresDms = postgresDms;
+    return this;
+  }
+
+  /**
+   * Get postgresDms
+   *
+   * @return postgresDms
+   */
+  @JsonProperty("postgres_dms")
+  @ApiModelProperty(value = "")
+  public Boolean isPostgresDms() {
+    return postgresDms;
+  }
+
+  public void setPostgresDms(Boolean postgresDms) {
+    this.postgresDms = postgresDms;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -102,12 +148,14 @@ public class FormatParams {
     FormatParams formatParams = (FormatParams) o;
     return Objects.equals(this.json, formatParams.json)
         && Objects.equals(this.csv, formatParams.csv)
-        && Objects.equals(this.xml, formatParams.xml);
+        && Objects.equals(this.xml, formatParams.xml)
+        && Objects.equals(this.mysqlDms, formatParams.mysqlDms)
+        && Objects.equals(this.postgresDms, formatParams.postgresDms);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(json, csv, xml);
+    return Objects.hash(json, csv, xml, mysqlDms, postgresDms);
   }
 
   @Override
@@ -118,6 +166,8 @@ public class FormatParams {
     sb.append("    json: ").append(toIndentedString(json)).append("\n");
     sb.append("    csv: ").append(toIndentedString(csv)).append("\n");
     sb.append("    xml: ").append(toIndentedString(xml)).append("\n");
+    sb.append("    mysqlDms: ").append(toIndentedString(mysqlDms)).append("\n");
+    sb.append("    postgresDms: ").append(toIndentedString(postgresDms)).append("\n");
     sb.append("}");
     return sb.toString();
   }

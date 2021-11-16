@@ -14,7 +14,7 @@ package com.rockset.client;
 
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class Configuration {
   private static ApiClient defaultApiClient = new ApiClient();
 

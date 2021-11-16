@@ -22,7 +22,7 @@ import java.util.Objects;
 /** CreateCollectionRequest */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class CreateCollectionRequest {
   @SerializedName("name")
   private String name = null;
@@ -36,11 +36,20 @@ public class CreateCollectionRequest {
   @SerializedName("retention_secs")
   private Long retentionSecs = null;
 
+  @SerializedName("time_partition_resolution_secs")
+  private Long timePartitionResolutionSecs = null;
+
+  @SerializedName("insert_only")
+  private Boolean insertOnly = null;
+
   @SerializedName("event_time_info")
   private EventTimeInfo eventTimeInfo = null;
 
   @SerializedName("field_mappings")
   private List<FieldMappingV2> fieldMappings = null;
+
+  @SerializedName("field_mapping_query")
+  private FieldMappingQuery fieldMappingQuery = null;
 
   @SerializedName("clustering_key")
   private List<FieldPartition> clusteringKey = null;
@@ -146,6 +155,50 @@ public class CreateCollectionRequest {
     this.retentionSecs = retentionSecs;
   }
 
+  public CreateCollectionRequest timePartitionResolutionSecs(Long timePartitionResolutionSecs) {
+    this.timePartitionResolutionSecs = timePartitionResolutionSecs;
+    return this;
+  }
+
+  /**
+   * If non-null, the collection will be time partitioned and each partition will be
+   * time_partition_resolution_secs wide.
+   *
+   * @return timePartitionResolutionSecs
+   */
+  @JsonProperty("time_partition_resolution_secs")
+  @ApiModelProperty(
+      value =
+          "If non-null, the collection will be time partitioned and each partition will be time_partition_resolution_secs wide.")
+  public Long getTimePartitionResolutionSecs() {
+    return timePartitionResolutionSecs;
+  }
+
+  public void setTimePartitionResolutionSecs(Long timePartitionResolutionSecs) {
+    this.timePartitionResolutionSecs = timePartitionResolutionSecs;
+  }
+
+  public CreateCollectionRequest insertOnly(Boolean insertOnly) {
+    this.insertOnly = insertOnly;
+    return this;
+  }
+
+  /**
+   * If true disallows updates and deletes, but makes indexing more efficient
+   *
+   * @return insertOnly
+   */
+  @JsonProperty("insert_only")
+  @ApiModelProperty(
+      value = "If true disallows updates and deletes, but makes indexing more efficient")
+  public Boolean isInsertOnly() {
+    return insertOnly;
+  }
+
+  public void setInsertOnly(Boolean insertOnly) {
+    this.insertOnly = insertOnly;
+  }
+
   public CreateCollectionRequest eventTimeInfo(EventTimeInfo eventTimeInfo) {
     this.eventTimeInfo = eventTimeInfo;
     return this;
@@ -192,6 +245,26 @@ public class CreateCollectionRequest {
 
   public void setFieldMappings(List<FieldMappingV2> fieldMappings) {
     this.fieldMappings = fieldMappings;
+  }
+
+  public CreateCollectionRequest fieldMappingQuery(FieldMappingQuery fieldMappingQuery) {
+    this.fieldMappingQuery = fieldMappingQuery;
+    return this;
+  }
+
+  /**
+   * Mapping of fields for a collection
+   *
+   * @return fieldMappingQuery
+   */
+  @JsonProperty("field_mapping_query")
+  @ApiModelProperty(value = "Mapping of fields for a collection")
+  public FieldMappingQuery getFieldMappingQuery() {
+    return fieldMappingQuery;
+  }
+
+  public void setFieldMappingQuery(FieldMappingQuery fieldMappingQuery) {
+    this.fieldMappingQuery = fieldMappingQuery;
   }
 
   public CreateCollectionRequest clusteringKey(List<FieldPartition> clusteringKey) {
@@ -285,8 +358,12 @@ public class CreateCollectionRequest {
         && Objects.equals(this.description, createCollectionRequest.description)
         && Objects.equals(this.sources, createCollectionRequest.sources)
         && Objects.equals(this.retentionSecs, createCollectionRequest.retentionSecs)
+        && Objects.equals(
+            this.timePartitionResolutionSecs, createCollectionRequest.timePartitionResolutionSecs)
+        && Objects.equals(this.insertOnly, createCollectionRequest.insertOnly)
         && Objects.equals(this.eventTimeInfo, createCollectionRequest.eventTimeInfo)
         && Objects.equals(this.fieldMappings, createCollectionRequest.fieldMappings)
+        && Objects.equals(this.fieldMappingQuery, createCollectionRequest.fieldMappingQuery)
         && Objects.equals(this.clusteringKey, createCollectionRequest.clusteringKey)
         && Objects.equals(this.fieldSchemas, createCollectionRequest.fieldSchemas)
         && Objects.equals(
@@ -301,8 +378,11 @@ public class CreateCollectionRequest {
         description,
         sources,
         retentionSecs,
+        timePartitionResolutionSecs,
+        insertOnly,
         eventTimeInfo,
         fieldMappings,
+        fieldMappingQuery,
         clusteringKey,
         fieldSchemas,
         invertedIndexGroupEncodingOptions);
@@ -317,8 +397,13 @@ public class CreateCollectionRequest {
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    sources: ").append(toIndentedString(sources)).append("\n");
     sb.append("    retentionSecs: ").append(toIndentedString(retentionSecs)).append("\n");
+    sb.append("    timePartitionResolutionSecs: ")
+        .append(toIndentedString(timePartitionResolutionSecs))
+        .append("\n");
+    sb.append("    insertOnly: ").append(toIndentedString(insertOnly)).append("\n");
     sb.append("    eventTimeInfo: ").append(toIndentedString(eventTimeInfo)).append("\n");
     sb.append("    fieldMappings: ").append(toIndentedString(fieldMappings)).append("\n");
+    sb.append("    fieldMappingQuery: ").append(toIndentedString(fieldMappingQuery)).append("\n");
     sb.append("    clusteringKey: ").append(toIndentedString(clusteringKey)).append("\n");
     sb.append("    fieldSchemas: ").append(toIndentedString(fieldSchemas)).append("\n");
     sb.append("    invertedIndexGroupEncodingOptions: ")

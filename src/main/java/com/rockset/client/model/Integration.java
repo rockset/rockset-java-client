@@ -29,7 +29,7 @@ import java.util.Objects;
         "Integrations that can be associated with data sources to create collections. Only one type of integration may be specified.")
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class Integration {
   @SerializedName("name")
   private String name = null;
@@ -54,9 +54,6 @@ public class Integration {
 
   @SerializedName("dynamodb")
   private DynamodbIntegration dynamodb = null;
-
-  @SerializedName("redshift")
-  private RedshiftIntegration redshift = null;
 
   @SerializedName("gcs")
   private GcsIntegration gcs = null;
@@ -246,26 +243,6 @@ public class Integration {
     this.dynamodb = dynamodb;
   }
 
-  public Integration redshift(RedshiftIntegration redshift) {
-    this.redshift = redshift;
-    return this;
-  }
-
-  /**
-   * Amazon Redshift details
-   *
-   * @return redshift
-   */
-  @JsonProperty("redshift")
-  @ApiModelProperty(value = "Amazon Redshift details")
-  public RedshiftIntegration getRedshift() {
-    return redshift;
-  }
-
-  public void setRedshift(RedshiftIntegration redshift) {
-    this.redshift = redshift;
-  }
-
   public Integration gcs(GcsIntegration gcs) {
     this.gcs = gcs;
     return this;
@@ -363,7 +340,6 @@ public class Integration {
         && Objects.equals(this.s3, integration.s3)
         && Objects.equals(this.kinesis, integration.kinesis)
         && Objects.equals(this.dynamodb, integration.dynamodb)
-        && Objects.equals(this.redshift, integration.redshift)
         && Objects.equals(this.gcs, integration.gcs)
         && Objects.equals(this.segment, integration.segment)
         && Objects.equals(this.kafka, integration.kafka)
@@ -381,7 +357,6 @@ public class Integration {
         s3,
         kinesis,
         dynamodb,
-        redshift,
         gcs,
         segment,
         kafka,
@@ -401,7 +376,6 @@ public class Integration {
     sb.append("    s3: ").append(toIndentedString(s3)).append("\n");
     sb.append("    kinesis: ").append(toIndentedString(kinesis)).append("\n");
     sb.append("    dynamodb: ").append(toIndentedString(dynamodb)).append("\n");
-    sb.append("    redshift: ").append(toIndentedString(redshift)).append("\n");
     sb.append("    gcs: ").append(toIndentedString(gcs)).append("\n");
     sb.append("    segment: ").append(toIndentedString(segment)).append("\n");
     sb.append("    kafka: ").append(toIndentedString(kafka)).append("\n");

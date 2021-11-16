@@ -13,23 +13,16 @@
 package com.rockset.client.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /** An organization in Rockset is a container for users and collections. */
 @ApiModel(description = "An organization in Rockset is a container for users and collections.")
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class Organization {
   @SerializedName("deletionScheduledAt")
   private String deletionScheduledAt = null;
@@ -42,77 +35,6 @@ public class Organization {
 
   @SerializedName("display_name")
   private String displayName = null;
-
-  @SerializedName("company_name")
-  private String companyName = null;
-
-  @SerializedName("external_id")
-  private String externalId = null;
-
-  @SerializedName("rockset_user")
-  private String rocksetUser = null;
-
-  /** org state */
-  @JsonAdapter(StateEnum.Adapter.class)
-  public enum StateEnum {
-    FREE("FREE"),
-
-    PAID("PAID"),
-
-    TRIAL("TRIAL"),
-
-    TRIAL_EXPIRED("TRIALEXPIRED"),
-
-    TRIAL_DEPLETED("TRIALDEPLETED"),
-
-    INACTIVE("INACTIVE"),
-
-    DELETED("DELETED");
-
-    private String value;
-
-    StateEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StateEnum fromValue(String text) {
-      for (StateEnum b : StateEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-
-    public static class Adapter extends TypeAdapter<StateEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StateEnum enumeration)
-          throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StateEnum read(final JsonReader jsonReader) throws IOException {
-        String value = jsonReader.nextString();
-        return StateEnum.fromValue(String.valueOf(value));
-      }
-    }
-  }
-
-  @SerializedName("state")
-  private StateEnum state = null;
-
-  @SerializedName("clusters")
-  private List<Cluster> clusters = null;
 
   public Organization deletionScheduledAt(String deletionScheduledAt) {
     this.deletionScheduledAt = deletionScheduledAt;
@@ -194,114 +116,6 @@ public class Organization {
     this.displayName = displayName;
   }
 
-  public Organization companyName(String companyName) {
-    this.companyName = companyName;
-    return this;
-  }
-
-  /**
-   * name of the company
-   *
-   * @return companyName
-   */
-  @JsonProperty("company_name")
-  @ApiModelProperty(example = "Rockset, Inc", value = "name of the company")
-  public String getCompanyName() {
-    return companyName;
-  }
-
-  public void setCompanyName(String companyName) {
-    this.companyName = companyName;
-  }
-
-  public Organization externalId(String externalId) {
-    this.externalId = externalId;
-    return this;
-  }
-
-  /**
-   * organization&#39;s unique external ID within Rockset
-   *
-   * @return externalId
-   */
-  @JsonProperty("external_id")
-  @ApiModelProperty(example = "<hash>", value = "organization's unique external ID within Rockset")
-  public String getExternalId() {
-    return externalId;
-  }
-
-  public void setExternalId(String externalId) {
-    this.externalId = externalId;
-  }
-
-  public Organization rocksetUser(String rocksetUser) {
-    this.rocksetUser = rocksetUser;
-    return this;
-  }
-
-  /**
-   * Get rocksetUser
-   *
-   * @return rocksetUser
-   */
-  @JsonProperty("rockset_user")
-  @ApiModelProperty(value = "")
-  public String getRocksetUser() {
-    return rocksetUser;
-  }
-
-  public void setRocksetUser(String rocksetUser) {
-    this.rocksetUser = rocksetUser;
-  }
-
-  public Organization state(StateEnum state) {
-    this.state = state;
-    return this;
-  }
-
-  /**
-   * org state
-   *
-   * @return state
-   */
-  @JsonProperty("state")
-  @ApiModelProperty(example = "TRIAL", value = "org state")
-  public StateEnum getState() {
-    return state;
-  }
-
-  public void setState(StateEnum state) {
-    this.state = state;
-  }
-
-  public Organization clusters(List<Cluster> clusters) {
-    this.clusters = clusters;
-    return this;
-  }
-
-  public Organization addClustersItem(Cluster clustersItem) {
-    if (this.clusters == null) {
-      this.clusters = new ArrayList<Cluster>();
-    }
-    this.clusters.add(clustersItem);
-    return this;
-  }
-
-  /**
-   * Get clusters
-   *
-   * @return clusters
-   */
-  @JsonProperty("clusters")
-  @ApiModelProperty(value = "")
-  public List<Cluster> getClusters() {
-    return clusters;
-  }
-
-  public void setClusters(List<Cluster> clusters) {
-    this.clusters = clusters;
-  }
-
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -314,26 +128,12 @@ public class Organization {
     return Objects.equals(this.deletionScheduledAt, organization.deletionScheduledAt)
         && Objects.equals(this.id, organization.id)
         && Objects.equals(this.createdAt, organization.createdAt)
-        && Objects.equals(this.displayName, organization.displayName)
-        && Objects.equals(this.companyName, organization.companyName)
-        && Objects.equals(this.externalId, organization.externalId)
-        && Objects.equals(this.rocksetUser, organization.rocksetUser)
-        && Objects.equals(this.state, organization.state)
-        && Objects.equals(this.clusters, organization.clusters);
+        && Objects.equals(this.displayName, organization.displayName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(
-        deletionScheduledAt,
-        id,
-        createdAt,
-        displayName,
-        companyName,
-        externalId,
-        rocksetUser,
-        state,
-        clusters);
+    return Objects.hash(deletionScheduledAt, id, createdAt, displayName);
   }
 
   @Override
@@ -347,11 +147,6 @@ public class Organization {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
-    sb.append("    companyName: ").append(toIndentedString(companyName)).append("\n");
-    sb.append("    externalId: ").append(toIndentedString(externalId)).append("\n");
-    sb.append("    rocksetUser: ").append(toIndentedString(rocksetUser)).append("\n");
-    sb.append("    state: ").append(toIndentedString(state)).append("\n");
-    sb.append("    clusters: ").append(toIndentedString(clusters)).append("\n");
     sb.append("}");
     return sb.toString();
   }

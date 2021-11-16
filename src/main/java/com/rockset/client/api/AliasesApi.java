@@ -25,7 +25,6 @@ import com.rockset.client.model.CreateAliasResponse;
 import com.rockset.client.model.DeleteAliasResponse;
 import com.rockset.client.model.GetAliasResponse;
 import com.rockset.client.model.ListAliasesResponse;
-import com.rockset.client.model.ListQueryLambdasResponse;
 import com.rockset.client.model.UpdateAliasRequest;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -472,7 +471,7 @@ public class AliasesApi {
   }
 
   /**
-   * Get Alias Get details about a alias
+   * Retrieve Alias Get details about an alias
    *
    * @param workspace name of the workspace (required)
    * @param alias name of the alias (required)
@@ -486,7 +485,7 @@ public class AliasesApi {
   }
 
   /**
-   * Get Alias Get details about a alias
+   * Retrieve Alias Get details about an alias
    *
    * @param workspace name of the workspace (required)
    * @param alias name of the alias (required)
@@ -502,7 +501,7 @@ public class AliasesApi {
   }
 
   /**
-   * Get Alias (asynchronously) Get details about a alias
+   * Retrieve Alias (asynchronously) Get details about an alias
    *
    * @param workspace name of the workspace (required)
    * @param alias name of the alias (required)
@@ -673,170 +672,6 @@ public class AliasesApi {
     com.squareup.okhttp.Call call =
         listValidateBeforeCall(progressListener, progressRequestListener);
     Type localVarReturnType = new TypeToken<ListAliasesResponse>() {}.getType();
-    apiClient.executeAsync(call, localVarReturnType, callback);
-    return call;
-  }
-  /**
-   * Build call for list_0
-   *
-   * @param workspace (required)
-   * @param alias (required)
-   * @param progressListener Progress listener
-   * @param progressRequestListener Progress request listener
-   * @return Call to execute
-   * @throws Exception If fail to serialize the request body object
-   */
-  public com.squareup.okhttp.Call list_0Call(
-      String workspace,
-      String alias,
-      final ProgressResponseBody.ProgressListener progressListener,
-      final ProgressRequestBody.ProgressRequestListener progressRequestListener)
-      throws Exception {
-    Object localVarPostBody = null;
-
-    // create path and map variables
-    String localVarPath =
-        "/v1/orgs/self/ws/{workspace}/aliases/{alias}/lambdas"
-            .replaceAll("\\{" + "workspace" + "\\}", apiClient.escapeString(workspace.toString()))
-            .replaceAll("\\{" + "alias" + "\\}", apiClient.escapeString(alias.toString()));
-
-    List<Pair> localVarQueryParams = new ArrayList<Pair>();
-    List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-
-    Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-
-    Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-    final String[] localVarAccepts = {"application/json"};
-    final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
-    if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
-
-    final String[] localVarContentTypes = {"application/json"};
-    final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
-    localVarHeaderParams.put("Content-Type", localVarContentType);
-
-    if (progressListener != null) {
-      apiClient
-          .getHttpClient()
-          .networkInterceptors()
-          .add(
-              new com.squareup.okhttp.Interceptor() {
-                @Override
-                public com.squareup.okhttp.Response intercept(
-                    com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                  com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
-                  return originalResponse
-                      .newBuilder()
-                      .body(new ProgressResponseBody(originalResponse.body(), progressListener))
-                      .build();
-                }
-              });
-    }
-
-    String[] localVarAuthNames = new String[] {};
-    return apiClient.buildCall(
-        localVarPath,
-        "GET",
-        localVarQueryParams,
-        localVarCollectionQueryParams,
-        localVarPostBody,
-        localVarHeaderParams,
-        localVarFormParams,
-        localVarAuthNames,
-        progressRequestListener);
-  }
-
-  @SuppressWarnings("rawtypes")
-  private com.squareup.okhttp.Call list_0ValidateBeforeCall(
-      String workspace,
-      String alias,
-      final ProgressResponseBody.ProgressListener progressListener,
-      final ProgressRequestBody.ProgressRequestListener progressRequestListener)
-      throws Exception {
-
-    // verify the required parameter 'workspace' is set
-    if (workspace == null) {
-      throw new Exception("Missing the required parameter 'workspace' when calling list_0(Async)");
-    }
-
-    // verify the required parameter 'alias' is set
-    if (alias == null) {
-      throw new Exception("Missing the required parameter 'alias' when calling list_0(Async)");
-    }
-
-    com.squareup.okhttp.Call call =
-        list_0Call(workspace, alias, progressListener, progressRequestListener);
-    return call;
-  }
-
-  /**
-   * Get Query Lambdas with Alias Get all Query Lambdas that hit a specific Rockset Alias.
-   *
-   * @param workspace (required)
-   * @param alias (required)
-   * @return ListQueryLambdasResponse
-   * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
-   *     body
-   */
-  public ListQueryLambdasResponse list_0(String workspace, String alias) throws Exception {
-    ApiResponse<ListQueryLambdasResponse> resp = list_0WithHttpInfo(workspace, alias);
-    return resp.getData();
-  }
-
-  /**
-   * Get Query Lambdas with Alias Get all Query Lambdas that hit a specific Rockset Alias.
-   *
-   * @param workspace (required)
-   * @param alias (required)
-   * @return ApiResponse&lt;ListQueryLambdasResponse&gt;
-   * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
-   *     body
-   */
-  public ApiResponse<ListQueryLambdasResponse> list_0WithHttpInfo(String workspace, String alias)
-      throws Exception {
-    com.squareup.okhttp.Call call = list_0ValidateBeforeCall(workspace, alias, null, null);
-    Type localVarReturnType = new TypeToken<ListQueryLambdasResponse>() {}.getType();
-    return apiClient.execute(call, localVarReturnType);
-  }
-
-  /**
-   * Get Query Lambdas with Alias (asynchronously) Get all Query Lambdas that hit a specific Rockset
-   * Alias.
-   *
-   * @param workspace (required)
-   * @param alias (required)
-   * @param callback The callback to be executed when the API call finishes
-   * @return The request call
-   * @throws Exception If fail to process the API call, e.g. serializing the request body object
-   */
-  public com.squareup.okhttp.Call list_0Async(
-      String workspace, String alias, final ApiCallback<ListQueryLambdasResponse> callback)
-      throws Exception {
-
-    ProgressResponseBody.ProgressListener progressListener = null;
-    ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
-
-    if (callback != null) {
-      progressListener =
-          new ProgressResponseBody.ProgressListener() {
-            @Override
-            public void update(long bytesRead, long contentLength, boolean done) {
-              callback.onDownloadProgress(bytesRead, contentLength, done);
-            }
-          };
-
-      progressRequestListener =
-          new ProgressRequestBody.ProgressRequestListener() {
-            @Override
-            public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
-              callback.onUploadProgress(bytesWritten, contentLength, done);
-            }
-          };
-    }
-
-    com.squareup.okhttp.Call call =
-        list_0ValidateBeforeCall(workspace, alias, progressListener, progressRequestListener);
-    Type localVarReturnType = new TypeToken<ListQueryLambdasResponse>() {}.getType();
     apiClient.executeAsync(call, localVarReturnType, callback);
     return call;
   }
@@ -1104,7 +939,7 @@ public class AliasesApi {
   }
 
   /**
-   * List Aliases for Workspace Retrieve all aliases in a workspace.
+   * List Aliases in Workspace Retrieve all aliases in a workspace.
    *
    * @param workspace name of the workspace (required)
    * @return ListAliasesResponse
@@ -1117,7 +952,7 @@ public class AliasesApi {
   }
 
   /**
-   * List Aliases for Workspace Retrieve all aliases in a workspace.
+   * List Aliases in Workspace Retrieve all aliases in a workspace.
    *
    * @param workspace name of the workspace (required)
    * @return ApiResponse&lt;ListAliasesResponse&gt;
@@ -1131,7 +966,7 @@ public class AliasesApi {
   }
 
   /**
-   * List Aliases for Workspace (asynchronously) Retrieve all aliases in a workspace.
+   * List Aliases in Workspace (asynchronously) Retrieve all aliases in a workspace.
    *
    * @param workspace name of the workspace (required)
    * @param callback The callback to be executed when the API call finishes

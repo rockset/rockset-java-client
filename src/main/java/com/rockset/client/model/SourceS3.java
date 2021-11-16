@@ -27,7 +27,7 @@ import java.util.Objects;
 /** SourceS3 */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class SourceS3 {
   @SerializedName("access_key")
   private String accessKey = null;
@@ -99,6 +99,15 @@ public class SourceS3 {
 
   @SerializedName("mappings")
   private List<FieldMask> mappings = null;
+
+  @SerializedName("object_count_downloaded")
+  private Long objectCountDownloaded = null;
+
+  @SerializedName("object_count_total")
+  private Long objectCountTotal = null;
+
+  @SerializedName("object_bytes_total")
+  private Long objectBytesTotal = null;
 
   /**
    * AWS credential with ListObjects and GetObject access
@@ -218,7 +227,7 @@ public class SourceS3 {
    */
   @JsonProperty("prefixes")
   @ApiModelProperty(
-      example = "\"['/transactions', '/stores']\"",
+      example = "\"[\\\"/transactions\\\", \\\"/stores\\\"]\"",
       required = true,
       value = "list of prefixes to paths from which data should be ingested")
   public List<String> getPrefixes() {
@@ -273,6 +282,66 @@ public class SourceS3 {
     this.mappings = mappings;
   }
 
+  public SourceS3 objectCountDownloaded(Long objectCountDownloaded) {
+    this.objectCountDownloaded = objectCountDownloaded;
+    return this;
+  }
+
+  /**
+   * Get objectCountDownloaded
+   *
+   * @return objectCountDownloaded
+   */
+  @JsonProperty("object_count_downloaded")
+  @ApiModelProperty(value = "")
+  public Long getObjectCountDownloaded() {
+    return objectCountDownloaded;
+  }
+
+  public void setObjectCountDownloaded(Long objectCountDownloaded) {
+    this.objectCountDownloaded = objectCountDownloaded;
+  }
+
+  public SourceS3 objectCountTotal(Long objectCountTotal) {
+    this.objectCountTotal = objectCountTotal;
+    return this;
+  }
+
+  /**
+   * Get objectCountTotal
+   *
+   * @return objectCountTotal
+   */
+  @JsonProperty("object_count_total")
+  @ApiModelProperty(value = "")
+  public Long getObjectCountTotal() {
+    return objectCountTotal;
+  }
+
+  public void setObjectCountTotal(Long objectCountTotal) {
+    this.objectCountTotal = objectCountTotal;
+  }
+
+  public SourceS3 objectBytesTotal(Long objectBytesTotal) {
+    this.objectBytesTotal = objectBytesTotal;
+    return this;
+  }
+
+  /**
+   * Get objectBytesTotal
+   *
+   * @return objectBytesTotal
+   */
+  @JsonProperty("object_bytes_total")
+  @ApiModelProperty(value = "")
+  public Long getObjectBytesTotal() {
+    return objectBytesTotal;
+  }
+
+  public void setObjectBytesTotal(Long objectBytesTotal) {
+    this.objectBytesTotal = objectBytesTotal;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -290,13 +359,27 @@ public class SourceS3 {
         && Objects.equals(this.bucket, sourceS3.bucket)
         && Objects.equals(this.prefixes, sourceS3.prefixes)
         && Objects.equals(this.format, sourceS3.format)
-        && Objects.equals(this.mappings, sourceS3.mappings);
+        && Objects.equals(this.mappings, sourceS3.mappings)
+        && Objects.equals(this.objectCountDownloaded, sourceS3.objectCountDownloaded)
+        && Objects.equals(this.objectCountTotal, sourceS3.objectCountTotal)
+        && Objects.equals(this.objectBytesTotal, sourceS3.objectBytesTotal);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(
-        accessKey, secretAccess, prefix, pattern, region, bucket, prefixes, format, mappings);
+        accessKey,
+        secretAccess,
+        prefix,
+        pattern,
+        region,
+        bucket,
+        prefixes,
+        format,
+        mappings,
+        objectCountDownloaded,
+        objectCountTotal,
+        objectBytesTotal);
   }
 
   @Override
@@ -313,6 +396,11 @@ public class SourceS3 {
     sb.append("    prefixes: ").append(toIndentedString(prefixes)).append("\n");
     sb.append("    format: ").append(toIndentedString(format)).append("\n");
     sb.append("    mappings: ").append(toIndentedString(mappings)).append("\n");
+    sb.append("    objectCountDownloaded: ")
+        .append(toIndentedString(objectCountDownloaded))
+        .append("\n");
+    sb.append("    objectCountTotal: ").append(toIndentedString(objectCountTotal)).append("\n");
+    sb.append("    objectBytesTotal: ").append(toIndentedString(objectBytesTotal)).append("\n");
     sb.append("}");
     return sb.toString();
   }

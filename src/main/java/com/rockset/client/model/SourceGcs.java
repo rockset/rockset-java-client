@@ -20,13 +20,22 @@ import java.util.Objects;
 /** SourceGcs */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class SourceGcs {
   @SerializedName("bucket")
   private String bucket = null;
 
   @SerializedName("prefix")
   private String prefix = null;
+
+  @SerializedName("object_count_downloaded")
+  private Long objectCountDownloaded = null;
+
+  @SerializedName("object_count_total")
+  private Long objectCountTotal = null;
+
+  @SerializedName("object_bytes_total")
+  private Long objectBytesTotal = null;
 
   public SourceGcs bucket(String bucket) {
     this.bucket = bucket;
@@ -68,6 +77,66 @@ public class SourceGcs {
     this.prefix = prefix;
   }
 
+  public SourceGcs objectCountDownloaded(Long objectCountDownloaded) {
+    this.objectCountDownloaded = objectCountDownloaded;
+    return this;
+  }
+
+  /**
+   * Get objectCountDownloaded
+   *
+   * @return objectCountDownloaded
+   */
+  @JsonProperty("object_count_downloaded")
+  @ApiModelProperty(value = "")
+  public Long getObjectCountDownloaded() {
+    return objectCountDownloaded;
+  }
+
+  public void setObjectCountDownloaded(Long objectCountDownloaded) {
+    this.objectCountDownloaded = objectCountDownloaded;
+  }
+
+  public SourceGcs objectCountTotal(Long objectCountTotal) {
+    this.objectCountTotal = objectCountTotal;
+    return this;
+  }
+
+  /**
+   * Get objectCountTotal
+   *
+   * @return objectCountTotal
+   */
+  @JsonProperty("object_count_total")
+  @ApiModelProperty(value = "")
+  public Long getObjectCountTotal() {
+    return objectCountTotal;
+  }
+
+  public void setObjectCountTotal(Long objectCountTotal) {
+    this.objectCountTotal = objectCountTotal;
+  }
+
+  public SourceGcs objectBytesTotal(Long objectBytesTotal) {
+    this.objectBytesTotal = objectBytesTotal;
+    return this;
+  }
+
+  /**
+   * Get objectBytesTotal
+   *
+   * @return objectBytesTotal
+   */
+  @JsonProperty("object_bytes_total")
+  @ApiModelProperty(value = "")
+  public Long getObjectBytesTotal() {
+    return objectBytesTotal;
+  }
+
+  public void setObjectBytesTotal(Long objectBytesTotal) {
+    this.objectBytesTotal = objectBytesTotal;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -78,12 +147,15 @@ public class SourceGcs {
     }
     SourceGcs sourceGcs = (SourceGcs) o;
     return Objects.equals(this.bucket, sourceGcs.bucket)
-        && Objects.equals(this.prefix, sourceGcs.prefix);
+        && Objects.equals(this.prefix, sourceGcs.prefix)
+        && Objects.equals(this.objectCountDownloaded, sourceGcs.objectCountDownloaded)
+        && Objects.equals(this.objectCountTotal, sourceGcs.objectCountTotal)
+        && Objects.equals(this.objectBytesTotal, sourceGcs.objectBytesTotal);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(bucket, prefix);
+    return Objects.hash(bucket, prefix, objectCountDownloaded, objectCountTotal, objectBytesTotal);
   }
 
   @Override
@@ -93,6 +165,11 @@ public class SourceGcs {
 
     sb.append("    bucket: ").append(toIndentedString(bucket)).append("\n");
     sb.append("    prefix: ").append(toIndentedString(prefix)).append("\n");
+    sb.append("    objectCountDownloaded: ")
+        .append(toIndentedString(objectCountDownloaded))
+        .append("\n");
+    sb.append("    objectCountTotal: ").append(toIndentedString(objectCountTotal)).append("\n");
+    sb.append("    objectBytesTotal: ").append(toIndentedString(objectBytesTotal)).append("\n");
     sb.append("}");
     return sb.toString();
   }

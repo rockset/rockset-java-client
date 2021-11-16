@@ -55,8 +55,8 @@ public class DocumentsApi {
   /**
    * Build call for add
    *
-   * @param workspace name of the workspace (required)
-   * @param collection name of the collection (required)
+   * @param workspace Name of the workspace. (required)
+   * @param collection Name of the collection. (required)
    * @param body JSON object (required)
    * @param progressListener Progress listener
    * @param progressRequestListener Progress request listener
@@ -157,8 +157,8 @@ public class DocumentsApi {
   /**
    * Add Documents Add documents to a collection.
    *
-   * @param workspace name of the workspace (required)
-   * @param collection name of the collection (required)
+   * @param workspace Name of the workspace. (required)
+   * @param collection Name of the collection. (required)
    * @param body JSON object (required)
    * @return AddDocumentsResponse
    * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
@@ -173,8 +173,8 @@ public class DocumentsApi {
   /**
    * Add Documents Add documents to a collection.
    *
-   * @param workspace name of the workspace (required)
-   * @param collection name of the collection (required)
+   * @param workspace Name of the workspace. (required)
+   * @param collection Name of the collection. (required)
    * @param body JSON object (required)
    * @return ApiResponse&lt;AddDocumentsResponse&gt;
    * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
@@ -190,8 +190,8 @@ public class DocumentsApi {
   /**
    * Add Documents (asynchronously) Add documents to a collection.
    *
-   * @param workspace name of the workspace (required)
-   * @param collection name of the collection (required)
+   * @param workspace Name of the workspace. (required)
+   * @param collection Name of the collection. (required)
    * @param body JSON object (required)
    * @param callback The callback to be executed when the API call finishes
    * @return The request call
@@ -235,8 +235,8 @@ public class DocumentsApi {
   /**
    * Build call for delete
    *
-   * @param workspace name of the workspace (required)
-   * @param collection name of the collection (required)
+   * @param workspace Name of the workspace. (required)
+   * @param collection Name of the collection. (required)
    * @param body JSON object (required)
    * @param progressListener Progress listener
    * @param progressRequestListener Progress request listener
@@ -337,8 +337,8 @@ public class DocumentsApi {
   /**
    * Delete Documents Delete documents from a collection.
    *
-   * @param workspace name of the workspace (required)
-   * @param collection name of the collection (required)
+   * @param workspace Name of the workspace. (required)
+   * @param collection Name of the collection. (required)
    * @param body JSON object (required)
    * @return DeleteDocumentsResponse
    * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
@@ -353,8 +353,8 @@ public class DocumentsApi {
   /**
    * Delete Documents Delete documents from a collection.
    *
-   * @param workspace name of the workspace (required)
-   * @param collection name of the collection (required)
+   * @param workspace Name of the workspace. (required)
+   * @param collection Name of the collection. (required)
    * @param body JSON object (required)
    * @return ApiResponse&lt;DeleteDocumentsResponse&gt;
    * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
@@ -371,8 +371,8 @@ public class DocumentsApi {
   /**
    * Delete Documents (asynchronously) Delete documents from a collection.
    *
-   * @param workspace name of the workspace (required)
-   * @param collection name of the collection (required)
+   * @param workspace Name of the workspace. (required)
+   * @param collection Name of the collection. (required)
    * @param body JSON object (required)
    * @param callback The callback to be executed when the API call finishes
    * @return The request call
@@ -416,8 +416,8 @@ public class DocumentsApi {
   /**
    * Build call for patch
    *
-   * @param workspace name of the workspace (required)
-   * @param collection name of the collection (required)
+   * @param workspace Name of the workspace. (required)
+   * @param collection Name of the collection. (required)
    * @param body JSON Patch objects (required)
    * @param progressListener Progress listener
    * @param progressRequestListener Progress request listener
@@ -518,8 +518,8 @@ public class DocumentsApi {
   /**
    * Patch Documents Update existing documents in a collection.
    *
-   * @param workspace name of the workspace (required)
-   * @param collection name of the collection (required)
+   * @param workspace Name of the workspace. (required)
+   * @param collection Name of the collection. (required)
    * @param body JSON Patch objects (required)
    * @return PatchDocumentsResponse
    * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
@@ -534,8 +534,8 @@ public class DocumentsApi {
   /**
    * Patch Documents Update existing documents in a collection.
    *
-   * @param workspace name of the workspace (required)
-   * @param collection name of the collection (required)
+   * @param workspace Name of the workspace. (required)
+   * @param collection Name of the collection. (required)
    * @param body JSON Patch objects (required)
    * @return ApiResponse&lt;PatchDocumentsResponse&gt;
    * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
@@ -552,8 +552,8 @@ public class DocumentsApi {
   /**
    * Patch Documents (asynchronously) Update existing documents in a collection.
    *
-   * @param workspace name of the workspace (required)
-   * @param collection name of the collection (required)
+   * @param workspace Name of the workspace. (required)
+   * @param collection Name of the collection. (required)
    * @param body JSON Patch objects (required)
    * @param callback The callback to be executed when the API call finishes
    * @return The request call

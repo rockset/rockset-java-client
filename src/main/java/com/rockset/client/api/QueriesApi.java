@@ -199,7 +199,6 @@ public class QueriesApi {
    * Build call for validate
    *
    * @param body JSON object (required)
-   * @param parameters (optional)
    * @param progressListener Progress listener
    * @param progressRequestListener Progress request listener
    * @return Call to execute
@@ -207,7 +206,6 @@ public class QueriesApi {
    */
   public com.squareup.okhttp.Call validateCall(
       QueryRequest body,
-      Boolean parameters,
       final ProgressResponseBody.ProgressListener progressListener,
       final ProgressRequestBody.ProgressRequestListener progressRequestListener)
       throws Exception {
@@ -218,8 +216,6 @@ public class QueriesApi {
 
     List<Pair> localVarQueryParams = new ArrayList<Pair>();
     List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-    if (parameters != null)
-      localVarQueryParams.addAll(apiClient.parameterToPair("parameters", parameters));
 
     Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -267,7 +263,6 @@ public class QueriesApi {
   @SuppressWarnings("rawtypes")
   private com.squareup.okhttp.Call validateValidateBeforeCall(
       QueryRequest body,
-      Boolean parameters,
       final ProgressResponseBody.ProgressListener progressListener,
       final ProgressRequestBody.ProgressRequestListener progressRequestListener)
       throws Exception {
@@ -277,8 +272,7 @@ public class QueriesApi {
       throw new Exception("Missing the required parameter 'body' when calling validate(Async)");
     }
 
-    com.squareup.okhttp.Call call =
-        validateCall(body, parameters, progressListener, progressRequestListener);
+    com.squareup.okhttp.Call call = validateCall(body, progressListener, progressRequestListener);
     return call;
   }
 
@@ -286,13 +280,12 @@ public class QueriesApi {
    * Validate Query Validate a SQL query with Rockset&#39;s parser and planner.
    *
    * @param body JSON object (required)
-   * @param parameters (optional)
    * @return ValidateQueryResponse
    * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
    *     body
    */
-  public ValidateQueryResponse validate(QueryRequest body, Boolean parameters) throws Exception {
-    ApiResponse<ValidateQueryResponse> resp = validateWithHttpInfo(body, parameters);
+  public ValidateQueryResponse validate(QueryRequest body) throws Exception {
+    ApiResponse<ValidateQueryResponse> resp = validateWithHttpInfo(body);
     return resp.getData();
   }
 
@@ -300,14 +293,13 @@ public class QueriesApi {
    * Validate Query Validate a SQL query with Rockset&#39;s parser and planner.
    *
    * @param body JSON object (required)
-   * @param parameters (optional)
    * @return ApiResponse&lt;ValidateQueryResponse&gt;
    * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
    *     body
    */
-  public ApiResponse<ValidateQueryResponse> validateWithHttpInfo(
-      QueryRequest body, Boolean parameters) throws Exception {
-    com.squareup.okhttp.Call call = validateValidateBeforeCall(body, parameters, null, null);
+  public ApiResponse<ValidateQueryResponse> validateWithHttpInfo(QueryRequest body)
+      throws Exception {
+    com.squareup.okhttp.Call call = validateValidateBeforeCall(body, null, null);
     Type localVarReturnType = new TypeToken<ValidateQueryResponse>() {}.getType();
     return apiClient.execute(call, localVarReturnType);
   }
@@ -316,14 +308,12 @@ public class QueriesApi {
    * Validate Query (asynchronously) Validate a SQL query with Rockset&#39;s parser and planner.
    *
    * @param body JSON object (required)
-   * @param parameters (optional)
    * @param callback The callback to be executed when the API call finishes
    * @return The request call
    * @throws Exception If fail to process the API call, e.g. serializing the request body object
    */
   public com.squareup.okhttp.Call validateAsync(
-      QueryRequest body, Boolean parameters, final ApiCallback<ValidateQueryResponse> callback)
-      throws Exception {
+      QueryRequest body, final ApiCallback<ValidateQueryResponse> callback) throws Exception {
 
     ProgressResponseBody.ProgressListener progressListener = null;
     ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -347,7 +337,7 @@ public class QueriesApi {
     }
 
     com.squareup.okhttp.Call call =
-        validateValidateBeforeCall(body, parameters, progressListener, progressRequestListener);
+        validateValidateBeforeCall(body, progressListener, progressRequestListener);
     Type localVarReturnType = new TypeToken<ValidateQueryResponse>() {}.getType();
     apiClient.executeAsync(call, localVarReturnType, callback);
     return call;

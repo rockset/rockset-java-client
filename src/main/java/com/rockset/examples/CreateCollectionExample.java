@@ -10,7 +10,7 @@ public class CreateCollectionExample {
     CreateCollectionRequest request = new CreateCollectionRequest().name("my-first-collection");
 
     try {
-      CreateCollectionResponse response = rs.createCollection("commoms", request);
+      CreateCollectionResponse response = rs.collections.create("commoms", request);
       System.out.println(response);
     } catch (Exception e) {
       e.printStackTrace();

@@ -417,7 +417,7 @@ public class TestTable {
       while (true) {
         try {
           QueryRequestSql qs = new QueryRequestSql().query(sql);
-          testClient.query(new QueryRequest().sql(qs));
+          testClient.queries.query(new QueryRequest().sql(qs));
           break;
         } catch (Exception e) {
           System.out.println(String.format("Waiting for collection %s to be describable", name));
@@ -434,7 +434,7 @@ public class TestTable {
   private void createCollections(List<String> names) throws Exception {
     for (String name : names) {
       CreateCollectionRequest request = new CreateCollectionRequest().name(name);
-      CreateCollectionResponse response = testClient.createCollection("commons", request);
+      CreateCollectionResponse response = testClient.collections.create("commons", request);
 
       Assert.assertEquals(response.getData().getName(), name);
       Assert.assertEquals(response.getData().getStatus(), Collection.StatusEnum.CREATED);
@@ -447,7 +447,7 @@ public class TestTable {
   private void deleteCollections(List<String> names) throws Exception {
     for (String name : names) {
       DeleteCollectionResponse deleteCollectionResponse =
-          testClient.deleteCollection("commons", name);
+          testClient.collections.delete("commons", name);
       Assert.assertEquals(deleteCollectionResponse.getData().getName(), name);
       // Assert.assertEquals(deleteCollectionResponse.getData().getStatus(),
       //                     Collection.StatusEnum.DELETED);
@@ -511,7 +511,7 @@ public class TestTable {
     while (found < expectedDocs) {
       try {
         QueryRequestSql qs = new QueryRequestSql().query(sql);
-        QueryResponse resp = testClient.query(new QueryRequest().sql(qs));
+        QueryResponse resp = testClient.queries.query(new QueryRequest().sql(qs));
 
         RocksetResultSet res = new RocksetResultSet(sql, resp, 10);
         if (res.next()) {

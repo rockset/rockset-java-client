@@ -25,7 +25,7 @@ import java.util.Objects;
 /** DocumentStatus */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class DocumentStatus {
   @SerializedName("_collection")
   private String collection = null;

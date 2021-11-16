@@ -27,7 +27,7 @@ import java.util.Objects;
 /** CsvParams */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class CsvParams {
   @SerializedName("firstLineAsColumnNames")
   private Boolean firstLineAsColumnNames = null;
@@ -195,7 +195,9 @@ public class CsvParams {
    * @return columnNames
    */
   @JsonProperty("columnNames")
-  @ApiModelProperty(example = "\"[c1, c2, c3]\"", value = "names of columns")
+  @ApiModelProperty(
+      example = "\"[\\\"c1\\\", \\\"c2\\\", \\\"c3\\\"]\"",
+      value = "names of columns")
   public List<String> getColumnNames() {
     return columnNames;
   }
@@ -224,7 +226,7 @@ public class CsvParams {
    */
   @JsonProperty("columnTypes")
   @ApiModelProperty(
-      example = "\"['BOOLEAN', 'INTEGER', 'FLOAT', 'STRING']\"",
+      example = "\"[\\\"BOOLEAN\\\", \\\"INTEGER\\\", \\\"FLOAT\\\", \\\"STRING\\\"]\"",
       value = "names of columns")
   public List<ColumnTypesEnum> getColumnTypes() {
     return columnTypes;

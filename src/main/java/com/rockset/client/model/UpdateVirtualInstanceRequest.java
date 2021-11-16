@@ -25,7 +25,7 @@ import java.util.Objects;
 /** UpdateVirtualInstanceRequest */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class UpdateVirtualInstanceRequest {
   /** requested virtual instance size */
   @JsonAdapter(NewSizeEnum.Adapter.class)
@@ -157,6 +157,9 @@ public class UpdateVirtualInstanceRequest {
   @SerializedName("new_type")
   private NewTypeEnum newType = null;
 
+  @SerializedName("monitoring_enabled")
+  private Boolean monitoringEnabled = null;
+
   public UpdateVirtualInstanceRequest newSize(NewSizeEnum newSize) {
     this.newSize = newSize;
     return this;
@@ -168,7 +171,7 @@ public class UpdateVirtualInstanceRequest {
    * @return newSize
    */
   @JsonProperty("new_size")
-  @ApiModelProperty(example = "LARGE", required = true, value = "requested virtual instance size")
+  @ApiModelProperty(example = "LARGE", value = "requested virtual instance size")
   public NewSizeEnum getNewSize() {
     return newSize;
   }
@@ -197,6 +200,26 @@ public class UpdateVirtualInstanceRequest {
     this.newType = newType;
   }
 
+  public UpdateVirtualInstanceRequest monitoringEnabled(Boolean monitoringEnabled) {
+    this.monitoringEnabled = monitoringEnabled;
+    return this;
+  }
+
+  /**
+   * Get monitoringEnabled
+   *
+   * @return monitoringEnabled
+   */
+  @JsonProperty("monitoring_enabled")
+  @ApiModelProperty(value = "")
+  public Boolean isMonitoringEnabled() {
+    return monitoringEnabled;
+  }
+
+  public void setMonitoringEnabled(Boolean monitoringEnabled) {
+    this.monitoringEnabled = monitoringEnabled;
+  }
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -207,12 +230,13 @@ public class UpdateVirtualInstanceRequest {
     }
     UpdateVirtualInstanceRequest updateVirtualInstanceRequest = (UpdateVirtualInstanceRequest) o;
     return Objects.equals(this.newSize, updateVirtualInstanceRequest.newSize)
-        && Objects.equals(this.newType, updateVirtualInstanceRequest.newType);
+        && Objects.equals(this.newType, updateVirtualInstanceRequest.newType)
+        && Objects.equals(this.monitoringEnabled, updateVirtualInstanceRequest.monitoringEnabled);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(newSize, newType);
+    return Objects.hash(newSize, newType, monitoringEnabled);
   }
 
   @Override
@@ -222,6 +246,7 @@ public class UpdateVirtualInstanceRequest {
 
     sb.append("    newSize: ").append(toIndentedString(newSize)).append("\n");
     sb.append("    newType: ").append(toIndentedString(newType)).append("\n");
+    sb.append("    monitoringEnabled: ").append(toIndentedString(monitoringEnabled)).append("\n");
     sb.append("}");
     return sb.toString();
   }

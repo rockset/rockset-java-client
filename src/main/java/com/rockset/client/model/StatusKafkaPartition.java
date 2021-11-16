@@ -20,13 +20,13 @@ import java.util.Objects;
 /** StatusKafkaPartition */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-02-26T17:46:04.637Z")
+    date = "2021-11-12T22:54:16.921Z")
 public class StatusKafkaPartition {
   @SerializedName("partition_number")
   private Integer partitionNumber = null;
 
-  @SerializedName("num_documents_processed")
-  private Long numDocumentsProcessed = null;
+  @SerializedName("partition_offset")
+  private Long partitionOffset = null;
 
   public StatusKafkaPartition partitionNumber(Integer partitionNumber) {
     this.partitionNumber = partitionNumber;
@@ -48,24 +48,24 @@ public class StatusKafkaPartition {
     this.partitionNumber = partitionNumber;
   }
 
-  public StatusKafkaPartition numDocumentsProcessed(Long numDocumentsProcessed) {
-    this.numDocumentsProcessed = numDocumentsProcessed;
+  public StatusKafkaPartition partitionOffset(Long partitionOffset) {
+    this.partitionOffset = partitionOffset;
     return this;
   }
 
   /**
-   * Number of documents consumed by this partition
+   * Latest offset of partition
    *
-   * @return numDocumentsProcessed
+   * @return partitionOffset
    */
-  @JsonProperty("num_documents_processed")
-  @ApiModelProperty(example = "1337", value = "Number of documents consumed by this partition")
-  public Long getNumDocumentsProcessed() {
-    return numDocumentsProcessed;
+  @JsonProperty("partition_offset")
+  @ApiModelProperty(example = "100", value = "Latest offset of partition")
+  public Long getPartitionOffset() {
+    return partitionOffset;
   }
 
-  public void setNumDocumentsProcessed(Long numDocumentsProcessed) {
-    this.numDocumentsProcessed = numDocumentsProcessed;
+  public void setPartitionOffset(Long partitionOffset) {
+    this.partitionOffset = partitionOffset;
   }
 
   @Override
@@ -78,12 +78,12 @@ public class StatusKafkaPartition {
     }
     StatusKafkaPartition statusKafkaPartition = (StatusKafkaPartition) o;
     return Objects.equals(this.partitionNumber, statusKafkaPartition.partitionNumber)
-        && Objects.equals(this.numDocumentsProcessed, statusKafkaPartition.numDocumentsProcessed);
+        && Objects.equals(this.partitionOffset, statusKafkaPartition.partitionOffset);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(partitionNumber, numDocumentsProcessed);
+    return Objects.hash(partitionNumber, partitionOffset);
   }
 
   @Override
@@ -92,9 +92,7 @@ public class StatusKafkaPartition {
     sb.append("class StatusKafkaPartition {\n");
 
     sb.append("    partitionNumber: ").append(toIndentedString(partitionNumber)).append("\n");
-    sb.append("    numDocumentsProcessed: ")
-        .append(toIndentedString(numDocumentsProcessed))
-        .append("\n");
+    sb.append("    partitionOffset: ").append(toIndentedString(partitionOffset)).append("\n");
     sb.append("}");
     return sb.toString();
   }
