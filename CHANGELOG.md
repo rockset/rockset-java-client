@@ -1,5 +1,8 @@
 # Rockset Java Client Changelog
 
+## v0.9.1 2021-12-10
+- Support result set pagination by leveraging the new Rockset pagination feature
+
 ## v0.9.0 2021-03-10
 - Introduce Aliases, IP Allowlist and Virtual Instances
 - Fix a bug to ignore unknown properties in response from server

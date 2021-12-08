@@ -518,7 +518,7 @@ public class TestTable {
           found = res.getInt("?COUNT");
         }
       } catch (Exception e) {
-        System.out.println("Exception in query " + sql + "exception " + e.getMessage());
+        System.out.println("Exception in query " + sql + "exception: " + e);
       }
       System.out.println(
           String.format(
