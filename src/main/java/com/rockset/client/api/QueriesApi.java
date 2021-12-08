@@ -114,6 +114,109 @@ public class QueriesApi {
         progressRequestListener);
   }
 
+  /**
+   * Get query pagination results.
+   *
+   * @param queryId Query Id
+   * @param cursor Cursor
+   * @param docCount Doc count
+   * @return QueryResponse
+   * @throws Exception
+   *     body
+   */
+  public QueryResponse getQueryPaginationResults(final String queryId,
+                                                 final String cursor,
+                                                 final int docCount) throws Exception {
+    com.squareup.okhttp.Call call = getQueryPaginationResultsCall(queryId, cursor, docCount, null, null);
+    Type localVarReturnType = new TypeToken<QueryResponse>() {}.getType();
+
+    ApiResponse<QueryResponse> response = this.apiClient.execute(call, localVarReturnType);
+    return response.getData();
+  }
+
+  /**
+   * Query Make a SQL query to Rockset.
+   *
+   * @param body JSON object (required)
+   * @return ApiResponse&lt;QueryResponse&gt;
+   * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
+   *     body
+   */
+  public ApiResponse<QueryResponse> queryWithHttpInfo(QueryRequest body) throws Exception {
+    com.squareup.okhttp.Call call = queryValidateBeforeCall(body, null, null);
+    Type localVarReturnType = new TypeToken<QueryResponse>() {}.getType();
+    return apiClient.execute(call, localVarReturnType);
+  }
+
+  /**
+   * Pagination query
+   *
+   * @param queryId Query Id
+   * @param cursor Cursor
+   * @param docCount Doc count
+   * @param progressListener Progress listener
+   * @param progressRequestListener Progress request listener
+   * @return Call to execute
+   * @throws Exception
+   */
+  private com.squareup.okhttp.Call getQueryPaginationResultsCall(
+          final String queryId,
+          final String cursor,
+          final int docCount,
+          final ProgressResponseBody.ProgressListener progressListener,
+          final ProgressRequestBody.ProgressRequestListener progressRequestListener)
+          throws Exception {
+    // create path and map variables
+    String localVarPath = String.format("/v1/orgs/self/queries/%s/pages/%s", queryId, cursor);
+
+    List<Pair> localVarQueryParams = new ArrayList<Pair>();
+    localVarQueryParams.add(new Pair("docs", String.valueOf(docCount)));
+
+    List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+    Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+    Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+    final String[] localVarAccepts = {"application/json"};
+    final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+    if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+    final String[] localVarContentTypes = {"application/json"};
+    final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+    localVarHeaderParams.put("Content-Type", localVarContentType);
+
+    if (progressListener != null) {
+      apiClient
+              .getHttpClient()
+              .networkInterceptors()
+              .add(
+                      new com.squareup.okhttp.Interceptor() {
+                        @Override
+                        public com.squareup.okhttp.Response intercept(
+                                com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                          com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                          return originalResponse
+                                  .newBuilder()
+                                  .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                                  .build();
+                        }
+                      });
+    }
+
+    String[] localVarAuthNames = new String[] {};
+    return apiClient.buildCall(
+            localVarPath,
+            "GET",
+            localVarQueryParams,
+            localVarCollectionQueryParams,
+            null,
+            localVarHeaderParams,
+            localVarFormParams,
+            localVarAuthNames,
+            progressRequestListener);
+  }
+
   @SuppressWarnings("rawtypes")
   private com.squareup.okhttp.Call queryValidateBeforeCall(
       QueryRequest body,
@@ -141,20 +244,6 @@ public class QueriesApi {
   public QueryResponse query(QueryRequest body) throws Exception {
     ApiResponse<QueryResponse> resp = queryWithHttpInfo(body);
     return resp.getData();
-  }
-
-  /**
-   * Query Make a SQL query to Rockset.
-   *
-   * @param body JSON object (required)
-   * @return ApiResponse&lt;QueryResponse&gt;
-   * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response
-   *     body
-   */
-  public ApiResponse<QueryResponse> queryWithHttpInfo(QueryRequest body) throws Exception {
-    com.squareup.okhttp.Call call = queryValidateBeforeCall(body, null, null);
-    Type localVarReturnType = new TypeToken<QueryResponse>() {}.getType();
-    return apiClient.execute(call, localVarReturnType);
   }
 
   /**

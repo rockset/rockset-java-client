@@ -2,6 +2,7 @@ package com.rockset.jdbc;
 
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.Map;
 
 class RocksetUtils {
 

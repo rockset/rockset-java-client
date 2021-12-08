@@ -123,7 +123,11 @@ public class ApiClient {
     return this;
   }
 
-  /** set version */
+  /**
+   * Set version
+   * @param version version of API client
+   * @return API Client object
+   */
   public ApiClient setVersion(String version) {
     this.version = version;
     return this;
@@ -961,9 +965,11 @@ public class ApiClient {
       String[] authNames,
       ProgressRequestBody.ProgressRequestListener progressRequestListener)
       throws ApiException {
+
     updateParamsForAuth(authNames, queryParams, headerParams);
 
     final String url = buildUrl(path, queryParams, collectionQueryParams);
+
     final Request.Builder reqBuilder = new Request.Builder().url(url);
     processHeaderParams(headerParams, reqBuilder);
 

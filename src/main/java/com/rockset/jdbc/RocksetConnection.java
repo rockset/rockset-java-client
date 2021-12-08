@@ -443,7 +443,11 @@ public class RocksetConnection implements Connection {
     this.locale.set(locale);
   }
 
-  /** Adds a session property (experimental). */
+  /**
+   * Adds a session property (experimental).
+   * @param name Name
+   * @param value Value
+   */
   public void setSessionProperty(String name, String value) {
     requireNonNull(name, "name is null");
     requireNonNull(value, "value is null");
@@ -500,9 +504,13 @@ public class RocksetConnection implements Connection {
   // This is invoked by the RocksetStatement to execute a query
   //
   QueryResponse startQuery(
-      String sql, List<QueryParameter> params, Map<String, String> sessionPropertiesOverride)
+      String sql, int fetchSize, List<QueryParameter> params, Map<String, String> sessionPropertiesOverride)
       throws Exception {
     final QueryRequestSql q = new QueryRequestSql().query(sql);
+
+    if (fetchSize > 0) {
+      q.paginate(true).initialPaginateResponseDocCount(fetchSize);
+    }
 
     // Append any specified queries
     if (params != null) {
@@ -511,6 +519,15 @@ public class RocksetConnection implements Connection {
 
     final QueryRequest request = new QueryRequest().sql(q);
     return client.queries.query(request);
+  }
+
+  //
+  // This is invoked by the RocksetStatement to paginate a query
+  //
+  public QueryResponse getQueryPaginationResults(
+          String queryId, String cursor, int fetchSize)
+          throws Exception {
+    return client.queries.getQueryPaginationResults(queryId, cursor, fetchSize);
   }
 
   //
@@ -541,7 +558,7 @@ public class RocksetConnection implements Connection {
         String.format(
             "describe %s.%s OPTION(max_field_depth=1)",
             quoteIdentifier(schema), quoteIdentifier(name));
-    QueryResponse resp = startQuery(sql, null, null);
+    QueryResponse resp = startQuery(sql, 0,null, null);
     RocksetDriver.log("Exit: describeTable " + name);
     return resp;
   }

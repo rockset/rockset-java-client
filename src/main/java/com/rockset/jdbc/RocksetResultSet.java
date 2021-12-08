@@ -87,28 +87,32 @@ public class RocksetResultSet implements ResultSet {
   // tracing via RocksetDriver.debugLogs = true.
   private static boolean debugLogs = false;
 
-  private final List<Object> resultSet;
+  private List<Object> resultSet;
   private final DateTimeZone sessionTimeZone;
 
   private final Map<String, Integer> fieldMap;
   private final List<Column> columns;
   private final ResultSetMetaData resultSetMetaData;
   private final AtomicInteger rowIndex = new AtomicInteger(-1);
-  private final long totalRows;
+  private final long maxRows;
+
   private final int columnCount;
   private final AtomicBoolean wasNull = new AtomicBoolean();
   private final AtomicBoolean closed = new AtomicBoolean(false);
   private final String prefix;
   private static final AtomicInteger queryId = new AtomicInteger(0);
 
-  RocksetResultSet(String queryStr, QueryResponse response, long maxRows) throws SQLException {
+  private final RocksetResultSetPaginationParams rocksetResultSetPaginationParams;
+
+  RocksetResultSet(String queryStr, QueryResponse response, long maxRows, RocksetResultSetPaginationParams rocksetResultSetPaginationParams) throws SQLException {
+    this.maxRows = maxRows;
+    this.rocksetResultSetPaginationParams = rocksetResultSetPaginationParams;
     this.sessionTimeZone = DateTimeZone.forID(TimeZone.getDefault().getID());
     this.columns = getColumns(response);
     this.columnCount = this.columns.size();
     this.fieldMap = getFieldMap(columns);
     this.resultSet = response.getResults();
     this.resultSetMetaData = new RocksetResultSetMetaData(this.columns);
-    this.totalRows = resultSet.size();
     if (debugLogs) {
       int myid = queryId.getAndIncrement();
       this.prefix = String.format("RocksetResultSet[%d] ", myid);
@@ -120,18 +124,18 @@ public class RocksetResultSet implements ResultSet {
               + " id = "
               + myid
               + " created with numrows = "
-              + this.totalRows
+              + this.resultSet.size()
               + " "
-              + this.resultSetMetaData.toString());
+              + this.resultSetMetaData);
     } else {
       this.prefix = "";
     }
   }
 
   RocksetResultSet(List<Column> columns, List<Object> resultSet) {
-
+    this.maxRows = Long.MAX_VALUE;
     this.resultSet = resultSet;
-    this.totalRows = resultSet.size();
+    this.rocksetResultSetPaginationParams = null;
     this.columnCount = columns.size();
     this.columns = columns;
     this.fieldMap = getFieldMap(columns);
@@ -146,7 +150,7 @@ public class RocksetResultSet implements ResultSet {
               + " id = "
               + myid
               + " created with numrows = "
-              + this.totalRows
+              + this.resultSet.size()
               + " "
               + this.resultSetMetaData.toString());
     } else {
@@ -154,26 +158,75 @@ public class RocksetResultSet implements ResultSet {
     }
   }
 
+  private boolean doNextIfPaginationDisabled() throws SQLException {
+    if (this.rowIndex.get() >= this.resultSet.size()) {
+      log(this.prefix
+                      + " Thread "
+                      + Thread.currentThread().getName()
+                      + " no more data "
+                      + this.rowIndex.get());
+      return false;
+    }
+    log(this.prefix
+                    + " Thread "
+                    + Thread.currentThread().getName()
+                    + " positioned at "
+                    + this.rowIndex.get());
+    return true;
+  }
+
+  private List<Object> getResults() throws SQLException {
+
+    try {
+      QueryResponse response = this.rocksetResultSetPaginationParams.getConnection().
+              getQueryPaginationResults(this.rocksetResultSetPaginationParams.getLastQueryId(),
+                      this.rocksetResultSetPaginationParams.getCurrentCursor(), this.rocksetResultSetPaginationParams.getFetchSize());
+
+      this.rocksetResultSetPaginationParams.setCurrentCursor(response.getPagination().getNextCursor());
+
+      return response.getResults();
+    } catch (RuntimeException e) {
+      String msg = "Error retriving pagination info from query Id '" + this.rocksetResultSetPaginationParams.getLastQueryId() + "'" + " error =  " + e.getMessage();
+      RocksetDriver.log(msg);
+      throw new SQLException(msg, e);
+    } catch (Exception e) {
+      throw new SQLException(e.getMessage(), e);
+    }
+  }
+
+  private boolean doNextIfPaginationEnabled() throws SQLException {
+    if (this.rowIndex.get() >= this.resultSet.size()) {
+      // To paginate or not?
+
+      if (this.rocksetResultSetPaginationParams.getCurrentCursor() == null) {
+        //nothing to paginate
+        this.resultSet = new ArrayList<>();
+      } else {
+        // paginate
+        this.resultSet = getResults();
+
+        // reset row index to point to first record of newly paginated results
+        this.rowIndex.set(0);
+      }
+
+      if (this.resultSet.size() == 0) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   @Override
   public boolean next() throws SQLException {
     checkOpen();
-    rowIndex.getAndIncrement();
-    if (rowIndex.get() >= this.totalRows) {
-      log(
-          prefix
-              + " Thread "
-              + Thread.currentThread().getName()
-              + " no more data "
-              + rowIndex.get());
-      return false;
+    this.rowIndex.getAndIncrement();
+
+    if (this.rocksetResultSetPaginationParams.getFetchSize() > 0) {
+      return doNextIfPaginationEnabled();
     }
-    log(
-        prefix
-            + " Thread "
-            + Thread.currentThread().getName()
-            + " positioned at "
-            + rowIndex.get());
-    return true;
+
+    return doNextIfPaginationDisabled();
   }
 
   @Override
@@ -592,12 +645,15 @@ public class RocksetResultSet implements ResultSet {
       log("RocksetResultSet setFetchDirection error");
       throw new SQLException("Fetch direction must be FETCH_FORWARD");
     }
-    log("RocksetResultSet setFetchDirection");
+
+    // we only allow fetch forward
   }
 
   @Override
   public int getFetchDirection() throws SQLException {
     checkOpen();
+
+    // weonly support fetch forward today
     return FETCH_FORWARD;
   }
 
@@ -607,16 +663,15 @@ public class RocksetResultSet implements ResultSet {
     if (rows < 0) {
       throw new SQLException("Rows is negative");
     }
-    // fetch size is ignored
-    log("RocksetResultSet setFetchSize ignored");
+
+    this.rocksetResultSetPaginationParams.setFetchSize(rows);
   }
 
   @Override
   public int getFetchSize() throws SQLException {
     checkOpen();
-    // fetch size is ignored
-    log("RocksetResultSet getFetchSize ignored");
-    return 0;
+
+    return this.rocksetResultSetPaginationParams.getFetchSize();
   }
 
   @Override
@@ -1309,9 +1364,9 @@ public class RocksetResultSet implements ResultSet {
 
   private void checkValidRow() throws SQLException {
     int cur = rowIndex.get();
-    if (cur >= this.totalRows) {
+    if (cur >= this.resultSet.size()) {
       throw new SQLException(
-          "Not on a valid row " + " current row " + cur + " total " + this.totalRows);
+          "Not on a valid row " + " current row " + cur + " total " + this.resultSet.size());
     }
   }
 
