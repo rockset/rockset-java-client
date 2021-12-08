@@ -23,8 +23,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -255,6 +257,60 @@ public class TestSchema {
     }
   }
 
+  private void validatePagination(Statement stmt, int pageSize, String query, Set<String> cities)
+      throws Exception {
+    stmt.setFetchSize(pageSize);
+    stmt.setFetchDirection(ResultSet.FETCH_FORWARD);
+    ResultSet rs = stmt.executeQuery(query);
+
+    while (rs.next()) {
+      cities.add(rs.getString("city"));
+    }
+
+    System.out.println("Verifying for page size " + pageSize);
+    Assert.assertEquals(cities.size(), 11);
+  }
+
+  @Test
+  public void testPagination() throws Exception {
+    System.out.println("testPagination");
+    Connection conn = null;
+    Statement stmt = null;
+
+    Set<String> cities = new HashSet<>();
+
+    // create 1 collection
+    int numCollections = 1;
+    List<String> colls = generateCollectionNames(numCollections);
+    final String collectionName = colls.get(0);
+
+    try {
+      // create collection
+      createCollections(colls);
+
+      // wait for all leaves to be ready to serve
+      waitCollections(colls);
+
+      // upload one file to collection and wait for it to be visible
+      uploadFile(collectionName, "src/test/resources/pagination_data.json", null);
+      waitNumberDocs(collectionName, 1);
+
+      conn = DriverManager.getConnection(DB_URL, property);
+
+      String query = String.format("SELECT city FROM %s", collectionName);
+      stmt = conn.createStatement();
+
+      for (int pageSize = 0; pageSize <= 12; ++pageSize) {
+        validatePagination(stmt, pageSize, query, cities);
+      }
+
+    } catch (SQLException e) {
+      System.out.println("Exception: " + e);
+    } finally {
+      cleanup(colls, stmt, conn);
+    }
+  }
+
   //
   // Invoked by all unit tests at the end to cleanup its mess
   //
@@ -399,7 +455,7 @@ public class TestSchema {
         QueryRequestSql qs = new QueryRequestSql().query(sql);
         QueryResponse resp = testClient.queries.query(new QueryRequest().sql(qs));
 
-        RocksetResultSet res = new RocksetResultSet(sql, resp, 10);
+        RocksetResultSet res = new RocksetResultSet(sql, resp, Integer.MAX_VALUE, null);
         if (res.next()) {
           found = res.getInt("?COUNT");
         }

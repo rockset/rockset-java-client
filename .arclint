@@ -1,0 +1,9 @@
+{
+  "linters": {
+    "java-format": {
+      "type": "java-format",
+      "include": "(\\.java$)",
+      "jar_path": "src/google-java-format/google-java-format-1.7-all-deps.jar"
+    }
+  }
+}

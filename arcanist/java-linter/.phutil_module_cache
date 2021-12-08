@@ -1,0 +1,1 @@
+{"__symbol_cache_version__":11,"e6a09ffadb526741db33c109b4050556":{"have":{"class":{"JavaFormatLinter":91}},"need":{"function":{"pht":288},"class":{"ArcanistExternalLinter":116,"ArcanistLintMessage":1395,"ArcanistLintSeverity":1474}},"xmap":{"JavaFormatLinter":["ArcanistExternalLinter"]}}}

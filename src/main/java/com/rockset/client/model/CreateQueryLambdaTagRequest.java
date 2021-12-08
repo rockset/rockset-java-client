@@ -20,7 +20,7 @@ import java.util.Objects;
 /** CreateQueryLambdaTagRequest */
 @javax.annotation.Generated(
     value = "io.swagger.codegen.languages.JavaClientCodegen",
-    date = "2021-11-12T22:54:16.921Z")
+    date = "2021-12-09T15:56:21.038-08:00")
 public class CreateQueryLambdaTagRequest {
   @SerializedName("tag_name")
   private String tagName = null;

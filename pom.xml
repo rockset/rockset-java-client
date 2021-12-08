@@ -5,7 +5,7 @@
     <artifactId>rockset-java</artifactId>
     <packaging>jar</packaging>
     <name>Rockset Java</name>
-    <version>0.9.0</version>
+    <version>0.9.1</version>
     <url>https://github.com/rockset/rockset-java-client</url>
     <description>The official Rockset Java client library</description>
     <scm>
@@ -225,6 +225,24 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>3.1.3</version>
+                <configuration>
+                    <skip>false</skip>
+                    <failOnError>false</failOnError>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
@@ -322,6 +340,11 @@
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
             <version>3.9.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.22</version>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>

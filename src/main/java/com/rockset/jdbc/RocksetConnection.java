@@ -7,6 +7,7 @@ import static java.util.Objects.requireNonNull;
 
 import com.rockset.client.RocksetClient;
 import com.rockset.client.model.Collection;
+import com.rockset.client.model.QueryPaginationResponse;
 import com.rockset.client.model.QueryParameter;
 import com.rockset.client.model.QueryRequest;
 import com.rockset.client.model.QueryRequestSql;
@@ -40,6 +41,7 @@ import java.util.TimeZone;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
@@ -54,12 +56,18 @@ public class RocksetConnection implements Connection {
   // A workspace internally contains a set of tables.
   public static final String DEFAULT_SCHEMA = "commons";
 
+  // Property name for setting the fetch size for JDBC connection
+  private static final String DEFAULT_FETCH_SIZE = "defaultRowFetchSize";
+
   private final AtomicBoolean closed = new AtomicBoolean();
+
   private final AtomicReference<String> catalog = new AtomicReference<>();
   private final AtomicReference<String> schema = new AtomicReference<>();
   private final AtomicReference<String> timeZoneId = new AtomicReference<>();
   private final AtomicReference<Locale> locale = new AtomicReference<>();
   private final AtomicLong nextStatementId = new AtomicLong(1);
+
+  private final AtomicInteger fetchSize = new AtomicInteger(0);
 
   private final URI uri; // The JDBC URI
   private final String user;
@@ -80,6 +88,7 @@ public class RocksetConnection implements Connection {
     String apiKey = getApiKey(info);
     String apiServer = getApiServer(uri, info);
     this.client = new RocksetClient(apiKey, apiServer, "jdbc");
+    this.fetchSize.set(getFetchSizeFromProperty(info));
 
     timeZoneId.set(TimeZone.getDefault().getID());
     locale.set(Locale.getDefault());
@@ -443,7 +452,12 @@ public class RocksetConnection implements Connection {
     this.locale.set(locale);
   }
 
-  /** Adds a session property (experimental). */
+  /**
+   * Adds a session property (experimental).
+   *
+   * @param name Name
+   * @param value Value
+   */
   public void setSessionProperty(String name, String value) {
     requireNonNull(name, "name is null");
     requireNonNull(value, "value is null");
@@ -488,6 +502,10 @@ public class RocksetConnection implements Connection {
     return iface.isInstance(this);
   }
 
+  int getFetchSize() {
+    return this.fetchSize.get();
+  }
+
   URI getUri() {
     return uri;
   }
@@ -500,9 +518,16 @@ public class RocksetConnection implements Connection {
   // This is invoked by the RocksetStatement to execute a query
   //
   QueryResponse startQuery(
-      String sql, List<QueryParameter> params, Map<String, String> sessionPropertiesOverride)
+      String sql,
+      int fetchSize,
+      List<QueryParameter> params,
+      Map<String, String> sessionPropertiesOverride)
       throws Exception {
     final QueryRequestSql q = new QueryRequestSql().query(sql);
+
+    if (fetchSize > 0) {
+      q.paginate(true).initialPaginateResponseDocCount(fetchSize);
+    }
 
     // Append any specified queries
     if (params != null) {
@@ -511,6 +536,15 @@ public class RocksetConnection implements Connection {
 
     final QueryRequest request = new QueryRequest().sql(q);
     return client.queries.query(request);
+  }
+
+  //
+  // This is invoked by the RocksetStatement to paginate a query
+  //
+  QueryPaginationResponse getQueryPaginationResults(String queryId, String cursor, int fetchSize)
+      throws Exception {
+
+    return client.queries.get(queryId, cursor, fetchSize, null);
   }
 
   //
@@ -541,7 +575,7 @@ public class RocksetConnection implements Connection {
         String.format(
             "describe %s.%s OPTION(max_field_depth=1)",
             quoteIdentifier(schema), quoteIdentifier(name));
-    QueryResponse resp = startQuery(sql, null, null);
+    QueryResponse resp = startQuery(sql, 0, null, null);
     RocksetDriver.log("Exit: describeTable " + name);
     return resp;
   }
@@ -554,6 +588,22 @@ public class RocksetConnection implements Connection {
     return client.workspaces.list(true).getData().stream()
         .map(Workspace::getName)
         .collect(Collectors.toList());
+  }
+
+  private static int getFetchSizeFromProperty(Properties info) {
+    String fetchSizeStr = info.getProperty(DEFAULT_FETCH_SIZE);
+
+    if (fetchSizeStr == null) {
+      return 0;
+    }
+
+    try {
+      return Integer.parseInt(fetchSizeStr);
+    } catch (NumberFormatException e) {
+      RocksetDriver.log(String.format("Invalid fetch size %s, reverting to 0", fetchSizeStr));
+    }
+
+    return 0;
   }
 
   private static String getApiKey(Properties info) {

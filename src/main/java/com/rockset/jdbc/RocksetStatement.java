@@ -32,6 +32,7 @@ public class RocksetStatement implements Statement {
 
   RocksetStatement(RocksetConnection connection) {
     this.connection = new AtomicReference<>(requireNonNull(connection, "connection is null"));
+    this.fetchSize.set(this.connection.get().getFetchSize());
   }
 
   @Override
@@ -39,6 +40,7 @@ public class RocksetStatement implements Statement {
     if (!execute(sql)) {
       throw new SQLException("SQL statement is not a query: " + sql);
     }
+
     return currentResult.get();
   }
 
@@ -142,6 +144,44 @@ public class RocksetStatement implements Statement {
     return executeWithParams(sql, null);
   }
 
+  /**
+   * Given query response, it returns the next cursor. The data format is as below:
+   * https://rockset.com/docs/query-results-pagination/#gatsby-focus-wrapper { "query_id":
+   * "5b596206-c632-4a08-8343-0c560f7ef7f1", "results": [ { ... } ], ... "results_total_doc_count":
+   * 10000000, // This is the total number of documents included in the results. "pagination": {
+   * "current_page_doc_count": 1000, // This will be fewer if there are no more results.
+   * "start_cursor": "dfasdgaaasdfad2x" // This will be null if there are no results returned by the
+   * query. "next_cursor": "aabawe153wtea352" // This will be null if there are no more results than
+   * those returned in this response. } }
+   *
+   * @param response
+   * @return Next cursor
+   */
+  private static String getNextCursorFromQueryResponse(QueryResponse response) {
+    if (response.getPagination() != null) {
+      return response.getPagination().getNextCursor();
+    }
+
+    return null;
+  }
+
+  /**
+   * Given query response, it returns the query Id. The data format is as below:
+   * https://rockset.com/docs/query-results-pagination/#gatsby-focus-wrapper { "query_id":
+   * "5b596206-c632-4a08-8343-0c560f7ef7f1", "results": [ { ... } ], ... "results_total_doc_count":
+   * 10000000, // This is the total number of documents included in the results. "pagination": {
+   * "current_page_doc_count": 1000, // This will be fewer if there are no more results.
+   * "start_cursor": "dfasdgaaasdfad2x" // This will be null if there are no results returned by the
+   * query. "next_cursor": "aabawe153wtea352" // This will be null if there are no more results than
+   * those returned in this response. } }
+   *
+   * @param response
+   * @return Query Id
+   */
+  private static String getQueryIdFromQueryResponse(QueryResponse response) {
+    return response.getQueryId();
+  }
+
   protected boolean executeWithParams(String sql, List<QueryParameter> params) throws SQLException {
     clearCurrentResults();
     checkOpen();
@@ -150,11 +190,24 @@ public class RocksetStatement implements Statement {
     try {
       // Make query to rockset service. We do not use queryTimeoutSeconds
       // because rockset queries do not yet have a client-side timeout.
-      QueryResponse resp = connection().startQuery(sql, params, getStatementSessionProperties());
+      QueryResponse resp =
+          connection()
+              .startQuery(sql, this.fetchSize.get(), params, getStatementSessionProperties());
 
       // store resuts in memory
-      resultSet = new RocksetResultSet(sql, resp, maxRows.get());
-      currentResult.set(resultSet);
+      resultSet =
+          new RocksetResultSet(
+              sql,
+              resp,
+              this.maxRows.get(),
+              RocksetResultSetPaginationParams.builder()
+                  .connection(connection())
+                  .fetchSize(this.fetchSize.get())
+                  .lastQueryId(getQueryIdFromQueryResponse(resp))
+                  .currentCursor(getNextCursorFromQueryResponse(resp))
+                  .build());
+
+      this.currentResult.set(resultSet);
       return true;
     } catch (RuntimeException e) {
       String msg = "Error executing query '" + sql + "'" + " error =  " + e.getMessage();
@@ -163,7 +216,7 @@ public class RocksetStatement implements Statement {
     } catch (Exception e) {
       throw new SQLException(e.getMessage(), e);
     } finally {
-      if (currentResult.get() == null && resultSet != null) {
+      if (this.currentResult.get() == null && resultSet != null) {
         resultSet.close();
       }
     }
@@ -215,7 +268,7 @@ public class RocksetStatement implements Statement {
     if (rows < 0) {
       throw new SQLException("Fetch size must be positive");
     }
-    fetchSize.set(rows);
+    this.fetchSize.set(rows);
   }
 
   @Override

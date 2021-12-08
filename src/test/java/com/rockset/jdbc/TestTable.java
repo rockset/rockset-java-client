@@ -513,12 +513,12 @@ public class TestTable {
         QueryRequestSql qs = new QueryRequestSql().query(sql);
         QueryResponse resp = testClient.queries.query(new QueryRequest().sql(qs));
 
-        RocksetResultSet res = new RocksetResultSet(sql, resp, 10);
+        RocksetResultSet res = new RocksetResultSet(sql, resp, Integer.MAX_VALUE, null);
         if (res.next()) {
           found = res.getInt("?COUNT");
         }
       } catch (Exception e) {
-        System.out.println("Exception in query " + sql + "exception " + e.getMessage());
+        System.out.println("Exception in query " + sql + "exception: " + e);
       }
       System.out.println(
           String.format(
