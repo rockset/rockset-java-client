@@ -6,19 +6,19 @@ import com.rockset.client.model.*;
 public class RocksetClient {
   private ApiClient apiClient;
 
-  public final AliasesApi aliases;
-  public final ApiKeysApi apiKeys;
-  public final CollectionsApi collections;
-  public final CustomRolesBetaApi customRolesBeta;
-  public final DocumentsApi documents;
-  public final IntegrationsApi integrations;
-  public final OrganizationsApi organizations;
-  public final QueriesApi queries;
-  public final QueryLambdasApi queryLambdas;
-  public final UsersApi users;
-  public final ViewsApi views;
-  public final VirtualInstancesApi virtualInstances;
-  public final WorkspacesApi workspaces;
+  public AliasesApi aliases;
+  public ApiKeysApi apiKeys;
+  public CollectionsApi collections;
+  public CustomRolesBetaApi customRolesBeta;
+  public DocumentsApi documents;
+  public IntegrationsApi integrations;
+  public OrganizationsApi organizations;
+  public QueriesApi queries;
+  public QueryLambdasApi queryLambdas;
+  public UsersApi users;
+  public ViewsApi views;
+  public VirtualInstancesApi virtualInstances;
+  public WorkspacesApi workspaces;
 
   public RocksetClient(String apiKey, String apiServer) {
     this(apiKey, apiServer, "");
@@ -88,5 +88,57 @@ public class RocksetClient {
   public RocksetClient setWriteTimeout(int writeTimeout) {
     apiClient.setWriteTimeout(writeTimeout);
     return this;
+  }
+
+  public void setAliasesApi(AliasesApi aliasesApi) {
+    this.aliases = aliasesApi;
+  }
+
+  public void setApiKeys(ApiKeysApi apiKeysApi) {
+    this.apiKeys = apiKeysApi;
+  }
+
+  public void setCollections(CollectionsApi collectionsApi) {
+    this.collections = collectionsApi;
+  }
+
+  public void setCustomRolesBeta(CustomRolesBetaApi customRolesBetaApi) {
+    this.customRolesBeta = customRolesBetaApi;
+  }
+
+  public void setDocuments(DocumentsApi documentsApi) {
+    this.documents = documentsApi;
+  }
+
+  public void setIntegrations(IntegrationsApi integrationsApi) {
+    this.integrations = integrationsApi;
+  }
+
+  public void setOrganizations(OrganizationsApi organizationsApi) {
+    this.organizations = organizationsApi;
+  }
+
+  public void setQueries(QueriesApi queriesApi) {
+    this.queries = queriesApi;
+  }
+
+  public void setQueryLambdas(QueryLambdasApi queryLambdasApi) {
+    this.queryLambdas = queryLambdasApi;
+  }
+
+  public void setUsers(UsersApi usersApi) {
+    this.users = usersApi;
+  }
+
+  public void setViews(ViewsApi viewsApi) {
+    this.views = viewsApi;
+  }
+
+  public void setVirtualInstances(VirtualInstancesApi virtualInstancesApi) {
+    this.virtualInstances = virtualInstancesApi;
+  }
+
+  public void setWorkspaces(WorkspacesApi workspacesApi) {
+    this.workspaces = workspacesApi;
   }
 }
