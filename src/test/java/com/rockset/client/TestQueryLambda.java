@@ -112,7 +112,6 @@ public class TestQueryLambda {
     exReq.setDefaultRowLimit(1);
     exReq.setInitialPaginateResponseDocCount(1);
     QueryResponse qr = client.queryLambdas.execute("commons", paginatedQueryName, queryLambdaTag, exReq);
-    System.out.println(qr.getResults().toString());
     Assert.assertEquals(qr.getResults().size(), 1);
 
     Map<String, String> result = (LinkedTreeMap) qr.getResults().get(0);
