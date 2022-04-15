@@ -544,6 +544,7 @@ public class RocksetConnection implements Connection {
   QueryPaginationResponse getQueryPaginationResults(String queryId, String cursor, int fetchSize)
       throws Exception {
 
+    final QueryRequest request = new QueryRequest();
     return client.queries.get(queryId, cursor, fetchSize, null);
   }
 
