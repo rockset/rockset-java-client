@@ -23,20 +23,19 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import org.threeten.bp.OffsetDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * StatusAzureServiceBusSession
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-15T14:59:14.000-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
 public class StatusAzureServiceBusSession {
   @SerializedName("sequence_number")
   private Long sequenceNumber = null;
 
   @SerializedName("last_processed")
-  private OffsetDateTime lastProcessed = null;
+  private String lastProcessed = null;
 
   public StatusAzureServiceBusSession sequenceNumber(Long sequenceNumber) {
     this.sequenceNumber = sequenceNumber;
@@ -58,7 +57,7 @@ public class StatusAzureServiceBusSession {
     this.sequenceNumber = sequenceNumber;
   }
 
-  public StatusAzureServiceBusSession lastProcessed(OffsetDateTime lastProcessed) {
+  public StatusAzureServiceBusSession lastProcessed(String lastProcessed) {
     this.lastProcessed = lastProcessed;
     return this;
   }
@@ -70,11 +69,11 @@ public class StatusAzureServiceBusSession {
 
 @JsonProperty("last_processed")
 @ApiModelProperty(example = "2022-08-23T00:13:41Z", value = "Most recent ISO-8601 date when a message from this session was processed")
-  public OffsetDateTime getLastProcessed() {
+  public String getLastProcessed() {
     return lastProcessed;
   }
 
-  public void setLastProcessed(OffsetDateTime lastProcessed) {
+  public void setLastProcessed(String lastProcessed) {
     this.lastProcessed = lastProcessed;
   }
 
