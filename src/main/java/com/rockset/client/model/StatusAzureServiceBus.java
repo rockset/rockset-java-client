@@ -27,17 +27,16 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.threeten.bp.OffsetDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * StatusAzureServiceBus
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-15T14:59:14.000-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
 public class StatusAzureServiceBus {
   @SerializedName("first_processed_at")
-  private OffsetDateTime firstProcessedAt = null;
+  private String firstProcessedAt = null;
 
   @SerializedName("records_processed")
   private Long recordsProcessed = null;
@@ -45,7 +44,7 @@ public class StatusAzureServiceBus {
   @SerializedName("sessions")
   private Map<String, StatusAzureServiceBusSession> sessions = null;
 
-  public StatusAzureServiceBus firstProcessedAt(OffsetDateTime firstProcessedAt) {
+  public StatusAzureServiceBus firstProcessedAt(String firstProcessedAt) {
     this.firstProcessedAt = firstProcessedAt;
     return this;
   }
@@ -57,11 +56,11 @@ public class StatusAzureServiceBus {
 
 @JsonProperty("first_processed_at")
 @ApiModelProperty(example = "2021-08-28T00:23:41Z", value = "Service Bus first message processed time in ISO-8601 format")
-  public OffsetDateTime getFirstProcessedAt() {
+  public String getFirstProcessedAt() {
     return firstProcessedAt;
   }
 
-  public void setFirstProcessedAt(OffsetDateTime firstProcessedAt) {
+  public void setFirstProcessedAt(String firstProcessedAt) {
     this.firstProcessedAt = firstProcessedAt;
   }
 
