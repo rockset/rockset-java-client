@@ -86,18 +86,9 @@
                             </excludes>
                         </filter>
                     </filters>
-                    <shadedArtifactAttached>false</shadedArtifactAttached>
-                    <createDependencyReducedPom>true</createDependencyReducedPom>
-                    <relocations>
-                        <relocation>
-                            <pattern>com.fasterxml.jackson</pattern>
-                            <shadedPattern>rockset.com.fasterxml.jackson</shadedPattern>
-                        </relocation>
-                        <relocation>
-                            <pattern>com.google.gson</pattern>
-                            <shadedPattern>rockset.com.google.gson</shadedPattern>
-                        </relocation>
-                    </relocations>
+                    <shadedArtifactAttached>true</shadedArtifactAttached>
+                    <shadedClassifierName>uberjar</shadedClassifierName>
+                    <createDependencyReducedPom>false</createDependencyReducedPom>
                     <finalName>${project.artifactId}-${project.version}</finalName>
                 </configuration>
             </plugin>
@@ -166,8 +157,7 @@
                         </goals>
                         <configuration>
                             <sources>
-                                <source>
-                                src/main/java</source>
+                                <source>src/main/java</source>
                             </sources>
                         </configuration>
                     </execution>
