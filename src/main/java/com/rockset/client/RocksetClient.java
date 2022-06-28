@@ -52,7 +52,7 @@ public class RocksetClient {
     this.apiKeys = new ApiKeysApi(this.apiClient);
     this.collections = new CollectionsApi(this.apiClient);
     this.customRolesBeta = new CustomRolesBetaApi(this.apiClient);
-    this.documents = new DocumentsApi(this.apiClient);
+    this.documents = new CustomDocumentsApi(this.apiClient);
     this.integrations = new IntegrationsApi(this.apiClient);
     this.organizations = new OrganizationsApi(this.apiClient);
     this.queries = new QueriesApi(this.apiClient);
