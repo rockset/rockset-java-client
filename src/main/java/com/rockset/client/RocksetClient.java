@@ -110,8 +110,6 @@ public class RocksetClient {
     this.documents = documentsApi;
   }
 
-  public void setCustomDocuments(CustomDocumentsApi customDocumentsApi) {}
-
   public void setIntegrations(IntegrationsApi integrationsApi) {
     this.integrations = integrationsApi;
   }
