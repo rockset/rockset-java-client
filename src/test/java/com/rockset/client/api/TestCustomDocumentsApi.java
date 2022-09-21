@@ -40,8 +40,11 @@ public class TestCustomDocumentsApi {
 
     // java.sql
     document.put("sql_timestamp", new Timestamp(1656417600000L));
-    document.put("sql_date", new Date(1656417600000L));
-    document.put("sql_time", new Time(1656417600000L));
+    document.put("sql_date", new Date(2022-1900, 6-1, 28));
+    document.put("sql_time", new Time(5, 0, 0));
+
+    // java.util.Date
+    document.put("util_date", new java.util.Date(1656417600000L));
 
     List list = new ArrayList<Object>();
     list.add("abc");
@@ -81,8 +84,8 @@ public class TestCustomDocumentsApi {
     assertEquals(time.get(CustomDocumentsApi.ROCKSET_VALUE), "16:00");
 
     Map<String, Object> sqlTimestamp = (Map) document.get("sql_timestamp");
-    assertEquals(sqlTimestamp.get(CustomDocumentsApi.ROCKSET_TYPE), "datetime");
-    assertEquals((String) sqlTimestamp.get(CustomDocumentsApi.ROCKSET_VALUE), "2022-06-28T05:00");
+    assertEquals(sqlTimestamp.get(CustomDocumentsApi.ROCKSET_TYPE), "timestamp");
+    assertEquals((long) sqlTimestamp.get(CustomDocumentsApi.ROCKSET_VALUE), 1656417600000000L);
 
     Map<String, Object> sqlDate = (Map) document.get("sql_date");
     assertEquals(sqlDate.get(CustomDocumentsApi.ROCKSET_TYPE), "date");
@@ -91,6 +94,10 @@ public class TestCustomDocumentsApi {
     Map<String, Object> sqlTime = (Map) document.get("sql_time");
     assertEquals(sqlTime.get(CustomDocumentsApi.ROCKSET_TYPE), "time");
     assertEquals(sqlTime.get(CustomDocumentsApi.ROCKSET_VALUE), "05:00:00");
+
+    Map<String, Object> utilDate = (Map) document.get("util_date");
+    assertEquals(utilDate.get(CustomDocumentsApi.ROCKSET_TYPE), "timestamp");
+    assertEquals((long) utilDate.get(CustomDocumentsApi.ROCKSET_VALUE), 1656417600000000L);
 
     List<Object> resList = (List) document.get("list");
     assertEquals(resList.size(), 2);

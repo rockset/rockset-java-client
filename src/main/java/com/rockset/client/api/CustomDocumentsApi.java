@@ -65,10 +65,7 @@ public class CustomDocumentsApi extends DocumentsApi {
       }
       return modifiedSet;
     } else if (doc instanceof Instant) {
-      Map<String, Object> timestamp = new HashMap<>();
-      timestamp.put(ROCKSET_TYPE, "timestamp");
-      timestamp.put(ROCKSET_VALUE, instantToTimestamp((Instant) doc));
-      return timestamp;
+      return constructTimestamp((Instant) doc);
     } else if (doc instanceof LocalDateTime) {
       // toString outputs in ISO-8601 format:
       // uuuu-MM-dd'T'HH:mm
@@ -89,19 +86,26 @@ public class CustomDocumentsApi extends DocumentsApi {
       // HH:mm:ss.SSSSSSSSS
       return constructTime(((LocalTime) doc).toString());
     } else if (doc instanceof Timestamp) {
-      // Timestamp toString formats to yyyy-mm-dd hh:mm:ss.fffffffff format,
-      // so to use uuuu-MM-dd'T'HH:mm:ss.SSSSSSSSS notation, convert
-      // to LocalDateTime first
-      return constructDateTime(((Timestamp) doc).toLocalDateTime().toString());
+      return constructTimestamp(((Timestamp) doc).toInstant());
     } else if (doc instanceof Date) {
       // Formats a date in the date escape format yyyy-mm-dd
       return constructDate(((Date) doc).toString());
     } else if (doc instanceof Time) {
       // Formats a String in hh:mm:ss format
       return constructTime(((Time) doc).toString());
+    } else if (doc instanceof java.util.Date) {
+      return constructTimestamp(((java.util.Date)doc).toInstant());
+
     }
 
     return doc;
+  }
+
+  private Map<String, Object> constructTimestamp(Instant instant) {
+    Map<String, Object> timestamp = new HashMap<>();
+    timestamp.put(ROCKSET_TYPE, "timestamp");
+    timestamp.put(ROCKSET_VALUE, instantToTimestamp(instant));
+    return timestamp;
   }
 
   private Map<String, Object> constructDateTime(String datetimeStr) {
