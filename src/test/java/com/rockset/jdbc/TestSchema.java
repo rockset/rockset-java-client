@@ -1,6 +1,5 @@
 package com.rockset.jdbc;
 
-import static com.rockset.jdbc.TestTable.EXPECTS_META_FIELD;
 import static org.testng.Assert.assertEquals;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -204,9 +203,9 @@ public class TestSchema {
       uploadFile(collectionName, "src/test/resources/basic.json", null);
       waitNumberDocs(collectionName, 1);
 
-      // there should be 6 columns in this test file
-      // a, name, nested, _id, _meta, _event_time
-      final int numColumns = EXPECTS_META_FIELD ? 6 : 5;
+      // there should be 5 columns in this test file
+      // a, name, nested, _id, _event_time
+      final int numColumns = 5;
 
       conn = DriverManager.getConnection(DB_URL, property);
 

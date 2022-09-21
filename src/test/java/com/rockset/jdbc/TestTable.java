@@ -45,9 +45,6 @@ import org.testng.annotations.Test;
 //
 public class TestTable {
 
-  // whether file uploads include a _meta fields
-  static final boolean EXPECTS_META_FIELD = false;
-
   // JDBC driver name and database URL
   private static final String JDBC_DRIVER = FirstExample.JDBC_DRIVER;
   private static final String DB_URL = FirstExample.DB_URL;
@@ -207,9 +204,9 @@ public class TestTable {
       uploadFile(collectionName, "src/test/resources/basic.json", null);
       waitNumberDocs(collectionName, 1);
 
-      // there should be 6 columns in this test file
-      // a, name, nested, _id, _meta, _event_time
-      final int numColumns = EXPECTS_META_FIELD ? 6 : 5;
+      // there should be 5 columns in this test file
+      // a, name, nested, _id, _event_time
+      final int numColumns = 5;
 
       conn = DriverManager.getConnection(DB_URL, property);
 
@@ -339,9 +336,6 @@ public class TestTable {
 
       assertNextEquals(rs, "_event_time", Types.TIMESTAMP);
       assertNextEquals(rs, "_id", Types.VARCHAR);
-      if (EXPECTS_META_FIELD) {
-        assertNextEquals(rs, "_meta", Types.JAVA_OBJECT);
-      }
       assertNextEquals(rs, "array_col", Types.ARRAY);
       assertNextEquals(rs, "bool_col", Types.BOOLEAN);
       assertNextEquals(rs, "date_col", Types.DATE);
