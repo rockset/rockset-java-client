@@ -203,9 +203,9 @@ public class TestSchema {
       uploadFile(collectionName, "src/test/resources/basic.json", null);
       waitNumberDocs(collectionName, 1);
 
-      // there should be 6 columns in this test file
-      // a, name, nested, _id, _meta, _event_time
-      final int numColumns = 6;
+      // there should be 5 columns in this test file
+      // a, name, nested, _id, _event_time
+      final int numColumns = 5;
 
       conn = DriverManager.getConnection(DB_URL, property);
 
