@@ -1,5 +1,16 @@
 # Rockset Java Client Changelog
 
+## v0.9.3 2022-09-21
+- Packaging: Update default jar to avoid bundling shaded dependencies to better integrate with build tools.
+- Packaging: Release a separate uberjar for use with business intelligence tools.
+- Support Rockset json models for timestamp, datetime, date, and time types
+
+## v0.9.2 2022-04-18
+- Resolve certain package dependency conflicts while using rockset java client
+- Backward compatibility fixes for query API
+- Support java API for query lambda pagination
+
+
 ## v0.9.1 2021-12-10
 - Support result set pagination by leveraging the new Rockset pagination feature
 
