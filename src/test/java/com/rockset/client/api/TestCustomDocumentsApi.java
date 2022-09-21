@@ -40,6 +40,11 @@ public class TestCustomDocumentsApi {
 
     // java.sql
     document.put("sql_timestamp", new Timestamp(1656417600000L));
+
+    // Using constructors that get time component values explicitly. The Date/Time
+    // millisecond long constructors use the time components after converting time to
+    // the default local JVM system time zone, and makes the tests sensitive to local timezone.
+    // https://docs.oracle.com/javase/7/docs/api/java/sql/Date.html#Date(long)
     document.put("sql_date", new Date(2022-1900, 6-1, 28));
     document.put("sql_time", new Time(5, 0, 0));
 
