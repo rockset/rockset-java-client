@@ -1390,9 +1390,7 @@ public class RocksetResultSet implements ResultSet {
     String columnName = columnInfo(index).getName();
     // extract the row
     try {
-      Object onedoc = resultSet.get(rowIndex.get());
-      JsonNode docRootNode = OBJECT_MAPPER.readTree(OBJECT_MAPPER.writeValueAsString(onedoc));
-      JsonNode value = docRootNode.get(columnName);
+      JsonNode value = currentDocRootNode.get(columnName);
       wasNull.set((value == null) || (value instanceof NullNode));
       return value;
     } catch (Exception e) {
