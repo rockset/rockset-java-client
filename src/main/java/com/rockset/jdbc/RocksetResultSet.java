@@ -3,6 +3,7 @@ package com.rockset.jdbc;
 import static java.math.BigDecimal.ROUND_HALF_UP;
 import static java.util.Locale.ENGLISH;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.BooleanNode;
@@ -58,6 +59,7 @@ import org.joda.time.format.ISODateTimeFormat;
 
 public class RocksetResultSet implements ResultSet {
 
+  static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
   static final DateTimeFormatter DATE_FORMATTER = ISODateTimeFormat.date();
   static final DateTimeFormatter TIME_FORMATTER = DateTimeFormat.forPattern("HH:mm:ss.SSS");
   static final DateTimeFormatter TIMESTAMP_FORMATTER =
@@ -95,6 +97,10 @@ public class RocksetResultSet implements ResultSet {
   private final List<Column> columns;
   private final ResultSetMetaData resultSetMetaData;
   private final AtomicInteger rowIndex = new AtomicInteger(-1);
+
+  // see next() and parseCurrentDocRootNode() -> we eagerly deserialize the raw Maps in the resultSet collection
+  // into JsonNodes whenever next() is called. On wide rows and large resultsets, this yields measurable performance benefit.
+  private JsonNode currentDocRootNode;
   private final long maxRows;
 
   private final int columnCount;
@@ -230,15 +236,17 @@ public class RocksetResultSet implements ResultSet {
 
   @Override
   public boolean next() throws SQLException {
-    checkOpen();
-    this.rowIndex.getAndIncrement();
+    boolean hasNext = doNext();
 
-    if (this.rocksetResultSetPaginationParams != null
-        && this.rocksetResultSetPaginationParams.getFetchSize() > 0) {
-      return doNextIfPaginationEnabled();
+    if (hasNext) {
+      // eagerly parse the current row
+      currentDocRootNode = parseCurrentDocRootNode();
+    } else {
+      // nothing to parse -> nullify in case we use it elsewhere and the tests will reveal an NPE!
+      currentDocRootNode = null;
     }
 
-    return doNextIfPaginationDisabled();
+    return hasNext;
   }
 
   @Override
@@ -1387,10 +1395,7 @@ public class RocksetResultSet implements ResultSet {
     String columnName = columnInfo(index).getName();
     // extract the row
     try {
-      ObjectMapper mapper = new ObjectMapper();
-      Object onedoc = resultSet.get(rowIndex.get());
-      JsonNode docRootNode = mapper.readTree(mapper.writeValueAsString(onedoc));
-      JsonNode value = docRootNode.get(columnName);
+      JsonNode value = currentDocRootNode.get(columnName);
       wasNull.set((value == null) || (value instanceof NullNode));
       return value;
     } catch (Exception e) {
@@ -1607,5 +1612,38 @@ public class RocksetResultSet implements ResultSet {
       }
     }
     return ImmutableMap.copyOf(map);
+  }
+
+  private boolean doNext() throws SQLException {
+    checkOpen();
+    this.rowIndex.getAndIncrement();
+
+    if (this.rocksetResultSetPaginationParams != null
+            && this.rocksetResultSetPaginationParams.getFetchSize() > 0) {
+      return doNextIfPaginationEnabled();
+    }
+
+    return doNextIfPaginationDisabled();
+  }
+
+  /**
+   * Two-step parse of the row at the current index, in the resultSet.
+   *
+   * @return JsonNode encapsulating the parsed row
+   * @throws SQLException if unable to parse the row
+   */
+  private JsonNode parseCurrentDocRootNode() throws SQLException {
+    int index = rowIndex.get();
+
+    Object onedoc = resultSet.get(index);
+
+    try {
+      String asJson = OBJECT_MAPPER.writeValueAsString(onedoc);
+
+      return OBJECT_MAPPER.readTree(asJson);
+    } catch (JsonProcessingException e) {
+      throw new SQLException(
+              "Error caching document root node at row index " + index, e);
+    }
   }
 }
