@@ -97,6 +97,9 @@ public class RocksetResultSet implements ResultSet {
   private final List<Column> columns;
   private final ResultSetMetaData resultSetMetaData;
   private final AtomicInteger rowIndex = new AtomicInteger(-1);
+
+  // see next() and parseCurrentDocRootNode() -> we eagerly deserialize the raw Maps in the resultSet collection
+  // into JsonNodes whenever next() is called. On wide rows and large resultsets, this yields measurable performance benefit.
   private JsonNode currentDocRootNode;
   private final long maxRows;
 
@@ -236,8 +239,10 @@ public class RocksetResultSet implements ResultSet {
     boolean hasNext = doNext();
 
     if (hasNext) {
+      // eagerly parse the current row
       currentDocRootNode = parseCurrentDocRootNode();
     } else {
+      // nothing to parse -> nullify in case we use it elsewhere and the tests will reveal an NPE!
       currentDocRootNode = null;
     }
 
@@ -1621,8 +1626,15 @@ public class RocksetResultSet implements ResultSet {
     return doNextIfPaginationDisabled();
   }
 
+  /**
+   * Two-step parse of the row at the current index, in the resultSet.
+   *
+   * @return JsonNode encapsulating the parsed row
+   * @throws SQLException if unable to parse the row
+   */
   private JsonNode parseCurrentDocRootNode() throws SQLException {
     int index = rowIndex.get();
+
     Object onedoc = resultSet.get(index);
 
     try {
@@ -1631,7 +1643,7 @@ public class RocksetResultSet implements ResultSet {
       return OBJECT_MAPPER.readTree(asJson);
     } catch (JsonProcessingException e) {
       throw new SQLException(
-              "Error caching document root node at column index " + index + " exception " + e.getMessage());
+              "Error caching document root node at row index " + index, e);
     }
   }
 }
