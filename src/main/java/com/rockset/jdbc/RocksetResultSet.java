@@ -3,6 +3,7 @@ package com.rockset.jdbc;
 import static java.math.BigDecimal.ROUND_HALF_UP;
 import static java.util.Locale.ENGLISH;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.BooleanNode;
@@ -13,8 +14,11 @@ import com.google.common.collect.ImmutableMap;
 import com.rockset.client.model.QueryFieldType;
 import com.rockset.client.model.QueryPaginationResponse;
 import com.rockset.client.model.QueryResponse;
+
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
+import java.io.UncheckedIOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.Array;
@@ -51,6 +55,8 @@ import java.util.Set;
 import java.util.TimeZone;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
+
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -104,6 +110,8 @@ public class RocksetResultSet implements ResultSet {
   private static final AtomicInteger queryId = new AtomicInteger(0);
 
   private final RocksetResultSetPaginationParams rocksetResultSetPaginationParams;
+
+  private final CachedFunctionApply<Object, JsonNode> cachedDoubleParseResult = new CachedFunctionApply<>();
 
   public RocksetResultSet(
       String queryStr,
@@ -1389,7 +1397,9 @@ public class RocksetResultSet implements ResultSet {
     try {
       ObjectMapper mapper = new ObjectMapper();
       Object onedoc = resultSet.get(rowIndex.get());
-      JsonNode docRootNode = mapper.readTree(mapper.writeValueAsString(onedoc));
+
+      JsonNode docRootNode = cachedDoubleParseResult.getOrCompute(onedoc, parseFunction(mapper));
+
       JsonNode value = docRootNode.get(columnName);
       wasNull.set((value == null) || (value instanceof NullNode));
       return value;
@@ -1399,7 +1409,17 @@ public class RocksetResultSet implements ResultSet {
     }
   }
 
-  private Column columnInfo(int index) throws SQLException {
+    private Function<Object, JsonNode> parseFunction(ObjectMapper mapper) {
+        return doc -> {
+          try {
+            return mapper.readTree(mapper.writeValueAsString(doc));
+          } catch (IOException e) {
+            throw new UncheckedIOException(e);
+          }
+        };
+    }
+
+    private Column columnInfo(int index) throws SQLException {
     checkOpen();
     checkValidRow();
     if ((index <= 0) || (index > this.columnCount)) {
