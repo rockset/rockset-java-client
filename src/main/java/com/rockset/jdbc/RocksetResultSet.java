@@ -231,15 +231,7 @@ public class RocksetResultSet implements ResultSet {
 
   @Override
   public boolean next() throws SQLException {
-    checkOpen();
-    this.rowIndex.getAndIncrement();
-
-    if (this.rocksetResultSetPaginationParams != null
-        && this.rocksetResultSetPaginationParams.getFetchSize() > 0) {
-      return doNextIfPaginationEnabled();
-    }
-
-    return doNextIfPaginationDisabled();
+    return doNext();
   }
 
   @Override
@@ -1607,5 +1599,17 @@ public class RocksetResultSet implements ResultSet {
       }
     }
     return ImmutableMap.copyOf(map);
+  }
+
+  private boolean doNext() throws SQLException {
+    checkOpen();
+    this.rowIndex.getAndIncrement();
+
+    if (this.rocksetResultSetPaginationParams != null
+            && this.rocksetResultSetPaginationParams.getFetchSize() > 0) {
+      return doNextIfPaginationEnabled();
+    }
+
+    return doNextIfPaginationDisabled();
   }
 }
