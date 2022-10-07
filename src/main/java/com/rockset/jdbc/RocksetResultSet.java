@@ -3,6 +3,7 @@ package com.rockset.jdbc;
 import static java.math.BigDecimal.ROUND_HALF_UP;
 import static java.util.Locale.ENGLISH;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.BooleanNode;
@@ -96,6 +97,7 @@ public class RocksetResultSet implements ResultSet {
   private final List<Column> columns;
   private final ResultSetMetaData resultSetMetaData;
   private final AtomicInteger rowIndex = new AtomicInteger(-1);
+  private JsonNode currentDocRootNode;
   private final long maxRows;
 
   private final int columnCount;
@@ -231,7 +233,15 @@ public class RocksetResultSet implements ResultSet {
 
   @Override
   public boolean next() throws SQLException {
-    return doNext();
+    boolean hasNext = doNext();
+
+    if (hasNext) {
+      cacheCurrentDocRootNode();
+    } else {
+      currentDocRootNode = null;
+    }
+
+    return hasNext;
   }
 
   @Override
@@ -1611,5 +1621,19 @@ public class RocksetResultSet implements ResultSet {
     }
 
     return doNextIfPaginationDisabled();
+  }
+
+  private void cacheCurrentDocRootNode() throws SQLException {
+    int index = rowIndex.get();
+    Object onedoc = resultSet.get(index);
+
+    try {
+      String asJson = OBJECT_MAPPER.writeValueAsString(onedoc);
+
+      currentDocRootNode = OBJECT_MAPPER.readTree(asJson);
+    } catch (JsonProcessingException e) {
+      throw new SQLException(
+              "Error caching document root node at column index " + index + " exception " + e.getMessage());
+    }
   }
 }
