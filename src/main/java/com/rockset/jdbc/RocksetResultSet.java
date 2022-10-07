@@ -236,7 +236,7 @@ public class RocksetResultSet implements ResultSet {
     boolean hasNext = doNext();
 
     if (hasNext) {
-      cacheCurrentDocRootNode();
+      currentDocRootNode = parseCurrentDocRootNode();
     } else {
       currentDocRootNode = null;
     }
@@ -1621,14 +1621,14 @@ public class RocksetResultSet implements ResultSet {
     return doNextIfPaginationDisabled();
   }
 
-  private void cacheCurrentDocRootNode() throws SQLException {
+  private JsonNode parseCurrentDocRootNode() throws SQLException {
     int index = rowIndex.get();
     Object onedoc = resultSet.get(index);
 
     try {
       String asJson = OBJECT_MAPPER.writeValueAsString(onedoc);
 
-      currentDocRootNode = OBJECT_MAPPER.readTree(asJson);
+      return OBJECT_MAPPER.readTree(asJson);
     } catch (JsonProcessingException e) {
       throw new SQLException(
               "Error caching document root node at column index " + index + " exception " + e.getMessage());
