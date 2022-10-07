@@ -15,8 +15,6 @@ public class CachedFunctionApply<T, R> {
 
     public R getOrCompute(T t, Function<T, R> function) {
         if (t == lastArgument) {
-            // it's the exact same object reference we saw previously ->
-            // NOT (necessarily) the same by equals().
             return lastResult;
         }
 
