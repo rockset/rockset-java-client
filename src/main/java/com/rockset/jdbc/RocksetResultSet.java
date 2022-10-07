@@ -58,6 +58,7 @@ import org.joda.time.format.ISODateTimeFormat;
 
 public class RocksetResultSet implements ResultSet {
 
+  static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
   static final DateTimeFormatter DATE_FORMATTER = ISODateTimeFormat.date();
   static final DateTimeFormatter TIME_FORMATTER = DateTimeFormat.forPattern("HH:mm:ss.SSS");
   static final DateTimeFormatter TIMESTAMP_FORMATTER =
@@ -1387,9 +1388,8 @@ public class RocksetResultSet implements ResultSet {
     String columnName = columnInfo(index).getName();
     // extract the row
     try {
-      ObjectMapper mapper = new ObjectMapper();
       Object onedoc = resultSet.get(rowIndex.get());
-      JsonNode docRootNode = mapper.readTree(mapper.writeValueAsString(onedoc));
+      JsonNode docRootNode = OBJECT_MAPPER.readTree(OBJECT_MAPPER.writeValueAsString(onedoc));
       JsonNode value = docRootNode.get(columnName);
       wasNull.set((value == null) || (value instanceof NullNode));
       return value;
