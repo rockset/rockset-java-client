@@ -1,5 +1,9 @@
 # Rockset Java Client Changelog
 
+## v0.9.4 2022-10-12
+- Backward compatibility fixes for response error handling
+- Handle wide row result sets in JDBC efficiently
+
 ## v0.9.3 2022-09-21
 - Packaging: Update default jar to avoid bundling shaded dependencies to better integrate with build tools.
 - Packaging: Release a separate uberjar for use with business intelligence tools.
