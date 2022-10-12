@@ -520,6 +520,8 @@ public class RocksetResultSet implements ResultSet {
     log(prefix + "getObject columnIndex " + columnIndex);
     int sqlType = resultSetMetaData.getColumnType(columnIndex);
     switch (sqlType) {
+      case java.sql.Types.VARCHAR:
+        return getString(columnIndex);
       case java.sql.Types.DATE:
         return getDate(columnIndex);
       case java.sql.Types.TIME:

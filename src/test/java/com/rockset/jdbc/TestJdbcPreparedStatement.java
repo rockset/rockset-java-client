@@ -415,7 +415,7 @@ public class TestJdbcPreparedStatement {
     }
   }
 
-  // @Test
+  @Test
   public void testConvertVarchar() throws SQLException {
     assertParameter("hello", Types.VARCHAR, (ps, i) -> ps.setString(i, "hello"));
     assertParameter("hello", Types.VARCHAR, (ps, i) -> ps.setObject(i, "hello"));
