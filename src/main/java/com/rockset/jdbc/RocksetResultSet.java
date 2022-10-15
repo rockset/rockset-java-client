@@ -340,7 +340,7 @@ public class RocksetResultSet implements ResultSet {
           "Error processing getBytes for column index "
               + columnIndex
               + " exception "
-              + e.getMessage());
+              + e.getMessage(), e);
     }
   }
 
@@ -461,7 +461,7 @@ public class RocksetResultSet implements ResultSet {
           "Error processing getBytes for column label "
               + columnLabel
               + " exception "
-              + e.getMessage());
+              + e.getMessage(), e);
     }
   }
 
@@ -1400,7 +1400,7 @@ public class RocksetResultSet implements ResultSet {
       return value;
     } catch (Exception e) {
       throw new SQLException(
-          "Error processing column index " + index + " exception " + e.getMessage());
+          "Error processing column index " + index + " exception " + e.getMessage(), e);
     }
   }
 
@@ -1599,7 +1599,7 @@ public class RocksetResultSet implements ResultSet {
     } catch (Exception e) {
       log("Error processing row to extract column info " + " exception " + e.getMessage());
       throw new SQLException(
-          "Error processing row to extract column info " + " exception " + e.getMessage());
+          "Error processing row to extract column info " + " exception " + e.getMessage(), e);
     }
   }
 
