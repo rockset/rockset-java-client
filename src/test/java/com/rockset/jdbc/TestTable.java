@@ -351,6 +351,7 @@ public class TestTable {
       assertNextEquals(rs, "string_col", Types.VARCHAR);
       assertNextEquals(rs, "time_col", Types.TIME);
       assertNextEquals(rs, "timestamp_col", Types.TIMESTAMP);
+      assertNextEquals(rs, "u256_col", Types.BIGINT);
       assertFalse(rs.next());
 
     } finally {

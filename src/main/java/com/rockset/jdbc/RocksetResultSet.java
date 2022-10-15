@@ -17,6 +17,7 @@ import com.rockset.client.model.QueryResponse;
 import java.io.InputStream;
 import java.io.Reader;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.net.URL;
 import java.sql.Array;
 import java.sql.Blob;
@@ -482,6 +483,20 @@ public class RocksetResultSet implements ResultSet {
     return getTimestamp(columnIndex(columnLabel));
   }
 
+  public BigInteger getU256(int columnIndex) throws SQLException {
+    JsonNode value = column(columnIndex);
+    if (value == null || value.get("value") == null) {
+      return null;
+    }
+    String bigInt = value.get("value").asText();
+    try {
+      // U256 value comes in base 10 form
+      return new BigInteger(bigInt);
+    } catch (NumberFormatException e) {
+      throw new SQLException("Invalid U256 from server: " + bigInt, e);
+    }
+  }
+
   @Override
   public InputStream getAsciiStream(String columnLabel) throws SQLException {
     log(prefix + "getAsciiStream " + columnLabel);
@@ -539,6 +554,8 @@ public class RocksetResultSet implements ResultSet {
         return getArray(columnIndex);
       case java.sql.Types.DECIMAL:
         return getBigDecimal(columnIndex);
+      case java.sql.Types.BIGINT:
+        return getU256(columnIndex);
       case java.sql.Types.JAVA_OBJECT:
       default:
         // XXX TODO

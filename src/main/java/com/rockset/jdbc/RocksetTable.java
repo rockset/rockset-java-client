@@ -214,6 +214,9 @@ class RocksetTable {
       } else if (rockType.equals("geography")) {
         sqlType = Types.JAVA_OBJECT;
         sqlTypeName = "object";
+      } else if (rockType.equals("u256")) {
+        sqlType = Types.BIGINT;
+        sqlTypeName = "bigint";
       } else {
         throw new Exception("Unknown rockset type " + rockType);
       }
