@@ -1417,7 +1417,7 @@ public class RocksetResultSet implements ResultSet {
       return value;
     } catch (Exception e) {
       throw new SQLException(
-          "Error processing column index " + index + " exception " + e.getMessage(), e);
+          "Error processing column index " + index + " exception", e);
     }
   }
 
@@ -1614,9 +1614,9 @@ public class RocksetResultSet implements ResultSet {
       }
       return out;
     } catch (Exception e) {
-      log("Error processing row to extract column info " + " exception " + e.getMessage());
+      log("Error processing row to extract column info exception" + e.getMessage());
       throw new SQLException(
-          "Error processing row to extract column info " + " exception " + e.getMessage(), e);
+          "Error processing row to extract column info exception", e);
     }
   }
 

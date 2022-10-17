@@ -815,7 +815,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
       RocksetDriver.log("Exit : RocksetDatabaseMetaData getTables");
       return new RocksetResultSet(columns, data);
     } catch (Exception e) {
-      throw new SQLException("Error processing getTables " + " exception " + e.getMessage(), e);
+      throw new SQLException("Error processing getTables exception", e);
     }
   }
 
@@ -851,7 +851,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
       RocksetDriver.log("Exit : RocksetDatabaseMetaData getSchemas");
       return new RocksetResultSet(columns, data);
     } catch (Exception e) {
-      throw new SQLException("Error processing getSchemas " + " exception " + e.getMessage(), e);
+      throw new SQLException("Error processing getSchemas exception", e);
     }
   }
 
@@ -875,7 +875,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
       RocksetDriver.log("Exit : RocksetDatabaseMetaData getCatalogs");
       return new RocksetResultSet(columns, data);
     } catch (Exception e) {
-      throw new SQLException("Error processing getCatalogs " + " exception " + e.getMessage(), e);
+      throw new SQLException("Error processing getCatalogs exception", e);
     }
   }
 
@@ -899,7 +899,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
       RocksetDriver.log("Exit : RocksetDatabaseMetaData getTableTypes");
       return new RocksetResultSet(columns, data);
     } catch (Exception e) {
-      throw new SQLException("Error processing getTableTypes " + " exception " + e.getMessage(), e);
+      throw new SQLException("Error processing getTableTypes exception", e);
     }
   }
 
@@ -936,7 +936,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
       }
     } catch (Exception e) {
       e.printStackTrace();
-      throw new SQLException("Error processing getColumns " + " exception " + e.getMessage(), e);
+      throw new SQLException("Error processing getColumns exception", e);
     }
     throw new SQLException("No matching table name found.");
   }
@@ -1011,7 +1011,7 @@ public class RocksetDatabaseMetaData implements DatabaseMetaData {
       RocksetDriver.log("Exit : RocksetDatabaseMetaData getPrimaryKeys");
       return new RocksetResultSet(columns, data);
     } catch (Exception e) {
-      throw new SQLException("Error processing getPrimaryKeys " + " exception " + e.getMessage(), e);
+      throw new SQLException("Error processing getPrimaryKeys exception", e);
     }
   }
 
