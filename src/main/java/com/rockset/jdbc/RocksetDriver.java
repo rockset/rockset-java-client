@@ -73,7 +73,7 @@ public class RocksetDriver implements Driver, Closeable {
     try {
       uri = new URI(url);
     } catch (URISyntaxException e) {
-      throw new SQLException("Bad url format " + url + " exception " + e.getMessage());
+      throw new SQLException("Bad url format " + url + " exception", e);
     }
 
     // create a connection to the rockset service

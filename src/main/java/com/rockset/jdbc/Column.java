@@ -22,7 +22,8 @@ class Column {
     DATE("DATE"),
     TIME("TIME"),
     DATETIME("DATETIME"),
-    TIMESTAMP("TIMESTAMP");
+    TIMESTAMP("TIMESTAMP"),
+    U256("U256");
 
     public static ColumnTypes fromValue(String text) {
       for (final ColumnTypes ct : ColumnTypes.values()) {

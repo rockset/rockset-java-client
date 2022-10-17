@@ -47,6 +47,8 @@ class RocksetUtils {
       case DATE:
         stype = Types.DATE;
         break;
+      case U256:
+        stype = Types.BIGINT;
       default:
         break;
     }

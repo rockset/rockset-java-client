@@ -17,6 +17,7 @@ import com.rockset.client.model.QueryResponse;
 import java.io.InputStream;
 import java.io.Reader;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.net.URL;
 import java.sql.Array;
 import java.sql.Blob;
@@ -340,7 +341,7 @@ public class RocksetResultSet implements ResultSet {
           "Error processing getBytes for column index "
               + columnIndex
               + " exception "
-              + e.getMessage());
+              + e.getMessage(), e);
     }
   }
 
@@ -461,7 +462,7 @@ public class RocksetResultSet implements ResultSet {
           "Error processing getBytes for column label "
               + columnLabel
               + " exception "
-              + e.getMessage());
+              + e.getMessage(), e);
     }
   }
 
@@ -480,6 +481,20 @@ public class RocksetResultSet implements ResultSet {
   @Override
   public Timestamp getTimestamp(String columnLabel) throws SQLException {
     return getTimestamp(columnIndex(columnLabel));
+  }
+
+  public BigInteger getU256(int columnIndex) throws SQLException {
+    JsonNode value = column(columnIndex);
+    if (value == null || value.get("value") == null) {
+      return null;
+    }
+    String bigInt = value.get("value").asText();
+    try {
+      // U256 value comes in base 10 form
+      return new BigInteger(bigInt);
+    } catch (NumberFormatException e) {
+      throw new SQLException("Invalid U256 from server: " + bigInt, e);
+    }
   }
 
   @Override
@@ -539,6 +554,8 @@ public class RocksetResultSet implements ResultSet {
         return getArray(columnIndex);
       case java.sql.Types.DECIMAL:
         return getBigDecimal(columnIndex);
+      case java.sql.Types.BIGINT:
+        return getU256(columnIndex);
       case java.sql.Types.JAVA_OBJECT:
       default:
         // XXX TODO
@@ -1400,7 +1417,7 @@ public class RocksetResultSet implements ResultSet {
       return value;
     } catch (Exception e) {
       throw new SQLException(
-          "Error processing column index " + index + " exception " + e.getMessage());
+          "Error processing column index " + index + " exception", e);
     }
   }
 
@@ -1597,9 +1614,9 @@ public class RocksetResultSet implements ResultSet {
       }
       return out;
     } catch (Exception e) {
-      log("Error processing row to extract column info " + " exception " + e.getMessage());
+      log("Error processing row to extract column info exception" + e.getMessage());
       throw new SQLException(
-          "Error processing row to extract column info " + " exception " + e.getMessage());
+          "Error processing row to extract column info exception", e);
     }
   }
 
