@@ -31,13 +31,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "Describes details about an error")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-10-17T16:15:03.867-07:00")
 public class ErrorModel {
   @SerializedName("message")
   private String message = null;
 
   /**
-   * category of the error
+   * Category of the error.
    */
   @JsonAdapter(TypeEnum.Adapter.class)
   public enum TypeEnum {
@@ -104,6 +104,7 @@ public class ErrorModel {
       return String.valueOf(value);
     }
 
+    @com.fasterxml.jackson.annotation.JsonCreator
     public static TypeEnum fromValue(String text) {
       for (TypeEnum b : TypeEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -151,12 +152,12 @@ public class ErrorModel {
   }
 
    /**
-   * descriptive message about the error
+   * Descriptive message about the error.
    * @return message
   **/
 
 @JsonProperty("message")
-@ApiModelProperty(example = "collection not found", value = "descriptive message about the error")
+@ApiModelProperty(example = "collection not found", value = "Descriptive message about the error.")
   public String getMessage() {
     return message;
   }
@@ -171,12 +172,12 @@ public class ErrorModel {
   }
 
    /**
-   * category of the error
+   * Category of the error.
    * @return type
   **/
 
 @JsonProperty("type")
-@ApiModelProperty(example = "InvalidInput", value = "category of the error")
+@ApiModelProperty(example = "INVALIDINPUT", value = "Category of the error.")
   public TypeEnum getType() {
     return type;
   }
@@ -191,12 +192,12 @@ public class ErrorModel {
   }
 
    /**
-   * Line where the error happened (if applicable)
+   * Line where the error happened (if applicable).
    * @return line
   **/
 
 @JsonProperty("line")
-@ApiModelProperty(value = "Line where the error happened (if applicable)")
+@ApiModelProperty(value = "Line where the error happened (if applicable).")
   public Integer getLine() {
     return line;
   }
@@ -211,12 +212,12 @@ public class ErrorModel {
   }
 
    /**
-   * Column where the error happened (if applicable)
+   * Column where the error happened (if applicable).
    * @return column
   **/
 
 @JsonProperty("column")
-@ApiModelProperty(value = "Column where the error happened (if applicable)")
+@ApiModelProperty(value = "Column where the error happened (if applicable).")
   public Integer getColumn() {
     return column;
   }
@@ -231,12 +232,12 @@ public class ErrorModel {
   }
 
    /**
-   * Internal trace ID to help with debugging
+   * Internal trace ID to help with debugging.
    * @return traceId
   **/
 
 @JsonProperty("trace_id")
-@ApiModelProperty(value = "Internal trace ID to help with debugging")
+@ApiModelProperty(value = "Internal trace ID to help with debugging.")
   public String getTraceId() {
     return traceId;
   }
@@ -251,12 +252,12 @@ public class ErrorModel {
   }
 
    /**
-   * ID of the error
+   * ID of the error.
    * @return errorId
   **/
 
 @JsonProperty("error_id")
-@ApiModelProperty(value = "ID of the error")
+@ApiModelProperty(value = "ID of the error.")
   public String getErrorId() {
     return errorId;
   }
@@ -271,12 +272,12 @@ public class ErrorModel {
   }
 
    /**
-   * ID of the query (if applicable)
+   * ID of the query (if applicable).
    * @return queryId
   **/
 
 @JsonProperty("query_id")
-@ApiModelProperty(value = "ID of the query (if applicable)")
+@ApiModelProperty(value = "ID of the query (if applicable).")
   public String getQueryId() {
     return queryId;
   }
