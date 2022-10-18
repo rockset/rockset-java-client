@@ -1,5 +1,10 @@
 # Rockset Java Client Changelog
 
+## v0.9.5 2022-10-17
+- Support u256 SQL data type
+- Improved error messages
+- Fix query error deserialization
+
 ## v0.9.4 2022-10-12
 - Backward compatibility fixes for response error handling
 - Handle wide row result sets in JDBC efficiently
