@@ -54,15 +54,31 @@ import java.util.TimeZone;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.joda.time.DateTimeZone;
+import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.DateTimeFormatterBuilder;
+import org.joda.time.format.DateTimeParser;
 import org.joda.time.format.ISODateTimeFormat;
 
 public class RocksetResultSet implements ResultSet {
 
   static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
   static final DateTimeFormatter DATE_FORMATTER = ISODateTimeFormat.date();
-  static final DateTimeFormatter TIME_FORMATTER = DateTimeFormat.forPattern("HH:mm:ss.SSS");
+
+  static final DateTimeParser MICROSECOND_PARSER = new DateTimeFormatterBuilder()
+          .appendPattern(".")
+          .appendFractionOfSecond(1, 6)
+          .toParser();
+
+  static final DateTimeParser SECOND_PARSER = new DateTimeFormatterBuilder()
+          .appendPattern(":ss")
+          .appendOptional(MICROSECOND_PARSER)
+          .toParser();
+
+  static final DateTimeFormatter TIME_FORMATTER = new DateTimeFormatterBuilder().appendPattern("HH:mm")
+                                                                                .appendOptional(SECOND_PARSER)
+                                                                                .toFormatter();
   static final DateTimeFormatter TIMESTAMP_FORMATTER =
       DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS");
 
@@ -1458,7 +1474,8 @@ public class RocksetResultSet implements ResultSet {
     if (columnInfo.getType() == Column.ColumnTypes.TIME) {
       String time = value.get("value").asText();
       try {
-        return Time.valueOf(time);
+        LocalTime localTime = LocalTime.parse(time, TIME_FORMATTER);
+        return new Time(localTime.getHourOfDay(), localTime.getMinuteOfHour(), localTime.getSecondOfMinute());
       } catch (IllegalArgumentException e) {
         throw new SQLException("Invalid time from server: " + time, e);
       }
