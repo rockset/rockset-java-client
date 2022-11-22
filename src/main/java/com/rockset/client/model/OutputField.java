@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * OutputField
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class OutputField {
   @SerializedName("field_name")
   private String fieldName = null;
@@ -39,7 +39,7 @@ public class OutputField {
   private SqlExpression value = null;
 
   /**
-   * Error in Mapping execution: &#39;skip&#39; or &#39;fail&#39; 
+   * Error in Mapping execution: &#39;skip&#39; or &#39;fail&#39;.
    */
   @JsonAdapter(OnErrorEnum.Adapter.class)
   public enum OnErrorEnum {
@@ -94,12 +94,12 @@ public class OutputField {
   }
 
    /**
-   * The name of a field, parsed as a SQL qualified name 
+   * The name of a field, parsed as a SQL qualified name.
    * @return fieldName
   **/
 
 @JsonProperty("field_name")
-@ApiModelProperty(example = "zip_hash", value = "The name of a field, parsed as a SQL qualified name ")
+@ApiModelProperty(example = "zip_hash", value = "The name of a field, parsed as a SQL qualified name.")
   public String getFieldName() {
     return fieldName;
   }
@@ -114,12 +114,12 @@ public class OutputField {
   }
 
    /**
-   * The name of a sql function
+   * The name of a sql function.
    * @return value
   **/
 
 @JsonProperty("value")
-@ApiModelProperty(value = "The name of a sql function")
+@ApiModelProperty(value = "The name of a sql function.")
   public SqlExpression getValue() {
     return value;
   }
@@ -134,12 +134,12 @@ public class OutputField {
   }
 
    /**
-   * Error in Mapping execution: &#39;skip&#39; or &#39;fail&#39; 
+   * Error in Mapping execution: &#39;skip&#39; or &#39;fail&#39;.
    * @return onError
   **/
 
 @JsonProperty("on_error")
-@ApiModelProperty(example = "SKIP", value = "Error in Mapping execution: 'skip' or 'fail' ")
+@ApiModelProperty(example = "SKIP", value = "Error in Mapping execution: 'skip' or 'fail'.")
   public OnErrorEnum getOnError() {
     return onError;
   }

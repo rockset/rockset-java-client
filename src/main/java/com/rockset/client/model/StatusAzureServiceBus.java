@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * StatusAzureServiceBus
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class StatusAzureServiceBus {
   @SerializedName("first_processed_at")
   private String firstProcessedAt = null;
@@ -50,12 +50,12 @@ public class StatusAzureServiceBus {
   }
 
    /**
-   * Service Bus first message processed time in ISO-8601 format
+   * Service Bus first message processed time in ISO-8601 format.
    * @return firstProcessedAt
   **/
 
 @JsonProperty("first_processed_at")
-@ApiModelProperty(example = "2021-08-28T00:23:41Z", value = "Service Bus first message processed time in ISO-8601 format")
+@ApiModelProperty(example = "2021-08-28T00:23:41Z", value = "Service Bus first message processed time in ISO-8601 format.")
   public String getFirstProcessedAt() {
     return firstProcessedAt;
   }
@@ -70,12 +70,12 @@ public class StatusAzureServiceBus {
   }
 
    /**
-   * Number of records processed
+   * Number of records processed.
    * @return recordsProcessed
   **/
 
 @JsonProperty("records_processed")
-@ApiModelProperty(example = "1000", value = "Number of records processed")
+@ApiModelProperty(example = "1000", value = "Number of records processed.")
   public Long getRecordsProcessed() {
     return recordsProcessed;
   }
@@ -98,12 +98,12 @@ public class StatusAzureServiceBus {
   }
 
    /**
-   * Sessions processed
+   * Sessions processed.
    * @return sessions
   **/
 
 @JsonProperty("sessions")
-@ApiModelProperty(value = "Sessions processed")
+@ApiModelProperty(value = "Sessions processed.")
   public Map<String, StatusAzureServiceBusSession> getSessions() {
     return sessions;
   }

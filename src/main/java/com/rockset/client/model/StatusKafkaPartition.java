@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * StatusKafkaPartition
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class StatusKafkaPartition {
   @SerializedName("partition_number")
   private Integer partitionNumber = null;
@@ -46,12 +46,12 @@ public class StatusKafkaPartition {
   }
 
    /**
-   * The number of this partition
+   * The number of this partition.
    * @return partitionNumber
   **/
 
 @JsonProperty("partition_number")
-@ApiModelProperty(example = "123", value = "The number of this partition")
+@ApiModelProperty(example = "123", value = "The number of this partition.")
   public Integer getPartitionNumber() {
     return partitionNumber;
   }
@@ -66,12 +66,12 @@ public class StatusKafkaPartition {
   }
 
    /**
-   * Latest offset of partition
+   * Latest offset of partition.
    * @return partitionOffset
   **/
 
 @JsonProperty("partition_offset")
-@ApiModelProperty(example = "100", value = "Latest offset of partition")
+@ApiModelProperty(example = "100", value = "Latest offset of partition.")
   public Long getPartitionOffset() {
     return partitionOffset;
   }
@@ -86,12 +86,12 @@ public class StatusKafkaPartition {
   }
 
    /**
-   * Per partition lag for offset
+   * Per partition lag for offset.
    * @return offsetLag
   **/
 
 @JsonProperty("offset_lag")
-@ApiModelProperty(example = "10", value = "Per partition lag for offset")
+@ApiModelProperty(example = "10", value = "Per partition lag for offset.")
   public Long getOffsetLag() {
     return offsetLag;
   }

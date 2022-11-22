@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * GetVirtualInstanceResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class GetVirtualInstanceResponse {
   @SerializedName("data")
   private VirtualInstance data = null;
@@ -41,12 +41,12 @@ public class GetVirtualInstanceResponse {
   }
 
    /**
-   * virtual instance that was requested
+   * Virtual instance that was requested.
    * @return data
   **/
 
 @JsonProperty("data")
-@ApiModelProperty(value = "virtual instance that was requested")
+@ApiModelProperty(value = "Virtual instance that was requested.")
   public VirtualInstance getData() {
     return data;
   }

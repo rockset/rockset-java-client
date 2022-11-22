@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Alias
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class Alias {
   @SerializedName("name")
   private String name = null;
@@ -49,7 +49,7 @@ public class Alias {
   private List<String> collections = null;
 
   /**
-   * state of the alias
+   * State of the alias.
    */
   @JsonAdapter(StateEnum.Adapter.class)
   public enum StateEnum {
@@ -110,12 +110,12 @@ public class Alias {
   }
 
    /**
-   * name of the alias
+   * Name of the alias.
    * @return name
   **/
 
 @JsonProperty("name")
-@ApiModelProperty(example = "demo", value = "name of the alias")
+@ApiModelProperty(example = "demo", value = "Name of the alias.")
   public String getName() {
     return name;
   }
@@ -130,12 +130,12 @@ public class Alias {
   }
 
    /**
-   * alias description
+   * Alias description.
    * @return description
   **/
 
 @JsonProperty("description")
-@ApiModelProperty(example = "alias referencing collection in workspace", value = "alias description")
+@ApiModelProperty(example = "alias referencing collection in workspace", value = "Alias description.")
   public String getDescription() {
     return description;
   }
@@ -150,12 +150,12 @@ public class Alias {
   }
 
    /**
-   * name of the workspace
+   * Name of the workspace.
    * @return workspace
   **/
 
 @JsonProperty("workspace")
-@ApiModelProperty(example = "commons", value = "name of the workspace")
+@ApiModelProperty(example = "commons", value = "Name of the workspace.")
   public String getWorkspace() {
     return workspace;
   }
@@ -170,12 +170,12 @@ public class Alias {
   }
 
    /**
-   * email of the creator
+   * Email of the creator.
    * @return creatorEmail
   **/
 
 @JsonProperty("creator_email")
-@ApiModelProperty(example = "xyz@rockset.com", value = "email of the creator")
+@ApiModelProperty(example = "xyz@rockset.com", value = "Email of the creator.")
   public String getCreatorEmail() {
     return creatorEmail;
   }
@@ -198,12 +198,12 @@ public class Alias {
   }
 
    /**
-   * list of fully qualified collection names referenced by alias
+   * List of fully qualified collection names referenced by alias.
    * @return collections
   **/
 
 @JsonProperty("collections")
-@ApiModelProperty(example = "\"[\\\"commons.foo\\\", \\\"prod.demo\\\"]\"", value = "list of fully qualified collection names referenced by alias")
+@ApiModelProperty(example = "\"[\\\"commons.foo\\\", \\\"prod.demo\\\"]\"", value = "List of fully qualified collection names referenced by alias.")
   public List<String> getCollections() {
     return collections;
   }
@@ -218,12 +218,12 @@ public class Alias {
   }
 
    /**
-   * state of the alias
+   * State of the alias.
    * @return state
   **/
 
 @JsonProperty("state")
-@ApiModelProperty(example = "CREATED", value = "state of the alias")
+@ApiModelProperty(example = "CREATED", value = "State of the alias.")
   public StateEnum getState() {
     return state;
   }
@@ -238,12 +238,12 @@ public class Alias {
   }
 
    /**
-   * ISO-8601 date
+   * ISO-8601 date.
    * @return createdAt
   **/
 
 @JsonProperty("created_at")
-@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date.")
   public String getCreatedAt() {
     return createdAt;
   }
@@ -258,12 +258,12 @@ public class Alias {
   }
 
    /**
-   * ISO-8601 date
+   * ISO-8601 date.
    * @return modifiedAt
   **/
 
 @JsonProperty("modified_at")
-@ApiModelProperty(example = "2001-08-28T00:23:42Z", value = "ISO-8601 date")
+@ApiModelProperty(example = "2001-08-28T00:23:42Z", value = "ISO-8601 date.")
   public String getModifiedAt() {
     return modifiedAt;
   }

@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * DeleteIntegrationResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class DeleteIntegrationResponse {
   @SerializedName("data")
   private Integration data = null;
@@ -41,12 +41,12 @@ public class DeleteIntegrationResponse {
   }
 
    /**
-   * integration object that was deleted
+   * Integration object that was deleted.
    * @return data
   **/
 
 @JsonProperty("data")
-@ApiModelProperty(value = "integration object that was deleted")
+@ApiModelProperty(value = "Integration object that was deleted.")
   public Integration getData() {
     return data;
   }

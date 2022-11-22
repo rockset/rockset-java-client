@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceKafka
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class SourceKafka {
   @SerializedName("kafka_topic_name")
   private String kafkaTopicName = null;
@@ -38,11 +38,14 @@ public class SourceKafka {
   @SerializedName("status")
   private StatusKafka status = null;
 
+  @SerializedName("consumer_group_id")
+  private String consumerGroupId = null;
+
   @SerializedName("use_v3")
   private Boolean useV3 = null;
 
   /**
-   * Gets or Sets offsetResetPolicy
+   * The offset reset policy.
    */
   @JsonAdapter(OffsetResetPolicyEnum.Adapter.class)
   public enum OffsetResetPolicyEnum {
@@ -97,12 +100,12 @@ public class SourceKafka {
   }
 
    /**
-   * The Kafka topic to be tailed
+   * The Kafka topic to be tailed.
    * @return kafkaTopicName
   **/
 
 @JsonProperty("kafka_topic_name")
-@ApiModelProperty(example = "example-topic", required = true, value = "The Kafka topic to be tailed")
+@ApiModelProperty(example = "example-topic", value = "The Kafka topic to be tailed.")
   public String getKafkaTopicName() {
     return kafkaTopicName;
   }
@@ -112,14 +115,34 @@ public class SourceKafka {
   }
 
    /**
-   * Kafka source status
+   * Kafka source status.
    * @return status
   **/
 
 @JsonProperty("status")
-@ApiModelProperty(value = "Kafka source status")
+@ApiModelProperty(value = "Kafka source status.")
   public StatusKafka getStatus() {
     return status;
+  }
+
+  public SourceKafka consumerGroupId(String consumerGroupId) {
+    this.consumerGroupId = consumerGroupId;
+    return this;
+  }
+
+   /**
+   * The Kafka consumer group Id being used.
+   * @return consumerGroupId
+  **/
+
+@JsonProperty("consumer_group_id")
+@ApiModelProperty(example = "org-collection", value = "The Kafka consumer group Id being used.")
+  public String getConsumerGroupId() {
+    return consumerGroupId;
+  }
+
+  public void setConsumerGroupId(String consumerGroupId) {
+    this.consumerGroupId = consumerGroupId;
   }
 
   public SourceKafka useV3(Boolean useV3) {
@@ -128,12 +151,12 @@ public class SourceKafka {
   }
 
    /**
-   * Get useV3
+   * Whether to use v3 integration.
    * @return useV3
   **/
 
 @JsonProperty("use_v3")
-@ApiModelProperty(value = "")
+@ApiModelProperty(value = "Whether to use v3 integration.")
   public Boolean isUseV3() {
     return useV3;
   }
@@ -148,12 +171,12 @@ public class SourceKafka {
   }
 
    /**
-   * Get offsetResetPolicy
+   * The offset reset policy.
    * @return offsetResetPolicy
   **/
 
 @JsonProperty("offset_reset_policy")
-@ApiModelProperty(value = "")
+@ApiModelProperty(example = "EARLIEST", value = "The offset reset policy.")
   public OffsetResetPolicyEnum getOffsetResetPolicy() {
     return offsetResetPolicy;
   }
@@ -174,13 +197,14 @@ public class SourceKafka {
     SourceKafka sourceKafka = (SourceKafka) o;
     return Objects.equals(this.kafkaTopicName, sourceKafka.kafkaTopicName) &&
         Objects.equals(this.status, sourceKafka.status) &&
+        Objects.equals(this.consumerGroupId, sourceKafka.consumerGroupId) &&
         Objects.equals(this.useV3, sourceKafka.useV3) &&
         Objects.equals(this.offsetResetPolicy, sourceKafka.offsetResetPolicy);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(kafkaTopicName, status, useV3, offsetResetPolicy);
+    return Objects.hash(kafkaTopicName, status, consumerGroupId, useV3, offsetResetPolicy);
   }
 
 
@@ -191,6 +215,7 @@ public class SourceKafka {
     
     sb.append("    kafkaTopicName: ").append(toIndentedString(kafkaTopicName)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    consumerGroupId: ").append(toIndentedString(consumerGroupId)).append("\n");
     sb.append("    useV3: ").append(toIndentedString(useV3)).append("\n");
     sb.append("    offsetResetPolicy: ").append(toIndentedString(offsetResetPolicy)).append("\n");
     sb.append("}");

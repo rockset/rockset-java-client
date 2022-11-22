@@ -29,10 +29,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * AwsRole
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class AwsRole {
   @SerializedName("aws_role_arn")
   private String awsRoleArn = null;
+
+  @SerializedName("aws_external_id")
+  private String awsExternalId = null;
 
   public AwsRole awsRoleArn(String awsRoleArn) {
     this.awsRoleArn = awsRoleArn;
@@ -40,18 +43,38 @@ public class AwsRole {
   }
 
    /**
-   * ARN of rockset-role created in your account
+   * ARN of rockset-role created in your account.
    * @return awsRoleArn
   **/
 
 @JsonProperty("aws_role_arn")
-@ApiModelProperty(example = "arn:aws:iam::2378964092:role/rockset-role", required = true, value = "ARN of rockset-role created in your account")
+@ApiModelProperty(example = "arn:aws:iam::2378964092:role/rockset-role", required = true, value = "ARN of rockset-role created in your account.")
   public String getAwsRoleArn() {
     return awsRoleArn;
   }
 
   public void setAwsRoleArn(String awsRoleArn) {
     this.awsRoleArn = awsRoleArn;
+  }
+
+  public AwsRole awsExternalId(String awsExternalId) {
+    this.awsExternalId = awsExternalId;
+    return this;
+  }
+
+   /**
+   * External id used for integration.
+   * @return awsExternalId
+  **/
+
+@JsonProperty("aws_external_id")
+@ApiModelProperty(example = "external id of aws", value = "External id used for integration.")
+  public String getAwsExternalId() {
+    return awsExternalId;
+  }
+
+  public void setAwsExternalId(String awsExternalId) {
+    this.awsExternalId = awsExternalId;
   }
 
 
@@ -64,12 +87,13 @@ public class AwsRole {
       return false;
     }
     AwsRole awsRole = (AwsRole) o;
-    return Objects.equals(this.awsRoleArn, awsRole.awsRoleArn);
+    return Objects.equals(this.awsRoleArn, awsRole.awsRoleArn) &&
+        Objects.equals(this.awsExternalId, awsRole.awsExternalId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(awsRoleArn);
+    return Objects.hash(awsRoleArn, awsExternalId);
   }
 
 
@@ -79,6 +103,7 @@ public class AwsRole {
     sb.append("class AwsRole {\n");
     
     sb.append("    awsRoleArn: ").append(toIndentedString(awsRoleArn)).append("\n");
+    sb.append("    awsExternalId: ").append(toIndentedString(awsExternalId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

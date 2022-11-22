@@ -29,20 +29,29 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * AzureEventHubsIntegration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class AzureEventHubsIntegration {
   @SerializedName("connection_string")
   private String connectionString = null;
 
+  public AzureEventHubsIntegration connectionString(String connectionString) {
+    this.connectionString = connectionString;
+    return this;
+  }
+
    /**
-   * azure event hubs connection string
+   * Credentials for the Azure Event Hubs.
    * @return connectionString
   **/
 
 @JsonProperty("connection_string")
-@ApiModelProperty(value = "azure event hubs connection string")
+@ApiModelProperty(example = "Endpoint=sb://<NamespaceName>.servicebus.windows.net/;SharedAccessKeyName=<KeyName>;SharedAccessKey=<KeyValue>", value = "Credentials for the Azure Event Hubs.")
   public String getConnectionString() {
     return connectionString;
+  }
+
+  public void setConnectionString(String connectionString) {
+    this.connectionString = connectionString;
   }
 
 

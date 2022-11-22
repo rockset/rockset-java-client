@@ -1844,7 +1844,7 @@ public class QueryLambdasApi {
      * @param workspace name of the workspace (required)
      * @param queryLambda name of the Query Lambda (required)
      * @param body JSON object (required)
-     * @param create  (optional)
+     * @param create Create a new Query Lambda if one does not exist already. (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
@@ -1925,7 +1925,7 @@ public class QueryLambdasApi {
      * @param workspace name of the workspace (required)
      * @param queryLambda name of the Query Lambda (required)
      * @param body JSON object (required)
-     * @param create  (optional)
+     * @param create Create a new Query Lambda if one does not exist already. (optional)
      * @return QueryLambdaVersionResponse
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -1940,7 +1940,7 @@ public class QueryLambdasApi {
      * @param workspace name of the workspace (required)
      * @param queryLambda name of the Query Lambda (required)
      * @param body JSON object (required)
-     * @param create  (optional)
+     * @param create Create a new Query Lambda if one does not exist already. (optional)
      * @return ApiResponse&lt;QueryLambdaVersionResponse&gt;
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -1956,7 +1956,7 @@ public class QueryLambdasApi {
      * @param workspace name of the workspace (required)
      * @param queryLambda name of the Query Lambda (required)
      * @param body JSON object (required)
-     * @param create  (optional)
+     * @param create Create a new Query Lambda if one does not exist already. (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object

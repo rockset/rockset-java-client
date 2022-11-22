@@ -31,13 +31,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * FieldPartition
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class FieldPartition {
   @SerializedName("field_name")
   private String fieldName = null;
 
   /**
-   * The type of partitions on a field
+   * The type of partitions on a field.
    */
   @JsonAdapter(TypeEnum.Adapter.class)
   public enum TypeEnum {
@@ -93,12 +93,12 @@ public class FieldPartition {
   }
 
    /**
-   * The name of a field, parsed as a SQL qualified name
+   * The name of a field, parsed as a SQL qualified name.
    * @return fieldName
   **/
 
 @JsonProperty("field_name")
-@ApiModelProperty(example = "address.city.zipcode", value = "The name of a field, parsed as a SQL qualified name")
+@ApiModelProperty(example = "address.city.zipcode", value = "The name of a field, parsed as a SQL qualified name.")
   public String getFieldName() {
     return fieldName;
   }
@@ -113,12 +113,12 @@ public class FieldPartition {
   }
 
    /**
-   * The type of partitions on a field
+   * The type of partitions on a field.
    * @return type
   **/
 
 @JsonProperty("type")
-@ApiModelProperty(example = "AUTO", value = "The type of partitions on a field")
+@ApiModelProperty(example = "AUTO", value = "The type of partitions on a field.")
   public TypeEnum getType() {
     return type;
   }

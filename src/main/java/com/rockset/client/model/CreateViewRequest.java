@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateViewRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class CreateViewRequest {
   @SerializedName("name")
   private String name = null;
@@ -46,12 +46,12 @@ public class CreateViewRequest {
   }
 
    /**
-   * View name
+   * View name.
    * @return name
   **/
 
 @JsonProperty("name")
-@ApiModelProperty(example = "myAwesomeView", required = true, value = "View name")
+@ApiModelProperty(example = "myAwesomeView", required = true, value = "View name.")
   public String getName() {
     return name;
   }
@@ -66,12 +66,12 @@ public class CreateViewRequest {
   }
 
    /**
-   * optional description
+   * Optional description.
    * @return description
   **/
 
 @JsonProperty("description")
-@ApiModelProperty(example = "view of awesome collection", value = "optional description")
+@ApiModelProperty(example = "view of awesome collection", value = "Optional description.")
   public String getDescription() {
     return description;
   }
@@ -86,12 +86,12 @@ public class CreateViewRequest {
   }
 
    /**
-   * SQL for this view
+   * SQL for this view.
    * @return query
   **/
 
 @JsonProperty("query")
-@ApiModelProperty(example = "SELECT * FROM foo", required = true, value = "SQL for this view")
+@ApiModelProperty(example = "SELECT * FROM foo", required = true, value = "SQL for this view.")
   public String getQuery() {
     return query;
   }

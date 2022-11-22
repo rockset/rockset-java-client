@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * PaginationInfo
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class PaginationInfo {
   @SerializedName("current_page_doc_count")
   private Long currentPageDocCount = null;
@@ -52,12 +52,12 @@ public class PaginationInfo {
   }
 
    /**
-   * Number of documents returned in this result set
+   * Number of documents returned in this result set.
    * @return currentPageDocCount
   **/
 
 @JsonProperty("current_page_doc_count")
-@ApiModelProperty(example = "1000", value = "Number of documents returned in this result set")
+@ApiModelProperty(example = "1000", value = "Number of documents returned in this result set.")
   public Long getCurrentPageDocCount() {
     return currentPageDocCount;
   }
@@ -112,12 +112,12 @@ public class PaginationInfo {
   }
 
    /**
-   * Cursor to use to get the list of documents
+   * Cursor to use to get the list of documents.
    * @return nextCursor
   **/
 
 @JsonProperty("next_cursor")
-@ApiModelProperty(example = "testnextcursor", value = "Cursor to use to get the list of documents")
+@ApiModelProperty(example = "testnextcursor", value = "Cursor to use to get the list of documents.")
   public String getNextCursor() {
     return nextCursor;
   }

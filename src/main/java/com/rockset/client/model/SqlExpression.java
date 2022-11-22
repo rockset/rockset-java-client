@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SqlExpression
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class SqlExpression {
   @SerializedName("sql")
   private String sql = null;
@@ -40,12 +40,12 @@ public class SqlExpression {
   }
 
    /**
-   * The name of a sql function
+   * The name of a sql function.
    * @return sql
   **/
 
 @JsonProperty("sql")
-@ApiModelProperty(example = "SHA256()", value = "The name of a sql function")
+@ApiModelProperty(example = "SHA256()", value = "The name of a sql function.")
   public String getSql() {
     return sql;
   }

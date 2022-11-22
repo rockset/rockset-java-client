@@ -319,12 +319,13 @@ public class ApiKeysApi {
      * Build call for get
      * @param user Email of the API key owner. Use &#x60;self&#x60; to specify the currently authenticated user. (required)
      * @param name Name of the API key. (required)
+     * @param reveal Reveal full key. (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getCall(String user, String name, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public com.squareup.okhttp.Call getCall(String user, String name, Boolean reveal, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -334,6 +335,8 @@ public class ApiKeysApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        if (reveal != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("reveal", reveal));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -368,7 +371,7 @@ public class ApiKeysApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getValidateBeforeCall(String user, String name, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private com.squareup.okhttp.Call getValidateBeforeCall(String user, String name, Boolean reveal, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'user' is set
         if (user == null) {
@@ -381,7 +384,7 @@ public class ApiKeysApi {
         }
         
 
-        com.squareup.okhttp.Call call = getCall(user, name, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getCall(user, name, reveal, progressListener, progressRequestListener);
         return call;
 
     }
@@ -391,11 +394,12 @@ public class ApiKeysApi {
      * Retrieve a particular API key for any user in your organization.
      * @param user Email of the API key owner. Use &#x60;self&#x60; to specify the currently authenticated user. (required)
      * @param name Name of the API key. (required)
+     * @param reveal Reveal full key. (optional)
      * @return GetApiKeyResponse
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public GetApiKeyResponse get(String user, String name) throws Exception {
-        ApiResponse<GetApiKeyResponse> resp = getWithHttpInfo(user, name);
+    public GetApiKeyResponse get(String user, String name, Boolean reveal) throws Exception {
+        ApiResponse<GetApiKeyResponse> resp = getWithHttpInfo(user, name, reveal);
         return resp.getData();
     }
 
@@ -404,11 +408,12 @@ public class ApiKeysApi {
      * Retrieve a particular API key for any user in your organization.
      * @param user Email of the API key owner. Use &#x60;self&#x60; to specify the currently authenticated user. (required)
      * @param name Name of the API key. (required)
+     * @param reveal Reveal full key. (optional)
      * @return ApiResponse&lt;GetApiKeyResponse&gt;
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<GetApiKeyResponse> getWithHttpInfo(String user, String name) throws Exception {
-        com.squareup.okhttp.Call call = getValidateBeforeCall(user, name, null, null);
+    public ApiResponse<GetApiKeyResponse> getWithHttpInfo(String user, String name, Boolean reveal) throws Exception {
+        com.squareup.okhttp.Call call = getValidateBeforeCall(user, name, reveal, null, null);
         Type localVarReturnType = new TypeToken<GetApiKeyResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -418,11 +423,12 @@ public class ApiKeysApi {
      * Retrieve a particular API key for any user in your organization.
      * @param user Email of the API key owner. Use &#x60;self&#x60; to specify the currently authenticated user. (required)
      * @param name Name of the API key. (required)
+     * @param reveal Reveal full key. (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getAsync(String user, String name, final ApiCallback<GetApiKeyResponse> callback) throws Exception {
+    public com.squareup.okhttp.Call getAsync(String user, String name, Boolean reveal, final ApiCallback<GetApiKeyResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -443,7 +449,7 @@ public class ApiKeysApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getValidateBeforeCall(user, name, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getValidateBeforeCall(user, name, reveal, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<GetApiKeyResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

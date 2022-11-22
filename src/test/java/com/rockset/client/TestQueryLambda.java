@@ -122,7 +122,7 @@ public class TestQueryLambda {
     String next = pInfo.getNextCursor();
 
     String queryId = qr.getQueryId();
-    QueryPaginationResponse paginationResponse = client.queries.get(queryId, next, 1, null);
+    QueryPaginationResponse paginationResponse = client.queries.get_0(queryId, next, 1);
 
     // Check that the second row just has a 2.
     Assert.assertEquals(paginationResponse.getResults().size(), 1);

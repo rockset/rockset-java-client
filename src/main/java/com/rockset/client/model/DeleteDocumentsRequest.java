@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * DeleteDocumentsRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class DeleteDocumentsRequest {
   @SerializedName("data")
   private List<DeleteDocumentsRequestData> data = new ArrayList<DeleteDocumentsRequestData>();
@@ -48,12 +48,12 @@ public class DeleteDocumentsRequest {
   }
 
    /**
-   * Array of IDs of documents to be deleted
+   * Array of IDs of documents to be deleted.
    * @return data
   **/
 
 @JsonProperty("data")
-@ApiModelProperty(required = true, value = "Array of IDs of documents to be deleted")
+@ApiModelProperty(required = true, value = "Array of IDs of documents to be deleted.")
   public List<DeleteDocumentsRequestData> getData() {
     return data;
   }

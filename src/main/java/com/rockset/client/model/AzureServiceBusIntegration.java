@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * AzureServiceBusIntegration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class AzureServiceBusIntegration {
   @SerializedName("connection_string")
   private String connectionString = null;
@@ -40,12 +40,12 @@ public class AzureServiceBusIntegration {
   }
 
    /**
-   * credentials for the Azure Service Bus
+   * Credentials for the Azure Service Bus.
    * @return connectionString
   **/
 
 @JsonProperty("connection_string")
-@ApiModelProperty(required = true, value = "credentials for the Azure Service Bus")
+@ApiModelProperty(example = "Endpoint=sb://<NamespaceName>.servicebus.windows.net/;SharedAccessKeyName=<KeyName>;SharedAccessKey=<KeyValue>", required = true, value = "Credentials for the Azure Service Bus.")
   public String getConnectionString() {
     return connectionString;
   }

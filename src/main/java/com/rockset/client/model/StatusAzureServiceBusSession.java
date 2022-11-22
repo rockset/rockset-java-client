@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * StatusAzureServiceBusSession
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class StatusAzureServiceBusSession {
   @SerializedName("sequence_number")
   private Long sequenceNumber = null;
@@ -43,12 +43,12 @@ public class StatusAzureServiceBusSession {
   }
 
    /**
-   * The last processed sequence number within this session
+   * The last processed sequence number within this session.
    * @return sequenceNumber
   **/
 
 @JsonProperty("sequence_number")
-@ApiModelProperty(example = "323862", value = "The last processed sequence number within this session")
+@ApiModelProperty(example = "323862", value = "The last processed sequence number within this session.")
   public Long getSequenceNumber() {
     return sequenceNumber;
   }
@@ -63,12 +63,12 @@ public class StatusAzureServiceBusSession {
   }
 
    /**
-   * Most recent ISO-8601 date when a message from this session was processed
+   * Most recent ISO-8601 date when a message from this session was processed.
    * @return lastProcessed
   **/
 
 @JsonProperty("last_processed")
-@ApiModelProperty(example = "2022-08-23T00:13:41Z", value = "Most recent ISO-8601 date when a message from this session was processed")
+@ApiModelProperty(example = "2022-08-23T00:13:41Z", value = "Most recent ISO-8601 date when a message from this session was processed.")
   public String getLastProcessed() {
     return lastProcessed;
   }

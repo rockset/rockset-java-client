@@ -21,6 +21,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.rockset.client.model.Alias;
+import com.rockset.client.model.BulkStats;
 import com.rockset.client.model.CollectionStats;
 import com.rockset.client.model.FieldMappingQuery;
 import com.rockset.client.model.FieldMappingV2;
@@ -37,7 +38,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Collection
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class Collection {
   @SerializedName("created_at")
   private String createdAt = null;
@@ -55,7 +56,7 @@ public class Collection {
   private String workspace = null;
 
   /**
-   * current status of collection, one of: CREATED, READY, DELETED
+   * Current status of collection.
    */
   @JsonAdapter(StatusEnum.Adapter.class)
   public enum StatusEnum {
@@ -143,8 +144,14 @@ public class Collection {
   @SerializedName("aliases")
   private List<Alias> aliases = null;
 
+  @SerializedName("read_only")
+  private Boolean readOnly = null;
+
   @SerializedName("insert_only")
   private Boolean insertOnly = null;
+
+  @SerializedName("bulk_stats")
+  private List<BulkStats> bulkStats = null;
 
   public Collection createdAt(String createdAt) {
     this.createdAt = createdAt;
@@ -152,12 +159,12 @@ public class Collection {
   }
 
    /**
-   * ISO-8601 date
+   * ISO-8601 date.
    * @return createdAt
   **/
 
 @JsonProperty("created_at")
-@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date.")
   public String getCreatedAt() {
     return createdAt;
   }
@@ -172,12 +179,12 @@ public class Collection {
   }
 
    /**
-   * email of user who created the collection
+   * Email of user who created the collection.
    * @return createdBy
   **/
 
 @JsonProperty("created_by")
-@ApiModelProperty(example = "hello@rockset.com", value = "email of user who created the collection")
+@ApiModelProperty(example = "hello@rockset.com", value = "Email of user who created the collection.")
   public String getCreatedBy() {
     return createdBy;
   }
@@ -192,12 +199,12 @@ public class Collection {
   }
 
    /**
-   * unique identifer for collection, can contain alphanumeric or dash characters
+   * Unique identifer for collection, can contain alphanumeric or dash characters.
    * @return name
   **/
 
 @JsonProperty("name")
-@ApiModelProperty(example = "global-transactions", value = "unique identifer for collection, can contain alphanumeric or dash characters")
+@ApiModelProperty(example = "global-transactions", value = "Unique identifer for collection, can contain alphanumeric or dash characters.")
   public String getName() {
     return name;
   }
@@ -212,12 +219,12 @@ public class Collection {
   }
 
    /**
-   * text describing the collection
+   * Text describing the collection.
    * @return description
   **/
 
 @JsonProperty("description")
-@ApiModelProperty(example = "transactions from stores worldwide", value = "text describing the collection")
+@ApiModelProperty(example = "transactions from stores worldwide", value = "Text describing the collection.")
   public String getDescription() {
     return description;
   }
@@ -232,12 +239,12 @@ public class Collection {
   }
 
    /**
-   * name of the workspace that the collection is in
+   * Name of the workspace that the collection is in.
    * @return workspace
   **/
 
 @JsonProperty("workspace")
-@ApiModelProperty(example = "commons", value = "name of the workspace that the collection is in")
+@ApiModelProperty(example = "commons", value = "Name of the workspace that the collection is in.")
   public String getWorkspace() {
     return workspace;
   }
@@ -252,12 +259,12 @@ public class Collection {
   }
 
    /**
-   * current status of collection, one of: CREATED, READY, DELETED
+   * Current status of collection.
    * @return status
   **/
 
 @JsonProperty("status")
-@ApiModelProperty(example = "READY", value = "current status of collection, one of: CREATED, READY, DELETED")
+@ApiModelProperty(example = "READY", value = "Current status of collection.")
   public StatusEnum getStatus() {
     return status;
   }
@@ -280,12 +287,12 @@ public class Collection {
   }
 
    /**
-   * list of sources from which collection ingests
+   * List of sources from which collection ingests.
    * @return sources
   **/
 
 @JsonProperty("sources")
-@ApiModelProperty(value = "list of sources from which collection ingests")
+@ApiModelProperty(value = "List of sources from which collection ingests.")
   public List<Source> getSources() {
     return sources;
   }
@@ -300,12 +307,12 @@ public class Collection {
   }
 
    /**
-   * metrics about the collection
+   * Metrics about the collection.
    * @return stats
   **/
 
 @JsonProperty("stats")
-@ApiModelProperty(value = "metrics about the collection")
+@ApiModelProperty(value = "Metrics about the collection.")
   public CollectionStats getStats() {
     return stats;
   }
@@ -320,12 +327,12 @@ public class Collection {
   }
 
    /**
-   * number of seconds after which data is purged based on event time
+   * Number of seconds after which data is purged based on event time.
    * @return retentionSecs
   **/
 
 @JsonProperty("retention_secs")
-@ApiModelProperty(example = "2592000", value = "number of seconds after which data is purged based on event time")
+@ApiModelProperty(example = "2592000", value = "Number of seconds after which data is purged based on event time.")
   public Long getRetentionSecs() {
     return retentionSecs;
   }
@@ -348,12 +355,12 @@ public class Collection {
   }
 
    /**
-   * list of mappings applied on all documents in a collection
+   * List of mappings applied on all documents in a collection.
    * @return fieldMappings
   **/
 
 @JsonProperty("field_mappings")
-@ApiModelProperty(value = "list of mappings applied on all documents in a collection")
+@ApiModelProperty(value = "List of mappings applied on all documents in a collection.")
   public List<FieldMappingV2> getFieldMappings() {
     return fieldMappings;
   }
@@ -368,12 +375,12 @@ public class Collection {
   }
 
    /**
-   * Field mapping for a collection
+   * Field mapping for a collection.
    * @return fieldMappingQuery
   **/
 
 @JsonProperty("field_mapping_query")
-@ApiModelProperty(value = "Field mapping for a collection")
+@ApiModelProperty(value = "Field mapping for a collection.")
   public FieldMappingQuery getFieldMappingQuery() {
     return fieldMappingQuery;
   }
@@ -396,12 +403,12 @@ public class Collection {
   }
 
    /**
-   * list of clustering fields for a collection
+   * List of clustering fields for a collection.
    * @return clusteringKey
   **/
 
 @JsonProperty("clustering_key")
-@ApiModelProperty(value = "list of clustering fields for a collection")
+@ApiModelProperty(value = "List of clustering fields for a collection.")
   public List<FieldPartition> getClusteringKey() {
     return clusteringKey;
   }
@@ -424,12 +431,12 @@ public class Collection {
   }
 
    /**
-   * list of aliases for a collection
+   * List of aliases for a collection.
    * @return aliases
   **/
 
 @JsonProperty("aliases")
-@ApiModelProperty(value = "list of aliases for a collection")
+@ApiModelProperty(value = "List of aliases for a collection.")
   public List<Alias> getAliases() {
     return aliases;
   }
@@ -438,24 +445,72 @@ public class Collection {
     this.aliases = aliases;
   }
 
+  public Collection readOnly(Boolean readOnly) {
+    this.readOnly = readOnly;
+    return this;
+  }
+
+   /**
+   * Whether the collection is read-only or not.
+   * @return readOnly
+  **/
+
+@JsonProperty("read_only")
+@ApiModelProperty(value = "Whether the collection is read-only or not.")
+  public Boolean isReadOnly() {
+    return readOnly;
+  }
+
+  public void setReadOnly(Boolean readOnly) {
+    this.readOnly = readOnly;
+  }
+
   public Collection insertOnly(Boolean insertOnly) {
     this.insertOnly = insertOnly;
     return this;
   }
 
    /**
-   * Whether the collection is insert only or not
+   * Whether the collection is insert only or not.
    * @return insertOnly
   **/
 
 @JsonProperty("insert_only")
-@ApiModelProperty(value = "Whether the collection is insert only or not")
+@ApiModelProperty(value = "Whether the collection is insert only or not.")
   public Boolean isInsertOnly() {
     return insertOnly;
   }
 
   public void setInsertOnly(Boolean insertOnly) {
     this.insertOnly = insertOnly;
+  }
+
+  public Collection bulkStats(List<BulkStats> bulkStats) {
+    this.bulkStats = bulkStats;
+    return this;
+  }
+
+  public Collection addBulkStatsItem(BulkStats bulkStatsItem) {
+    if (this.bulkStats == null) {
+      this.bulkStats = new ArrayList<BulkStats>();
+    }
+    this.bulkStats.add(bulkStatsItem);
+    return this;
+  }
+
+   /**
+   * Get bulkStats
+   * @return bulkStats
+  **/
+
+@JsonProperty("bulk_stats")
+@ApiModelProperty(value = "")
+  public List<BulkStats> getBulkStats() {
+    return bulkStats;
+  }
+
+  public void setBulkStats(List<BulkStats> bulkStats) {
+    this.bulkStats = bulkStats;
   }
 
 
@@ -481,12 +536,14 @@ public class Collection {
         Objects.equals(this.fieldMappingQuery, collection.fieldMappingQuery) &&
         Objects.equals(this.clusteringKey, collection.clusteringKey) &&
         Objects.equals(this.aliases, collection.aliases) &&
-        Objects.equals(this.insertOnly, collection.insertOnly);
+        Objects.equals(this.readOnly, collection.readOnly) &&
+        Objects.equals(this.insertOnly, collection.insertOnly) &&
+        Objects.equals(this.bulkStats, collection.bulkStats);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(createdAt, createdBy, name, description, workspace, status, sources, stats, retentionSecs, fieldMappings, fieldMappingQuery, clusteringKey, aliases, insertOnly);
+    return Objects.hash(createdAt, createdBy, name, description, workspace, status, sources, stats, retentionSecs, fieldMappings, fieldMappingQuery, clusteringKey, aliases, readOnly, insertOnly, bulkStats);
   }
 
 
@@ -508,7 +565,9 @@ public class Collection {
     sb.append("    fieldMappingQuery: ").append(toIndentedString(fieldMappingQuery)).append("\n");
     sb.append("    clusteringKey: ").append(toIndentedString(clusteringKey)).append("\n");
     sb.append("    aliases: ").append(toIndentedString(aliases)).append("\n");
+    sb.append("    readOnly: ").append(toIndentedString(readOnly)).append("\n");
     sb.append("    insertOnly: ").append(toIndentedString(insertOnly)).append("\n");
+    sb.append("    bulkStats: ").append(toIndentedString(bulkStats)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * StatusDynamoDb
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class StatusDynamoDb {
   @SerializedName("scan_start_time")
   private String scanStartTime = null;
@@ -44,7 +44,7 @@ public class StatusDynamoDb {
   private Long scanTotalRecords = null;
 
   /**
-   * state of current ingest for this table
+   * State of current ingest for this table.
    */
   @JsonAdapter(StateEnum.Adapter.class)
   public enum StateEnum {
@@ -104,12 +104,12 @@ public class StatusDynamoDb {
   }
 
    /**
-   * DynamoDB scan start time
+   * DynamoDB scan start time.
    * @return scanStartTime
   **/
 
 @JsonProperty("scan_start_time")
-@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "DynamoDB scan start time")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "DynamoDB scan start time.")
   public String getScanStartTime() {
     return scanStartTime;
   }
@@ -124,12 +124,12 @@ public class StatusDynamoDb {
   }
 
    /**
-   * DynamoDb scan end time
+   * DynamoDb scan end time.
    * @return scanEndTime
   **/
 
 @JsonProperty("scan_end_time")
-@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "DynamoDb scan end time")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "DynamoDb scan end time.")
   public String getScanEndTime() {
     return scanEndTime;
   }
@@ -144,12 +144,12 @@ public class StatusDynamoDb {
   }
 
    /**
-   * Number of records inserted using scan
+   * Number of records inserted using scan.
    * @return scanRecordsProcessed
   **/
 
 @JsonProperty("scan_records_processed")
-@ApiModelProperty(example = "1000", value = "Number of records inserted using scan")
+@ApiModelProperty(example = "1000", value = "Number of records inserted using scan.")
   public Long getScanRecordsProcessed() {
     return scanRecordsProcessed;
   }
@@ -164,12 +164,12 @@ public class StatusDynamoDb {
   }
 
    /**
-   * Number of records in DynamoDB table at time of scan
+   * Number of records in DynamoDB table at time of scan.
    * @return scanTotalRecords
   **/
 
 @JsonProperty("scan_total_records")
-@ApiModelProperty(example = "2000", value = "Number of records in DynamoDB table at time of scan")
+@ApiModelProperty(example = "2000", value = "Number of records in DynamoDB table at time of scan.")
   public Long getScanTotalRecords() {
     return scanTotalRecords;
   }
@@ -184,12 +184,12 @@ public class StatusDynamoDb {
   }
 
    /**
-   * state of current ingest for this table
+   * State of current ingest for this table.
    * @return state
   **/
 
 @JsonProperty("state")
-@ApiModelProperty(example = "SCANNING_TABLE", value = "state of current ingest for this table")
+@ApiModelProperty(example = "SCANNING_TABLE", value = "State of current ingest for this table.")
   public StateEnum getState() {
     return state;
   }
@@ -204,12 +204,12 @@ public class StatusDynamoDb {
   }
 
    /**
-   * ISO-8601 date when source was last processed
+   * ISO-8601 date when source was last processed.
    * @return streamLastProcessedAt
   **/
 
 @JsonProperty("stream_last_processed_at")
-@ApiModelProperty(example = "2019-01-15T21:48:23Z", value = "ISO-8601 date when source was last processed")
+@ApiModelProperty(example = "2019-01-15T21:48:23Z", value = "ISO-8601 date when source was last processed.")
   public String getStreamLastProcessedAt() {
     return streamLastProcessedAt;
   }

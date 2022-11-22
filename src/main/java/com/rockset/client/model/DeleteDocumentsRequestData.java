@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * DeleteDocumentsRequestData
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class DeleteDocumentsRequestData {
   @SerializedName("_id")
   private String id = null;
@@ -40,12 +40,12 @@ public class DeleteDocumentsRequestData {
   }
 
    /**
-   * unique document ID
+   * Unique document ID.
    * @return id
   **/
 
 @JsonProperty("_id")
-@ApiModelProperty(example = "2cd61e3b", required = true, value = "unique document ID")
+@ApiModelProperty(example = "2cd61e3b", required = true, value = "Unique document ID.")
   public String getId() {
     return id;
   }

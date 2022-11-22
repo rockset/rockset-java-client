@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * KinesisIntegration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class KinesisIntegration {
   @SerializedName("aws_access_key")
   private AwsAccessKey awsAccessKey = null;
@@ -45,12 +45,12 @@ public class KinesisIntegration {
   }
 
    /**
-   * credentials for an AWS access key integration
+   * Credentials for an AWS access key integration.
    * @return awsAccessKey
   **/
 
 @JsonProperty("aws_access_key")
-@ApiModelProperty(value = "credentials for an AWS access key integration")
+@ApiModelProperty(value = "Credentials for an AWS access key integration.")
   public AwsAccessKey getAwsAccessKey() {
     return awsAccessKey;
   }
@@ -65,12 +65,12 @@ public class KinesisIntegration {
   }
 
    /**
-   * details of an AWS cross-account role integration
+   * Details of an AWS cross-account role integration.
    * @return awsRole
   **/
 
 @JsonProperty("aws_role")
-@ApiModelProperty(value = "details of an AWS cross-account role integration")
+@ApiModelProperty(value = "Details of an AWS cross-account role integration.")
   public AwsRole getAwsRole() {
     return awsRole;
   }

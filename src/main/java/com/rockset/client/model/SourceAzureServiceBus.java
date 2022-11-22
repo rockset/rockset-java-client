@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceAzureServiceBus
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class SourceAzureServiceBus {
   @SerializedName("topic")
   private String topic = null;
@@ -47,12 +47,12 @@ public class SourceAzureServiceBus {
   }
 
    /**
-   * name of the topic which rockset should ingest from
+   * Name of the topic which rockset should ingest from.
    * @return topic
   **/
 
 @JsonProperty("topic")
-@ApiModelProperty(example = "rockset-topic", value = "name of the topic which rockset should ingest from")
+@ApiModelProperty(example = "rockset-topic", value = "Name of the topic which rockset should ingest from.")
   public String getTopic() {
     return topic;
   }
@@ -67,12 +67,12 @@ public class SourceAzureServiceBus {
   }
 
    /**
-   * the subscription to read from the topic
+   * The subscription to read from the topic.
    * @return subscription
   **/
 
 @JsonProperty("subscription")
-@ApiModelProperty(example = "rockset-subscription", value = "the subscription to read from the topic")
+@ApiModelProperty(example = "rockset-subscription", value = "The subscription to read from the topic.")
   public String getSubscription() {
     return subscription;
   }
@@ -82,12 +82,12 @@ public class SourceAzureServiceBus {
   }
 
    /**
-   * Azure Service bus source status
+   * Azure Service bus source status.
    * @return status
   **/
 
 @JsonProperty("status")
-@ApiModelProperty(value = "Azure Service bus source status")
+@ApiModelProperty(value = "Azure Service bus source status.")
   public StatusAzureServiceBus getStatus() {
     return status;
   }

@@ -29,16 +29,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * UpdateVirtualInstanceRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class UpdateVirtualInstanceRequest {
   /**
-   * requested virtual instance size
+   * Requested virtual instance size.
    */
   @JsonAdapter(NewSizeEnum.Adapter.class)
   public enum NewSizeEnum {
     FREE("FREE"),
     
+    NANO("NANO"),
+    
     SHARED("SHARED"),
+    
+    MILLI("MILLI"),
     
     SMALL("SMALL"),
     
@@ -97,74 +101,20 @@ public class UpdateVirtualInstanceRequest {
   @SerializedName("new_size")
   private NewSizeEnum newSize = null;
 
-  /**
-   * Gets or Sets newType
-   */
-  @JsonAdapter(NewTypeEnum.Adapter.class)
-  public enum NewTypeEnum {
-    FREE("FREE"),
-    
-    SHARED("SHARED"),
-    
-    SMALL("SMALL"),
-    
-    MEDIUM("MEDIUM"),
-    
-    LARGE("LARGE"),
-    
-    XLARGE("XLARGE"),
-    
-    XLARGE2("XLARGE2"),
-    
-    XLARGE4("XLARGE4"),
-    
-    XLARGE8("XLARGE8"),
-    
-    XLARGE16("XLARGE16");
-
-    private String value;
-
-    NewTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static NewTypeEnum fromValue(String text) {
-      for (NewTypeEnum b : NewTypeEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-
-    public static class Adapter extends TypeAdapter<NewTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final NewTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public NewTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value = jsonReader.nextString();
-        return NewTypeEnum.fromValue(String.valueOf(value));
-      }
-    }
-  }
-
-  @SerializedName("new_type")
-  private NewTypeEnum newType = null;
-
   @SerializedName("monitoring_enabled")
   private Boolean monitoringEnabled = null;
+
+  @SerializedName("name")
+  private String name = null;
+
+  @SerializedName("description")
+  private String description = null;
+
+  @SerializedName("auto_suspend_enabled")
+  private Boolean autoSuspendEnabled = null;
+
+  @SerializedName("auto_suspend_seconds")
+  private Integer autoSuspendSeconds = null;
 
   public UpdateVirtualInstanceRequest newSize(NewSizeEnum newSize) {
     this.newSize = newSize;
@@ -172,38 +122,18 @@ public class UpdateVirtualInstanceRequest {
   }
 
    /**
-   * requested virtual instance size
+   * Requested virtual instance size.
    * @return newSize
   **/
 
 @JsonProperty("new_size")
-@ApiModelProperty(example = "LARGE", value = "requested virtual instance size")
+@ApiModelProperty(example = "LARGE", value = "Requested virtual instance size.")
   public NewSizeEnum getNewSize() {
     return newSize;
   }
 
   public void setNewSize(NewSizeEnum newSize) {
     this.newSize = newSize;
-  }
-
-  public UpdateVirtualInstanceRequest newType(NewTypeEnum newType) {
-    this.newType = newType;
-    return this;
-  }
-
-   /**
-   * Get newType
-   * @return newType
-  **/
-
-@JsonProperty("new_type")
-@ApiModelProperty(value = "")
-  public NewTypeEnum getNewType() {
-    return newType;
-  }
-
-  public void setNewType(NewTypeEnum newType) {
-    this.newType = newType;
   }
 
   public UpdateVirtualInstanceRequest monitoringEnabled(Boolean monitoringEnabled) {
@@ -226,6 +156,86 @@ public class UpdateVirtualInstanceRequest {
     this.monitoringEnabled = monitoringEnabled;
   }
 
+  public UpdateVirtualInstanceRequest name(String name) {
+    this.name = name;
+    return this;
+  }
+
+   /**
+   * New virtual instance name.
+   * @return name
+  **/
+
+@JsonProperty("name")
+@ApiModelProperty(example = "prod_vi", value = "New virtual instance name.")
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public UpdateVirtualInstanceRequest description(String description) {
+    this.description = description;
+    return this;
+  }
+
+   /**
+   * New virtual instance description.
+   * @return description
+  **/
+
+@JsonProperty("description")
+@ApiModelProperty(example = "VI for prod traffic", value = "New virtual instance description.")
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public UpdateVirtualInstanceRequest autoSuspendEnabled(Boolean autoSuspendEnabled) {
+    this.autoSuspendEnabled = autoSuspendEnabled;
+    return this;
+  }
+
+   /**
+   * Whether auto-suspend should be enabled for this Virtual Instance.
+   * @return autoSuspendEnabled
+  **/
+
+@JsonProperty("auto_suspend_enabled")
+@ApiModelProperty(example = "true", value = "Whether auto-suspend should be enabled for this Virtual Instance.")
+  public Boolean isAutoSuspendEnabled() {
+    return autoSuspendEnabled;
+  }
+
+  public void setAutoSuspendEnabled(Boolean autoSuspendEnabled) {
+    this.autoSuspendEnabled = autoSuspendEnabled;
+  }
+
+  public UpdateVirtualInstanceRequest autoSuspendSeconds(Integer autoSuspendSeconds) {
+    this.autoSuspendSeconds = autoSuspendSeconds;
+    return this;
+  }
+
+   /**
+   * Number of seconds without queries after which the VI is suspended
+   * @return autoSuspendSeconds
+  **/
+
+@JsonProperty("auto_suspend_seconds")
+@ApiModelProperty(example = "3600", value = "Number of seconds without queries after which the VI is suspended")
+  public Integer getAutoSuspendSeconds() {
+    return autoSuspendSeconds;
+  }
+
+  public void setAutoSuspendSeconds(Integer autoSuspendSeconds) {
+    this.autoSuspendSeconds = autoSuspendSeconds;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -237,13 +247,16 @@ public class UpdateVirtualInstanceRequest {
     }
     UpdateVirtualInstanceRequest updateVirtualInstanceRequest = (UpdateVirtualInstanceRequest) o;
     return Objects.equals(this.newSize, updateVirtualInstanceRequest.newSize) &&
-        Objects.equals(this.newType, updateVirtualInstanceRequest.newType) &&
-        Objects.equals(this.monitoringEnabled, updateVirtualInstanceRequest.monitoringEnabled);
+        Objects.equals(this.monitoringEnabled, updateVirtualInstanceRequest.monitoringEnabled) &&
+        Objects.equals(this.name, updateVirtualInstanceRequest.name) &&
+        Objects.equals(this.description, updateVirtualInstanceRequest.description) &&
+        Objects.equals(this.autoSuspendEnabled, updateVirtualInstanceRequest.autoSuspendEnabled) &&
+        Objects.equals(this.autoSuspendSeconds, updateVirtualInstanceRequest.autoSuspendSeconds);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(newSize, newType, monitoringEnabled);
+    return Objects.hash(newSize, monitoringEnabled, name, description, autoSuspendEnabled, autoSuspendSeconds);
   }
 
 
@@ -253,8 +266,11 @@ public class UpdateVirtualInstanceRequest {
     sb.append("class UpdateVirtualInstanceRequest {\n");
     
     sb.append("    newSize: ").append(toIndentedString(newSize)).append("\n");
-    sb.append("    newType: ").append(toIndentedString(newType)).append("\n");
     sb.append("    monitoringEnabled: ").append(toIndentedString(monitoringEnabled)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    autoSuspendEnabled: ").append(toIndentedString(autoSuspendEnabled)).append("\n");
+    sb.append("    autoSuspendSeconds: ").append(toIndentedString(autoSuspendSeconds)).append("\n");
     sb.append("}");
     return sb.toString();
   }

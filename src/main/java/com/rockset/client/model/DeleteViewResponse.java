@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * DeleteViewResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class DeleteViewResponse {
   @SerializedName("data")
   private View data = null;
@@ -41,12 +41,12 @@ public class DeleteViewResponse {
   }
 
    /**
-   * view that was deleted
+   * View that was deleted.
    * @return data
   **/
 
 @JsonProperty("data")
-@ApiModelProperty(value = "view that was deleted")
+@ApiModelProperty(value = "View that was deleted.")
   public View getData() {
     return data;
   }

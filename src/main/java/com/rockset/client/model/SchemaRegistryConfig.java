@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SchemaRegistryConfig
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class SchemaRegistryConfig {
   @SerializedName("url")
   private String url = null;
@@ -46,12 +46,12 @@ public class SchemaRegistryConfig {
   }
 
    /**
-   * Schema registry URL
+   * Schema registry URL.
    * @return url
   **/
 
 @JsonProperty("url")
-@ApiModelProperty(value = "Schema registry URL")
+@ApiModelProperty(value = "Schema registry URL.")
   public String getUrl() {
     return url;
   }
@@ -66,12 +66,12 @@ public class SchemaRegistryConfig {
   }
 
    /**
-   * The secure API key for schema registry
+   * The secure API key for schema registry.
    * @return key
   **/
 
 @JsonProperty("key")
-@ApiModelProperty(value = "The secure API key for schema registry")
+@ApiModelProperty(value = "The secure API key for schema registry.")
   public String getKey() {
     return key;
   }
@@ -86,12 +86,12 @@ public class SchemaRegistryConfig {
   }
 
    /**
-   * The secure API password registry
+   * The secure API password registry.
    * @return secret
   **/
 
 @JsonProperty("secret")
-@ApiModelProperty(value = "The secure API password registry")
+@ApiModelProperty(value = "The secure API password registry.")
   public String getSecret() {
     return secret;
   }

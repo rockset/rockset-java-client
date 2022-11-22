@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryLambdaStats
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class QueryLambdaStats {
   @SerializedName("last_executed")
   private String lastExecuted = null;
@@ -49,12 +49,12 @@ public class QueryLambdaStats {
   }
 
    /**
-   * ISO-8601 date
+   * ISO-8601 date.
    * @return lastExecuted
   **/
 
 @JsonProperty("last_executed")
-@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date.")
   public String getLastExecuted() {
     return lastExecuted;
   }
@@ -69,12 +69,12 @@ public class QueryLambdaStats {
   }
 
    /**
-   * user who last executed Query Lambda
+   * User who last executed Query Lambda.
    * @return lastExecutedBy
   **/
 
 @JsonProperty("last_executed_by")
-@ApiModelProperty(example = "...@rockset.com", value = "user who last executed Query Lambda")
+@ApiModelProperty(example = "...@rockset.com", value = "User who last executed Query Lambda.")
   public String getLastExecutedBy() {
     return lastExecutedBy;
   }
@@ -89,12 +89,12 @@ public class QueryLambdaStats {
   }
 
    /**
-   * ISO-8601 date of last execution failure
+   * ISO-8601 date of last execution failure.
    * @return lastExecutionError
   **/
 
 @JsonProperty("last_execution_error")
-@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date of last execution failure")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date of last execution failure.")
   public String getLastExecutionError() {
     return lastExecutionError;
   }
@@ -109,12 +109,12 @@ public class QueryLambdaStats {
   }
 
    /**
-   * error message associated with last failed execution
+   * Error message associated with last failed execution.
    * @return lastExecutionErrorMessage
   **/
 
 @JsonProperty("last_execution_error_message")
-@ApiModelProperty(example = "[error message]", value = "error message associated with last failed execution")
+@ApiModelProperty(example = "[error message]", value = "Error message associated with last failed execution.")
   public String getLastExecutionErrorMessage() {
     return lastExecutionErrorMessage;
   }

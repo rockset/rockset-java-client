@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * GcsIntegration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class GcsIntegration {
   @SerializedName("gcp_service_account")
   private GcpServiceAccount gcpServiceAccount = null;
@@ -41,12 +41,12 @@ public class GcsIntegration {
   }
 
    /**
-   * credentials for an AWS key integration
+   * Credentials for an GCP key integration.
    * @return gcpServiceAccount
   **/
 
 @JsonProperty("gcp_service_account")
-@ApiModelProperty(value = "credentials for an AWS key integration")
+@ApiModelProperty(value = "Credentials for an GCP key integration.")
   public GcpServiceAccount getGcpServiceAccount() {
     return gcpServiceAccount;
   }

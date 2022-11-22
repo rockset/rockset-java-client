@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceAzureEventHubs
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class SourceAzureEventHubs {
   @SerializedName("hub_id")
   private String hubId = null;
@@ -94,12 +94,12 @@ public class SourceAzureEventHubs {
   }
 
    /**
-   * name of the hub which rockset should ingest from
+   * Name of the hub which rockset should ingest from.
    * @return hubId
   **/
 
 @JsonProperty("hub_id")
-@ApiModelProperty(example = "event-hub-1", value = "name of the hub which rockset should ingest from")
+@ApiModelProperty(example = "event-hub-1", value = "Name of the hub which rockset should ingest from.")
   public String getHubId() {
     return hubId;
   }
@@ -129,12 +129,12 @@ public class SourceAzureEventHubs {
   }
 
    /**
-   * source status
+   * Source status.
    * @return status
   **/
 
 @JsonProperty("status")
-@ApiModelProperty(value = "source status")
+@ApiModelProperty(value = "Source status.")
   public StatusAzureEventHubs getStatus() {
     return status;
   }

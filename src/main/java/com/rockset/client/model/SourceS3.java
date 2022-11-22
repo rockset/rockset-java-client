@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceS3
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class SourceS3 {
   @SerializedName("prefix")
   private String prefix = null;
@@ -56,6 +56,9 @@ public class SourceS3 {
 
   @SerializedName("object_bytes_total")
   private Long objectBytesTotal = null;
+
+  @SerializedName("object_bytes_downloaded")
+  private Long objectBytesDownloaded = null;
 
   public SourceS3 prefix(String prefix) {
     this.prefix = prefix;
@@ -103,12 +106,12 @@ public class SourceS3 {
   }
 
    /**
-   * AWS region containing source bucket
+   * AWS region containing source bucket.
    * @return region
   **/
 
 @JsonProperty("region")
-@ApiModelProperty(example = "us-west-2", value = "AWS region containing source bucket")
+@ApiModelProperty(example = "us-west-2", value = "AWS region containing source bucket.")
   public String getRegion() {
     return region;
   }
@@ -123,12 +126,12 @@ public class SourceS3 {
   }
 
    /**
-   * address of S3 bucket containing data
+   * Address of S3 bucket containing data.
    * @return bucket
   **/
 
 @JsonProperty("bucket")
-@ApiModelProperty(example = "s3://customer-account-info", required = true, value = "address of S3 bucket containing data")
+@ApiModelProperty(example = "s3://customer-account-info", required = true, value = "Address of S3 bucket containing data.")
   public String getBucket() {
     return bucket;
   }
@@ -138,12 +141,12 @@ public class SourceS3 {
   }
 
    /**
-   * list of prefixes to paths from which data should be ingested
+   * List of prefixes to paths from which data should be ingested.
    * @return prefixes
   **/
 
 @JsonProperty("prefixes")
-@ApiModelProperty(example = "\"[\\\"/transactions\\\", \\\"/stores\\\"]\"", required = true, value = "list of prefixes to paths from which data should be ingested")
+@ApiModelProperty(example = "\"[\\\"/transactions\\\", \\\"/stores\\\"]\"", required = true, value = "List of prefixes to paths from which data should be ingested.")
   public List<String> getPrefixes() {
     return prefixes;
   }
@@ -181,6 +184,17 @@ public class SourceS3 {
     return objectBytesTotal;
   }
 
+   /**
+   * Get objectBytesDownloaded
+   * @return objectBytesDownloaded
+  **/
+
+@JsonProperty("object_bytes_downloaded")
+@ApiModelProperty(value = "")
+  public Long getObjectBytesDownloaded() {
+    return objectBytesDownloaded;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -198,12 +212,13 @@ public class SourceS3 {
         Objects.equals(this.prefixes, sourceS3.prefixes) &&
         Objects.equals(this.objectCountDownloaded, sourceS3.objectCountDownloaded) &&
         Objects.equals(this.objectCountTotal, sourceS3.objectCountTotal) &&
-        Objects.equals(this.objectBytesTotal, sourceS3.objectBytesTotal);
+        Objects.equals(this.objectBytesTotal, sourceS3.objectBytesTotal) &&
+        Objects.equals(this.objectBytesDownloaded, sourceS3.objectBytesDownloaded);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(prefix, pattern, region, bucket, prefixes, objectCountDownloaded, objectCountTotal, objectBytesTotal);
+    return Objects.hash(prefix, pattern, region, bucket, prefixes, objectCountDownloaded, objectCountTotal, objectBytesTotal, objectBytesDownloaded);
   }
 
 
@@ -220,6 +235,7 @@ public class SourceS3 {
     sb.append("    objectCountDownloaded: ").append(toIndentedString(objectCountDownloaded)).append("\n");
     sb.append("    objectCountTotal: ").append(toIndentedString(objectCountTotal)).append("\n");
     sb.append("    objectBytesTotal: ").append(toIndentedString(objectBytesTotal)).append("\n");
+    sb.append("    objectBytesDownloaded: ").append(toIndentedString(objectBytesDownloaded)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateQueryLambdaTagRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class CreateQueryLambdaTagRequest {
   @SerializedName("tag_name")
   private String tagName = null;
@@ -43,12 +43,12 @@ public class CreateQueryLambdaTagRequest {
   }
 
    /**
-   * name of Query Lambda tag
+   * Name of Query Lambda tag.
    * @return tagName
   **/
 
 @JsonProperty("tag_name")
-@ApiModelProperty(example = "production", required = true, value = "name of Query Lambda tag")
+@ApiModelProperty(example = "production", required = true, value = "Name of Query Lambda tag.")
   public String getTagName() {
     return tagName;
   }
@@ -63,12 +63,12 @@ public class CreateQueryLambdaTagRequest {
   }
 
    /**
-   * hash identifying a Query Lambda tag
+   * Hash identifying a Query Lambda tag.
    * @return version
   **/
 
 @JsonProperty("version")
-@ApiModelProperty(example = "123ABC", required = true, value = "hash identifying a Query Lambda tag")
+@ApiModelProperty(example = "123ABC", required = true, value = "Hash identifying a Query Lambda tag.")
   public String getVersion() {
     return version;
   }

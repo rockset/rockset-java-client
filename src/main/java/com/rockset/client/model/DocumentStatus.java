@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * DocumentStatus
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class DocumentStatus {
   @SerializedName("_collection")
   private String collection = null;
@@ -42,7 +42,7 @@ public class DocumentStatus {
   private String id = null;
 
   /**
-   * status of the document
+   * Status of the document.
    */
   @JsonAdapter(StatusEnum.Adapter.class)
   public enum StatusEnum {
@@ -106,12 +106,12 @@ public class DocumentStatus {
   }
 
    /**
-   * collection name
+   * Collection name.
    * @return collection
   **/
 
 @JsonProperty("_collection")
-@ApiModelProperty(example = "customers", value = "collection name")
+@ApiModelProperty(example = "customers", value = "Collection name.")
   public String getCollection() {
     return collection;
   }
@@ -126,12 +126,12 @@ public class DocumentStatus {
   }
 
    /**
-   * error message, if any
+   * Error message, if any.
    * @return error
   **/
 
 @JsonProperty("error")
-@ApiModelProperty(value = "error message, if any")
+@ApiModelProperty(value = "Error message, if any.")
   public ErrorModel getError() {
     return error;
   }
@@ -146,12 +146,12 @@ public class DocumentStatus {
   }
 
    /**
-   * unique document ID
+   * Unique document ID.
    * @return id
   **/
 
 @JsonProperty("_id")
-@ApiModelProperty(example = "2cd61e3b", value = "unique document ID")
+@ApiModelProperty(example = "2cd61e3b", value = "Unique document ID.")
   public String getId() {
     return id;
   }
@@ -166,12 +166,12 @@ public class DocumentStatus {
   }
 
    /**
-   * status of the document
+   * Status of the document.
    * @return status
   **/
 
 @JsonProperty("status")
-@ApiModelProperty(example = "ADDED", value = "status of the document")
+@ApiModelProperty(example = "ADDED", value = "Status of the document.")
   public StatusEnum getStatus() {
     return status;
   }
@@ -186,12 +186,12 @@ public class DocumentStatus {
   }
 
    /**
-   * unique id used to represent each patch request
+   * Unique id used to represent each patch request.
    * @return patchId
   **/
 
 @JsonProperty("patch_id")
-@ApiModelProperty(example = "486gsg8", value = "unique id used to represent each patch request")
+@ApiModelProperty(example = "486gsg8", value = "Unique id used to represent each patch request.")
   public String getPatchId() {
     return patchId;
   }

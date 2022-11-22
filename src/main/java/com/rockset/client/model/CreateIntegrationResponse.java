@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateIntegrationResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class CreateIntegrationResponse {
   @SerializedName("data")
   private Integration data = null;
@@ -41,12 +41,12 @@ public class CreateIntegrationResponse {
   }
 
    /**
-   * integration object that was created
+   * Integration object that was created.
    * @return data
   **/
 
 @JsonProperty("data")
-@ApiModelProperty(value = "integration object that was created")
+@ApiModelProperty(value = "Integration object that was created.")
   public Integration getData() {
     return data;
   }

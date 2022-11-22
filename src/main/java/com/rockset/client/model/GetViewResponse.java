@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * GetViewResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class GetViewResponse {
   @SerializedName("data")
   private View data = null;
@@ -41,12 +41,12 @@ public class GetViewResponse {
   }
 
    /**
-   * view that was requested
+   * View that was requested.
    * @return data
   **/
 
 @JsonProperty("data")
-@ApiModelProperty(value = "view that was requested")
+@ApiModelProperty(value = "View that was requested.")
   public View getData() {
     return data;
   }

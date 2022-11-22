@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryLambdaSql
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class QueryLambdaSql {
   @SerializedName("query")
   private String query = null;
@@ -46,12 +46,12 @@ public class QueryLambdaSql {
   }
 
    /**
-   * SQL text
+   * SQL text.
    * @return query
   **/
 
 @JsonProperty("query")
-@ApiModelProperty(example = "SELECT 'Foo'", required = true, value = "SQL text")
+@ApiModelProperty(example = "SELECT 'Foo'", required = true, value = "SQL text.")
   public String getQuery() {
     return query;
   }
@@ -74,12 +74,12 @@ public class QueryLambdaSql {
   }
 
    /**
-   * default parameters for this Query Lambda
+   * Default parameters for this Query Lambda.
    * @return defaultParameters
   **/
 
 @JsonProperty("default_parameters")
-@ApiModelProperty(value = "default parameters for this Query Lambda")
+@ApiModelProperty(value = "Default parameters for this Query Lambda.")
   public List<QueryParameter> getDefaultParameters() {
     return defaultParameters;
   }

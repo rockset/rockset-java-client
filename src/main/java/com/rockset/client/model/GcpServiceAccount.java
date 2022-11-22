@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * GcpServiceAccount
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class GcpServiceAccount {
   @SerializedName("service_account_key_file_json")
   private String serviceAccountKeyFileJson = null;
@@ -40,12 +40,12 @@ public class GcpServiceAccount {
   }
 
    /**
-   * Contents of JSON Service Account key file
+   * Contents of JSON Service Account key file.
    * @return serviceAccountKeyFileJson
   **/
 
 @JsonProperty("service_account_key_file_json")
-@ApiModelProperty(required = true, value = "Contents of JSON Service Account key file")
+@ApiModelProperty(required = true, value = "Contents of JSON Service Account key file.")
   public String getServiceAccountKeyFileJson() {
     return serviceAccountKeyFileJson;
   }

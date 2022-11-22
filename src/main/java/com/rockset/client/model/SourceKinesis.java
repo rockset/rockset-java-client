@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceKinesis
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class SourceKinesis {
   @SerializedName("aws_region")
   private String awsRegion = null;
@@ -98,12 +98,12 @@ public class SourceKinesis {
   }
 
    /**
-   * AWS region name of Kinesis stream, by default us-west-2 is used
+   * AWS region name of Kinesis stream, by default us-west-2 is used.
    * @return awsRegion
   **/
 
 @JsonProperty("aws_region")
-@ApiModelProperty(example = "us-east-2", value = "AWS region name of Kinesis stream, by default us-west-2 is used")
+@ApiModelProperty(example = "us-east-2", value = "AWS region name of Kinesis stream, by default us-west-2 is used.")
   public String getAwsRegion() {
     return awsRegion;
   }
@@ -118,12 +118,12 @@ public class SourceKinesis {
   }
 
    /**
-   * name of kinesis stream
+   * Name of kinesis stream.
    * @return streamName
   **/
 
 @JsonProperty("stream_name")
-@ApiModelProperty(example = "click_stream", required = true, value = "name of kinesis stream")
+@ApiModelProperty(example = "click_stream", required = true, value = "Name of kinesis stream.")
   public String getStreamName() {
     return streamName;
   }
@@ -146,12 +146,12 @@ public class SourceKinesis {
   }
 
    /**
-   * set of fields that correspond to a DMS primary key
+   * Set of fields that correspond to a DMS primary key.
    * @return dmsPrimaryKey
   **/
 
 @JsonProperty("dms_primary_key")
-@ApiModelProperty(value = "set of fields that correspond to a DMS primary key")
+@ApiModelProperty(value = "Set of fields that correspond to a DMS primary key.")
   public List<String> getDmsPrimaryKey() {
     return dmsPrimaryKey;
   }

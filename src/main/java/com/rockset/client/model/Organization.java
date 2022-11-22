@@ -34,20 +34,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "An organization in Rockset is a container for users and collections.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class Organization {
-  @SerializedName("deletionScheduledAt")
-  private String deletionScheduledAt = null;
-
-  @SerializedName("rockset_user")
-  private String rocksetUser = null;
-
-  @SerializedName("external_id")
-  private String externalId = null;
-
-  @SerializedName("clusters")
-  private List<Cluster> clusters = null;
-
   @SerializedName("id")
   private String id = null;
 
@@ -57,44 +45,73 @@ public class Organization {
   @SerializedName("display_name")
   private String displayName = null;
 
-  public Organization deletionScheduledAt(String deletionScheduledAt) {
-    this.deletionScheduledAt = deletionScheduledAt;
+  @SerializedName("external_id")
+  private String externalId = null;
+
+  @SerializedName("rockset_user")
+  private String rocksetUser = null;
+
+  @SerializedName("clusters")
+  private List<Cluster> clusters = null;
+
+  public Organization id(String id) {
+    this.id = id;
     return this;
   }
 
    /**
-   * Get deletionScheduledAt
-   * @return deletionScheduledAt
+   * Unique identifier for the organization.
+   * @return id
   **/
 
-@JsonProperty("deletionScheduledAt")
-@ApiModelProperty(value = "")
-  public String getDeletionScheduledAt() {
-    return deletionScheduledAt;
+@JsonProperty("id")
+@ApiModelProperty(example = "rockset", value = "Unique identifier for the organization.")
+  public String getId() {
+    return id;
   }
 
-  public void setDeletionScheduledAt(String deletionScheduledAt) {
-    this.deletionScheduledAt = deletionScheduledAt;
+  public void setId(String id) {
+    this.id = id;
   }
 
-  public Organization rocksetUser(String rocksetUser) {
-    this.rocksetUser = rocksetUser;
+  public Organization createdAt(String createdAt) {
+    this.createdAt = createdAt;
     return this;
   }
 
    /**
-   * Rockset&#39;s global AWS user
-   * @return rocksetUser
+   * ISO-8601 date.
+   * @return createdAt
   **/
 
-@JsonProperty("rockset_user")
-@ApiModelProperty(example = "<id>", value = "Rockset's global AWS user")
-  public String getRocksetUser() {
-    return rocksetUser;
+@JsonProperty("created_at")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date.")
+  public String getCreatedAt() {
+    return createdAt;
   }
 
-  public void setRocksetUser(String rocksetUser) {
-    this.rocksetUser = rocksetUser;
+  public void setCreatedAt(String createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public Organization displayName(String displayName) {
+    this.displayName = displayName;
+    return this;
+  }
+
+   /**
+   * Name of the organization.
+   * @return displayName
+  **/
+
+@JsonProperty("display_name")
+@ApiModelProperty(example = "Rockset, Inc", value = "Name of the organization.")
+  public String getDisplayName() {
+    return displayName;
+  }
+
+  public void setDisplayName(String displayName) {
+    this.displayName = displayName;
   }
 
   public Organization externalId(String externalId) {
@@ -103,18 +120,38 @@ public class Organization {
   }
 
    /**
-   * organization&#39;s unique external ID within Rockset
+   * Organization&#39;s unique external ID within Rockset.
    * @return externalId
   **/
 
 @JsonProperty("external_id")
-@ApiModelProperty(example = "<hash>", value = "organization's unique external ID within Rockset")
+@ApiModelProperty(example = "<hash>", value = "Organization's unique external ID within Rockset.")
   public String getExternalId() {
     return externalId;
   }
 
   public void setExternalId(String externalId) {
     this.externalId = externalId;
+  }
+
+  public Organization rocksetUser(String rocksetUser) {
+    this.rocksetUser = rocksetUser;
+    return this;
+  }
+
+   /**
+   * Rockset&#39;s global AWS user.
+   * @return rocksetUser
+  **/
+
+@JsonProperty("rockset_user")
+@ApiModelProperty(example = "<id>", value = "Rockset's global AWS user.")
+  public String getRocksetUser() {
+    return rocksetUser;
+  }
+
+  public void setRocksetUser(String rocksetUser) {
+    this.rocksetUser = rocksetUser;
   }
 
   public Organization clusters(List<Cluster> clusters) {
@@ -131,78 +168,18 @@ public class Organization {
   }
 
    /**
-   * list of clusters associated with this org
+   * List of clusters associated with this org.
    * @return clusters
   **/
 
 @JsonProperty("clusters")
-@ApiModelProperty(example = "\"[{ ... }]\"", value = "list of clusters associated with this org")
+@ApiModelProperty(example = "\"[{ ... }]\"", value = "List of clusters associated with this org.")
   public List<Cluster> getClusters() {
     return clusters;
   }
 
   public void setClusters(List<Cluster> clusters) {
     this.clusters = clusters;
-  }
-
-  public Organization id(String id) {
-    this.id = id;
-    return this;
-  }
-
-   /**
-   * unique identifier for the organization
-   * @return id
-  **/
-
-@JsonProperty("id")
-@ApiModelProperty(example = "rockset", value = "unique identifier for the organization")
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public Organization createdAt(String createdAt) {
-    this.createdAt = createdAt;
-    return this;
-  }
-
-   /**
-   * ISO-8601 date
-   * @return createdAt
-  **/
-
-@JsonProperty("created_at")
-@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date")
-  public String getCreatedAt() {
-    return createdAt;
-  }
-
-  public void setCreatedAt(String createdAt) {
-    this.createdAt = createdAt;
-  }
-
-  public Organization displayName(String displayName) {
-    this.displayName = displayName;
-    return this;
-  }
-
-   /**
-   * name of the organization
-   * @return displayName
-  **/
-
-@JsonProperty("display_name")
-@ApiModelProperty(example = "Rockset, Inc", value = "name of the organization")
-  public String getDisplayName() {
-    return displayName;
-  }
-
-  public void setDisplayName(String displayName) {
-    this.displayName = displayName;
   }
 
 
@@ -215,18 +192,17 @@ public class Organization {
       return false;
     }
     Organization organization = (Organization) o;
-    return Objects.equals(this.deletionScheduledAt, organization.deletionScheduledAt) &&
-        Objects.equals(this.rocksetUser, organization.rocksetUser) &&
-        Objects.equals(this.externalId, organization.externalId) &&
-        Objects.equals(this.clusters, organization.clusters) &&
-        Objects.equals(this.id, organization.id) &&
+    return Objects.equals(this.id, organization.id) &&
         Objects.equals(this.createdAt, organization.createdAt) &&
-        Objects.equals(this.displayName, organization.displayName);
+        Objects.equals(this.displayName, organization.displayName) &&
+        Objects.equals(this.externalId, organization.externalId) &&
+        Objects.equals(this.rocksetUser, organization.rocksetUser) &&
+        Objects.equals(this.clusters, organization.clusters);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(deletionScheduledAt, rocksetUser, externalId, clusters, id, createdAt, displayName);
+    return Objects.hash(id, createdAt, displayName, externalId, rocksetUser, clusters);
   }
 
 
@@ -235,13 +211,12 @@ public class Organization {
     StringBuilder sb = new StringBuilder();
     sb.append("class Organization {\n");
     
-    sb.append("    deletionScheduledAt: ").append(toIndentedString(deletionScheduledAt)).append("\n");
-    sb.append("    rocksetUser: ").append(toIndentedString(rocksetUser)).append("\n");
-    sb.append("    externalId: ").append(toIndentedString(externalId)).append("\n");
-    sb.append("    clusters: ").append(toIndentedString(clusters)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
+    sb.append("    externalId: ").append(toIndentedString(externalId)).append("\n");
+    sb.append("    rocksetUser: ").append(toIndentedString(rocksetUser)).append("\n");
+    sb.append("    clusters: ").append(toIndentedString(clusters)).append("\n");
     sb.append("}");
     return sb.toString();
   }

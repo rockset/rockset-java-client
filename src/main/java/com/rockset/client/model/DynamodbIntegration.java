@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * DynamodbIntegration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class DynamodbIntegration {
   @SerializedName("aws_access_key")
   private AwsAccessKey awsAccessKey = null;
@@ -48,12 +48,12 @@ public class DynamodbIntegration {
   }
 
    /**
-   * credentials for an AWS access key integration
+   * Credentials for an AWS access key integration.
    * @return awsAccessKey
   **/
 
 @JsonProperty("aws_access_key")
-@ApiModelProperty(value = "credentials for an AWS access key integration")
+@ApiModelProperty(value = "Credentials for an AWS access key integration.")
   public AwsAccessKey getAwsAccessKey() {
     return awsAccessKey;
   }
@@ -68,12 +68,12 @@ public class DynamodbIntegration {
   }
 
    /**
-   * role used for external id type authentication
+   * Role used for external id type authentication.
    * @return awsRole
   **/
 
 @JsonProperty("aws_role")
-@ApiModelProperty(value = "role used for external id type authentication")
+@ApiModelProperty(value = "Role used for external id type authentication.")
   public AwsRole getAwsRole() {
     return awsRole;
   }
@@ -88,12 +88,12 @@ public class DynamodbIntegration {
   }
 
    /**
-   * Get s3ExportBucketName
+   * S3 bucket used for export during collection initial dump.
    * @return s3ExportBucketName
   **/
 
 @JsonProperty("s3_export_bucket_name")
-@ApiModelProperty(value = "")
+@ApiModelProperty(value = "S3 bucket used for export during collection initial dump.")
   public String getS3ExportBucketName() {
     return s3ExportBucketName;
   }

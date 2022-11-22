@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceAzureBlobStorage
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class SourceAzureBlobStorage {
   @SerializedName("container")
   private String container = null;
@@ -55,12 +55,12 @@ public class SourceAzureBlobStorage {
   }
 
    /**
-   * name of Azure blob Storage container you want to ingest from
+   * Name of Azure blob Storage container you want to ingest from.
    * @return container
   **/
 
 @JsonProperty("container")
-@ApiModelProperty(example = "server-logs", value = "name of Azure blob Storage container you want to ingest from")
+@ApiModelProperty(example = "server-logs", value = "Name of Azure blob Storage container you want to ingest from.")
   public String getContainer() {
     return container;
   }

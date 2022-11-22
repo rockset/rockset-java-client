@@ -544,7 +544,7 @@ public class RocksetConnection implements Connection {
   QueryPaginationResponse getQueryPaginationResults(String queryId, String cursor, int fetchSize)
       throws Exception {
 
-    return client.queries.get(queryId, cursor, fetchSize, null);
+    return client.queries.get_0(queryId, cursor, fetchSize);
   }
 
   //
@@ -585,7 +585,7 @@ public class RocksetConnection implements Connection {
   }
 
   List<String> getWorkspaces() throws Exception {
-    return client.workspaces.list(true).getData().stream()
+    return client.workspaces.list().getData().stream()
         .map(Workspace::getName)
         .collect(Collectors.toList());
   }
