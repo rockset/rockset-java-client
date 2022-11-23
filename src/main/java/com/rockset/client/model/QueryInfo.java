@@ -34,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryInfo
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class QueryInfo {
   @SerializedName("query_id")
   private String queryId = null;
@@ -48,7 +48,7 @@ public class QueryInfo {
     
     RUNNING("RUNNING"),
     
-    COMPLETE("COMPLETE"),
+    COMPLETED("COMPLETED"),
     
     ERROR("ERROR"),
     
@@ -162,12 +162,12 @@ public class QueryInfo {
   }
 
    /**
-   * User ID who executed the query
+   * User ID who executed the query.
    * @return executedBy
   **/
 
 @JsonProperty("executed_by")
-@ApiModelProperty(example = "xyz@rockset.com", value = "User ID who executed the query")
+@ApiModelProperty(example = "xyz@rockset.com", value = "User ID who executed the query.")
   public String getExecutedBy() {
     return executedBy;
   }

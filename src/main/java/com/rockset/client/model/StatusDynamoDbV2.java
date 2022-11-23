@@ -29,13 +29,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * StatusDynamoDbV2
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class StatusDynamoDbV2 {
   @SerializedName("initial_dump_completion_percentage")
   private Double initialDumpCompletionPercentage = null;
 
   /**
-   * state of current ingest for this table
+   * State of current ingest for this table.
    */
   @JsonAdapter(StateEnum.Adapter.class)
   public enum StateEnum {
@@ -119,12 +119,12 @@ public class StatusDynamoDbV2 {
   }
 
    /**
-   * state of current ingest for this table
+   * State of current ingest for this table.
    * @return state
   **/
 
 @JsonProperty("state")
-@ApiModelProperty(example = "PROCESSING_STREAM", value = "state of current ingest for this table")
+@ApiModelProperty(example = "PROCESSING_STREAM", value = "State of current ingest for this table.")
   public StateEnum getState() {
     return state;
   }
@@ -139,12 +139,12 @@ public class StatusDynamoDbV2 {
   }
 
    /**
-   * ISO-8601 date when source was last processed
+   * ISO-8601 date when source was last processed.
    * @return streamLastProcessedAt
   **/
 
 @JsonProperty("stream_last_processed_at")
-@ApiModelProperty(example = "2019-01-15T21:48:23Z", value = "ISO-8601 date when source was last processed")
+@ApiModelProperty(example = "2019-01-15T21:48:23Z", value = "ISO-8601 date when source was last processed.")
   public String getStreamLastProcessedAt() {
     return streamLastProcessedAt;
   }

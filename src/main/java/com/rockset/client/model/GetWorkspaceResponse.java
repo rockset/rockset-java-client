@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * GetWorkspaceResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class GetWorkspaceResponse {
   @SerializedName("data")
   private Workspace data = null;
@@ -41,12 +41,12 @@ public class GetWorkspaceResponse {
   }
 
    /**
-   * the workspace that was requested
+   * The workspace that was requested.
    * @return data
   **/
 
 @JsonProperty("data")
-@ApiModelProperty(value = "the workspace that was requested")
+@ApiModelProperty(value = "The workspace that was requested.")
   public Workspace getData() {
     return data;
   }

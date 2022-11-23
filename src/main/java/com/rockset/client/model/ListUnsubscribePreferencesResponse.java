@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * ListUnsubscribePreferencesResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class ListUnsubscribePreferencesResponse {
   @SerializedName("data")
   private List<UnsubscribePreference> data = null;
@@ -51,12 +51,12 @@ public class ListUnsubscribePreferencesResponse {
   }
 
    /**
-   * List of notification preferences
+   * List of notification preferences.
    * @return data
   **/
 
 @JsonProperty("data")
-@ApiModelProperty(value = "List of notification preferences")
+@ApiModelProperty(value = "List of notification preferences.")
   public List<UnsubscribePreference> getData() {
     return data;
   }

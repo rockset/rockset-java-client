@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceFileUpload
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class SourceFileUpload {
   @SerializedName("file_name")
   private String fileName = null;
@@ -46,12 +46,12 @@ public class SourceFileUpload {
   }
 
    /**
-   * name of the file
+   * Name of the file.
    * @return fileName
   **/
 
 @JsonProperty("file_name")
-@ApiModelProperty(example = "file1.json", required = true, value = "name of the file")
+@ApiModelProperty(example = "file1.json", required = true, value = "Name of the file.")
   public String getFileName() {
     return fileName;
   }
@@ -66,12 +66,12 @@ public class SourceFileUpload {
   }
 
    /**
-   * size of the file in bytes
+   * Size of the file in bytes.
    * @return fileSize
   **/
 
 @JsonProperty("file_size")
-@ApiModelProperty(example = "12345", required = true, value = "size of the file in bytes")
+@ApiModelProperty(example = "12345", required = true, value = "Size of the file in bytes.")
   public Long getFileSize() {
     return fileSize;
   }
@@ -86,12 +86,12 @@ public class SourceFileUpload {
   }
 
    /**
-   * time of file upload
+   * Time of file upload.
    * @return fileUploadTime
   **/
 
 @JsonProperty("file_upload_time")
-@ApiModelProperty(example = "2019-01-15T21:48:23Z", required = true, value = "time of file upload")
+@ApiModelProperty(example = "2019-01-15T21:48:23Z", required = true, value = "Time of file upload.")
   public String getFileUploadTime() {
     return fileUploadTime;
   }

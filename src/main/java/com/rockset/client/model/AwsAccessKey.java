@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * AwsAccessKey
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class AwsAccessKey {
   @SerializedName("aws_access_key_id")
   private String awsAccessKeyId = null;
@@ -43,12 +43,12 @@ public class AwsAccessKey {
   }
 
    /**
-   * AWS access key ID
+   * AWS access key ID.
    * @return awsAccessKeyId
   **/
 
 @JsonProperty("aws_access_key_id")
-@ApiModelProperty(example = "AKIAIOSFODNN7EXAMPLE", required = true, value = "AWS access key ID")
+@ApiModelProperty(example = "AKIAIOSFODNN7EXAMPLE", required = true, value = "AWS access key ID.")
   public String getAwsAccessKeyId() {
     return awsAccessKeyId;
   }
@@ -63,12 +63,12 @@ public class AwsAccessKey {
   }
 
    /**
-   * AWS secret access key
+   * AWS secret access key.
    * @return awsSecretAccessKey
   **/
 
 @JsonProperty("aws_secret_access_key")
-@ApiModelProperty(example = "wJal....", required = true, value = "AWS secret access key")
+@ApiModelProperty(example = "wJal....", required = true, value = "AWS secret access key.")
   public String getAwsSecretAccessKey() {
     return awsSecretAccessKey;
   }

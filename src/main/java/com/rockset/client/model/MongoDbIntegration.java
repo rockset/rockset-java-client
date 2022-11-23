@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * MongoDbIntegration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class MongoDbIntegration {
   @SerializedName("connection_uri")
   private String connectionUri = null;
@@ -40,12 +40,12 @@ public class MongoDbIntegration {
   }
 
    /**
-   * MongoDB connection URI string
+   * MongoDB connection URI string.
    * @return connectionUri
   **/
 
 @JsonProperty("connection_uri")
-@ApiModelProperty(example = "mongodb+srv://<username>:<password>@server.example.com/", required = true, value = "MongoDB connection URI string")
+@ApiModelProperty(example = "mongodb+srv://<username>:<password>@server.example.com/", required = true, value = "MongoDB connection URI string.")
   public String getConnectionUri() {
     return connectionUri;
   }

@@ -29,10 +29,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Status
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class Status {
   /**
-   * Status of the Source&#39;s ingestion, one of: INITIALIZING, WATCHING, PROCESSING, COMPLETED, ERROR
+   * Status of the Source&#39;s ingestion.
    */
   @JsonAdapter(StateEnum.Adapter.class)
   public enum StateEnum {
@@ -105,12 +105,12 @@ public class Status {
   }
 
    /**
-   * Status of the Source&#39;s ingestion, one of: INITIALIZING, WATCHING, PROCESSING, COMPLETED, ERROR
+   * Status of the Source&#39;s ingestion.
    * @return state
   **/
 
 @JsonProperty("state")
-@ApiModelProperty(example = "INITIALIZING", value = "Status of the Source's ingestion, one of: INITIALIZING, WATCHING, PROCESSING, COMPLETED, ERROR")
+@ApiModelProperty(example = "INITIALIZING", value = "Status of the Source's ingestion.")
   public StateEnum getState() {
     return state;
   }
@@ -125,12 +125,12 @@ public class Status {
   }
 
    /**
-   * state message
+   * State message.
    * @return message
   **/
 
 @JsonProperty("message")
-@ApiModelProperty(example = "error 403 forbidden", value = "state message")
+@ApiModelProperty(example = "error 403 forbidden", value = "State message.")
   public String getMessage() {
     return message;
   }
@@ -145,12 +145,12 @@ public class Status {
   }
 
    /**
-   * ISO-8601 date when source was last processed
+   * ISO-8601 date when source was last processed.
    * @return lastProcessedAt
   **/
 
 @JsonProperty("last_processed_at")
-@ApiModelProperty(example = "2019-01-15T21:48:23Z", value = "ISO-8601 date when source was last processed")
+@ApiModelProperty(example = "2019-01-15T21:48:23Z", value = "ISO-8601 date when source was last processed.")
   public String getLastProcessedAt() {
     return lastProcessedAt;
   }
@@ -165,12 +165,12 @@ public class Status {
   }
 
    /**
-   * last source item processed by ingester
+   * Last source item processed by ingester.
    * @return lastProcessedItem
   **/
 
 @JsonProperty("last_processed_item")
-@ApiModelProperty(example = "/path/to/some/object", value = "last source item processed by ingester")
+@ApiModelProperty(example = "/path/to/some/object", value = "Last source item processed by ingester.")
   public String getLastProcessedItem() {
     return lastProcessedItem;
   }
@@ -185,12 +185,12 @@ public class Status {
   }
 
    /**
-   * Total items processed of source
+   * Total items processed of source.
    * @return totalProcessedItems
   **/
 
 @JsonProperty("total_processed_items")
-@ApiModelProperty(example = "32849023", value = "Total items processed of source")
+@ApiModelProperty(example = "32849023", value = "Total items processed of source.")
   public Long getTotalProcessedItems() {
     return totalProcessedItems;
   }

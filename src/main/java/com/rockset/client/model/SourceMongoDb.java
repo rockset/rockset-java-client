@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceMongoDb
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class SourceMongoDb {
   @SerializedName("database_name")
   private String databaseName = null;
@@ -47,12 +47,12 @@ public class SourceMongoDb {
   }
 
    /**
-   * MongoDB database name containing this collection
+   * MongoDB database name containing this collection.
    * @return databaseName
   **/
 
 @JsonProperty("database_name")
-@ApiModelProperty(example = "my_database", required = true, value = "MongoDB database name containing this collection")
+@ApiModelProperty(example = "my_database", required = true, value = "MongoDB database name containing this collection.")
   public String getDatabaseName() {
     return databaseName;
   }
@@ -67,12 +67,12 @@ public class SourceMongoDb {
   }
 
    /**
-   * MongoDB collection name
+   * MongoDB collection name.
    * @return collectionName
   **/
 
 @JsonProperty("collection_name")
-@ApiModelProperty(example = "my_collection", required = true, value = "MongoDB collection name")
+@ApiModelProperty(example = "my_collection", required = true, value = "MongoDB collection name.")
   public String getCollectionName() {
     return collectionName;
   }
@@ -82,12 +82,12 @@ public class SourceMongoDb {
   }
 
    /**
-   * MongoDB source status
+   * MongoDB source status.
    * @return status
   **/
 
 @JsonProperty("status")
-@ApiModelProperty(value = "MongoDB source status")
+@ApiModelProperty(value = "MongoDB source status.")
   public StatusMongoDb getStatus() {
     return status;
   }

@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "Describes details about an error")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-10-17T16:15:03.867-07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class ErrorModel {
   @SerializedName("message")
   private String message = null;
@@ -77,6 +77,8 @@ public class ErrorModel {
     
     CONNECTION_ERROR("CONNECTIONERROR"),
     
+    CONTENTTOOLARGE("CONTENTTOOLARGE"),
+    
     CREATING("CREATING"),
     
     BADREQUEST("BADREQUEST"),
@@ -104,7 +106,6 @@ public class ErrorModel {
       return String.valueOf(value);
     }
 
-    @com.fasterxml.jackson.annotation.JsonCreator
     public static TypeEnum fromValue(String text) {
       for (TypeEnum b : TypeEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {

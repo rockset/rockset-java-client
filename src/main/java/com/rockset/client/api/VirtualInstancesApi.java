@@ -26,9 +26,20 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
+import com.rockset.client.model.CollectionMountResponse;
+import com.rockset.client.model.CreateCollectionMountRequest;
+import com.rockset.client.model.CreateVirtualInstanceRequest;
+import com.rockset.client.model.CreateVirtualInstanceResponse;
+import com.rockset.client.model.DeleteVirtualInstanceResponse;
 import com.rockset.client.model.ErrorModel;
 import com.rockset.client.model.GetVirtualInstanceResponse;
+import com.rockset.client.model.ListCollectionMountsResponse;
+import com.rockset.client.model.ListQueriesResponse;
 import com.rockset.client.model.ListVirtualInstancesResponse;
+import com.rockset.client.model.QueryRequest;
+import com.rockset.client.model.QueryResponse;
+import com.rockset.client.model.ResumeVirtualInstanceResponse;
+import com.rockset.client.model.SuspendVirtualInstanceResponse;
 import com.rockset.client.model.UpdateVirtualInstanceRequest;
 import com.rockset.client.model.UpdateVirtualInstanceResponse;
 
@@ -58,8 +69,253 @@ public class VirtualInstancesApi {
     }
 
     /**
+     * Build call for create
+     * @param body JSON object (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws Exception If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call createCall(CreateVirtualInstanceRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/v1/orgs/self/virtualinstances";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call createValidateBeforeCall(CreateVirtualInstanceRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new Exception("Missing the required parameter 'body' when calling create(Async)");
+        }
+        
+
+        com.squareup.okhttp.Call call = createCall(body, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Create Virtual Instance
+     * [beta] Create virtual instance
+     * @param body JSON object (required)
+     * @return CreateVirtualInstanceResponse
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public CreateVirtualInstanceResponse create(CreateVirtualInstanceRequest body) throws Exception {
+        ApiResponse<CreateVirtualInstanceResponse> resp = createWithHttpInfo(body);
+        return resp.getData();
+    }
+
+    /**
+     * Create Virtual Instance
+     * [beta] Create virtual instance
+     * @param body JSON object (required)
+     * @return ApiResponse&lt;CreateVirtualInstanceResponse&gt;
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<CreateVirtualInstanceResponse> createWithHttpInfo(CreateVirtualInstanceRequest body) throws Exception {
+        com.squareup.okhttp.Call call = createValidateBeforeCall(body, null, null);
+        Type localVarReturnType = new TypeToken<CreateVirtualInstanceResponse>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Create Virtual Instance (asynchronously)
+     * [beta] Create virtual instance
+     * @param body JSON object (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call createAsync(CreateVirtualInstanceRequest body, final ApiCallback<CreateVirtualInstanceResponse> callback) throws Exception {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = createValidateBeforeCall(body, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<CreateVirtualInstanceResponse>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for delete
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws Exception If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call deleteCall(String virtualInstanceId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/orgs/self/virtualinstances/{virtualInstanceId}"
+            .replaceAll("\\{" + "virtualInstanceId" + "\\}", apiClient.escapeString(virtualInstanceId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return apiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call deleteValidateBeforeCall(String virtualInstanceId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        
+        // verify the required parameter 'virtualInstanceId' is set
+        if (virtualInstanceId == null) {
+            throw new Exception("Missing the required parameter 'virtualInstanceId' when calling delete(Async)");
+        }
+        
+
+        com.squareup.okhttp.Call call = deleteCall(virtualInstanceId, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Delete Virtual Instance
+     * [beta] Delete a virtual instance.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @return DeleteVirtualInstanceResponse
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public DeleteVirtualInstanceResponse delete(String virtualInstanceId) throws Exception {
+        ApiResponse<DeleteVirtualInstanceResponse> resp = deleteWithHttpInfo(virtualInstanceId);
+        return resp.getData();
+    }
+
+    /**
+     * Delete Virtual Instance
+     * [beta] Delete a virtual instance.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @return ApiResponse&lt;DeleteVirtualInstanceResponse&gt;
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<DeleteVirtualInstanceResponse> deleteWithHttpInfo(String virtualInstanceId) throws Exception {
+        com.squareup.okhttp.Call call = deleteValidateBeforeCall(virtualInstanceId, null, null);
+        Type localVarReturnType = new TypeToken<DeleteVirtualInstanceResponse>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Delete Virtual Instance (asynchronously)
+     * [beta] Delete a virtual instance.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call deleteAsync(String virtualInstanceId, final ApiCallback<DeleteVirtualInstanceResponse> callback) throws Exception {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = deleteValidateBeforeCall(virtualInstanceId, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<DeleteVirtualInstanceResponse>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
      * Build call for get
-     * @param virtualInstanceId uuid of the virtual instance (required)
+     * @param virtualInstanceId Virtual Instance RRN (required)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
@@ -124,7 +380,7 @@ public class VirtualInstancesApi {
     /**
      * Retrieve Virtual Instance
      * Get details about a virtual instance.
-     * @param virtualInstanceId uuid of the virtual instance (required)
+     * @param virtualInstanceId Virtual Instance RRN (required)
      * @return GetVirtualInstanceResponse
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -136,7 +392,7 @@ public class VirtualInstancesApi {
     /**
      * Retrieve Virtual Instance
      * Get details about a virtual instance.
-     * @param virtualInstanceId uuid of the virtual instance (required)
+     * @param virtualInstanceId Virtual Instance RRN (required)
      * @return ApiResponse&lt;GetVirtualInstanceResponse&gt;
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -149,7 +405,7 @@ public class VirtualInstancesApi {
     /**
      * Retrieve Virtual Instance (asynchronously)
      * Get details about a virtual instance.
-     * @param virtualInstanceId uuid of the virtual instance (required)
+     * @param virtualInstanceId Virtual Instance RRN (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
@@ -177,6 +433,262 @@ public class VirtualInstancesApi {
 
         com.squareup.okhttp.Call call = getValidateBeforeCall(virtualInstanceId, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<GetVirtualInstanceResponse>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for get_0
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param collectionPath  (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws Exception If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call get_0Call(String virtualInstanceId, String collectionPath, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/orgs/self/virtualinstances/{virtualInstanceId}/mounts/{collectionPath}"
+            .replaceAll("\\{" + "virtualInstanceId" + "\\}", apiClient.escapeString(virtualInstanceId.toString()))
+            .replaceAll("\\{" + "collectionPath" + "\\}", apiClient.escapeString(collectionPath.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call get_0ValidateBeforeCall(String virtualInstanceId, String collectionPath, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        
+        // verify the required parameter 'virtualInstanceId' is set
+        if (virtualInstanceId == null) {
+            throw new Exception("Missing the required parameter 'virtualInstanceId' when calling get_0(Async)");
+        }
+        
+        // verify the required parameter 'collectionPath' is set
+        if (collectionPath == null) {
+            throw new Exception("Missing the required parameter 'collectionPath' when calling get_0(Async)");
+        }
+        
+
+        com.squareup.okhttp.Call call = get_0Call(virtualInstanceId, collectionPath, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Get Collection Mount
+     * [beta] Get a mount on this virtual instance.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param collectionPath  (required)
+     * @return CollectionMountResponse
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public CollectionMountResponse get_0(String virtualInstanceId, String collectionPath) throws Exception {
+        ApiResponse<CollectionMountResponse> resp = get_0WithHttpInfo(virtualInstanceId, collectionPath);
+        return resp.getData();
+    }
+
+    /**
+     * Get Collection Mount
+     * [beta] Get a mount on this virtual instance.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param collectionPath  (required)
+     * @return ApiResponse&lt;CollectionMountResponse&gt;
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<CollectionMountResponse> get_0WithHttpInfo(String virtualInstanceId, String collectionPath) throws Exception {
+        com.squareup.okhttp.Call call = get_0ValidateBeforeCall(virtualInstanceId, collectionPath, null, null);
+        Type localVarReturnType = new TypeToken<CollectionMountResponse>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Get Collection Mount (asynchronously)
+     * [beta] Get a mount on this virtual instance.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param collectionPath  (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call get_0Async(String virtualInstanceId, String collectionPath, final ApiCallback<CollectionMountResponse> callback) throws Exception {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = get_0ValidateBeforeCall(virtualInstanceId, collectionPath, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<CollectionMountResponse>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for get_1
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws Exception If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call get_1Call(String virtualInstanceId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/orgs/self/virtualinstances/{virtualInstanceId}/queries"
+            .replaceAll("\\{" + "virtualInstanceId" + "\\}", apiClient.escapeString(virtualInstanceId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call get_1ValidateBeforeCall(String virtualInstanceId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        
+        // verify the required parameter 'virtualInstanceId' is set
+        if (virtualInstanceId == null) {
+            throw new Exception("Missing the required parameter 'virtualInstanceId' when calling get_1(Async)");
+        }
+        
+
+        com.squareup.okhttp.Call call = get_1Call(virtualInstanceId, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * List Queries
+     * [beta] Lists actively queued and running queries for a particular Virtual Instance.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @return ListQueriesResponse
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ListQueriesResponse get_1(String virtualInstanceId) throws Exception {
+        ApiResponse<ListQueriesResponse> resp = get_1WithHttpInfo(virtualInstanceId);
+        return resp.getData();
+    }
+
+    /**
+     * List Queries
+     * [beta] Lists actively queued and running queries for a particular Virtual Instance.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @return ApiResponse&lt;ListQueriesResponse&gt;
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<ListQueriesResponse> get_1WithHttpInfo(String virtualInstanceId) throws Exception {
+        com.squareup.okhttp.Call call = get_1ValidateBeforeCall(virtualInstanceId, null, null);
+        Type localVarReturnType = new TypeToken<ListQueriesResponse>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * List Queries (asynchronously)
+     * [beta] Lists actively queued and running queries for a particular Virtual Instance.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call get_1Async(String virtualInstanceId, final ApiCallback<ListQueriesResponse> callback) throws Exception {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = get_1ValidateBeforeCall(virtualInstanceId, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<ListQueriesResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -294,8 +806,518 @@ public class VirtualInstancesApi {
         return call;
     }
     /**
+     * Build call for list_0
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws Exception If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call list_0Call(String virtualInstanceId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/orgs/self/virtualinstances/{virtualInstanceId}/mounts"
+            .replaceAll("\\{" + "virtualInstanceId" + "\\}", apiClient.escapeString(virtualInstanceId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call list_0ValidateBeforeCall(String virtualInstanceId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        
+        // verify the required parameter 'virtualInstanceId' is set
+        if (virtualInstanceId == null) {
+            throw new Exception("Missing the required parameter 'virtualInstanceId' when calling list_0(Async)");
+        }
+        
+
+        com.squareup.okhttp.Call call = list_0Call(virtualInstanceId, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * List Collection Mounts
+     * [beta] List collection mounts for a particular VI.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @return ListCollectionMountsResponse
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ListCollectionMountsResponse list_0(String virtualInstanceId) throws Exception {
+        ApiResponse<ListCollectionMountsResponse> resp = list_0WithHttpInfo(virtualInstanceId);
+        return resp.getData();
+    }
+
+    /**
+     * List Collection Mounts
+     * [beta] List collection mounts for a particular VI.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @return ApiResponse&lt;ListCollectionMountsResponse&gt;
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<ListCollectionMountsResponse> list_0WithHttpInfo(String virtualInstanceId) throws Exception {
+        com.squareup.okhttp.Call call = list_0ValidateBeforeCall(virtualInstanceId, null, null);
+        Type localVarReturnType = new TypeToken<ListCollectionMountsResponse>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * List Collection Mounts (asynchronously)
+     * [beta] List collection mounts for a particular VI.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call list_0Async(String virtualInstanceId, final ApiCallback<ListCollectionMountsResponse> callback) throws Exception {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = list_0ValidateBeforeCall(virtualInstanceId, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<ListCollectionMountsResponse>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for mount
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param body JSON object (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws Exception If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call mountCall(String virtualInstanceId, CreateCollectionMountRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/v1/orgs/self/virtualinstances/{virtualInstanceId}/mounts"
+            .replaceAll("\\{" + "virtualInstanceId" + "\\}", apiClient.escapeString(virtualInstanceId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call mountValidateBeforeCall(String virtualInstanceId, CreateCollectionMountRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        
+        // verify the required parameter 'virtualInstanceId' is set
+        if (virtualInstanceId == null) {
+            throw new Exception("Missing the required parameter 'virtualInstanceId' when calling mount(Async)");
+        }
+        
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new Exception("Missing the required parameter 'body' when calling mount(Async)");
+        }
+        
+
+        com.squareup.okhttp.Call call = mountCall(virtualInstanceId, body, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Mount Collection
+     * [beta] Mount a collection to this virtual instance.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param body JSON object (required)
+     * @return CollectionMountResponse
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public CollectionMountResponse mount(String virtualInstanceId, CreateCollectionMountRequest body) throws Exception {
+        ApiResponse<CollectionMountResponse> resp = mountWithHttpInfo(virtualInstanceId, body);
+        return resp.getData();
+    }
+
+    /**
+     * Mount Collection
+     * [beta] Mount a collection to this virtual instance.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param body JSON object (required)
+     * @return ApiResponse&lt;CollectionMountResponse&gt;
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<CollectionMountResponse> mountWithHttpInfo(String virtualInstanceId, CreateCollectionMountRequest body) throws Exception {
+        com.squareup.okhttp.Call call = mountValidateBeforeCall(virtualInstanceId, body, null, null);
+        Type localVarReturnType = new TypeToken<CollectionMountResponse>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Mount Collection (asynchronously)
+     * [beta] Mount a collection to this virtual instance.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param body JSON object (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call mountAsync(String virtualInstanceId, CreateCollectionMountRequest body, final ApiCallback<CollectionMountResponse> callback) throws Exception {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = mountValidateBeforeCall(virtualInstanceId, body, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<CollectionMountResponse>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for query
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param body JSON object (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws Exception If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call queryCall(String virtualInstanceId, QueryRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/v1/orgs/self/virtualinstances/{virtualInstanceId}/queries"
+            .replaceAll("\\{" + "virtualInstanceId" + "\\}", apiClient.escapeString(virtualInstanceId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call queryValidateBeforeCall(String virtualInstanceId, QueryRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        
+        // verify the required parameter 'virtualInstanceId' is set
+        if (virtualInstanceId == null) {
+            throw new Exception("Missing the required parameter 'virtualInstanceId' when calling query(Async)");
+        }
+        
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new Exception("Missing the required parameter 'body' when calling query(Async)");
+        }
+        
+
+        com.squareup.okhttp.Call call = queryCall(virtualInstanceId, body, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Execute SQL Query
+     * [beta] Make a SQL query to Rockset.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param body JSON object (required)
+     * @return QueryResponse
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public QueryResponse query(String virtualInstanceId, QueryRequest body) throws Exception {
+        ApiResponse<QueryResponse> resp = queryWithHttpInfo(virtualInstanceId, body);
+        return resp.getData();
+    }
+
+    /**
+     * Execute SQL Query
+     * [beta] Make a SQL query to Rockset.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param body JSON object (required)
+     * @return ApiResponse&lt;QueryResponse&gt;
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<QueryResponse> queryWithHttpInfo(String virtualInstanceId, QueryRequest body) throws Exception {
+        com.squareup.okhttp.Call call = queryValidateBeforeCall(virtualInstanceId, body, null, null);
+        Type localVarReturnType = new TypeToken<QueryResponse>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Execute SQL Query (asynchronously)
+     * [beta] Make a SQL query to Rockset.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param body JSON object (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call queryAsync(String virtualInstanceId, QueryRequest body, final ApiCallback<QueryResponse> callback) throws Exception {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = queryValidateBeforeCall(virtualInstanceId, body, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<QueryResponse>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for resume
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws Exception If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call resumeCall(String virtualInstanceId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/orgs/self/virtualinstances/{virtualInstanceId}/resume"
+            .replaceAll("\\{" + "virtualInstanceId" + "\\}", apiClient.escapeString(virtualInstanceId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call resumeValidateBeforeCall(String virtualInstanceId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        
+        // verify the required parameter 'virtualInstanceId' is set
+        if (virtualInstanceId == null) {
+            throw new Exception("Missing the required parameter 'virtualInstanceId' when calling resume(Async)");
+        }
+        
+
+        com.squareup.okhttp.Call call = resumeCall(virtualInstanceId, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Resume Virtual Instance
+     * [beta] Resume a virtual instance.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @return ResumeVirtualInstanceResponse
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ResumeVirtualInstanceResponse resume(String virtualInstanceId) throws Exception {
+        ApiResponse<ResumeVirtualInstanceResponse> resp = resumeWithHttpInfo(virtualInstanceId);
+        return resp.getData();
+    }
+
+    /**
+     * Resume Virtual Instance
+     * [beta] Resume a virtual instance.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @return ApiResponse&lt;ResumeVirtualInstanceResponse&gt;
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<ResumeVirtualInstanceResponse> resumeWithHttpInfo(String virtualInstanceId) throws Exception {
+        com.squareup.okhttp.Call call = resumeValidateBeforeCall(virtualInstanceId, null, null);
+        Type localVarReturnType = new TypeToken<ResumeVirtualInstanceResponse>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Resume Virtual Instance (asynchronously)
+     * [beta] Resume a virtual instance.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call resumeAsync(String virtualInstanceId, final ApiCallback<ResumeVirtualInstanceResponse> callback) throws Exception {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = resumeValidateBeforeCall(virtualInstanceId, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<ResumeVirtualInstanceResponse>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
      * Build call for set
-     * @param virtualInstanceId uuid of the virtual instance (required)
+     * @param virtualInstanceId Virtual Instance RRN (required)
      * @param body JSON object (required)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
@@ -366,7 +1388,7 @@ public class VirtualInstancesApi {
     /**
      * Update Virtual Instance
      * Update the properties of a virtual instance.
-     * @param virtualInstanceId uuid of the virtual instance (required)
+     * @param virtualInstanceId Virtual Instance RRN (required)
      * @param body JSON object (required)
      * @return UpdateVirtualInstanceResponse
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -379,7 +1401,7 @@ public class VirtualInstancesApi {
     /**
      * Update Virtual Instance
      * Update the properties of a virtual instance.
-     * @param virtualInstanceId uuid of the virtual instance (required)
+     * @param virtualInstanceId Virtual Instance RRN (required)
      * @param body JSON object (required)
      * @return ApiResponse&lt;UpdateVirtualInstanceResponse&gt;
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -393,7 +1415,7 @@ public class VirtualInstancesApi {
     /**
      * Update Virtual Instance (asynchronously)
      * Update the properties of a virtual instance.
-     * @param virtualInstanceId uuid of the virtual instance (required)
+     * @param virtualInstanceId Virtual Instance RRN (required)
      * @param body JSON object (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
@@ -422,6 +1444,262 @@ public class VirtualInstancesApi {
 
         com.squareup.okhttp.Call call = setValidateBeforeCall(virtualInstanceId, body, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<UpdateVirtualInstanceResponse>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for suspend
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws Exception If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call suspendCall(String virtualInstanceId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/orgs/self/virtualinstances/{virtualInstanceId}/suspend"
+            .replaceAll("\\{" + "virtualInstanceId" + "\\}", apiClient.escapeString(virtualInstanceId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call suspendValidateBeforeCall(String virtualInstanceId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        
+        // verify the required parameter 'virtualInstanceId' is set
+        if (virtualInstanceId == null) {
+            throw new Exception("Missing the required parameter 'virtualInstanceId' when calling suspend(Async)");
+        }
+        
+
+        com.squareup.okhttp.Call call = suspendCall(virtualInstanceId, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Suspend Virtual Instance
+     * [beta] Suspend a virtual instance.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @return SuspendVirtualInstanceResponse
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public SuspendVirtualInstanceResponse suspend(String virtualInstanceId) throws Exception {
+        ApiResponse<SuspendVirtualInstanceResponse> resp = suspendWithHttpInfo(virtualInstanceId);
+        return resp.getData();
+    }
+
+    /**
+     * Suspend Virtual Instance
+     * [beta] Suspend a virtual instance.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @return ApiResponse&lt;SuspendVirtualInstanceResponse&gt;
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<SuspendVirtualInstanceResponse> suspendWithHttpInfo(String virtualInstanceId) throws Exception {
+        com.squareup.okhttp.Call call = suspendValidateBeforeCall(virtualInstanceId, null, null);
+        Type localVarReturnType = new TypeToken<SuspendVirtualInstanceResponse>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Suspend Virtual Instance (asynchronously)
+     * [beta] Suspend a virtual instance.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call suspendAsync(String virtualInstanceId, final ApiCallback<SuspendVirtualInstanceResponse> callback) throws Exception {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = suspendValidateBeforeCall(virtualInstanceId, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<SuspendVirtualInstanceResponse>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for unmount
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param collectionPath  (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws Exception If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call unmountCall(String virtualInstanceId, String collectionPath, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/v1/orgs/self/virtualinstances/{virtualInstanceId}/mounts/{collectionPath}"
+            .replaceAll("\\{" + "virtualInstanceId" + "\\}", apiClient.escapeString(virtualInstanceId.toString()))
+            .replaceAll("\\{" + "collectionPath" + "\\}", apiClient.escapeString(collectionPath.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return apiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private com.squareup.okhttp.Call unmountValidateBeforeCall(String virtualInstanceId, String collectionPath, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        
+        // verify the required parameter 'virtualInstanceId' is set
+        if (virtualInstanceId == null) {
+            throw new Exception("Missing the required parameter 'virtualInstanceId' when calling unmount(Async)");
+        }
+        
+        // verify the required parameter 'collectionPath' is set
+        if (collectionPath == null) {
+            throw new Exception("Missing the required parameter 'collectionPath' when calling unmount(Async)");
+        }
+        
+
+        com.squareup.okhttp.Call call = unmountCall(virtualInstanceId, collectionPath, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Unmount Collection
+     * [beta] Unmount a collection from this virtual instance.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param collectionPath  (required)
+     * @return CollectionMountResponse
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public CollectionMountResponse unmount(String virtualInstanceId, String collectionPath) throws Exception {
+        ApiResponse<CollectionMountResponse> resp = unmountWithHttpInfo(virtualInstanceId, collectionPath);
+        return resp.getData();
+    }
+
+    /**
+     * Unmount Collection
+     * [beta] Unmount a collection from this virtual instance.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param collectionPath  (required)
+     * @return ApiResponse&lt;CollectionMountResponse&gt;
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<CollectionMountResponse> unmountWithHttpInfo(String virtualInstanceId, String collectionPath) throws Exception {
+        com.squareup.okhttp.Call call = unmountValidateBeforeCall(virtualInstanceId, collectionPath, null, null);
+        Type localVarReturnType = new TypeToken<CollectionMountResponse>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Unmount Collection (asynchronously)
+     * [beta] Unmount a collection from this virtual instance.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param collectionPath  (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call unmountAsync(String virtualInstanceId, String collectionPath, final ApiCallback<CollectionMountResponse> callback) throws Exception {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = unmountValidateBeforeCall(virtualInstanceId, collectionPath, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<CollectionMountResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }

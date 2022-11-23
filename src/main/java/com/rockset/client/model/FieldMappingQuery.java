@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * FieldMappingQuery
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class FieldMappingQuery {
   @SerializedName("sql")
   private String sql = null;
@@ -40,12 +40,12 @@ public class FieldMappingQuery {
   }
 
    /**
-   * SELECT * EXCEPT (name), SHA256(name) AS name_anon FROM _input
+   * SELECT * EXCEPT (name), SHA256(name) AS name_anon FROM _input.
    * @return sql
   **/
 
 @JsonProperty("sql")
-@ApiModelProperty(example = "sql", value = "SELECT * EXCEPT (name), SHA256(name) AS name_anon FROM _input")
+@ApiModelProperty(example = "sql", value = "SELECT * EXCEPT (name), SHA256(name) AS name_anon FROM _input.")
   public String getSql() {
     return sql;
   }

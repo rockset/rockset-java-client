@@ -20,6 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.rockset.client.model.VirtualInstanceStats;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -29,13 +30,30 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * VirtualInstance
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class VirtualInstance {
+  @SerializedName("name")
+  private String name = null;
+
+  @SerializedName("description")
+  private String description = null;
+
+  @SerializedName("created_by")
+  private String createdBy = null;
+
+  @SerializedName("created_at")
+  private String createdAt = null;
+
+  @SerializedName("resumed_at")
+  private String resumedAt = null;
+
   /**
-   * virtual instance state
+   * Virtual instance state.
    */
   @JsonAdapter(StateEnum.Adapter.class)
   public enum StateEnum {
+    INITIALIZING("INITIALIZING"),
+    
     PROVISIONING_RESOURCES("PROVISIONINGRESOURCES"),
     
     REBALANCING_COLLECTIONS("REBALANCINGCOLLECTIONS"),
@@ -92,145 +110,17 @@ public class VirtualInstance {
   private StateEnum state = null;
 
   /**
-   * Gets or Sets currentType
-   */
-  @JsonAdapter(CurrentTypeEnum.Adapter.class)
-  public enum CurrentTypeEnum {
-    FREE("FREE"),
-    
-    SHARED("SHARED"),
-    
-    SMALL("SMALL"),
-    
-    MEDIUM("MEDIUM"),
-    
-    LARGE("LARGE"),
-    
-    XLARGE("XLARGE"),
-    
-    XLARGE2("XLARGE2"),
-    
-    XLARGE4("XLARGE4"),
-    
-    XLARGE8("XLARGE8"),
-    
-    XLARGE16("XLARGE16");
-
-    private String value;
-
-    CurrentTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static CurrentTypeEnum fromValue(String text) {
-      for (CurrentTypeEnum b : CurrentTypeEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-
-    public static class Adapter extends TypeAdapter<CurrentTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final CurrentTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public CurrentTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value = jsonReader.nextString();
-        return CurrentTypeEnum.fromValue(String.valueOf(value));
-      }
-    }
-  }
-
-  @SerializedName("current_type")
-  private CurrentTypeEnum currentType = null;
-
-  /**
-   * Gets or Sets desiredType
-   */
-  @JsonAdapter(DesiredTypeEnum.Adapter.class)
-  public enum DesiredTypeEnum {
-    FREE("FREE"),
-    
-    SHARED("SHARED"),
-    
-    SMALL("SMALL"),
-    
-    MEDIUM("MEDIUM"),
-    
-    LARGE("LARGE"),
-    
-    XLARGE("XLARGE"),
-    
-    XLARGE2("XLARGE2"),
-    
-    XLARGE4("XLARGE4"),
-    
-    XLARGE8("XLARGE8"),
-    
-    XLARGE16("XLARGE16");
-
-    private String value;
-
-    DesiredTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static DesiredTypeEnum fromValue(String text) {
-      for (DesiredTypeEnum b : DesiredTypeEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-
-    public static class Adapter extends TypeAdapter<DesiredTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final DesiredTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public DesiredTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value = jsonReader.nextString();
-        return DesiredTypeEnum.fromValue(String.valueOf(value));
-      }
-    }
-  }
-
-  @SerializedName("desired_type")
-  private DesiredTypeEnum desiredType = null;
-
-  /**
-   * virtual instance current size
+   * Virtual instance current size.
    */
   @JsonAdapter(CurrentSizeEnum.Adapter.class)
   public enum CurrentSizeEnum {
     FREE("FREE"),
     
+    NANO("NANO"),
+    
     SHARED("SHARED"),
+    
+    MILLI("MILLI"),
     
     SMALL("SMALL"),
     
@@ -290,13 +180,17 @@ public class VirtualInstance {
   private CurrentSizeEnum currentSize = null;
 
   /**
-   * virtual instance desired size
+   * Virtual instance desired size.
    */
   @JsonAdapter(DesiredSizeEnum.Adapter.class)
   public enum DesiredSizeEnum {
     FREE("FREE"),
     
+    NANO("NANO"),
+    
     SHARED("SHARED"),
+    
+    MILLI("MILLI"),
     
     SMALL("SMALL"),
     
@@ -355,14 +249,11 @@ public class VirtualInstance {
   @SerializedName("desired_size")
   private DesiredSizeEnum desiredSize = null;
 
-  @SerializedName("last_updated")
-  private String lastUpdated = null;
-
-  @SerializedName("estimated_switch_duration_minutes")
-  private Long estimatedSwitchDurationMinutes = null;
-
   @SerializedName("monitoring_enabled")
   private Boolean monitoringEnabled = null;
+
+  @SerializedName("default_vi")
+  private Boolean defaultVi = null;
 
   @SerializedName("default_pod_count")
   private Integer defaultPodCount = null;
@@ -373,18 +264,127 @@ public class VirtualInstance {
   @SerializedName("id")
   private String id = null;
 
+  @SerializedName("rrn")
+  private String rrn = null;
+
+  @SerializedName("auto_suspend_seconds")
+  private Integer autoSuspendSeconds = null;
+
+  @SerializedName("stats")
+  private VirtualInstanceStats stats = null;
+
+  public VirtualInstance name(String name) {
+    this.name = name;
+    return this;
+  }
+
+   /**
+   * Virtual instance name.
+   * @return name
+  **/
+
+@JsonProperty("name")
+@ApiModelProperty(example = "prod_vi", required = true, value = "Virtual instance name.")
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public VirtualInstance description(String description) {
+    this.description = description;
+    return this;
+  }
+
+   /**
+   * Virtual instance description.
+   * @return description
+  **/
+
+@JsonProperty("description")
+@ApiModelProperty(example = "VI for prod traffic", value = "Virtual instance description.")
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public VirtualInstance createdBy(String createdBy) {
+    this.createdBy = createdBy;
+    return this;
+  }
+
+   /**
+   * Creator of requested virtual instance.
+   * @return createdBy
+  **/
+
+@JsonProperty("created_by")
+@ApiModelProperty(example = "hello@rockset.com", value = "Creator of requested virtual instance.")
+  public String getCreatedBy() {
+    return createdBy;
+  }
+
+  public void setCreatedBy(String createdBy) {
+    this.createdBy = createdBy;
+  }
+
+  public VirtualInstance createdAt(String createdAt) {
+    this.createdAt = createdAt;
+    return this;
+  }
+
+   /**
+   * ISO-8601 date of when virtual instance was created.
+   * @return createdAt
+  **/
+
+@JsonProperty("created_at")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date of when virtual instance was created.")
+  public String getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(String createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public VirtualInstance resumedAt(String resumedAt) {
+    this.resumedAt = resumedAt;
+    return this;
+  }
+
+   /**
+   * ISO-8601 date of when virtual instance was created.
+   * @return resumedAt
+  **/
+
+@JsonProperty("resumed_at")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date of when virtual instance was created.")
+  public String getResumedAt() {
+    return resumedAt;
+  }
+
+  public void setResumedAt(String resumedAt) {
+    this.resumedAt = resumedAt;
+  }
+
   public VirtualInstance state(StateEnum state) {
     this.state = state;
     return this;
   }
 
    /**
-   * virtual instance state
+   * Virtual instance state.
    * @return state
   **/
 
 @JsonProperty("state")
-@ApiModelProperty(example = "ACTIVE", value = "virtual instance state")
+@ApiModelProperty(example = "ACTIVE", value = "Virtual instance state.")
   public StateEnum getState() {
     return state;
   }
@@ -393,106 +393,26 @@ public class VirtualInstance {
     this.state = state;
   }
 
-  public VirtualInstance currentType(CurrentTypeEnum currentType) {
-    this.currentType = currentType;
-    return this;
-  }
-
    /**
-   * Get currentType
-   * @return currentType
-  **/
-
-@JsonProperty("current_type")
-@ApiModelProperty(value = "")
-  public CurrentTypeEnum getCurrentType() {
-    return currentType;
-  }
-
-  public void setCurrentType(CurrentTypeEnum currentType) {
-    this.currentType = currentType;
-  }
-
-  public VirtualInstance desiredType(DesiredTypeEnum desiredType) {
-    this.desiredType = desiredType;
-    return this;
-  }
-
-   /**
-   * Get desiredType
-   * @return desiredType
-  **/
-
-@JsonProperty("desired_type")
-@ApiModelProperty(value = "")
-  public DesiredTypeEnum getDesiredType() {
-    return desiredType;
-  }
-
-  public void setDesiredType(DesiredTypeEnum desiredType) {
-    this.desiredType = desiredType;
-  }
-
-   /**
-   * virtual instance current size
+   * Virtual instance current size.
    * @return currentSize
   **/
 
 @JsonProperty("current_size")
-@ApiModelProperty(example = "MEDIUM", value = "virtual instance current size")
+@ApiModelProperty(example = "MEDIUM", value = "Virtual instance current size.")
   public CurrentSizeEnum getCurrentSize() {
     return currentSize;
   }
 
    /**
-   * virtual instance desired size
+   * Virtual instance desired size.
    * @return desiredSize
   **/
 
 @JsonProperty("desired_size")
-@ApiModelProperty(example = "MEDIUM", value = "virtual instance desired size")
+@ApiModelProperty(example = "MEDIUM", value = "Virtual instance desired size.")
   public DesiredSizeEnum getDesiredSize() {
     return desiredSize;
-  }
-
-  public VirtualInstance lastUpdated(String lastUpdated) {
-    this.lastUpdated = lastUpdated;
-    return this;
-  }
-
-   /**
-   * ISO-8601 date of when virtual instance size was last updated
-   * @return lastUpdated
-  **/
-
-@JsonProperty("last_updated")
-@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date of when virtual instance size was last updated")
-  public String getLastUpdated() {
-    return lastUpdated;
-  }
-
-  public void setLastUpdated(String lastUpdated) {
-    this.lastUpdated = lastUpdated;
-  }
-
-  public VirtualInstance estimatedSwitchDurationMinutes(Long estimatedSwitchDurationMinutes) {
-    this.estimatedSwitchDurationMinutes = estimatedSwitchDurationMinutes;
-    return this;
-  }
-
-   /**
-   * estimated duration in minutes of last virtual instance size update
-   * @return estimatedSwitchDurationMinutes
-  **/
-
-@JsonProperty("estimated_switch_duration_minutes")
-@ApiModelProperty(example = "20", value = "estimated duration in minutes of last virtual instance size update")
-  public Long getEstimatedSwitchDurationMinutes() {
-    return estimatedSwitchDurationMinutes;
-  }
-
-  public void setEstimatedSwitchDurationMinutes(Long estimatedSwitchDurationMinutes) {
-    this.estimatedSwitchDurationMinutes = estimatedSwitchDurationMinutes;
   }
 
   public VirtualInstance monitoringEnabled(Boolean monitoringEnabled) {
@@ -513,6 +433,26 @@ public class VirtualInstance {
 
   public void setMonitoringEnabled(Boolean monitoringEnabled) {
     this.monitoringEnabled = monitoringEnabled;
+  }
+
+  public VirtualInstance defaultVi(Boolean defaultVi) {
+    this.defaultVi = defaultVi;
+    return this;
+  }
+
+   /**
+   * Get defaultVi
+   * @return defaultVi
+  **/
+
+@JsonProperty("default_vi")
+@ApiModelProperty(value = "")
+  public Boolean isDefaultVi() {
+    return defaultVi;
+  }
+
+  public void setDefaultVi(Boolean defaultVi) {
+    this.defaultVi = defaultVi;
   }
 
   public VirtualInstance defaultPodCount(Integer defaultPodCount) {
@@ -561,18 +501,78 @@ public class VirtualInstance {
   }
 
    /**
-   * unique identifier for virtual instance
+   * Unique identifier for virtual instance.
    * @return id
   **/
 
 @JsonProperty("id")
-@ApiModelProperty(example = "123e4567-e89b-12d3-a456-556642440000", value = "unique identifier for virtual instance")
+@ApiModelProperty(example = "123e4567-e89b-12d3-a456-556642440000", value = "Unique identifier for virtual instance.")
   public String getId() {
     return id;
   }
 
   public void setId(String id) {
     this.id = id;
+  }
+
+  public VirtualInstance rrn(String rrn) {
+    this.rrn = rrn;
+    return this;
+  }
+
+   /**
+   * Virtual Instance RRN.
+   * @return rrn
+  **/
+
+@JsonProperty("rrn")
+@ApiModelProperty(example = "rrn:vi:use1a1:123e4567-e89b-12d3-a456-556642440000", value = "Virtual Instance RRN.")
+  public String getRrn() {
+    return rrn;
+  }
+
+  public void setRrn(String rrn) {
+    this.rrn = rrn;
+  }
+
+  public VirtualInstance autoSuspendSeconds(Integer autoSuspendSeconds) {
+    this.autoSuspendSeconds = autoSuspendSeconds;
+    return this;
+  }
+
+   /**
+   * Number of seconds without queries after which the VI is suspended
+   * @return autoSuspendSeconds
+  **/
+
+@JsonProperty("auto_suspend_seconds")
+@ApiModelProperty(example = "3600", value = "Number of seconds without queries after which the VI is suspended")
+  public Integer getAutoSuspendSeconds() {
+    return autoSuspendSeconds;
+  }
+
+  public void setAutoSuspendSeconds(Integer autoSuspendSeconds) {
+    this.autoSuspendSeconds = autoSuspendSeconds;
+  }
+
+  public VirtualInstance stats(VirtualInstanceStats stats) {
+    this.stats = stats;
+    return this;
+  }
+
+   /**
+   * Stats about this VirtualInstance
+   * @return stats
+  **/
+
+@JsonProperty("stats")
+@ApiModelProperty(value = "Stats about this VirtualInstance")
+  public VirtualInstanceStats getStats() {
+    return stats;
+  }
+
+  public void setStats(VirtualInstanceStats stats) {
+    this.stats = stats;
   }
 
 
@@ -585,22 +585,27 @@ public class VirtualInstance {
       return false;
     }
     VirtualInstance virtualInstance = (VirtualInstance) o;
-    return Objects.equals(this.state, virtualInstance.state) &&
-        Objects.equals(this.currentType, virtualInstance.currentType) &&
-        Objects.equals(this.desiredType, virtualInstance.desiredType) &&
+    return Objects.equals(this.name, virtualInstance.name) &&
+        Objects.equals(this.description, virtualInstance.description) &&
+        Objects.equals(this.createdBy, virtualInstance.createdBy) &&
+        Objects.equals(this.createdAt, virtualInstance.createdAt) &&
+        Objects.equals(this.resumedAt, virtualInstance.resumedAt) &&
+        Objects.equals(this.state, virtualInstance.state) &&
         Objects.equals(this.currentSize, virtualInstance.currentSize) &&
         Objects.equals(this.desiredSize, virtualInstance.desiredSize) &&
-        Objects.equals(this.lastUpdated, virtualInstance.lastUpdated) &&
-        Objects.equals(this.estimatedSwitchDurationMinutes, virtualInstance.estimatedSwitchDurationMinutes) &&
         Objects.equals(this.monitoringEnabled, virtualInstance.monitoringEnabled) &&
+        Objects.equals(this.defaultVi, virtualInstance.defaultVi) &&
         Objects.equals(this.defaultPodCount, virtualInstance.defaultPodCount) &&
         Objects.equals(this.scaledPodCount, virtualInstance.scaledPodCount) &&
-        Objects.equals(this.id, virtualInstance.id);
+        Objects.equals(this.id, virtualInstance.id) &&
+        Objects.equals(this.rrn, virtualInstance.rrn) &&
+        Objects.equals(this.autoSuspendSeconds, virtualInstance.autoSuspendSeconds) &&
+        Objects.equals(this.stats, virtualInstance.stats);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(state, currentType, desiredType, currentSize, desiredSize, lastUpdated, estimatedSwitchDurationMinutes, monitoringEnabled, defaultPodCount, scaledPodCount, id);
+    return Objects.hash(name, description, createdBy, createdAt, resumedAt, state, currentSize, desiredSize, monitoringEnabled, defaultVi, defaultPodCount, scaledPodCount, id, rrn, autoSuspendSeconds, stats);
   }
 
 
@@ -609,17 +614,22 @@ public class VirtualInstance {
     StringBuilder sb = new StringBuilder();
     sb.append("class VirtualInstance {\n");
     
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
+    sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
+    sb.append("    resumedAt: ").append(toIndentedString(resumedAt)).append("\n");
     sb.append("    state: ").append(toIndentedString(state)).append("\n");
-    sb.append("    currentType: ").append(toIndentedString(currentType)).append("\n");
-    sb.append("    desiredType: ").append(toIndentedString(desiredType)).append("\n");
     sb.append("    currentSize: ").append(toIndentedString(currentSize)).append("\n");
     sb.append("    desiredSize: ").append(toIndentedString(desiredSize)).append("\n");
-    sb.append("    lastUpdated: ").append(toIndentedString(lastUpdated)).append("\n");
-    sb.append("    estimatedSwitchDurationMinutes: ").append(toIndentedString(estimatedSwitchDurationMinutes)).append("\n");
     sb.append("    monitoringEnabled: ").append(toIndentedString(monitoringEnabled)).append("\n");
+    sb.append("    defaultVi: ").append(toIndentedString(defaultVi)).append("\n");
     sb.append("    defaultPodCount: ").append(toIndentedString(defaultPodCount)).append("\n");
     sb.append("    scaledPodCount: ").append(toIndentedString(scaledPodCount)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    rrn: ").append(toIndentedString(rrn)).append("\n");
+    sb.append("    autoSuspendSeconds: ").append(toIndentedString(autoSuspendSeconds)).append("\n");
+    sb.append("    stats: ").append(toIndentedString(stats)).append("\n");
     sb.append("}");
     return sb.toString();
   }

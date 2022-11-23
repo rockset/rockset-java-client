@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * OrganizationResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class OrganizationResponse {
   @SerializedName("data")
   private Organization data = null;
@@ -41,12 +41,12 @@ public class OrganizationResponse {
   }
 
    /**
-   * Organization object
+   * Organization object.
    * @return data
   **/
 
 @JsonProperty("data")
-@ApiModelProperty(value = "Organization object")
+@ApiModelProperty(value = "Organization object.")
   public Organization getData() {
     return data;
   }

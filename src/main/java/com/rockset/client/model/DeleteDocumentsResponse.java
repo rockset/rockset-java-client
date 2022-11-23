@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * DeleteDocumentsResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class DeleteDocumentsResponse {
   @SerializedName("data")
   private List<DocumentStatus> data = null;
@@ -51,12 +51,12 @@ public class DeleteDocumentsResponse {
   }
 
    /**
-   * information about deleted documents
+   * Information about deleted documents.
    * @return data
   **/
 
 @JsonProperty("data")
-@ApiModelProperty(value = "information about deleted documents")
+@ApiModelProperty(value = "Information about deleted documents.")
   public List<DocumentStatus> getData() {
     return data;
   }

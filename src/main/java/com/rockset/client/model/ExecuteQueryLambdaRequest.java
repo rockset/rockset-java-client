@@ -20,6 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.rockset.client.model.AsyncQueryOptions;
 import com.rockset.client.model.QueryParameter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -32,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * ExecuteQueryLambdaRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class ExecuteQueryLambdaRequest {
   @SerializedName("parameters")
   private List<QueryParameter> parameters = null;
@@ -49,6 +50,12 @@ public class ExecuteQueryLambdaRequest {
   @SerializedName("initial_paginate_response_doc_count")
   private Integer initialPaginateResponseDocCount = null;
 
+  @SerializedName("async_options")
+  private AsyncQueryOptions asyncOptions = null;
+
+  @SerializedName("virtual_instance_id")
+  private String virtualInstanceId = null;
+
   public ExecuteQueryLambdaRequest parameters(List<QueryParameter> parameters) {
     this.parameters = parameters;
     return this;
@@ -63,12 +70,12 @@ public class ExecuteQueryLambdaRequest {
   }
 
    /**
-   * list of named parameters
+   * List of named parameters.
    * @return parameters
   **/
 
 @JsonProperty("parameters")
-@ApiModelProperty(value = "list of named parameters")
+@ApiModelProperty(value = "List of named parameters.")
   public List<QueryParameter> getParameters() {
     return parameters;
   }
@@ -83,12 +90,12 @@ public class ExecuteQueryLambdaRequest {
   }
 
    /**
-   * Row limit to use if no limit specified in the SQL query text
+   * Row limit to use if no limit specified in the SQL query text.
    * @return defaultRowLimit
   **/
 
 @JsonProperty("default_row_limit")
-@ApiModelProperty(value = "Row limit to use if no limit specified in the SQL query text")
+@ApiModelProperty(value = "Row limit to use if no limit specified in the SQL query text.")
   public Integer getDefaultRowLimit() {
     return defaultRowLimit;
   }
@@ -103,12 +110,12 @@ public class ExecuteQueryLambdaRequest {
   }
 
    /**
-   * Whether to generate warnings
+   * Whether to generate warnings.
    * @return generateWarnings
   **/
 
 @JsonProperty("generate_warnings")
-@ApiModelProperty(value = "Whether to generate warnings")
+@ApiModelProperty(value = "Whether to generate warnings.")
   public Boolean isGenerateWarnings() {
     return generateWarnings;
   }
@@ -157,6 +164,46 @@ public class ExecuteQueryLambdaRequest {
     this.initialPaginateResponseDocCount = initialPaginateResponseDocCount;
   }
 
+  public ExecuteQueryLambdaRequest asyncOptions(AsyncQueryOptions asyncOptions) {
+    this.asyncOptions = asyncOptions;
+    return this;
+  }
+
+   /**
+   * Options for configuring Asynchronous Query Mode (beta).
+   * @return asyncOptions
+  **/
+
+@JsonProperty("async_options")
+@ApiModelProperty(value = "Options for configuring Asynchronous Query Mode (beta).")
+  public AsyncQueryOptions getAsyncOptions() {
+    return asyncOptions;
+  }
+
+  public void setAsyncOptions(AsyncQueryOptions asyncOptions) {
+    this.asyncOptions = asyncOptions;
+  }
+
+  public ExecuteQueryLambdaRequest virtualInstanceId(String virtualInstanceId) {
+    this.virtualInstanceId = virtualInstanceId;
+    return this;
+  }
+
+   /**
+   * Virtual instance on which to run the query.
+   * @return virtualInstanceId
+  **/
+
+@JsonProperty("virtual_instance_id")
+@ApiModelProperty(value = "Virtual instance on which to run the query.")
+  public String getVirtualInstanceId() {
+    return virtualInstanceId;
+  }
+
+  public void setVirtualInstanceId(String virtualInstanceId) {
+    this.virtualInstanceId = virtualInstanceId;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -171,12 +218,14 @@ public class ExecuteQueryLambdaRequest {
         Objects.equals(this.defaultRowLimit, executeQueryLambdaRequest.defaultRowLimit) &&
         Objects.equals(this.generateWarnings, executeQueryLambdaRequest.generateWarnings) &&
         Objects.equals(this.paginate, executeQueryLambdaRequest.paginate) &&
-        Objects.equals(this.initialPaginateResponseDocCount, executeQueryLambdaRequest.initialPaginateResponseDocCount);
+        Objects.equals(this.initialPaginateResponseDocCount, executeQueryLambdaRequest.initialPaginateResponseDocCount) &&
+        Objects.equals(this.asyncOptions, executeQueryLambdaRequest.asyncOptions) &&
+        Objects.equals(this.virtualInstanceId, executeQueryLambdaRequest.virtualInstanceId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(parameters, defaultRowLimit, generateWarnings, paginate, initialPaginateResponseDocCount);
+    return Objects.hash(parameters, defaultRowLimit, generateWarnings, paginate, initialPaginateResponseDocCount, asyncOptions, virtualInstanceId);
   }
 
 
@@ -190,6 +239,8 @@ public class ExecuteQueryLambdaRequest {
     sb.append("    generateWarnings: ").append(toIndentedString(generateWarnings)).append("\n");
     sb.append("    paginate: ").append(toIndentedString(paginate)).append("\n");
     sb.append("    initialPaginateResponseDocCount: ").append(toIndentedString(initialPaginateResponseDocCount)).append("\n");
+    sb.append("    asyncOptions: ").append(toIndentedString(asyncOptions)).append("\n");
+    sb.append("    virtualInstanceId: ").append(toIndentedString(virtualInstanceId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

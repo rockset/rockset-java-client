@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateAliasRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class CreateAliasRequest {
   @SerializedName("name")
   private String name = null;
@@ -48,12 +48,12 @@ public class CreateAliasRequest {
   }
 
    /**
-   * Alias name
+   * Alias name.
    * @return name
   **/
 
 @JsonProperty("name")
-@ApiModelProperty(example = "aliasName", required = true, value = "Alias name")
+@ApiModelProperty(example = "aliasName", required = true, value = "Alias name.")
   public String getName() {
     return name;
   }
@@ -68,12 +68,12 @@ public class CreateAliasRequest {
   }
 
    /**
-   * optional description
+   * Optional description.
    * @return description
   **/
 
 @JsonProperty("description")
-@ApiModelProperty(example = "version alias", value = "optional description")
+@ApiModelProperty(example = "version alias", value = "Optional description.")
   public String getDescription() {
     return description;
   }
@@ -93,12 +93,12 @@ public class CreateAliasRequest {
   }
 
    /**
-   * list of fully qualified collection names referenced by alias
+   * List of fully qualified collection names referenced by alias.
    * @return collections
   **/
 
 @JsonProperty("collections")
-@ApiModelProperty(example = "\"[\\\"commons.foo\\\", \\\"prod.demo\\\"]\"", required = true, value = "list of fully qualified collection names referenced by alias")
+@ApiModelProperty(example = "\"[\\\"commons.foo\\\", \\\"prod.demo\\\"]\"", required = true, value = "List of fully qualified collection names referenced by alias.")
   public List<String> getCollections() {
     return collections;
   }

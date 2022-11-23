@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateWorkspaceRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class CreateWorkspaceRequest {
   @SerializedName("name")
   private String name = null;
@@ -43,12 +43,12 @@ public class CreateWorkspaceRequest {
   }
 
    /**
-   * descriptive label and unique identifier
+   * Descriptive label and unique identifier.
    * @return name
   **/
 
 @JsonProperty("name")
-@ApiModelProperty(example = "event_logs", required = true, value = "descriptive label and unique identifier")
+@ApiModelProperty(example = "event_logs", required = true, value = "Descriptive label and unique identifier.")
   public String getName() {
     return name;
   }
@@ -63,12 +63,12 @@ public class CreateWorkspaceRequest {
   }
 
    /**
-   * longer explanation for the workspace
+   * Longer explanation for the workspace.
    * @return description
   **/
 
 @JsonProperty("description")
-@ApiModelProperty(example = "Datasets of system logs for the ops team.", value = "longer explanation for the workspace")
+@ApiModelProperty(example = "Datasets of system logs for the ops team.", value = "Longer explanation for the workspace.")
   public String getDescription() {
     return description;
   }

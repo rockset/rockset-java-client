@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CollectionStats
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class CollectionStats {
   @SerializedName("doc_count")
   private Long docCount = null;
@@ -85,12 +85,12 @@ public class CollectionStats {
   }
 
    /**
-   * number of documents in the collection
+   * Number of documents in the collection.
    * @return docCount
   **/
 
 @JsonProperty("doc_count")
-@ApiModelProperty(example = "2145", value = "number of documents in the collection")
+@ApiModelProperty(example = "2145", value = "Number of documents in the collection.")
   public Long getDocCount() {
     return docCount;
   }
@@ -105,12 +105,12 @@ public class CollectionStats {
   }
 
    /**
-   * number of documents purged from the collection
+   * Number of documents purged from the collection.
    * @return purgedDocCount
   **/
 
 @JsonProperty("purged_doc_count")
-@ApiModelProperty(example = "2145", value = "number of documents purged from the collection")
+@ApiModelProperty(example = "2145", value = "Number of documents purged from the collection.")
   public Long getPurgedDocCount() {
     return purgedDocCount;
   }
@@ -125,12 +125,12 @@ public class CollectionStats {
   }
 
    /**
-   * number between 0 and 1 that indicates progress of collection creation
+   * Number between 0 and 1 that indicates progress of collection creation.
    * @return fillProgress
   **/
 
 @JsonProperty("fill_progress")
-@ApiModelProperty(example = "0.6", value = "number between 0 and 1 that indicates progress of collection creation")
+@ApiModelProperty(example = "0.6", value = "Number between 0 and 1 that indicates progress of collection creation.")
   public Double getFillProgress() {
     return fillProgress;
   }
@@ -145,12 +145,12 @@ public class CollectionStats {
   }
 
    /**
-   * milliseconds since Unix epoch Jan 1, 1970
+   * Milliseconds since Unix epoch Jan 1, 1970.
    * @return lastQueriedMs
   **/
 
 @JsonProperty("last_queried_ms")
-@ApiModelProperty(example = "1535101119334", value = "milliseconds since Unix epoch Jan 1, 1970")
+@ApiModelProperty(example = "1535101119334", value = "Milliseconds since Unix epoch Jan 1, 1970.")
   public Long getLastQueriedMs() {
     return lastQueriedMs;
   }
@@ -165,12 +165,12 @@ public class CollectionStats {
   }
 
    /**
-   * milliseconds since Unix epoch Jan 1, 1970
+   * Milliseconds since Unix epoch Jan 1, 1970.
    * @return lastUpdatedMs
   **/
 
 @JsonProperty("last_updated_ms")
-@ApiModelProperty(example = "1535101094433", value = "milliseconds since Unix epoch Jan 1, 1970")
+@ApiModelProperty(example = "1535101094433", value = "Milliseconds since Unix epoch Jan 1, 1970.")
   public Long getLastUpdatedMs() {
     return lastUpdatedMs;
   }
@@ -185,12 +185,12 @@ public class CollectionStats {
   }
 
    /**
-   * total collection size in bytes
+   * Total collection size in bytes.
    * @return totalSize
   **/
 
 @JsonProperty("total_size")
-@ApiModelProperty(example = "123456", value = "total collection size in bytes")
+@ApiModelProperty(example = "123456", value = "Total collection size in bytes.")
   public Long getTotalSize() {
     return totalSize;
   }
@@ -205,12 +205,12 @@ public class CollectionStats {
   }
 
    /**
-   * total collection index size in bytes
+   * Total collection index size in bytes.
    * @return totalIndexSize
   **/
 
 @JsonProperty("total_index_size")
-@ApiModelProperty(example = "123456", value = "total collection index size in bytes")
+@ApiModelProperty(example = "123456", value = "Total collection index size in bytes.")
   public Long getTotalIndexSize() {
     return totalIndexSize;
   }
@@ -225,12 +225,12 @@ public class CollectionStats {
   }
 
    /**
-   * total collection row index size in bytes
+   * Total collection row index size in bytes.
    * @return rowIndexSize
   **/
 
 @JsonProperty("row_index_size")
-@ApiModelProperty(example = "123456", value = "total collection row index size in bytes")
+@ApiModelProperty(example = "123456", value = "Total collection row index size in bytes.")
   public Long getRowIndexSize() {
     return rowIndexSize;
   }
@@ -245,12 +245,12 @@ public class CollectionStats {
   }
 
    /**
-   * total collection column index size in bytes
+   * Total collection column index size in bytes.
    * @return columnIndexSize
   **/
 
 @JsonProperty("column_index_size")
-@ApiModelProperty(example = "123456", value = "total collection column index size in bytes")
+@ApiModelProperty(example = "123456", value = "Total collection column index size in bytes.")
   public Long getColumnIndexSize() {
     return columnIndexSize;
   }
@@ -265,12 +265,12 @@ public class CollectionStats {
   }
 
    /**
-   * total collection inverted index size in bytes
+   * Total collection inverted index size in bytes.
    * @return invertedIndexSize
   **/
 
 @JsonProperty("inverted_index_size")
-@ApiModelProperty(example = "123456", value = "total collection inverted index size in bytes")
+@ApiModelProperty(example = "123456", value = "Total collection inverted index size in bytes.")
   public Long getInvertedIndexSize() {
     return invertedIndexSize;
   }
@@ -285,12 +285,12 @@ public class CollectionStats {
   }
 
    /**
-   * total collection range index size in bytes
+   * Total collection range index size in bytes.
    * @return rangeIndexSize
   **/
 
 @JsonProperty("range_index_size")
-@ApiModelProperty(example = "123456", value = "total collection range index size in bytes")
+@ApiModelProperty(example = "123456", value = "Total collection range index size in bytes.")
   public Long getRangeIndexSize() {
     return rangeIndexSize;
   }
@@ -305,12 +305,12 @@ public class CollectionStats {
   }
 
    /**
-   * total size of bytes purged in bytes
+   * Total size of bytes purged in bytes.
    * @return purgedDocSize
   **/
 
 @JsonProperty("purged_doc_size")
-@ApiModelProperty(example = "123456", value = "total size of bytes purged in bytes")
+@ApiModelProperty(example = "123456", value = "Total size of bytes purged in bytes.")
   public Long getPurgedDocSize() {
     return purgedDocSize;
   }
@@ -325,12 +325,12 @@ public class CollectionStats {
   }
 
    /**
-   * total number of bytes inserted into the collection
+   * Total number of bytes inserted into the collection.
    * @return bytesInserted
   **/
 
 @JsonProperty("bytes_inserted")
-@ApiModelProperty(example = "123456", value = "total number of bytes inserted into the collection")
+@ApiModelProperty(example = "123456", value = "Total number of bytes inserted into the collection.")
   public Long getBytesInserted() {
     return bytesInserted;
   }
@@ -345,12 +345,12 @@ public class CollectionStats {
   }
 
    /**
-   * total number of bytes overwritten in writing into the collection
+   * Total number of bytes overwritten in writing into the collection.
    * @return bytesOverwritten
   **/
 
 @JsonProperty("bytes_overwritten")
-@ApiModelProperty(example = "123456", value = "total number of bytes overwritten in writing into the collection")
+@ApiModelProperty(example = "123456", value = "Total number of bytes overwritten in writing into the collection.")
   public Long getBytesOverwritten() {
     return bytesOverwritten;
   }
@@ -365,12 +365,12 @@ public class CollectionStats {
   }
 
    /**
-   * total number of bytes inserted into the collection during bulk
+   * Total number of bytes inserted into the collection during bulk.
    * @return bulkBytesInserted
   **/
 
 @JsonProperty("bulk_bytes_inserted")
-@ApiModelProperty(value = "total number of bytes inserted into the collection during bulk")
+@ApiModelProperty(value = "Total number of bytes inserted into the collection during bulk.")
   public Long getBulkBytesInserted() {
     return bulkBytesInserted;
   }
@@ -385,12 +385,12 @@ public class CollectionStats {
   }
 
    /**
-   * total number of bytes overwritten in writing into the collection during bulk
+   * Total number of bytes overwritten in writing into the collection during bulk.
    * @return bulkBytesOverwritten
   **/
 
 @JsonProperty("bulk_bytes_overwritten")
-@ApiModelProperty(value = "total number of bytes overwritten in writing into the collection during bulk")
+@ApiModelProperty(value = "Total number of bytes overwritten in writing into the collection during bulk.")
   public Long getBulkBytesOverwritten() {
     return bulkBytesOverwritten;
   }

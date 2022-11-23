@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryLambda
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class QueryLambda {
   @SerializedName("workspace")
   private String workspace = null;
@@ -61,12 +61,12 @@ public class QueryLambda {
   }
 
    /**
-   * workspace of this Query Lambda
+   * Workspace of this Query Lambda.
    * @return workspace
   **/
 
 @JsonProperty("workspace")
-@ApiModelProperty(example = "commons", value = "workspace of this Query Lambda")
+@ApiModelProperty(example = "commons", value = "Workspace of this Query Lambda.")
   public String getWorkspace() {
     return workspace;
   }
@@ -81,12 +81,12 @@ public class QueryLambda {
   }
 
    /**
-   * user that created this Query Lambda
+   * User that created this Query Lambda.
    * @return lastUpdatedBy
   **/
 
 @JsonProperty("last_updated_by")
-@ApiModelProperty(example = "..@rockset.com", value = "user that created this Query Lambda")
+@ApiModelProperty(example = "..@rockset.com", value = "User that created this Query Lambda.")
   public String getLastUpdatedBy() {
     return lastUpdatedBy;
   }
@@ -101,12 +101,12 @@ public class QueryLambda {
   }
 
    /**
-   * ISO-8601 date of when Query Lambda was last updated
+   * ISO-8601 date of when Query Lambda was last updated.
    * @return lastUpdated
   **/
 
 @JsonProperty("last_updated")
-@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date of when Query Lambda was last updated")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date of when Query Lambda was last updated.")
   public String getLastUpdated() {
     return lastUpdated;
   }
@@ -121,12 +121,12 @@ public class QueryLambda {
   }
 
    /**
-   * Query Lambda name
+   * Query Lambda name.
    * @return name
   **/
 
 @JsonProperty("name")
-@ApiModelProperty(example = "myQuery", value = "Query Lambda name")
+@ApiModelProperty(example = "myQuery", value = "Query Lambda name.")
   public String getName() {
     return name;
   }
@@ -141,12 +141,12 @@ public class QueryLambda {
   }
 
    /**
-   * number of Query Lambda versions
+   * Number of Query Lambda versions.
    * @return versionCount
   **/
 
 @JsonProperty("version_count")
-@ApiModelProperty(example = "1", value = "number of Query Lambda versions")
+@ApiModelProperty(example = "1", value = "Number of Query Lambda versions.")
   public Integer getVersionCount() {
     return versionCount;
   }
@@ -169,12 +169,12 @@ public class QueryLambda {
   }
 
    /**
-   * collections/aliases queried by underlying SQL query
+   * Collections/aliases queried by underlying SQL query.
    * @return collections
   **/
 
 @JsonProperty("collections")
-@ApiModelProperty(value = "collections/aliases queried by underlying SQL query")
+@ApiModelProperty(value = "Collections/aliases queried by underlying SQL query.")
   public List<String> getCollections() {
     return collections;
   }
@@ -189,12 +189,12 @@ public class QueryLambda {
   }
 
    /**
-   * Query Lambda version details for most recently created version
+   * Query Lambda version details for most recently created version.
    * @return latestVersion
   **/
 
 @JsonProperty("latest_version")
-@ApiModelProperty(value = "Query Lambda version details for most recently created version")
+@ApiModelProperty(value = "Query Lambda version details for most recently created version.")
   public QueryLambdaVersion getLatestVersion() {
     return latestVersion;
   }

@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryResponseStats
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class QueryResponseStats {
   @SerializedName("elapsed_time_ms")
   private Long elapsedTimeMs = null;
@@ -43,12 +43,12 @@ public class QueryResponseStats {
   }
 
    /**
-   * query time in milliseconds
+   * Query time in milliseconds.
    * @return elapsedTimeMs
   **/
 
 @JsonProperty("elapsed_time_ms")
-@ApiModelProperty(example = "126", value = "query time in milliseconds")
+@ApiModelProperty(example = "126", value = "Query time in milliseconds.")
   public Long getElapsedTimeMs() {
     return elapsedTimeMs;
   }
@@ -63,12 +63,12 @@ public class QueryResponseStats {
   }
 
    /**
-   * time query was throttled by admission control
+   * Time query was throttled by admission control.
    * @return throttledTimeMicros
   **/
 
 @JsonProperty("throttled_time_micros")
-@ApiModelProperty(example = "126", value = "time query was throttled by admission control")
+@ApiModelProperty(example = "126", value = "Time query was throttled by admission control.")
   public Long getThrottledTimeMicros() {
     return throttledTimeMicros;
   }

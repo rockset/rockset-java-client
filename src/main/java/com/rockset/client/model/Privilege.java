@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Privilege
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class Privilege {
   /**
    * The action allowed by this privilege.
@@ -55,6 +55,8 @@ public class Privilege {
     UPDATE_SETTINGS_GLOBAL("UPDATESETTINGSGLOBAL"),
     
     GET_METRICS_GLOBAL("GETMETRICSGLOBAL"),
+    
+    CREATE_VI_GLOBAL("CREATEVIGLOBAL"),
     
     UPDATE_VI_GLOBAL("UPDATEVIGLOBAL"),
     
@@ -114,7 +116,17 @@ public class Privilege {
     
     CREATE_VIEW_WS("CREATEVIEWWS"),
     
-    DELETE_VIEW_WS("DELETEVIEWWS");
+    DELETE_VIEW_WS("DELETEVIEWWS"),
+    
+    ALL_VI_ACTIONS("ALLVIACTIONS"),
+    
+    QUERY_VI("QUERYVI"),
+    
+    UPDATE_VI("UPDATEVI"),
+    
+    SUSPEND_RESUME_VI("SUSPENDRESUMEVI"),
+    
+    DELETE_VI("DELETEVI");
 
     private String value;
 
@@ -174,7 +186,7 @@ public class Privilege {
   **/
 
 @JsonProperty("action")
-@ApiModelProperty(example = "Create collection", value = "The action allowed by this privilege.")
+@ApiModelProperty(example = "CREATE_COLLECTION_WS", value = "The action allowed by this privilege.")
   public ActionEnum getAction() {
     return action;
   }
@@ -209,12 +221,12 @@ public class Privilege {
   }
 
    /**
-   * Cluster ID (&#x60;rs2&#x60; for us-west-2, &#x60;use1a1&#x60; for us-east-1) for which the action is allowed. Defaults to &#39;*All*&#39; if not specified.
+   * Cluster ID (&#x60;usw2a1&#x60; for us-west-2, &#x60;use1a1&#x60; for us-east-1, &#x60;euc1a1&#x60; for eu-central-1) for which the action is allowed. Defaults to &#39;*All*&#39; if not specified.
    * @return cluster
   **/
 
 @JsonProperty("cluster")
-@ApiModelProperty(example = "*ALL*", value = "Cluster ID (`rs2` for us-west-2, `use1a1` for us-east-1) for which the action is allowed. Defaults to '*All*' if not specified.")
+@ApiModelProperty(example = "*ALL*", value = "Cluster ID (`usw2a1` for us-west-2, `use1a1` for us-east-1, `euc1a1` for eu-central-1) for which the action is allowed. Defaults to '*All*' if not specified.")
   public String getCluster() {
     return cluster;
   }

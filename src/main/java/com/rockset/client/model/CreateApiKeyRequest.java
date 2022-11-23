@@ -29,13 +29,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateApiKeyRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class CreateApiKeyRequest {
   @SerializedName("name")
   private String name = null;
 
   @SerializedName("role")
   private String role = null;
+
+  @SerializedName("created_by")
+  private String createdBy = null;
 
   public CreateApiKeyRequest name(String name) {
     this.name = name;
@@ -77,6 +80,26 @@ public class CreateApiKeyRequest {
     this.role = role;
   }
 
+  public CreateApiKeyRequest createdBy(String createdBy) {
+    this.createdBy = createdBy;
+    return this;
+  }
+
+   /**
+   * Get createdBy
+   * @return createdBy
+  **/
+
+@JsonProperty("created_by")
+@ApiModelProperty(value = "")
+  public String getCreatedBy() {
+    return createdBy;
+  }
+
+  public void setCreatedBy(String createdBy) {
+    this.createdBy = createdBy;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -88,12 +111,13 @@ public class CreateApiKeyRequest {
     }
     CreateApiKeyRequest createApiKeyRequest = (CreateApiKeyRequest) o;
     return Objects.equals(this.name, createApiKeyRequest.name) &&
-        Objects.equals(this.role, createApiKeyRequest.role);
+        Objects.equals(this.role, createApiKeyRequest.role) &&
+        Objects.equals(this.createdBy, createApiKeyRequest.createdBy);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, role);
+    return Objects.hash(name, role, createdBy);
   }
 
 
@@ -104,6 +128,7 @@ public class CreateApiKeyRequest {
     
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    role: ").append(toIndentedString(role)).append("\n");
+    sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
     sb.append("}");
     return sb.toString();
   }

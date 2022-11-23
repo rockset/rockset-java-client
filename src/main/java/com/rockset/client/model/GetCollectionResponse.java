@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * GetCollectionResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class GetCollectionResponse {
   @SerializedName("data")
   private Collection data = null;
@@ -41,12 +41,12 @@ public class GetCollectionResponse {
   }
 
    /**
-   * collection that was requested
+   * Collection that was requested.
    * @return data
   **/
 
 @JsonProperty("data")
-@ApiModelProperty(value = "collection that was requested")
+@ApiModelProperty(value = "Collection that was requested.")
   public Collection getData() {
     return data;
   }

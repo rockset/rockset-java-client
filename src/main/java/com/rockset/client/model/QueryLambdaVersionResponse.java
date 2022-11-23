@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryLambdaVersionResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class QueryLambdaVersionResponse {
   @SerializedName("data")
   private QueryLambdaVersion data = null;
@@ -41,12 +41,12 @@ public class QueryLambdaVersionResponse {
   }
 
    /**
-   * Query Lambda version details
+   * Query Lambda version details.
    * @return data
   **/
 
 @JsonProperty("data")
-@ApiModelProperty(value = "Query Lambda version details")
+@ApiModelProperty(value = "Query Lambda version details.")
   public QueryLambdaVersion getData() {
     return data;
   }

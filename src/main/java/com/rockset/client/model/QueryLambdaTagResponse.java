@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryLambdaTagResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class QueryLambdaTagResponse {
   @SerializedName("data")
   private QueryLambdaTag data = null;
@@ -41,12 +41,12 @@ public class QueryLambdaTagResponse {
   }
 
    /**
-   * updated Query Lambda tag
+   * Updated Query Lambda tag.
    * @return data
   **/
 
 @JsonProperty("data")
-@ApiModelProperty(value = "updated Query Lambda tag")
+@ApiModelProperty(value = "Updated Query Lambda tag.")
   public QueryLambdaTag getData() {
     return data;
   }

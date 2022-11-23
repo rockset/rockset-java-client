@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * ListQueryLambdaTagsResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class ListQueryLambdaTagsResponse {
   @SerializedName("data")
   private List<QueryLambdaTag> data = null;
@@ -51,12 +51,12 @@ public class ListQueryLambdaTagsResponse {
   }
 
    /**
-   * list of all tags associated with a Query Lambda
+   * List of all tags associated with a Query Lambda.
    * @return data
   **/
 
 @JsonProperty("data")
-@ApiModelProperty(value = "list of all tags associated with a Query Lambda")
+@ApiModelProperty(value = "List of all tags associated with a Query Lambda.")
   public List<QueryLambdaTag> getData() {
     return data;
   }

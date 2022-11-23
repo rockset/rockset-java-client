@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryFieldType
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class QueryFieldType {
   @SerializedName("name")
   private String name = null;
@@ -43,12 +43,12 @@ public class QueryFieldType {
   }
 
    /**
-   * name of the field
+   * Name of the field.
    * @return name
   **/
 
 @JsonProperty("name")
-@ApiModelProperty(example = "_id", required = true, value = "name of the field")
+@ApiModelProperty(example = "_id", required = true, value = "Name of the field.")
   public String getName() {
     return name;
   }
@@ -63,12 +63,12 @@ public class QueryFieldType {
   }
 
    /**
-   * data type of the field
+   * Data type of the field.
    * @return type
   **/
 
 @JsonProperty("type")
-@ApiModelProperty(example = "string", required = true, value = "data type of the field")
+@ApiModelProperty(example = "string", required = true, value = "Data type of the field.")
   public String getType() {
     return type;
   }

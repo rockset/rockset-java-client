@@ -31,6 +31,7 @@ import com.rockset.client.model.SourceKafka;
 import com.rockset.client.model.SourceKinesis;
 import com.rockset.client.model.SourceMongoDb;
 import com.rockset.client.model.SourceS3;
+import com.rockset.client.model.SourceSnowflake;
 import com.rockset.client.model.Status;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -43,8 +44,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "Details about the data source for the given collection. Only one of the following fields are allowed to be defined. Only collections can act as data sources for views. ")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class Source {
+  @SerializedName("id")
+  private String id = null;
+
   @SerializedName("integration_name")
   private String integrationName = null;
 
@@ -78,11 +82,34 @@ public class Source {
   @SerializedName("mongodb")
   private SourceMongoDb mongodb = null;
 
+  @SerializedName("snowflake")
+  private SourceSnowflake snowflake = null;
+
   @SerializedName("status")
   private Status status = null;
 
   @SerializedName("format_params")
   private FormatParams formatParams = null;
+
+  public Source id(String id) {
+    this.id = id;
+    return this;
+  }
+
+   /**
+   * Unique source identifier.
+   * @return id
+  **/
+
+@JsonProperty("id")
+@ApiModelProperty(example = "a1df483c-734e-485b-8005-f46386ef42f6", value = "Unique source identifier.")
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
 
   public Source integrationName(String integrationName) {
     this.integrationName = integrationName;
@@ -90,12 +117,12 @@ public class Source {
   }
 
    /**
-   * name of integration to use
+   * Name of integration to use.
    * @return integrationName
   **/
 
 @JsonProperty("integration_name")
-@ApiModelProperty(example = "aws-integration", required = true, value = "name of integration to use")
+@ApiModelProperty(example = "aws-integration", value = "Name of integration to use.")
   public String getIntegrationName() {
     return integrationName;
   }
@@ -110,12 +137,12 @@ public class Source {
   }
 
    /**
-   * configuration for ingestion from S3
+   * Configuration for ingestion from S3.
    * @return s3
   **/
 
 @JsonProperty("s3")
-@ApiModelProperty(value = "configuration for ingestion from S3")
+@ApiModelProperty(value = "Configuration for ingestion from S3.")
   public SourceS3 getS3() {
     return s3;
   }
@@ -130,12 +157,12 @@ public class Source {
   }
 
    /**
-   * configuration for ingestion from kinesis stream
+   * Configuration for ingestion from kinesis stream.
    * @return kinesis
   **/
 
 @JsonProperty("kinesis")
-@ApiModelProperty(value = "configuration for ingestion from kinesis stream")
+@ApiModelProperty(value = "Configuration for ingestion from kinesis stream.")
   public SourceKinesis getKinesis() {
     return kinesis;
   }
@@ -150,12 +177,12 @@ public class Source {
   }
 
    /**
-   * configuration for ingestion from GCS
+   * Configuration for ingestion from GCS.
    * @return gcs
   **/
 
 @JsonProperty("gcs")
-@ApiModelProperty(value = "configuration for ingestion from GCS")
+@ApiModelProperty(value = "Configuration for ingestion from GCS.")
   public SourceGcs getGcs() {
     return gcs;
   }
@@ -170,12 +197,12 @@ public class Source {
   }
 
    /**
-   * Get azureBlobStorage
+   * Configuration for ingestion from Azure Blob Storage.
    * @return azureBlobStorage
   **/
 
 @JsonProperty("azure_blob_storage")
-@ApiModelProperty(value = "")
+@ApiModelProperty(value = "Configuration for ingestion from Azure Blob Storage.")
   public SourceAzureBlobStorage getAzureBlobStorage() {
     return azureBlobStorage;
   }
@@ -190,12 +217,12 @@ public class Source {
   }
 
    /**
-   * Get azureServiceBus
+   * Configuration for ingestion from Azure Service Bus.
    * @return azureServiceBus
   **/
 
 @JsonProperty("azure_service_bus")
-@ApiModelProperty(value = "")
+@ApiModelProperty(value = "Configuration for ingestion from Azure Service Bus.")
   public SourceAzureServiceBus getAzureServiceBus() {
     return azureServiceBus;
   }
@@ -210,12 +237,12 @@ public class Source {
   }
 
    /**
-   * Get azureEventHubs
+   * Configuration for ingestion from Azure Event Hubs.
    * @return azureEventHubs
   **/
 
 @JsonProperty("azure_event_hubs")
-@ApiModelProperty(value = "")
+@ApiModelProperty(value = "Configuration for ingestion from Azure Event Hubs.")
   public SourceAzureEventHubs getAzureEventHubs() {
     return azureEventHubs;
   }
@@ -230,12 +257,12 @@ public class Source {
   }
 
    /**
-   * configuration for ingestion from  a dynamodb table
+   * Configuration for ingestion from  a dynamodb table.
    * @return dynamodb
   **/
 
 @JsonProperty("dynamodb")
-@ApiModelProperty(value = "configuration for ingestion from  a dynamodb table")
+@ApiModelProperty(value = "Configuration for ingestion from  a dynamodb table.")
   public SourceDynamoDb getDynamodb() {
     return dynamodb;
   }
@@ -250,12 +277,12 @@ public class Source {
   }
 
    /**
-   * file upload details
+   * File upload details.
    * @return fileUpload
   **/
 
 @JsonProperty("file_upload")
-@ApiModelProperty(value = "file upload details")
+@ApiModelProperty(value = "File upload details.")
   public SourceFileUpload getFileUpload() {
     return fileUpload;
   }
@@ -270,12 +297,12 @@ public class Source {
   }
 
    /**
-   * kafka collection identifier
+   * Kafka collection identifier.
    * @return kafka
   **/
 
 @JsonProperty("kafka")
-@ApiModelProperty(value = "kafka collection identifier")
+@ApiModelProperty(value = "Kafka collection identifier.")
   public SourceKafka getKafka() {
     return kafka;
   }
@@ -290,12 +317,12 @@ public class Source {
   }
 
    /**
-   * MongoDB collection details
+   * MongoDB collection details.
    * @return mongodb
   **/
 
 @JsonProperty("mongodb")
-@ApiModelProperty(value = "MongoDB collection details")
+@ApiModelProperty(value = "MongoDB collection details.")
   public SourceMongoDb getMongodb() {
     return mongodb;
   }
@@ -304,13 +331,33 @@ public class Source {
     this.mongodb = mongodb;
   }
 
+  public Source snowflake(SourceSnowflake snowflake) {
+    this.snowflake = snowflake;
+    return this;
+  }
+
    /**
-   * the ingest status of this source
+   * Configuration for ingestion from Snowflake.
+   * @return snowflake
+  **/
+
+@JsonProperty("snowflake")
+@ApiModelProperty(value = "Configuration for ingestion from Snowflake.")
+  public SourceSnowflake getSnowflake() {
+    return snowflake;
+  }
+
+  public void setSnowflake(SourceSnowflake snowflake) {
+    this.snowflake = snowflake;
+  }
+
+   /**
+   * The ingest status of this source.
    * @return status
   **/
 
 @JsonProperty("status")
-@ApiModelProperty(value = "the ingest status of this source")
+@ApiModelProperty(value = "The ingest status of this source.")
   public Status getStatus() {
     return status;
   }
@@ -321,12 +368,12 @@ public class Source {
   }
 
    /**
-   * format parameters for data from this source
+   * Format parameters for data from this source.
    * @return formatParams
   **/
 
 @JsonProperty("format_params")
-@ApiModelProperty(value = "format parameters for data from this source")
+@ApiModelProperty(value = "Format parameters for data from this source.")
   public FormatParams getFormatParams() {
     return formatParams;
   }
@@ -345,7 +392,8 @@ public class Source {
       return false;
     }
     Source source = (Source) o;
-    return Objects.equals(this.integrationName, source.integrationName) &&
+    return Objects.equals(this.id, source.id) &&
+        Objects.equals(this.integrationName, source.integrationName) &&
         Objects.equals(this.s3, source.s3) &&
         Objects.equals(this.kinesis, source.kinesis) &&
         Objects.equals(this.gcs, source.gcs) &&
@@ -356,13 +404,14 @@ public class Source {
         Objects.equals(this.fileUpload, source.fileUpload) &&
         Objects.equals(this.kafka, source.kafka) &&
         Objects.equals(this.mongodb, source.mongodb) &&
+        Objects.equals(this.snowflake, source.snowflake) &&
         Objects.equals(this.status, source.status) &&
         Objects.equals(this.formatParams, source.formatParams);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(integrationName, s3, kinesis, gcs, azureBlobStorage, azureServiceBus, azureEventHubs, dynamodb, fileUpload, kafka, mongodb, status, formatParams);
+    return Objects.hash(id, integrationName, s3, kinesis, gcs, azureBlobStorage, azureServiceBus, azureEventHubs, dynamodb, fileUpload, kafka, mongodb, snowflake, status, formatParams);
   }
 
 
@@ -371,6 +420,7 @@ public class Source {
     StringBuilder sb = new StringBuilder();
     sb.append("class Source {\n");
     
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    integrationName: ").append(toIndentedString(integrationName)).append("\n");
     sb.append("    s3: ").append(toIndentedString(s3)).append("\n");
     sb.append("    kinesis: ").append(toIndentedString(kinesis)).append("\n");
@@ -382,6 +432,7 @@ public class Source {
     sb.append("    fileUpload: ").append(toIndentedString(fileUpload)).append("\n");
     sb.append("    kafka: ").append(toIndentedString(kafka)).append("\n");
     sb.append("    mongodb: ").append(toIndentedString(mongodb)).append("\n");
+    sb.append("    snowflake: ").append(toIndentedString(snowflake)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    formatParams: ").append(toIndentedString(formatParams)).append("\n");
     sb.append("}");

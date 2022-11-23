@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * User
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class User {
   @SerializedName("created_at")
   private String createdAt = null;
@@ -57,12 +57,12 @@ public class User {
   }
 
    /**
-   * ISO-8601 date
+   * ISO-8601 date.
    * @return createdAt
   **/
 
 @JsonProperty("created_at")
-@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date.")
   public String getCreatedAt() {
     return createdAt;
   }
@@ -77,12 +77,12 @@ public class User {
   }
 
    /**
-   * user email
+   * User email.
    * @return email
   **/
 
 @JsonProperty("email")
-@ApiModelProperty(example = "hello@rockset.com", required = true, value = "user email")
+@ApiModelProperty(example = "hello@rockset.com", required = true, value = "User email.")
   public String getEmail() {
     return email;
   }
@@ -97,12 +97,12 @@ public class User {
   }
 
    /**
-   * user first name
+   * User first name.
    * @return firstName
   **/
 
 @JsonProperty("first_name")
-@ApiModelProperty(example = "John", value = "user first name")
+@ApiModelProperty(example = "John", value = "User first name.")
   public String getFirstName() {
     return firstName;
   }
@@ -117,12 +117,12 @@ public class User {
   }
 
    /**
-   * user last name
+   * User last name.
    * @return lastName
   **/
 
 @JsonProperty("last_name")
-@ApiModelProperty(example = "Doe", value = "user last name")
+@ApiModelProperty(example = "Doe", value = "User last name.")
   public String getLastName() {
     return lastName;
   }
@@ -145,12 +145,12 @@ public class User {
   }
 
    /**
-   * List of roles for a given user
+   * List of roles for a given user.
    * @return roles
   **/
 
 @JsonProperty("roles")
-@ApiModelProperty(example = "\"[\\\"admin\\\", \\\"member\\\", \\\"read-only\\\"]\"", value = "List of roles for a given user")
+@ApiModelProperty(example = "\"[\\\"admin\\\", \\\"member\\\", \\\"read-only\\\"]\"", value = "List of roles for a given user.")
   public List<String> getRoles() {
     return roles;
   }
@@ -165,12 +165,12 @@ public class User {
   }
 
    /**
-   * state of user - NEW / ACTIVE
+   * State of user - NEW / ACTIVE.
    * @return state
   **/
 
 @JsonProperty("state")
-@ApiModelProperty(example = "ACTIVE", value = "state of user - NEW / ACTIVE")
+@ApiModelProperty(example = "ACTIVE", value = "State of user - NEW / ACTIVE.")
   public String getState() {
     return state;
   }

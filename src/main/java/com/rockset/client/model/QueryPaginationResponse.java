@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryPaginationResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class QueryPaginationResponse {
   @SerializedName("results")
   private List<Object> results = null;
@@ -57,12 +57,12 @@ public class QueryPaginationResponse {
   }
 
    /**
-   * List of documents returned by the query
+   * List of documents returned by the query.
    * @return results
   **/
 
 @JsonProperty("results")
-@ApiModelProperty(value = "List of documents returned by the query")
+@ApiModelProperty(value = "List of documents returned by the query.")
   public List<Object> getResults() {
     return results;
   }
@@ -77,12 +77,12 @@ public class QueryPaginationResponse {
   }
 
    /**
-   * Total documents returned by the query
+   * Total documents returned by the query.
    * @return resultsTotalDocCount
   **/
 
 @JsonProperty("results_total_doc_count")
-@ApiModelProperty(value = "Total documents returned by the query")
+@ApiModelProperty(value = "Total documents returned by the query.")
   public Long getResultsTotalDocCount() {
     return resultsTotalDocCount;
   }
@@ -97,12 +97,12 @@ public class QueryPaginationResponse {
   }
 
    /**
-   * Pagination metadata
+   * Pagination metadata.
    * @return pagination
   **/
 
 @JsonProperty("pagination")
-@ApiModelProperty(value = "Pagination metadata")
+@ApiModelProperty(value = "Pagination metadata.")
   public PaginationInfo getPagination() {
     return pagination;
   }

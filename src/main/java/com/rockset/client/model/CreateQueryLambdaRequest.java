@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateQueryLambdaRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class CreateQueryLambdaRequest {
   @SerializedName("name")
   private String name = null;
@@ -41,18 +41,21 @@ public class CreateQueryLambdaRequest {
   @SerializedName("sql")
   private QueryLambdaSql sql = null;
 
+  @SerializedName("is_public")
+  private Boolean isPublic = null;
+
   public CreateQueryLambdaRequest name(String name) {
     this.name = name;
     return this;
   }
 
    /**
-   * Query Lambda name
+   * Query Lambda name.
    * @return name
   **/
 
 @JsonProperty("name")
-@ApiModelProperty(example = "myQueryLambda", required = true, value = "Query Lambda name")
+@ApiModelProperty(example = "myQueryLambda", required = true, value = "Query Lambda name.")
   public String getName() {
     return name;
   }
@@ -67,12 +70,12 @@ public class CreateQueryLambdaRequest {
   }
 
    /**
-   * optional description
+   * Optional description.
    * @return description
   **/
 
 @JsonProperty("description")
-@ApiModelProperty(example = "production version foo", value = "optional description")
+@ApiModelProperty(example = "production version foo", value = "Optional description.")
   public String getDescription() {
     return description;
   }
@@ -87,18 +90,38 @@ public class CreateQueryLambdaRequest {
   }
 
    /**
-   * Query Lambda SQL query
+   * Query Lambda SQL query.
    * @return sql
   **/
 
 @JsonProperty("sql")
-@ApiModelProperty(required = true, value = "Query Lambda SQL query")
+@ApiModelProperty(required = true, value = "Query Lambda SQL query.")
   public QueryLambdaSql getSql() {
     return sql;
   }
 
   public void setSql(QueryLambdaSql sql) {
     this.sql = sql;
+  }
+
+  public CreateQueryLambdaRequest isPublic(Boolean isPublic) {
+    this.isPublic = isPublic;
+    return this;
+  }
+
+   /**
+   * Get isPublic
+   * @return isPublic
+  **/
+
+@JsonProperty("is_public")
+@ApiModelProperty(value = "")
+  public Boolean isIsPublic() {
+    return isPublic;
+  }
+
+  public void setIsPublic(Boolean isPublic) {
+    this.isPublic = isPublic;
   }
 
 
@@ -113,12 +136,13 @@ public class CreateQueryLambdaRequest {
     CreateQueryLambdaRequest createQueryLambdaRequest = (CreateQueryLambdaRequest) o;
     return Objects.equals(this.name, createQueryLambdaRequest.name) &&
         Objects.equals(this.description, createQueryLambdaRequest.description) &&
-        Objects.equals(this.sql, createQueryLambdaRequest.sql);
+        Objects.equals(this.sql, createQueryLambdaRequest.sql) &&
+        Objects.equals(this.isPublic, createQueryLambdaRequest.isPublic);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, description, sql);
+    return Objects.hash(name, description, sql, isPublic);
   }
 
 
@@ -130,6 +154,7 @@ public class CreateQueryLambdaRequest {
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    sql: ").append(toIndentedString(sql)).append("\n");
+    sb.append("    isPublic: ").append(toIndentedString(isPublic)).append("\n");
     sb.append("}");
     return sb.toString();
   }

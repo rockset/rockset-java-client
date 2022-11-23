@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "Workspaces are organizational containers for collections.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class Workspace {
   @SerializedName("created_at")
   private String createdAt = null;
@@ -54,12 +54,12 @@ public class Workspace {
   }
 
    /**
-   * ISO-8601 date of when workspace was created
+   * ISO-8601 date of when workspace was created.
    * @return createdAt
   **/
 
 @JsonProperty("created_at")
-@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date of when workspace was created")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date of when workspace was created.")
   public String getCreatedAt() {
     return createdAt;
   }
@@ -74,12 +74,12 @@ public class Workspace {
   }
 
    /**
-   * email of user who created the workspace
+   * Email of user who created the workspace.
    * @return createdBy
   **/
 
 @JsonProperty("created_by")
-@ApiModelProperty(example = "hello@rockset.com", value = "email of user who created the workspace")
+@ApiModelProperty(example = "hello@rockset.com", value = "Email of user who created the workspace.")
   public String getCreatedBy() {
     return createdBy;
   }
@@ -94,12 +94,12 @@ public class Workspace {
   }
 
    /**
-   * descriptive label and unique identifier
+   * Descriptive label and unique identifier.
    * @return name
   **/
 
 @JsonProperty("name")
-@ApiModelProperty(example = "event_logs", value = "descriptive label and unique identifier")
+@ApiModelProperty(example = "event_logs", value = "Descriptive label and unique identifier.")
   public String getName() {
     return name;
   }
@@ -114,12 +114,12 @@ public class Workspace {
   }
 
    /**
-   * longer explanation for the workspace
+   * Longer explanation for the workspace.
    * @return description
   **/
 
 @JsonProperty("description")
-@ApiModelProperty(example = "Datasets of system logs for the ops team.", value = "longer explanation for the workspace")
+@ApiModelProperty(example = "Datasets of system logs for the ops team.", value = "Longer explanation for the workspace.")
   public String getDescription() {
     return description;
   }
@@ -134,12 +134,12 @@ public class Workspace {
   }
 
    /**
-   * number of collections that are immediate children of workspace
+   * Number of collections that are immediate children of workspace.
    * @return collectionCount
   **/
 
 @JsonProperty("collection_count")
-@ApiModelProperty(example = "3", value = "number of collections that are immediate children of workspace")
+@ApiModelProperty(example = "3", value = "Number of collections that are immediate children of workspace.")
   public Long getCollectionCount() {
     return collectionCount;
   }

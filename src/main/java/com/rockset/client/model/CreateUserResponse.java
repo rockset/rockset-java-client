@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateUserResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class CreateUserResponse {
   @SerializedName("data")
   private User data = null;
@@ -41,12 +41,12 @@ public class CreateUserResponse {
   }
 
    /**
-   * user that was created
+   * User that was created.
    * @return data
   **/
 
 @JsonProperty("data")
-@ApiModelProperty(value = "user that was created")
+@ApiModelProperty(value = "User that was created.")
   public User getData() {
     return data;
   }

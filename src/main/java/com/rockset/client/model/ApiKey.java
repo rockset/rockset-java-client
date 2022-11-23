@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "API keys are used to authenticate requests to Rockset's API. An API key is tied to the user who creates it.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class ApiKey {
   @SerializedName("created_at")
   private String createdAt = null;
@@ -45,6 +45,9 @@ public class ApiKey {
   @SerializedName("last_access_time")
   private String lastAccessTime = null;
 
+  @SerializedName("expiry_time")
+  private String expiryTime = null;
+
   @SerializedName("role")
   private String role = null;
 
@@ -52,7 +55,7 @@ public class ApiKey {
   private String createdBy = null;
 
   /**
-   * current state of this key
+   * Current state of this key.
    */
   @JsonAdapter(StateEnum.Adapter.class)
   public enum StateEnum {
@@ -181,6 +184,26 @@ public class ApiKey {
     this.lastAccessTime = lastAccessTime;
   }
 
+  public ApiKey expiryTime(String expiryTime) {
+    this.expiryTime = expiryTime;
+    return this;
+  }
+
+   /**
+   * The expiration date of this API key.
+   * @return expiryTime
+  **/
+
+@JsonProperty("expiry_time")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "The expiration date of this API key.")
+  public String getExpiryTime() {
+    return expiryTime;
+  }
+
+  public void setExpiryTime(String expiryTime) {
+    this.expiryTime = expiryTime;
+  }
+
   public ApiKey role(String role) {
     this.role = role;
     return this;
@@ -212,7 +235,7 @@ public class ApiKey {
   **/
 
 @JsonProperty("created_by")
-@ApiModelProperty(example = "test@example.com", value = "Email of API key owner.")
+@ApiModelProperty(example = "test@rockset.com", value = "Email of API key owner.")
   public String getCreatedBy() {
     return createdBy;
   }
@@ -227,12 +250,12 @@ public class ApiKey {
   }
 
    /**
-   * current state of this key
+   * Current state of this key.
    * @return state
   **/
 
 @JsonProperty("state")
-@ApiModelProperty(example = "ACTIVE", value = "current state of this key")
+@ApiModelProperty(example = "ACTIVE", value = "Current state of this key.")
   public StateEnum getState() {
     return state;
   }
@@ -255,6 +278,7 @@ public class ApiKey {
         Objects.equals(this.name, apiKey.name) &&
         Objects.equals(this.key, apiKey.key) &&
         Objects.equals(this.lastAccessTime, apiKey.lastAccessTime) &&
+        Objects.equals(this.expiryTime, apiKey.expiryTime) &&
         Objects.equals(this.role, apiKey.role) &&
         Objects.equals(this.createdBy, apiKey.createdBy) &&
         Objects.equals(this.state, apiKey.state);
@@ -262,7 +286,7 @@ public class ApiKey {
 
   @Override
   public int hashCode() {
-    return Objects.hash(createdAt, name, key, lastAccessTime, role, createdBy, state);
+    return Objects.hash(createdAt, name, key, lastAccessTime, expiryTime, role, createdBy, state);
   }
 
 
@@ -275,6 +299,7 @@ public class ApiKey {
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    key: ").append(toIndentedString(key)).append("\n");
     sb.append("    lastAccessTime: ").append(toIndentedString(lastAccessTime)).append("\n");
+    sb.append("    expiryTime: ").append(toIndentedString(expiryTime)).append("\n");
     sb.append("    role: ").append(toIndentedString(role)).append("\n");
     sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
     sb.append("    state: ").append(toIndentedString(state)).append("\n");

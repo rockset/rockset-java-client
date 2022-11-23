@@ -20,6 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.rockset.client.model.AwsRole;
 import com.rockset.client.model.KafkaV3SecurityConfig;
 import com.rockset.client.model.SchemaRegistryConfig;
 import com.rockset.client.model.StatusKafka;
@@ -36,7 +37,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * KafkaIntegration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class KafkaIntegration {
   @SerializedName("kafka_topic_names")
   private List<String> kafkaTopicNames = null;
@@ -45,7 +46,7 @@ public class KafkaIntegration {
   private Map<String, StatusKafka> sourceStatusByTopic = null;
 
   /**
-   * The format of the Kafka topics being tailed
+   * The format of the Kafka topics being tailed.
    */
   @JsonAdapter(KafkaDataFormatEnum.Adapter.class)
   public enum KafkaDataFormatEnum {
@@ -97,6 +98,9 @@ public class KafkaIntegration {
   @SerializedName("connection_string")
   private String connectionString = null;
 
+  @SerializedName("aws_role")
+  private AwsRole awsRole = null;
+
   @SerializedName("use_v3")
   private Boolean useV3 = null;
 
@@ -123,12 +127,12 @@ public class KafkaIntegration {
   }
 
    /**
-   * Kafka topics to tail
+   * Kafka topics to tail.
    * @return kafkaTopicNames
   **/
 
 @JsonProperty("kafka_topic_names")
-@ApiModelProperty(value = "Kafka topics to tail")
+@ApiModelProperty(value = "Kafka topics to tail.")
   public List<String> getKafkaTopicNames() {
     return kafkaTopicNames;
   }
@@ -138,12 +142,12 @@ public class KafkaIntegration {
   }
 
    /**
-   * The status of the Kafka source by topic
+   * The status of the Kafka source by topic.
    * @return sourceStatusByTopic
   **/
 
 @JsonProperty("source_status_by_topic")
-@ApiModelProperty(example = "\"{\\\"topic-a\\\": \\\"DORMANT\\\"}\"", value = "The status of the Kafka source by topic")
+@ApiModelProperty(example = "\"{\\\"topic-a\\\": \\\"DORMANT\\\"}\"", value = "The status of the Kafka source by topic.")
   public Map<String, StatusKafka> getSourceStatusByTopic() {
     return sourceStatusByTopic;
   }
@@ -154,12 +158,12 @@ public class KafkaIntegration {
   }
 
    /**
-   * The format of the Kafka topics being tailed
+   * The format of the Kafka topics being tailed.
    * @return kafkaDataFormat
   **/
 
 @JsonProperty("kafka_data_format")
-@ApiModelProperty(example = "json", value = "The format of the Kafka topics being tailed")
+@ApiModelProperty(example = "JSON", value = "The format of the Kafka topics being tailed.")
   public KafkaDataFormatEnum getKafkaDataFormat() {
     return kafkaDataFormat;
   }
@@ -168,15 +172,44 @@ public class KafkaIntegration {
     this.kafkaDataFormat = kafkaDataFormat;
   }
 
+  public KafkaIntegration connectionString(String connectionString) {
+    this.connectionString = connectionString;
+    return this;
+  }
+
    /**
-   * kafka connection string
+   * Kafka connection string.
    * @return connectionString
   **/
 
 @JsonProperty("connection_string")
-@ApiModelProperty(value = "kafka connection string")
+@ApiModelProperty(value = "Kafka connection string.")
   public String getConnectionString() {
     return connectionString;
+  }
+
+  public void setConnectionString(String connectionString) {
+    this.connectionString = connectionString;
+  }
+
+  public KafkaIntegration awsRole(AwsRole awsRole) {
+    this.awsRole = awsRole;
+    return this;
+  }
+
+   /**
+   * Details of an AWS cross-account role integration.
+   * @return awsRole
+  **/
+
+@JsonProperty("aws_role")
+@ApiModelProperty(value = "Details of an AWS cross-account role integration.")
+  public AwsRole getAwsRole() {
+    return awsRole;
+  }
+
+  public void setAwsRole(AwsRole awsRole) {
+    this.awsRole = awsRole;
   }
 
   public KafkaIntegration useV3(Boolean useV3) {
@@ -205,12 +238,12 @@ public class KafkaIntegration {
   }
 
    /**
-   * Get bootstrapServers
+   * The Kafka bootstrap server url(s). Required only for V3 integration.
    * @return bootstrapServers
   **/
 
 @JsonProperty("bootstrap_servers")
-@ApiModelProperty(value = "")
+@ApiModelProperty(example = "localhost:9092", value = "The Kafka bootstrap server url(s). Required only for V3 integration.")
   public String getBootstrapServers() {
     return bootstrapServers;
   }
@@ -225,12 +258,12 @@ public class KafkaIntegration {
   }
 
    /**
-   * Kafka security configurations. Required only for V3 integration.
+   * Kafka security configurations.
    * @return securityConfig
   **/
 
 @JsonProperty("security_config")
-@ApiModelProperty(value = "Kafka security configurations. Required only for V3 integration.")
+@ApiModelProperty(value = "Kafka security configurations.")
   public KafkaV3SecurityConfig getSecurityConfig() {
     return securityConfig;
   }
@@ -245,12 +278,12 @@ public class KafkaIntegration {
   }
 
    /**
-   * Get schemaRegistryConfig
+   * Kafka configurations for schema registry.
    * @return schemaRegistryConfig
   **/
 
 @JsonProperty("schema_registry_config")
-@ApiModelProperty(value = "")
+@ApiModelProperty(value = "Kafka configurations for schema registry.")
   public SchemaRegistryConfig getSchemaRegistryConfig() {
     return schemaRegistryConfig;
   }
@@ -273,6 +306,7 @@ public class KafkaIntegration {
         Objects.equals(this.sourceStatusByTopic, kafkaIntegration.sourceStatusByTopic) &&
         Objects.equals(this.kafkaDataFormat, kafkaIntegration.kafkaDataFormat) &&
         Objects.equals(this.connectionString, kafkaIntegration.connectionString) &&
+        Objects.equals(this.awsRole, kafkaIntegration.awsRole) &&
         Objects.equals(this.useV3, kafkaIntegration.useV3) &&
         Objects.equals(this.bootstrapServers, kafkaIntegration.bootstrapServers) &&
         Objects.equals(this.securityConfig, kafkaIntegration.securityConfig) &&
@@ -281,7 +315,7 @@ public class KafkaIntegration {
 
   @Override
   public int hashCode() {
-    return Objects.hash(kafkaTopicNames, sourceStatusByTopic, kafkaDataFormat, connectionString, useV3, bootstrapServers, securityConfig, schemaRegistryConfig);
+    return Objects.hash(kafkaTopicNames, sourceStatusByTopic, kafkaDataFormat, connectionString, awsRole, useV3, bootstrapServers, securityConfig, schemaRegistryConfig);
   }
 
 
@@ -294,6 +328,7 @@ public class KafkaIntegration {
     sb.append("    sourceStatusByTopic: ").append(toIndentedString(sourceStatusByTopic)).append("\n");
     sb.append("    kafkaDataFormat: ").append(toIndentedString(kafkaDataFormat)).append("\n");
     sb.append("    connectionString: ").append(toIndentedString(connectionString)).append("\n");
+    sb.append("    awsRole: ").append(toIndentedString(awsRole)).append("\n");
     sb.append("    useV3: ").append(toIndentedString(useV3)).append("\n");
     sb.append("    bootstrapServers: ").append(toIndentedString(bootstrapServers)).append("\n");
     sb.append("    securityConfig: ").append(toIndentedString(securityConfig)).append("\n");

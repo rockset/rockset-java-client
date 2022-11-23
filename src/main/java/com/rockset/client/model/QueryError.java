@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryError
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class QueryError {
   @SerializedName("type")
   private String type = null;
@@ -46,12 +46,12 @@ public class QueryError {
   }
 
    /**
-   * The type of error
+   * The type of error.
    * @return type
   **/
 
 @JsonProperty("type")
-@ApiModelProperty(example = "ResourceExceeded", value = "The type of error")
+@ApiModelProperty(example = "ResourceExceeded", value = "The type of error.")
   public String getType() {
     return type;
   }
@@ -66,12 +66,12 @@ public class QueryError {
   }
 
    /**
-   * A message associated with the error, containing more information about it
+   * A message associated with the error, containing more information about it.
    * @return message
   **/
 
 @JsonProperty("message")
-@ApiModelProperty(example = "Too many rows", value = "A message associated with the error, containing more information about it")
+@ApiModelProperty(example = "Too many rows", value = "A message associated with the error, containing more information about it.")
   public String getMessage() {
     return message;
   }

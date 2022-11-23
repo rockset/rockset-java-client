@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * ValidateQueryResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class ValidateQueryResponse {
   @SerializedName("collections")
   private List<String> collections = new ArrayList<String>();
@@ -50,12 +50,12 @@ public class ValidateQueryResponse {
   }
 
    /**
-   * list of collections specified in query
+   * List of collections specified in query.
    * @return collections
   **/
 
 @JsonProperty("collections")
-@ApiModelProperty(example = "\"[\\\"commons.foo\\\"]\"", required = true, value = "list of collections specified in query")
+@ApiModelProperty(example = "\"[\\\"commons.foo\\\"]\"", required = true, value = "List of collections specified in query.")
   public List<String> getCollections() {
     return collections;
   }
@@ -75,12 +75,12 @@ public class ValidateQueryResponse {
   }
 
    /**
-   * list of parameters specified in query
+   * List of parameters specified in query.
    * @return parameters
   **/
 
 @JsonProperty("parameters")
-@ApiModelProperty(example = "\"[\\\"foo\\\"]\"", required = true, value = "list of parameters specified in query")
+@ApiModelProperty(example = "\"[\\\"foo\\\"]\"", required = true, value = "List of parameters specified in query.")
   public List<String> getParameters() {
     return parameters;
   }

@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * AzureBlobStorageIntegration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class AzureBlobStorageIntegration {
   @SerializedName("connection_string")
   private String connectionString = null;
@@ -40,12 +40,12 @@ public class AzureBlobStorageIntegration {
   }
 
    /**
-   * credentials for Azure Blob Storage
+   * Credentials for the Azure Blob Service.
    * @return connectionString
   **/
 
 @JsonProperty("connection_string")
-@ApiModelProperty(required = true, value = "credentials for Azure Blob Storage")
+@ApiModelProperty(example = "BlobEndpoint=https://<NamespaceName>.blob.core.windows.net; SharedAccessSignature=<KeyValue>", required = true, value = "Credentials for the Azure Blob Service.")
   public String getConnectionString() {
     return connectionString;
   }

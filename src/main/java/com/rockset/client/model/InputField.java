@@ -29,13 +29,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * InputField
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class InputField {
   @SerializedName("field_name")
   private String fieldName = null;
 
   /**
-   * Define the behaviour if fieldName is missing or is null
+   * Define the behaviour if fieldName is missing or is null.
    */
   @JsonAdapter(IfMissingEnum.Adapter.class)
   public enum IfMissingEnum {
@@ -96,12 +96,12 @@ public class InputField {
   }
 
    /**
-   * The name of a field, parsed as a SQL qualified name
+   * The name of a field, parsed as a SQL qualified name.
    * @return fieldName
   **/
 
 @JsonProperty("field_name")
-@ApiModelProperty(example = "address.city.zipcode", value = "The name of a field, parsed as a SQL qualified name")
+@ApiModelProperty(example = "address.city.zipcode", value = "The name of a field, parsed as a SQL qualified name.")
   public String getFieldName() {
     return fieldName;
   }
@@ -116,12 +116,12 @@ public class InputField {
   }
 
    /**
-   * Define the behaviour if fieldName is missing or is null
+   * Define the behaviour if fieldName is missing or is null.
    * @return ifMissing
   **/
 
 @JsonProperty("if_missing")
-@ApiModelProperty(example = "SKIP", value = "Define the behaviour if fieldName is missing or is null")
+@ApiModelProperty(example = "SKIP", value = "Define the behaviour if fieldName is missing or is null.")
   public IfMissingEnum getIfMissing() {
     return ifMissing;
   }
@@ -136,12 +136,12 @@ public class InputField {
   }
 
    /**
-   * If true, then drop fieldName from the document
+   * If true, then drop fieldName from the document.
    * @return isDrop
   **/
 
 @JsonProperty("is_drop")
-@ApiModelProperty(example = "true", value = "If true, then drop fieldName from the document")
+@ApiModelProperty(example = "true", value = "If true, then drop fieldName from the document.")
   public Boolean isIsDrop() {
     return isDrop;
   }
@@ -156,12 +156,12 @@ public class InputField {
   }
 
    /**
-   * Sql parameter name
+   * Sql parameter name.
    * @return param
   **/
 
 @JsonProperty("param")
-@ApiModelProperty(example = "zip", value = "Sql parameter name")
+@ApiModelProperty(example = "zip", value = "Sql parameter name.")
   public String getParam() {
     return param;
   }

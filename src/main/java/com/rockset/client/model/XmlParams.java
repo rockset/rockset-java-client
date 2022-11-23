@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * XmlParams
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class XmlParams {
   @SerializedName("root_tag")
   private String rootTag = null;
@@ -52,12 +52,12 @@ public class XmlParams {
   }
 
    /**
-   * tag until which xml is ignored
+   * Tag until which xml is ignored.
    * @return rootTag
   **/
 
 @JsonProperty("root_tag")
-@ApiModelProperty(example = "root", value = "tag until which xml is ignored")
+@ApiModelProperty(example = "root", value = "Tag until which xml is ignored.")
   public String getRootTag() {
     return rootTag;
   }
@@ -72,12 +72,12 @@ public class XmlParams {
   }
 
    /**
-   * encoding in which data source is encoded
+   * Encoding in which data source is encoded.
    * @return encoding
   **/
 
 @JsonProperty("encoding")
-@ApiModelProperty(example = "UTF-8", value = "encoding in which data source is encoded")
+@ApiModelProperty(example = "UTF-8", value = "Encoding in which data source is encoded.")
   public String getEncoding() {
     return encoding;
   }
@@ -92,12 +92,12 @@ public class XmlParams {
   }
 
    /**
-   * tags with which documents are identified
+   * Tags with which documents are identified.
    * @return docTag
   **/
 
 @JsonProperty("doc_tag")
-@ApiModelProperty(example = "row", value = "tags with which documents are identified")
+@ApiModelProperty(example = "row", value = "Tags with which documents are identified.")
   public String getDocTag() {
     return docTag;
   }
@@ -132,12 +132,12 @@ public class XmlParams {
   }
 
    /**
-   * tag to differentiate between attributes and elements
+   * Tag to differentiate between attributes and elements.
    * @return attributePrefix
   **/
 
 @JsonProperty("attribute_prefix")
-@ApiModelProperty(example = "_attr", value = "tag to differentiate between attributes and elements")
+@ApiModelProperty(example = "_attr", value = "Tag to differentiate between attributes and elements.")
   public String getAttributePrefix() {
     return attributePrefix;
   }

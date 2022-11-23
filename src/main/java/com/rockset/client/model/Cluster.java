@@ -29,19 +29,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Cluster
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class Cluster {
   @SerializedName("id")
   private String id = null;
 
   /**
-   * cluster type
+   * Cluster type.
    */
   @JsonAdapter(ClusterTypeEnum.Adapter.class)
   public enum ClusterTypeEnum {
-    PUBLIC("PUBLIC"),
-    
-    PRIVATE("PRIVATE");
+    PUBLIC("PUBLIC");
 
     private String value;
 
@@ -102,12 +100,12 @@ public class Cluster {
   }
 
    /**
-   * unique identifier for the cluster
+   * Unique identifier for the cluster.
    * @return id
   **/
 
 @JsonProperty("id")
-@ApiModelProperty(example = "asdf98-as9df8adf-adsf9asfd", value = "unique identifier for the cluster")
+@ApiModelProperty(example = "asdf98-as9df8adf-adsf9asfd", value = "Unique identifier for the cluster.")
   public String getId() {
     return id;
   }
@@ -122,12 +120,12 @@ public class Cluster {
   }
 
    /**
-   * cluster type
+   * Cluster type.
    * @return clusterType
   **/
 
 @JsonProperty("cluster_type")
-@ApiModelProperty(example = "PRIVATE", value = "cluster type")
+@ApiModelProperty(example = "PRIVATE", value = "Cluster type.")
   public ClusterTypeEnum getClusterType() {
     return clusterType;
   }
@@ -142,12 +140,12 @@ public class Cluster {
   }
 
    /**
-   * aws region
+   * Aws region.
    * @return awsRegion
   **/
 
 @JsonProperty("aws_region")
-@ApiModelProperty(example = "us-west-2", value = "aws region")
+@ApiModelProperty(example = "us-west-2", value = "Aws region.")
   public String getAwsRegion() {
     return awsRegion;
   }
@@ -162,12 +160,12 @@ public class Cluster {
   }
 
    /**
-   * domain of org using cluster
+   * Domain of org using cluster.
    * @return domain
   **/
 
 @JsonProperty("domain")
-@ApiModelProperty(example = "rockset", value = "domain of org using cluster")
+@ApiModelProperty(example = "rockset", value = "Domain of org using cluster.")
   public String getDomain() {
     return domain;
   }
@@ -182,12 +180,12 @@ public class Cluster {
   }
 
    /**
-   * top level domain of org using cluster
+   * Top level domain of org using cluster.
    * @return topLevelDomain
   **/
 
 @JsonProperty("top_level_domain")
-@ApiModelProperty(example = ".com", value = "top level domain of org using cluster")
+@ApiModelProperty(example = ".com", value = "Top level domain of org using cluster.")
   public String getTopLevelDomain() {
     return topLevelDomain;
   }
@@ -202,12 +200,12 @@ public class Cluster {
   }
 
    /**
-   * api server url for cluster
+   * Api server url for cluster.
    * @return apiserverUrl
   **/
 
 @JsonProperty("apiserver_url")
-@ApiModelProperty(example = "api.rockset.us-west-2.rockset.com", value = "api server url for cluster")
+@ApiModelProperty(example = "api.rockset.us-west-2.rockset.com", value = "Api server url for cluster.")
   public String getApiserverUrl() {
     return apiserverUrl;
   }

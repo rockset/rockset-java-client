@@ -36,7 +36,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateCollectionRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class CreateCollectionRequest {
   @SerializedName("name")
   private String name = null;
@@ -49,9 +49,6 @@ public class CreateCollectionRequest {
 
   @SerializedName("retention_secs")
   private Long retentionSecs = null;
-
-  @SerializedName("insert_only")
-  private Boolean insertOnly = null;
 
   @SerializedName("event_time_info")
   private EventTimeInfo eventTimeInfo = null;
@@ -71,12 +68,12 @@ public class CreateCollectionRequest {
   }
 
    /**
-   * unique identifier for collection, can contain alphanumeric or dash characters
+   * Unique identifier for collection, can contain alphanumeric or dash characters.
    * @return name
   **/
 
 @JsonProperty("name")
-@ApiModelProperty(example = "global-transactions", required = true, value = "unique identifier for collection, can contain alphanumeric or dash characters")
+@ApiModelProperty(example = "global-transactions", value = "Unique identifier for collection, can contain alphanumeric or dash characters.")
   public String getName() {
     return name;
   }
@@ -91,12 +88,12 @@ public class CreateCollectionRequest {
   }
 
    /**
-   * text describing the collection
+   * Text describing the collection.
    * @return description
   **/
 
 @JsonProperty("description")
-@ApiModelProperty(example = "transactions from stores worldwide", value = "text describing the collection")
+@ApiModelProperty(example = "transactions from stores worldwide", value = "Text describing the collection.")
   public String getDescription() {
     return description;
   }
@@ -119,12 +116,12 @@ public class CreateCollectionRequest {
   }
 
    /**
-   * list of sources from which to ingest data
+   * List of sources from which to ingest data.
    * @return sources
   **/
 
 @JsonProperty("sources")
-@ApiModelProperty(value = "list of sources from which to ingest data")
+@ApiModelProperty(value = "List of sources from which to ingest data.")
   public List<Source> getSources() {
     return sources;
   }
@@ -139,12 +136,13 @@ public class CreateCollectionRequest {
   }
 
    /**
-   * number of seconds after which data is purged, based on event time
+   * Number of seconds after which data is purged, based on event time.
+   * minimum: 1
    * @return retentionSecs
   **/
 
 @JsonProperty("retention_secs")
-@ApiModelProperty(example = "1000000", value = "number of seconds after which data is purged, based on event time")
+@ApiModelProperty(example = "1000000", value = "Number of seconds after which data is purged, based on event time.")
   public Long getRetentionSecs() {
     return retentionSecs;
   }
@@ -153,38 +151,18 @@ public class CreateCollectionRequest {
     this.retentionSecs = retentionSecs;
   }
 
-  public CreateCollectionRequest insertOnly(Boolean insertOnly) {
-    this.insertOnly = insertOnly;
-    return this;
-  }
-
-   /**
-   * If true disallows updates and deletes, but makes indexing more efficient
-   * @return insertOnly
-  **/
-
-@JsonProperty("insert_only")
-@ApiModelProperty(value = "If true disallows updates and deletes, but makes indexing more efficient")
-  public Boolean isInsertOnly() {
-    return insertOnly;
-  }
-
-  public void setInsertOnly(Boolean insertOnly) {
-    this.insertOnly = insertOnly;
-  }
-
   public CreateCollectionRequest eventTimeInfo(EventTimeInfo eventTimeInfo) {
     this.eventTimeInfo = eventTimeInfo;
     return this;
   }
 
    /**
-   * configuration for event data
+   * Deprecated. Configuration for event data. Use an _event_time mapping in &#x60;field_mapping_query&#x60; instead.
    * @return eventTimeInfo
   **/
 
 @JsonProperty("event_time_info")
-@ApiModelProperty(value = "configuration for event data")
+@ApiModelProperty(value = "Deprecated. Configuration for event data. Use an _event_time mapping in `field_mapping_query` instead.")
   public EventTimeInfo getEventTimeInfo() {
     return eventTimeInfo;
   }
@@ -207,12 +185,12 @@ public class CreateCollectionRequest {
   }
 
    /**
-   * list of mappings
+   * Deprecated. List of mappings. Use field_mapping_query instead.
    * @return fieldMappings
   **/
 
 @JsonProperty("field_mappings")
-@ApiModelProperty(value = "list of mappings")
+@ApiModelProperty(value = "Deprecated. List of mappings. Use field_mapping_query instead.")
   public List<FieldMappingV2> getFieldMappings() {
     return fieldMappings;
   }
@@ -227,12 +205,12 @@ public class CreateCollectionRequest {
   }
 
    /**
-   * Mapping of fields for a collection
+   * Mapping of fields for a collection.
    * @return fieldMappingQuery
   **/
 
 @JsonProperty("field_mapping_query")
-@ApiModelProperty(value = "Mapping of fields for a collection")
+@ApiModelProperty(value = "Mapping of fields for a collection.")
   public FieldMappingQuery getFieldMappingQuery() {
     return fieldMappingQuery;
   }
@@ -255,12 +233,12 @@ public class CreateCollectionRequest {
   }
 
    /**
-   * list of clustering fields
+   * Deprecated. List of clustering fields. Use CLUSTER BY clause in &#x60;field_mapping_query&#x60; instead.
    * @return clusteringKey
   **/
 
 @JsonProperty("clustering_key")
-@ApiModelProperty(value = "list of clustering fields")
+@ApiModelProperty(value = "Deprecated. List of clustering fields. Use CLUSTER BY clause in `field_mapping_query` instead.")
   public List<FieldPartition> getClusteringKey() {
     return clusteringKey;
   }
@@ -283,7 +261,6 @@ public class CreateCollectionRequest {
         Objects.equals(this.description, createCollectionRequest.description) &&
         Objects.equals(this.sources, createCollectionRequest.sources) &&
         Objects.equals(this.retentionSecs, createCollectionRequest.retentionSecs) &&
-        Objects.equals(this.insertOnly, createCollectionRequest.insertOnly) &&
         Objects.equals(this.eventTimeInfo, createCollectionRequest.eventTimeInfo) &&
         Objects.equals(this.fieldMappings, createCollectionRequest.fieldMappings) &&
         Objects.equals(this.fieldMappingQuery, createCollectionRequest.fieldMappingQuery) &&
@@ -292,7 +269,7 @@ public class CreateCollectionRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, description, sources, retentionSecs, insertOnly, eventTimeInfo, fieldMappings, fieldMappingQuery, clusteringKey);
+    return Objects.hash(name, description, sources, retentionSecs, eventTimeInfo, fieldMappings, fieldMappingQuery, clusteringKey);
   }
 
 
@@ -305,7 +282,6 @@ public class CreateCollectionRequest {
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    sources: ").append(toIndentedString(sources)).append("\n");
     sb.append("    retentionSecs: ").append(toIndentedString(retentionSecs)).append("\n");
-    sb.append("    insertOnly: ").append(toIndentedString(insertOnly)).append("\n");
     sb.append("    eventTimeInfo: ").append(toIndentedString(eventTimeInfo)).append("\n");
     sb.append("    fieldMappings: ").append(toIndentedString(fieldMappings)).append("\n");
     sb.append("    fieldMappingQuery: ").append(toIndentedString(fieldMappingQuery)).append("\n");

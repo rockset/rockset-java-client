@@ -32,10 +32,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * StatusKafka
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class StatusKafka {
   /**
-   * State of the Kafka source
+   * State of the Kafka source.
    */
   @JsonAdapter(StateEnum.Adapter.class)
   public enum StateEnum {
@@ -101,12 +101,12 @@ public class StatusKafka {
   }
 
    /**
-   * State of the Kafka source
+   * State of the Kafka source.
    * @return state
   **/
 
 @JsonProperty("state")
-@ApiModelProperty(example = "ACTIVE", value = "State of the Kafka source")
+@ApiModelProperty(example = "ACTIVE", value = "State of the Kafka source.")
   public StateEnum getState() {
     return state;
   }
@@ -121,12 +121,12 @@ public class StatusKafka {
   }
 
    /**
-   * Time at which the last document was consumed from Kafka
+   * Time at which the last document was consumed from Kafka.
    * @return lastConsumedTime
   **/
 
 @JsonProperty("last_consumed_time")
-@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "Time at which the last document was consumed from Kafka")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "Time at which the last document was consumed from Kafka.")
   public String getLastConsumedTime() {
     return lastConsumedTime;
   }
@@ -141,12 +141,12 @@ public class StatusKafka {
   }
 
    /**
-   * Number of documents consumed by this Kafka topic
+   * Number of documents consumed by this Kafka topic.
    * @return numDocumentsProcessed
   **/
 
 @JsonProperty("num_documents_processed")
-@ApiModelProperty(example = "1337", value = "Number of documents consumed by this Kafka topic")
+@ApiModelProperty(example = "1337", value = "Number of documents consumed by this Kafka topic.")
   public Long getNumDocumentsProcessed() {
     return numDocumentsProcessed;
   }
@@ -169,12 +169,12 @@ public class StatusKafka {
   }
 
    /**
-   * Status info per partition
+   * Status info per partition.
    * @return kafkaPartitions
   **/
 
 @JsonProperty("kafka_partitions")
-@ApiModelProperty(value = "Status info per partition")
+@ApiModelProperty(value = "Status info per partition.")
   public List<StatusKafkaPartition> getKafkaPartitions() {
     return kafkaPartitions;
   }

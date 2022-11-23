@@ -30,7 +30,7 @@ import com.rockset.client.model.KafkaIntegration;
 import com.rockset.client.model.KinesisIntegration;
 import com.rockset.client.model.MongoDbIntegration;
 import com.rockset.client.model.S3Integration;
-import com.rockset.client.model.SegmentIntegration;
+import com.rockset.client.model.SnowflakeIntegration;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -44,7 +44,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "Integrations that can be associated with data sources to create collections. Only one type of integration may be specified.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class Integration {
   @SerializedName("name")
   private String name = null;
@@ -52,11 +52,11 @@ public class Integration {
   @SerializedName("description")
   private String description = null;
 
-  @SerializedName("collections")
-  private List<Collection> collections = null;
-
   @SerializedName("created_by")
   private String createdBy = null;
+
+  @SerializedName("owner_email")
+  private String ownerEmail = null;
 
   @SerializedName("created_at")
   private String createdAt = null;
@@ -82,14 +82,17 @@ public class Integration {
   @SerializedName("azure_event_hubs")
   private AzureEventHubsIntegration azureEventHubs = null;
 
-  @SerializedName("segment")
-  private SegmentIntegration segment = null;
-
   @SerializedName("kafka")
   private KafkaIntegration kafka = null;
 
   @SerializedName("mongodb")
   private MongoDbIntegration mongodb = null;
+
+  @SerializedName("snowflake")
+  private SnowflakeIntegration snowflake = null;
+
+  @SerializedName("collections")
+  private List<Collection> collections = null;
 
   public Integration name(String name) {
     this.name = name;
@@ -97,12 +100,12 @@ public class Integration {
   }
 
    /**
-   * descriptive label and unique identifier
+   * Descriptive label and unique identifier.
    * @return name
   **/
 
 @JsonProperty("name")
-@ApiModelProperty(example = "event-logs", required = true, value = "descriptive label and unique identifier")
+@ApiModelProperty(example = "event-logs", required = true, value = "Descriptive label and unique identifier.")
   public String getName() {
     return name;
   }
@@ -117,18 +120,278 @@ public class Integration {
   }
 
    /**
-   * longer explanation for the integration
+   * Longer explanation for the integration.
    * @return description
   **/
 
 @JsonProperty("description")
-@ApiModelProperty(example = "AWS account with event data for the data science team.", value = "longer explanation for the integration")
+@ApiModelProperty(example = "AWS account with event data for the data science team.", value = "Longer explanation for the integration.")
   public String getDescription() {
     return description;
   }
 
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  public Integration createdBy(String createdBy) {
+    this.createdBy = createdBy;
+    return this;
+  }
+
+   /**
+   * Email of user who created the integration.
+   * @return createdBy
+  **/
+
+@JsonProperty("created_by")
+@ApiModelProperty(example = "hello@rockset.com", required = true, value = "Email of user who created the integration.")
+  public String getCreatedBy() {
+    return createdBy;
+  }
+
+  public void setCreatedBy(String createdBy) {
+    this.createdBy = createdBy;
+  }
+
+  public Integration ownerEmail(String ownerEmail) {
+    this.ownerEmail = ownerEmail;
+    return this;
+  }
+
+   /**
+   * User that owns this integration.
+   * @return ownerEmail
+  **/
+
+@JsonProperty("owner_email")
+@ApiModelProperty(example = "abc@rockset.com", value = "User that owns this integration.")
+  public String getOwnerEmail() {
+    return ownerEmail;
+  }
+
+  public void setOwnerEmail(String ownerEmail) {
+    this.ownerEmail = ownerEmail;
+  }
+
+  public Integration createdAt(String createdAt) {
+    this.createdAt = createdAt;
+    return this;
+  }
+
+   /**
+   * ISO-8601 date.
+   * @return createdAt
+  **/
+
+@JsonProperty("created_at")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date.")
+  public String getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(String createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public Integration s3(S3Integration s3) {
+    this.s3 = s3;
+    return this;
+  }
+
+   /**
+   * Amazon S3 details, must have one of aws_access_key or aws_role.
+   * @return s3
+  **/
+
+@JsonProperty("s3")
+@ApiModelProperty(value = "Amazon S3 details, must have one of aws_access_key or aws_role.")
+  public S3Integration getS3() {
+    return s3;
+  }
+
+  public void setS3(S3Integration s3) {
+    this.s3 = s3;
+  }
+
+  public Integration kinesis(KinesisIntegration kinesis) {
+    this.kinesis = kinesis;
+    return this;
+  }
+
+   /**
+   * Amazon Kinesis details, must have one of aws_access_key or aws_role.
+   * @return kinesis
+  **/
+
+@JsonProperty("kinesis")
+@ApiModelProperty(value = "Amazon Kinesis details, must have one of aws_access_key or aws_role.")
+  public KinesisIntegration getKinesis() {
+    return kinesis;
+  }
+
+  public void setKinesis(KinesisIntegration kinesis) {
+    this.kinesis = kinesis;
+  }
+
+  public Integration dynamodb(DynamodbIntegration dynamodb) {
+    this.dynamodb = dynamodb;
+    return this;
+  }
+
+   /**
+   * Amazon DynamoDB details, must have one of aws_access_key or aws_role.
+   * @return dynamodb
+  **/
+
+@JsonProperty("dynamodb")
+@ApiModelProperty(value = "Amazon DynamoDB details, must have one of aws_access_key or aws_role.")
+  public DynamodbIntegration getDynamodb() {
+    return dynamodb;
+  }
+
+  public void setDynamodb(DynamodbIntegration dynamodb) {
+    this.dynamodb = dynamodb;
+  }
+
+  public Integration gcs(GcsIntegration gcs) {
+    this.gcs = gcs;
+    return this;
+  }
+
+   /**
+   * GCS details.
+   * @return gcs
+  **/
+
+@JsonProperty("gcs")
+@ApiModelProperty(value = "GCS details.")
+  public GcsIntegration getGcs() {
+    return gcs;
+  }
+
+  public void setGcs(GcsIntegration gcs) {
+    this.gcs = gcs;
+  }
+
+  public Integration azureBlobStorage(AzureBlobStorageIntegration azureBlobStorage) {
+    this.azureBlobStorage = azureBlobStorage;
+    return this;
+  }
+
+   /**
+   * Azure Blob Storage details.
+   * @return azureBlobStorage
+  **/
+
+@JsonProperty("azure_blob_storage")
+@ApiModelProperty(value = "Azure Blob Storage details.")
+  public AzureBlobStorageIntegration getAzureBlobStorage() {
+    return azureBlobStorage;
+  }
+
+  public void setAzureBlobStorage(AzureBlobStorageIntegration azureBlobStorage) {
+    this.azureBlobStorage = azureBlobStorage;
+  }
+
+  public Integration azureServiceBus(AzureServiceBusIntegration azureServiceBus) {
+    this.azureServiceBus = azureServiceBus;
+    return this;
+  }
+
+   /**
+   * Azure Service Bus details.
+   * @return azureServiceBus
+  **/
+
+@JsonProperty("azure_service_bus")
+@ApiModelProperty(value = "Azure Service Bus details.")
+  public AzureServiceBusIntegration getAzureServiceBus() {
+    return azureServiceBus;
+  }
+
+  public void setAzureServiceBus(AzureServiceBusIntegration azureServiceBus) {
+    this.azureServiceBus = azureServiceBus;
+  }
+
+  public Integration azureEventHubs(AzureEventHubsIntegration azureEventHubs) {
+    this.azureEventHubs = azureEventHubs;
+    return this;
+  }
+
+   /**
+   * Azure Event Hubs details.
+   * @return azureEventHubs
+  **/
+
+@JsonProperty("azure_event_hubs")
+@ApiModelProperty(value = "Azure Event Hubs details.")
+  public AzureEventHubsIntegration getAzureEventHubs() {
+    return azureEventHubs;
+  }
+
+  public void setAzureEventHubs(AzureEventHubsIntegration azureEventHubs) {
+    this.azureEventHubs = azureEventHubs;
+  }
+
+  public Integration kafka(KafkaIntegration kafka) {
+    this.kafka = kafka;
+    return this;
+  }
+
+   /**
+   * Kafka details.
+   * @return kafka
+  **/
+
+@JsonProperty("kafka")
+@ApiModelProperty(value = "Kafka details.")
+  public KafkaIntegration getKafka() {
+    return kafka;
+  }
+
+  public void setKafka(KafkaIntegration kafka) {
+    this.kafka = kafka;
+  }
+
+  public Integration mongodb(MongoDbIntegration mongodb) {
+    this.mongodb = mongodb;
+    return this;
+  }
+
+   /**
+   * MongoDb details.
+   * @return mongodb
+  **/
+
+@JsonProperty("mongodb")
+@ApiModelProperty(value = "MongoDb details.")
+  public MongoDbIntegration getMongodb() {
+    return mongodb;
+  }
+
+  public void setMongodb(MongoDbIntegration mongodb) {
+    this.mongodb = mongodb;
+  }
+
+  public Integration snowflake(SnowflakeIntegration snowflake) {
+    this.snowflake = snowflake;
+    return this;
+  }
+
+   /**
+   * Snowflake details.
+   * @return snowflake
+  **/
+
+@JsonProperty("snowflake")
+@ApiModelProperty(value = "Snowflake details.")
+  public SnowflakeIntegration getSnowflake() {
+    return snowflake;
+  }
+
+  public void setSnowflake(SnowflakeIntegration snowflake) {
+    this.snowflake = snowflake;
   }
 
   public Integration collections(List<Collection> collections) {
@@ -145,258 +408,18 @@ public class Integration {
   }
 
    /**
-   * list of collections that use the integration
+   * List of collections that use the integration.
    * @return collections
   **/
 
 @JsonProperty("collections")
-@ApiModelProperty(value = "list of collections that use the integration")
+@ApiModelProperty(value = "List of collections that use the integration.")
   public List<Collection> getCollections() {
     return collections;
   }
 
   public void setCollections(List<Collection> collections) {
     this.collections = collections;
-  }
-
-  public Integration createdBy(String createdBy) {
-    this.createdBy = createdBy;
-    return this;
-  }
-
-   /**
-   * email of user who created the integration
-   * @return createdBy
-  **/
-
-@JsonProperty("created_by")
-@ApiModelProperty(example = "hello@rockset.com", required = true, value = "email of user who created the integration")
-  public String getCreatedBy() {
-    return createdBy;
-  }
-
-  public void setCreatedBy(String createdBy) {
-    this.createdBy = createdBy;
-  }
-
-  public Integration createdAt(String createdAt) {
-    this.createdAt = createdAt;
-    return this;
-  }
-
-   /**
-   * ISO-8601 date
-   * @return createdAt
-  **/
-
-@JsonProperty("created_at")
-@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date")
-  public String getCreatedAt() {
-    return createdAt;
-  }
-
-  public void setCreatedAt(String createdAt) {
-    this.createdAt = createdAt;
-  }
-
-  public Integration s3(S3Integration s3) {
-    this.s3 = s3;
-    return this;
-  }
-
-   /**
-   * Amazon S3 details, must have one of aws_access_key or aws_role
-   * @return s3
-  **/
-
-@JsonProperty("s3")
-@ApiModelProperty(value = "Amazon S3 details, must have one of aws_access_key or aws_role")
-  public S3Integration getS3() {
-    return s3;
-  }
-
-  public void setS3(S3Integration s3) {
-    this.s3 = s3;
-  }
-
-  public Integration kinesis(KinesisIntegration kinesis) {
-    this.kinesis = kinesis;
-    return this;
-  }
-
-   /**
-   * Amazon Kinesis details, must have one of aws_access_key or aws_role
-   * @return kinesis
-  **/
-
-@JsonProperty("kinesis")
-@ApiModelProperty(value = "Amazon Kinesis details, must have one of aws_access_key or aws_role")
-  public KinesisIntegration getKinesis() {
-    return kinesis;
-  }
-
-  public void setKinesis(KinesisIntegration kinesis) {
-    this.kinesis = kinesis;
-  }
-
-  public Integration dynamodb(DynamodbIntegration dynamodb) {
-    this.dynamodb = dynamodb;
-    return this;
-  }
-
-   /**
-   * Amazon DynamoDB details, must have one of aws_access_key or aws_role
-   * @return dynamodb
-  **/
-
-@JsonProperty("dynamodb")
-@ApiModelProperty(value = "Amazon DynamoDB details, must have one of aws_access_key or aws_role")
-  public DynamodbIntegration getDynamodb() {
-    return dynamodb;
-  }
-
-  public void setDynamodb(DynamodbIntegration dynamodb) {
-    this.dynamodb = dynamodb;
-  }
-
-  public Integration gcs(GcsIntegration gcs) {
-    this.gcs = gcs;
-    return this;
-  }
-
-   /**
-   * GCS details
-   * @return gcs
-  **/
-
-@JsonProperty("gcs")
-@ApiModelProperty(value = "GCS details")
-  public GcsIntegration getGcs() {
-    return gcs;
-  }
-
-  public void setGcs(GcsIntegration gcs) {
-    this.gcs = gcs;
-  }
-
-  public Integration azureBlobStorage(AzureBlobStorageIntegration azureBlobStorage) {
-    this.azureBlobStorage = azureBlobStorage;
-    return this;
-  }
-
-   /**
-   * Azure Blob Storage details
-   * @return azureBlobStorage
-  **/
-
-@JsonProperty("azure_blob_storage")
-@ApiModelProperty(value = "Azure Blob Storage details")
-  public AzureBlobStorageIntegration getAzureBlobStorage() {
-    return azureBlobStorage;
-  }
-
-  public void setAzureBlobStorage(AzureBlobStorageIntegration azureBlobStorage) {
-    this.azureBlobStorage = azureBlobStorage;
-  }
-
-  public Integration azureServiceBus(AzureServiceBusIntegration azureServiceBus) {
-    this.azureServiceBus = azureServiceBus;
-    return this;
-  }
-
-   /**
-   * Get azureServiceBus
-   * @return azureServiceBus
-  **/
-
-@JsonProperty("azure_service_bus")
-@ApiModelProperty(value = "")
-  public AzureServiceBusIntegration getAzureServiceBus() {
-    return azureServiceBus;
-  }
-
-  public void setAzureServiceBus(AzureServiceBusIntegration azureServiceBus) {
-    this.azureServiceBus = azureServiceBus;
-  }
-
-  public Integration azureEventHubs(AzureEventHubsIntegration azureEventHubs) {
-    this.azureEventHubs = azureEventHubs;
-    return this;
-  }
-
-   /**
-   * Get azureEventHubs
-   * @return azureEventHubs
-  **/
-
-@JsonProperty("azure_event_hubs")
-@ApiModelProperty(value = "")
-  public AzureEventHubsIntegration getAzureEventHubs() {
-    return azureEventHubs;
-  }
-
-  public void setAzureEventHubs(AzureEventHubsIntegration azureEventHubs) {
-    this.azureEventHubs = azureEventHubs;
-  }
-
-  public Integration segment(SegmentIntegration segment) {
-    this.segment = segment;
-    return this;
-  }
-
-   /**
-   * Segment details
-   * @return segment
-  **/
-
-@JsonProperty("segment")
-@ApiModelProperty(value = "Segment details")
-  public SegmentIntegration getSegment() {
-    return segment;
-  }
-
-  public void setSegment(SegmentIntegration segment) {
-    this.segment = segment;
-  }
-
-  public Integration kafka(KafkaIntegration kafka) {
-    this.kafka = kafka;
-    return this;
-  }
-
-   /**
-   * Kafka details
-   * @return kafka
-  **/
-
-@JsonProperty("kafka")
-@ApiModelProperty(value = "Kafka details")
-  public KafkaIntegration getKafka() {
-    return kafka;
-  }
-
-  public void setKafka(KafkaIntegration kafka) {
-    this.kafka = kafka;
-  }
-
-  public Integration mongodb(MongoDbIntegration mongodb) {
-    this.mongodb = mongodb;
-    return this;
-  }
-
-   /**
-   * MongoDb details
-   * @return mongodb
-  **/
-
-@JsonProperty("mongodb")
-@ApiModelProperty(value = "MongoDb details")
-  public MongoDbIntegration getMongodb() {
-    return mongodb;
-  }
-
-  public void setMongodb(MongoDbIntegration mongodb) {
-    this.mongodb = mongodb;
   }
 
 
@@ -411,8 +434,8 @@ public class Integration {
     Integration integration = (Integration) o;
     return Objects.equals(this.name, integration.name) &&
         Objects.equals(this.description, integration.description) &&
-        Objects.equals(this.collections, integration.collections) &&
         Objects.equals(this.createdBy, integration.createdBy) &&
+        Objects.equals(this.ownerEmail, integration.ownerEmail) &&
         Objects.equals(this.createdAt, integration.createdAt) &&
         Objects.equals(this.s3, integration.s3) &&
         Objects.equals(this.kinesis, integration.kinesis) &&
@@ -421,14 +444,15 @@ public class Integration {
         Objects.equals(this.azureBlobStorage, integration.azureBlobStorage) &&
         Objects.equals(this.azureServiceBus, integration.azureServiceBus) &&
         Objects.equals(this.azureEventHubs, integration.azureEventHubs) &&
-        Objects.equals(this.segment, integration.segment) &&
         Objects.equals(this.kafka, integration.kafka) &&
-        Objects.equals(this.mongodb, integration.mongodb);
+        Objects.equals(this.mongodb, integration.mongodb) &&
+        Objects.equals(this.snowflake, integration.snowflake) &&
+        Objects.equals(this.collections, integration.collections);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, description, collections, createdBy, createdAt, s3, kinesis, dynamodb, gcs, azureBlobStorage, azureServiceBus, azureEventHubs, segment, kafka, mongodb);
+    return Objects.hash(name, description, createdBy, ownerEmail, createdAt, s3, kinesis, dynamodb, gcs, azureBlobStorage, azureServiceBus, azureEventHubs, kafka, mongodb, snowflake, collections);
   }
 
 
@@ -439,8 +463,8 @@ public class Integration {
     
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
-    sb.append("    collections: ").append(toIndentedString(collections)).append("\n");
     sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
+    sb.append("    ownerEmail: ").append(toIndentedString(ownerEmail)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    s3: ").append(toIndentedString(s3)).append("\n");
     sb.append("    kinesis: ").append(toIndentedString(kinesis)).append("\n");
@@ -449,9 +473,10 @@ public class Integration {
     sb.append("    azureBlobStorage: ").append(toIndentedString(azureBlobStorage)).append("\n");
     sb.append("    azureServiceBus: ").append(toIndentedString(azureServiceBus)).append("\n");
     sb.append("    azureEventHubs: ").append(toIndentedString(azureEventHubs)).append("\n");
-    sb.append("    segment: ").append(toIndentedString(segment)).append("\n");
     sb.append("    kafka: ").append(toIndentedString(kafka)).append("\n");
     sb.append("    mongodb: ").append(toIndentedString(mongodb)).append("\n");
+    sb.append("    snowflake: ").append(toIndentedString(snowflake)).append("\n");
+    sb.append("    collections: ").append(toIndentedString(collections)).append("\n");
     sb.append("}");
     return sb.toString();
   }

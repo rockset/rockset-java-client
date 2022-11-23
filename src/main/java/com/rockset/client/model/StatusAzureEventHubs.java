@@ -32,10 +32,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * StatusAzureEventHubs
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class StatusAzureEventHubs {
   /**
-   * State of the source
+   * State of the source.
    */
   @JsonAdapter(StateEnum.Adapter.class)
   public enum StateEnum {
@@ -101,12 +101,12 @@ public class StatusAzureEventHubs {
   }
 
    /**
-   * State of the source
+   * State of the source.
    * @return state
   **/
 
 @JsonProperty("state")
-@ApiModelProperty(example = "ACTIVE", value = "State of the source")
+@ApiModelProperty(example = "ACTIVE", value = "State of the source.")
   public StateEnum getState() {
     return state;
   }
@@ -121,12 +121,12 @@ public class StatusAzureEventHubs {
   }
 
    /**
-   * Time at which the last document was consumed
+   * Time at which the last document was consumed.
    * @return lastConsumedTime
   **/
 
 @JsonProperty("last_consumed_time")
-@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "Time at which the last document was consumed")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "Time at which the last document was consumed.")
   public String getLastConsumedTime() {
     return lastConsumedTime;
   }
@@ -141,12 +141,12 @@ public class StatusAzureEventHubs {
   }
 
    /**
-   * Number of documents consumed
+   * Number of documents consumed.
    * @return numDocumentsProcessed
   **/
 
 @JsonProperty("num_documents_processed")
-@ApiModelProperty(example = "1337", value = "Number of documents consumed")
+@ApiModelProperty(example = "1337", value = "Number of documents consumed.")
   public Long getNumDocumentsProcessed() {
     return numDocumentsProcessed;
   }
@@ -169,12 +169,12 @@ public class StatusAzureEventHubs {
   }
 
    /**
-   * Status info per partition
+   * Status info per partition.
    * @return partitions
   **/
 
 @JsonProperty("partitions")
-@ApiModelProperty(value = "Status info per partition")
+@ApiModelProperty(value = "Status info per partition.")
   public List<StatusAzureEventHubsPartition> getPartitions() {
     return partitions;
   }

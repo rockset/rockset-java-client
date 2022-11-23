@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * EventTimeInfo
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class EventTimeInfo {
   @SerializedName("field")
   private String field = null;
@@ -46,12 +46,12 @@ public class EventTimeInfo {
   }
 
    /**
-   * name of the field containing event time
+   * Name of the field containing event time.
    * @return field
   **/
 
 @JsonProperty("field")
-@ApiModelProperty(example = "timestamp", required = true, value = "name of the field containing event time")
+@ApiModelProperty(example = "timestamp", required = true, value = "Name of the field containing event time.")
   public String getField() {
     return field;
   }
@@ -66,12 +66,12 @@ public class EventTimeInfo {
   }
 
    /**
-   * format of time field, can be one of: milliseconds_since_epoch, seconds_since_epoch
+   * Format of time field, can be one of: milliseconds_since_epoch, seconds_since_epoch.
    * @return format
   **/
 
 @JsonProperty("format")
-@ApiModelProperty(example = "seconds_since_epoch", value = "format of time field, can be one of: milliseconds_since_epoch, seconds_since_epoch")
+@ApiModelProperty(example = "seconds_since_epoch", value = "Format of time field, can be one of: milliseconds_since_epoch, seconds_since_epoch.")
   public String getFormat() {
     return format;
   }
@@ -86,12 +86,12 @@ public class EventTimeInfo {
   }
 
    /**
-   * default time zone, in standard IANA format
+   * Default time zone, in standard IANA format.
    * @return timeZone
   **/
 
 @JsonProperty("time_zone")
-@ApiModelProperty(example = "UTC", value = "default time zone, in standard IANA format")
+@ApiModelProperty(example = "UTC", value = "Default time zone, in standard IANA format.")
   public String getTimeZone() {
     return timeZone;
   }

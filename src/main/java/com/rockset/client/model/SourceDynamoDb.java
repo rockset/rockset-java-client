@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceDynamoDb
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class SourceDynamoDb {
   @SerializedName("aws_region")
   private String awsRegion = null;
@@ -57,12 +57,12 @@ public class SourceDynamoDb {
   }
 
    /**
-   * AWS region name of DynamoDB table, by default us-west-2 is used
+   * AWS region name of DynamoDB table, by default us-west-2 is used.
    * @return awsRegion
   **/
 
 @JsonProperty("aws_region")
-@ApiModelProperty(example = "us-east-2", value = "AWS region name of DynamoDB table, by default us-west-2 is used")
+@ApiModelProperty(example = "us-east-2", value = "AWS region name of DynamoDB table, by default us-west-2 is used.")
   public String getAwsRegion() {
     return awsRegion;
   }
@@ -77,12 +77,12 @@ public class SourceDynamoDb {
   }
 
    /**
-   * name of DynamoDB table containing data
+   * Name of DynamoDB table containing data.
    * @return tableName
   **/
 
 @JsonProperty("table_name")
-@ApiModelProperty(example = "dynamodb_table_name", required = true, value = "name of DynamoDB table containing data")
+@ApiModelProperty(example = "dynamodb_table_name", required = true, value = "Name of DynamoDB table containing data.")
   public String getTableName() {
     return tableName;
   }
@@ -92,12 +92,12 @@ public class SourceDynamoDb {
   }
 
    /**
-   * DynamoDB source status v2
+   * DynamoDB source status v2.
    * @return currentStatus
   **/
 
 @JsonProperty("current_status")
-@ApiModelProperty(value = "DynamoDB source status v2")
+@ApiModelProperty(value = "DynamoDB source status v2.")
   public StatusDynamoDbV2 getCurrentStatus() {
     return currentStatus;
   }
@@ -108,12 +108,12 @@ public class SourceDynamoDb {
   }
 
    /**
-   * Max RCU usage for scan
+   * Max RCU usage for scan.
    * @return rcu
   **/
 
 @JsonProperty("rcu")
-@ApiModelProperty(example = "1000", value = "Max RCU usage for scan")
+@ApiModelProperty(example = "1000", value = "Max RCU usage for scan.")
   public Long getRcu() {
     return rcu;
   }
@@ -123,12 +123,12 @@ public class SourceDynamoDb {
   }
 
    /**
-   * DynamoDB source status
+   * DynamoDB source status.
    * @return status
   **/
 
 @JsonProperty("status")
-@ApiModelProperty(value = "DynamoDB source status")
+@ApiModelProperty(value = "DynamoDB source status.")
   public StatusDynamoDb getStatus() {
     return status;
   }
@@ -139,12 +139,12 @@ public class SourceDynamoDb {
   }
 
    /**
-   * Whether to use DynamoDB Scan API for the initial scan
+   * Whether to use DynamoDB Scan API for the initial scan.
    * @return useScanApi
   **/
 
 @JsonProperty("use_scan_api")
-@ApiModelProperty(value = "Whether to use DynamoDB Scan API for the initial scan")
+@ApiModelProperty(value = "Whether to use DynamoDB Scan API for the initial scan.")
   public Boolean isUseScanApi() {
     return useScanApi;
   }

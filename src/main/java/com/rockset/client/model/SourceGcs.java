@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceGcs
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class SourceGcs {
   @SerializedName("bucket")
   private String bucket = null;
@@ -49,18 +49,21 @@ public class SourceGcs {
   @SerializedName("object_bytes_total")
   private Long objectBytesTotal = null;
 
+  @SerializedName("object_bytes_downloaded")
+  private Long objectBytesDownloaded = null;
+
   public SourceGcs bucket(String bucket) {
     this.bucket = bucket;
     return this;
   }
 
    /**
-   * name of GCS bucket you want to ingest from
+   * Name of GCS bucket you want to ingest from.
    * @return bucket
   **/
 
 @JsonProperty("bucket")
-@ApiModelProperty(example = "server-logs", value = "name of GCS bucket you want to ingest from")
+@ApiModelProperty(example = "server-logs", value = "Name of GCS bucket you want to ingest from.")
   public String getBucket() {
     return bucket;
   }
@@ -142,6 +145,17 @@ public class SourceGcs {
     return objectBytesTotal;
   }
 
+   /**
+   * Get objectBytesDownloaded
+   * @return objectBytesDownloaded
+  **/
+
+@JsonProperty("object_bytes_downloaded")
+@ApiModelProperty(value = "")
+  public Long getObjectBytesDownloaded() {
+    return objectBytesDownloaded;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -157,12 +171,13 @@ public class SourceGcs {
         Objects.equals(this.pattern, sourceGcs.pattern) &&
         Objects.equals(this.objectCountDownloaded, sourceGcs.objectCountDownloaded) &&
         Objects.equals(this.objectCountTotal, sourceGcs.objectCountTotal) &&
-        Objects.equals(this.objectBytesTotal, sourceGcs.objectBytesTotal);
+        Objects.equals(this.objectBytesTotal, sourceGcs.objectBytesTotal) &&
+        Objects.equals(this.objectBytesDownloaded, sourceGcs.objectBytesDownloaded);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(bucket, prefix, pattern, objectCountDownloaded, objectCountTotal, objectBytesTotal);
+    return Objects.hash(bucket, prefix, pattern, objectCountDownloaded, objectCountTotal, objectBytesTotal, objectBytesDownloaded);
   }
 
 
@@ -177,6 +192,7 @@ public class SourceGcs {
     sb.append("    objectCountDownloaded: ").append(toIndentedString(objectCountDownloaded)).append("\n");
     sb.append("    objectCountTotal: ").append(toIndentedString(objectCountTotal)).append("\n");
     sb.append("    objectBytesTotal: ").append(toIndentedString(objectBytesTotal)).append("\n");
+    sb.append("    objectBytesDownloaded: ").append(toIndentedString(objectBytesDownloaded)).append("\n");
     sb.append("}");
     return sb.toString();
   }

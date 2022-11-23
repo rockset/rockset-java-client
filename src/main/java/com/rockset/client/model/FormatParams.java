@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * FormatParams
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-04-16T12:14:16.934-04:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
 public class FormatParams {
   @SerializedName("json")
   private Boolean json = null;
@@ -64,12 +64,12 @@ public class FormatParams {
   }
 
    /**
-   * source data is in json format
+   * Source data is in json format.
    * @return json
   **/
 
 @JsonProperty("json")
-@ApiModelProperty(example = "true", value = "source data is in json format")
+@ApiModelProperty(example = "true", value = "Source data is in json format.")
   public Boolean isJson() {
     return json;
   }
