@@ -66,9 +66,13 @@ public class RocksetDriver implements Driver, Closeable {
     log("Entry: Connect " + url);
     if (!acceptsURL(url)) {
       log("Exit: Connect bad url" + url);
-      throw new SQLException(
-          "Bad url format " + url + ". Url should start with " + ROCKSET_DRIVER_URL_START + ".");
+      // JDBC expects null return if url cannot be supported by driver:
+      // "The driver should return "null" if it realizes it is the wrong kind of driver to connect
+      // to the given URL"
+      // https://docs.oracle.com/javase/7/docs/api/java/sql/Driver.html#connect(java.lang.String,%20java.util.Properties)
+      return null;
     }
+
     URI uri = null;
     try {
       uri = new URI(url);
