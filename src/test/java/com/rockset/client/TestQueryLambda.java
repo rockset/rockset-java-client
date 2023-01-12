@@ -1,6 +1,5 @@
 package com.rockset.client;
 
-import com.google.gson.internal.LinkedTreeMap;
 import com.rockset.client.model.CreateQueryLambdaRequest;
 import com.rockset.client.model.CreateQueryLambdaTagRequest;
 import com.rockset.client.model.ExecuteQueryLambdaRequest;
@@ -23,8 +22,8 @@ import org.testng.annotations.Test;
 public class TestQueryLambda {
 
   private RocksetClient client;
-  private static final String queryName = "myQuery";
-  private static final String paginatedQueryName = "myQueryPaginated";
+  private static final String queryNamePrefix = "myQuery-";
+  private static final String paginatedQueryNamePrefix = "myQueryPaginated-";
 
   @BeforeSuite
   public void setUp() throws Exception {
@@ -41,6 +40,8 @@ public class TestQueryLambda {
 
   @Test
   public void testSavedQueryCrud() throws Exception {
+    String queryName = queryNamePrefix + System.currentTimeMillis();
+
     CreateQueryLambdaRequest req = new CreateQueryLambdaRequest();
     req.setName(queryName);
     QueryLambdaSql sql = new QueryLambdaSql();
@@ -55,12 +56,12 @@ public class TestQueryLambda {
     req.setSql(sql);
 
     QueryLambdaVersionResponse resp = client.queryLambdas.create("commons", req);
-    Assert.assertEquals(resp.getData().getName(), this.queryName);
+    Assert.assertEquals(resp.getData().getName(), queryName);
 
     String version = resp.getData().getVersion();
     // Run Query Lambda with default parameters
     QueryResponse qr = client.queryLambdas.execute_0("commons", queryName, version, null);
-    Map<String, String> result = (LinkedTreeMap) qr.getResults().get(0);
+    Map<String, String> result = (Map<String, String>) qr.getResults().get(0);
     Assert.assertEquals(result.get("echo"), "Hello, world!");
 
     // Create a tag for a Query Lambda version
@@ -79,7 +80,7 @@ public class TestQueryLambda {
     ExecuteQueryLambdaRequest exReq = new ExecuteQueryLambdaRequest();
     exReq.addParametersItem(exParam);
     qr = client.queryLambdas.execute("commons", queryName, queryLambdaTag, exReq);
-    result = (LinkedTreeMap) qr.getResults().get(0);
+    result = (Map<String, String>) qr.getResults().get(0);
     Assert.assertEquals(result.get("echo"), "All work and no play makes Jack a dull boy");
 
     client.queryLambdas.delete("commons", queryName);
@@ -87,6 +88,8 @@ public class TestQueryLambda {
 
   @Test
   public void testPaginatedSavedQuery() throws Exception {
+    String paginatedQueryName = paginatedQueryNamePrefix + System.currentTimeMillis();
+
     CreateQueryLambdaRequest req = new CreateQueryLambdaRequest();
     req.setName(paginatedQueryName);
     QueryLambdaSql sql = new QueryLambdaSql();
@@ -114,12 +117,14 @@ public class TestQueryLambda {
     QueryResponse qr = client.queryLambdas.execute("commons", paginatedQueryName, queryLambdaTag, exReq);
     Assert.assertEquals(qr.getResults().size(), 1);
 
-    Map<String, String> result = (LinkedTreeMap) qr.getResults().get(0);
+    Map<String, String> result = (Map<String, String>) qr.getResults().get(0);
     Assert.assertEquals(result.values().stream().collect(Collectors.toList()).get(0), "1");
 
     // Get Pagination cursor.
     PaginationInfo pInfo = qr.getPagination();
     String next = pInfo.getNextCursor();
+    Assert.assertNotNull(next);
+    Assert.assertNotEquals(next, "");
 
     String queryId = qr.getQueryId();
     QueryPaginationResponse paginationResponse = client.queries.get_0(queryId, next, 1);
@@ -127,7 +132,7 @@ public class TestQueryLambda {
     // Check that the second row just has a 2.
     Assert.assertEquals(paginationResponse.getResults().size(), 1);
     Assert.assertEquals(paginationResponse.getPagination().getCurrentPageDocCount().longValue(), 1L);
-    result = (LinkedTreeMap) paginationResponse.getResults().get(0);
+    result = (Map<String, String>) paginationResponse.getResults().get(0);
     Assert.assertEquals(result.values().stream().collect(Collectors.toList()).get(0), "2");
 
     // No more pages.
