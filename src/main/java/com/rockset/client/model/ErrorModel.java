@@ -106,6 +106,7 @@ public class ErrorModel {
       return String.valueOf(value);
     }
 
+    @com.fasterxml.jackson.annotation.JsonCreator
     public static TypeEnum fromValue(String text) {
       for (TypeEnum b : TypeEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
