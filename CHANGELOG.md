@@ -1,5 +1,9 @@
 # Rockset Java Client Changelog
 
+## v0.10.0 2022-01-12
+- Added api changes for new MSK integration
+- Improved JDBC API conformance by ignoring non-Rockset urls
+
 ## v0.9.5 2022-10-17
 - Support u256 SQL data type
 - Improved error messages
