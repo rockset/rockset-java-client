@@ -109,7 +109,7 @@ public class TestQueryLambda {
     // Execute the QL and get only the first page.
     ExecuteQueryLambdaRequest exReq = new ExecuteQueryLambdaRequest();
     exReq.setPaginate(true);
-    exReq.setDefaultRowLimit(1);
+    exReq.setDefaultRowLimit(10);
     exReq.setInitialPaginateResponseDocCount(1);
     QueryResponse qr = client.queryLambdas.execute("commons", paginatedQueryName, queryLambdaTag, exReq);
     Assert.assertEquals(qr.getResults().size(), 1);
