@@ -30,6 +30,7 @@ jobs:
     - name: Build with Maven
       env:
         ROCKSET_API_KEY: ${{ secrets.ROCKSET_API_KEY }}
+        ROCKSET_APISERVER: ${{ secrets.ROCKSET_APISERVER }}
       run: mvn -B package --file pom.xml
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
