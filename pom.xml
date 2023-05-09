@@ -315,7 +315,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.14.2</version>
+            <version>7.5.1</version>
             <exclusions>
                 <exclusion>
                     <groupId>junit</groupId>
