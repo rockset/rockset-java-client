@@ -29,16 +29,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * StatusMongoDb
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class StatusMongoDb {
-  @SerializedName("scan_start_time")
-  private String scanStartTime = null;
-
   @SerializedName("scan_end_time")
   private String scanEndTime = null;
 
   @SerializedName("scan_records_processed")
   private Long scanRecordsProcessed = null;
+
+  @SerializedName("scan_start_time")
+  private String scanStartTime = null;
 
   @SerializedName("scan_total_records")
   private Long scanTotalRecords = null;
@@ -69,6 +69,7 @@ public class StatusMongoDb {
       return String.valueOf(value);
     }
 
+    @com.fasterxml.jackson.annotation.JsonCreator
     public static StateEnum fromValue(String text) {
       for (StateEnum b : StateEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -95,43 +96,23 @@ public class StatusMongoDb {
   @SerializedName("state")
   private StateEnum state = null;
 
+  @SerializedName("stream_last_delete_processed_at")
+  private String streamLastDeleteProcessedAt = null;
+
   @SerializedName("stream_last_insert_processed_at")
   private String streamLastInsertProcessedAt = null;
 
   @SerializedName("stream_last_update_processed_at")
   private String streamLastUpdateProcessedAt = null;
 
-  @SerializedName("stream_last_delete_processed_at")
-  private String streamLastDeleteProcessedAt = null;
+  @SerializedName("stream_records_deleted")
+  private Long streamRecordsDeleted = null;
 
   @SerializedName("stream_records_inserted")
   private Long streamRecordsInserted = null;
 
   @SerializedName("stream_records_updated")
   private Long streamRecordsUpdated = null;
-
-  @SerializedName("stream_records_deleted")
-  private Long streamRecordsDeleted = null;
-
-  public StatusMongoDb scanStartTime(String scanStartTime) {
-    this.scanStartTime = scanStartTime;
-    return this;
-  }
-
-   /**
-   * MongoDB scan start time.
-   * @return scanStartTime
-  **/
-
-@JsonProperty("scan_start_time")
-@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "MongoDB scan start time.")
-  public String getScanStartTime() {
-    return scanStartTime;
-  }
-
-  public void setScanStartTime(String scanStartTime) {
-    this.scanStartTime = scanStartTime;
-  }
 
   public StatusMongoDb scanEndTime(String scanEndTime) {
     this.scanEndTime = scanEndTime;
@@ -171,6 +152,26 @@ public class StatusMongoDb {
 
   public void setScanRecordsProcessed(Long scanRecordsProcessed) {
     this.scanRecordsProcessed = scanRecordsProcessed;
+  }
+
+  public StatusMongoDb scanStartTime(String scanStartTime) {
+    this.scanStartTime = scanStartTime;
+    return this;
+  }
+
+   /**
+   * MongoDB scan start time.
+   * @return scanStartTime
+  **/
+
+@JsonProperty("scan_start_time")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "MongoDB scan start time.")
+  public String getScanStartTime() {
+    return scanStartTime;
+  }
+
+  public void setScanStartTime(String scanStartTime) {
+    this.scanStartTime = scanStartTime;
   }
 
   public StatusMongoDb scanTotalRecords(Long scanTotalRecords) {
@@ -213,6 +214,26 @@ public class StatusMongoDb {
     this.state = state;
   }
 
+  public StatusMongoDb streamLastDeleteProcessedAt(String streamLastDeleteProcessedAt) {
+    this.streamLastDeleteProcessedAt = streamLastDeleteProcessedAt;
+    return this;
+  }
+
+   /**
+   * ISO-8601 date when delete from source was last processed.
+   * @return streamLastDeleteProcessedAt
+  **/
+
+@JsonProperty("stream_last_delete_processed_at")
+@ApiModelProperty(example = "2019-01-15T21:48:23Z", value = "ISO-8601 date when delete from source was last processed.")
+  public String getStreamLastDeleteProcessedAt() {
+    return streamLastDeleteProcessedAt;
+  }
+
+  public void setStreamLastDeleteProcessedAt(String streamLastDeleteProcessedAt) {
+    this.streamLastDeleteProcessedAt = streamLastDeleteProcessedAt;
+  }
+
   public StatusMongoDb streamLastInsertProcessedAt(String streamLastInsertProcessedAt) {
     this.streamLastInsertProcessedAt = streamLastInsertProcessedAt;
     return this;
@@ -253,24 +274,24 @@ public class StatusMongoDb {
     this.streamLastUpdateProcessedAt = streamLastUpdateProcessedAt;
   }
 
-  public StatusMongoDb streamLastDeleteProcessedAt(String streamLastDeleteProcessedAt) {
-    this.streamLastDeleteProcessedAt = streamLastDeleteProcessedAt;
+  public StatusMongoDb streamRecordsDeleted(Long streamRecordsDeleted) {
+    this.streamRecordsDeleted = streamRecordsDeleted;
     return this;
   }
 
    /**
-   * ISO-8601 date when delete from source was last processed.
-   * @return streamLastDeleteProcessedAt
+   * Number of new records deleted using stream.
+   * @return streamRecordsDeleted
   **/
 
-@JsonProperty("stream_last_delete_processed_at")
-@ApiModelProperty(example = "2019-01-15T21:48:23Z", value = "ISO-8601 date when delete from source was last processed.")
-  public String getStreamLastDeleteProcessedAt() {
-    return streamLastDeleteProcessedAt;
+@JsonProperty("stream_records_deleted")
+@ApiModelProperty(example = "100", value = "Number of new records deleted using stream.")
+  public Long getStreamRecordsDeleted() {
+    return streamRecordsDeleted;
   }
 
-  public void setStreamLastDeleteProcessedAt(String streamLastDeleteProcessedAt) {
-    this.streamLastDeleteProcessedAt = streamLastDeleteProcessedAt;
+  public void setStreamRecordsDeleted(Long streamRecordsDeleted) {
+    this.streamRecordsDeleted = streamRecordsDeleted;
   }
 
   public StatusMongoDb streamRecordsInserted(Long streamRecordsInserted) {
@@ -313,26 +334,6 @@ public class StatusMongoDb {
     this.streamRecordsUpdated = streamRecordsUpdated;
   }
 
-  public StatusMongoDb streamRecordsDeleted(Long streamRecordsDeleted) {
-    this.streamRecordsDeleted = streamRecordsDeleted;
-    return this;
-  }
-
-   /**
-   * Number of new records deleted using stream.
-   * @return streamRecordsDeleted
-  **/
-
-@JsonProperty("stream_records_deleted")
-@ApiModelProperty(example = "100", value = "Number of new records deleted using stream.")
-  public Long getStreamRecordsDeleted() {
-    return streamRecordsDeleted;
-  }
-
-  public void setStreamRecordsDeleted(Long streamRecordsDeleted) {
-    this.streamRecordsDeleted = streamRecordsDeleted;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -343,22 +344,22 @@ public class StatusMongoDb {
       return false;
     }
     StatusMongoDb statusMongoDb = (StatusMongoDb) o;
-    return Objects.equals(this.scanStartTime, statusMongoDb.scanStartTime) &&
-        Objects.equals(this.scanEndTime, statusMongoDb.scanEndTime) &&
+    return Objects.equals(this.scanEndTime, statusMongoDb.scanEndTime) &&
         Objects.equals(this.scanRecordsProcessed, statusMongoDb.scanRecordsProcessed) &&
+        Objects.equals(this.scanStartTime, statusMongoDb.scanStartTime) &&
         Objects.equals(this.scanTotalRecords, statusMongoDb.scanTotalRecords) &&
         Objects.equals(this.state, statusMongoDb.state) &&
+        Objects.equals(this.streamLastDeleteProcessedAt, statusMongoDb.streamLastDeleteProcessedAt) &&
         Objects.equals(this.streamLastInsertProcessedAt, statusMongoDb.streamLastInsertProcessedAt) &&
         Objects.equals(this.streamLastUpdateProcessedAt, statusMongoDb.streamLastUpdateProcessedAt) &&
-        Objects.equals(this.streamLastDeleteProcessedAt, statusMongoDb.streamLastDeleteProcessedAt) &&
+        Objects.equals(this.streamRecordsDeleted, statusMongoDb.streamRecordsDeleted) &&
         Objects.equals(this.streamRecordsInserted, statusMongoDb.streamRecordsInserted) &&
-        Objects.equals(this.streamRecordsUpdated, statusMongoDb.streamRecordsUpdated) &&
-        Objects.equals(this.streamRecordsDeleted, statusMongoDb.streamRecordsDeleted);
+        Objects.equals(this.streamRecordsUpdated, statusMongoDb.streamRecordsUpdated);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(scanStartTime, scanEndTime, scanRecordsProcessed, scanTotalRecords, state, streamLastInsertProcessedAt, streamLastUpdateProcessedAt, streamLastDeleteProcessedAt, streamRecordsInserted, streamRecordsUpdated, streamRecordsDeleted);
+    return Objects.hash(scanEndTime, scanRecordsProcessed, scanStartTime, scanTotalRecords, state, streamLastDeleteProcessedAt, streamLastInsertProcessedAt, streamLastUpdateProcessedAt, streamRecordsDeleted, streamRecordsInserted, streamRecordsUpdated);
   }
 
 
@@ -367,17 +368,17 @@ public class StatusMongoDb {
     StringBuilder sb = new StringBuilder();
     sb.append("class StatusMongoDb {\n");
     
-    sb.append("    scanStartTime: ").append(toIndentedString(scanStartTime)).append("\n");
     sb.append("    scanEndTime: ").append(toIndentedString(scanEndTime)).append("\n");
     sb.append("    scanRecordsProcessed: ").append(toIndentedString(scanRecordsProcessed)).append("\n");
+    sb.append("    scanStartTime: ").append(toIndentedString(scanStartTime)).append("\n");
     sb.append("    scanTotalRecords: ").append(toIndentedString(scanTotalRecords)).append("\n");
     sb.append("    state: ").append(toIndentedString(state)).append("\n");
+    sb.append("    streamLastDeleteProcessedAt: ").append(toIndentedString(streamLastDeleteProcessedAt)).append("\n");
     sb.append("    streamLastInsertProcessedAt: ").append(toIndentedString(streamLastInsertProcessedAt)).append("\n");
     sb.append("    streamLastUpdateProcessedAt: ").append(toIndentedString(streamLastUpdateProcessedAt)).append("\n");
-    sb.append("    streamLastDeleteProcessedAt: ").append(toIndentedString(streamLastDeleteProcessedAt)).append("\n");
+    sb.append("    streamRecordsDeleted: ").append(toIndentedString(streamRecordsDeleted)).append("\n");
     sb.append("    streamRecordsInserted: ").append(toIndentedString(streamRecordsInserted)).append("\n");
     sb.append("    streamRecordsUpdated: ").append(toIndentedString(streamRecordsUpdated)).append("\n");
-    sb.append("    streamRecordsDeleted: ").append(toIndentedString(streamRecordsDeleted)).append("\n");
     sb.append("}");
     return sb.toString();
   }

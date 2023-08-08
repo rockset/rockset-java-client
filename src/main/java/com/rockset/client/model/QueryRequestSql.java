@@ -32,64 +32,58 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryRequestSql
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class QueryRequestSql {
-  @SerializedName("query")
-  private String query = null;
-
-  @SerializedName("generate_warnings")
-  private Boolean generateWarnings = null;
-
-  @SerializedName("parameters")
-  private List<QueryParameter> parameters = null;
-
   @SerializedName("default_row_limit")
   private Integer defaultRowLimit = null;
-
-  @SerializedName("paginate")
-  private Boolean paginate = null;
 
   @SerializedName("initial_paginate_response_doc_count")
   private Integer initialPaginateResponseDocCount = null;
 
-  public QueryRequestSql query(String query) {
-    this.query = query;
+  @SerializedName("parameters")
+  private List<QueryParameter> parameters = null;
+
+  @SerializedName("query")
+  private String query = null;
+
+  public QueryRequestSql defaultRowLimit(Integer defaultRowLimit) {
+    this.defaultRowLimit = defaultRowLimit;
     return this;
   }
 
    /**
-   * SQL query string.
-   * @return query
+   * Row limit to use. Limits specified in the query text will override this default.
+   * @return defaultRowLimit
   **/
 
-@JsonProperty("query")
-@ApiModelProperty(example = "SELECT * FROM foo where _id = :_id", required = true, value = "SQL query string.")
-  public String getQuery() {
-    return query;
+@JsonProperty("default_row_limit")
+@ApiModelProperty(value = "Row limit to use. Limits specified in the query text will override this default.")
+  public Integer getDefaultRowLimit() {
+    return defaultRowLimit;
   }
 
-  public void setQuery(String query) {
-    this.query = query;
+  public void setDefaultRowLimit(Integer defaultRowLimit) {
+    this.defaultRowLimit = defaultRowLimit;
   }
 
-  public QueryRequestSql generateWarnings(Boolean generateWarnings) {
-    this.generateWarnings = generateWarnings;
+  public QueryRequestSql initialPaginateResponseDocCount(Integer initialPaginateResponseDocCount) {
+    this.initialPaginateResponseDocCount = initialPaginateResponseDocCount;
     return this;
   }
 
    /**
-   * Flag to enable warnings. Warnings can help debug query issues but negatively affect performance.
-   * @return generateWarnings
+   * [DEPRECATED] Use &#x60;max_initial_results&#x60; instead. Number of documents to return in addition to paginating for this query call. Only relevant if &#x60;paginate&#x60; flag is also set.
+   * @return initialPaginateResponseDocCount
   **/
 
-@JsonProperty("generate_warnings")
-@ApiModelProperty(value = "Flag to enable warnings. Warnings can help debug query issues but negatively affect performance.")
-  public Boolean isGenerateWarnings() {
-    return generateWarnings;
+@JsonProperty("initial_paginate_response_doc_count")
+@ApiModelProperty(value = "[DEPRECATED] Use `max_initial_results` instead. Number of documents to return in addition to paginating for this query call. Only relevant if `paginate` flag is also set.")
+  public Integer getInitialPaginateResponseDocCount() {
+    return initialPaginateResponseDocCount;
   }
 
-  public void setGenerateWarnings(Boolean generateWarnings) {
-    this.generateWarnings = generateWarnings;
+  public void setInitialPaginateResponseDocCount(Integer initialPaginateResponseDocCount) {
+    this.initialPaginateResponseDocCount = initialPaginateResponseDocCount;
   }
 
   public QueryRequestSql parameters(List<QueryParameter> parameters) {
@@ -120,64 +114,24 @@ public class QueryRequestSql {
     this.parameters = parameters;
   }
 
-  public QueryRequestSql defaultRowLimit(Integer defaultRowLimit) {
-    this.defaultRowLimit = defaultRowLimit;
+  public QueryRequestSql query(String query) {
+    this.query = query;
     return this;
   }
 
    /**
-   * Row limit to use. Limits specified in the query text will override this default.
-   * @return defaultRowLimit
+   * SQL query string.
+   * @return query
   **/
 
-@JsonProperty("default_row_limit")
-@ApiModelProperty(value = "Row limit to use. Limits specified in the query text will override this default.")
-  public Integer getDefaultRowLimit() {
-    return defaultRowLimit;
+@JsonProperty("query")
+@ApiModelProperty(example = "SELECT * FROM foo where _id = :_id", required = true, value = "SQL query string.")
+  public String getQuery() {
+    return query;
   }
 
-  public void setDefaultRowLimit(Integer defaultRowLimit) {
-    this.defaultRowLimit = defaultRowLimit;
-  }
-
-  public QueryRequestSql paginate(Boolean paginate) {
-    this.paginate = paginate;
-    return this;
-  }
-
-   /**
-   * Flag to paginate and store the results of this query for later / sequential retrieval.
-   * @return paginate
-  **/
-
-@JsonProperty("paginate")
-@ApiModelProperty(value = "Flag to paginate and store the results of this query for later / sequential retrieval.")
-  public Boolean isPaginate() {
-    return paginate;
-  }
-
-  public void setPaginate(Boolean paginate) {
-    this.paginate = paginate;
-  }
-
-  public QueryRequestSql initialPaginateResponseDocCount(Integer initialPaginateResponseDocCount) {
-    this.initialPaginateResponseDocCount = initialPaginateResponseDocCount;
-    return this;
-  }
-
-   /**
-   * Number of documents to return in addition to paginating for this query call. Only relevant if &#x60;paginate&#x60; flag is also set.
-   * @return initialPaginateResponseDocCount
-  **/
-
-@JsonProperty("initial_paginate_response_doc_count")
-@ApiModelProperty(value = "Number of documents to return in addition to paginating for this query call. Only relevant if `paginate` flag is also set.")
-  public Integer getInitialPaginateResponseDocCount() {
-    return initialPaginateResponseDocCount;
-  }
-
-  public void setInitialPaginateResponseDocCount(Integer initialPaginateResponseDocCount) {
-    this.initialPaginateResponseDocCount = initialPaginateResponseDocCount;
+  public void setQuery(String query) {
+    this.query = query;
   }
 
 
@@ -190,17 +144,15 @@ public class QueryRequestSql {
       return false;
     }
     QueryRequestSql queryRequestSql = (QueryRequestSql) o;
-    return Objects.equals(this.query, queryRequestSql.query) &&
-        Objects.equals(this.generateWarnings, queryRequestSql.generateWarnings) &&
+    return Objects.equals(this.defaultRowLimit, queryRequestSql.defaultRowLimit) &&
+        Objects.equals(this.initialPaginateResponseDocCount, queryRequestSql.initialPaginateResponseDocCount) &&
         Objects.equals(this.parameters, queryRequestSql.parameters) &&
-        Objects.equals(this.defaultRowLimit, queryRequestSql.defaultRowLimit) &&
-        Objects.equals(this.paginate, queryRequestSql.paginate) &&
-        Objects.equals(this.initialPaginateResponseDocCount, queryRequestSql.initialPaginateResponseDocCount);
+        Objects.equals(this.query, queryRequestSql.query);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(query, generateWarnings, parameters, defaultRowLimit, paginate, initialPaginateResponseDocCount);
+    return Objects.hash(defaultRowLimit, initialPaginateResponseDocCount, parameters, query);
   }
 
 
@@ -209,12 +161,10 @@ public class QueryRequestSql {
     StringBuilder sb = new StringBuilder();
     sb.append("class QueryRequestSql {\n");
     
-    sb.append("    query: ").append(toIndentedString(query)).append("\n");
-    sb.append("    generateWarnings: ").append(toIndentedString(generateWarnings)).append("\n");
-    sb.append("    parameters: ").append(toIndentedString(parameters)).append("\n");
     sb.append("    defaultRowLimit: ").append(toIndentedString(defaultRowLimit)).append("\n");
-    sb.append("    paginate: ").append(toIndentedString(paginate)).append("\n");
     sb.append("    initialPaginateResponseDocCount: ").append(toIndentedString(initialPaginateResponseDocCount)).append("\n");
+    sb.append("    parameters: ").append(toIndentedString(parameters)).append("\n");
+    sb.append("    query: ").append(toIndentedString(query)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -30,35 +30,26 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceAzureServiceBus
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class SourceAzureServiceBus {
-  @SerializedName("topic")
-  private String topic = null;
+  @SerializedName("status")
+  private StatusAzureServiceBus status = null;
 
   @SerializedName("subscription")
   private String subscription = null;
 
-  @SerializedName("status")
-  private StatusAzureServiceBus status = null;
-
-  public SourceAzureServiceBus topic(String topic) {
-    this.topic = topic;
-    return this;
-  }
+  @SerializedName("topic")
+  private String topic = null;
 
    /**
-   * Name of the topic which rockset should ingest from.
-   * @return topic
+   * Azure Service bus source status.
+   * @return status
   **/
 
-@JsonProperty("topic")
-@ApiModelProperty(example = "rockset-topic", value = "Name of the topic which rockset should ingest from.")
-  public String getTopic() {
-    return topic;
-  }
-
-  public void setTopic(String topic) {
-    this.topic = topic;
+@JsonProperty("status")
+@ApiModelProperty(value = "Azure Service bus source status.")
+  public StatusAzureServiceBus getStatus() {
+    return status;
   }
 
   public SourceAzureServiceBus subscription(String subscription) {
@@ -81,15 +72,24 @@ public class SourceAzureServiceBus {
     this.subscription = subscription;
   }
 
+  public SourceAzureServiceBus topic(String topic) {
+    this.topic = topic;
+    return this;
+  }
+
    /**
-   * Azure Service bus source status.
-   * @return status
+   * Name of the topic which rockset should ingest from.
+   * @return topic
   **/
 
-@JsonProperty("status")
-@ApiModelProperty(value = "Azure Service bus source status.")
-  public StatusAzureServiceBus getStatus() {
-    return status;
+@JsonProperty("topic")
+@ApiModelProperty(example = "rockset-topic", value = "Name of the topic which rockset should ingest from.")
+  public String getTopic() {
+    return topic;
+  }
+
+  public void setTopic(String topic) {
+    this.topic = topic;
   }
 
 
@@ -102,14 +102,14 @@ public class SourceAzureServiceBus {
       return false;
     }
     SourceAzureServiceBus sourceAzureServiceBus = (SourceAzureServiceBus) o;
-    return Objects.equals(this.topic, sourceAzureServiceBus.topic) &&
+    return Objects.equals(this.status, sourceAzureServiceBus.status) &&
         Objects.equals(this.subscription, sourceAzureServiceBus.subscription) &&
-        Objects.equals(this.status, sourceAzureServiceBus.status);
+        Objects.equals(this.topic, sourceAzureServiceBus.topic);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(topic, subscription, status);
+    return Objects.hash(status, subscription, topic);
   }
 
 
@@ -118,9 +118,9 @@ public class SourceAzureServiceBus {
     StringBuilder sb = new StringBuilder();
     sb.append("class SourceAzureServiceBus {\n");
     
-    sb.append("    topic: ").append(toIndentedString(topic)).append("\n");
-    sb.append("    subscription: ").append(toIndentedString(subscription)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    subscription: ").append(toIndentedString(subscription)).append("\n");
+    sb.append("    topic: ").append(toIndentedString(topic)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -30,16 +30,39 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceMongoDb
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class SourceMongoDb {
-  @SerializedName("database_name")
-  private String databaseName = null;
-
   @SerializedName("collection_name")
   private String collectionName = null;
 
+  @SerializedName("database_name")
+  private String databaseName = null;
+
+  @SerializedName("retrieve_full_document")
+  private Boolean retrieveFullDocument = null;
+
   @SerializedName("status")
   private StatusMongoDb status = null;
+
+  public SourceMongoDb collectionName(String collectionName) {
+    this.collectionName = collectionName;
+    return this;
+  }
+
+   /**
+   * MongoDB collection name.
+   * @return collectionName
+  **/
+
+@JsonProperty("collection_name")
+@ApiModelProperty(example = "my_collection", required = true, value = "MongoDB collection name.")
+  public String getCollectionName() {
+    return collectionName;
+  }
+
+  public void setCollectionName(String collectionName) {
+    this.collectionName = collectionName;
+  }
 
   public SourceMongoDb databaseName(String databaseName) {
     this.databaseName = databaseName;
@@ -61,24 +84,24 @@ public class SourceMongoDb {
     this.databaseName = databaseName;
   }
 
-  public SourceMongoDb collectionName(String collectionName) {
-    this.collectionName = collectionName;
+  public SourceMongoDb retrieveFullDocument(Boolean retrieveFullDocument) {
+    this.retrieveFullDocument = retrieveFullDocument;
     return this;
   }
 
    /**
-   * MongoDB collection name.
-   * @return collectionName
+   * Whether to get the full document from the MongoDB change stream to enable multi-field expression transformations. Selecting this option will increase load on your upstream MongoDB database.
+   * @return retrieveFullDocument
   **/
 
-@JsonProperty("collection_name")
-@ApiModelProperty(example = "my_collection", required = true, value = "MongoDB collection name.")
-  public String getCollectionName() {
-    return collectionName;
+@JsonProperty("retrieve_full_document")
+@ApiModelProperty(value = "Whether to get the full document from the MongoDB change stream to enable multi-field expression transformations. Selecting this option will increase load on your upstream MongoDB database.")
+  public Boolean isRetrieveFullDocument() {
+    return retrieveFullDocument;
   }
 
-  public void setCollectionName(String collectionName) {
-    this.collectionName = collectionName;
+  public void setRetrieveFullDocument(Boolean retrieveFullDocument) {
+    this.retrieveFullDocument = retrieveFullDocument;
   }
 
    /**
@@ -102,14 +125,15 @@ public class SourceMongoDb {
       return false;
     }
     SourceMongoDb sourceMongoDb = (SourceMongoDb) o;
-    return Objects.equals(this.databaseName, sourceMongoDb.databaseName) &&
-        Objects.equals(this.collectionName, sourceMongoDb.collectionName) &&
+    return Objects.equals(this.collectionName, sourceMongoDb.collectionName) &&
+        Objects.equals(this.databaseName, sourceMongoDb.databaseName) &&
+        Objects.equals(this.retrieveFullDocument, sourceMongoDb.retrieveFullDocument) &&
         Objects.equals(this.status, sourceMongoDb.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(databaseName, collectionName, status);
+    return Objects.hash(collectionName, databaseName, retrieveFullDocument, status);
   }
 
 
@@ -118,8 +142,9 @@ public class SourceMongoDb {
     StringBuilder sb = new StringBuilder();
     sb.append("class SourceMongoDb {\n");
     
-    sb.append("    databaseName: ").append(toIndentedString(databaseName)).append("\n");
     sb.append("    collectionName: ").append(toIndentedString(collectionName)).append("\n");
+    sb.append("    databaseName: ").append(toIndentedString(databaseName)).append("\n");
+    sb.append("    retrieveFullDocument: ").append(toIndentedString(retrieveFullDocument)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -32,50 +32,50 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * FormatParams
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class FormatParams {
-  @SerializedName("json")
-  private Boolean json = null;
+  @SerializedName("avro")
+  private AvroParams avro = null;
 
   @SerializedName("csv")
   private CsvParams csv = null;
 
-  @SerializedName("xml")
-  private XmlParams xml = null;
-
-  @SerializedName("mysql_dms")
-  private Boolean mysqlDms = null;
-
-  @SerializedName("postgres_dms")
-  private Boolean postgresDms = null;
+  @SerializedName("json")
+  private Boolean json = null;
 
   @SerializedName("mssql_dms")
   private Boolean mssqlDms = null;
 
+  @SerializedName("mysql_dms")
+  private Boolean mysqlDms = null;
+
   @SerializedName("oracle_dms")
   private Boolean oracleDms = null;
 
-  @SerializedName("avro")
-  private AvroParams avro = null;
+  @SerializedName("postgres_dms")
+  private Boolean postgresDms = null;
 
-  public FormatParams json(Boolean json) {
-    this.json = json;
+  @SerializedName("xml")
+  private XmlParams xml = null;
+
+  public FormatParams avro(AvroParams avro) {
+    this.avro = avro;
     return this;
   }
 
    /**
-   * Source data is in json format.
-   * @return json
+   * Get avro
+   * @return avro
   **/
 
-@JsonProperty("json")
-@ApiModelProperty(example = "true", value = "Source data is in json format.")
-  public Boolean isJson() {
-    return json;
+@JsonProperty("avro")
+@ApiModelProperty(value = "")
+  public AvroParams getAvro() {
+    return avro;
   }
 
-  public void setJson(Boolean json) {
-    this.json = json;
+  public void setAvro(AvroParams avro) {
+    this.avro = avro;
   }
 
   public FormatParams csv(CsvParams csv) {
@@ -98,64 +98,24 @@ public class FormatParams {
     this.csv = csv;
   }
 
-  public FormatParams xml(XmlParams xml) {
-    this.xml = xml;
+  public FormatParams json(Boolean json) {
+    this.json = json;
     return this;
   }
 
    /**
-   * Get xml
-   * @return xml
+   * Source data is in json format.
+   * @return json
   **/
 
-@JsonProperty("xml")
-@ApiModelProperty(value = "")
-  public XmlParams getXml() {
-    return xml;
+@JsonProperty("json")
+@ApiModelProperty(example = "true", value = "Source data is in json format.")
+  public Boolean isJson() {
+    return json;
   }
 
-  public void setXml(XmlParams xml) {
-    this.xml = xml;
-  }
-
-  public FormatParams mysqlDms(Boolean mysqlDms) {
-    this.mysqlDms = mysqlDms;
-    return this;
-  }
-
-   /**
-   * Get mysqlDms
-   * @return mysqlDms
-  **/
-
-@JsonProperty("mysql_dms")
-@ApiModelProperty(value = "")
-  public Boolean isMysqlDms() {
-    return mysqlDms;
-  }
-
-  public void setMysqlDms(Boolean mysqlDms) {
-    this.mysqlDms = mysqlDms;
-  }
-
-  public FormatParams postgresDms(Boolean postgresDms) {
-    this.postgresDms = postgresDms;
-    return this;
-  }
-
-   /**
-   * Get postgresDms
-   * @return postgresDms
-  **/
-
-@JsonProperty("postgres_dms")
-@ApiModelProperty(value = "")
-  public Boolean isPostgresDms() {
-    return postgresDms;
-  }
-
-  public void setPostgresDms(Boolean postgresDms) {
-    this.postgresDms = postgresDms;
+  public void setJson(Boolean json) {
+    this.json = json;
   }
 
   public FormatParams mssqlDms(Boolean mssqlDms) {
@@ -178,6 +138,26 @@ public class FormatParams {
     this.mssqlDms = mssqlDms;
   }
 
+  public FormatParams mysqlDms(Boolean mysqlDms) {
+    this.mysqlDms = mysqlDms;
+    return this;
+  }
+
+   /**
+   * Get mysqlDms
+   * @return mysqlDms
+  **/
+
+@JsonProperty("mysql_dms")
+@ApiModelProperty(value = "")
+  public Boolean isMysqlDms() {
+    return mysqlDms;
+  }
+
+  public void setMysqlDms(Boolean mysqlDms) {
+    this.mysqlDms = mysqlDms;
+  }
+
   public FormatParams oracleDms(Boolean oracleDms) {
     this.oracleDms = oracleDms;
     return this;
@@ -198,24 +178,44 @@ public class FormatParams {
     this.oracleDms = oracleDms;
   }
 
-  public FormatParams avro(AvroParams avro) {
-    this.avro = avro;
+  public FormatParams postgresDms(Boolean postgresDms) {
+    this.postgresDms = postgresDms;
     return this;
   }
 
    /**
-   * Get avro
-   * @return avro
+   * Get postgresDms
+   * @return postgresDms
   **/
 
-@JsonProperty("avro")
+@JsonProperty("postgres_dms")
 @ApiModelProperty(value = "")
-  public AvroParams getAvro() {
-    return avro;
+  public Boolean isPostgresDms() {
+    return postgresDms;
   }
 
-  public void setAvro(AvroParams avro) {
-    this.avro = avro;
+  public void setPostgresDms(Boolean postgresDms) {
+    this.postgresDms = postgresDms;
+  }
+
+  public FormatParams xml(XmlParams xml) {
+    this.xml = xml;
+    return this;
+  }
+
+   /**
+   * Get xml
+   * @return xml
+  **/
+
+@JsonProperty("xml")
+@ApiModelProperty(value = "")
+  public XmlParams getXml() {
+    return xml;
+  }
+
+  public void setXml(XmlParams xml) {
+    this.xml = xml;
   }
 
 
@@ -228,19 +228,19 @@ public class FormatParams {
       return false;
     }
     FormatParams formatParams = (FormatParams) o;
-    return Objects.equals(this.json, formatParams.json) &&
+    return Objects.equals(this.avro, formatParams.avro) &&
         Objects.equals(this.csv, formatParams.csv) &&
-        Objects.equals(this.xml, formatParams.xml) &&
-        Objects.equals(this.mysqlDms, formatParams.mysqlDms) &&
-        Objects.equals(this.postgresDms, formatParams.postgresDms) &&
+        Objects.equals(this.json, formatParams.json) &&
         Objects.equals(this.mssqlDms, formatParams.mssqlDms) &&
+        Objects.equals(this.mysqlDms, formatParams.mysqlDms) &&
         Objects.equals(this.oracleDms, formatParams.oracleDms) &&
-        Objects.equals(this.avro, formatParams.avro);
+        Objects.equals(this.postgresDms, formatParams.postgresDms) &&
+        Objects.equals(this.xml, formatParams.xml);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(json, csv, xml, mysqlDms, postgresDms, mssqlDms, oracleDms, avro);
+    return Objects.hash(avro, csv, json, mssqlDms, mysqlDms, oracleDms, postgresDms, xml);
   }
 
 
@@ -249,14 +249,14 @@ public class FormatParams {
     StringBuilder sb = new StringBuilder();
     sb.append("class FormatParams {\n");
     
-    sb.append("    json: ").append(toIndentedString(json)).append("\n");
-    sb.append("    csv: ").append(toIndentedString(csv)).append("\n");
-    sb.append("    xml: ").append(toIndentedString(xml)).append("\n");
-    sb.append("    mysqlDms: ").append(toIndentedString(mysqlDms)).append("\n");
-    sb.append("    postgresDms: ").append(toIndentedString(postgresDms)).append("\n");
-    sb.append("    mssqlDms: ").append(toIndentedString(mssqlDms)).append("\n");
-    sb.append("    oracleDms: ").append(toIndentedString(oracleDms)).append("\n");
     sb.append("    avro: ").append(toIndentedString(avro)).append("\n");
+    sb.append("    csv: ").append(toIndentedString(csv)).append("\n");
+    sb.append("    json: ").append(toIndentedString(json)).append("\n");
+    sb.append("    mssqlDms: ").append(toIndentedString(mssqlDms)).append("\n");
+    sb.append("    mysqlDms: ").append(toIndentedString(mysqlDms)).append("\n");
+    sb.append("    oracleDms: ").append(toIndentedString(oracleDms)).append("\n");
+    sb.append("    postgresDms: ").append(toIndentedString(postgresDms)).append("\n");
+    sb.append("    xml: ").append(toIndentedString(xml)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -32,16 +32,36 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryPaginationResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class QueryPaginationResponse {
+  @SerializedName("pagination")
+  private PaginationInfo pagination = null;
+
   @SerializedName("results")
   private List<Object> results = null;
 
   @SerializedName("results_total_doc_count")
   private Long resultsTotalDocCount = null;
 
-  @SerializedName("pagination")
-  private PaginationInfo pagination = null;
+  public QueryPaginationResponse pagination(PaginationInfo pagination) {
+    this.pagination = pagination;
+    return this;
+  }
+
+   /**
+   * Pagination metadata.
+   * @return pagination
+  **/
+
+@JsonProperty("pagination")
+@ApiModelProperty(value = "Pagination metadata.")
+  public PaginationInfo getPagination() {
+    return pagination;
+  }
+
+  public void setPagination(PaginationInfo pagination) {
+    this.pagination = pagination;
+  }
 
   public QueryPaginationResponse results(List<Object> results) {
     this.results = results;
@@ -91,26 +111,6 @@ public class QueryPaginationResponse {
     this.resultsTotalDocCount = resultsTotalDocCount;
   }
 
-  public QueryPaginationResponse pagination(PaginationInfo pagination) {
-    this.pagination = pagination;
-    return this;
-  }
-
-   /**
-   * Pagination metadata.
-   * @return pagination
-  **/
-
-@JsonProperty("pagination")
-@ApiModelProperty(value = "Pagination metadata.")
-  public PaginationInfo getPagination() {
-    return pagination;
-  }
-
-  public void setPagination(PaginationInfo pagination) {
-    this.pagination = pagination;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -121,14 +121,14 @@ public class QueryPaginationResponse {
       return false;
     }
     QueryPaginationResponse queryPaginationResponse = (QueryPaginationResponse) o;
-    return Objects.equals(this.results, queryPaginationResponse.results) &&
-        Objects.equals(this.resultsTotalDocCount, queryPaginationResponse.resultsTotalDocCount) &&
-        Objects.equals(this.pagination, queryPaginationResponse.pagination);
+    return Objects.equals(this.pagination, queryPaginationResponse.pagination) &&
+        Objects.equals(this.results, queryPaginationResponse.results) &&
+        Objects.equals(this.resultsTotalDocCount, queryPaginationResponse.resultsTotalDocCount);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(results, resultsTotalDocCount, pagination);
+    return Objects.hash(pagination, results, resultsTotalDocCount);
   }
 
 
@@ -137,9 +137,9 @@ public class QueryPaginationResponse {
     StringBuilder sb = new StringBuilder();
     sb.append("class QueryPaginationResponse {\n");
     
+    sb.append("    pagination: ").append(toIndentedString(pagination)).append("\n");
     sb.append("    results: ").append(toIndentedString(results)).append("\n");
     sb.append("    resultsTotalDocCount: ").append(toIndentedString(resultsTotalDocCount)).append("\n");
-    sb.append("    pagination: ").append(toIndentedString(pagination)).append("\n");
     sb.append("}");
     return sb.toString();
   }

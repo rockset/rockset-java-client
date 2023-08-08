@@ -311,12 +311,13 @@ public class QueriesApi {
      * @param queryId  (required)
      * @param cursor Cursor to current page. If unset, will default to the first page. (optional)
      * @param docs Number of documents to fetch. (optional)
+     * @param offset Offset from the cursor of the first document to be returned (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call get_0Call(String queryId, String cursor, Integer docs, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public com.squareup.okhttp.Call get_0Call(String queryId, String cursor, Integer docs, Integer offset, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -329,6 +330,8 @@ public class QueriesApi {
         localVarQueryParams.addAll(apiClient.parameterToPair("cursor", cursor));
         if (docs != null)
         localVarQueryParams.addAll(apiClient.parameterToPair("docs", docs));
+        if (offset != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("offset", offset));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -363,7 +366,7 @@ public class QueriesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call get_0ValidateBeforeCall(String queryId, String cursor, Integer docs, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private com.squareup.okhttp.Call get_0ValidateBeforeCall(String queryId, String cursor, Integer docs, Integer offset, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'queryId' is set
         if (queryId == null) {
@@ -371,7 +374,7 @@ public class QueriesApi {
         }
         
 
-        com.squareup.okhttp.Call call = get_0Call(queryId, cursor, docs, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = get_0Call(queryId, cursor, docs, offset, progressListener, progressRequestListener);
         return call;
 
     }
@@ -382,11 +385,12 @@ public class QueriesApi {
      * @param queryId  (required)
      * @param cursor Cursor to current page. If unset, will default to the first page. (optional)
      * @param docs Number of documents to fetch. (optional)
+     * @param offset Offset from the cursor of the first document to be returned (optional)
      * @return QueryPaginationResponse
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public QueryPaginationResponse get_0(String queryId, String cursor, Integer docs) throws Exception {
-        ApiResponse<QueryPaginationResponse> resp = get_0WithHttpInfo(queryId, cursor, docs);
+    public QueryPaginationResponse get_0(String queryId, String cursor, Integer docs, Integer offset) throws Exception {
+        ApiResponse<QueryPaginationResponse> resp = get_0WithHttpInfo(queryId, cursor, docs, offset);
         return resp.getData();
     }
 
@@ -396,11 +400,12 @@ public class QueriesApi {
      * @param queryId  (required)
      * @param cursor Cursor to current page. If unset, will default to the first page. (optional)
      * @param docs Number of documents to fetch. (optional)
+     * @param offset Offset from the cursor of the first document to be returned (optional)
      * @return ApiResponse&lt;QueryPaginationResponse&gt;
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<QueryPaginationResponse> get_0WithHttpInfo(String queryId, String cursor, Integer docs) throws Exception {
-        com.squareup.okhttp.Call call = get_0ValidateBeforeCall(queryId, cursor, docs, null, null);
+    public ApiResponse<QueryPaginationResponse> get_0WithHttpInfo(String queryId, String cursor, Integer docs, Integer offset) throws Exception {
+        com.squareup.okhttp.Call call = get_0ValidateBeforeCall(queryId, cursor, docs, offset, null, null);
         Type localVarReturnType = new TypeToken<QueryPaginationResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -411,11 +416,12 @@ public class QueriesApi {
      * @param queryId  (required)
      * @param cursor Cursor to current page. If unset, will default to the first page. (optional)
      * @param docs Number of documents to fetch. (optional)
+     * @param offset Offset from the cursor of the first document to be returned (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call get_0Async(String queryId, String cursor, Integer docs, final ApiCallback<QueryPaginationResponse> callback) throws Exception {
+    public com.squareup.okhttp.Call get_0Async(String queryId, String cursor, Integer docs, Integer offset, final ApiCallback<QueryPaginationResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -436,7 +442,7 @@ public class QueriesApi {
             };
         }
 
-        com.squareup.okhttp.Call call = get_0ValidateBeforeCall(queryId, cursor, docs, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = get_0ValidateBeforeCall(queryId, cursor, docs, offset, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<QueryPaginationResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

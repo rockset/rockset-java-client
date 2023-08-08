@@ -29,16 +29,36 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateApiKeyRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class CreateApiKeyRequest {
+  @SerializedName("created_by")
+  private String createdBy = null;
+
   @SerializedName("name")
   private String name = null;
 
   @SerializedName("role")
   private String role = null;
 
-  @SerializedName("created_by")
-  private String createdBy = null;
+  public CreateApiKeyRequest createdBy(String createdBy) {
+    this.createdBy = createdBy;
+    return this;
+  }
+
+   /**
+   * Get createdBy
+   * @return createdBy
+  **/
+
+@JsonProperty("created_by")
+@ApiModelProperty(value = "")
+  public String getCreatedBy() {
+    return createdBy;
+  }
+
+  public void setCreatedBy(String createdBy) {
+    this.createdBy = createdBy;
+  }
 
   public CreateApiKeyRequest name(String name) {
     this.name = name;
@@ -80,26 +100,6 @@ public class CreateApiKeyRequest {
     this.role = role;
   }
 
-  public CreateApiKeyRequest createdBy(String createdBy) {
-    this.createdBy = createdBy;
-    return this;
-  }
-
-   /**
-   * Get createdBy
-   * @return createdBy
-  **/
-
-@JsonProperty("created_by")
-@ApiModelProperty(value = "")
-  public String getCreatedBy() {
-    return createdBy;
-  }
-
-  public void setCreatedBy(String createdBy) {
-    this.createdBy = createdBy;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -110,14 +110,14 @@ public class CreateApiKeyRequest {
       return false;
     }
     CreateApiKeyRequest createApiKeyRequest = (CreateApiKeyRequest) o;
-    return Objects.equals(this.name, createApiKeyRequest.name) &&
-        Objects.equals(this.role, createApiKeyRequest.role) &&
-        Objects.equals(this.createdBy, createApiKeyRequest.createdBy);
+    return Objects.equals(this.createdBy, createApiKeyRequest.createdBy) &&
+        Objects.equals(this.name, createApiKeyRequest.name) &&
+        Objects.equals(this.role, createApiKeyRequest.role);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, role, createdBy);
+    return Objects.hash(createdBy, name, role);
   }
 
 
@@ -126,9 +126,9 @@ public class CreateApiKeyRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class CreateApiKeyRequest {\n");
     
+    sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    role: ").append(toIndentedString(role)).append("\n");
-    sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
     sb.append("}");
     return sb.toString();
   }

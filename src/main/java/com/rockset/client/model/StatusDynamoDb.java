@@ -29,16 +29,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * StatusDynamoDb
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class StatusDynamoDb {
-  @SerializedName("scan_start_time")
-  private String scanStartTime = null;
-
   @SerializedName("scan_end_time")
   private String scanEndTime = null;
 
   @SerializedName("scan_records_processed")
   private Long scanRecordsProcessed = null;
+
+  @SerializedName("scan_start_time")
+  private String scanStartTime = null;
 
   @SerializedName("scan_total_records")
   private Long scanTotalRecords = null;
@@ -69,6 +69,7 @@ public class StatusDynamoDb {
       return String.valueOf(value);
     }
 
+    @com.fasterxml.jackson.annotation.JsonCreator
     public static StateEnum fromValue(String text) {
       for (StateEnum b : StateEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -97,26 +98,6 @@ public class StatusDynamoDb {
 
   @SerializedName("stream_last_processed_at")
   private String streamLastProcessedAt = null;
-
-  public StatusDynamoDb scanStartTime(String scanStartTime) {
-    this.scanStartTime = scanStartTime;
-    return this;
-  }
-
-   /**
-   * DynamoDB scan start time.
-   * @return scanStartTime
-  **/
-
-@JsonProperty("scan_start_time")
-@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "DynamoDB scan start time.")
-  public String getScanStartTime() {
-    return scanStartTime;
-  }
-
-  public void setScanStartTime(String scanStartTime) {
-    this.scanStartTime = scanStartTime;
-  }
 
   public StatusDynamoDb scanEndTime(String scanEndTime) {
     this.scanEndTime = scanEndTime;
@@ -156,6 +137,26 @@ public class StatusDynamoDb {
 
   public void setScanRecordsProcessed(Long scanRecordsProcessed) {
     this.scanRecordsProcessed = scanRecordsProcessed;
+  }
+
+  public StatusDynamoDb scanStartTime(String scanStartTime) {
+    this.scanStartTime = scanStartTime;
+    return this;
+  }
+
+   /**
+   * DynamoDB scan start time.
+   * @return scanStartTime
+  **/
+
+@JsonProperty("scan_start_time")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "DynamoDB scan start time.")
+  public String getScanStartTime() {
+    return scanStartTime;
+  }
+
+  public void setScanStartTime(String scanStartTime) {
+    this.scanStartTime = scanStartTime;
   }
 
   public StatusDynamoDb scanTotalRecords(Long scanTotalRecords) {
@@ -228,9 +229,9 @@ public class StatusDynamoDb {
       return false;
     }
     StatusDynamoDb statusDynamoDb = (StatusDynamoDb) o;
-    return Objects.equals(this.scanStartTime, statusDynamoDb.scanStartTime) &&
-        Objects.equals(this.scanEndTime, statusDynamoDb.scanEndTime) &&
+    return Objects.equals(this.scanEndTime, statusDynamoDb.scanEndTime) &&
         Objects.equals(this.scanRecordsProcessed, statusDynamoDb.scanRecordsProcessed) &&
+        Objects.equals(this.scanStartTime, statusDynamoDb.scanStartTime) &&
         Objects.equals(this.scanTotalRecords, statusDynamoDb.scanTotalRecords) &&
         Objects.equals(this.state, statusDynamoDb.state) &&
         Objects.equals(this.streamLastProcessedAt, statusDynamoDb.streamLastProcessedAt);
@@ -238,7 +239,7 @@ public class StatusDynamoDb {
 
   @Override
   public int hashCode() {
-    return Objects.hash(scanStartTime, scanEndTime, scanRecordsProcessed, scanTotalRecords, state, streamLastProcessedAt);
+    return Objects.hash(scanEndTime, scanRecordsProcessed, scanStartTime, scanTotalRecords, state, streamLastProcessedAt);
   }
 
 
@@ -247,9 +248,9 @@ public class StatusDynamoDb {
     StringBuilder sb = new StringBuilder();
     sb.append("class StatusDynamoDb {\n");
     
-    sb.append("    scanStartTime: ").append(toIndentedString(scanStartTime)).append("\n");
     sb.append("    scanEndTime: ").append(toIndentedString(scanEndTime)).append("\n");
     sb.append("    scanRecordsProcessed: ").append(toIndentedString(scanRecordsProcessed)).append("\n");
+    sb.append("    scanStartTime: ").append(toIndentedString(scanStartTime)).append("\n");
     sb.append("    scanTotalRecords: ").append(toIndentedString(scanTotalRecords)).append("\n");
     sb.append("    state: ").append(toIndentedString(state)).append("\n");
     sb.append("    streamLastProcessedAt: ").append(toIndentedString(streamLastProcessedAt)).append("\n");

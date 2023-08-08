@@ -31,22 +31,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceS3
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class SourceS3 {
-  @SerializedName("prefix")
-  private String prefix = null;
-
-  @SerializedName("pattern")
-  private String pattern = null;
-
-  @SerializedName("region")
-  private String region = null;
-
   @SerializedName("bucket")
   private String bucket = null;
 
-  @SerializedName("prefixes")
-  private List<String> prefixes = new ArrayList<String>();
+  @SerializedName("object_bytes_downloaded")
+  private Long objectBytesDownloaded = null;
+
+  @SerializedName("object_bytes_total")
+  private Long objectBytesTotal = null;
 
   @SerializedName("object_count_downloaded")
   private Long objectCountDownloaded = null;
@@ -54,71 +48,17 @@ public class SourceS3 {
   @SerializedName("object_count_total")
   private Long objectCountTotal = null;
 
-  @SerializedName("object_bytes_total")
-  private Long objectBytesTotal = null;
+  @SerializedName("pattern")
+  private String pattern = null;
 
-  @SerializedName("object_bytes_downloaded")
-  private Long objectBytesDownloaded = null;
+  @SerializedName("prefix")
+  private String prefix = null;
 
-  public SourceS3 prefix(String prefix) {
-    this.prefix = prefix;
-    return this;
-  }
+  @SerializedName("prefixes")
+  private List<String> prefixes = null;
 
-   /**
-   * Prefix that selects keys to ingest.
-   * @return prefix
-  **/
-
-@JsonProperty("prefix")
-@ApiModelProperty(example = "prefix/to/keys", value = "Prefix that selects keys to ingest.")
-  public String getPrefix() {
-    return prefix;
-  }
-
-  public void setPrefix(String prefix) {
-    this.prefix = prefix;
-  }
-
-  public SourceS3 pattern(String pattern) {
-    this.pattern = pattern;
-    return this;
-  }
-
-   /**
-   * Glob-style pattern that selects keys to ingest. Only either prefix or pattern can be specified.
-   * @return pattern
-  **/
-
-@JsonProperty("pattern")
-@ApiModelProperty(example = "prefix/to/_**_/keys/_*.format", value = "Glob-style pattern that selects keys to ingest. Only either prefix or pattern can be specified.")
-  public String getPattern() {
-    return pattern;
-  }
-
-  public void setPattern(String pattern) {
-    this.pattern = pattern;
-  }
-
-  public SourceS3 region(String region) {
-    this.region = region;
-    return this;
-  }
-
-   /**
-   * AWS region containing source bucket.
-   * @return region
-  **/
-
-@JsonProperty("region")
-@ApiModelProperty(example = "us-west-2", value = "AWS region containing source bucket.")
-  public String getRegion() {
-    return region;
-  }
-
-  public void setRegion(String region) {
-    this.region = region;
-  }
+  @SerializedName("region")
+  private String region = null;
 
   public SourceS3 bucket(String bucket) {
     this.bucket = bucket;
@@ -141,14 +81,25 @@ public class SourceS3 {
   }
 
    /**
-   * List of prefixes to paths from which data should be ingested.
-   * @return prefixes
+   * Get objectBytesDownloaded
+   * @return objectBytesDownloaded
   **/
 
-@JsonProperty("prefixes")
-@ApiModelProperty(example = "\"[\\\"/transactions\\\", \\\"/stores\\\"]\"", required = true, value = "List of prefixes to paths from which data should be ingested.")
-  public List<String> getPrefixes() {
-    return prefixes;
+@JsonProperty("object_bytes_downloaded")
+@ApiModelProperty(value = "")
+  public Long getObjectBytesDownloaded() {
+    return objectBytesDownloaded;
+  }
+
+   /**
+   * Get objectBytesTotal
+   * @return objectBytesTotal
+  **/
+
+@JsonProperty("object_bytes_total")
+@ApiModelProperty(value = "")
+  public Long getObjectBytesTotal() {
+    return objectBytesTotal;
   }
 
    /**
@@ -173,26 +124,75 @@ public class SourceS3 {
     return objectCountTotal;
   }
 
-   /**
-   * Get objectBytesTotal
-   * @return objectBytesTotal
-  **/
-
-@JsonProperty("object_bytes_total")
-@ApiModelProperty(value = "")
-  public Long getObjectBytesTotal() {
-    return objectBytesTotal;
+  public SourceS3 pattern(String pattern) {
+    this.pattern = pattern;
+    return this;
   }
 
    /**
-   * Get objectBytesDownloaded
-   * @return objectBytesDownloaded
+   * Glob-style pattern that selects keys to ingest. Only either prefix or pattern can be specified.
+   * @return pattern
   **/
 
-@JsonProperty("object_bytes_downloaded")
-@ApiModelProperty(value = "")
-  public Long getObjectBytesDownloaded() {
-    return objectBytesDownloaded;
+@JsonProperty("pattern")
+@ApiModelProperty(example = "prefix/to/_**_/keys/_*.format", value = "Glob-style pattern that selects keys to ingest. Only either prefix or pattern can be specified.")
+  public String getPattern() {
+    return pattern;
+  }
+
+  public void setPattern(String pattern) {
+    this.pattern = pattern;
+  }
+
+  public SourceS3 prefix(String prefix) {
+    this.prefix = prefix;
+    return this;
+  }
+
+   /**
+   * Prefix that selects keys to ingest.
+   * @return prefix
+  **/
+
+@JsonProperty("prefix")
+@ApiModelProperty(example = "prefix/to/keys", value = "Prefix that selects keys to ingest.")
+  public String getPrefix() {
+    return prefix;
+  }
+
+  public void setPrefix(String prefix) {
+    this.prefix = prefix;
+  }
+
+   /**
+   * List of prefixes to paths from which data should be ingested.
+   * @return prefixes
+  **/
+
+@JsonProperty("prefixes")
+@ApiModelProperty(example = "\"[\\\"/transactions\\\", \\\"/stores\\\"]\"", value = "List of prefixes to paths from which data should be ingested.")
+  public List<String> getPrefixes() {
+    return prefixes;
+  }
+
+  public SourceS3 region(String region) {
+    this.region = region;
+    return this;
+  }
+
+   /**
+   * AWS region containing source bucket.
+   * @return region
+  **/
+
+@JsonProperty("region")
+@ApiModelProperty(example = "us-west-2", value = "AWS region containing source bucket.")
+  public String getRegion() {
+    return region;
+  }
+
+  public void setRegion(String region) {
+    this.region = region;
   }
 
 
@@ -205,20 +205,20 @@ public class SourceS3 {
       return false;
     }
     SourceS3 sourceS3 = (SourceS3) o;
-    return Objects.equals(this.prefix, sourceS3.prefix) &&
-        Objects.equals(this.pattern, sourceS3.pattern) &&
-        Objects.equals(this.region, sourceS3.region) &&
-        Objects.equals(this.bucket, sourceS3.bucket) &&
-        Objects.equals(this.prefixes, sourceS3.prefixes) &&
+    return Objects.equals(this.bucket, sourceS3.bucket) &&
+        Objects.equals(this.objectBytesDownloaded, sourceS3.objectBytesDownloaded) &&
+        Objects.equals(this.objectBytesTotal, sourceS3.objectBytesTotal) &&
         Objects.equals(this.objectCountDownloaded, sourceS3.objectCountDownloaded) &&
         Objects.equals(this.objectCountTotal, sourceS3.objectCountTotal) &&
-        Objects.equals(this.objectBytesTotal, sourceS3.objectBytesTotal) &&
-        Objects.equals(this.objectBytesDownloaded, sourceS3.objectBytesDownloaded);
+        Objects.equals(this.pattern, sourceS3.pattern) &&
+        Objects.equals(this.prefix, sourceS3.prefix) &&
+        Objects.equals(this.prefixes, sourceS3.prefixes) &&
+        Objects.equals(this.region, sourceS3.region);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(prefix, pattern, region, bucket, prefixes, objectCountDownloaded, objectCountTotal, objectBytesTotal, objectBytesDownloaded);
+    return Objects.hash(bucket, objectBytesDownloaded, objectBytesTotal, objectCountDownloaded, objectCountTotal, pattern, prefix, prefixes, region);
   }
 
 
@@ -227,15 +227,15 @@ public class SourceS3 {
     StringBuilder sb = new StringBuilder();
     sb.append("class SourceS3 {\n");
     
-    sb.append("    prefix: ").append(toIndentedString(prefix)).append("\n");
-    sb.append("    pattern: ").append(toIndentedString(pattern)).append("\n");
-    sb.append("    region: ").append(toIndentedString(region)).append("\n");
     sb.append("    bucket: ").append(toIndentedString(bucket)).append("\n");
-    sb.append("    prefixes: ").append(toIndentedString(prefixes)).append("\n");
+    sb.append("    objectBytesDownloaded: ").append(toIndentedString(objectBytesDownloaded)).append("\n");
+    sb.append("    objectBytesTotal: ").append(toIndentedString(objectBytesTotal)).append("\n");
     sb.append("    objectCountDownloaded: ").append(toIndentedString(objectCountDownloaded)).append("\n");
     sb.append("    objectCountTotal: ").append(toIndentedString(objectCountTotal)).append("\n");
-    sb.append("    objectBytesTotal: ").append(toIndentedString(objectBytesTotal)).append("\n");
-    sb.append("    objectBytesDownloaded: ").append(toIndentedString(objectBytesDownloaded)).append("\n");
+    sb.append("    pattern: ").append(toIndentedString(pattern)).append("\n");
+    sb.append("    prefix: ").append(toIndentedString(prefix)).append("\n");
+    sb.append("    prefixes: ").append(toIndentedString(prefixes)).append("\n");
+    sb.append("    region: ").append(toIndentedString(region)).append("\n");
     sb.append("}");
     return sb.toString();
   }

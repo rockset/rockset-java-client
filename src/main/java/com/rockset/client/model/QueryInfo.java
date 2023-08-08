@@ -34,10 +34,31 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryInfo
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class QueryInfo {
+  @SerializedName("executed_by")
+  private String executedBy = null;
+
+  @SerializedName("expires_at")
+  private String expiresAt = null;
+
+  @SerializedName("last_offset")
+  private String lastOffset = null;
+
+  @SerializedName("pagination")
+  private Pagination pagination = null;
+
+  @SerializedName("query_errors")
+  private List<QueryError> queryErrors = null;
+
   @SerializedName("query_id")
   private String queryId = null;
+
+  @SerializedName("sql")
+  private String sql = null;
+
+  @SerializedName("stats")
+  private Stats stats = null;
 
   /**
    * Status of the query.
@@ -69,6 +90,7 @@ public class QueryInfo {
       return String.valueOf(value);
     }
 
+    @com.fasterxml.jackson.annotation.JsonCreator
     public static StatusEnum fromValue(String text) {
       for (StatusEnum b : StatusEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -95,66 +117,8 @@ public class QueryInfo {
   @SerializedName("status")
   private StatusEnum status = null;
 
-  @SerializedName("executed_by")
-  private String executedBy = null;
-
   @SerializedName("submitted_at")
   private String submittedAt = null;
-
-  @SerializedName("expires_at")
-  private String expiresAt = null;
-
-  @SerializedName("stats")
-  private Stats stats = null;
-
-  @SerializedName("pagination")
-  private Pagination pagination = null;
-
-  @SerializedName("last_offset")
-  private String lastOffset = null;
-
-  @SerializedName("query_errors")
-  private List<QueryError> queryErrors = null;
-
-  public QueryInfo queryId(String queryId) {
-    this.queryId = queryId;
-    return this;
-  }
-
-   /**
-   * Unique Query ID.
-   * @return queryId
-  **/
-
-@JsonProperty("query_id")
-@ApiModelProperty(example = "5b596206-c632-4a08-8343-0c560f7ef7f1", value = "Unique Query ID.")
-  public String getQueryId() {
-    return queryId;
-  }
-
-  public void setQueryId(String queryId) {
-    this.queryId = queryId;
-  }
-
-  public QueryInfo status(StatusEnum status) {
-    this.status = status;
-    return this;
-  }
-
-   /**
-   * Status of the query.
-   * @return status
-  **/
-
-@JsonProperty("status")
-@ApiModelProperty(example = "RUNNING", value = "Status of the query.")
-  public StatusEnum getStatus() {
-    return status;
-  }
-
-  public void setStatus(StatusEnum status) {
-    this.status = status;
-  }
 
   public QueryInfo executedBy(String executedBy) {
     this.executedBy = executedBy;
@@ -174,26 +138,6 @@ public class QueryInfo {
 
   public void setExecutedBy(String executedBy) {
     this.executedBy = executedBy;
-  }
-
-  public QueryInfo submittedAt(String submittedAt) {
-    this.submittedAt = submittedAt;
-    return this;
-  }
-
-   /**
-   * Time (UTC) the query request was first received and queued for execution.
-   * @return submittedAt
-  **/
-
-@JsonProperty("submitted_at")
-@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "Time (UTC) the query request was first received and queued for execution.")
-  public String getSubmittedAt() {
-    return submittedAt;
-  }
-
-  public void setSubmittedAt(String submittedAt) {
-    this.submittedAt = submittedAt;
   }
 
   public QueryInfo expiresAt(String expiresAt) {
@@ -216,24 +160,24 @@ public class QueryInfo {
     this.expiresAt = expiresAt;
   }
 
-  public QueryInfo stats(Stats stats) {
-    this.stats = stats;
+  public QueryInfo lastOffset(String lastOffset) {
+    this.lastOffset = lastOffset;
     return this;
   }
 
    /**
-   * Various stats about the query&#39;s execution.
-   * @return stats
+   * The log offset that query results were written to in the destination collection. Only populated for INSERT INTO queries.
+   * @return lastOffset
   **/
 
-@JsonProperty("stats")
-@ApiModelProperty(value = "Various stats about the query's execution.")
-  public Stats getStats() {
-    return stats;
+@JsonProperty("last_offset")
+@ApiModelProperty(value = "The log offset that query results were written to in the destination collection. Only populated for INSERT INTO queries.")
+  public String getLastOffset() {
+    return lastOffset;
   }
 
-  public void setStats(Stats stats) {
-    this.stats = stats;
+  public void setLastOffset(String lastOffset) {
+    this.lastOffset = lastOffset;
   }
 
   public QueryInfo pagination(Pagination pagination) {
@@ -254,26 +198,6 @@ public class QueryInfo {
 
   public void setPagination(Pagination pagination) {
     this.pagination = pagination;
-  }
-
-  public QueryInfo lastOffset(String lastOffset) {
-    this.lastOffset = lastOffset;
-    return this;
-  }
-
-   /**
-   * The log offset that query results were written to in the destination collection. Only populated for INSERT INTO queries.
-   * @return lastOffset
-  **/
-
-@JsonProperty("last_offset")
-@ApiModelProperty(value = "The log offset that query results were written to in the destination collection. Only populated for INSERT INTO queries.")
-  public String getLastOffset() {
-    return lastOffset;
-  }
-
-  public void setLastOffset(String lastOffset) {
-    this.lastOffset = lastOffset;
   }
 
   public QueryInfo queryErrors(List<QueryError> queryErrors) {
@@ -304,6 +228,106 @@ public class QueryInfo {
     this.queryErrors = queryErrors;
   }
 
+  public QueryInfo queryId(String queryId) {
+    this.queryId = queryId;
+    return this;
+  }
+
+   /**
+   * Unique Query ID.
+   * @return queryId
+  **/
+
+@JsonProperty("query_id")
+@ApiModelProperty(example = "5b596206-c632-4a08-8343-0c560f7ef7f1", value = "Unique Query ID.")
+  public String getQueryId() {
+    return queryId;
+  }
+
+  public void setQueryId(String queryId) {
+    this.queryId = queryId;
+  }
+
+  public QueryInfo sql(String sql) {
+    this.sql = sql;
+    return this;
+  }
+
+   /**
+   * The SQL query for this request
+   * @return sql
+  **/
+
+@JsonProperty("sql")
+@ApiModelProperty(value = "The SQL query for this request")
+  public String getSql() {
+    return sql;
+  }
+
+  public void setSql(String sql) {
+    this.sql = sql;
+  }
+
+  public QueryInfo stats(Stats stats) {
+    this.stats = stats;
+    return this;
+  }
+
+   /**
+   * Various stats about the query&#39;s execution.
+   * @return stats
+  **/
+
+@JsonProperty("stats")
+@ApiModelProperty(value = "Various stats about the query's execution.")
+  public Stats getStats() {
+    return stats;
+  }
+
+  public void setStats(Stats stats) {
+    this.stats = stats;
+  }
+
+  public QueryInfo status(StatusEnum status) {
+    this.status = status;
+    return this;
+  }
+
+   /**
+   * Status of the query.
+   * @return status
+  **/
+
+@JsonProperty("status")
+@ApiModelProperty(example = "RUNNING", value = "Status of the query.")
+  public StatusEnum getStatus() {
+    return status;
+  }
+
+  public void setStatus(StatusEnum status) {
+    this.status = status;
+  }
+
+  public QueryInfo submittedAt(String submittedAt) {
+    this.submittedAt = submittedAt;
+    return this;
+  }
+
+   /**
+   * Time (UTC) the query request was first received and queued for execution.
+   * @return submittedAt
+  **/
+
+@JsonProperty("submitted_at")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "Time (UTC) the query request was first received and queued for execution.")
+  public String getSubmittedAt() {
+    return submittedAt;
+  }
+
+  public void setSubmittedAt(String submittedAt) {
+    this.submittedAt = submittedAt;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -314,20 +338,21 @@ public class QueryInfo {
       return false;
     }
     QueryInfo queryInfo = (QueryInfo) o;
-    return Objects.equals(this.queryId, queryInfo.queryId) &&
-        Objects.equals(this.status, queryInfo.status) &&
-        Objects.equals(this.executedBy, queryInfo.executedBy) &&
-        Objects.equals(this.submittedAt, queryInfo.submittedAt) &&
+    return Objects.equals(this.executedBy, queryInfo.executedBy) &&
         Objects.equals(this.expiresAt, queryInfo.expiresAt) &&
-        Objects.equals(this.stats, queryInfo.stats) &&
-        Objects.equals(this.pagination, queryInfo.pagination) &&
         Objects.equals(this.lastOffset, queryInfo.lastOffset) &&
-        Objects.equals(this.queryErrors, queryInfo.queryErrors);
+        Objects.equals(this.pagination, queryInfo.pagination) &&
+        Objects.equals(this.queryErrors, queryInfo.queryErrors) &&
+        Objects.equals(this.queryId, queryInfo.queryId) &&
+        Objects.equals(this.sql, queryInfo.sql) &&
+        Objects.equals(this.stats, queryInfo.stats) &&
+        Objects.equals(this.status, queryInfo.status) &&
+        Objects.equals(this.submittedAt, queryInfo.submittedAt);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(queryId, status, executedBy, submittedAt, expiresAt, stats, pagination, lastOffset, queryErrors);
+    return Objects.hash(executedBy, expiresAt, lastOffset, pagination, queryErrors, queryId, sql, stats, status, submittedAt);
   }
 
 
@@ -336,15 +361,16 @@ public class QueryInfo {
     StringBuilder sb = new StringBuilder();
     sb.append("class QueryInfo {\n");
     
-    sb.append("    queryId: ").append(toIndentedString(queryId)).append("\n");
-    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    executedBy: ").append(toIndentedString(executedBy)).append("\n");
-    sb.append("    submittedAt: ").append(toIndentedString(submittedAt)).append("\n");
     sb.append("    expiresAt: ").append(toIndentedString(expiresAt)).append("\n");
-    sb.append("    stats: ").append(toIndentedString(stats)).append("\n");
-    sb.append("    pagination: ").append(toIndentedString(pagination)).append("\n");
     sb.append("    lastOffset: ").append(toIndentedString(lastOffset)).append("\n");
+    sb.append("    pagination: ").append(toIndentedString(pagination)).append("\n");
     sb.append("    queryErrors: ").append(toIndentedString(queryErrors)).append("\n");
+    sb.append("    queryId: ").append(toIndentedString(queryId)).append("\n");
+    sb.append("    sql: ").append(toIndentedString(sql)).append("\n");
+    sb.append("    stats: ").append(toIndentedString(stats)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    submittedAt: ").append(toIndentedString(submittedAt)).append("\n");
     sb.append("}");
     return sb.toString();
   }

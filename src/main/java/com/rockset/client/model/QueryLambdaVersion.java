@@ -33,31 +33,31 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryLambdaVersion
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class QueryLambdaVersion {
-  @SerializedName("workspace")
-  private String workspace = null;
-
-  @SerializedName("created_by")
-  private String createdBy = null;
+  @SerializedName("collections")
+  private List<String> collections = null;
 
   @SerializedName("created_at")
   private String createdAt = null;
 
-  @SerializedName("name")
-  private String name = null;
+  @SerializedName("created_by")
+  private String createdBy = null;
 
-  @SerializedName("version")
-  private String version = null;
+  @SerializedName("created_by_apikey_name")
+  private String createdByApikeyName = null;
 
   @SerializedName("description")
   private String description = null;
 
+  @SerializedName("name")
+  private String name = null;
+
+  @SerializedName("public_access_id")
+  private String publicAccessId = null;
+
   @SerializedName("sql")
   private QueryLambdaSql sql = null;
-
-  @SerializedName("collections")
-  private List<String> collections = null;
 
   /**
    * Status of this Query Lambda.
@@ -83,6 +83,7 @@ public class QueryLambdaVersion {
       return String.valueOf(value);
     }
 
+    @com.fasterxml.jackson.annotation.JsonCreator
     public static StateEnum fromValue(String text) {
       for (StateEnum b : StateEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -112,148 +113,11 @@ public class QueryLambdaVersion {
   @SerializedName("stats")
   private QueryLambdaStats stats = null;
 
-  @SerializedName("public_access_id")
-  private String publicAccessId = null;
+  @SerializedName("version")
+  private String version = null;
 
-  public QueryLambdaVersion workspace(String workspace) {
-    this.workspace = workspace;
-    return this;
-  }
-
-   /**
-   * Workspace of this Query Lambda.
-   * @return workspace
-  **/
-
-@JsonProperty("workspace")
-@ApiModelProperty(example = "commons", value = "Workspace of this Query Lambda.")
-  public String getWorkspace() {
-    return workspace;
-  }
-
-  public void setWorkspace(String workspace) {
-    this.workspace = workspace;
-  }
-
-  public QueryLambdaVersion createdBy(String createdBy) {
-    this.createdBy = createdBy;
-    return this;
-  }
-
-   /**
-   * User that created this Query Lambda.
-   * @return createdBy
-  **/
-
-@JsonProperty("created_by")
-@ApiModelProperty(example = "..@rockset.com", value = "User that created this Query Lambda.")
-  public String getCreatedBy() {
-    return createdBy;
-  }
-
-  public void setCreatedBy(String createdBy) {
-    this.createdBy = createdBy;
-  }
-
-  public QueryLambdaVersion createdAt(String createdAt) {
-    this.createdAt = createdAt;
-    return this;
-  }
-
-   /**
-   * ISO-8601 date of when Query Lambda was created.
-   * @return createdAt
-  **/
-
-@JsonProperty("created_at")
-@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date of when Query Lambda was created.")
-  public String getCreatedAt() {
-    return createdAt;
-  }
-
-  public void setCreatedAt(String createdAt) {
-    this.createdAt = createdAt;
-  }
-
-  public QueryLambdaVersion name(String name) {
-    this.name = name;
-    return this;
-  }
-
-   /**
-   * Query Lambda name.
-   * @return name
-  **/
-
-@JsonProperty("name")
-@ApiModelProperty(example = "myQuery", value = "Query Lambda name.")
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public QueryLambdaVersion version(String version) {
-    this.version = version;
-    return this;
-  }
-
-   /**
-   * Query Lambda version.
-   * @return version
-  **/
-
-@JsonProperty("version")
-@ApiModelProperty(example = "acb99feg92bcaf", value = "Query Lambda version.")
-  public String getVersion() {
-    return version;
-  }
-
-  public void setVersion(String version) {
-    this.version = version;
-  }
-
-  public QueryLambdaVersion description(String description) {
-    this.description = description;
-    return this;
-  }
-
-   /**
-   * Optional description.
-   * @return description
-  **/
-
-@JsonProperty("description")
-@ApiModelProperty(example = "production version foo", value = "Optional description.")
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public QueryLambdaVersion sql(QueryLambdaSql sql) {
-    this.sql = sql;
-    return this;
-  }
-
-   /**
-   * Query Lambda SQL query.
-   * @return sql
-  **/
-
-@JsonProperty("sql")
-@ApiModelProperty(value = "Query Lambda SQL query.")
-  public QueryLambdaSql getSql() {
-    return sql;
-  }
-
-  public void setSql(QueryLambdaSql sql) {
-    this.sql = sql;
-  }
+  @SerializedName("workspace")
+  private String workspace = null;
 
   public QueryLambdaVersion collections(List<String> collections) {
     this.collections = collections;
@@ -281,6 +145,146 @@ public class QueryLambdaVersion {
 
   public void setCollections(List<String> collections) {
     this.collections = collections;
+  }
+
+  public QueryLambdaVersion createdAt(String createdAt) {
+    this.createdAt = createdAt;
+    return this;
+  }
+
+   /**
+   * ISO-8601 date of when Query Lambda was created.
+   * @return createdAt
+  **/
+
+@JsonProperty("created_at")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date of when Query Lambda was created.")
+  public String getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(String createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public QueryLambdaVersion createdBy(String createdBy) {
+    this.createdBy = createdBy;
+    return this;
+  }
+
+   /**
+   * User that created this Query Lambda.
+   * @return createdBy
+  **/
+
+@JsonProperty("created_by")
+@ApiModelProperty(example = "..@rockset.com", value = "User that created this Query Lambda.")
+  public String getCreatedBy() {
+    return createdBy;
+  }
+
+  public void setCreatedBy(String createdBy) {
+    this.createdBy = createdBy;
+  }
+
+  public QueryLambdaVersion createdByApikeyName(String createdByApikeyName) {
+    this.createdByApikeyName = createdByApikeyName;
+    return this;
+  }
+
+   /**
+   * Name of the API key that was used to create this object if one was used.
+   * @return createdByApikeyName
+  **/
+
+@JsonProperty("created_by_apikey_name")
+@ApiModelProperty(value = "Name of the API key that was used to create this object if one was used.")
+  public String getCreatedByApikeyName() {
+    return createdByApikeyName;
+  }
+
+  public void setCreatedByApikeyName(String createdByApikeyName) {
+    this.createdByApikeyName = createdByApikeyName;
+  }
+
+  public QueryLambdaVersion description(String description) {
+    this.description = description;
+    return this;
+  }
+
+   /**
+   * Optional description.
+   * @return description
+  **/
+
+@JsonProperty("description")
+@ApiModelProperty(example = "production version foo", value = "Optional description.")
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public QueryLambdaVersion name(String name) {
+    this.name = name;
+    return this;
+  }
+
+   /**
+   * Query Lambda name.
+   * @return name
+  **/
+
+@JsonProperty("name")
+@ApiModelProperty(example = "myQuery", value = "Query Lambda name.")
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public QueryLambdaVersion publicAccessId(String publicAccessId) {
+    this.publicAccessId = publicAccessId;
+    return this;
+  }
+
+   /**
+   * Public access ID associated with this QL version
+   * @return publicAccessId
+  **/
+
+@JsonProperty("public_access_id")
+@ApiModelProperty(value = "Public access ID associated with this QL version")
+  public String getPublicAccessId() {
+    return publicAccessId;
+  }
+
+  public void setPublicAccessId(String publicAccessId) {
+    this.publicAccessId = publicAccessId;
+  }
+
+  public QueryLambdaVersion sql(QueryLambdaSql sql) {
+    this.sql = sql;
+    return this;
+  }
+
+   /**
+   * Query Lambda SQL query.
+   * @return sql
+  **/
+
+@JsonProperty("sql")
+@ApiModelProperty(value = "Query Lambda SQL query.")
+  public QueryLambdaSql getSql() {
+    return sql;
+  }
+
+  public void setSql(QueryLambdaSql sql) {
+    this.sql = sql;
   }
 
   public QueryLambdaVersion state(StateEnum state) {
@@ -323,24 +327,44 @@ public class QueryLambdaVersion {
     this.stats = stats;
   }
 
-  public QueryLambdaVersion publicAccessId(String publicAccessId) {
-    this.publicAccessId = publicAccessId;
+  public QueryLambdaVersion version(String version) {
+    this.version = version;
     return this;
   }
 
    /**
-   * Public access ID associated with this QL version
-   * @return publicAccessId
+   * Query Lambda version.
+   * @return version
   **/
 
-@JsonProperty("public_access_id")
-@ApiModelProperty(value = "Public access ID associated with this QL version")
-  public String getPublicAccessId() {
-    return publicAccessId;
+@JsonProperty("version")
+@ApiModelProperty(example = "acb99feg92bcaf", value = "Query Lambda version.")
+  public String getVersion() {
+    return version;
   }
 
-  public void setPublicAccessId(String publicAccessId) {
-    this.publicAccessId = publicAccessId;
+  public void setVersion(String version) {
+    this.version = version;
+  }
+
+  public QueryLambdaVersion workspace(String workspace) {
+    this.workspace = workspace;
+    return this;
+  }
+
+   /**
+   * Workspace of this Query Lambda.
+   * @return workspace
+  **/
+
+@JsonProperty("workspace")
+@ApiModelProperty(example = "commons", value = "Workspace of this Query Lambda.")
+  public String getWorkspace() {
+    return workspace;
+  }
+
+  public void setWorkspace(String workspace) {
+    this.workspace = workspace;
   }
 
 
@@ -353,22 +377,23 @@ public class QueryLambdaVersion {
       return false;
     }
     QueryLambdaVersion queryLambdaVersion = (QueryLambdaVersion) o;
-    return Objects.equals(this.workspace, queryLambdaVersion.workspace) &&
-        Objects.equals(this.createdBy, queryLambdaVersion.createdBy) &&
+    return Objects.equals(this.collections, queryLambdaVersion.collections) &&
         Objects.equals(this.createdAt, queryLambdaVersion.createdAt) &&
-        Objects.equals(this.name, queryLambdaVersion.name) &&
-        Objects.equals(this.version, queryLambdaVersion.version) &&
+        Objects.equals(this.createdBy, queryLambdaVersion.createdBy) &&
+        Objects.equals(this.createdByApikeyName, queryLambdaVersion.createdByApikeyName) &&
         Objects.equals(this.description, queryLambdaVersion.description) &&
+        Objects.equals(this.name, queryLambdaVersion.name) &&
+        Objects.equals(this.publicAccessId, queryLambdaVersion.publicAccessId) &&
         Objects.equals(this.sql, queryLambdaVersion.sql) &&
-        Objects.equals(this.collections, queryLambdaVersion.collections) &&
         Objects.equals(this.state, queryLambdaVersion.state) &&
         Objects.equals(this.stats, queryLambdaVersion.stats) &&
-        Objects.equals(this.publicAccessId, queryLambdaVersion.publicAccessId);
+        Objects.equals(this.version, queryLambdaVersion.version) &&
+        Objects.equals(this.workspace, queryLambdaVersion.workspace);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(workspace, createdBy, createdAt, name, version, description, sql, collections, state, stats, publicAccessId);
+    return Objects.hash(collections, createdAt, createdBy, createdByApikeyName, description, name, publicAccessId, sql, state, stats, version, workspace);
   }
 
 
@@ -377,17 +402,18 @@ public class QueryLambdaVersion {
     StringBuilder sb = new StringBuilder();
     sb.append("class QueryLambdaVersion {\n");
     
-    sb.append("    workspace: ").append(toIndentedString(workspace)).append("\n");
-    sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
-    sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    version: ").append(toIndentedString(version)).append("\n");
-    sb.append("    description: ").append(toIndentedString(description)).append("\n");
-    sb.append("    sql: ").append(toIndentedString(sql)).append("\n");
     sb.append("    collections: ").append(toIndentedString(collections)).append("\n");
+    sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
+    sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
+    sb.append("    createdByApikeyName: ").append(toIndentedString(createdByApikeyName)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    publicAccessId: ").append(toIndentedString(publicAccessId)).append("\n");
+    sb.append("    sql: ").append(toIndentedString(sql)).append("\n");
     sb.append("    state: ").append(toIndentedString(state)).append("\n");
     sb.append("    stats: ").append(toIndentedString(stats)).append("\n");
-    sb.append("    publicAccessId: ").append(toIndentedString(publicAccessId)).append("\n");
+    sb.append("    version: ").append(toIndentedString(version)).append("\n");
+    sb.append("    workspace: ").append(toIndentedString(workspace)).append("\n");
     sb.append("}");
     return sb.toString();
   }

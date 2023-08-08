@@ -29,16 +29,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceGcs
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class SourceGcs {
   @SerializedName("bucket")
   private String bucket = null;
 
-  @SerializedName("prefix")
-  private String prefix = null;
+  @SerializedName("object_bytes_downloaded")
+  private Long objectBytesDownloaded = null;
 
-  @SerializedName("pattern")
-  private String pattern = null;
+  @SerializedName("object_bytes_total")
+  private Long objectBytesTotal = null;
 
   @SerializedName("object_count_downloaded")
   private Long objectCountDownloaded = null;
@@ -46,11 +46,11 @@ public class SourceGcs {
   @SerializedName("object_count_total")
   private Long objectCountTotal = null;
 
-  @SerializedName("object_bytes_total")
-  private Long objectBytesTotal = null;
+  @SerializedName("pattern")
+  private String pattern = null;
 
-  @SerializedName("object_bytes_downloaded")
-  private Long objectBytesDownloaded = null;
+  @SerializedName("prefix")
+  private String prefix = null;
 
   public SourceGcs bucket(String bucket) {
     this.bucket = bucket;
@@ -72,44 +72,26 @@ public class SourceGcs {
     this.bucket = bucket;
   }
 
-  public SourceGcs prefix(String prefix) {
-    this.prefix = prefix;
-    return this;
+   /**
+   * Get objectBytesDownloaded
+   * @return objectBytesDownloaded
+  **/
+
+@JsonProperty("object_bytes_downloaded")
+@ApiModelProperty(value = "")
+  public Long getObjectBytesDownloaded() {
+    return objectBytesDownloaded;
   }
 
    /**
-   * Prefix that selects keys to ingest.
-   * @return prefix
+   * Get objectBytesTotal
+   * @return objectBytesTotal
   **/
 
-@JsonProperty("prefix")
-@ApiModelProperty(example = "prefix/to/keys", value = "Prefix that selects keys to ingest.")
-  public String getPrefix() {
-    return prefix;
-  }
-
-  public void setPrefix(String prefix) {
-    this.prefix = prefix;
-  }
-
-  public SourceGcs pattern(String pattern) {
-    this.pattern = pattern;
-    return this;
-  }
-
-   /**
-   * Glob-style pattern that selects keys to ingest. Only either prefix or pattern can be specified.
-   * @return pattern
-  **/
-
-@JsonProperty("pattern")
-@ApiModelProperty(example = "prefix/to/_**_/keys/_*.format", value = "Glob-style pattern that selects keys to ingest. Only either prefix or pattern can be specified.")
-  public String getPattern() {
-    return pattern;
-  }
-
-  public void setPattern(String pattern) {
-    this.pattern = pattern;
+@JsonProperty("object_bytes_total")
+@ApiModelProperty(value = "")
+  public Long getObjectBytesTotal() {
+    return objectBytesTotal;
   }
 
    /**
@@ -134,26 +116,44 @@ public class SourceGcs {
     return objectCountTotal;
   }
 
-   /**
-   * Get objectBytesTotal
-   * @return objectBytesTotal
-  **/
-
-@JsonProperty("object_bytes_total")
-@ApiModelProperty(value = "")
-  public Long getObjectBytesTotal() {
-    return objectBytesTotal;
+  public SourceGcs pattern(String pattern) {
+    this.pattern = pattern;
+    return this;
   }
 
    /**
-   * Get objectBytesDownloaded
-   * @return objectBytesDownloaded
+   * Glob-style pattern that selects keys to ingest. Only either prefix or pattern can be specified.
+   * @return pattern
   **/
 
-@JsonProperty("object_bytes_downloaded")
-@ApiModelProperty(value = "")
-  public Long getObjectBytesDownloaded() {
-    return objectBytesDownloaded;
+@JsonProperty("pattern")
+@ApiModelProperty(example = "prefix/to/_**_/keys/_*.format", value = "Glob-style pattern that selects keys to ingest. Only either prefix or pattern can be specified.")
+  public String getPattern() {
+    return pattern;
+  }
+
+  public void setPattern(String pattern) {
+    this.pattern = pattern;
+  }
+
+  public SourceGcs prefix(String prefix) {
+    this.prefix = prefix;
+    return this;
+  }
+
+   /**
+   * Prefix that selects keys to ingest.
+   * @return prefix
+  **/
+
+@JsonProperty("prefix")
+@ApiModelProperty(example = "prefix/to/keys", value = "Prefix that selects keys to ingest.")
+  public String getPrefix() {
+    return prefix;
+  }
+
+  public void setPrefix(String prefix) {
+    this.prefix = prefix;
   }
 
 
@@ -167,17 +167,17 @@ public class SourceGcs {
     }
     SourceGcs sourceGcs = (SourceGcs) o;
     return Objects.equals(this.bucket, sourceGcs.bucket) &&
-        Objects.equals(this.prefix, sourceGcs.prefix) &&
-        Objects.equals(this.pattern, sourceGcs.pattern) &&
+        Objects.equals(this.objectBytesDownloaded, sourceGcs.objectBytesDownloaded) &&
+        Objects.equals(this.objectBytesTotal, sourceGcs.objectBytesTotal) &&
         Objects.equals(this.objectCountDownloaded, sourceGcs.objectCountDownloaded) &&
         Objects.equals(this.objectCountTotal, sourceGcs.objectCountTotal) &&
-        Objects.equals(this.objectBytesTotal, sourceGcs.objectBytesTotal) &&
-        Objects.equals(this.objectBytesDownloaded, sourceGcs.objectBytesDownloaded);
+        Objects.equals(this.pattern, sourceGcs.pattern) &&
+        Objects.equals(this.prefix, sourceGcs.prefix);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(bucket, prefix, pattern, objectCountDownloaded, objectCountTotal, objectBytesTotal, objectBytesDownloaded);
+    return Objects.hash(bucket, objectBytesDownloaded, objectBytesTotal, objectCountDownloaded, objectCountTotal, pattern, prefix);
   }
 
 
@@ -187,12 +187,12 @@ public class SourceGcs {
     sb.append("class SourceGcs {\n");
     
     sb.append("    bucket: ").append(toIndentedString(bucket)).append("\n");
-    sb.append("    prefix: ").append(toIndentedString(prefix)).append("\n");
-    sb.append("    pattern: ").append(toIndentedString(pattern)).append("\n");
+    sb.append("    objectBytesDownloaded: ").append(toIndentedString(objectBytesDownloaded)).append("\n");
+    sb.append("    objectBytesTotal: ").append(toIndentedString(objectBytesTotal)).append("\n");
     sb.append("    objectCountDownloaded: ").append(toIndentedString(objectCountDownloaded)).append("\n");
     sb.append("    objectCountTotal: ").append(toIndentedString(objectCountTotal)).append("\n");
-    sb.append("    objectBytesTotal: ").append(toIndentedString(objectBytesTotal)).append("\n");
-    sb.append("    objectBytesDownloaded: ").append(toIndentedString(objectBytesDownloaded)).append("\n");
+    sb.append("    pattern: ").append(toIndentedString(pattern)).append("\n");
+    sb.append("    prefix: ").append(toIndentedString(prefix)).append("\n");
     sb.append("}");
     return sb.toString();
   }

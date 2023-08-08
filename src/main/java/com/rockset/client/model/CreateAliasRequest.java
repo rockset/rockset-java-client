@@ -31,56 +31,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateAliasRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class CreateAliasRequest {
-  @SerializedName("name")
-  private String name = null;
+  @SerializedName("collections")
+  private List<String> collections = new ArrayList<String>();
 
   @SerializedName("description")
   private String description = null;
 
-  @SerializedName("collections")
-  private List<String> collections = new ArrayList<String>();
-
-  public CreateAliasRequest name(String name) {
-    this.name = name;
-    return this;
-  }
-
-   /**
-   * Alias name.
-   * @return name
-  **/
-
-@JsonProperty("name")
-@ApiModelProperty(example = "aliasName", required = true, value = "Alias name.")
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public CreateAliasRequest description(String description) {
-    this.description = description;
-    return this;
-  }
-
-   /**
-   * Optional description.
-   * @return description
-  **/
-
-@JsonProperty("description")
-@ApiModelProperty(example = "version alias", value = "Optional description.")
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
+  @SerializedName("name")
+  private String name = null;
 
   public CreateAliasRequest collections(List<String> collections) {
     this.collections = collections;
@@ -107,6 +67,46 @@ public class CreateAliasRequest {
     this.collections = collections;
   }
 
+  public CreateAliasRequest description(String description) {
+    this.description = description;
+    return this;
+  }
+
+   /**
+   * Optional description.
+   * @return description
+  **/
+
+@JsonProperty("description")
+@ApiModelProperty(example = "version alias", value = "Optional description.")
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public CreateAliasRequest name(String name) {
+    this.name = name;
+    return this;
+  }
+
+   /**
+   * Alias name.
+   * @return name
+  **/
+
+@JsonProperty("name")
+@ApiModelProperty(example = "aliasName", required = true, value = "Alias name.")
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -117,14 +117,14 @@ public class CreateAliasRequest {
       return false;
     }
     CreateAliasRequest createAliasRequest = (CreateAliasRequest) o;
-    return Objects.equals(this.name, createAliasRequest.name) &&
+    return Objects.equals(this.collections, createAliasRequest.collections) &&
         Objects.equals(this.description, createAliasRequest.description) &&
-        Objects.equals(this.collections, createAliasRequest.collections);
+        Objects.equals(this.name, createAliasRequest.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, description, collections);
+    return Objects.hash(collections, description, name);
   }
 
 
@@ -133,9 +133,9 @@ public class CreateAliasRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class CreateAliasRequest {\n");
     
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    collections: ").append(toIndentedString(collections)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("}");
     return sb.toString();
   }

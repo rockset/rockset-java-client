@@ -31,17 +31,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CsvParams
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class CsvParams {
-  @SerializedName("firstLineAsColumnNames")
-  private Boolean firstLineAsColumnNames = null;
-
-  @SerializedName("separator")
-  private String separator = null;
-
-  @SerializedName("encoding")
-  private String encoding = null;
-
   @SerializedName("columnNames")
   private List<String> columnNames = null;
 
@@ -87,6 +78,7 @@ public class CsvParams {
       return String.valueOf(value);
     }
 
+    @com.fasterxml.jackson.annotation.JsonCreator
     public static ColumnTypesEnum fromValue(String text) {
       for (ColumnTypesEnum b : ColumnTypesEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -113,71 +105,20 @@ public class CsvParams {
   @SerializedName("columnTypes")
   private List<ColumnTypesEnum> columnTypes = null;
 
-  @SerializedName("quoteChar")
-  private String quoteChar = null;
+  @SerializedName("encoding")
+  private String encoding = null;
 
   @SerializedName("escapeChar")
   private String escapeChar = null;
 
-  public CsvParams firstLineAsColumnNames(Boolean firstLineAsColumnNames) {
-    this.firstLineAsColumnNames = firstLineAsColumnNames;
-    return this;
-  }
+  @SerializedName("firstLineAsColumnNames")
+  private Boolean firstLineAsColumnNames = null;
 
-   /**
-   * If the first line in every object specifies the column names.
-   * @return firstLineAsColumnNames
-  **/
+  @SerializedName("quoteChar")
+  private String quoteChar = null;
 
-@JsonProperty("firstLineAsColumnNames")
-@ApiModelProperty(example = "true", value = "If the first line in every object specifies the column names.")
-  public Boolean isFirstLineAsColumnNames() {
-    return firstLineAsColumnNames;
-  }
-
-  public void setFirstLineAsColumnNames(Boolean firstLineAsColumnNames) {
-    this.firstLineAsColumnNames = firstLineAsColumnNames;
-  }
-
-  public CsvParams separator(String separator) {
-    this.separator = separator;
-    return this;
-  }
-
-   /**
-   * A single character that is the column separator.
-   * @return separator
-  **/
-
-@JsonProperty("separator")
-@ApiModelProperty(example = ",", value = "A single character that is the column separator.")
-  public String getSeparator() {
-    return separator;
-  }
-
-  public void setSeparator(String separator) {
-    this.separator = separator;
-  }
-
-  public CsvParams encoding(String encoding) {
-    this.encoding = encoding;
-    return this;
-  }
-
-   /**
-   * One of: UTF-8, ISO_8859_1, UTF-16.
-   * @return encoding
-  **/
-
-@JsonProperty("encoding")
-@ApiModelProperty(example = "UTF-8", value = "One of: UTF-8, ISO_8859_1, UTF-16.")
-  public String getEncoding() {
-    return encoding;
-  }
-
-  public void setEncoding(String encoding) {
-    this.encoding = encoding;
-  }
+  @SerializedName("separator")
+  private String separator = null;
 
   public CsvParams columnNames(List<String> columnNames) {
     this.columnNames = columnNames;
@@ -235,24 +176,24 @@ public class CsvParams {
     this.columnTypes = columnTypes;
   }
 
-  public CsvParams quoteChar(String quoteChar) {
-    this.quoteChar = quoteChar;
+  public CsvParams encoding(String encoding) {
+    this.encoding = encoding;
     return this;
   }
 
    /**
-   * character within which a cell value is enclosed,null character if no such character, default is &#39;\&quot;&#39;
-   * @return quoteChar
+   * One of: UTF-8, ISO_8859_1, UTF-16.
+   * @return encoding
   **/
 
-@JsonProperty("quoteChar")
-@ApiModelProperty(example = "\"", value = "character within which a cell value is enclosed,null character if no such character, default is '\"'")
-  public String getQuoteChar() {
-    return quoteChar;
+@JsonProperty("encoding")
+@ApiModelProperty(example = "UTF-8", value = "One of: UTF-8, ISO_8859_1, UTF-16.")
+  public String getEncoding() {
+    return encoding;
   }
 
-  public void setQuoteChar(String quoteChar) {
-    this.quoteChar = quoteChar;
+  public void setEncoding(String encoding) {
+    this.encoding = encoding;
   }
 
   public CsvParams escapeChar(String escapeChar) {
@@ -275,6 +216,66 @@ public class CsvParams {
     this.escapeChar = escapeChar;
   }
 
+  public CsvParams firstLineAsColumnNames(Boolean firstLineAsColumnNames) {
+    this.firstLineAsColumnNames = firstLineAsColumnNames;
+    return this;
+  }
+
+   /**
+   * If the first line in every object specifies the column names.
+   * @return firstLineAsColumnNames
+  **/
+
+@JsonProperty("firstLineAsColumnNames")
+@ApiModelProperty(example = "true", value = "If the first line in every object specifies the column names.")
+  public Boolean isFirstLineAsColumnNames() {
+    return firstLineAsColumnNames;
+  }
+
+  public void setFirstLineAsColumnNames(Boolean firstLineAsColumnNames) {
+    this.firstLineAsColumnNames = firstLineAsColumnNames;
+  }
+
+  public CsvParams quoteChar(String quoteChar) {
+    this.quoteChar = quoteChar;
+    return this;
+  }
+
+   /**
+   * character within which a cell value is enclosed,null character if no such character, default is &#39;\&quot;&#39;
+   * @return quoteChar
+  **/
+
+@JsonProperty("quoteChar")
+@ApiModelProperty(example = "\"", value = "character within which a cell value is enclosed,null character if no such character, default is '\"'")
+  public String getQuoteChar() {
+    return quoteChar;
+  }
+
+  public void setQuoteChar(String quoteChar) {
+    this.quoteChar = quoteChar;
+  }
+
+  public CsvParams separator(String separator) {
+    this.separator = separator;
+    return this;
+  }
+
+   /**
+   * A single character that is the column separator.
+   * @return separator
+  **/
+
+@JsonProperty("separator")
+@ApiModelProperty(example = ",", value = "A single character that is the column separator.")
+  public String getSeparator() {
+    return separator;
+  }
+
+  public void setSeparator(String separator) {
+    this.separator = separator;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -285,18 +286,18 @@ public class CsvParams {
       return false;
     }
     CsvParams csvParams = (CsvParams) o;
-    return Objects.equals(this.firstLineAsColumnNames, csvParams.firstLineAsColumnNames) &&
-        Objects.equals(this.separator, csvParams.separator) &&
-        Objects.equals(this.encoding, csvParams.encoding) &&
-        Objects.equals(this.columnNames, csvParams.columnNames) &&
+    return Objects.equals(this.columnNames, csvParams.columnNames) &&
         Objects.equals(this.columnTypes, csvParams.columnTypes) &&
+        Objects.equals(this.encoding, csvParams.encoding) &&
+        Objects.equals(this.escapeChar, csvParams.escapeChar) &&
+        Objects.equals(this.firstLineAsColumnNames, csvParams.firstLineAsColumnNames) &&
         Objects.equals(this.quoteChar, csvParams.quoteChar) &&
-        Objects.equals(this.escapeChar, csvParams.escapeChar);
+        Objects.equals(this.separator, csvParams.separator);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(firstLineAsColumnNames, separator, encoding, columnNames, columnTypes, quoteChar, escapeChar);
+    return Objects.hash(columnNames, columnTypes, encoding, escapeChar, firstLineAsColumnNames, quoteChar, separator);
   }
 
 
@@ -305,13 +306,13 @@ public class CsvParams {
     StringBuilder sb = new StringBuilder();
     sb.append("class CsvParams {\n");
     
-    sb.append("    firstLineAsColumnNames: ").append(toIndentedString(firstLineAsColumnNames)).append("\n");
-    sb.append("    separator: ").append(toIndentedString(separator)).append("\n");
-    sb.append("    encoding: ").append(toIndentedString(encoding)).append("\n");
     sb.append("    columnNames: ").append(toIndentedString(columnNames)).append("\n");
     sb.append("    columnTypes: ").append(toIndentedString(columnTypes)).append("\n");
-    sb.append("    quoteChar: ").append(toIndentedString(quoteChar)).append("\n");
+    sb.append("    encoding: ").append(toIndentedString(encoding)).append("\n");
     sb.append("    escapeChar: ").append(toIndentedString(escapeChar)).append("\n");
+    sb.append("    firstLineAsColumnNames: ").append(toIndentedString(firstLineAsColumnNames)).append("\n");
+    sb.append("    quoteChar: ").append(toIndentedString(quoteChar)).append("\n");
+    sb.append("    separator: ").append(toIndentedString(separator)).append("\n");
     sb.append("}");
     return sb.toString();
   }

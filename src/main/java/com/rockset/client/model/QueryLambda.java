@@ -32,16 +32,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryLambda
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class QueryLambda {
-  @SerializedName("workspace")
-  private String workspace = null;
+  @SerializedName("collections")
+  private List<String> collections = null;
+
+  @SerializedName("last_updated")
+  private String lastUpdated = null;
 
   @SerializedName("last_updated_by")
   private String lastUpdatedBy = null;
 
-  @SerializedName("last_updated")
-  private String lastUpdated = null;
+  @SerializedName("latest_version")
+  private QueryLambdaVersion latestVersion = null;
 
   @SerializedName("name")
   private String name = null;
@@ -49,30 +52,55 @@ public class QueryLambda {
   @SerializedName("version_count")
   private Integer versionCount = null;
 
-  @SerializedName("collections")
-  private List<String> collections = null;
+  @SerializedName("workspace")
+  private String workspace = null;
 
-  @SerializedName("latest_version")
-  private QueryLambdaVersion latestVersion = null;
+  public QueryLambda collections(List<String> collections) {
+    this.collections = collections;
+    return this;
+  }
 
-  public QueryLambda workspace(String workspace) {
-    this.workspace = workspace;
+  public QueryLambda addCollectionsItem(String collectionsItem) {
+    if (this.collections == null) {
+      this.collections = new ArrayList<String>();
+    }
+    this.collections.add(collectionsItem);
     return this;
   }
 
    /**
-   * Workspace of this Query Lambda.
-   * @return workspace
+   * Collections/aliases queried by underlying SQL query.
+   * @return collections
   **/
 
-@JsonProperty("workspace")
-@ApiModelProperty(example = "commons", value = "Workspace of this Query Lambda.")
-  public String getWorkspace() {
-    return workspace;
+@JsonProperty("collections")
+@ApiModelProperty(value = "Collections/aliases queried by underlying SQL query.")
+  public List<String> getCollections() {
+    return collections;
   }
 
-  public void setWorkspace(String workspace) {
-    this.workspace = workspace;
+  public void setCollections(List<String> collections) {
+    this.collections = collections;
+  }
+
+  public QueryLambda lastUpdated(String lastUpdated) {
+    this.lastUpdated = lastUpdated;
+    return this;
+  }
+
+   /**
+   * ISO-8601 date of when Query Lambda was last updated.
+   * @return lastUpdated
+  **/
+
+@JsonProperty("last_updated")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date of when Query Lambda was last updated.")
+  public String getLastUpdated() {
+    return lastUpdated;
+  }
+
+  public void setLastUpdated(String lastUpdated) {
+    this.lastUpdated = lastUpdated;
   }
 
   public QueryLambda lastUpdatedBy(String lastUpdatedBy) {
@@ -95,24 +123,24 @@ public class QueryLambda {
     this.lastUpdatedBy = lastUpdatedBy;
   }
 
-  public QueryLambda lastUpdated(String lastUpdated) {
-    this.lastUpdated = lastUpdated;
+  public QueryLambda latestVersion(QueryLambdaVersion latestVersion) {
+    this.latestVersion = latestVersion;
     return this;
   }
 
    /**
-   * ISO-8601 date of when Query Lambda was last updated.
-   * @return lastUpdated
+   * Query Lambda version details for most recently created version.
+   * @return latestVersion
   **/
 
-@JsonProperty("last_updated")
-@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date of when Query Lambda was last updated.")
-  public String getLastUpdated() {
-    return lastUpdated;
+@JsonProperty("latest_version")
+@ApiModelProperty(value = "Query Lambda version details for most recently created version.")
+  public QueryLambdaVersion getLatestVersion() {
+    return latestVersion;
   }
 
-  public void setLastUpdated(String lastUpdated) {
-    this.lastUpdated = lastUpdated;
+  public void setLatestVersion(QueryLambdaVersion latestVersion) {
+    this.latestVersion = latestVersion;
   }
 
   public QueryLambda name(String name) {
@@ -155,52 +183,24 @@ public class QueryLambda {
     this.versionCount = versionCount;
   }
 
-  public QueryLambda collections(List<String> collections) {
-    this.collections = collections;
-    return this;
-  }
-
-  public QueryLambda addCollectionsItem(String collectionsItem) {
-    if (this.collections == null) {
-      this.collections = new ArrayList<String>();
-    }
-    this.collections.add(collectionsItem);
+  public QueryLambda workspace(String workspace) {
+    this.workspace = workspace;
     return this;
   }
 
    /**
-   * Collections/aliases queried by underlying SQL query.
-   * @return collections
+   * Workspace of this Query Lambda.
+   * @return workspace
   **/
 
-@JsonProperty("collections")
-@ApiModelProperty(value = "Collections/aliases queried by underlying SQL query.")
-  public List<String> getCollections() {
-    return collections;
+@JsonProperty("workspace")
+@ApiModelProperty(example = "commons", value = "Workspace of this Query Lambda.")
+  public String getWorkspace() {
+    return workspace;
   }
 
-  public void setCollections(List<String> collections) {
-    this.collections = collections;
-  }
-
-  public QueryLambda latestVersion(QueryLambdaVersion latestVersion) {
-    this.latestVersion = latestVersion;
-    return this;
-  }
-
-   /**
-   * Query Lambda version details for most recently created version.
-   * @return latestVersion
-  **/
-
-@JsonProperty("latest_version")
-@ApiModelProperty(value = "Query Lambda version details for most recently created version.")
-  public QueryLambdaVersion getLatestVersion() {
-    return latestVersion;
-  }
-
-  public void setLatestVersion(QueryLambdaVersion latestVersion) {
-    this.latestVersion = latestVersion;
+  public void setWorkspace(String workspace) {
+    this.workspace = workspace;
   }
 
 
@@ -213,18 +213,18 @@ public class QueryLambda {
       return false;
     }
     QueryLambda queryLambda = (QueryLambda) o;
-    return Objects.equals(this.workspace, queryLambda.workspace) &&
-        Objects.equals(this.lastUpdatedBy, queryLambda.lastUpdatedBy) &&
+    return Objects.equals(this.collections, queryLambda.collections) &&
         Objects.equals(this.lastUpdated, queryLambda.lastUpdated) &&
+        Objects.equals(this.lastUpdatedBy, queryLambda.lastUpdatedBy) &&
+        Objects.equals(this.latestVersion, queryLambda.latestVersion) &&
         Objects.equals(this.name, queryLambda.name) &&
         Objects.equals(this.versionCount, queryLambda.versionCount) &&
-        Objects.equals(this.collections, queryLambda.collections) &&
-        Objects.equals(this.latestVersion, queryLambda.latestVersion);
+        Objects.equals(this.workspace, queryLambda.workspace);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(workspace, lastUpdatedBy, lastUpdated, name, versionCount, collections, latestVersion);
+    return Objects.hash(collections, lastUpdated, lastUpdatedBy, latestVersion, name, versionCount, workspace);
   }
 
 
@@ -233,13 +233,13 @@ public class QueryLambda {
     StringBuilder sb = new StringBuilder();
     sb.append("class QueryLambda {\n");
     
-    sb.append("    workspace: ").append(toIndentedString(workspace)).append("\n");
-    sb.append("    lastUpdatedBy: ").append(toIndentedString(lastUpdatedBy)).append("\n");
+    sb.append("    collections: ").append(toIndentedString(collections)).append("\n");
     sb.append("    lastUpdated: ").append(toIndentedString(lastUpdated)).append("\n");
+    sb.append("    lastUpdatedBy: ").append(toIndentedString(lastUpdatedBy)).append("\n");
+    sb.append("    latestVersion: ").append(toIndentedString(latestVersion)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    versionCount: ").append(toIndentedString(versionCount)).append("\n");
-    sb.append("    collections: ").append(toIndentedString(collections)).append("\n");
-    sb.append("    latestVersion: ").append(toIndentedString(latestVersion)).append("\n");
+    sb.append("    workspace: ").append(toIndentedString(workspace)).append("\n");
     sb.append("}");
     return sb.toString();
   }

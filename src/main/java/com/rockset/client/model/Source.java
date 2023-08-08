@@ -20,6 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.rockset.client.model.FieldMappingQuery;
 import com.rockset.client.model.FormatParams;
 import com.rockset.client.model.SourceAzureBlobStorage;
 import com.rockset.client.model.SourceAzureEventHubs;
@@ -32,6 +33,7 @@ import com.rockset.client.model.SourceKinesis;
 import com.rockset.client.model.SourceMongoDb;
 import com.rockset.client.model.SourceS3;
 import com.rockset.client.model.SourceSnowflake;
+import com.rockset.client.model.SourceSystem;
 import com.rockset.client.model.Status;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -44,31 +46,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "Details about the data source for the given collection. Only one of the following fields are allowed to be defined. Only collections can act as data sources for views. ")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class Source {
-  @SerializedName("id")
-  private String id = null;
-
-  @SerializedName("integration_name")
-  private String integrationName = null;
-
-  @SerializedName("s3")
-  private SourceS3 s3 = null;
-
-  @SerializedName("kinesis")
-  private SourceKinesis kinesis = null;
-
-  @SerializedName("gcs")
-  private SourceGcs gcs = null;
-
   @SerializedName("azure_blob_storage")
   private SourceAzureBlobStorage azureBlobStorage = null;
 
-  @SerializedName("azure_service_bus")
-  private SourceAzureServiceBus azureServiceBus = null;
-
   @SerializedName("azure_event_hubs")
   private SourceAzureEventHubs azureEventHubs = null;
+
+  @SerializedName("azure_service_bus")
+  private SourceAzureServiceBus azureServiceBus = null;
 
   @SerializedName("dynamodb")
   private SourceDynamoDb dynamodb = null;
@@ -76,11 +63,32 @@ public class Source {
   @SerializedName("file_upload")
   private SourceFileUpload fileUpload = null;
 
+  @SerializedName("format_params")
+  private FormatParams formatParams = null;
+
+  @SerializedName("gcs")
+  private SourceGcs gcs = null;
+
+  @SerializedName("id")
+  private String id = null;
+
+  @SerializedName("ingest_transformation")
+  private FieldMappingQuery ingestTransformation = null;
+
+  @SerializedName("integration_name")
+  private String integrationName = null;
+
   @SerializedName("kafka")
   private SourceKafka kafka = null;
 
+  @SerializedName("kinesis")
+  private SourceKinesis kinesis = null;
+
   @SerializedName("mongodb")
   private SourceMongoDb mongodb = null;
+
+  @SerializedName("s3")
+  private SourceS3 s3 = null;
 
   @SerializedName("snowflake")
   private SourceSnowflake snowflake = null;
@@ -88,108 +96,11 @@ public class Source {
   @SerializedName("status")
   private Status status = null;
 
-  @SerializedName("format_params")
-  private FormatParams formatParams = null;
+  @SerializedName("suspended_at")
+  private String suspendedAt = null;
 
-  public Source id(String id) {
-    this.id = id;
-    return this;
-  }
-
-   /**
-   * Unique source identifier.
-   * @return id
-  **/
-
-@JsonProperty("id")
-@ApiModelProperty(example = "a1df483c-734e-485b-8005-f46386ef42f6", value = "Unique source identifier.")
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public Source integrationName(String integrationName) {
-    this.integrationName = integrationName;
-    return this;
-  }
-
-   /**
-   * Name of integration to use.
-   * @return integrationName
-  **/
-
-@JsonProperty("integration_name")
-@ApiModelProperty(example = "aws-integration", value = "Name of integration to use.")
-  public String getIntegrationName() {
-    return integrationName;
-  }
-
-  public void setIntegrationName(String integrationName) {
-    this.integrationName = integrationName;
-  }
-
-  public Source s3(SourceS3 s3) {
-    this.s3 = s3;
-    return this;
-  }
-
-   /**
-   * Configuration for ingestion from S3.
-   * @return s3
-  **/
-
-@JsonProperty("s3")
-@ApiModelProperty(value = "Configuration for ingestion from S3.")
-  public SourceS3 getS3() {
-    return s3;
-  }
-
-  public void setS3(SourceS3 s3) {
-    this.s3 = s3;
-  }
-
-  public Source kinesis(SourceKinesis kinesis) {
-    this.kinesis = kinesis;
-    return this;
-  }
-
-   /**
-   * Configuration for ingestion from kinesis stream.
-   * @return kinesis
-  **/
-
-@JsonProperty("kinesis")
-@ApiModelProperty(value = "Configuration for ingestion from kinesis stream.")
-  public SourceKinesis getKinesis() {
-    return kinesis;
-  }
-
-  public void setKinesis(SourceKinesis kinesis) {
-    this.kinesis = kinesis;
-  }
-
-  public Source gcs(SourceGcs gcs) {
-    this.gcs = gcs;
-    return this;
-  }
-
-   /**
-   * Configuration for ingestion from GCS.
-   * @return gcs
-  **/
-
-@JsonProperty("gcs")
-@ApiModelProperty(value = "Configuration for ingestion from GCS.")
-  public SourceGcs getGcs() {
-    return gcs;
-  }
-
-  public void setGcs(SourceGcs gcs) {
-    this.gcs = gcs;
-  }
+  @SerializedName("system")
+  private SourceSystem system = null;
 
   public Source azureBlobStorage(SourceAzureBlobStorage azureBlobStorage) {
     this.azureBlobStorage = azureBlobStorage;
@@ -209,26 +120,6 @@ public class Source {
 
   public void setAzureBlobStorage(SourceAzureBlobStorage azureBlobStorage) {
     this.azureBlobStorage = azureBlobStorage;
-  }
-
-  public Source azureServiceBus(SourceAzureServiceBus azureServiceBus) {
-    this.azureServiceBus = azureServiceBus;
-    return this;
-  }
-
-   /**
-   * Configuration for ingestion from Azure Service Bus.
-   * @return azureServiceBus
-  **/
-
-@JsonProperty("azure_service_bus")
-@ApiModelProperty(value = "Configuration for ingestion from Azure Service Bus.")
-  public SourceAzureServiceBus getAzureServiceBus() {
-    return azureServiceBus;
-  }
-
-  public void setAzureServiceBus(SourceAzureServiceBus azureServiceBus) {
-    this.azureServiceBus = azureServiceBus;
   }
 
   public Source azureEventHubs(SourceAzureEventHubs azureEventHubs) {
@@ -251,6 +142,26 @@ public class Source {
     this.azureEventHubs = azureEventHubs;
   }
 
+  public Source azureServiceBus(SourceAzureServiceBus azureServiceBus) {
+    this.azureServiceBus = azureServiceBus;
+    return this;
+  }
+
+   /**
+   * Get azureServiceBus
+   * @return azureServiceBus
+  **/
+
+@JsonProperty("azure_service_bus")
+@ApiModelProperty(value = "")
+  public SourceAzureServiceBus getAzureServiceBus() {
+    return azureServiceBus;
+  }
+
+  public void setAzureServiceBus(SourceAzureServiceBus azureServiceBus) {
+    this.azureServiceBus = azureServiceBus;
+  }
+
   public Source dynamodb(SourceDynamoDb dynamodb) {
     this.dynamodb = dynamodb;
     return this;
@@ -271,11 +182,6 @@ public class Source {
     this.dynamodb = dynamodb;
   }
 
-  public Source fileUpload(SourceFileUpload fileUpload) {
-    this.fileUpload = fileUpload;
-    return this;
-  }
-
    /**
    * File upload details.
    * @return fileUpload
@@ -287,8 +193,95 @@ public class Source {
     return fileUpload;
   }
 
-  public void setFileUpload(SourceFileUpload fileUpload) {
-    this.fileUpload = fileUpload;
+  public Source formatParams(FormatParams formatParams) {
+    this.formatParams = formatParams;
+    return this;
+  }
+
+   /**
+   * Format parameters for data from this source.
+   * @return formatParams
+  **/
+
+@JsonProperty("format_params")
+@ApiModelProperty(value = "Format parameters for data from this source.")
+  public FormatParams getFormatParams() {
+    return formatParams;
+  }
+
+  public void setFormatParams(FormatParams formatParams) {
+    this.formatParams = formatParams;
+  }
+
+  public Source gcs(SourceGcs gcs) {
+    this.gcs = gcs;
+    return this;
+  }
+
+   /**
+   * Configuration for ingestion from GCS.
+   * @return gcs
+  **/
+
+@JsonProperty("gcs")
+@ApiModelProperty(value = "Configuration for ingestion from GCS.")
+  public SourceGcs getGcs() {
+    return gcs;
+  }
+
+  public void setGcs(SourceGcs gcs) {
+    this.gcs = gcs;
+  }
+
+   /**
+   * Unique source identifier.
+   * @return id
+  **/
+
+@JsonProperty("id")
+@ApiModelProperty(example = "a1df483c-734e-485b-8005-f46386ef42f6", value = "Unique source identifier.")
+  public String getId() {
+    return id;
+  }
+
+  public Source ingestTransformation(FieldMappingQuery ingestTransformation) {
+    this.ingestTransformation = ingestTransformation;
+    return this;
+  }
+
+   /**
+   * Ingest transformation for a source.
+   * @return ingestTransformation
+  **/
+
+@JsonProperty("ingest_transformation")
+@ApiModelProperty(value = "Ingest transformation for a source.")
+  public FieldMappingQuery getIngestTransformation() {
+    return ingestTransformation;
+  }
+
+  public void setIngestTransformation(FieldMappingQuery ingestTransformation) {
+    this.ingestTransformation = ingestTransformation;
+  }
+
+  public Source integrationName(String integrationName) {
+    this.integrationName = integrationName;
+    return this;
+  }
+
+   /**
+   * Name of integration to use.
+   * @return integrationName
+  **/
+
+@JsonProperty("integration_name")
+@ApiModelProperty(example = "aws-integration", value = "Name of integration to use.")
+  public String getIntegrationName() {
+    return integrationName;
+  }
+
+  public void setIntegrationName(String integrationName) {
+    this.integrationName = integrationName;
   }
 
   public Source kafka(SourceKafka kafka) {
@@ -311,6 +304,26 @@ public class Source {
     this.kafka = kafka;
   }
 
+  public Source kinesis(SourceKinesis kinesis) {
+    this.kinesis = kinesis;
+    return this;
+  }
+
+   /**
+   * Configuration for ingestion from kinesis stream.
+   * @return kinesis
+  **/
+
+@JsonProperty("kinesis")
+@ApiModelProperty(value = "Configuration for ingestion from kinesis stream.")
+  public SourceKinesis getKinesis() {
+    return kinesis;
+  }
+
+  public void setKinesis(SourceKinesis kinesis) {
+    this.kinesis = kinesis;
+  }
+
   public Source mongodb(SourceMongoDb mongodb) {
     this.mongodb = mongodb;
     return this;
@@ -329,6 +342,26 @@ public class Source {
 
   public void setMongodb(SourceMongoDb mongodb) {
     this.mongodb = mongodb;
+  }
+
+  public Source s3(SourceS3 s3) {
+    this.s3 = s3;
+    return this;
+  }
+
+   /**
+   * Configuration for ingestion from S3.
+   * @return s3
+  **/
+
+@JsonProperty("s3")
+@ApiModelProperty(value = "Configuration for ingestion from S3.")
+  public SourceS3 getS3() {
+    return s3;
+  }
+
+  public void setS3(SourceS3 s3) {
+    this.s3 = s3;
   }
 
   public Source snowflake(SourceSnowflake snowflake) {
@@ -362,24 +395,35 @@ public class Source {
     return status;
   }
 
-  public Source formatParams(FormatParams formatParams) {
-    this.formatParams = formatParams;
+   /**
+   * ISO-8601 date when source was suspended, if suspended
+   * @return suspendedAt
+  **/
+
+@JsonProperty("suspended_at")
+@ApiModelProperty(example = "2019-01-15T21:48:23Z", value = "ISO-8601 date when source was suspended, if suspended")
+  public String getSuspendedAt() {
+    return suspendedAt;
+  }
+
+  public Source system(SourceSystem system) {
+    this.system = system;
     return this;
   }
 
    /**
-   * Format parameters for data from this source.
-   * @return formatParams
+   * Get system
+   * @return system
   **/
 
-@JsonProperty("format_params")
-@ApiModelProperty(value = "Format parameters for data from this source.")
-  public FormatParams getFormatParams() {
-    return formatParams;
+@JsonProperty("system")
+@ApiModelProperty(value = "")
+  public SourceSystem getSystem() {
+    return system;
   }
 
-  public void setFormatParams(FormatParams formatParams) {
-    this.formatParams = formatParams;
+  public void setSystem(SourceSystem system) {
+    this.system = system;
   }
 
 
@@ -392,26 +436,29 @@ public class Source {
       return false;
     }
     Source source = (Source) o;
-    return Objects.equals(this.id, source.id) &&
-        Objects.equals(this.integrationName, source.integrationName) &&
-        Objects.equals(this.s3, source.s3) &&
-        Objects.equals(this.kinesis, source.kinesis) &&
-        Objects.equals(this.gcs, source.gcs) &&
-        Objects.equals(this.azureBlobStorage, source.azureBlobStorage) &&
-        Objects.equals(this.azureServiceBus, source.azureServiceBus) &&
+    return Objects.equals(this.azureBlobStorage, source.azureBlobStorage) &&
         Objects.equals(this.azureEventHubs, source.azureEventHubs) &&
+        Objects.equals(this.azureServiceBus, source.azureServiceBus) &&
         Objects.equals(this.dynamodb, source.dynamodb) &&
         Objects.equals(this.fileUpload, source.fileUpload) &&
+        Objects.equals(this.formatParams, source.formatParams) &&
+        Objects.equals(this.gcs, source.gcs) &&
+        Objects.equals(this.id, source.id) &&
+        Objects.equals(this.ingestTransformation, source.ingestTransformation) &&
+        Objects.equals(this.integrationName, source.integrationName) &&
         Objects.equals(this.kafka, source.kafka) &&
+        Objects.equals(this.kinesis, source.kinesis) &&
         Objects.equals(this.mongodb, source.mongodb) &&
+        Objects.equals(this.s3, source.s3) &&
         Objects.equals(this.snowflake, source.snowflake) &&
         Objects.equals(this.status, source.status) &&
-        Objects.equals(this.formatParams, source.formatParams);
+        Objects.equals(this.suspendedAt, source.suspendedAt) &&
+        Objects.equals(this.system, source.system);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, integrationName, s3, kinesis, gcs, azureBlobStorage, azureServiceBus, azureEventHubs, dynamodb, fileUpload, kafka, mongodb, snowflake, status, formatParams);
+    return Objects.hash(azureBlobStorage, azureEventHubs, azureServiceBus, dynamodb, fileUpload, formatParams, gcs, id, ingestTransformation, integrationName, kafka, kinesis, mongodb, s3, snowflake, status, suspendedAt, system);
   }
 
 
@@ -420,21 +467,24 @@ public class Source {
     StringBuilder sb = new StringBuilder();
     sb.append("class Source {\n");
     
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    integrationName: ").append(toIndentedString(integrationName)).append("\n");
-    sb.append("    s3: ").append(toIndentedString(s3)).append("\n");
-    sb.append("    kinesis: ").append(toIndentedString(kinesis)).append("\n");
-    sb.append("    gcs: ").append(toIndentedString(gcs)).append("\n");
     sb.append("    azureBlobStorage: ").append(toIndentedString(azureBlobStorage)).append("\n");
-    sb.append("    azureServiceBus: ").append(toIndentedString(azureServiceBus)).append("\n");
     sb.append("    azureEventHubs: ").append(toIndentedString(azureEventHubs)).append("\n");
+    sb.append("    azureServiceBus: ").append(toIndentedString(azureServiceBus)).append("\n");
     sb.append("    dynamodb: ").append(toIndentedString(dynamodb)).append("\n");
     sb.append("    fileUpload: ").append(toIndentedString(fileUpload)).append("\n");
+    sb.append("    formatParams: ").append(toIndentedString(formatParams)).append("\n");
+    sb.append("    gcs: ").append(toIndentedString(gcs)).append("\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    ingestTransformation: ").append(toIndentedString(ingestTransformation)).append("\n");
+    sb.append("    integrationName: ").append(toIndentedString(integrationName)).append("\n");
     sb.append("    kafka: ").append(toIndentedString(kafka)).append("\n");
+    sb.append("    kinesis: ").append(toIndentedString(kinesis)).append("\n");
     sb.append("    mongodb: ").append(toIndentedString(mongodb)).append("\n");
+    sb.append("    s3: ").append(toIndentedString(s3)).append("\n");
     sb.append("    snowflake: ").append(toIndentedString(snowflake)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
-    sb.append("    formatParams: ").append(toIndentedString(formatParams)).append("\n");
+    sb.append("    suspendedAt: ").append(toIndentedString(suspendedAt)).append("\n");
+    sb.append("    system: ").append(toIndentedString(system)).append("\n");
     sb.append("}");
     return sb.toString();
   }

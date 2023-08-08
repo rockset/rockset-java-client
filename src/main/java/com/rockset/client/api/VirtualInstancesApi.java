@@ -28,6 +28,7 @@ import java.io.IOException;
 
 import com.rockset.client.model.CollectionMountResponse;
 import com.rockset.client.model.CreateCollectionMountRequest;
+import com.rockset.client.model.CreateCollectionMountsResponse;
 import com.rockset.client.model.CreateVirtualInstanceRequest;
 import com.rockset.client.model.CreateVirtualInstanceResponse;
 import com.rockset.client.model.DeleteVirtualInstanceResponse;
@@ -509,7 +510,7 @@ public class VirtualInstancesApi {
 
     /**
      * Get Collection Mount
-     * [beta] Get a mount on this virtual instance.
+     * [beta] Retrieve a mount on this virtual instance.
      * @param virtualInstanceId Virtual Instance RRN (required)
      * @param collectionPath  (required)
      * @return CollectionMountResponse
@@ -522,7 +523,7 @@ public class VirtualInstancesApi {
 
     /**
      * Get Collection Mount
-     * [beta] Get a mount on this virtual instance.
+     * [beta] Retrieve a mount on this virtual instance.
      * @param virtualInstanceId Virtual Instance RRN (required)
      * @param collectionPath  (required)
      * @return ApiResponse&lt;CollectionMountResponse&gt;
@@ -536,7 +537,7 @@ public class VirtualInstancesApi {
 
     /**
      * Get Collection Mount (asynchronously)
-     * [beta] Get a mount on this virtual instance.
+     * [beta] Retrieve a mount on this virtual instance.
      * @param virtualInstanceId Virtual Instance RRN (required)
      * @param collectionPath  (required)
      * @param callback The callback to be executed when the API call finishes
@@ -999,34 +1000,34 @@ public class VirtualInstancesApi {
     }
 
     /**
-     * Mount Collection
+     * Mount Collections
      * [beta] Mount a collection to this virtual instance.
      * @param virtualInstanceId Virtual Instance RRN (required)
      * @param body JSON object (required)
-     * @return CollectionMountResponse
+     * @return CreateCollectionMountsResponse
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public CollectionMountResponse mount(String virtualInstanceId, CreateCollectionMountRequest body) throws Exception {
-        ApiResponse<CollectionMountResponse> resp = mountWithHttpInfo(virtualInstanceId, body);
+    public CreateCollectionMountsResponse mount(String virtualInstanceId, CreateCollectionMountRequest body) throws Exception {
+        ApiResponse<CreateCollectionMountsResponse> resp = mountWithHttpInfo(virtualInstanceId, body);
         return resp.getData();
     }
 
     /**
-     * Mount Collection
+     * Mount Collections
      * [beta] Mount a collection to this virtual instance.
      * @param virtualInstanceId Virtual Instance RRN (required)
      * @param body JSON object (required)
-     * @return ApiResponse&lt;CollectionMountResponse&gt;
+     * @return ApiResponse&lt;CreateCollectionMountsResponse&gt;
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<CollectionMountResponse> mountWithHttpInfo(String virtualInstanceId, CreateCollectionMountRequest body) throws Exception {
+    public ApiResponse<CreateCollectionMountsResponse> mountWithHttpInfo(String virtualInstanceId, CreateCollectionMountRequest body) throws Exception {
         com.squareup.okhttp.Call call = mountValidateBeforeCall(virtualInstanceId, body, null, null);
-        Type localVarReturnType = new TypeToken<CollectionMountResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<CreateCollectionMountsResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
-     * Mount Collection (asynchronously)
+     * Mount Collections (asynchronously)
      * [beta] Mount a collection to this virtual instance.
      * @param virtualInstanceId Virtual Instance RRN (required)
      * @param body JSON object (required)
@@ -1034,7 +1035,7 @@ public class VirtualInstancesApi {
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call mountAsync(String virtualInstanceId, CreateCollectionMountRequest body, final ApiCallback<CollectionMountResponse> callback) throws Exception {
+    public com.squareup.okhttp.Call mountAsync(String virtualInstanceId, CreateCollectionMountRequest body, final ApiCallback<CreateCollectionMountsResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1056,7 +1057,7 @@ public class VirtualInstancesApi {
         }
 
         com.squareup.okhttp.Call call = mountValidateBeforeCall(virtualInstanceId, body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<CollectionMountResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<CreateCollectionMountsResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }

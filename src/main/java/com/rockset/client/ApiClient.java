@@ -13,10 +13,10 @@
 
 package com.rockset.client;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.rockset.client.model.ErrorModel;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.squareup.okhttp.*;
 import com.squareup.okhttp.internal.http.HttpMethod;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor;

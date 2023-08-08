@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceAzureEventHubs
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class SourceAzureEventHubs {
   @SerializedName("hub_id")
   private String hubId = null;
@@ -59,6 +59,7 @@ public class SourceAzureEventHubs {
       return String.valueOf(value);
     }
 
+    @com.fasterxml.jackson.annotation.JsonCreator
     public static OffsetResetPolicyEnum fromValue(String text) {
       for (OffsetResetPolicyEnum b : OffsetResetPolicyEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {

@@ -35,60 +35,95 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class QueryResponse {
-  @SerializedName("query_id")
-  private String queryId = null;
-
   @SerializedName("collections")
   private List<String> collections = null;
-
-  @SerializedName("results")
-  private List<Object> results = null;
-
-  @SerializedName("stats")
-  private QueryResponseStats stats = null;
-
-  @SerializedName("warnings")
-  private List<String> warnings = null;
-
-  @SerializedName("query_lambda_path")
-  private String queryLambdaPath = null;
-
-  @SerializedName("query_errors")
-  private List<QueryError> queryErrors = null;
 
   @SerializedName("column_fields")
   private List<QueryFieldType> columnFields = null;
 
-  @SerializedName("results_total_doc_count")
-  private Long resultsTotalDocCount = null;
+  @SerializedName("last_offset")
+  private String lastOffset = null;
 
   @SerializedName("pagination")
   private PaginationInfo pagination = null;
 
-  @SerializedName("last_offset")
-  private String lastOffset = null;
+  @SerializedName("query_errors")
+  private List<QueryError> queryErrors = null;
 
-  public QueryResponse queryId(String queryId) {
-    this.queryId = queryId;
-    return this;
+  @SerializedName("query_id")
+  private String queryId = null;
+
+  @SerializedName("query_lambda_path")
+  private String queryLambdaPath = null;
+
+  @SerializedName("results")
+  private List<Object> results = null;
+
+  @SerializedName("results_total_doc_count")
+  private Long resultsTotalDocCount = null;
+
+  @SerializedName("stats")
+  private QueryResponseStats stats = null;
+
+  /**
+   * Status of query execution. Possible values: &#x60;QUEUED&#x60;, &#x60;RUNNING&#x60;, &#x60;COMPLETED&#x60;, &#x60;ERROR&#x60;.
+   */
+  @JsonAdapter(StatusEnum.Adapter.class)
+  public enum StatusEnum {
+    QUEUED("QUEUED"),
+    
+    RUNNING("RUNNING"),
+    
+    COMPLETED("COMPLETED"),
+    
+    ERROR("ERROR");
+
+    private String value;
+
+    StatusEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @com.fasterxml.jackson.annotation.JsonCreator
+    public static StatusEnum fromValue(String text) {
+      for (StatusEnum b : StatusEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+
+    public static class Adapter extends TypeAdapter<StatusEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public StatusEnum read(final JsonReader jsonReader) throws IOException {
+        String value = jsonReader.nextString();
+        return StatusEnum.fromValue(String.valueOf(value));
+      }
+    }
   }
 
-   /**
-   * Unique ID for this query.
-   * @return queryId
-  **/
+  @SerializedName("status")
+  private StatusEnum status = null;
 
-@JsonProperty("query_id")
-@ApiModelProperty(value = "Unique ID for this query.")
-  public String getQueryId() {
-    return queryId;
-  }
-
-  public void setQueryId(String queryId) {
-    this.queryId = queryId;
-  }
+  @SerializedName("warnings")
+  private List<String> warnings = null;
 
   public QueryResponse collections(List<String> collections) {
     this.collections = collections;
@@ -116,130 +151,6 @@ public class QueryResponse {
 
   public void setCollections(List<String> collections) {
     this.collections = collections;
-  }
-
-  public QueryResponse results(List<Object> results) {
-    this.results = results;
-    return this;
-  }
-
-  public QueryResponse addResultsItem(Object resultsItem) {
-    if (this.results == null) {
-      this.results = new ArrayList<Object>();
-    }
-    this.results.add(resultsItem);
-    return this;
-  }
-
-   /**
-   * Results from the query.
-   * @return results
-  **/
-
-@JsonProperty("results")
-@ApiModelProperty(value = "Results from the query.")
-  public List<Object> getResults() {
-    return results;
-  }
-
-  public void setResults(List<Object> results) {
-    this.results = results;
-  }
-
-  public QueryResponse stats(QueryResponseStats stats) {
-    this.stats = stats;
-    return this;
-  }
-
-   /**
-   * Meta information about the query including execution latencies.
-   * @return stats
-  **/
-
-@JsonProperty("stats")
-@ApiModelProperty(value = "Meta information about the query including execution latencies.")
-  public QueryResponseStats getStats() {
-    return stats;
-  }
-
-  public void setStats(QueryResponseStats stats) {
-    this.stats = stats;
-  }
-
-  public QueryResponse warnings(List<String> warnings) {
-    this.warnings = warnings;
-    return this;
-  }
-
-  public QueryResponse addWarningsItem(String warningsItem) {
-    if (this.warnings == null) {
-      this.warnings = new ArrayList<String>();
-    }
-    this.warnings.add(warningsItem);
-    return this;
-  }
-
-   /**
-   * Warnings generated by the query. Only populated if &#x60;generate_warnings&#x60; is specified in the query request.
-   * @return warnings
-  **/
-
-@JsonProperty("warnings")
-@ApiModelProperty(value = "Warnings generated by the query. Only populated if `generate_warnings` is specified in the query request.")
-  public List<String> getWarnings() {
-    return warnings;
-  }
-
-  public void setWarnings(List<String> warnings) {
-    this.warnings = warnings;
-  }
-
-  public QueryResponse queryLambdaPath(String queryLambdaPath) {
-    this.queryLambdaPath = queryLambdaPath;
-    return this;
-  }
-
-   /**
-   * The full path of the executed query lambda. Includes version information.
-   * @return queryLambdaPath
-  **/
-
-@JsonProperty("query_lambda_path")
-@ApiModelProperty(value = "The full path of the executed query lambda. Includes version information.")
-  public String getQueryLambdaPath() {
-    return queryLambdaPath;
-  }
-
-  public void setQueryLambdaPath(String queryLambdaPath) {
-    this.queryLambdaPath = queryLambdaPath;
-  }
-
-  public QueryResponse queryErrors(List<QueryError> queryErrors) {
-    this.queryErrors = queryErrors;
-    return this;
-  }
-
-  public QueryResponse addQueryErrorsItem(QueryError queryErrorsItem) {
-    if (this.queryErrors == null) {
-      this.queryErrors = new ArrayList<QueryError>();
-    }
-    this.queryErrors.add(queryErrorsItem);
-    return this;
-  }
-
-   /**
-   * Errors encountered while executing the query.
-   * @return queryErrors
-  **/
-
-@JsonProperty("query_errors")
-@ApiModelProperty(value = "Errors encountered while executing the query.")
-  public List<QueryError> getQueryErrors() {
-    return queryErrors;
-  }
-
-  public void setQueryErrors(List<QueryError> queryErrors) {
-    this.queryErrors = queryErrors;
   }
 
   public QueryResponse columnFields(List<QueryFieldType> columnFields) {
@@ -270,24 +181,24 @@ public class QueryResponse {
     this.columnFields = columnFields;
   }
 
-  public QueryResponse resultsTotalDocCount(Long resultsTotalDocCount) {
-    this.resultsTotalDocCount = resultsTotalDocCount;
+  public QueryResponse lastOffset(String lastOffset) {
+    this.lastOffset = lastOffset;
     return this;
   }
 
    /**
-   * Number of results generated by the query.
-   * @return resultsTotalDocCount
+   * If this was a write query, this is the log offset the query was written to.
+   * @return lastOffset
   **/
 
-@JsonProperty("results_total_doc_count")
-@ApiModelProperty(value = "Number of results generated by the query.")
-  public Long getResultsTotalDocCount() {
-    return resultsTotalDocCount;
+@JsonProperty("last_offset")
+@ApiModelProperty(value = "If this was a write query, this is the log offset the query was written to.")
+  public String getLastOffset() {
+    return lastOffset;
   }
 
-  public void setResultsTotalDocCount(Long resultsTotalDocCount) {
-    this.resultsTotalDocCount = resultsTotalDocCount;
+  public void setLastOffset(String lastOffset) {
+    this.lastOffset = lastOffset;
   }
 
   public QueryResponse pagination(PaginationInfo pagination) {
@@ -310,24 +221,188 @@ public class QueryResponse {
     this.pagination = pagination;
   }
 
-  public QueryResponse lastOffset(String lastOffset) {
-    this.lastOffset = lastOffset;
+  public QueryResponse queryErrors(List<QueryError> queryErrors) {
+    this.queryErrors = queryErrors;
+    return this;
+  }
+
+  public QueryResponse addQueryErrorsItem(QueryError queryErrorsItem) {
+    if (this.queryErrors == null) {
+      this.queryErrors = new ArrayList<QueryError>();
+    }
+    this.queryErrors.add(queryErrorsItem);
     return this;
   }
 
    /**
-   * If this was a write query, this is the log offset the query was written to.
-   * @return lastOffset
+   * Errors encountered while executing the query.
+   * @return queryErrors
   **/
 
-@JsonProperty("last_offset")
-@ApiModelProperty(value = "If this was a write query, this is the log offset the query was written to.")
-  public String getLastOffset() {
-    return lastOffset;
+@JsonProperty("query_errors")
+@ApiModelProperty(value = "Errors encountered while executing the query.")
+  public List<QueryError> getQueryErrors() {
+    return queryErrors;
   }
 
-  public void setLastOffset(String lastOffset) {
-    this.lastOffset = lastOffset;
+  public void setQueryErrors(List<QueryError> queryErrors) {
+    this.queryErrors = queryErrors;
+  }
+
+  public QueryResponse queryId(String queryId) {
+    this.queryId = queryId;
+    return this;
+  }
+
+   /**
+   * Unique ID for this query.
+   * @return queryId
+  **/
+
+@JsonProperty("query_id")
+@ApiModelProperty(value = "Unique ID for this query.")
+  public String getQueryId() {
+    return queryId;
+  }
+
+  public void setQueryId(String queryId) {
+    this.queryId = queryId;
+  }
+
+  public QueryResponse queryLambdaPath(String queryLambdaPath) {
+    this.queryLambdaPath = queryLambdaPath;
+    return this;
+  }
+
+   /**
+   * The full path of the executed query lambda. Includes version information.
+   * @return queryLambdaPath
+  **/
+
+@JsonProperty("query_lambda_path")
+@ApiModelProperty(value = "The full path of the executed query lambda. Includes version information.")
+  public String getQueryLambdaPath() {
+    return queryLambdaPath;
+  }
+
+  public void setQueryLambdaPath(String queryLambdaPath) {
+    this.queryLambdaPath = queryLambdaPath;
+  }
+
+  public QueryResponse results(List<Object> results) {
+    this.results = results;
+    return this;
+  }
+
+  public QueryResponse addResultsItem(Object resultsItem) {
+    if (this.results == null) {
+      this.results = new ArrayList<Object>();
+    }
+    this.results.add(resultsItem);
+    return this;
+  }
+
+   /**
+   * Results from the query.
+   * @return results
+  **/
+
+@JsonProperty("results")
+@ApiModelProperty(value = "Results from the query.")
+  public List<Object> getResults() {
+    return results;
+  }
+
+  public void setResults(List<Object> results) {
+    this.results = results;
+  }
+
+  public QueryResponse resultsTotalDocCount(Long resultsTotalDocCount) {
+    this.resultsTotalDocCount = resultsTotalDocCount;
+    return this;
+  }
+
+   /**
+   * Number of results generated by the query.
+   * @return resultsTotalDocCount
+  **/
+
+@JsonProperty("results_total_doc_count")
+@ApiModelProperty(value = "Number of results generated by the query.")
+  public Long getResultsTotalDocCount() {
+    return resultsTotalDocCount;
+  }
+
+  public void setResultsTotalDocCount(Long resultsTotalDocCount) {
+    this.resultsTotalDocCount = resultsTotalDocCount;
+  }
+
+  public QueryResponse stats(QueryResponseStats stats) {
+    this.stats = stats;
+    return this;
+  }
+
+   /**
+   * Meta information about the query including execution latencies.
+   * @return stats
+  **/
+
+@JsonProperty("stats")
+@ApiModelProperty(value = "Meta information about the query including execution latencies.")
+  public QueryResponseStats getStats() {
+    return stats;
+  }
+
+  public void setStats(QueryResponseStats stats) {
+    this.stats = stats;
+  }
+
+  public QueryResponse status(StatusEnum status) {
+    this.status = status;
+    return this;
+  }
+
+   /**
+   * Status of query execution. Possible values: &#x60;QUEUED&#x60;, &#x60;RUNNING&#x60;, &#x60;COMPLETED&#x60;, &#x60;ERROR&#x60;.
+   * @return status
+  **/
+
+@JsonProperty("status")
+@ApiModelProperty(example = "RUNNING", value = "Status of query execution. Possible values: `QUEUED`, `RUNNING`, `COMPLETED`, `ERROR`.")
+  public StatusEnum getStatus() {
+    return status;
+  }
+
+  public void setStatus(StatusEnum status) {
+    this.status = status;
+  }
+
+  public QueryResponse warnings(List<String> warnings) {
+    this.warnings = warnings;
+    return this;
+  }
+
+  public QueryResponse addWarningsItem(String warningsItem) {
+    if (this.warnings == null) {
+      this.warnings = new ArrayList<String>();
+    }
+    this.warnings.add(warningsItem);
+    return this;
+  }
+
+   /**
+   * Get warnings
+   * @return warnings
+  **/
+
+@JsonProperty("warnings")
+@ApiModelProperty(value = "")
+  public List<String> getWarnings() {
+    return warnings;
+  }
+
+  public void setWarnings(List<String> warnings) {
+    this.warnings = warnings;
   }
 
 
@@ -340,22 +415,23 @@ public class QueryResponse {
       return false;
     }
     QueryResponse queryResponse = (QueryResponse) o;
-    return Objects.equals(this.queryId, queryResponse.queryId) &&
-        Objects.equals(this.collections, queryResponse.collections) &&
-        Objects.equals(this.results, queryResponse.results) &&
-        Objects.equals(this.stats, queryResponse.stats) &&
-        Objects.equals(this.warnings, queryResponse.warnings) &&
-        Objects.equals(this.queryLambdaPath, queryResponse.queryLambdaPath) &&
-        Objects.equals(this.queryErrors, queryResponse.queryErrors) &&
+    return Objects.equals(this.collections, queryResponse.collections) &&
         Objects.equals(this.columnFields, queryResponse.columnFields) &&
-        Objects.equals(this.resultsTotalDocCount, queryResponse.resultsTotalDocCount) &&
+        Objects.equals(this.lastOffset, queryResponse.lastOffset) &&
         Objects.equals(this.pagination, queryResponse.pagination) &&
-        Objects.equals(this.lastOffset, queryResponse.lastOffset);
+        Objects.equals(this.queryErrors, queryResponse.queryErrors) &&
+        Objects.equals(this.queryId, queryResponse.queryId) &&
+        Objects.equals(this.queryLambdaPath, queryResponse.queryLambdaPath) &&
+        Objects.equals(this.results, queryResponse.results) &&
+        Objects.equals(this.resultsTotalDocCount, queryResponse.resultsTotalDocCount) &&
+        Objects.equals(this.stats, queryResponse.stats) &&
+        Objects.equals(this.status, queryResponse.status) &&
+        Objects.equals(this.warnings, queryResponse.warnings);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(queryId, collections, results, stats, warnings, queryLambdaPath, queryErrors, columnFields, resultsTotalDocCount, pagination, lastOffset);
+    return Objects.hash(collections, columnFields, lastOffset, pagination, queryErrors, queryId, queryLambdaPath, results, resultsTotalDocCount, stats, status, warnings);
   }
 
 
@@ -364,17 +440,18 @@ public class QueryResponse {
     StringBuilder sb = new StringBuilder();
     sb.append("class QueryResponse {\n");
     
-    sb.append("    queryId: ").append(toIndentedString(queryId)).append("\n");
     sb.append("    collections: ").append(toIndentedString(collections)).append("\n");
-    sb.append("    results: ").append(toIndentedString(results)).append("\n");
-    sb.append("    stats: ").append(toIndentedString(stats)).append("\n");
-    sb.append("    warnings: ").append(toIndentedString(warnings)).append("\n");
-    sb.append("    queryLambdaPath: ").append(toIndentedString(queryLambdaPath)).append("\n");
-    sb.append("    queryErrors: ").append(toIndentedString(queryErrors)).append("\n");
     sb.append("    columnFields: ").append(toIndentedString(columnFields)).append("\n");
-    sb.append("    resultsTotalDocCount: ").append(toIndentedString(resultsTotalDocCount)).append("\n");
-    sb.append("    pagination: ").append(toIndentedString(pagination)).append("\n");
     sb.append("    lastOffset: ").append(toIndentedString(lastOffset)).append("\n");
+    sb.append("    pagination: ").append(toIndentedString(pagination)).append("\n");
+    sb.append("    queryErrors: ").append(toIndentedString(queryErrors)).append("\n");
+    sb.append("    queryId: ").append(toIndentedString(queryId)).append("\n");
+    sb.append("    queryLambdaPath: ").append(toIndentedString(queryLambdaPath)).append("\n");
+    sb.append("    results: ").append(toIndentedString(results)).append("\n");
+    sb.append("    resultsTotalDocCount: ").append(toIndentedString(resultsTotalDocCount)).append("\n");
+    sb.append("    stats: ").append(toIndentedString(stats)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    warnings: ").append(toIndentedString(warnings)).append("\n");
     sb.append("}");
     return sb.toString();
   }

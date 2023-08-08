@@ -31,33 +31,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * UpdateAliasRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class UpdateAliasRequest {
-  @SerializedName("description")
-  private String description = null;
-
   @SerializedName("collections")
   private List<String> collections = new ArrayList<String>();
 
-  public UpdateAliasRequest description(String description) {
-    this.description = description;
-    return this;
-  }
-
-   /**
-   * Optional description.
-   * @return description
-  **/
-
-@JsonProperty("description")
-@ApiModelProperty(example = "version alias", value = "Optional description.")
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
+  @SerializedName("description")
+  private String description = null;
 
   public UpdateAliasRequest collections(List<String> collections) {
     this.collections = collections;
@@ -84,6 +64,26 @@ public class UpdateAliasRequest {
     this.collections = collections;
   }
 
+  public UpdateAliasRequest description(String description) {
+    this.description = description;
+    return this;
+  }
+
+   /**
+   * Optional description.
+   * @return description
+  **/
+
+@JsonProperty("description")
+@ApiModelProperty(example = "version alias", value = "Optional description.")
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -94,13 +94,13 @@ public class UpdateAliasRequest {
       return false;
     }
     UpdateAliasRequest updateAliasRequest = (UpdateAliasRequest) o;
-    return Objects.equals(this.description, updateAliasRequest.description) &&
-        Objects.equals(this.collections, updateAliasRequest.collections);
+    return Objects.equals(this.collections, updateAliasRequest.collections) &&
+        Objects.equals(this.description, updateAliasRequest.description);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(description, collections);
+    return Objects.hash(collections, description);
   }
 
 
@@ -109,8 +109,8 @@ public class UpdateAliasRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class UpdateAliasRequest {\n");
     
-    sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    collections: ").append(toIndentedString(collections)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("}");
     return sb.toString();
   }

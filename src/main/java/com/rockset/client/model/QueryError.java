@@ -29,36 +29,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryError
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class QueryError {
-  @SerializedName("type")
-  private String type = null;
-
   @SerializedName("message")
   private String message = null;
 
   @SerializedName("status_code")
   private Integer statusCode = null;
 
-  public QueryError type(String type) {
-    this.type = type;
-    return this;
-  }
-
-   /**
-   * The type of error.
-   * @return type
-  **/
-
-@JsonProperty("type")
-@ApiModelProperty(example = "ResourceExceeded", value = "The type of error.")
-  public String getType() {
-    return type;
-  }
-
-  public void setType(String type) {
-    this.type = type;
-  }
+  @SerializedName("type")
+  private String type = null;
 
   public QueryError message(String message) {
     this.message = message;
@@ -100,6 +80,26 @@ public class QueryError {
     this.statusCode = statusCode;
   }
 
+  public QueryError type(String type) {
+    this.type = type;
+    return this;
+  }
+
+   /**
+   * The type of error.
+   * @return type
+  **/
+
+@JsonProperty("type")
+@ApiModelProperty(example = "ResourceExceeded", value = "The type of error.")
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -110,14 +110,14 @@ public class QueryError {
       return false;
     }
     QueryError queryError = (QueryError) o;
-    return Objects.equals(this.type, queryError.type) &&
-        Objects.equals(this.message, queryError.message) &&
-        Objects.equals(this.statusCode, queryError.statusCode);
+    return Objects.equals(this.message, queryError.message) &&
+        Objects.equals(this.statusCode, queryError.statusCode) &&
+        Objects.equals(this.type, queryError.type);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(type, message, statusCode);
+    return Objects.hash(message, statusCode, type);
   }
 
 
@@ -126,9 +126,9 @@ public class QueryError {
     StringBuilder sb = new StringBuilder();
     sb.append("class QueryError {\n");
     
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    message: ").append(toIndentedString(message)).append("\n");
     sb.append("    statusCode: ").append(toIndentedString(statusCode)).append("\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");
     return sb.toString();
   }

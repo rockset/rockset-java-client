@@ -31,13 +31,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceKinesis
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class SourceKinesis {
   @SerializedName("aws_region")
   private String awsRegion = null;
-
-  @SerializedName("stream_name")
-  private String streamName = null;
 
   @SerializedName("dms_primary_key")
   private List<String> dmsPrimaryKey = null;
@@ -66,6 +63,7 @@ public class SourceKinesis {
       return String.valueOf(value);
     }
 
+    @com.fasterxml.jackson.annotation.JsonCreator
     public static OffsetResetPolicyEnum fromValue(String text) {
       for (OffsetResetPolicyEnum b : OffsetResetPolicyEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -92,6 +90,9 @@ public class SourceKinesis {
   @SerializedName("offset_reset_policy")
   private OffsetResetPolicyEnum offsetResetPolicy = null;
 
+  @SerializedName("stream_name")
+  private String streamName = null;
+
   public SourceKinesis awsRegion(String awsRegion) {
     this.awsRegion = awsRegion;
     return this;
@@ -110,26 +111,6 @@ public class SourceKinesis {
 
   public void setAwsRegion(String awsRegion) {
     this.awsRegion = awsRegion;
-  }
-
-  public SourceKinesis streamName(String streamName) {
-    this.streamName = streamName;
-    return this;
-  }
-
-   /**
-   * Name of kinesis stream.
-   * @return streamName
-  **/
-
-@JsonProperty("stream_name")
-@ApiModelProperty(example = "click_stream", required = true, value = "Name of kinesis stream.")
-  public String getStreamName() {
-    return streamName;
-  }
-
-  public void setStreamName(String streamName) {
-    this.streamName = streamName;
   }
 
   public SourceKinesis dmsPrimaryKey(List<String> dmsPrimaryKey) {
@@ -180,6 +161,26 @@ public class SourceKinesis {
     this.offsetResetPolicy = offsetResetPolicy;
   }
 
+  public SourceKinesis streamName(String streamName) {
+    this.streamName = streamName;
+    return this;
+  }
+
+   /**
+   * Name of kinesis stream.
+   * @return streamName
+  **/
+
+@JsonProperty("stream_name")
+@ApiModelProperty(example = "click_stream", required = true, value = "Name of kinesis stream.")
+  public String getStreamName() {
+    return streamName;
+  }
+
+  public void setStreamName(String streamName) {
+    this.streamName = streamName;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -191,14 +192,14 @@ public class SourceKinesis {
     }
     SourceKinesis sourceKinesis = (SourceKinesis) o;
     return Objects.equals(this.awsRegion, sourceKinesis.awsRegion) &&
-        Objects.equals(this.streamName, sourceKinesis.streamName) &&
         Objects.equals(this.dmsPrimaryKey, sourceKinesis.dmsPrimaryKey) &&
-        Objects.equals(this.offsetResetPolicy, sourceKinesis.offsetResetPolicy);
+        Objects.equals(this.offsetResetPolicy, sourceKinesis.offsetResetPolicy) &&
+        Objects.equals(this.streamName, sourceKinesis.streamName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(awsRegion, streamName, dmsPrimaryKey, offsetResetPolicy);
+    return Objects.hash(awsRegion, dmsPrimaryKey, offsetResetPolicy, streamName);
   }
 
 
@@ -208,9 +209,9 @@ public class SourceKinesis {
     sb.append("class SourceKinesis {\n");
     
     sb.append("    awsRegion: ").append(toIndentedString(awsRegion)).append("\n");
-    sb.append("    streamName: ").append(toIndentedString(streamName)).append("\n");
     sb.append("    dmsPrimaryKey: ").append(toIndentedString(dmsPrimaryKey)).append("\n");
     sb.append("    offsetResetPolicy: ").append(toIndentedString(offsetResetPolicy)).append("\n");
+    sb.append("    streamName: ").append(toIndentedString(streamName)).append("\n");
     sb.append("}");
     return sb.toString();
   }
