@@ -29,16 +29,36 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * StatusKafkaPartition
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class StatusKafkaPartition {
+  @SerializedName("offset_lag")
+  private Long offsetLag = null;
+
   @SerializedName("partition_number")
   private Integer partitionNumber = null;
 
   @SerializedName("partition_offset")
   private Long partitionOffset = null;
 
-  @SerializedName("offset_lag")
-  private Long offsetLag = null;
+  public StatusKafkaPartition offsetLag(Long offsetLag) {
+    this.offsetLag = offsetLag;
+    return this;
+  }
+
+   /**
+   * Per partition lag for offset.
+   * @return offsetLag
+  **/
+
+@JsonProperty("offset_lag")
+@ApiModelProperty(example = "10", value = "Per partition lag for offset.")
+  public Long getOffsetLag() {
+    return offsetLag;
+  }
+
+  public void setOffsetLag(Long offsetLag) {
+    this.offsetLag = offsetLag;
+  }
 
   public StatusKafkaPartition partitionNumber(Integer partitionNumber) {
     this.partitionNumber = partitionNumber;
@@ -80,26 +100,6 @@ public class StatusKafkaPartition {
     this.partitionOffset = partitionOffset;
   }
 
-  public StatusKafkaPartition offsetLag(Long offsetLag) {
-    this.offsetLag = offsetLag;
-    return this;
-  }
-
-   /**
-   * Per partition lag for offset.
-   * @return offsetLag
-  **/
-
-@JsonProperty("offset_lag")
-@ApiModelProperty(example = "10", value = "Per partition lag for offset.")
-  public Long getOffsetLag() {
-    return offsetLag;
-  }
-
-  public void setOffsetLag(Long offsetLag) {
-    this.offsetLag = offsetLag;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -110,14 +110,14 @@ public class StatusKafkaPartition {
       return false;
     }
     StatusKafkaPartition statusKafkaPartition = (StatusKafkaPartition) o;
-    return Objects.equals(this.partitionNumber, statusKafkaPartition.partitionNumber) &&
-        Objects.equals(this.partitionOffset, statusKafkaPartition.partitionOffset) &&
-        Objects.equals(this.offsetLag, statusKafkaPartition.offsetLag);
+    return Objects.equals(this.offsetLag, statusKafkaPartition.offsetLag) &&
+        Objects.equals(this.partitionNumber, statusKafkaPartition.partitionNumber) &&
+        Objects.equals(this.partitionOffset, statusKafkaPartition.partitionOffset);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(partitionNumber, partitionOffset, offsetLag);
+    return Objects.hash(offsetLag, partitionNumber, partitionOffset);
   }
 
 
@@ -126,9 +126,9 @@ public class StatusKafkaPartition {
     StringBuilder sb = new StringBuilder();
     sb.append("class StatusKafkaPartition {\n");
     
+    sb.append("    offsetLag: ").append(toIndentedString(offsetLag)).append("\n");
     sb.append("    partitionNumber: ").append(toIndentedString(partitionNumber)).append("\n");
     sb.append("    partitionOffset: ").append(toIndentedString(partitionOffset)).append("\n");
-    sb.append("    offsetLag: ").append(toIndentedString(offsetLag)).append("\n");
     sb.append("}");
     return sb.toString();
   }

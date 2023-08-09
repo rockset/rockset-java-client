@@ -127,7 +127,7 @@ public class TestQueryLambda {
     Assert.assertNotEquals(next, "");
 
     String queryId = qr.getQueryId();
-    QueryPaginationResponse paginationResponse = client.queries.get_0(queryId, next, 1);
+    QueryPaginationResponse paginationResponse = client.queries.get_0(queryId, next, 1, 0);
 
     // Check that the second row just has a 2.
     Assert.assertEquals(paginationResponse.getResults().size(), 1);

@@ -22,7 +22,6 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.rockset.client.model.EventTimeInfo;
 import com.rockset.client.model.FieldMappingQuery;
-import com.rockset.client.model.FieldMappingV2;
 import com.rockset.client.model.FieldPartition;
 import com.rockset.client.model.Source;
 import io.swagger.annotations.ApiModel;
@@ -36,31 +35,170 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateCollectionRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class CreateCollectionRequest {
-  @SerializedName("name")
-  private String name = null;
+  @SerializedName("clustering_key")
+  private List<FieldPartition> clusteringKey = null;
 
   @SerializedName("description")
   private String description = null;
 
-  @SerializedName("sources")
-  private List<Source> sources = null;
-
-  @SerializedName("retention_secs")
-  private Long retentionSecs = null;
-
   @SerializedName("event_time_info")
   private EventTimeInfo eventTimeInfo = null;
-
-  @SerializedName("field_mappings")
-  private List<FieldMappingV2> fieldMappings = null;
 
   @SerializedName("field_mapping_query")
   private FieldMappingQuery fieldMappingQuery = null;
 
-  @SerializedName("clustering_key")
-  private List<FieldPartition> clusteringKey = null;
+  @SerializedName("name")
+  private String name = null;
+
+  @SerializedName("retention_secs")
+  private Long retentionSecs = null;
+
+  @SerializedName("source_download_soft_limit_bytes")
+  private Long sourceDownloadSoftLimitBytes = null;
+
+  @SerializedName("sources")
+  private List<Source> sources = null;
+
+  /**
+   * RocksDB storage compression type.
+   */
+  @JsonAdapter(StorageCompressionTypeEnum.Adapter.class)
+  public enum StorageCompressionTypeEnum {
+    LZ4("LZ4"),
+    
+    ZSTD("ZSTD");
+
+    private String value;
+
+    StorageCompressionTypeEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @com.fasterxml.jackson.annotation.JsonCreator
+    public static StorageCompressionTypeEnum fromValue(String text) {
+      for (StorageCompressionTypeEnum b : StorageCompressionTypeEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+
+    public static class Adapter extends TypeAdapter<StorageCompressionTypeEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final StorageCompressionTypeEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public StorageCompressionTypeEnum read(final JsonReader jsonReader) throws IOException {
+        String value = jsonReader.nextString();
+        return StorageCompressionTypeEnum.fromValue(String.valueOf(value));
+      }
+    }
+  }
+
+  @SerializedName("storage_compression_type")
+  private StorageCompressionTypeEnum storageCompressionType = null;
+
+  public CreateCollectionRequest clusteringKey(List<FieldPartition> clusteringKey) {
+    this.clusteringKey = clusteringKey;
+    return this;
+  }
+
+  public CreateCollectionRequest addClusteringKeyItem(FieldPartition clusteringKeyItem) {
+    if (this.clusteringKey == null) {
+      this.clusteringKey = new ArrayList<FieldPartition>();
+    }
+    this.clusteringKey.add(clusteringKeyItem);
+    return this;
+  }
+
+   /**
+   * Deprecated. List of clustering fields. Use CLUSTER BY clause in &#x60;field_mapping_query&#x60; instead.
+   * @return clusteringKey
+  **/
+
+@JsonProperty("clustering_key")
+@ApiModelProperty(value = "Deprecated. List of clustering fields. Use CLUSTER BY clause in `field_mapping_query` instead.")
+  public List<FieldPartition> getClusteringKey() {
+    return clusteringKey;
+  }
+
+  public void setClusteringKey(List<FieldPartition> clusteringKey) {
+    this.clusteringKey = clusteringKey;
+  }
+
+  public CreateCollectionRequest description(String description) {
+    this.description = description;
+    return this;
+  }
+
+   /**
+   * Text describing the collection.
+   * @return description
+  **/
+
+@JsonProperty("description")
+@ApiModelProperty(example = "transactions from stores worldwide", value = "Text describing the collection.")
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public CreateCollectionRequest eventTimeInfo(EventTimeInfo eventTimeInfo) {
+    this.eventTimeInfo = eventTimeInfo;
+    return this;
+  }
+
+   /**
+   * Deprecated. Configuration for event data. Use an _event_time mapping in &#x60;field_mapping_query&#x60; instead.
+   * @return eventTimeInfo
+  **/
+
+@JsonProperty("event_time_info")
+@ApiModelProperty(value = "Deprecated. Configuration for event data. Use an _event_time mapping in `field_mapping_query` instead.")
+  public EventTimeInfo getEventTimeInfo() {
+    return eventTimeInfo;
+  }
+
+  public void setEventTimeInfo(EventTimeInfo eventTimeInfo) {
+    this.eventTimeInfo = eventTimeInfo;
+  }
+
+  public CreateCollectionRequest fieldMappingQuery(FieldMappingQuery fieldMappingQuery) {
+    this.fieldMappingQuery = fieldMappingQuery;
+    return this;
+  }
+
+   /**
+   * Ingest transformation query.
+   * @return fieldMappingQuery
+  **/
+
+@JsonProperty("field_mapping_query")
+@ApiModelProperty(value = "Ingest transformation query.")
+  public FieldMappingQuery getFieldMappingQuery() {
+    return fieldMappingQuery;
+  }
+
+  public void setFieldMappingQuery(FieldMappingQuery fieldMappingQuery) {
+    this.fieldMappingQuery = fieldMappingQuery;
+  }
 
   public CreateCollectionRequest name(String name) {
     this.name = name;
@@ -82,24 +220,45 @@ public class CreateCollectionRequest {
     this.name = name;
   }
 
-  public CreateCollectionRequest description(String description) {
-    this.description = description;
+  public CreateCollectionRequest retentionSecs(Long retentionSecs) {
+    this.retentionSecs = retentionSecs;
     return this;
   }
 
    /**
-   * Text describing the collection.
-   * @return description
+   * Number of seconds after which data is purged, based on event time.
+   * minimum: 1
+   * @return retentionSecs
   **/
 
-@JsonProperty("description")
-@ApiModelProperty(example = "transactions from stores worldwide", value = "Text describing the collection.")
-  public String getDescription() {
-    return description;
+@JsonProperty("retention_secs")
+@ApiModelProperty(example = "1000000", value = "Number of seconds after which data is purged, based on event time.")
+  public Long getRetentionSecs() {
+    return retentionSecs;
   }
 
-  public void setDescription(String description) {
-    this.description = description;
+  public void setRetentionSecs(Long retentionSecs) {
+    this.retentionSecs = retentionSecs;
+  }
+
+  public CreateCollectionRequest sourceDownloadSoftLimitBytes(Long sourceDownloadSoftLimitBytes) {
+    this.sourceDownloadSoftLimitBytes = sourceDownloadSoftLimitBytes;
+    return this;
+  }
+
+   /**
+   * Soft ingest limit for this collection.
+   * @return sourceDownloadSoftLimitBytes
+  **/
+
+@JsonProperty("source_download_soft_limit_bytes")
+@ApiModelProperty(value = "Soft ingest limit for this collection.")
+  public Long getSourceDownloadSoftLimitBytes() {
+    return sourceDownloadSoftLimitBytes;
+  }
+
+  public void setSourceDownloadSoftLimitBytes(Long sourceDownloadSoftLimitBytes) {
+    this.sourceDownloadSoftLimitBytes = sourceDownloadSoftLimitBytes;
   }
 
   public CreateCollectionRequest sources(List<Source> sources) {
@@ -130,121 +289,24 @@ public class CreateCollectionRequest {
     this.sources = sources;
   }
 
-  public CreateCollectionRequest retentionSecs(Long retentionSecs) {
-    this.retentionSecs = retentionSecs;
+  public CreateCollectionRequest storageCompressionType(StorageCompressionTypeEnum storageCompressionType) {
+    this.storageCompressionType = storageCompressionType;
     return this;
   }
 
    /**
-   * Number of seconds after which data is purged, based on event time.
-   * minimum: 1
-   * @return retentionSecs
+   * RocksDB storage compression type.
+   * @return storageCompressionType
   **/
 
-@JsonProperty("retention_secs")
-@ApiModelProperty(example = "1000000", value = "Number of seconds after which data is purged, based on event time.")
-  public Long getRetentionSecs() {
-    return retentionSecs;
+@JsonProperty("storage_compression_type")
+@ApiModelProperty(example = "LZ4", value = "RocksDB storage compression type.")
+  public StorageCompressionTypeEnum getStorageCompressionType() {
+    return storageCompressionType;
   }
 
-  public void setRetentionSecs(Long retentionSecs) {
-    this.retentionSecs = retentionSecs;
-  }
-
-  public CreateCollectionRequest eventTimeInfo(EventTimeInfo eventTimeInfo) {
-    this.eventTimeInfo = eventTimeInfo;
-    return this;
-  }
-
-   /**
-   * Deprecated. Configuration for event data. Use an _event_time mapping in &#x60;field_mapping_query&#x60; instead.
-   * @return eventTimeInfo
-  **/
-
-@JsonProperty("event_time_info")
-@ApiModelProperty(value = "Deprecated. Configuration for event data. Use an _event_time mapping in `field_mapping_query` instead.")
-  public EventTimeInfo getEventTimeInfo() {
-    return eventTimeInfo;
-  }
-
-  public void setEventTimeInfo(EventTimeInfo eventTimeInfo) {
-    this.eventTimeInfo = eventTimeInfo;
-  }
-
-  public CreateCollectionRequest fieldMappings(List<FieldMappingV2> fieldMappings) {
-    this.fieldMappings = fieldMappings;
-    return this;
-  }
-
-  public CreateCollectionRequest addFieldMappingsItem(FieldMappingV2 fieldMappingsItem) {
-    if (this.fieldMappings == null) {
-      this.fieldMappings = new ArrayList<FieldMappingV2>();
-    }
-    this.fieldMappings.add(fieldMappingsItem);
-    return this;
-  }
-
-   /**
-   * Deprecated. List of mappings. Use field_mapping_query instead.
-   * @return fieldMappings
-  **/
-
-@JsonProperty("field_mappings")
-@ApiModelProperty(value = "Deprecated. List of mappings. Use field_mapping_query instead.")
-  public List<FieldMappingV2> getFieldMappings() {
-    return fieldMappings;
-  }
-
-  public void setFieldMappings(List<FieldMappingV2> fieldMappings) {
-    this.fieldMappings = fieldMappings;
-  }
-
-  public CreateCollectionRequest fieldMappingQuery(FieldMappingQuery fieldMappingQuery) {
-    this.fieldMappingQuery = fieldMappingQuery;
-    return this;
-  }
-
-   /**
-   * Mapping of fields for a collection.
-   * @return fieldMappingQuery
-  **/
-
-@JsonProperty("field_mapping_query")
-@ApiModelProperty(value = "Mapping of fields for a collection.")
-  public FieldMappingQuery getFieldMappingQuery() {
-    return fieldMappingQuery;
-  }
-
-  public void setFieldMappingQuery(FieldMappingQuery fieldMappingQuery) {
-    this.fieldMappingQuery = fieldMappingQuery;
-  }
-
-  public CreateCollectionRequest clusteringKey(List<FieldPartition> clusteringKey) {
-    this.clusteringKey = clusteringKey;
-    return this;
-  }
-
-  public CreateCollectionRequest addClusteringKeyItem(FieldPartition clusteringKeyItem) {
-    if (this.clusteringKey == null) {
-      this.clusteringKey = new ArrayList<FieldPartition>();
-    }
-    this.clusteringKey.add(clusteringKeyItem);
-    return this;
-  }
-
-   /**
-   * Deprecated. List of clustering fields. Use CLUSTER BY clause in &#x60;field_mapping_query&#x60; instead.
-   * @return clusteringKey
-  **/
-
-@JsonProperty("clustering_key")
-@ApiModelProperty(value = "Deprecated. List of clustering fields. Use CLUSTER BY clause in `field_mapping_query` instead.")
-  public List<FieldPartition> getClusteringKey() {
-    return clusteringKey;
-  }
-
-  public void setClusteringKey(List<FieldPartition> clusteringKey) {
-    this.clusteringKey = clusteringKey;
+  public void setStorageCompressionType(StorageCompressionTypeEnum storageCompressionType) {
+    this.storageCompressionType = storageCompressionType;
   }
 
 
@@ -257,19 +319,20 @@ public class CreateCollectionRequest {
       return false;
     }
     CreateCollectionRequest createCollectionRequest = (CreateCollectionRequest) o;
-    return Objects.equals(this.name, createCollectionRequest.name) &&
+    return Objects.equals(this.clusteringKey, createCollectionRequest.clusteringKey) &&
         Objects.equals(this.description, createCollectionRequest.description) &&
-        Objects.equals(this.sources, createCollectionRequest.sources) &&
-        Objects.equals(this.retentionSecs, createCollectionRequest.retentionSecs) &&
         Objects.equals(this.eventTimeInfo, createCollectionRequest.eventTimeInfo) &&
-        Objects.equals(this.fieldMappings, createCollectionRequest.fieldMappings) &&
         Objects.equals(this.fieldMappingQuery, createCollectionRequest.fieldMappingQuery) &&
-        Objects.equals(this.clusteringKey, createCollectionRequest.clusteringKey);
+        Objects.equals(this.name, createCollectionRequest.name) &&
+        Objects.equals(this.retentionSecs, createCollectionRequest.retentionSecs) &&
+        Objects.equals(this.sourceDownloadSoftLimitBytes, createCollectionRequest.sourceDownloadSoftLimitBytes) &&
+        Objects.equals(this.sources, createCollectionRequest.sources) &&
+        Objects.equals(this.storageCompressionType, createCollectionRequest.storageCompressionType);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, description, sources, retentionSecs, eventTimeInfo, fieldMappings, fieldMappingQuery, clusteringKey);
+    return Objects.hash(clusteringKey, description, eventTimeInfo, fieldMappingQuery, name, retentionSecs, sourceDownloadSoftLimitBytes, sources, storageCompressionType);
   }
 
 
@@ -278,14 +341,15 @@ public class CreateCollectionRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class CreateCollectionRequest {\n");
     
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    description: ").append(toIndentedString(description)).append("\n");
-    sb.append("    sources: ").append(toIndentedString(sources)).append("\n");
-    sb.append("    retentionSecs: ").append(toIndentedString(retentionSecs)).append("\n");
-    sb.append("    eventTimeInfo: ").append(toIndentedString(eventTimeInfo)).append("\n");
-    sb.append("    fieldMappings: ").append(toIndentedString(fieldMappings)).append("\n");
-    sb.append("    fieldMappingQuery: ").append(toIndentedString(fieldMappingQuery)).append("\n");
     sb.append("    clusteringKey: ").append(toIndentedString(clusteringKey)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    eventTimeInfo: ").append(toIndentedString(eventTimeInfo)).append("\n");
+    sb.append("    fieldMappingQuery: ").append(toIndentedString(fieldMappingQuery)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    retentionSecs: ").append(toIndentedString(retentionSecs)).append("\n");
+    sb.append("    sourceDownloadSoftLimitBytes: ").append(toIndentedString(sourceDownloadSoftLimitBytes)).append("\n");
+    sb.append("    sources: ").append(toIndentedString(sources)).append("\n");
+    sb.append("    storageCompressionType: ").append(toIndentedString(storageCompressionType)).append("\n");
     sb.append("}");
     return sb.toString();
   }

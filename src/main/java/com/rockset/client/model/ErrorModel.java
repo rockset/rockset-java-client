@@ -31,10 +31,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "Describes details about an error")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class ErrorModel {
+  @SerializedName("column")
+  private Integer column = null;
+
+  @SerializedName("error_id")
+  private String errorId = null;
+
+  @SerializedName("line")
+  private Integer line = null;
+
   @SerializedName("message")
   private String message = null;
+
+  @SerializedName("query_id")
+  private String queryId = null;
+
+  @SerializedName("trace_id")
+  private String traceId = null;
 
   /**
    * Category of the error.
@@ -73,8 +88,6 @@ public class ErrorModel {
     
     QUERY_TIMEOUT("QUERYTIMEOUT"),
     
-    ROLE_NOT_FOUND("ROLENOTFOUND"),
-    
     CONNECTION_ERROR("CONNECTIONERROR"),
     
     CONTENTTOOLARGE("CONTENTTOOLARGE"),
@@ -84,6 +97,8 @@ public class ErrorModel {
     BADREQUEST("BADREQUEST"),
     
     SERVICEUNAVAILABLE("SERVICEUNAVAILABLE"),
+    
+    CONFLICT("CONFLICT"),
     
     RATELIMITEXCEEDED("RATELIMITEXCEEDED"),
     
@@ -133,81 +148,6 @@ public class ErrorModel {
   @SerializedName("type")
   private TypeEnum type = null;
 
-  @SerializedName("line")
-  private Integer line = null;
-
-  @SerializedName("column")
-  private Integer column = null;
-
-  @SerializedName("trace_id")
-  private String traceId = null;
-
-  @SerializedName("error_id")
-  private String errorId = null;
-
-  @SerializedName("query_id")
-  private String queryId = null;
-
-  public ErrorModel message(String message) {
-    this.message = message;
-    return this;
-  }
-
-   /**
-   * Descriptive message about the error.
-   * @return message
-  **/
-
-@JsonProperty("message")
-@ApiModelProperty(example = "collection not found", value = "Descriptive message about the error.")
-  public String getMessage() {
-    return message;
-  }
-
-  public void setMessage(String message) {
-    this.message = message;
-  }
-
-  public ErrorModel type(TypeEnum type) {
-    this.type = type;
-    return this;
-  }
-
-   /**
-   * Category of the error.
-   * @return type
-  **/
-
-@JsonProperty("type")
-@ApiModelProperty(example = "INVALIDINPUT", value = "Category of the error.")
-  public TypeEnum getType() {
-    return type;
-  }
-
-  public void setType(TypeEnum type) {
-    this.type = type;
-  }
-
-  public ErrorModel line(Integer line) {
-    this.line = line;
-    return this;
-  }
-
-   /**
-   * Line where the error happened (if applicable).
-   * @return line
-  **/
-
-@JsonProperty("line")
-@ApiModelProperty(value = "Line where the error happened (if applicable).")
-  public Integer getLine() {
-    return line;
-  }
-
-  public void setLine(Integer line) {
-    this.line = line;
-  }
-
   public ErrorModel column(Integer column) {
     this.column = column;
     return this;
@@ -226,26 +166,6 @@ public class ErrorModel {
 
   public void setColumn(Integer column) {
     this.column = column;
-  }
-
-  public ErrorModel traceId(String traceId) {
-    this.traceId = traceId;
-    return this;
-  }
-
-   /**
-   * Internal trace ID to help with debugging.
-   * @return traceId
-  **/
-
-@JsonProperty("trace_id")
-@ApiModelProperty(value = "Internal trace ID to help with debugging.")
-  public String getTraceId() {
-    return traceId;
-  }
-
-  public void setTraceId(String traceId) {
-    this.traceId = traceId;
   }
 
   public ErrorModel errorId(String errorId) {
@@ -268,6 +188,46 @@ public class ErrorModel {
     this.errorId = errorId;
   }
 
+  public ErrorModel line(Integer line) {
+    this.line = line;
+    return this;
+  }
+
+   /**
+   * Line where the error happened (if applicable).
+   * @return line
+  **/
+
+@JsonProperty("line")
+@ApiModelProperty(value = "Line where the error happened (if applicable).")
+  public Integer getLine() {
+    return line;
+  }
+
+  public void setLine(Integer line) {
+    this.line = line;
+  }
+
+  public ErrorModel message(String message) {
+    this.message = message;
+    return this;
+  }
+
+   /**
+   * Descriptive message about the error.
+   * @return message
+  **/
+
+@JsonProperty("message")
+@ApiModelProperty(example = "collection not found", value = "Descriptive message about the error.")
+  public String getMessage() {
+    return message;
+  }
+
+  public void setMessage(String message) {
+    this.message = message;
+  }
+
   public ErrorModel queryId(String queryId) {
     this.queryId = queryId;
     return this;
@@ -288,6 +248,46 @@ public class ErrorModel {
     this.queryId = queryId;
   }
 
+  public ErrorModel traceId(String traceId) {
+    this.traceId = traceId;
+    return this;
+  }
+
+   /**
+   * Internal trace ID to help with debugging.
+   * @return traceId
+  **/
+
+@JsonProperty("trace_id")
+@ApiModelProperty(value = "Internal trace ID to help with debugging.")
+  public String getTraceId() {
+    return traceId;
+  }
+
+  public void setTraceId(String traceId) {
+    this.traceId = traceId;
+  }
+
+  public ErrorModel type(TypeEnum type) {
+    this.type = type;
+    return this;
+  }
+
+   /**
+   * Category of the error.
+   * @return type
+  **/
+
+@JsonProperty("type")
+@ApiModelProperty(example = "INVALIDINPUT", value = "Category of the error.")
+  public TypeEnum getType() {
+    return type;
+  }
+
+  public void setType(TypeEnum type) {
+    this.type = type;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -298,18 +298,18 @@ public class ErrorModel {
       return false;
     }
     ErrorModel errorModel = (ErrorModel) o;
-    return Objects.equals(this.message, errorModel.message) &&
-        Objects.equals(this.type, errorModel.type) &&
-        Objects.equals(this.line, errorModel.line) &&
-        Objects.equals(this.column, errorModel.column) &&
-        Objects.equals(this.traceId, errorModel.traceId) &&
+    return Objects.equals(this.column, errorModel.column) &&
         Objects.equals(this.errorId, errorModel.errorId) &&
-        Objects.equals(this.queryId, errorModel.queryId);
+        Objects.equals(this.line, errorModel.line) &&
+        Objects.equals(this.message, errorModel.message) &&
+        Objects.equals(this.queryId, errorModel.queryId) &&
+        Objects.equals(this.traceId, errorModel.traceId) &&
+        Objects.equals(this.type, errorModel.type);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(message, type, line, column, traceId, errorId, queryId);
+    return Objects.hash(column, errorId, line, message, queryId, traceId, type);
   }
 
 
@@ -318,13 +318,13 @@ public class ErrorModel {
     StringBuilder sb = new StringBuilder();
     sb.append("class ErrorModel {\n");
     
-    sb.append("    message: ").append(toIndentedString(message)).append("\n");
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    line: ").append(toIndentedString(line)).append("\n");
     sb.append("    column: ").append(toIndentedString(column)).append("\n");
-    sb.append("    traceId: ").append(toIndentedString(traceId)).append("\n");
     sb.append("    errorId: ").append(toIndentedString(errorId)).append("\n");
+    sb.append("    line: ").append(toIndentedString(line)).append("\n");
+    sb.append("    message: ").append(toIndentedString(message)).append("\n");
     sb.append("    queryId: ").append(toIndentedString(queryId)).append("\n");
+    sb.append("    traceId: ").append(toIndentedString(traceId)).append("\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");
     return sb.toString();
   }

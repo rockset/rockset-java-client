@@ -34,10 +34,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "An organization in Rockset is a container for users and collections.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class Organization {
-  @SerializedName("id")
-  private String id = null;
+  @SerializedName("clusters")
+  private List<Cluster> clusters = null;
 
   @SerializedName("created_at")
   private String createdAt = null;
@@ -48,30 +48,44 @@ public class Organization {
   @SerializedName("external_id")
   private String externalId = null;
 
+  @SerializedName("id")
+  private String id = null;
+
   @SerializedName("rockset_user")
   private String rocksetUser = null;
 
-  @SerializedName("clusters")
-  private List<Cluster> clusters = null;
+  @SerializedName("sso_connection")
+  private String ssoConnection = null;
 
-  public Organization id(String id) {
-    this.id = id;
+  @SerializedName("sso_only")
+  private Boolean ssoOnly = null;
+
+  public Organization clusters(List<Cluster> clusters) {
+    this.clusters = clusters;
+    return this;
+  }
+
+  public Organization addClustersItem(Cluster clustersItem) {
+    if (this.clusters == null) {
+      this.clusters = new ArrayList<Cluster>();
+    }
+    this.clusters.add(clustersItem);
     return this;
   }
 
    /**
-   * Unique identifier for the organization.
-   * @return id
+   * List of clusters associated with this org.
+   * @return clusters
   **/
 
-@JsonProperty("id")
-@ApiModelProperty(example = "rockset", value = "Unique identifier for the organization.")
-  public String getId() {
-    return id;
+@JsonProperty("clusters")
+@ApiModelProperty(example = "\"[{ ... }]\"", value = "List of clusters associated with this org.")
+  public List<Cluster> getClusters() {
+    return clusters;
   }
 
-  public void setId(String id) {
-    this.id = id;
+  public void setClusters(List<Cluster> clusters) {
+    this.clusters = clusters;
   }
 
   public Organization createdAt(String createdAt) {
@@ -134,6 +148,26 @@ public class Organization {
     this.externalId = externalId;
   }
 
+  public Organization id(String id) {
+    this.id = id;
+    return this;
+  }
+
+   /**
+   * Unique identifier for the organization.
+   * @return id
+  **/
+
+@JsonProperty("id")
+@ApiModelProperty(example = "rockset", value = "Unique identifier for the organization.")
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
   public Organization rocksetUser(String rocksetUser) {
     this.rocksetUser = rocksetUser;
     return this;
@@ -154,32 +188,44 @@ public class Organization {
     this.rocksetUser = rocksetUser;
   }
 
-  public Organization clusters(List<Cluster> clusters) {
-    this.clusters = clusters;
-    return this;
-  }
-
-  public Organization addClustersItem(Cluster clustersItem) {
-    if (this.clusters == null) {
-      this.clusters = new ArrayList<Cluster>();
-    }
-    this.clusters.add(clustersItem);
+  public Organization ssoConnection(String ssoConnection) {
+    this.ssoConnection = ssoConnection;
     return this;
   }
 
    /**
-   * List of clusters associated with this org.
-   * @return clusters
+   * Connection name of SSO connection.
+   * @return ssoConnection
   **/
 
-@JsonProperty("clusters")
-@ApiModelProperty(example = "\"[{ ... }]\"", value = "List of clusters associated with this org.")
-  public List<Cluster> getClusters() {
-    return clusters;
+@JsonProperty("sso_connection")
+@ApiModelProperty(example = "rockset", value = "Connection name of SSO connection.")
+  public String getSsoConnection() {
+    return ssoConnection;
   }
 
-  public void setClusters(List<Cluster> clusters) {
-    this.clusters = clusters;
+  public void setSsoConnection(String ssoConnection) {
+    this.ssoConnection = ssoConnection;
+  }
+
+  public Organization ssoOnly(Boolean ssoOnly) {
+    this.ssoOnly = ssoOnly;
+    return this;
+  }
+
+   /**
+   * Whether or not SSO is the only permitted form of auth.
+   * @return ssoOnly
+  **/
+
+@JsonProperty("sso_only")
+@ApiModelProperty(example = "true", value = "Whether or not SSO is the only permitted form of auth.")
+  public Boolean isSsoOnly() {
+    return ssoOnly;
+  }
+
+  public void setSsoOnly(Boolean ssoOnly) {
+    this.ssoOnly = ssoOnly;
   }
 
 
@@ -192,17 +238,19 @@ public class Organization {
       return false;
     }
     Organization organization = (Organization) o;
-    return Objects.equals(this.id, organization.id) &&
+    return Objects.equals(this.clusters, organization.clusters) &&
         Objects.equals(this.createdAt, organization.createdAt) &&
         Objects.equals(this.displayName, organization.displayName) &&
         Objects.equals(this.externalId, organization.externalId) &&
+        Objects.equals(this.id, organization.id) &&
         Objects.equals(this.rocksetUser, organization.rocksetUser) &&
-        Objects.equals(this.clusters, organization.clusters);
+        Objects.equals(this.ssoConnection, organization.ssoConnection) &&
+        Objects.equals(this.ssoOnly, organization.ssoOnly);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, createdAt, displayName, externalId, rocksetUser, clusters);
+    return Objects.hash(clusters, createdAt, displayName, externalId, id, rocksetUser, ssoConnection, ssoOnly);
   }
 
 
@@ -211,12 +259,14 @@ public class Organization {
     StringBuilder sb = new StringBuilder();
     sb.append("class Organization {\n");
     
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    clusters: ").append(toIndentedString(clusters)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
     sb.append("    externalId: ").append(toIndentedString(externalId)).append("\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    rocksetUser: ").append(toIndentedString(rocksetUser)).append("\n");
-    sb.append("    clusters: ").append(toIndentedString(clusters)).append("\n");
+    sb.append("    ssoConnection: ").append(toIndentedString(ssoConnection)).append("\n");
+    sb.append("    ssoOnly: ").append(toIndentedString(ssoOnly)).append("\n");
     sb.append("}");
     return sb.toString();
   }

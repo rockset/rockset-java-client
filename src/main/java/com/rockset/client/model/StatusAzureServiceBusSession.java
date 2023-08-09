@@ -29,33 +29,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * StatusAzureServiceBusSession
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class StatusAzureServiceBusSession {
-  @SerializedName("sequence_number")
-  private Long sequenceNumber = null;
-
   @SerializedName("last_processed")
   private String lastProcessed = null;
 
-  public StatusAzureServiceBusSession sequenceNumber(Long sequenceNumber) {
-    this.sequenceNumber = sequenceNumber;
-    return this;
-  }
-
-   /**
-   * The last processed sequence number within this session.
-   * @return sequenceNumber
-  **/
-
-@JsonProperty("sequence_number")
-@ApiModelProperty(example = "323862", value = "The last processed sequence number within this session.")
-  public Long getSequenceNumber() {
-    return sequenceNumber;
-  }
-
-  public void setSequenceNumber(Long sequenceNumber) {
-    this.sequenceNumber = sequenceNumber;
-  }
+  @SerializedName("sequence_number")
+  private Long sequenceNumber = null;
 
   public StatusAzureServiceBusSession lastProcessed(String lastProcessed) {
     this.lastProcessed = lastProcessed;
@@ -77,6 +57,26 @@ public class StatusAzureServiceBusSession {
     this.lastProcessed = lastProcessed;
   }
 
+  public StatusAzureServiceBusSession sequenceNumber(Long sequenceNumber) {
+    this.sequenceNumber = sequenceNumber;
+    return this;
+  }
+
+   /**
+   * The last processed sequence number within this session.
+   * @return sequenceNumber
+  **/
+
+@JsonProperty("sequence_number")
+@ApiModelProperty(example = "323862", value = "The last processed sequence number within this session.")
+  public Long getSequenceNumber() {
+    return sequenceNumber;
+  }
+
+  public void setSequenceNumber(Long sequenceNumber) {
+    this.sequenceNumber = sequenceNumber;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -87,13 +87,13 @@ public class StatusAzureServiceBusSession {
       return false;
     }
     StatusAzureServiceBusSession statusAzureServiceBusSession = (StatusAzureServiceBusSession) o;
-    return Objects.equals(this.sequenceNumber, statusAzureServiceBusSession.sequenceNumber) &&
-        Objects.equals(this.lastProcessed, statusAzureServiceBusSession.lastProcessed);
+    return Objects.equals(this.lastProcessed, statusAzureServiceBusSession.lastProcessed) &&
+        Objects.equals(this.sequenceNumber, statusAzureServiceBusSession.sequenceNumber);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(sequenceNumber, lastProcessed);
+    return Objects.hash(lastProcessed, sequenceNumber);
   }
 
 
@@ -102,8 +102,8 @@ public class StatusAzureServiceBusSession {
     StringBuilder sb = new StringBuilder();
     sb.append("class StatusAzureServiceBusSession {\n");
     
-    sb.append("    sequenceNumber: ").append(toIndentedString(sequenceNumber)).append("\n");
     sb.append("    lastProcessed: ").append(toIndentedString(lastProcessed)).append("\n");
+    sb.append("    sequenceNumber: ").append(toIndentedString(sequenceNumber)).append("\n");
     sb.append("}");
     return sb.toString();
   }

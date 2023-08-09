@@ -29,16 +29,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * AsyncQueryOptions
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class AsyncQueryOptions {
   @SerializedName("client_timeout_ms")
   private Long clientTimeoutMs = null;
 
-  @SerializedName("timeout_ms")
-  private Long timeoutMs = null;
-
   @SerializedName("max_initial_results")
   private Long maxInitialResults = null;
+
+  @SerializedName("timeout_ms")
+  private Long timeoutMs = null;
 
   public AsyncQueryOptions clientTimeoutMs(Long clientTimeoutMs) {
     this.clientTimeoutMs = clientTimeoutMs;
@@ -46,12 +46,12 @@ public class AsyncQueryOptions {
   }
 
    /**
-   * The maximum amount of time that the client is willing to wait for the query to complete. If the query is not complete by this timeout, a response will be returned with a &#x60;query_id&#x60; that can be used to check the status of the query and retrieve results once the query has completed.
+   * If the query completes before the client timeout, the results are returned. Otherwise if the client timeout is exceeded, the query id will be returned, and the query will continue to run in the background for up to 30 minutes. (The 30 minute timeout can be configured lower with timeout_ms.) &#x60;async_options.client_timeout_ms&#x60; only applies when &#x60;async&#x60; is true. The default value of &#x60;client_timeout_ms&#x60; is 0, so async query requests will immediately return with a query id by default. 
    * @return clientTimeoutMs
   **/
 
 @JsonProperty("client_timeout_ms")
-@ApiModelProperty(value = "The maximum amount of time that the client is willing to wait for the query to complete. If the query is not complete by this timeout, a response will be returned with a `query_id` that can be used to check the status of the query and retrieve results once the query has completed.")
+@ApiModelProperty(value = "If the query completes before the client timeout, the results are returned. Otherwise if the client timeout is exceeded, the query id will be returned, and the query will continue to run in the background for up to 30 minutes. (The 30 minute timeout can be configured lower with timeout_ms.) `async_options.client_timeout_ms` only applies when `async` is true. The default value of `client_timeout_ms` is 0, so async query requests will immediately return with a query id by default. ")
   public Long getClientTimeoutMs() {
     return clientTimeoutMs;
   }
@@ -60,44 +60,44 @@ public class AsyncQueryOptions {
     this.clientTimeoutMs = clientTimeoutMs;
   }
 
-  public AsyncQueryOptions timeoutMs(Long timeoutMs) {
-    this.timeoutMs = timeoutMs;
-    return this;
-  }
-
-   /**
-   * The maximum amount of time that the system will attempt to complete query execution before aborting the query and returning an error.
-   * @return timeoutMs
-  **/
-
-@JsonProperty("timeout_ms")
-@ApiModelProperty(value = "The maximum amount of time that the system will attempt to complete query execution before aborting the query and returning an error.")
-  public Long getTimeoutMs() {
-    return timeoutMs;
-  }
-
-  public void setTimeoutMs(Long timeoutMs) {
-    this.timeoutMs = timeoutMs;
-  }
-
   public AsyncQueryOptions maxInitialResults(Long maxInitialResults) {
     this.maxInitialResults = maxInitialResults;
     return this;
   }
 
    /**
-   * The maximum number of results you will receive as a client. If the query exceeds this limit, the remaining results can be requested using a returned pagination cursor. In addition, there is a maximum response size of 100MiB so fewer than &#x60;max_results&#x60; may be returned.
+   * [DEPRECATED] Use the query request &#x60;max_initial_results&#x60; instead. The maximum number of results you will receive as a client. If the query exceeds this limit, the remaining results can be requested using a returned pagination cursor. In addition, there is a maximum response size of 100MiB so fewer than &#x60;max_results&#x60; may be returned.
    * @return maxInitialResults
   **/
 
 @JsonProperty("max_initial_results")
-@ApiModelProperty(value = "The maximum number of results you will receive as a client. If the query exceeds this limit, the remaining results can be requested using a returned pagination cursor. In addition, there is a maximum response size of 100MiB so fewer than `max_results` may be returned.")
+@ApiModelProperty(value = "[DEPRECATED] Use the query request `max_initial_results` instead. The maximum number of results you will receive as a client. If the query exceeds this limit, the remaining results can be requested using a returned pagination cursor. In addition, there is a maximum response size of 100MiB so fewer than `max_results` may be returned.")
   public Long getMaxInitialResults() {
     return maxInitialResults;
   }
 
   public void setMaxInitialResults(Long maxInitialResults) {
     this.maxInitialResults = maxInitialResults;
+  }
+
+  public AsyncQueryOptions timeoutMs(Long timeoutMs) {
+    this.timeoutMs = timeoutMs;
+    return this;
+  }
+
+   /**
+   * [DEPRECATED] Use the query request &#x60;timeout_ms&#x60; instead. The maximum amount of time that the system will attempt to complete query execution before aborting the query and returning an error. This must be set to a value that is greater than or equal to the client timeout, and the maximum value of this timeout is 30 minutes.
+   * @return timeoutMs
+  **/
+
+@JsonProperty("timeout_ms")
+@ApiModelProperty(value = "[DEPRECATED] Use the query request `timeout_ms` instead. The maximum amount of time that the system will attempt to complete query execution before aborting the query and returning an error. This must be set to a value that is greater than or equal to the client timeout, and the maximum value of this timeout is 30 minutes.")
+  public Long getTimeoutMs() {
+    return timeoutMs;
+  }
+
+  public void setTimeoutMs(Long timeoutMs) {
+    this.timeoutMs = timeoutMs;
   }
 
 
@@ -111,13 +111,13 @@ public class AsyncQueryOptions {
     }
     AsyncQueryOptions asyncQueryOptions = (AsyncQueryOptions) o;
     return Objects.equals(this.clientTimeoutMs, asyncQueryOptions.clientTimeoutMs) &&
-        Objects.equals(this.timeoutMs, asyncQueryOptions.timeoutMs) &&
-        Objects.equals(this.maxInitialResults, asyncQueryOptions.maxInitialResults);
+        Objects.equals(this.maxInitialResults, asyncQueryOptions.maxInitialResults) &&
+        Objects.equals(this.timeoutMs, asyncQueryOptions.timeoutMs);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(clientTimeoutMs, timeoutMs, maxInitialResults);
+    return Objects.hash(clientTimeoutMs, maxInitialResults, timeoutMs);
   }
 
 
@@ -127,8 +127,8 @@ public class AsyncQueryOptions {
     sb.append("class AsyncQueryOptions {\n");
     
     sb.append("    clientTimeoutMs: ").append(toIndentedString(clientTimeoutMs)).append("\n");
-    sb.append("    timeoutMs: ").append(toIndentedString(timeoutMs)).append("\n");
     sb.append("    maxInitialResults: ").append(toIndentedString(maxInitialResults)).append("\n");
+    sb.append("    timeoutMs: ").append(toIndentedString(timeoutMs)).append("\n");
     sb.append("}");
     return sb.toString();
   }

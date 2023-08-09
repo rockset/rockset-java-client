@@ -31,110 +31,50 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SnowflakeIntegration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
 public class SnowflakeIntegration {
-  @SerializedName("snowflake_url")
-  private String snowflakeUrl = null;
-
-  @SerializedName("username")
-  private String username = null;
-
-  @SerializedName("password")
-  private String password = null;
-
-  @SerializedName("user_role")
-  private String userRole = null;
+  @SerializedName("aws_access_key")
+  private AwsAccessKey awsAccessKey = null;
 
   @SerializedName("aws_role")
   private AwsRole awsRole = null;
 
-  @SerializedName("aws_access_key")
-  private AwsAccessKey awsAccessKey = null;
-
   @SerializedName("default_warehouse")
   private String defaultWarehouse = null;
+
+  @SerializedName("password")
+  private String password = null;
 
   @SerializedName("s3_export_path")
   private String s3ExportPath = null;
 
-  public SnowflakeIntegration snowflakeUrl(String snowflakeUrl) {
-    this.snowflakeUrl = snowflakeUrl;
+  @SerializedName("snowflake_url")
+  private String snowflakeUrl = null;
+
+  @SerializedName("user_role")
+  private String userRole = null;
+
+  @SerializedName("username")
+  private String username = null;
+
+  public SnowflakeIntegration awsAccessKey(AwsAccessKey awsAccessKey) {
+    this.awsAccessKey = awsAccessKey;
     return this;
   }
 
    /**
-   * Snowflake browser url.
-   * @return snowflakeUrl
+   * Credentials for an AWS access key integration.
+   * @return awsAccessKey
   **/
 
-@JsonProperty("snowflake_url")
-@ApiModelProperty(example = "acme-marketing-test-account.snowflakecomputing.com", required = true, value = "Snowflake browser url.")
-  public String getSnowflakeUrl() {
-    return snowflakeUrl;
+@JsonProperty("aws_access_key")
+@ApiModelProperty(value = "Credentials for an AWS access key integration.")
+  public AwsAccessKey getAwsAccessKey() {
+    return awsAccessKey;
   }
 
-  public void setSnowflakeUrl(String snowflakeUrl) {
-    this.snowflakeUrl = snowflakeUrl;
-  }
-
-  public SnowflakeIntegration username(String username) {
-    this.username = username;
-    return this;
-  }
-
-   /**
-   * Snowflake database username.
-   * @return username
-  **/
-
-@JsonProperty("username")
-@ApiModelProperty(required = true, value = "Snowflake database username.")
-  public String getUsername() {
-    return username;
-  }
-
-  public void setUsername(String username) {
-    this.username = username;
-  }
-
-  public SnowflakeIntegration password(String password) {
-    this.password = password;
-    return this;
-  }
-
-   /**
-   * Snowflake database password.
-   * @return password
-  **/
-
-@JsonProperty("password")
-@ApiModelProperty(required = true, value = "Snowflake database password.")
-  public String getPassword() {
-    return password;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
-  public SnowflakeIntegration userRole(String userRole) {
-    this.userRole = userRole;
-    return this;
-  }
-
-   /**
-   * Snowflake user role. If unspecified, will use the default user role.
-   * @return userRole
-  **/
-
-@JsonProperty("user_role")
-@ApiModelProperty(value = "Snowflake user role. If unspecified, will use the default user role.")
-  public String getUserRole() {
-    return userRole;
-  }
-
-  public void setUserRole(String userRole) {
-    this.userRole = userRole;
+  public void setAwsAccessKey(AwsAccessKey awsAccessKey) {
+    this.awsAccessKey = awsAccessKey;
   }
 
   public SnowflakeIntegration awsRole(AwsRole awsRole) {
@@ -157,26 +97,6 @@ public class SnowflakeIntegration {
     this.awsRole = awsRole;
   }
 
-  public SnowflakeIntegration awsAccessKey(AwsAccessKey awsAccessKey) {
-    this.awsAccessKey = awsAccessKey;
-    return this;
-  }
-
-   /**
-   * Credentials for an AWS access key integration.
-   * @return awsAccessKey
-  **/
-
-@JsonProperty("aws_access_key")
-@ApiModelProperty(value = "Credentials for an AWS access key integration.")
-  public AwsAccessKey getAwsAccessKey() {
-    return awsAccessKey;
-  }
-
-  public void setAwsAccessKey(AwsAccessKey awsAccessKey) {
-    this.awsAccessKey = awsAccessKey;
-  }
-
   public SnowflakeIntegration defaultWarehouse(String defaultWarehouse) {
     this.defaultWarehouse = defaultWarehouse;
     return this;
@@ -195,6 +115,26 @@ public class SnowflakeIntegration {
 
   public void setDefaultWarehouse(String defaultWarehouse) {
     this.defaultWarehouse = defaultWarehouse;
+  }
+
+  public SnowflakeIntegration password(String password) {
+    this.password = password;
+    return this;
+  }
+
+   /**
+   * Snowflake database password.
+   * @return password
+  **/
+
+@JsonProperty("password")
+@ApiModelProperty(required = true, value = "Snowflake database password.")
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
   }
 
   public SnowflakeIntegration s3ExportPath(String s3ExportPath) {
@@ -217,6 +157,66 @@ public class SnowflakeIntegration {
     this.s3ExportPath = s3ExportPath;
   }
 
+  public SnowflakeIntegration snowflakeUrl(String snowflakeUrl) {
+    this.snowflakeUrl = snowflakeUrl;
+    return this;
+  }
+
+   /**
+   * Snowflake browser url.
+   * @return snowflakeUrl
+  **/
+
+@JsonProperty("snowflake_url")
+@ApiModelProperty(example = "acme-marketing-test-account.snowflakecomputing.com", required = true, value = "Snowflake browser url.")
+  public String getSnowflakeUrl() {
+    return snowflakeUrl;
+  }
+
+  public void setSnowflakeUrl(String snowflakeUrl) {
+    this.snowflakeUrl = snowflakeUrl;
+  }
+
+  public SnowflakeIntegration userRole(String userRole) {
+    this.userRole = userRole;
+    return this;
+  }
+
+   /**
+   * Snowflake user role. If unspecified, will use the default user role.
+   * @return userRole
+  **/
+
+@JsonProperty("user_role")
+@ApiModelProperty(value = "Snowflake user role. If unspecified, will use the default user role.")
+  public String getUserRole() {
+    return userRole;
+  }
+
+  public void setUserRole(String userRole) {
+    this.userRole = userRole;
+  }
+
+  public SnowflakeIntegration username(String username) {
+    this.username = username;
+    return this;
+  }
+
+   /**
+   * Snowflake database username.
+   * @return username
+  **/
+
+@JsonProperty("username")
+@ApiModelProperty(required = true, value = "Snowflake database username.")
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -227,19 +227,19 @@ public class SnowflakeIntegration {
       return false;
     }
     SnowflakeIntegration snowflakeIntegration = (SnowflakeIntegration) o;
-    return Objects.equals(this.snowflakeUrl, snowflakeIntegration.snowflakeUrl) &&
-        Objects.equals(this.username, snowflakeIntegration.username) &&
-        Objects.equals(this.password, snowflakeIntegration.password) &&
-        Objects.equals(this.userRole, snowflakeIntegration.userRole) &&
+    return Objects.equals(this.awsAccessKey, snowflakeIntegration.awsAccessKey) &&
         Objects.equals(this.awsRole, snowflakeIntegration.awsRole) &&
-        Objects.equals(this.awsAccessKey, snowflakeIntegration.awsAccessKey) &&
         Objects.equals(this.defaultWarehouse, snowflakeIntegration.defaultWarehouse) &&
-        Objects.equals(this.s3ExportPath, snowflakeIntegration.s3ExportPath);
+        Objects.equals(this.password, snowflakeIntegration.password) &&
+        Objects.equals(this.s3ExportPath, snowflakeIntegration.s3ExportPath) &&
+        Objects.equals(this.snowflakeUrl, snowflakeIntegration.snowflakeUrl) &&
+        Objects.equals(this.userRole, snowflakeIntegration.userRole) &&
+        Objects.equals(this.username, snowflakeIntegration.username);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(snowflakeUrl, username, password, userRole, awsRole, awsAccessKey, defaultWarehouse, s3ExportPath);
+    return Objects.hash(awsAccessKey, awsRole, defaultWarehouse, password, s3ExportPath, snowflakeUrl, userRole, username);
   }
 
 
@@ -248,14 +248,14 @@ public class SnowflakeIntegration {
     StringBuilder sb = new StringBuilder();
     sb.append("class SnowflakeIntegration {\n");
     
-    sb.append("    snowflakeUrl: ").append(toIndentedString(snowflakeUrl)).append("\n");
-    sb.append("    username: ").append(toIndentedString(username)).append("\n");
-    sb.append("    password: ").append(toIndentedString(password)).append("\n");
-    sb.append("    userRole: ").append(toIndentedString(userRole)).append("\n");
-    sb.append("    awsRole: ").append(toIndentedString(awsRole)).append("\n");
     sb.append("    awsAccessKey: ").append(toIndentedString(awsAccessKey)).append("\n");
+    sb.append("    awsRole: ").append(toIndentedString(awsRole)).append("\n");
     sb.append("    defaultWarehouse: ").append(toIndentedString(defaultWarehouse)).append("\n");
+    sb.append("    password: ").append(toIndentedString(password)).append("\n");
     sb.append("    s3ExportPath: ").append(toIndentedString(s3ExportPath)).append("\n");
+    sb.append("    snowflakeUrl: ").append(toIndentedString(snowflakeUrl)).append("\n");
+    sb.append("    userRole: ").append(toIndentedString(userRole)).append("\n");
+    sb.append("    username: ").append(toIndentedString(username)).append("\n");
     sb.append("}");
     return sb.toString();
   }
