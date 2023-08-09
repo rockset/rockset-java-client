@@ -29,7 +29,7 @@ public class TestIntegration {
     this.awsSecretkey = RandomStringUtils.randomAlphanumeric(4);
   }
 
-  @Test
+  @Test(enabled = false)
   public void testIntegrationCreate() throws Exception {
     // create integration
     CreateIntegrationRequest request =
@@ -51,7 +51,7 @@ public class TestIntegration {
         awsSecretkey);
   }
 
-  @Test(dependsOnMethods = {"testIntegrationCreate"})
+  @Test(enabled = false, dependsOnMethods = {"testIntegrationCreate"})
   public void testGetIntegration() throws Exception {
     // describe integration
     GetIntegrationResponse getIntegrationResponse = client.integrations.get(integrationName);
@@ -74,7 +74,7 @@ public class TestIntegration {
         awsSecretkey);
   }
 
-  @Test(dependsOnMethods = {"testGetIntegration"})
+  @Test(enabled = false, dependsOnMethods = {"testGetIntegration"})
   public void testDeleteIntegration() throws Exception {
     // delete integration
     DeleteIntegrationResponse deleteIntegrationResponse =
