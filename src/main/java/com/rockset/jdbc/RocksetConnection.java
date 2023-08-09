@@ -526,7 +526,7 @@ public class RocksetConnection implements Connection {
     final QueryRequestSql q = new QueryRequestSql().query(sql);
 
     if (fetchSize > 0) {
-      q.paginate(true).initialPaginateResponseDocCount(fetchSize);
+      q.initialPaginateResponseDocCount(fetchSize);
     }
 
     // Append any specified queries
@@ -544,7 +544,16 @@ public class RocksetConnection implements Connection {
   QueryPaginationResponse getQueryPaginationResults(String queryId, String cursor, int fetchSize)
       throws Exception {
 
-    return client.queries.get_0(queryId, cursor, fetchSize);
+    return client.queries.get_0(queryId, cursor, fetchSize, 0);
+  }
+
+  //
+  // This is invoked by the RocksetStatement to paginate a query
+  //
+  QueryPaginationResponse getQueryPaginationResults(String queryId, String cursor, int fetchSize, int offset)
+      throws Exception {
+
+    return client.queries.get_0(queryId, cursor, fetchSize, offset);
   }
 
   //
