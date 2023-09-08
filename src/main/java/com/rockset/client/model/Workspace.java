@@ -31,22 +31,42 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "Workspaces are organizational containers for collections.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class Workspace {
+  @SerializedName("collection_count")
+  private Long collectionCount = null;
+
   @SerializedName("created_at")
   private String createdAt = null;
 
   @SerializedName("created_by")
   private String createdBy = null;
 
-  @SerializedName("name")
-  private String name = null;
-
   @SerializedName("description")
   private String description = null;
 
-  @SerializedName("collection_count")
-  private Long collectionCount = null;
+  @SerializedName("name")
+  private String name = null;
+
+  public Workspace collectionCount(Long collectionCount) {
+    this.collectionCount = collectionCount;
+    return this;
+  }
+
+   /**
+   * Number of collections that are immediate children of workspace.
+   * @return collectionCount
+  **/
+
+@JsonProperty("collection_count")
+@ApiModelProperty(example = "3", value = "Number of collections that are immediate children of workspace.")
+  public Long getCollectionCount() {
+    return collectionCount;
+  }
+
+  public void setCollectionCount(Long collectionCount) {
+    this.collectionCount = collectionCount;
+  }
 
   public Workspace createdAt(String createdAt) {
     this.createdAt = createdAt;
@@ -88,26 +108,6 @@ public class Workspace {
     this.createdBy = createdBy;
   }
 
-  public Workspace name(String name) {
-    this.name = name;
-    return this;
-  }
-
-   /**
-   * Descriptive label and unique identifier.
-   * @return name
-  **/
-
-@JsonProperty("name")
-@ApiModelProperty(example = "event_logs", value = "Descriptive label and unique identifier.")
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
   public Workspace description(String description) {
     this.description = description;
     return this;
@@ -128,24 +128,24 @@ public class Workspace {
     this.description = description;
   }
 
-  public Workspace collectionCount(Long collectionCount) {
-    this.collectionCount = collectionCount;
+  public Workspace name(String name) {
+    this.name = name;
     return this;
   }
 
    /**
-   * Number of collections that are immediate children of workspace.
-   * @return collectionCount
+   * Descriptive label and unique identifier.
+   * @return name
   **/
 
-@JsonProperty("collection_count")
-@ApiModelProperty(example = "3", value = "Number of collections that are immediate children of workspace.")
-  public Long getCollectionCount() {
-    return collectionCount;
+@JsonProperty("name")
+@ApiModelProperty(example = "event_logs", value = "Descriptive label and unique identifier.")
+  public String getName() {
+    return name;
   }
 
-  public void setCollectionCount(Long collectionCount) {
-    this.collectionCount = collectionCount;
+  public void setName(String name) {
+    this.name = name;
   }
 
 
@@ -158,16 +158,16 @@ public class Workspace {
       return false;
     }
     Workspace workspace = (Workspace) o;
-    return Objects.equals(this.createdAt, workspace.createdAt) &&
+    return Objects.equals(this.collectionCount, workspace.collectionCount) &&
+        Objects.equals(this.createdAt, workspace.createdAt) &&
         Objects.equals(this.createdBy, workspace.createdBy) &&
-        Objects.equals(this.name, workspace.name) &&
         Objects.equals(this.description, workspace.description) &&
-        Objects.equals(this.collectionCount, workspace.collectionCount);
+        Objects.equals(this.name, workspace.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(createdAt, createdBy, name, description, collectionCount);
+    return Objects.hash(collectionCount, createdAt, createdBy, description, name);
   }
 
 
@@ -176,11 +176,11 @@ public class Workspace {
     StringBuilder sb = new StringBuilder();
     sb.append("class Workspace {\n");
     
+    sb.append("    collectionCount: ").append(toIndentedString(collectionCount)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
-    sb.append("    collectionCount: ").append(toIndentedString(collectionCount)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("}");
     return sb.toString();
   }

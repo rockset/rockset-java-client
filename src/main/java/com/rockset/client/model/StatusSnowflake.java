@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * StatusSnowflake
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class StatusSnowflake {
   /**
    * State of current ingest for this table.
@@ -59,6 +59,7 @@ public class StatusSnowflake {
       return String.valueOf(value);
     }
 
+    @com.fasterxml.jackson.annotation.JsonCreator
     public static StateEnum fromValue(String text) {
       for (StateEnum b : StateEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {

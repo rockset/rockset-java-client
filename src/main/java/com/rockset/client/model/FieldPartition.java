@@ -31,10 +31,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * FieldPartition
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class FieldPartition {
   @SerializedName("field_name")
   private String fieldName = null;
+
+  @SerializedName("keys")
+  private List<String> keys = null;
 
   /**
    * The type of partitions on a field.
@@ -58,6 +61,7 @@ public class FieldPartition {
       return String.valueOf(value);
     }
 
+    @com.fasterxml.jackson.annotation.JsonCreator
     public static TypeEnum fromValue(String text) {
       for (TypeEnum b : TypeEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -84,9 +88,6 @@ public class FieldPartition {
   @SerializedName("type")
   private TypeEnum type = null;
 
-  @SerializedName("keys")
-  private List<String> keys = null;
-
   public FieldPartition fieldName(String fieldName) {
     this.fieldName = fieldName;
     return this;
@@ -105,26 +106,6 @@ public class FieldPartition {
 
   public void setFieldName(String fieldName) {
     this.fieldName = fieldName;
-  }
-
-  public FieldPartition type(TypeEnum type) {
-    this.type = type;
-    return this;
-  }
-
-   /**
-   * The type of partitions on a field.
-   * @return type
-  **/
-
-@JsonProperty("type")
-@ApiModelProperty(example = "AUTO", value = "The type of partitions on a field.")
-  public TypeEnum getType() {
-    return type;
-  }
-
-  public void setType(TypeEnum type) {
-    this.type = type;
   }
 
   public FieldPartition keys(List<String> keys) {
@@ -155,6 +136,26 @@ public class FieldPartition {
     this.keys = keys;
   }
 
+  public FieldPartition type(TypeEnum type) {
+    this.type = type;
+    return this;
+  }
+
+   /**
+   * The type of partitions on a field.
+   * @return type
+  **/
+
+@JsonProperty("type")
+@ApiModelProperty(example = "AUTO", value = "The type of partitions on a field.")
+  public TypeEnum getType() {
+    return type;
+  }
+
+  public void setType(TypeEnum type) {
+    this.type = type;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -166,13 +167,13 @@ public class FieldPartition {
     }
     FieldPartition fieldPartition = (FieldPartition) o;
     return Objects.equals(this.fieldName, fieldPartition.fieldName) &&
-        Objects.equals(this.type, fieldPartition.type) &&
-        Objects.equals(this.keys, fieldPartition.keys);
+        Objects.equals(this.keys, fieldPartition.keys) &&
+        Objects.equals(this.type, fieldPartition.type);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(fieldName, type, keys);
+    return Objects.hash(fieldName, keys, type);
   }
 
 
@@ -182,8 +183,8 @@ public class FieldPartition {
     sb.append("class FieldPartition {\n");
     
     sb.append("    fieldName: ").append(toIndentedString(fieldName)).append("\n");
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    keys: ").append(toIndentedString(keys)).append("\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");
     return sb.toString();
   }

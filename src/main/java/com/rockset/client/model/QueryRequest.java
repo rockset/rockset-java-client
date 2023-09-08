@@ -31,13 +31,105 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class QueryRequest {
-  @SerializedName("sql")
-  private QueryRequestSql sql = null;
+  @SerializedName("async")
+  private Boolean async = null;
 
   @SerializedName("async_options")
   private AsyncQueryOptions asyncOptions = null;
+
+  @SerializedName("debug_threshold_ms")
+  private Long debugThresholdMs = null;
+
+  @SerializedName("max_initial_results")
+  private Long maxInitialResults = null;
+
+  @SerializedName("sql")
+  private QueryRequestSql sql = null;
+
+  @SerializedName("timeout_ms")
+  private Long timeoutMs = null;
+
+  public QueryRequest async(Boolean async) {
+    this.async = async;
+    return this;
+  }
+
+   /**
+   * If true, the query will run asynchronously for up to 30 minutes. The query request will immediately return with a query id that can be used to retrieve the query status and results. If false or not specified, the query will return with results once completed or timeout after 2 minutes. (To return results directly for shorter queries while still allowing a timeout of up to 30 minutes, set &#x60;async_options.client_timeout_ms&#x60;.) 
+   * @return async
+  **/
+
+@JsonProperty("async")
+@ApiModelProperty(value = "If true, the query will run asynchronously for up to 30 minutes. The query request will immediately return with a query id that can be used to retrieve the query status and results. If false or not specified, the query will return with results once completed or timeout after 2 minutes. (To return results directly for shorter queries while still allowing a timeout of up to 30 minutes, set `async_options.client_timeout_ms`.) ")
+  public Boolean isAsync() {
+    return async;
+  }
+
+  public void setAsync(Boolean async) {
+    this.async = async;
+  }
+
+  public QueryRequest asyncOptions(AsyncQueryOptions asyncOptions) {
+    this.asyncOptions = asyncOptions;
+    return this;
+  }
+
+   /**
+   * Options for configuring Asynchronous Query Mode.
+   * @return asyncOptions
+  **/
+
+@JsonProperty("async_options")
+@ApiModelProperty(value = "Options for configuring Asynchronous Query Mode.")
+  public AsyncQueryOptions getAsyncOptions() {
+    return asyncOptions;
+  }
+
+  public void setAsyncOptions(AsyncQueryOptions asyncOptions) {
+    this.asyncOptions = asyncOptions;
+  }
+
+  public QueryRequest debugThresholdMs(Long debugThresholdMs) {
+    this.debugThresholdMs = debugThresholdMs;
+    return this;
+  }
+
+   /**
+   * If query execution takes longer than this value, debug information will be logged. If the query text includes the DEBUG hint and this parameter is also provided, only this value will be used and the DEBUG hint will be ignored.
+   * @return debugThresholdMs
+  **/
+
+@JsonProperty("debug_threshold_ms")
+@ApiModelProperty(value = "If query execution takes longer than this value, debug information will be logged. If the query text includes the DEBUG hint and this parameter is also provided, only this value will be used and the DEBUG hint will be ignored.")
+  public Long getDebugThresholdMs() {
+    return debugThresholdMs;
+  }
+
+  public void setDebugThresholdMs(Long debugThresholdMs) {
+    this.debugThresholdMs = debugThresholdMs;
+  }
+
+  public QueryRequest maxInitialResults(Long maxInitialResults) {
+    this.maxInitialResults = maxInitialResults;
+    return this;
+  }
+
+   /**
+   * This limits the maximum number of results in the initial response. A pagination cursor is returned if the number of results exceeds &#x60;max_initial_results&#x60;. If &#x60;max_initial_results&#x60; is not set, all results will be returned in the initial response up to 4 million. If &#x60;max_initial_results&#x60; is set, the value must be between 0 and 100,000. If the query is async and &#x60;client_timeout_ms&#x60; is exceeded, &#x60;max_initial_results&#x60; does not apply since none of the results will be returned with the initial response.
+   * @return maxInitialResults
+  **/
+
+@JsonProperty("max_initial_results")
+@ApiModelProperty(value = "This limits the maximum number of results in the initial response. A pagination cursor is returned if the number of results exceeds `max_initial_results`. If `max_initial_results` is not set, all results will be returned in the initial response up to 4 million. If `max_initial_results` is set, the value must be between 0 and 100,000. If the query is async and `client_timeout_ms` is exceeded, `max_initial_results` does not apply since none of the results will be returned with the initial response.")
+  public Long getMaxInitialResults() {
+    return maxInitialResults;
+  }
+
+  public void setMaxInitialResults(Long maxInitialResults) {
+    this.maxInitialResults = maxInitialResults;
+  }
 
   public QueryRequest sql(QueryRequestSql sql) {
     this.sql = sql;
@@ -59,24 +151,24 @@ public class QueryRequest {
     this.sql = sql;
   }
 
-  public QueryRequest asyncOptions(AsyncQueryOptions asyncOptions) {
-    this.asyncOptions = asyncOptions;
+  public QueryRequest timeoutMs(Long timeoutMs) {
+    this.timeoutMs = timeoutMs;
     return this;
   }
 
    /**
-   * Options for configuring Asynchronous Query Mode (beta).
-   * @return asyncOptions
+   * If a query exceeds the specified timeout, the query will automatically stop and return an error. The query timeout defaults to a maximum of 2 minutes. If &#x60;async&#x60; is true, the query timeout defaults to a maximum of 30 minutes.
+   * @return timeoutMs
   **/
 
-@JsonProperty("async_options")
-@ApiModelProperty(value = "Options for configuring Asynchronous Query Mode (beta).")
-  public AsyncQueryOptions getAsyncOptions() {
-    return asyncOptions;
+@JsonProperty("timeout_ms")
+@ApiModelProperty(value = "If a query exceeds the specified timeout, the query will automatically stop and return an error. The query timeout defaults to a maximum of 2 minutes. If `async` is true, the query timeout defaults to a maximum of 30 minutes.")
+  public Long getTimeoutMs() {
+    return timeoutMs;
   }
 
-  public void setAsyncOptions(AsyncQueryOptions asyncOptions) {
-    this.asyncOptions = asyncOptions;
+  public void setTimeoutMs(Long timeoutMs) {
+    this.timeoutMs = timeoutMs;
   }
 
 
@@ -89,13 +181,17 @@ public class QueryRequest {
       return false;
     }
     QueryRequest queryRequest = (QueryRequest) o;
-    return Objects.equals(this.sql, queryRequest.sql) &&
-        Objects.equals(this.asyncOptions, queryRequest.asyncOptions);
+    return Objects.equals(this.async, queryRequest.async) &&
+        Objects.equals(this.asyncOptions, queryRequest.asyncOptions) &&
+        Objects.equals(this.debugThresholdMs, queryRequest.debugThresholdMs) &&
+        Objects.equals(this.maxInitialResults, queryRequest.maxInitialResults) &&
+        Objects.equals(this.sql, queryRequest.sql) &&
+        Objects.equals(this.timeoutMs, queryRequest.timeoutMs);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(sql, asyncOptions);
+    return Objects.hash(async, asyncOptions, debugThresholdMs, maxInitialResults, sql, timeoutMs);
   }
 
 
@@ -104,8 +200,12 @@ public class QueryRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class QueryRequest {\n");
     
-    sb.append("    sql: ").append(toIndentedString(sql)).append("\n");
+    sb.append("    async: ").append(toIndentedString(async)).append("\n");
     sb.append("    asyncOptions: ").append(toIndentedString(asyncOptions)).append("\n");
+    sb.append("    debugThresholdMs: ").append(toIndentedString(debugThresholdMs)).append("\n");
+    sb.append("    maxInitialResults: ").append(toIndentedString(maxInitialResults)).append("\n");
+    sb.append("    sql: ").append(toIndentedString(sql)).append("\n");
+    sb.append("    timeoutMs: ").append(toIndentedString(timeoutMs)).append("\n");
     sb.append("}");
     return sb.toString();
   }

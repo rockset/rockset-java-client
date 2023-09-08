@@ -30,16 +30,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * UpdateQueryLambdaRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class UpdateQueryLambdaRequest {
   @SerializedName("description")
   private String description = null;
 
-  @SerializedName("sql")
-  private QueryLambdaSql sql = null;
-
   @SerializedName("is_public")
   private Boolean isPublic = null;
+
+  @SerializedName("sql")
+  private QueryLambdaSql sql = null;
 
   public UpdateQueryLambdaRequest description(String description) {
     this.description = description;
@@ -59,26 +59,6 @@ public class UpdateQueryLambdaRequest {
 
   public void setDescription(String description) {
     this.description = description;
-  }
-
-  public UpdateQueryLambdaRequest sql(QueryLambdaSql sql) {
-    this.sql = sql;
-    return this;
-  }
-
-   /**
-   * Query Lambda SQL query.
-   * @return sql
-  **/
-
-@JsonProperty("sql")
-@ApiModelProperty(value = "Query Lambda SQL query.")
-  public QueryLambdaSql getSql() {
-    return sql;
-  }
-
-  public void setSql(QueryLambdaSql sql) {
-    this.sql = sql;
   }
 
   public UpdateQueryLambdaRequest isPublic(Boolean isPublic) {
@@ -101,6 +81,26 @@ public class UpdateQueryLambdaRequest {
     this.isPublic = isPublic;
   }
 
+  public UpdateQueryLambdaRequest sql(QueryLambdaSql sql) {
+    this.sql = sql;
+    return this;
+  }
+
+   /**
+   * Query Lambda SQL query.
+   * @return sql
+  **/
+
+@JsonProperty("sql")
+@ApiModelProperty(value = "Query Lambda SQL query.")
+  public QueryLambdaSql getSql() {
+    return sql;
+  }
+
+  public void setSql(QueryLambdaSql sql) {
+    this.sql = sql;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -112,13 +112,13 @@ public class UpdateQueryLambdaRequest {
     }
     UpdateQueryLambdaRequest updateQueryLambdaRequest = (UpdateQueryLambdaRequest) o;
     return Objects.equals(this.description, updateQueryLambdaRequest.description) &&
-        Objects.equals(this.sql, updateQueryLambdaRequest.sql) &&
-        Objects.equals(this.isPublic, updateQueryLambdaRequest.isPublic);
+        Objects.equals(this.isPublic, updateQueryLambdaRequest.isPublic) &&
+        Objects.equals(this.sql, updateQueryLambdaRequest.sql);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(description, sql, isPublic);
+    return Objects.hash(description, isPublic, sql);
   }
 
 
@@ -128,8 +128,8 @@ public class UpdateQueryLambdaRequest {
     sb.append("class UpdateQueryLambdaRequest {\n");
     
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
-    sb.append("    sql: ").append(toIndentedString(sql)).append("\n");
     sb.append("    isPublic: ").append(toIndentedString(isPublic)).append("\n");
+    sb.append("    sql: ").append(toIndentedString(sql)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -29,8 +29,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Status
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class Status {
+  @SerializedName("detected_size_bytes")
+  private Long detectedSizeBytes = null;
+
+  @SerializedName("last_processed_at")
+  private String lastProcessedAt = null;
+
+  @SerializedName("last_processed_item")
+  private String lastProcessedItem = null;
+
+  @SerializedName("message")
+  private String message = null;
+
   /**
    * Status of the Source&#39;s ingestion.
    */
@@ -44,7 +56,9 @@ public class Status {
     
     COMPLETED("COMPLETED"),
     
-    ERROR("ERROR");
+    ERROR("ERROR"),
+    
+    SUSPENDED("SUSPENDED");
 
     private String value;
 
@@ -61,6 +75,7 @@ public class Status {
       return String.valueOf(value);
     }
 
+    @com.fasterxml.jackson.annotation.JsonCreator
     public static StateEnum fromValue(String text) {
       for (StateEnum b : StateEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -87,56 +102,27 @@ public class Status {
   @SerializedName("state")
   private StateEnum state = null;
 
-  @SerializedName("message")
-  private String message = null;
-
-  @SerializedName("last_processed_at")
-  private String lastProcessedAt = null;
-
-  @SerializedName("last_processed_item")
-  private String lastProcessedItem = null;
-
   @SerializedName("total_processed_items")
   private Long totalProcessedItems = null;
 
-  public Status state(StateEnum state) {
-    this.state = state;
+  public Status detectedSizeBytes(Long detectedSizeBytes) {
+    this.detectedSizeBytes = detectedSizeBytes;
     return this;
   }
 
    /**
-   * Status of the Source&#39;s ingestion.
-   * @return state
+   * Size in bytes detected for the source at collection initialization. This size can be 0 or null for event stream sources.
+   * @return detectedSizeBytes
   **/
 
-@JsonProperty("state")
-@ApiModelProperty(example = "INITIALIZING", value = "Status of the Source's ingestion.")
-  public StateEnum getState() {
-    return state;
+@JsonProperty("detected_size_bytes")
+@ApiModelProperty(value = "Size in bytes detected for the source at collection initialization. This size can be 0 or null for event stream sources.")
+  public Long getDetectedSizeBytes() {
+    return detectedSizeBytes;
   }
 
-  public void setState(StateEnum state) {
-    this.state = state;
-  }
-
-  public Status message(String message) {
-    this.message = message;
-    return this;
-  }
-
-   /**
-   * State message.
-   * @return message
-  **/
-
-@JsonProperty("message")
-@ApiModelProperty(example = "error 403 forbidden", value = "State message.")
-  public String getMessage() {
-    return message;
-  }
-
-  public void setMessage(String message) {
-    this.message = message;
+  public void setDetectedSizeBytes(Long detectedSizeBytes) {
+    this.detectedSizeBytes = detectedSizeBytes;
   }
 
   public Status lastProcessedAt(String lastProcessedAt) {
@@ -179,6 +165,46 @@ public class Status {
     this.lastProcessedItem = lastProcessedItem;
   }
 
+  public Status message(String message) {
+    this.message = message;
+    return this;
+  }
+
+   /**
+   * State message.
+   * @return message
+  **/
+
+@JsonProperty("message")
+@ApiModelProperty(example = "error 403 forbidden", value = "State message.")
+  public String getMessage() {
+    return message;
+  }
+
+  public void setMessage(String message) {
+    this.message = message;
+  }
+
+  public Status state(StateEnum state) {
+    this.state = state;
+    return this;
+  }
+
+   /**
+   * Status of the Source&#39;s ingestion.
+   * @return state
+  **/
+
+@JsonProperty("state")
+@ApiModelProperty(example = "INITIALIZING", value = "Status of the Source's ingestion.")
+  public StateEnum getState() {
+    return state;
+  }
+
+  public void setState(StateEnum state) {
+    this.state = state;
+  }
+
   public Status totalProcessedItems(Long totalProcessedItems) {
     this.totalProcessedItems = totalProcessedItems;
     return this;
@@ -209,16 +235,17 @@ public class Status {
       return false;
     }
     Status status = (Status) o;
-    return Objects.equals(this.state, status.state) &&
-        Objects.equals(this.message, status.message) &&
+    return Objects.equals(this.detectedSizeBytes, status.detectedSizeBytes) &&
         Objects.equals(this.lastProcessedAt, status.lastProcessedAt) &&
         Objects.equals(this.lastProcessedItem, status.lastProcessedItem) &&
+        Objects.equals(this.message, status.message) &&
+        Objects.equals(this.state, status.state) &&
         Objects.equals(this.totalProcessedItems, status.totalProcessedItems);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(state, message, lastProcessedAt, lastProcessedItem, totalProcessedItems);
+    return Objects.hash(detectedSizeBytes, lastProcessedAt, lastProcessedItem, message, state, totalProcessedItems);
   }
 
 
@@ -227,10 +254,11 @@ public class Status {
     StringBuilder sb = new StringBuilder();
     sb.append("class Status {\n");
     
-    sb.append("    state: ").append(toIndentedString(state)).append("\n");
-    sb.append("    message: ").append(toIndentedString(message)).append("\n");
+    sb.append("    detectedSizeBytes: ").append(toIndentedString(detectedSizeBytes)).append("\n");
     sb.append("    lastProcessedAt: ").append(toIndentedString(lastProcessedAt)).append("\n");
     sb.append("    lastProcessedItem: ").append(toIndentedString(lastProcessedItem)).append("\n");
+    sb.append("    message: ").append(toIndentedString(message)).append("\n");
+    sb.append("    state: ").append(toIndentedString(state)).append("\n");
     sb.append("    totalProcessedItems: ").append(toIndentedString(totalProcessedItems)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -20,6 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.rockset.client.model.AutoScalingPolicy;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -29,8 +30,29 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * UpdateVirtualInstanceRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class UpdateVirtualInstanceRequest {
+  @SerializedName("auto_scaling_policy")
+  private AutoScalingPolicy autoScalingPolicy = null;
+
+  @SerializedName("auto_suspend_enabled")
+  private Boolean autoSuspendEnabled = null;
+
+  @SerializedName("auto_suspend_seconds")
+  private Integer autoSuspendSeconds = null;
+
+  @SerializedName("description")
+  private String description = null;
+
+  @SerializedName("enable_remount_on_resume")
+  private Boolean enableRemountOnResume = null;
+
+  @SerializedName("mount_refresh_interval_seconds")
+  private Integer mountRefreshIntervalSeconds = null;
+
+  @SerializedName("name")
+  private String name = null;
+
   /**
    * Requested virtual instance size.
    */
@@ -75,6 +97,7 @@ public class UpdateVirtualInstanceRequest {
       return String.valueOf(value);
     }
 
+    @com.fasterxml.jackson.annotation.JsonCreator
     public static NewSizeEnum fromValue(String text) {
       for (NewSizeEnum b : NewSizeEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -101,99 +124,24 @@ public class UpdateVirtualInstanceRequest {
   @SerializedName("new_size")
   private NewSizeEnum newSize = null;
 
-  @SerializedName("monitoring_enabled")
-  private Boolean monitoringEnabled = null;
-
-  @SerializedName("name")
-  private String name = null;
-
-  @SerializedName("description")
-  private String description = null;
-
-  @SerializedName("auto_suspend_enabled")
-  private Boolean autoSuspendEnabled = null;
-
-  @SerializedName("auto_suspend_seconds")
-  private Integer autoSuspendSeconds = null;
-
-  public UpdateVirtualInstanceRequest newSize(NewSizeEnum newSize) {
-    this.newSize = newSize;
+  public UpdateVirtualInstanceRequest autoScalingPolicy(AutoScalingPolicy autoScalingPolicy) {
+    this.autoScalingPolicy = autoScalingPolicy;
     return this;
   }
 
    /**
-   * Requested virtual instance size.
-   * @return newSize
+   * Options for configuring auto scaling policy
+   * @return autoScalingPolicy
   **/
 
-@JsonProperty("new_size")
-@ApiModelProperty(example = "LARGE", value = "Requested virtual instance size.")
-  public NewSizeEnum getNewSize() {
-    return newSize;
+@JsonProperty("auto_scaling_policy")
+@ApiModelProperty(value = "Options for configuring auto scaling policy")
+  public AutoScalingPolicy getAutoScalingPolicy() {
+    return autoScalingPolicy;
   }
 
-  public void setNewSize(NewSizeEnum newSize) {
-    this.newSize = newSize;
-  }
-
-  public UpdateVirtualInstanceRequest monitoringEnabled(Boolean monitoringEnabled) {
-    this.monitoringEnabled = monitoringEnabled;
-    return this;
-  }
-
-   /**
-   * Get monitoringEnabled
-   * @return monitoringEnabled
-  **/
-
-@JsonProperty("monitoring_enabled")
-@ApiModelProperty(value = "")
-  public Boolean isMonitoringEnabled() {
-    return monitoringEnabled;
-  }
-
-  public void setMonitoringEnabled(Boolean monitoringEnabled) {
-    this.monitoringEnabled = monitoringEnabled;
-  }
-
-  public UpdateVirtualInstanceRequest name(String name) {
-    this.name = name;
-    return this;
-  }
-
-   /**
-   * New virtual instance name.
-   * @return name
-  **/
-
-@JsonProperty("name")
-@ApiModelProperty(example = "prod_vi", value = "New virtual instance name.")
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public UpdateVirtualInstanceRequest description(String description) {
-    this.description = description;
-    return this;
-  }
-
-   /**
-   * New virtual instance description.
-   * @return description
-  **/
-
-@JsonProperty("description")
-@ApiModelProperty(example = "VI for prod traffic", value = "New virtual instance description.")
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
+  public void setAutoScalingPolicy(AutoScalingPolicy autoScalingPolicy) {
+    this.autoScalingPolicy = autoScalingPolicy;
   }
 
   public UpdateVirtualInstanceRequest autoSuspendEnabled(Boolean autoSuspendEnabled) {
@@ -236,6 +184,106 @@ public class UpdateVirtualInstanceRequest {
     this.autoSuspendSeconds = autoSuspendSeconds;
   }
 
+  public UpdateVirtualInstanceRequest description(String description) {
+    this.description = description;
+    return this;
+  }
+
+   /**
+   * New virtual instance description.
+   * @return description
+  **/
+
+@JsonProperty("description")
+@ApiModelProperty(example = "VI for prod traffic", value = "New virtual instance description.")
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public UpdateVirtualInstanceRequest enableRemountOnResume(Boolean enableRemountOnResume) {
+    this.enableRemountOnResume = enableRemountOnResume;
+    return this;
+  }
+
+   /**
+   * When a Virtual Instance is resumed, it will remount all collections that were mounted when the Virtual Instance was suspended.
+   * @return enableRemountOnResume
+  **/
+
+@JsonProperty("enable_remount_on_resume")
+@ApiModelProperty(example = "true", value = "When a Virtual Instance is resumed, it will remount all collections that were mounted when the Virtual Instance was suspended.")
+  public Boolean isEnableRemountOnResume() {
+    return enableRemountOnResume;
+  }
+
+  public void setEnableRemountOnResume(Boolean enableRemountOnResume) {
+    this.enableRemountOnResume = enableRemountOnResume;
+  }
+
+  public UpdateVirtualInstanceRequest mountRefreshIntervalSeconds(Integer mountRefreshIntervalSeconds) {
+    this.mountRefreshIntervalSeconds = mountRefreshIntervalSeconds;
+    return this;
+  }
+
+   /**
+   * Number of seconds between data refreshes for mounts on this Virtual Instance. A value of 0 means continuous refresh and a value of null means never refresh.
+   * @return mountRefreshIntervalSeconds
+  **/
+
+@JsonProperty("mount_refresh_interval_seconds")
+@ApiModelProperty(example = "3600", value = "Number of seconds between data refreshes for mounts on this Virtual Instance. A value of 0 means continuous refresh and a value of null means never refresh.")
+  public Integer getMountRefreshIntervalSeconds() {
+    return mountRefreshIntervalSeconds;
+  }
+
+  public void setMountRefreshIntervalSeconds(Integer mountRefreshIntervalSeconds) {
+    this.mountRefreshIntervalSeconds = mountRefreshIntervalSeconds;
+  }
+
+  public UpdateVirtualInstanceRequest name(String name) {
+    this.name = name;
+    return this;
+  }
+
+   /**
+   * New virtual instance name.
+   * @return name
+  **/
+
+@JsonProperty("name")
+@ApiModelProperty(example = "prod_vi", value = "New virtual instance name.")
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public UpdateVirtualInstanceRequest newSize(NewSizeEnum newSize) {
+    this.newSize = newSize;
+    return this;
+  }
+
+   /**
+   * Requested virtual instance size.
+   * @return newSize
+  **/
+
+@JsonProperty("new_size")
+@ApiModelProperty(example = "LARGE", value = "Requested virtual instance size.")
+  public NewSizeEnum getNewSize() {
+    return newSize;
+  }
+
+  public void setNewSize(NewSizeEnum newSize) {
+    this.newSize = newSize;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -246,17 +294,19 @@ public class UpdateVirtualInstanceRequest {
       return false;
     }
     UpdateVirtualInstanceRequest updateVirtualInstanceRequest = (UpdateVirtualInstanceRequest) o;
-    return Objects.equals(this.newSize, updateVirtualInstanceRequest.newSize) &&
-        Objects.equals(this.monitoringEnabled, updateVirtualInstanceRequest.monitoringEnabled) &&
-        Objects.equals(this.name, updateVirtualInstanceRequest.name) &&
-        Objects.equals(this.description, updateVirtualInstanceRequest.description) &&
+    return Objects.equals(this.autoScalingPolicy, updateVirtualInstanceRequest.autoScalingPolicy) &&
         Objects.equals(this.autoSuspendEnabled, updateVirtualInstanceRequest.autoSuspendEnabled) &&
-        Objects.equals(this.autoSuspendSeconds, updateVirtualInstanceRequest.autoSuspendSeconds);
+        Objects.equals(this.autoSuspendSeconds, updateVirtualInstanceRequest.autoSuspendSeconds) &&
+        Objects.equals(this.description, updateVirtualInstanceRequest.description) &&
+        Objects.equals(this.enableRemountOnResume, updateVirtualInstanceRequest.enableRemountOnResume) &&
+        Objects.equals(this.mountRefreshIntervalSeconds, updateVirtualInstanceRequest.mountRefreshIntervalSeconds) &&
+        Objects.equals(this.name, updateVirtualInstanceRequest.name) &&
+        Objects.equals(this.newSize, updateVirtualInstanceRequest.newSize);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(newSize, monitoringEnabled, name, description, autoSuspendEnabled, autoSuspendSeconds);
+    return Objects.hash(autoScalingPolicy, autoSuspendEnabled, autoSuspendSeconds, description, enableRemountOnResume, mountRefreshIntervalSeconds, name, newSize);
   }
 
 
@@ -265,12 +315,14 @@ public class UpdateVirtualInstanceRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class UpdateVirtualInstanceRequest {\n");
     
-    sb.append("    newSize: ").append(toIndentedString(newSize)).append("\n");
-    sb.append("    monitoringEnabled: ").append(toIndentedString(monitoringEnabled)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    autoScalingPolicy: ").append(toIndentedString(autoScalingPolicy)).append("\n");
     sb.append("    autoSuspendEnabled: ").append(toIndentedString(autoSuspendEnabled)).append("\n");
     sb.append("    autoSuspendSeconds: ").append(toIndentedString(autoSuspendSeconds)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    enableRemountOnResume: ").append(toIndentedString(enableRemountOnResume)).append("\n");
+    sb.append("    mountRefreshIntervalSeconds: ").append(toIndentedString(mountRefreshIntervalSeconds)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    newSize: ").append(toIndentedString(newSize)).append("\n");
     sb.append("}");
     return sb.toString();
   }

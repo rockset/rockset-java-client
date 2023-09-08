@@ -68,7 +68,7 @@ public class AliasesApi {
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call createCall(String workspace, CreateAliasRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public okhttp3.Call createCall(String workspace, CreateAliasRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -95,10 +95,10 @@ public class AliasesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+                    okhttp3.Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -111,7 +111,7 @@ public class AliasesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call createValidateBeforeCall(String workspace, CreateAliasRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private okhttp3.Call createValidateBeforeCall(String workspace, CreateAliasRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'workspace' is set
         if (workspace == null) {
@@ -124,7 +124,7 @@ public class AliasesApi {
         }
         
 
-        com.squareup.okhttp.Call call = createCall(workspace, body, progressListener, progressRequestListener);
+        okhttp3.Call call = createCall(workspace, body, progressListener, progressRequestListener);
         return call;
 
     }
@@ -151,7 +151,7 @@ public class AliasesApi {
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<CreateAliasResponse> createWithHttpInfo(String workspace, CreateAliasRequest body) throws Exception {
-        com.squareup.okhttp.Call call = createValidateBeforeCall(workspace, body, null, null);
+        okhttp3.Call call = createValidateBeforeCall(workspace, body, null, null);
         Type localVarReturnType = new TypeToken<CreateAliasResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -165,7 +165,7 @@ public class AliasesApi {
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call createAsync(String workspace, CreateAliasRequest body, final ApiCallback<CreateAliasResponse> callback) throws Exception {
+    public okhttp3.Call createAsync(String workspace, CreateAliasRequest body, final ApiCallback<CreateAliasResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -186,7 +186,7 @@ public class AliasesApi {
             };
         }
 
-        com.squareup.okhttp.Call call = createValidateBeforeCall(workspace, body, progressListener, progressRequestListener);
+        okhttp3.Call call = createValidateBeforeCall(workspace, body, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<CreateAliasResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -200,7 +200,7 @@ public class AliasesApi {
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call deleteCall(String workspace, String alias, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public okhttp3.Call deleteCall(String workspace, String alias, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -228,10 +228,10 @@ public class AliasesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+                    okhttp3.Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -244,7 +244,7 @@ public class AliasesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call deleteValidateBeforeCall(String workspace, String alias, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private okhttp3.Call deleteValidateBeforeCall(String workspace, String alias, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'workspace' is set
         if (workspace == null) {
@@ -257,7 +257,7 @@ public class AliasesApi {
         }
         
 
-        com.squareup.okhttp.Call call = deleteCall(workspace, alias, progressListener, progressRequestListener);
+        okhttp3.Call call = deleteCall(workspace, alias, progressListener, progressRequestListener);
         return call;
 
     }
@@ -284,7 +284,7 @@ public class AliasesApi {
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<DeleteAliasResponse> deleteWithHttpInfo(String workspace, String alias) throws Exception {
-        com.squareup.okhttp.Call call = deleteValidateBeforeCall(workspace, alias, null, null);
+        okhttp3.Call call = deleteValidateBeforeCall(workspace, alias, null, null);
         Type localVarReturnType = new TypeToken<DeleteAliasResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -298,7 +298,7 @@ public class AliasesApi {
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call deleteAsync(String workspace, String alias, final ApiCallback<DeleteAliasResponse> callback) throws Exception {
+    public okhttp3.Call deleteAsync(String workspace, String alias, final ApiCallback<DeleteAliasResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -319,7 +319,7 @@ public class AliasesApi {
             };
         }
 
-        com.squareup.okhttp.Call call = deleteValidateBeforeCall(workspace, alias, progressListener, progressRequestListener);
+        okhttp3.Call call = deleteValidateBeforeCall(workspace, alias, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<DeleteAliasResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -333,7 +333,7 @@ public class AliasesApi {
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getCall(String workspace, String alias, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public okhttp3.Call getCall(String workspace, String alias, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -361,10 +361,10 @@ public class AliasesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+                    okhttp3.Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -377,7 +377,7 @@ public class AliasesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getValidateBeforeCall(String workspace, String alias, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private okhttp3.Call getValidateBeforeCall(String workspace, String alias, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'workspace' is set
         if (workspace == null) {
@@ -390,7 +390,7 @@ public class AliasesApi {
         }
         
 
-        com.squareup.okhttp.Call call = getCall(workspace, alias, progressListener, progressRequestListener);
+        okhttp3.Call call = getCall(workspace, alias, progressListener, progressRequestListener);
         return call;
 
     }
@@ -417,7 +417,7 @@ public class AliasesApi {
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<GetAliasResponse> getWithHttpInfo(String workspace, String alias) throws Exception {
-        com.squareup.okhttp.Call call = getValidateBeforeCall(workspace, alias, null, null);
+        okhttp3.Call call = getValidateBeforeCall(workspace, alias, null, null);
         Type localVarReturnType = new TypeToken<GetAliasResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -431,7 +431,7 @@ public class AliasesApi {
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getAsync(String workspace, String alias, final ApiCallback<GetAliasResponse> callback) throws Exception {
+    public okhttp3.Call getAsync(String workspace, String alias, final ApiCallback<GetAliasResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -452,7 +452,7 @@ public class AliasesApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getValidateBeforeCall(workspace, alias, progressListener, progressRequestListener);
+        okhttp3.Call call = getValidateBeforeCall(workspace, alias, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<GetAliasResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -464,7 +464,7 @@ public class AliasesApi {
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call listCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public okhttp3.Call listCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -490,10 +490,10 @@ public class AliasesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+                    okhttp3.Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -506,10 +506,10 @@ public class AliasesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call listValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private okhttp3.Call listValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
 
-        com.squareup.okhttp.Call call = listCall(progressListener, progressRequestListener);
+        okhttp3.Call call = listCall(progressListener, progressRequestListener);
         return call;
 
     }
@@ -532,7 +532,7 @@ public class AliasesApi {
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<ListAliasesResponse> listWithHttpInfo() throws Exception {
-        com.squareup.okhttp.Call call = listValidateBeforeCall(null, null);
+        okhttp3.Call call = listValidateBeforeCall(null, null);
         Type localVarReturnType = new TypeToken<ListAliasesResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -544,7 +544,7 @@ public class AliasesApi {
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listAsync(final ApiCallback<ListAliasesResponse> callback) throws Exception {
+    public okhttp3.Call listAsync(final ApiCallback<ListAliasesResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -565,7 +565,7 @@ public class AliasesApi {
             };
         }
 
-        com.squareup.okhttp.Call call = listValidateBeforeCall(progressListener, progressRequestListener);
+        okhttp3.Call call = listValidateBeforeCall(progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<ListAliasesResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -580,7 +580,7 @@ public class AliasesApi {
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call updateCall(String workspace, String alias, UpdateAliasRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public okhttp3.Call updateCall(String workspace, String alias, UpdateAliasRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -608,10 +608,10 @@ public class AliasesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+                    okhttp3.Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -624,7 +624,7 @@ public class AliasesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call updateValidateBeforeCall(String workspace, String alias, UpdateAliasRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private okhttp3.Call updateValidateBeforeCall(String workspace, String alias, UpdateAliasRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'workspace' is set
         if (workspace == null) {
@@ -642,7 +642,7 @@ public class AliasesApi {
         }
         
 
-        com.squareup.okhttp.Call call = updateCall(workspace, alias, body, progressListener, progressRequestListener);
+        okhttp3.Call call = updateCall(workspace, alias, body, progressListener, progressRequestListener);
         return call;
 
     }
@@ -671,7 +671,7 @@ public class AliasesApi {
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<GetAliasResponse> updateWithHttpInfo(String workspace, String alias, UpdateAliasRequest body) throws Exception {
-        com.squareup.okhttp.Call call = updateValidateBeforeCall(workspace, alias, body, null, null);
+        okhttp3.Call call = updateValidateBeforeCall(workspace, alias, body, null, null);
         Type localVarReturnType = new TypeToken<GetAliasResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -686,7 +686,7 @@ public class AliasesApi {
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call updateAsync(String workspace, String alias, UpdateAliasRequest body, final ApiCallback<GetAliasResponse> callback) throws Exception {
+    public okhttp3.Call updateAsync(String workspace, String alias, UpdateAliasRequest body, final ApiCallback<GetAliasResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -707,7 +707,7 @@ public class AliasesApi {
             };
         }
 
-        com.squareup.okhttp.Call call = updateValidateBeforeCall(workspace, alias, body, progressListener, progressRequestListener);
+        okhttp3.Call call = updateValidateBeforeCall(workspace, alias, body, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<GetAliasResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -720,7 +720,7 @@ public class AliasesApi {
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call workspaceCall(String workspace, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public okhttp3.Call workspaceCall(String workspace, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -747,10 +747,10 @@ public class AliasesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+                    okhttp3.Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -763,7 +763,7 @@ public class AliasesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call workspaceValidateBeforeCall(String workspace, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private okhttp3.Call workspaceValidateBeforeCall(String workspace, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'workspace' is set
         if (workspace == null) {
@@ -771,7 +771,7 @@ public class AliasesApi {
         }
         
 
-        com.squareup.okhttp.Call call = workspaceCall(workspace, progressListener, progressRequestListener);
+        okhttp3.Call call = workspaceCall(workspace, progressListener, progressRequestListener);
         return call;
 
     }
@@ -796,7 +796,7 @@ public class AliasesApi {
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<ListAliasesResponse> workspaceWithHttpInfo(String workspace) throws Exception {
-        com.squareup.okhttp.Call call = workspaceValidateBeforeCall(workspace, null, null);
+        okhttp3.Call call = workspaceValidateBeforeCall(workspace, null, null);
         Type localVarReturnType = new TypeToken<ListAliasesResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -809,7 +809,7 @@ public class AliasesApi {
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call workspaceAsync(String workspace, final ApiCallback<ListAliasesResponse> callback) throws Exception {
+    public okhttp3.Call workspaceAsync(String workspace, final ApiCallback<ListAliasesResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -830,7 +830,7 @@ public class AliasesApi {
             };
         }
 
-        com.squareup.okhttp.Call call = workspaceValidateBeforeCall(workspace, progressListener, progressRequestListener);
+        okhttp3.Call call = workspaceValidateBeforeCall(workspace, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<ListAliasesResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

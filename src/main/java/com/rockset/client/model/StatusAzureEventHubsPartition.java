@@ -29,16 +29,36 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * StatusAzureEventHubsPartition
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class StatusAzureEventHubsPartition {
+  @SerializedName("offset_lag")
+  private Long offsetLag = null;
+
   @SerializedName("partition_number")
   private Integer partitionNumber = null;
 
   @SerializedName("partition_offset")
   private Long partitionOffset = null;
 
-  @SerializedName("offset_lag")
-  private Long offsetLag = null;
+  public StatusAzureEventHubsPartition offsetLag(Long offsetLag) {
+    this.offsetLag = offsetLag;
+    return this;
+  }
+
+   /**
+   * Per partition lag for offset.
+   * @return offsetLag
+  **/
+
+@JsonProperty("offset_lag")
+@ApiModelProperty(example = "10", value = "Per partition lag for offset.")
+  public Long getOffsetLag() {
+    return offsetLag;
+  }
+
+  public void setOffsetLag(Long offsetLag) {
+    this.offsetLag = offsetLag;
+  }
 
   public StatusAzureEventHubsPartition partitionNumber(Integer partitionNumber) {
     this.partitionNumber = partitionNumber;
@@ -80,26 +100,6 @@ public class StatusAzureEventHubsPartition {
     this.partitionOffset = partitionOffset;
   }
 
-  public StatusAzureEventHubsPartition offsetLag(Long offsetLag) {
-    this.offsetLag = offsetLag;
-    return this;
-  }
-
-   /**
-   * Per partition lag for offset.
-   * @return offsetLag
-  **/
-
-@JsonProperty("offset_lag")
-@ApiModelProperty(example = "10", value = "Per partition lag for offset.")
-  public Long getOffsetLag() {
-    return offsetLag;
-  }
-
-  public void setOffsetLag(Long offsetLag) {
-    this.offsetLag = offsetLag;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -110,14 +110,14 @@ public class StatusAzureEventHubsPartition {
       return false;
     }
     StatusAzureEventHubsPartition statusAzureEventHubsPartition = (StatusAzureEventHubsPartition) o;
-    return Objects.equals(this.partitionNumber, statusAzureEventHubsPartition.partitionNumber) &&
-        Objects.equals(this.partitionOffset, statusAzureEventHubsPartition.partitionOffset) &&
-        Objects.equals(this.offsetLag, statusAzureEventHubsPartition.offsetLag);
+    return Objects.equals(this.offsetLag, statusAzureEventHubsPartition.offsetLag) &&
+        Objects.equals(this.partitionNumber, statusAzureEventHubsPartition.partitionNumber) &&
+        Objects.equals(this.partitionOffset, statusAzureEventHubsPartition.partitionOffset);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(partitionNumber, partitionOffset, offsetLag);
+    return Objects.hash(offsetLag, partitionNumber, partitionOffset);
   }
 
 
@@ -126,9 +126,9 @@ public class StatusAzureEventHubsPartition {
     StringBuilder sb = new StringBuilder();
     sb.append("class StatusAzureEventHubsPartition {\n");
     
+    sb.append("    offsetLag: ").append(toIndentedString(offsetLag)).append("\n");
     sb.append("    partitionNumber: ").append(toIndentedString(partitionNumber)).append("\n");
     sb.append("    partitionOffset: ").append(toIndentedString(partitionOffset)).append("\n");
-    sb.append("    offsetLag: ").append(toIndentedString(offsetLag)).append("\n");
     sb.append("}");
     return sb.toString();
   }

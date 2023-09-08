@@ -29,36 +29,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SchemaRegistryConfig
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class SchemaRegistryConfig {
-  @SerializedName("url")
-  private String url = null;
-
   @SerializedName("key")
   private String key = null;
 
   @SerializedName("secret")
   private String secret = null;
 
-  public SchemaRegistryConfig url(String url) {
-    this.url = url;
-    return this;
-  }
-
-   /**
-   * Schema registry URL.
-   * @return url
-  **/
-
-@JsonProperty("url")
-@ApiModelProperty(value = "Schema registry URL.")
-  public String getUrl() {
-    return url;
-  }
-
-  public void setUrl(String url) {
-    this.url = url;
-  }
+  @SerializedName("url")
+  private String url = null;
 
   public SchemaRegistryConfig key(String key) {
     this.key = key;
@@ -100,6 +80,26 @@ public class SchemaRegistryConfig {
     this.secret = secret;
   }
 
+  public SchemaRegistryConfig url(String url) {
+    this.url = url;
+    return this;
+  }
+
+   /**
+   * Schema registry URL.
+   * @return url
+  **/
+
+@JsonProperty("url")
+@ApiModelProperty(value = "Schema registry URL.")
+  public String getUrl() {
+    return url;
+  }
+
+  public void setUrl(String url) {
+    this.url = url;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -110,14 +110,14 @@ public class SchemaRegistryConfig {
       return false;
     }
     SchemaRegistryConfig schemaRegistryConfig = (SchemaRegistryConfig) o;
-    return Objects.equals(this.url, schemaRegistryConfig.url) &&
-        Objects.equals(this.key, schemaRegistryConfig.key) &&
-        Objects.equals(this.secret, schemaRegistryConfig.secret);
+    return Objects.equals(this.key, schemaRegistryConfig.key) &&
+        Objects.equals(this.secret, schemaRegistryConfig.secret) &&
+        Objects.equals(this.url, schemaRegistryConfig.url);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(url, key, secret);
+    return Objects.hash(key, secret, url);
   }
 
 
@@ -126,9 +126,9 @@ public class SchemaRegistryConfig {
     StringBuilder sb = new StringBuilder();
     sb.append("class SchemaRegistryConfig {\n");
     
-    sb.append("    url: ").append(toIndentedString(url)).append("\n");
     sb.append("    key: ").append(toIndentedString(key)).append("\n");
     sb.append("    secret: ").append(toIndentedString(secret)).append("\n");
+    sb.append("    url: ").append(toIndentedString(url)).append("\n");
     sb.append("}");
     return sb.toString();
   }

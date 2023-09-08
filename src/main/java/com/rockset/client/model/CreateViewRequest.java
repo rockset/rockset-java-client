@@ -29,36 +29,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateViewRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class CreateViewRequest {
-  @SerializedName("name")
-  private String name = null;
-
   @SerializedName("description")
   private String description = null;
 
+  @SerializedName("name")
+  private String name = null;
+
   @SerializedName("query")
   private String query = null;
-
-  public CreateViewRequest name(String name) {
-    this.name = name;
-    return this;
-  }
-
-   /**
-   * View name.
-   * @return name
-  **/
-
-@JsonProperty("name")
-@ApiModelProperty(example = "myAwesomeView", required = true, value = "View name.")
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
 
   public CreateViewRequest description(String description) {
     this.description = description;
@@ -78,6 +58,26 @@ public class CreateViewRequest {
 
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  public CreateViewRequest name(String name) {
+    this.name = name;
+    return this;
+  }
+
+   /**
+   * View name.
+   * @return name
+  **/
+
+@JsonProperty("name")
+@ApiModelProperty(example = "myAwesomeView", required = true, value = "View name.")
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 
   public CreateViewRequest query(String query) {
@@ -110,14 +110,14 @@ public class CreateViewRequest {
       return false;
     }
     CreateViewRequest createViewRequest = (CreateViewRequest) o;
-    return Objects.equals(this.name, createViewRequest.name) &&
-        Objects.equals(this.description, createViewRequest.description) &&
+    return Objects.equals(this.description, createViewRequest.description) &&
+        Objects.equals(this.name, createViewRequest.name) &&
         Objects.equals(this.query, createViewRequest.query);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, description, query);
+    return Objects.hash(description, name, query);
   }
 
 
@@ -126,8 +126,8 @@ public class CreateViewRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class CreateViewRequest {\n");
     
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    query: ").append(toIndentedString(query)).append("\n");
     sb.append("}");
     return sb.toString();

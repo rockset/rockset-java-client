@@ -69,7 +69,7 @@ public class DocumentsApi {
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call addCall(String workspace, String collection, AddDocumentsRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public okhttp3.Call addCall(String workspace, String collection, AddDocumentsRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -97,10 +97,10 @@ public class DocumentsApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+                    okhttp3.Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -113,7 +113,7 @@ public class DocumentsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call addValidateBeforeCall(String workspace, String collection, AddDocumentsRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private okhttp3.Call addValidateBeforeCall(String workspace, String collection, AddDocumentsRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'workspace' is set
         if (workspace == null) {
@@ -131,7 +131,7 @@ public class DocumentsApi {
         }
         
 
-        com.squareup.okhttp.Call call = addCall(workspace, collection, body, progressListener, progressRequestListener);
+        okhttp3.Call call = addCall(workspace, collection, body, progressListener, progressRequestListener);
         return call;
 
     }
@@ -160,7 +160,7 @@ public class DocumentsApi {
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<AddDocumentsResponse> addWithHttpInfo(String workspace, String collection, AddDocumentsRequest body) throws Exception {
-        com.squareup.okhttp.Call call = addValidateBeforeCall(workspace, collection, body, null, null);
+        okhttp3.Call call = addValidateBeforeCall(workspace, collection, body, null, null);
         Type localVarReturnType = new TypeToken<AddDocumentsResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -175,7 +175,7 @@ public class DocumentsApi {
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call addAsync(String workspace, String collection, AddDocumentsRequest body, final ApiCallback<AddDocumentsResponse> callback) throws Exception {
+    public okhttp3.Call addAsync(String workspace, String collection, AddDocumentsRequest body, final ApiCallback<AddDocumentsResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -196,7 +196,7 @@ public class DocumentsApi {
             };
         }
 
-        com.squareup.okhttp.Call call = addValidateBeforeCall(workspace, collection, body, progressListener, progressRequestListener);
+        okhttp3.Call call = addValidateBeforeCall(workspace, collection, body, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<AddDocumentsResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -211,7 +211,7 @@ public class DocumentsApi {
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call deleteCall(String workspace, String collection, DeleteDocumentsRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public okhttp3.Call deleteCall(String workspace, String collection, DeleteDocumentsRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -239,10 +239,10 @@ public class DocumentsApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+                    okhttp3.Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -255,7 +255,7 @@ public class DocumentsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call deleteValidateBeforeCall(String workspace, String collection, DeleteDocumentsRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private okhttp3.Call deleteValidateBeforeCall(String workspace, String collection, DeleteDocumentsRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'workspace' is set
         if (workspace == null) {
@@ -273,7 +273,7 @@ public class DocumentsApi {
         }
         
 
-        com.squareup.okhttp.Call call = deleteCall(workspace, collection, body, progressListener, progressRequestListener);
+        okhttp3.Call call = deleteCall(workspace, collection, body, progressListener, progressRequestListener);
         return call;
 
     }
@@ -302,7 +302,7 @@ public class DocumentsApi {
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<DeleteDocumentsResponse> deleteWithHttpInfo(String workspace, String collection, DeleteDocumentsRequest body) throws Exception {
-        com.squareup.okhttp.Call call = deleteValidateBeforeCall(workspace, collection, body, null, null);
+        okhttp3.Call call = deleteValidateBeforeCall(workspace, collection, body, null, null);
         Type localVarReturnType = new TypeToken<DeleteDocumentsResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -317,7 +317,7 @@ public class DocumentsApi {
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call deleteAsync(String workspace, String collection, DeleteDocumentsRequest body, final ApiCallback<DeleteDocumentsResponse> callback) throws Exception {
+    public okhttp3.Call deleteAsync(String workspace, String collection, DeleteDocumentsRequest body, final ApiCallback<DeleteDocumentsResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -338,7 +338,7 @@ public class DocumentsApi {
             };
         }
 
-        com.squareup.okhttp.Call call = deleteValidateBeforeCall(workspace, collection, body, progressListener, progressRequestListener);
+        okhttp3.Call call = deleteValidateBeforeCall(workspace, collection, body, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<DeleteDocumentsResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -353,7 +353,7 @@ public class DocumentsApi {
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call patchCall(String workspace, String collection, PatchDocumentsRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public okhttp3.Call patchCall(String workspace, String collection, PatchDocumentsRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -381,10 +381,10 @@ public class DocumentsApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+                    okhttp3.Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -397,7 +397,7 @@ public class DocumentsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call patchValidateBeforeCall(String workspace, String collection, PatchDocumentsRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private okhttp3.Call patchValidateBeforeCall(String workspace, String collection, PatchDocumentsRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'workspace' is set
         if (workspace == null) {
@@ -415,7 +415,7 @@ public class DocumentsApi {
         }
         
 
-        com.squareup.okhttp.Call call = patchCall(workspace, collection, body, progressListener, progressRequestListener);
+        okhttp3.Call call = patchCall(workspace, collection, body, progressListener, progressRequestListener);
         return call;
 
     }
@@ -444,7 +444,7 @@ public class DocumentsApi {
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<PatchDocumentsResponse> patchWithHttpInfo(String workspace, String collection, PatchDocumentsRequest body) throws Exception {
-        com.squareup.okhttp.Call call = patchValidateBeforeCall(workspace, collection, body, null, null);
+        okhttp3.Call call = patchValidateBeforeCall(workspace, collection, body, null, null);
         Type localVarReturnType = new TypeToken<PatchDocumentsResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -459,7 +459,7 @@ public class DocumentsApi {
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call patchAsync(String workspace, String collection, PatchDocumentsRequest body, final ApiCallback<PatchDocumentsResponse> callback) throws Exception {
+    public okhttp3.Call patchAsync(String workspace, String collection, PatchDocumentsRequest body, final ApiCallback<PatchDocumentsResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -480,7 +480,7 @@ public class DocumentsApi {
             };
         }
 
-        com.squareup.okhttp.Call call = patchValidateBeforeCall(workspace, collection, body, progressListener, progressRequestListener);
+        okhttp3.Call call = patchValidateBeforeCall(workspace, collection, body, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<PatchDocumentsResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

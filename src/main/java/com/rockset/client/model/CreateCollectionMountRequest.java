@@ -31,80 +31,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateCollectionMountRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class CreateCollectionMountRequest {
-  /**
-   * Mount type.
-   */
-  @JsonAdapter(TypeEnum.Adapter.class)
-  public enum TypeEnum {
-    STATIC("STATIC"),
-    
-    LIVE("LIVE");
-
-    private String value;
-
-    TypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TypeEnum fromValue(String text) {
-      for (TypeEnum b : TypeEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-
-    public static class Adapter extends TypeAdapter<TypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value = jsonReader.nextString();
-        return TypeEnum.fromValue(String.valueOf(value));
-      }
-    }
-  }
-
-  @SerializedName("type")
-  private TypeEnum type = null;
-
   @SerializedName("collection_paths")
   private List<String> collectionPaths = null;
-
-  public CreateCollectionMountRequest type(TypeEnum type) {
-    this.type = type;
-    return this;
-  }
-
-   /**
-   * Mount type.
-   * @return type
-  **/
-
-@JsonProperty("type")
-@ApiModelProperty(example = "STATIC", value = "Mount type.")
-  public TypeEnum getType() {
-    return type;
-  }
-
-  public void setType(TypeEnum type) {
-    this.type = type;
-  }
 
   public CreateCollectionMountRequest collectionPaths(List<String> collectionPaths) {
     this.collectionPaths = collectionPaths;
@@ -144,13 +74,12 @@ public class CreateCollectionMountRequest {
       return false;
     }
     CreateCollectionMountRequest createCollectionMountRequest = (CreateCollectionMountRequest) o;
-    return Objects.equals(this.type, createCollectionMountRequest.type) &&
-        Objects.equals(this.collectionPaths, createCollectionMountRequest.collectionPaths);
+    return Objects.equals(this.collectionPaths, createCollectionMountRequest.collectionPaths);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(type, collectionPaths);
+    return Objects.hash(collectionPaths);
   }
 
 
@@ -159,7 +88,6 @@ public class CreateCollectionMountRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class CreateCollectionMountRequest {\n");
     
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    collectionPaths: ").append(toIndentedString(collectionPaths)).append("\n");
     sb.append("}");
     return sb.toString();

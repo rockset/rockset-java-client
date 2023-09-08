@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Privilege
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class Privilege {
   /**
    * The action allowed by this privilege.
@@ -86,6 +86,8 @@ public class Privilege {
     
     GRANT_REVOKE_ROLE_GLOBAL("GRANTREVOKEROLEGLOBAL"),
     
+    CREATE_QUERY_LOGS_COLLECTION_GLOBAL("CREATEQUERYLOGSCOLLECTIONGLOBAL"),
+    
     ALL_INTEGRATION_ACTIONS("ALLINTEGRATIONACTIONS"),
     
     CREATE_COLLECTION_INTEGRATION("CREATECOLLECTIONINTEGRATION"),
@@ -106,6 +108,8 @@ public class Privilege {
     
     DELETE_ALIAS_WS("DELETEALIASWS"),
     
+    CREATE_SNAPSHOT_WS("CREATESNAPSHOTWS"),
+    
     LIST_RESOURCES_WS("LISTRESOURCESWS"),
     
     CREATE_QUERY_LAMBDA_WS("CREATEQUERYLAMBDAWS"),
@@ -113,6 +117,10 @@ public class Privilege {
     DELETE_QUERY_LAMBDA_WS("DELETEQUERYLAMBDAWS"),
     
     EXECUTE_QUERY_LAMBDA_WS("EXECUTEQUERYLAMBDAWS"),
+    
+    CREATE_SCHEDULED_LAMBDA_WS("CREATESCHEDULEDLAMBDAWS"),
+    
+    DELETE_SCHEDULED_LAMBDA_WS("DELETESCHEDULEDLAMBDAWS"),
     
     CREATE_VIEW_WS("CREATEVIEWWS"),
     
@@ -126,7 +134,11 @@ public class Privilege {
     
     SUSPEND_RESUME_VI("SUSPENDRESUMEVI"),
     
-    DELETE_VI("DELETEVI");
+    DELETE_VI("DELETEVI"),
+    
+    CREATE_SIMILARITY_INDEX_WS("CREATESIMILARITYINDEXWS"),
+    
+    DELETE_SIMILARITY_INDEX_WS("DELETESIMILARITYINDEXWS");
 
     private String value;
 
@@ -143,6 +155,7 @@ public class Privilege {
       return String.valueOf(value);
     }
 
+    @com.fasterxml.jackson.annotation.JsonCreator
     public static ActionEnum fromValue(String text) {
       for (ActionEnum b : ActionEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -169,11 +182,11 @@ public class Privilege {
   @SerializedName("action")
   private ActionEnum action = null;
 
-  @SerializedName("resource_name")
-  private String resourceName = null;
-
   @SerializedName("cluster")
   private String cluster = null;
+
+  @SerializedName("resource_name")
+  private String resourceName = null;
 
   public Privilege action(ActionEnum action) {
     this.action = action;
@@ -193,26 +206,6 @@ public class Privilege {
 
   public void setAction(ActionEnum action) {
     this.action = action;
-  }
-
-  public Privilege resourceName(String resourceName) {
-    this.resourceName = resourceName;
-    return this;
-  }
-
-   /**
-   * The resources on which the action is allowed. Defaults to &#39;*All*&#39; if not specified.
-   * @return resourceName
-  **/
-
-@JsonProperty("resource_name")
-@ApiModelProperty(example = "commons", value = "The resources on which the action is allowed. Defaults to '*All*' if not specified.")
-  public String getResourceName() {
-    return resourceName;
-  }
-
-  public void setResourceName(String resourceName) {
-    this.resourceName = resourceName;
   }
 
   public Privilege cluster(String cluster) {
@@ -235,6 +228,26 @@ public class Privilege {
     this.cluster = cluster;
   }
 
+  public Privilege resourceName(String resourceName) {
+    this.resourceName = resourceName;
+    return this;
+  }
+
+   /**
+   * The resources on which the action is allowed. Defaults to &#39;*All*&#39; if not specified.
+   * @return resourceName
+  **/
+
+@JsonProperty("resource_name")
+@ApiModelProperty(example = "commons", value = "The resources on which the action is allowed. Defaults to '*All*' if not specified.")
+  public String getResourceName() {
+    return resourceName;
+  }
+
+  public void setResourceName(String resourceName) {
+    this.resourceName = resourceName;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -246,13 +259,13 @@ public class Privilege {
     }
     Privilege privilege = (Privilege) o;
     return Objects.equals(this.action, privilege.action) &&
-        Objects.equals(this.resourceName, privilege.resourceName) &&
-        Objects.equals(this.cluster, privilege.cluster);
+        Objects.equals(this.cluster, privilege.cluster) &&
+        Objects.equals(this.resourceName, privilege.resourceName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(action, resourceName, cluster);
+    return Objects.hash(action, cluster, resourceName);
   }
 
 
@@ -262,8 +275,8 @@ public class Privilege {
     sb.append("class Privilege {\n");
     
     sb.append("    action: ").append(toIndentedString(action)).append("\n");
-    sb.append("    resourceName: ").append(toIndentedString(resourceName)).append("\n");
     sb.append("    cluster: ").append(toIndentedString(cluster)).append("\n");
+    sb.append("    resourceName: ").append(toIndentedString(resourceName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

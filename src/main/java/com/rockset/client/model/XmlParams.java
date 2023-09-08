@@ -29,61 +29,41 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * XmlParams
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class XmlParams {
-  @SerializedName("root_tag")
-  private String rootTag = null;
-
-  @SerializedName("encoding")
-  private String encoding = null;
+  @SerializedName("attribute_prefix")
+  private String attributePrefix = null;
 
   @SerializedName("doc_tag")
   private String docTag = null;
 
+  @SerializedName("encoding")
+  private String encoding = null;
+
+  @SerializedName("root_tag")
+  private String rootTag = null;
+
   @SerializedName("value_tag")
   private String valueTag = null;
 
-  @SerializedName("attribute_prefix")
-  private String attributePrefix = null;
-
-  public XmlParams rootTag(String rootTag) {
-    this.rootTag = rootTag;
+  public XmlParams attributePrefix(String attributePrefix) {
+    this.attributePrefix = attributePrefix;
     return this;
   }
 
    /**
-   * Tag until which xml is ignored.
-   * @return rootTag
+   * Tag to differentiate between attributes and elements.
+   * @return attributePrefix
   **/
 
-@JsonProperty("root_tag")
-@ApiModelProperty(example = "root", value = "Tag until which xml is ignored.")
-  public String getRootTag() {
-    return rootTag;
+@JsonProperty("attribute_prefix")
+@ApiModelProperty(example = "_attr", value = "Tag to differentiate between attributes and elements.")
+  public String getAttributePrefix() {
+    return attributePrefix;
   }
 
-  public void setRootTag(String rootTag) {
-    this.rootTag = rootTag;
-  }
-
-  public XmlParams encoding(String encoding) {
-    this.encoding = encoding;
-    return this;
-  }
-
-   /**
-   * Encoding in which data source is encoded.
-   * @return encoding
-  **/
-
-@JsonProperty("encoding")
-@ApiModelProperty(example = "UTF-8", value = "Encoding in which data source is encoded.")
-  public String getEncoding() {
-    return encoding;
-  }
-
-  public void setEncoding(String encoding) {
-    this.encoding = encoding;
+  public void setAttributePrefix(String attributePrefix) {
+    this.attributePrefix = attributePrefix;
   }
 
   public XmlParams docTag(String docTag) {
@@ -106,6 +86,46 @@ public class XmlParams {
     this.docTag = docTag;
   }
 
+  public XmlParams encoding(String encoding) {
+    this.encoding = encoding;
+    return this;
+  }
+
+   /**
+   * Encoding in which data source is encoded.
+   * @return encoding
+  **/
+
+@JsonProperty("encoding")
+@ApiModelProperty(example = "UTF-8", value = "Encoding in which data source is encoded.")
+  public String getEncoding() {
+    return encoding;
+  }
+
+  public void setEncoding(String encoding) {
+    this.encoding = encoding;
+  }
+
+  public XmlParams rootTag(String rootTag) {
+    this.rootTag = rootTag;
+    return this;
+  }
+
+   /**
+   * Tag until which xml is ignored.
+   * @return rootTag
+  **/
+
+@JsonProperty("root_tag")
+@ApiModelProperty(example = "root", value = "Tag until which xml is ignored.")
+  public String getRootTag() {
+    return rootTag;
+  }
+
+  public void setRootTag(String rootTag) {
+    this.rootTag = rootTag;
+  }
+
   public XmlParams valueTag(String valueTag) {
     this.valueTag = valueTag;
     return this;
@@ -126,26 +146,6 @@ public class XmlParams {
     this.valueTag = valueTag;
   }
 
-  public XmlParams attributePrefix(String attributePrefix) {
-    this.attributePrefix = attributePrefix;
-    return this;
-  }
-
-   /**
-   * Tag to differentiate between attributes and elements.
-   * @return attributePrefix
-  **/
-
-@JsonProperty("attribute_prefix")
-@ApiModelProperty(example = "_attr", value = "Tag to differentiate between attributes and elements.")
-  public String getAttributePrefix() {
-    return attributePrefix;
-  }
-
-  public void setAttributePrefix(String attributePrefix) {
-    this.attributePrefix = attributePrefix;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -156,16 +156,16 @@ public class XmlParams {
       return false;
     }
     XmlParams xmlParams = (XmlParams) o;
-    return Objects.equals(this.rootTag, xmlParams.rootTag) &&
-        Objects.equals(this.encoding, xmlParams.encoding) &&
+    return Objects.equals(this.attributePrefix, xmlParams.attributePrefix) &&
         Objects.equals(this.docTag, xmlParams.docTag) &&
-        Objects.equals(this.valueTag, xmlParams.valueTag) &&
-        Objects.equals(this.attributePrefix, xmlParams.attributePrefix);
+        Objects.equals(this.encoding, xmlParams.encoding) &&
+        Objects.equals(this.rootTag, xmlParams.rootTag) &&
+        Objects.equals(this.valueTag, xmlParams.valueTag);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(rootTag, encoding, docTag, valueTag, attributePrefix);
+    return Objects.hash(attributePrefix, docTag, encoding, rootTag, valueTag);
   }
 
 
@@ -174,11 +174,11 @@ public class XmlParams {
     StringBuilder sb = new StringBuilder();
     sb.append("class XmlParams {\n");
     
-    sb.append("    rootTag: ").append(toIndentedString(rootTag)).append("\n");
-    sb.append("    encoding: ").append(toIndentedString(encoding)).append("\n");
-    sb.append("    docTag: ").append(toIndentedString(docTag)).append("\n");
-    sb.append("    valueTag: ").append(toIndentedString(valueTag)).append("\n");
     sb.append("    attributePrefix: ").append(toIndentedString(attributePrefix)).append("\n");
+    sb.append("    docTag: ").append(toIndentedString(docTag)).append("\n");
+    sb.append("    encoding: ").append(toIndentedString(encoding)).append("\n");
+    sb.append("    rootTag: ").append(toIndentedString(rootTag)).append("\n");
+    sb.append("    valueTag: ").append(toIndentedString(valueTag)).append("\n");
     sb.append("}");
     return sb.toString();
   }

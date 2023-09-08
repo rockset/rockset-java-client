@@ -30,19 +30,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceKafka
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class SourceKafka {
-  @SerializedName("kafka_topic_name")
-  private String kafkaTopicName = null;
-
-  @SerializedName("status")
-  private StatusKafka status = null;
-
   @SerializedName("consumer_group_id")
   private String consumerGroupId = null;
 
-  @SerializedName("use_v3")
-  private Boolean useV3 = null;
+  @SerializedName("kafka_topic_name")
+  private String kafkaTopicName = null;
 
   /**
    * The offset reset policy.
@@ -68,6 +62,7 @@ public class SourceKafka {
       return String.valueOf(value);
     }
 
+    @com.fasterxml.jackson.annotation.JsonCreator
     public static OffsetResetPolicyEnum fromValue(String text) {
       for (OffsetResetPolicyEnum b : OffsetResetPolicyEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -94,36 +89,11 @@ public class SourceKafka {
   @SerializedName("offset_reset_policy")
   private OffsetResetPolicyEnum offsetResetPolicy = null;
 
-  public SourceKafka kafkaTopicName(String kafkaTopicName) {
-    this.kafkaTopicName = kafkaTopicName;
-    return this;
-  }
+  @SerializedName("status")
+  private StatusKafka status = null;
 
-   /**
-   * The Kafka topic to be tailed.
-   * @return kafkaTopicName
-  **/
-
-@JsonProperty("kafka_topic_name")
-@ApiModelProperty(example = "example-topic", value = "The Kafka topic to be tailed.")
-  public String getKafkaTopicName() {
-    return kafkaTopicName;
-  }
-
-  public void setKafkaTopicName(String kafkaTopicName) {
-    this.kafkaTopicName = kafkaTopicName;
-  }
-
-   /**
-   * Kafka source status.
-   * @return status
-  **/
-
-@JsonProperty("status")
-@ApiModelProperty(value = "Kafka source status.")
-  public StatusKafka getStatus() {
-    return status;
-  }
+  @SerializedName("use_v3")
+  private Boolean useV3 = null;
 
   public SourceKafka consumerGroupId(String consumerGroupId) {
     this.consumerGroupId = consumerGroupId;
@@ -145,24 +115,24 @@ public class SourceKafka {
     this.consumerGroupId = consumerGroupId;
   }
 
-  public SourceKafka useV3(Boolean useV3) {
-    this.useV3 = useV3;
+  public SourceKafka kafkaTopicName(String kafkaTopicName) {
+    this.kafkaTopicName = kafkaTopicName;
     return this;
   }
 
    /**
-   * Whether to use v3 integration.
-   * @return useV3
+   * The Kafka topic to be tailed.
+   * @return kafkaTopicName
   **/
 
-@JsonProperty("use_v3")
-@ApiModelProperty(value = "Whether to use v3 integration.")
-  public Boolean isUseV3() {
-    return useV3;
+@JsonProperty("kafka_topic_name")
+@ApiModelProperty(example = "example-topic", value = "The Kafka topic to be tailed.")
+  public String getKafkaTopicName() {
+    return kafkaTopicName;
   }
 
-  public void setUseV3(Boolean useV3) {
-    this.useV3 = useV3;
+  public void setKafkaTopicName(String kafkaTopicName) {
+    this.kafkaTopicName = kafkaTopicName;
   }
 
   public SourceKafka offsetResetPolicy(OffsetResetPolicyEnum offsetResetPolicy) {
@@ -185,6 +155,37 @@ public class SourceKafka {
     this.offsetResetPolicy = offsetResetPolicy;
   }
 
+   /**
+   * Kafka source status.
+   * @return status
+  **/
+
+@JsonProperty("status")
+@ApiModelProperty(value = "Kafka source status.")
+  public StatusKafka getStatus() {
+    return status;
+  }
+
+  public SourceKafka useV3(Boolean useV3) {
+    this.useV3 = useV3;
+    return this;
+  }
+
+   /**
+   * Whether to use v3 integration.
+   * @return useV3
+  **/
+
+@JsonProperty("use_v3")
+@ApiModelProperty(value = "Whether to use v3 integration.")
+  public Boolean isUseV3() {
+    return useV3;
+  }
+
+  public void setUseV3(Boolean useV3) {
+    this.useV3 = useV3;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -195,16 +196,16 @@ public class SourceKafka {
       return false;
     }
     SourceKafka sourceKafka = (SourceKafka) o;
-    return Objects.equals(this.kafkaTopicName, sourceKafka.kafkaTopicName) &&
+    return Objects.equals(this.consumerGroupId, sourceKafka.consumerGroupId) &&
+        Objects.equals(this.kafkaTopicName, sourceKafka.kafkaTopicName) &&
+        Objects.equals(this.offsetResetPolicy, sourceKafka.offsetResetPolicy) &&
         Objects.equals(this.status, sourceKafka.status) &&
-        Objects.equals(this.consumerGroupId, sourceKafka.consumerGroupId) &&
-        Objects.equals(this.useV3, sourceKafka.useV3) &&
-        Objects.equals(this.offsetResetPolicy, sourceKafka.offsetResetPolicy);
+        Objects.equals(this.useV3, sourceKafka.useV3);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(kafkaTopicName, status, consumerGroupId, useV3, offsetResetPolicy);
+    return Objects.hash(consumerGroupId, kafkaTopicName, offsetResetPolicy, status, useV3);
   }
 
 
@@ -213,11 +214,11 @@ public class SourceKafka {
     StringBuilder sb = new StringBuilder();
     sb.append("class SourceKafka {\n");
     
-    sb.append("    kafkaTopicName: ").append(toIndentedString(kafkaTopicName)).append("\n");
-    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    consumerGroupId: ").append(toIndentedString(consumerGroupId)).append("\n");
-    sb.append("    useV3: ").append(toIndentedString(useV3)).append("\n");
+    sb.append("    kafkaTopicName: ").append(toIndentedString(kafkaTopicName)).append("\n");
     sb.append("    offsetResetPolicy: ").append(toIndentedString(offsetResetPolicy)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    useV3: ").append(toIndentedString(useV3)).append("\n");
     sb.append("}");
     return sb.toString();
   }

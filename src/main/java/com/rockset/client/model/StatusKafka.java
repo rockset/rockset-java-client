@@ -32,8 +32,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * StatusKafka
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class StatusKafka {
+  @SerializedName("kafka_partitions")
+  private List<StatusKafkaPartition> kafkaPartitions = null;
+
+  @SerializedName("last_consumed_time")
+  private String lastConsumedTime = null;
+
+  @SerializedName("num_documents_processed")
+  private Long numDocumentsProcessed = null;
+
   /**
    * State of the Kafka source.
    */
@@ -60,6 +69,7 @@ public class StatusKafka {
       return String.valueOf(value);
     }
 
+    @com.fasterxml.jackson.annotation.JsonCreator
     public static StateEnum fromValue(String text) {
       for (StateEnum b : StateEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -86,33 +96,32 @@ public class StatusKafka {
   @SerializedName("state")
   private StateEnum state = null;
 
-  @SerializedName("last_consumed_time")
-  private String lastConsumedTime = null;
+  public StatusKafka kafkaPartitions(List<StatusKafkaPartition> kafkaPartitions) {
+    this.kafkaPartitions = kafkaPartitions;
+    return this;
+  }
 
-  @SerializedName("num_documents_processed")
-  private Long numDocumentsProcessed = null;
-
-  @SerializedName("kafka_partitions")
-  private List<StatusKafkaPartition> kafkaPartitions = null;
-
-  public StatusKafka state(StateEnum state) {
-    this.state = state;
+  public StatusKafka addKafkaPartitionsItem(StatusKafkaPartition kafkaPartitionsItem) {
+    if (this.kafkaPartitions == null) {
+      this.kafkaPartitions = new ArrayList<StatusKafkaPartition>();
+    }
+    this.kafkaPartitions.add(kafkaPartitionsItem);
     return this;
   }
 
    /**
-   * State of the Kafka source.
-   * @return state
+   * Status info per partition.
+   * @return kafkaPartitions
   **/
 
-@JsonProperty("state")
-@ApiModelProperty(example = "ACTIVE", value = "State of the Kafka source.")
-  public StateEnum getState() {
-    return state;
+@JsonProperty("kafka_partitions")
+@ApiModelProperty(value = "Status info per partition.")
+  public List<StatusKafkaPartition> getKafkaPartitions() {
+    return kafkaPartitions;
   }
 
-  public void setState(StateEnum state) {
-    this.state = state;
+  public void setKafkaPartitions(List<StatusKafkaPartition> kafkaPartitions) {
+    this.kafkaPartitions = kafkaPartitions;
   }
 
   public StatusKafka lastConsumedTime(String lastConsumedTime) {
@@ -155,32 +164,24 @@ public class StatusKafka {
     this.numDocumentsProcessed = numDocumentsProcessed;
   }
 
-  public StatusKafka kafkaPartitions(List<StatusKafkaPartition> kafkaPartitions) {
-    this.kafkaPartitions = kafkaPartitions;
-    return this;
-  }
-
-  public StatusKafka addKafkaPartitionsItem(StatusKafkaPartition kafkaPartitionsItem) {
-    if (this.kafkaPartitions == null) {
-      this.kafkaPartitions = new ArrayList<StatusKafkaPartition>();
-    }
-    this.kafkaPartitions.add(kafkaPartitionsItem);
+  public StatusKafka state(StateEnum state) {
+    this.state = state;
     return this;
   }
 
    /**
-   * Status info per partition.
-   * @return kafkaPartitions
+   * State of the Kafka source.
+   * @return state
   **/
 
-@JsonProperty("kafka_partitions")
-@ApiModelProperty(value = "Status info per partition.")
-  public List<StatusKafkaPartition> getKafkaPartitions() {
-    return kafkaPartitions;
+@JsonProperty("state")
+@ApiModelProperty(example = "ACTIVE", value = "State of the Kafka source.")
+  public StateEnum getState() {
+    return state;
   }
 
-  public void setKafkaPartitions(List<StatusKafkaPartition> kafkaPartitions) {
-    this.kafkaPartitions = kafkaPartitions;
+  public void setState(StateEnum state) {
+    this.state = state;
   }
 
 
@@ -193,15 +194,15 @@ public class StatusKafka {
       return false;
     }
     StatusKafka statusKafka = (StatusKafka) o;
-    return Objects.equals(this.state, statusKafka.state) &&
+    return Objects.equals(this.kafkaPartitions, statusKafka.kafkaPartitions) &&
         Objects.equals(this.lastConsumedTime, statusKafka.lastConsumedTime) &&
         Objects.equals(this.numDocumentsProcessed, statusKafka.numDocumentsProcessed) &&
-        Objects.equals(this.kafkaPartitions, statusKafka.kafkaPartitions);
+        Objects.equals(this.state, statusKafka.state);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(state, lastConsumedTime, numDocumentsProcessed, kafkaPartitions);
+    return Objects.hash(kafkaPartitions, lastConsumedTime, numDocumentsProcessed, state);
   }
 
 
@@ -210,10 +211,10 @@ public class StatusKafka {
     StringBuilder sb = new StringBuilder();
     sb.append("class StatusKafka {\n");
     
-    sb.append("    state: ").append(toIndentedString(state)).append("\n");
+    sb.append("    kafkaPartitions: ").append(toIndentedString(kafkaPartitions)).append("\n");
     sb.append("    lastConsumedTime: ").append(toIndentedString(lastConsumedTime)).append("\n");
     sb.append("    numDocumentsProcessed: ").append(toIndentedString(numDocumentsProcessed)).append("\n");
-    sb.append("    kafkaPartitions: ").append(toIndentedString(kafkaPartitions)).append("\n");
+    sb.append("    state: ").append(toIndentedString(state)).append("\n");
     sb.append("}");
     return sb.toString();
   }

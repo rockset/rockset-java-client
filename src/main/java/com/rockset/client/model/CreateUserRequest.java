@@ -31,19 +31,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateUserRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class CreateUserRequest {
   @SerializedName("email")
   private String email = null;
-
-  @SerializedName("roles")
-  private List<String> roles = new ArrayList<String>();
 
   @SerializedName("first_name")
   private String firstName = null;
 
   @SerializedName("last_name")
   private String lastName = null;
+
+  @SerializedName("roles")
+  private List<String> roles = new ArrayList<String>();
 
   public CreateUserRequest email(String email) {
     this.email = email;
@@ -63,31 +63,6 @@ public class CreateUserRequest {
 
   public void setEmail(String email) {
     this.email = email;
-  }
-
-  public CreateUserRequest roles(List<String> roles) {
-    this.roles = roles;
-    return this;
-  }
-
-  public CreateUserRequest addRolesItem(String rolesItem) {
-    this.roles.add(rolesItem);
-    return this;
-  }
-
-   /**
-   * List of roles for a given user.
-   * @return roles
-  **/
-
-@JsonProperty("roles")
-@ApiModelProperty(example = "\"[\\\"admin\\\", \\\"member\\\", \\\"read-only\\\"]\"", required = true, value = "List of roles for a given user.")
-  public List<String> getRoles() {
-    return roles;
-  }
-
-  public void setRoles(List<String> roles) {
-    this.roles = roles;
   }
 
   public CreateUserRequest firstName(String firstName) {
@@ -130,6 +105,31 @@ public class CreateUserRequest {
     this.lastName = lastName;
   }
 
+  public CreateUserRequest roles(List<String> roles) {
+    this.roles = roles;
+    return this;
+  }
+
+  public CreateUserRequest addRolesItem(String rolesItem) {
+    this.roles.add(rolesItem);
+    return this;
+  }
+
+   /**
+   * List of roles for a given user.
+   * @return roles
+  **/
+
+@JsonProperty("roles")
+@ApiModelProperty(example = "\"[\\\"admin\\\", \\\"member\\\", \\\"read-only\\\"]\"", required = true, value = "List of roles for a given user.")
+  public List<String> getRoles() {
+    return roles;
+  }
+
+  public void setRoles(List<String> roles) {
+    this.roles = roles;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -141,14 +141,14 @@ public class CreateUserRequest {
     }
     CreateUserRequest createUserRequest = (CreateUserRequest) o;
     return Objects.equals(this.email, createUserRequest.email) &&
-        Objects.equals(this.roles, createUserRequest.roles) &&
         Objects.equals(this.firstName, createUserRequest.firstName) &&
-        Objects.equals(this.lastName, createUserRequest.lastName);
+        Objects.equals(this.lastName, createUserRequest.lastName) &&
+        Objects.equals(this.roles, createUserRequest.roles);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(email, roles, firstName, lastName);
+    return Objects.hash(email, firstName, lastName, roles);
   }
 
 
@@ -158,9 +158,9 @@ public class CreateUserRequest {
     sb.append("class CreateUserRequest {\n");
     
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
-    sb.append("    roles: ").append(toIndentedString(roles)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
+    sb.append("    roles: ").append(toIndentedString(roles)).append("\n");
     sb.append("}");
     return sb.toString();
   }

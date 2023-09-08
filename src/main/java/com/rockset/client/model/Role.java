@@ -32,10 +32,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Role
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class Role {
-  @SerializedName("role_name")
-  private String roleName = null;
+  @SerializedName("created_at")
+  private String createdAt = null;
+
+  @SerializedName("created_by")
+  private String createdBy = null;
 
   @SerializedName("description")
   private String description = null;
@@ -43,33 +46,50 @@ public class Role {
   @SerializedName("owner_email")
   private String ownerEmail = null;
 
-  @SerializedName("created_by")
-  private String createdBy = null;
-
   @SerializedName("privileges")
   private List<Privilege> privileges = null;
 
-  @SerializedName("created_at")
-  private String createdAt = null;
+  @SerializedName("role_name")
+  private String roleName = null;
 
-  public Role roleName(String roleName) {
-    this.roleName = roleName;
+  public Role createdAt(String createdAt) {
+    this.createdAt = createdAt;
     return this;
   }
 
    /**
-   * Unique identifier for the role.
-   * @return roleName
+   * ISO-8601 date of when the role was created.
+   * @return createdAt
   **/
 
-@JsonProperty("role_name")
-@ApiModelProperty(example = "read_write", value = "Unique identifier for the role.")
-  public String getRoleName() {
-    return roleName;
+@JsonProperty("created_at")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date of when the role was created.")
+  public String getCreatedAt() {
+    return createdAt;
   }
 
-  public void setRoleName(String roleName) {
-    this.roleName = roleName;
+  public void setCreatedAt(String createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public Role createdBy(String createdBy) {
+    this.createdBy = createdBy;
+    return this;
+  }
+
+   /**
+   * Email of the user who created the role.
+   * @return createdBy
+  **/
+
+@JsonProperty("created_by")
+@ApiModelProperty(example = "hello@rockset.com", value = "Email of the user who created the role.")
+  public String getCreatedBy() {
+    return createdBy;
+  }
+
+  public void setCreatedBy(String createdBy) {
+    this.createdBy = createdBy;
   }
 
   public Role description(String description) {
@@ -112,26 +132,6 @@ public class Role {
     this.ownerEmail = ownerEmail;
   }
 
-  public Role createdBy(String createdBy) {
-    this.createdBy = createdBy;
-    return this;
-  }
-
-   /**
-   * Email of the user who created the role.
-   * @return createdBy
-  **/
-
-@JsonProperty("created_by")
-@ApiModelProperty(example = "hello@rockset.com", value = "Email of the user who created the role.")
-  public String getCreatedBy() {
-    return createdBy;
-  }
-
-  public void setCreatedBy(String createdBy) {
-    this.createdBy = createdBy;
-  }
-
   public Role privileges(List<Privilege> privileges) {
     this.privileges = privileges;
     return this;
@@ -160,24 +160,24 @@ public class Role {
     this.privileges = privileges;
   }
 
-  public Role createdAt(String createdAt) {
-    this.createdAt = createdAt;
+  public Role roleName(String roleName) {
+    this.roleName = roleName;
     return this;
   }
 
    /**
-   * ISO-8601 date of when the role was created.
-   * @return createdAt
+   * Unique identifier for the role.
+   * @return roleName
   **/
 
-@JsonProperty("created_at")
-@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date of when the role was created.")
-  public String getCreatedAt() {
-    return createdAt;
+@JsonProperty("role_name")
+@ApiModelProperty(example = "read_write", value = "Unique identifier for the role.")
+  public String getRoleName() {
+    return roleName;
   }
 
-  public void setCreatedAt(String createdAt) {
-    this.createdAt = createdAt;
+  public void setRoleName(String roleName) {
+    this.roleName = roleName;
   }
 
 
@@ -190,17 +190,17 @@ public class Role {
       return false;
     }
     Role role = (Role) o;
-    return Objects.equals(this.roleName, role.roleName) &&
+    return Objects.equals(this.createdAt, role.createdAt) &&
+        Objects.equals(this.createdBy, role.createdBy) &&
         Objects.equals(this.description, role.description) &&
         Objects.equals(this.ownerEmail, role.ownerEmail) &&
-        Objects.equals(this.createdBy, role.createdBy) &&
         Objects.equals(this.privileges, role.privileges) &&
-        Objects.equals(this.createdAt, role.createdAt);
+        Objects.equals(this.roleName, role.roleName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(roleName, description, ownerEmail, createdBy, privileges, createdAt);
+    return Objects.hash(createdAt, createdBy, description, ownerEmail, privileges, roleName);
   }
 
 
@@ -209,12 +209,12 @@ public class Role {
     StringBuilder sb = new StringBuilder();
     sb.append("class Role {\n");
     
-    sb.append("    roleName: ").append(toIndentedString(roleName)).append("\n");
+    sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
+    sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    ownerEmail: ").append(toIndentedString(ownerEmail)).append("\n");
-    sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
     sb.append("    privileges: ").append(toIndentedString(privileges)).append("\n");
-    sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
+    sb.append("    roleName: ").append(toIndentedString(roleName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

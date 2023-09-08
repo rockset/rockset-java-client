@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryParameter
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class QueryParameter {
   @SerializedName("name")
   private String name = null;
@@ -66,12 +66,12 @@ public class QueryParameter {
   }
 
    /**
-   * Data type of the field.
+   * Deprecated. Data type of the field.
    * @return type
   **/
 
 @JsonProperty("type")
-@ApiModelProperty(example = "string", required = true, value = "Data type of the field.")
+@ApiModelProperty(example = "string", required = true, value = "Deprecated. Data type of the field.")
   public String getType() {
     return type;
   }

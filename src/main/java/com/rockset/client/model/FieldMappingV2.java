@@ -33,59 +33,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * FieldMappingV2
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class FieldMappingV2 {
-  @SerializedName("name")
-  private String name = null;
+  @SerializedName("input_fields")
+  private List<InputField> inputFields = null;
 
   @SerializedName("is_drop_all_fields")
   private Boolean isDropAllFields = null;
 
-  @SerializedName("input_fields")
-  private List<InputField> inputFields = null;
+  @SerializedName("name")
+  private String name = null;
 
   @SerializedName("output_field")
   private OutputField outputField = null;
-
-  public FieldMappingV2 name(String name) {
-    this.name = name;
-    return this;
-  }
-
-   /**
-   * A user specified string that is a name for this mapping.
-   * @return name
-  **/
-
-@JsonProperty("name")
-@ApiModelProperty(example = "myTestMapping", value = "A user specified string that is a name for this mapping.")
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public FieldMappingV2 isDropAllFields(Boolean isDropAllFields) {
-    this.isDropAllFields = isDropAllFields;
-    return this;
-  }
-
-   /**
-   * A boolean that determines whether to drop all fields in this document. If set, input and output fields should not be set
-   * @return isDropAllFields
-  **/
-
-@JsonProperty("is_drop_all_fields")
-@ApiModelProperty(example = "true", value = "A boolean that determines whether to drop all fields in this document. If set, input and output fields should not be set")
-  public Boolean isIsDropAllFields() {
-    return isDropAllFields;
-  }
-
-  public void setIsDropAllFields(Boolean isDropAllFields) {
-    this.isDropAllFields = isDropAllFields;
-  }
 
   public FieldMappingV2 inputFields(List<InputField> inputFields) {
     this.inputFields = inputFields;
@@ -113,6 +73,46 @@ public class FieldMappingV2 {
 
   public void setInputFields(List<InputField> inputFields) {
     this.inputFields = inputFields;
+  }
+
+  public FieldMappingV2 isDropAllFields(Boolean isDropAllFields) {
+    this.isDropAllFields = isDropAllFields;
+    return this;
+  }
+
+   /**
+   * A boolean that determines whether to drop all fields in this document. If set, input and output fields should not be set
+   * @return isDropAllFields
+  **/
+
+@JsonProperty("is_drop_all_fields")
+@ApiModelProperty(example = "true", value = "A boolean that determines whether to drop all fields in this document. If set, input and output fields should not be set")
+  public Boolean isIsDropAllFields() {
+    return isDropAllFields;
+  }
+
+  public void setIsDropAllFields(Boolean isDropAllFields) {
+    this.isDropAllFields = isDropAllFields;
+  }
+
+  public FieldMappingV2 name(String name) {
+    this.name = name;
+    return this;
+  }
+
+   /**
+   * A user specified string that is a name for this mapping.
+   * @return name
+  **/
+
+@JsonProperty("name")
+@ApiModelProperty(example = "myTestMapping", value = "A user specified string that is a name for this mapping.")
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 
   public FieldMappingV2 outputField(OutputField outputField) {
@@ -145,15 +145,15 @@ public class FieldMappingV2 {
       return false;
     }
     FieldMappingV2 fieldMappingV2 = (FieldMappingV2) o;
-    return Objects.equals(this.name, fieldMappingV2.name) &&
+    return Objects.equals(this.inputFields, fieldMappingV2.inputFields) &&
         Objects.equals(this.isDropAllFields, fieldMappingV2.isDropAllFields) &&
-        Objects.equals(this.inputFields, fieldMappingV2.inputFields) &&
+        Objects.equals(this.name, fieldMappingV2.name) &&
         Objects.equals(this.outputField, fieldMappingV2.outputField);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, isDropAllFields, inputFields, outputField);
+    return Objects.hash(inputFields, isDropAllFields, name, outputField);
   }
 
 
@@ -162,9 +162,9 @@ public class FieldMappingV2 {
     StringBuilder sb = new StringBuilder();
     sb.append("class FieldMappingV2 {\n");
     
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    isDropAllFields: ").append(toIndentedString(isDropAllFields)).append("\n");
     sb.append("    inputFields: ").append(toIndentedString(inputFields)).append("\n");
+    sb.append("    isDropAllFields: ").append(toIndentedString(isDropAllFields)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    outputField: ").append(toIndentedString(outputField)).append("\n");
     sb.append("}");
     return sb.toString();

@@ -32,10 +32,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * PatchDocumentsResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class PatchDocumentsResponse {
   @SerializedName("data")
   private List<DocumentStatus> data = new ArrayList<DocumentStatus>();
+
+  @SerializedName("last_offset")
+  private String lastOffset = null;
 
   public PatchDocumentsResponse data(List<DocumentStatus> data) {
     this.data = data;
@@ -62,6 +65,26 @@ public class PatchDocumentsResponse {
     this.data = data;
   }
 
+  public PatchDocumentsResponse lastOffset(String lastOffset) {
+    this.lastOffset = lastOffset;
+    return this;
+  }
+
+   /**
+   * A string representing the collection offset after completing the patch.
+   * @return lastOffset
+  **/
+
+@JsonProperty("last_offset")
+@ApiModelProperty(example = "f1:0:0:0:0", value = "A string representing the collection offset after completing the patch.")
+  public String getLastOffset() {
+    return lastOffset;
+  }
+
+  public void setLastOffset(String lastOffset) {
+    this.lastOffset = lastOffset;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -72,12 +95,13 @@ public class PatchDocumentsResponse {
       return false;
     }
     PatchDocumentsResponse patchDocumentsResponse = (PatchDocumentsResponse) o;
-    return Objects.equals(this.data, patchDocumentsResponse.data);
+    return Objects.equals(this.data, patchDocumentsResponse.data) &&
+        Objects.equals(this.lastOffset, patchDocumentsResponse.lastOffset);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data);
+    return Objects.hash(data, lastOffset);
   }
 
 
@@ -87,6 +111,7 @@ public class PatchDocumentsResponse {
     sb.append("class PatchDocumentsResponse {\n");
     
     sb.append("    data: ").append(toIndentedString(data)).append("\n");
+    sb.append("    lastOffset: ").append(toIndentedString(lastOffset)).append("\n");
     sb.append("}");
     return sb.toString();
   }

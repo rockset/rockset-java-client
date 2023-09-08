@@ -30,13 +30,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * OutputField
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class OutputField {
   @SerializedName("field_name")
   private String fieldName = null;
-
-  @SerializedName("value")
-  private SqlExpression value = null;
 
   /**
    * Error in Mapping execution: &#39;skip&#39; or &#39;fail&#39;.
@@ -62,6 +59,7 @@ public class OutputField {
       return String.valueOf(value);
     }
 
+    @com.fasterxml.jackson.annotation.JsonCreator
     public static OnErrorEnum fromValue(String text) {
       for (OnErrorEnum b : OnErrorEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -88,6 +86,9 @@ public class OutputField {
   @SerializedName("on_error")
   private OnErrorEnum onError = null;
 
+  @SerializedName("value")
+  private SqlExpression value = null;
+
   public OutputField fieldName(String fieldName) {
     this.fieldName = fieldName;
     return this;
@@ -106,26 +107,6 @@ public class OutputField {
 
   public void setFieldName(String fieldName) {
     this.fieldName = fieldName;
-  }
-
-  public OutputField value(SqlExpression value) {
-    this.value = value;
-    return this;
-  }
-
-   /**
-   * The name of a sql function.
-   * @return value
-  **/
-
-@JsonProperty("value")
-@ApiModelProperty(value = "The name of a sql function.")
-  public SqlExpression getValue() {
-    return value;
-  }
-
-  public void setValue(SqlExpression value) {
-    this.value = value;
   }
 
   public OutputField onError(OnErrorEnum onError) {
@@ -148,6 +129,26 @@ public class OutputField {
     this.onError = onError;
   }
 
+  public OutputField value(SqlExpression value) {
+    this.value = value;
+    return this;
+  }
+
+   /**
+   * The name of a sql function.
+   * @return value
+  **/
+
+@JsonProperty("value")
+@ApiModelProperty(value = "The name of a sql function.")
+  public SqlExpression getValue() {
+    return value;
+  }
+
+  public void setValue(SqlExpression value) {
+    this.value = value;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -159,13 +160,13 @@ public class OutputField {
     }
     OutputField outputField = (OutputField) o;
     return Objects.equals(this.fieldName, outputField.fieldName) &&
-        Objects.equals(this.value, outputField.value) &&
-        Objects.equals(this.onError, outputField.onError);
+        Objects.equals(this.onError, outputField.onError) &&
+        Objects.equals(this.value, outputField.value);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(fieldName, value, onError);
+    return Objects.hash(fieldName, onError, value);
   }
 
 
@@ -175,8 +176,8 @@ public class OutputField {
     sb.append("class OutputField {\n");
     
     sb.append("    fieldName: ").append(toIndentedString(fieldName)).append("\n");
-    sb.append("    value: ").append(toIndentedString(value)).append("\n");
     sb.append("    onError: ").append(toIndentedString(onError)).append("\n");
+    sb.append("    value: ").append(toIndentedString(value)).append("\n");
     sb.append("}");
     return sb.toString();
   }

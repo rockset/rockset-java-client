@@ -29,19 +29,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Stats
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class Stats {
   @SerializedName("elapsed_time_ms")
   private Long elapsedTimeMs = null;
 
-  @SerializedName("throttled_time_ms")
-  private Long throttledTimeMs = null;
+  @SerializedName("result_set_bytes_size")
+  private Long resultSetBytesSize = null;
 
   @SerializedName("result_set_document_count")
   private Long resultSetDocumentCount = null;
 
-  @SerializedName("result_set_bytes_size")
-  private Long resultSetBytesSize = null;
+  @SerializedName("throttled_time_ms")
+  private Long throttledTimeMs = null;
 
   public Stats elapsedTimeMs(Long elapsedTimeMs) {
     this.elapsedTimeMs = elapsedTimeMs;
@@ -61,46 +61,6 @@ public class Stats {
 
   public void setElapsedTimeMs(Long elapsedTimeMs) {
     this.elapsedTimeMs = elapsedTimeMs;
-  }
-
-  public Stats throttledTimeMs(Long throttledTimeMs) {
-    this.throttledTimeMs = throttledTimeMs;
-    return this;
-  }
-
-   /**
-   * Time query spent queued, in milliseconds.
-   * @return throttledTimeMs
-  **/
-
-@JsonProperty("throttled_time_ms")
-@ApiModelProperty(example = "16", value = "Time query spent queued, in milliseconds.")
-  public Long getThrottledTimeMs() {
-    return throttledTimeMs;
-  }
-
-  public void setThrottledTimeMs(Long throttledTimeMs) {
-    this.throttledTimeMs = throttledTimeMs;
-  }
-
-  public Stats resultSetDocumentCount(Long resultSetDocumentCount) {
-    this.resultSetDocumentCount = resultSetDocumentCount;
-    return this;
-  }
-
-   /**
-   * Number of documents returned by the query. Only populated if &#x60;status&#x60; is &#x60;COMPLETE&#x60;.
-   * @return resultSetDocumentCount
-  **/
-
-@JsonProperty("result_set_document_count")
-@ApiModelProperty(example = "1235", value = "Number of documents returned by the query. Only populated if `status` is `COMPLETE`.")
-  public Long getResultSetDocumentCount() {
-    return resultSetDocumentCount;
-  }
-
-  public void setResultSetDocumentCount(Long resultSetDocumentCount) {
-    this.resultSetDocumentCount = resultSetDocumentCount;
   }
 
   public Stats resultSetBytesSize(Long resultSetBytesSize) {
@@ -123,6 +83,46 @@ public class Stats {
     this.resultSetBytesSize = resultSetBytesSize;
   }
 
+  public Stats resultSetDocumentCount(Long resultSetDocumentCount) {
+    this.resultSetDocumentCount = resultSetDocumentCount;
+    return this;
+  }
+
+   /**
+   * Number of documents returned by the query. Only populated if &#x60;status&#x60; is &#x60;COMPLETE&#x60;.
+   * @return resultSetDocumentCount
+  **/
+
+@JsonProperty("result_set_document_count")
+@ApiModelProperty(example = "1235", value = "Number of documents returned by the query. Only populated if `status` is `COMPLETE`.")
+  public Long getResultSetDocumentCount() {
+    return resultSetDocumentCount;
+  }
+
+  public void setResultSetDocumentCount(Long resultSetDocumentCount) {
+    this.resultSetDocumentCount = resultSetDocumentCount;
+  }
+
+  public Stats throttledTimeMs(Long throttledTimeMs) {
+    this.throttledTimeMs = throttledTimeMs;
+    return this;
+  }
+
+   /**
+   * Time query spent queued, in milliseconds.
+   * @return throttledTimeMs
+  **/
+
+@JsonProperty("throttled_time_ms")
+@ApiModelProperty(example = "16", value = "Time query spent queued, in milliseconds.")
+  public Long getThrottledTimeMs() {
+    return throttledTimeMs;
+  }
+
+  public void setThrottledTimeMs(Long throttledTimeMs) {
+    this.throttledTimeMs = throttledTimeMs;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -134,14 +134,14 @@ public class Stats {
     }
     Stats stats = (Stats) o;
     return Objects.equals(this.elapsedTimeMs, stats.elapsedTimeMs) &&
-        Objects.equals(this.throttledTimeMs, stats.throttledTimeMs) &&
+        Objects.equals(this.resultSetBytesSize, stats.resultSetBytesSize) &&
         Objects.equals(this.resultSetDocumentCount, stats.resultSetDocumentCount) &&
-        Objects.equals(this.resultSetBytesSize, stats.resultSetBytesSize);
+        Objects.equals(this.throttledTimeMs, stats.throttledTimeMs);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(elapsedTimeMs, throttledTimeMs, resultSetDocumentCount, resultSetBytesSize);
+    return Objects.hash(elapsedTimeMs, resultSetBytesSize, resultSetDocumentCount, throttledTimeMs);
   }
 
 
@@ -151,9 +151,9 @@ public class Stats {
     sb.append("class Stats {\n");
     
     sb.append("    elapsedTimeMs: ").append(toIndentedString(elapsedTimeMs)).append("\n");
-    sb.append("    throttledTimeMs: ").append(toIndentedString(throttledTimeMs)).append("\n");
-    sb.append("    resultSetDocumentCount: ").append(toIndentedString(resultSetDocumentCount)).append("\n");
     sb.append("    resultSetBytesSize: ").append(toIndentedString(resultSetBytesSize)).append("\n");
+    sb.append("    resultSetDocumentCount: ").append(toIndentedString(resultSetDocumentCount)).append("\n");
+    sb.append("    throttledTimeMs: ").append(toIndentedString(throttledTimeMs)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -29,10 +29,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Cluster
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class Cluster {
-  @SerializedName("id")
-  private String id = null;
+  @SerializedName("apiserver_url")
+  private String apiserverUrl = null;
+
+  @SerializedName("aws_region")
+  private String awsRegion = null;
 
   /**
    * Cluster type.
@@ -56,6 +59,7 @@ public class Cluster {
       return String.valueOf(value);
     }
 
+    @com.fasterxml.jackson.annotation.JsonCreator
     public static ClusterTypeEnum fromValue(String text) {
       for (ClusterTypeEnum b : ClusterTypeEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -82,56 +86,33 @@ public class Cluster {
   @SerializedName("cluster_type")
   private ClusterTypeEnum clusterType = null;
 
-  @SerializedName("aws_region")
-  private String awsRegion = null;
-
   @SerializedName("domain")
   private String domain = null;
+
+  @SerializedName("id")
+  private String id = null;
 
   @SerializedName("top_level_domain")
   private String topLevelDomain = null;
 
-  @SerializedName("apiserver_url")
-  private String apiserverUrl = null;
-
-  public Cluster id(String id) {
-    this.id = id;
+  public Cluster apiserverUrl(String apiserverUrl) {
+    this.apiserverUrl = apiserverUrl;
     return this;
   }
 
    /**
-   * Unique identifier for the cluster.
-   * @return id
+   * Api server url for cluster.
+   * @return apiserverUrl
   **/
 
-@JsonProperty("id")
-@ApiModelProperty(example = "asdf98-as9df8adf-adsf9asfd", value = "Unique identifier for the cluster.")
-  public String getId() {
-    return id;
+@JsonProperty("apiserver_url")
+@ApiModelProperty(example = "api.rockset.us-west-2.rockset.com", value = "Api server url for cluster.")
+  public String getApiserverUrl() {
+    return apiserverUrl;
   }
 
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public Cluster clusterType(ClusterTypeEnum clusterType) {
-    this.clusterType = clusterType;
-    return this;
-  }
-
-   /**
-   * Cluster type.
-   * @return clusterType
-  **/
-
-@JsonProperty("cluster_type")
-@ApiModelProperty(example = "PRIVATE", value = "Cluster type.")
-  public ClusterTypeEnum getClusterType() {
-    return clusterType;
-  }
-
-  public void setClusterType(ClusterTypeEnum clusterType) {
-    this.clusterType = clusterType;
+  public void setApiserverUrl(String apiserverUrl) {
+    this.apiserverUrl = apiserverUrl;
   }
 
   public Cluster awsRegion(String awsRegion) {
@@ -154,6 +135,26 @@ public class Cluster {
     this.awsRegion = awsRegion;
   }
 
+  public Cluster clusterType(ClusterTypeEnum clusterType) {
+    this.clusterType = clusterType;
+    return this;
+  }
+
+   /**
+   * Cluster type.
+   * @return clusterType
+  **/
+
+@JsonProperty("cluster_type")
+@ApiModelProperty(example = "PRIVATE", value = "Cluster type.")
+  public ClusterTypeEnum getClusterType() {
+    return clusterType;
+  }
+
+  public void setClusterType(ClusterTypeEnum clusterType) {
+    this.clusterType = clusterType;
+  }
+
   public Cluster domain(String domain) {
     this.domain = domain;
     return this;
@@ -172,6 +173,26 @@ public class Cluster {
 
   public void setDomain(String domain) {
     this.domain = domain;
+  }
+
+  public Cluster id(String id) {
+    this.id = id;
+    return this;
+  }
+
+   /**
+   * Unique identifier for the cluster.
+   * @return id
+  **/
+
+@JsonProperty("id")
+@ApiModelProperty(example = "asdf98-as9df8adf-adsf9asfd", value = "Unique identifier for the cluster.")
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
   }
 
   public Cluster topLevelDomain(String topLevelDomain) {
@@ -194,26 +215,6 @@ public class Cluster {
     this.topLevelDomain = topLevelDomain;
   }
 
-  public Cluster apiserverUrl(String apiserverUrl) {
-    this.apiserverUrl = apiserverUrl;
-    return this;
-  }
-
-   /**
-   * Api server url for cluster.
-   * @return apiserverUrl
-  **/
-
-@JsonProperty("apiserver_url")
-@ApiModelProperty(example = "api.rockset.us-west-2.rockset.com", value = "Api server url for cluster.")
-  public String getApiserverUrl() {
-    return apiserverUrl;
-  }
-
-  public void setApiserverUrl(String apiserverUrl) {
-    this.apiserverUrl = apiserverUrl;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -224,17 +225,17 @@ public class Cluster {
       return false;
     }
     Cluster cluster = (Cluster) o;
-    return Objects.equals(this.id, cluster.id) &&
-        Objects.equals(this.clusterType, cluster.clusterType) &&
+    return Objects.equals(this.apiserverUrl, cluster.apiserverUrl) &&
         Objects.equals(this.awsRegion, cluster.awsRegion) &&
+        Objects.equals(this.clusterType, cluster.clusterType) &&
         Objects.equals(this.domain, cluster.domain) &&
-        Objects.equals(this.topLevelDomain, cluster.topLevelDomain) &&
-        Objects.equals(this.apiserverUrl, cluster.apiserverUrl);
+        Objects.equals(this.id, cluster.id) &&
+        Objects.equals(this.topLevelDomain, cluster.topLevelDomain);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, clusterType, awsRegion, domain, topLevelDomain, apiserverUrl);
+    return Objects.hash(apiserverUrl, awsRegion, clusterType, domain, id, topLevelDomain);
   }
 
 
@@ -243,12 +244,12 @@ public class Cluster {
     StringBuilder sb = new StringBuilder();
     sb.append("class Cluster {\n");
     
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    clusterType: ").append(toIndentedString(clusterType)).append("\n");
-    sb.append("    awsRegion: ").append(toIndentedString(awsRegion)).append("\n");
-    sb.append("    domain: ").append(toIndentedString(domain)).append("\n");
-    sb.append("    topLevelDomain: ").append(toIndentedString(topLevelDomain)).append("\n");
     sb.append("    apiserverUrl: ").append(toIndentedString(apiserverUrl)).append("\n");
+    sb.append("    awsRegion: ").append(toIndentedString(awsRegion)).append("\n");
+    sb.append("    clusterType: ").append(toIndentedString(clusterType)).append("\n");
+    sb.append("    domain: ").append(toIndentedString(domain)).append("\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    topLevelDomain: ").append(toIndentedString(topLevelDomain)).append("\n");
     sb.append("}");
     return sb.toString();
   }

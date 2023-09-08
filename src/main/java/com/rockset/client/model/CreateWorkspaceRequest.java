@@ -29,33 +29,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateWorkspaceRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class CreateWorkspaceRequest {
-  @SerializedName("name")
-  private String name = null;
-
   @SerializedName("description")
   private String description = null;
 
-  public CreateWorkspaceRequest name(String name) {
-    this.name = name;
-    return this;
-  }
-
-   /**
-   * Descriptive label and unique identifier.
-   * @return name
-  **/
-
-@JsonProperty("name")
-@ApiModelProperty(example = "event_logs", required = true, value = "Descriptive label and unique identifier.")
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
+  @SerializedName("name")
+  private String name = null;
 
   public CreateWorkspaceRequest description(String description) {
     this.description = description;
@@ -77,6 +57,26 @@ public class CreateWorkspaceRequest {
     this.description = description;
   }
 
+  public CreateWorkspaceRequest name(String name) {
+    this.name = name;
+    return this;
+  }
+
+   /**
+   * Descriptive label and unique identifier.
+   * @return name
+  **/
+
+@JsonProperty("name")
+@ApiModelProperty(example = "event_logs", required = true, value = "Descriptive label and unique identifier.")
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -87,13 +87,13 @@ public class CreateWorkspaceRequest {
       return false;
     }
     CreateWorkspaceRequest createWorkspaceRequest = (CreateWorkspaceRequest) o;
-    return Objects.equals(this.name, createWorkspaceRequest.name) &&
-        Objects.equals(this.description, createWorkspaceRequest.description);
+    return Objects.equals(this.description, createWorkspaceRequest.description) &&
+        Objects.equals(this.name, createWorkspaceRequest.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, description);
+    return Objects.hash(description, name);
   }
 
 
@@ -102,8 +102,8 @@ public class CreateWorkspaceRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class CreateWorkspaceRequest {\n");
     
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("}");
     return sb.toString();
   }

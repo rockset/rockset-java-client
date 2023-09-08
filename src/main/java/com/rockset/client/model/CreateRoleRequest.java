@@ -32,36 +32,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateRoleRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class CreateRoleRequest {
-  @SerializedName("role_name")
-  private String roleName = null;
-
   @SerializedName("description")
   private String description = null;
 
   @SerializedName("privileges")
   private List<Privilege> privileges = null;
 
-  public CreateRoleRequest roleName(String roleName) {
-    this.roleName = roleName;
-    return this;
-  }
-
-   /**
-   * Unique identifier for the role.
-   * @return roleName
-  **/
-
-@JsonProperty("role_name")
-@ApiModelProperty(example = "read_write", value = "Unique identifier for the role.")
-  public String getRoleName() {
-    return roleName;
-  }
-
-  public void setRoleName(String roleName) {
-    this.roleName = roleName;
-  }
+  @SerializedName("role_name")
+  private String roleName = null;
 
   public CreateRoleRequest description(String description) {
     this.description = description;
@@ -111,6 +91,26 @@ public class CreateRoleRequest {
     this.privileges = privileges;
   }
 
+  public CreateRoleRequest roleName(String roleName) {
+    this.roleName = roleName;
+    return this;
+  }
+
+   /**
+   * Unique identifier for the role.
+   * @return roleName
+  **/
+
+@JsonProperty("role_name")
+@ApiModelProperty(example = "read_write", value = "Unique identifier for the role.")
+  public String getRoleName() {
+    return roleName;
+  }
+
+  public void setRoleName(String roleName) {
+    this.roleName = roleName;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -121,14 +121,14 @@ public class CreateRoleRequest {
       return false;
     }
     CreateRoleRequest createRoleRequest = (CreateRoleRequest) o;
-    return Objects.equals(this.roleName, createRoleRequest.roleName) &&
-        Objects.equals(this.description, createRoleRequest.description) &&
-        Objects.equals(this.privileges, createRoleRequest.privileges);
+    return Objects.equals(this.description, createRoleRequest.description) &&
+        Objects.equals(this.privileges, createRoleRequest.privileges) &&
+        Objects.equals(this.roleName, createRoleRequest.roleName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(roleName, description, privileges);
+    return Objects.hash(description, privileges, roleName);
   }
 
 
@@ -137,9 +137,9 @@ public class CreateRoleRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class CreateRoleRequest {\n");
     
-    sb.append("    roleName: ").append(toIndentedString(roleName)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    privileges: ").append(toIndentedString(privileges)).append("\n");
+    sb.append("    roleName: ").append(toIndentedString(roleName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

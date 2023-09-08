@@ -31,31 +31,37 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * View
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class View {
-  @SerializedName("path")
-  private String path = null;
+  @SerializedName("created_at")
+  private String createdAt = null;
 
-  @SerializedName("name")
-  private String name = null;
-
-  @SerializedName("description")
-  private String description = null;
-
-  @SerializedName("workspace")
-  private String workspace = null;
+  @SerializedName("created_by_apikey_name")
+  private String createdByApikeyName = null;
 
   @SerializedName("creator_email")
   private String creatorEmail = null;
 
-  @SerializedName("owner_email")
-  private String ownerEmail = null;
-
-  @SerializedName("query_sql")
-  private String querySql = null;
+  @SerializedName("description")
+  private String description = null;
 
   @SerializedName("entities")
   private List<String> entities = null;
+
+  @SerializedName("modified_at")
+  private String modifiedAt = null;
+
+  @SerializedName("name")
+  private String name = null;
+
+  @SerializedName("owner_email")
+  private String ownerEmail = null;
+
+  @SerializedName("path")
+  private String path = null;
+
+  @SerializedName("query_sql")
+  private String querySql = null;
 
   /**
    * State of the view.
@@ -83,6 +89,7 @@ public class View {
       return String.valueOf(value);
     }
 
+    @com.fasterxml.jackson.annotation.JsonCreator
     public static StateEnum fromValue(String text) {
       for (StateEnum b : StateEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -109,90 +116,47 @@ public class View {
   @SerializedName("state")
   private StateEnum state = null;
 
-  @SerializedName("created_at")
-  private String createdAt = null;
+  @SerializedName("workspace")
+  private String workspace = null;
 
-  @SerializedName("modified_at")
-  private String modifiedAt = null;
-
-  public View path(String path) {
-    this.path = path;
+  public View createdAt(String createdAt) {
+    this.createdAt = createdAt;
     return this;
   }
 
    /**
-   * Get path
-   * @return path
+   * ISO-8601 date.
+   * @return createdAt
   **/
 
-@JsonProperty("path")
-@ApiModelProperty(value = "")
-  public String getPath() {
-    return path;
+@JsonProperty("created_at")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date.")
+  public String getCreatedAt() {
+    return createdAt;
   }
 
-  public void setPath(String path) {
-    this.path = path;
+  public void setCreatedAt(String createdAt) {
+    this.createdAt = createdAt;
   }
 
-  public View name(String name) {
-    this.name = name;
+  public View createdByApikeyName(String createdByApikeyName) {
+    this.createdByApikeyName = createdByApikeyName;
     return this;
   }
 
    /**
-   * Name of the view.
-   * @return name
+   * Name of the API key that was used to create this object if one was used.
+   * @return createdByApikeyName
   **/
 
-@JsonProperty("name")
-@ApiModelProperty(example = "demo", value = "Name of the view.")
-  public String getName() {
-    return name;
+@JsonProperty("created_by_apikey_name")
+@ApiModelProperty(value = "Name of the API key that was used to create this object if one was used.")
+  public String getCreatedByApikeyName() {
+    return createdByApikeyName;
   }
 
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public View description(String description) {
-    this.description = description;
-    return this;
-  }
-
-   /**
-   * View description.
-   * @return description
-  **/
-
-@JsonProperty("description")
-@ApiModelProperty(example = "view referencing collection in workspace", value = "View description.")
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public View workspace(String workspace) {
-    this.workspace = workspace;
-    return this;
-  }
-
-   /**
-   * Name of the workspace.
-   * @return workspace
-  **/
-
-@JsonProperty("workspace")
-@ApiModelProperty(example = "commons", value = "Name of the workspace.")
-  public String getWorkspace() {
-    return workspace;
-  }
-
-  public void setWorkspace(String workspace) {
-    this.workspace = workspace;
+  public void setCreatedByApikeyName(String createdByApikeyName) {
+    this.createdByApikeyName = createdByApikeyName;
   }
 
   public View creatorEmail(String creatorEmail) {
@@ -215,44 +179,24 @@ public class View {
     this.creatorEmail = creatorEmail;
   }
 
-  public View ownerEmail(String ownerEmail) {
-    this.ownerEmail = ownerEmail;
+  public View description(String description) {
+    this.description = description;
     return this;
   }
 
    /**
-   * Email of the owner, note: deprecated and will always be null.
-   * @return ownerEmail
+   * View description.
+   * @return description
   **/
 
-@JsonProperty("owner_email")
-@ApiModelProperty(example = "abc@rockset.com", value = "Email of the owner, note: deprecated and will always be null.")
-  public String getOwnerEmail() {
-    return ownerEmail;
+@JsonProperty("description")
+@ApiModelProperty(example = "view referencing collection in workspace", value = "View description.")
+  public String getDescription() {
+    return description;
   }
 
-  public void setOwnerEmail(String ownerEmail) {
-    this.ownerEmail = ownerEmail;
-  }
-
-  public View querySql(String querySql) {
-    this.querySql = querySql;
-    return this;
-  }
-
-   /**
-   * SQL query of the view.
-   * @return querySql
-  **/
-
-@JsonProperty("query_sql")
-@ApiModelProperty(example = "SELECT * FROM commons.foo", value = "SQL query of the view.")
-  public String getQuerySql() {
-    return querySql;
-  }
-
-  public void setQuerySql(String querySql) {
-    this.querySql = querySql;
+  public void setDescription(String description) {
+    this.description = description;
   }
 
   public View entities(List<String> entities) {
@@ -283,46 +227,6 @@ public class View {
     this.entities = entities;
   }
 
-  public View state(StateEnum state) {
-    this.state = state;
-    return this;
-  }
-
-   /**
-   * State of the view.
-   * @return state
-  **/
-
-@JsonProperty("state")
-@ApiModelProperty(example = "CREATED", value = "State of the view.")
-  public StateEnum getState() {
-    return state;
-  }
-
-  public void setState(StateEnum state) {
-    this.state = state;
-  }
-
-  public View createdAt(String createdAt) {
-    this.createdAt = createdAt;
-    return this;
-  }
-
-   /**
-   * ISO-8601 date.
-   * @return createdAt
-  **/
-
-@JsonProperty("created_at")
-@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "ISO-8601 date.")
-  public String getCreatedAt() {
-    return createdAt;
-  }
-
-  public void setCreatedAt(String createdAt) {
-    this.createdAt = createdAt;
-  }
-
   public View modifiedAt(String modifiedAt) {
     this.modifiedAt = modifiedAt;
     return this;
@@ -343,6 +247,126 @@ public class View {
     this.modifiedAt = modifiedAt;
   }
 
+  public View name(String name) {
+    this.name = name;
+    return this;
+  }
+
+   /**
+   * Name of the view.
+   * @return name
+  **/
+
+@JsonProperty("name")
+@ApiModelProperty(example = "demo", value = "Name of the view.")
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public View ownerEmail(String ownerEmail) {
+    this.ownerEmail = ownerEmail;
+    return this;
+  }
+
+   /**
+   * Email of the owner, note: deprecated and will always be null.
+   * @return ownerEmail
+  **/
+
+@JsonProperty("owner_email")
+@ApiModelProperty(example = "abc@rockset.com", value = "Email of the owner, note: deprecated and will always be null.")
+  public String getOwnerEmail() {
+    return ownerEmail;
+  }
+
+  public void setOwnerEmail(String ownerEmail) {
+    this.ownerEmail = ownerEmail;
+  }
+
+  public View path(String path) {
+    this.path = path;
+    return this;
+  }
+
+   /**
+   * Get path
+   * @return path
+  **/
+
+@JsonProperty("path")
+@ApiModelProperty(value = "")
+  public String getPath() {
+    return path;
+  }
+
+  public void setPath(String path) {
+    this.path = path;
+  }
+
+  public View querySql(String querySql) {
+    this.querySql = querySql;
+    return this;
+  }
+
+   /**
+   * SQL query of the view.
+   * @return querySql
+  **/
+
+@JsonProperty("query_sql")
+@ApiModelProperty(example = "SELECT * FROM commons.foo", value = "SQL query of the view.")
+  public String getQuerySql() {
+    return querySql;
+  }
+
+  public void setQuerySql(String querySql) {
+    this.querySql = querySql;
+  }
+
+  public View state(StateEnum state) {
+    this.state = state;
+    return this;
+  }
+
+   /**
+   * State of the view.
+   * @return state
+  **/
+
+@JsonProperty("state")
+@ApiModelProperty(example = "CREATED", value = "State of the view.")
+  public StateEnum getState() {
+    return state;
+  }
+
+  public void setState(StateEnum state) {
+    this.state = state;
+  }
+
+  public View workspace(String workspace) {
+    this.workspace = workspace;
+    return this;
+  }
+
+   /**
+   * Name of the workspace.
+   * @return workspace
+  **/
+
+@JsonProperty("workspace")
+@ApiModelProperty(example = "commons", value = "Name of the workspace.")
+  public String getWorkspace() {
+    return workspace;
+  }
+
+  public void setWorkspace(String workspace) {
+    this.workspace = workspace;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -353,22 +377,23 @@ public class View {
       return false;
     }
     View view = (View) o;
-    return Objects.equals(this.path, view.path) &&
-        Objects.equals(this.name, view.name) &&
-        Objects.equals(this.description, view.description) &&
-        Objects.equals(this.workspace, view.workspace) &&
+    return Objects.equals(this.createdAt, view.createdAt) &&
+        Objects.equals(this.createdByApikeyName, view.createdByApikeyName) &&
         Objects.equals(this.creatorEmail, view.creatorEmail) &&
-        Objects.equals(this.ownerEmail, view.ownerEmail) &&
-        Objects.equals(this.querySql, view.querySql) &&
+        Objects.equals(this.description, view.description) &&
         Objects.equals(this.entities, view.entities) &&
+        Objects.equals(this.modifiedAt, view.modifiedAt) &&
+        Objects.equals(this.name, view.name) &&
+        Objects.equals(this.ownerEmail, view.ownerEmail) &&
+        Objects.equals(this.path, view.path) &&
+        Objects.equals(this.querySql, view.querySql) &&
         Objects.equals(this.state, view.state) &&
-        Objects.equals(this.createdAt, view.createdAt) &&
-        Objects.equals(this.modifiedAt, view.modifiedAt);
+        Objects.equals(this.workspace, view.workspace);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(path, name, description, workspace, creatorEmail, ownerEmail, querySql, entities, state, createdAt, modifiedAt);
+    return Objects.hash(createdAt, createdByApikeyName, creatorEmail, description, entities, modifiedAt, name, ownerEmail, path, querySql, state, workspace);
   }
 
 
@@ -377,17 +402,18 @@ public class View {
     StringBuilder sb = new StringBuilder();
     sb.append("class View {\n");
     
-    sb.append("    path: ").append(toIndentedString(path)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    description: ").append(toIndentedString(description)).append("\n");
-    sb.append("    workspace: ").append(toIndentedString(workspace)).append("\n");
-    sb.append("    creatorEmail: ").append(toIndentedString(creatorEmail)).append("\n");
-    sb.append("    ownerEmail: ").append(toIndentedString(ownerEmail)).append("\n");
-    sb.append("    querySql: ").append(toIndentedString(querySql)).append("\n");
-    sb.append("    entities: ").append(toIndentedString(entities)).append("\n");
-    sb.append("    state: ").append(toIndentedString(state)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
+    sb.append("    createdByApikeyName: ").append(toIndentedString(createdByApikeyName)).append("\n");
+    sb.append("    creatorEmail: ").append(toIndentedString(creatorEmail)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    entities: ").append(toIndentedString(entities)).append("\n");
     sb.append("    modifiedAt: ").append(toIndentedString(modifiedAt)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    ownerEmail: ").append(toIndentedString(ownerEmail)).append("\n");
+    sb.append("    path: ").append(toIndentedString(path)).append("\n");
+    sb.append("    querySql: ").append(toIndentedString(querySql)).append("\n");
+    sb.append("    state: ").append(toIndentedString(state)).append("\n");
+    sb.append("    workspace: ").append(toIndentedString(workspace)).append("\n");
     sb.append("}");
     return sb.toString();
   }

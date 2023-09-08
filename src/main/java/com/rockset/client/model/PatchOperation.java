@@ -29,8 +29,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * PatchOperation
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class PatchOperation {
+  @SerializedName("from")
+  private String from = null;
+
   /**
    * [JSON Patch operation](https://datatracker.ietf.org/doc/html/rfc6902#page-4) to be performed in this patch. Case insensitive.
    */
@@ -65,6 +68,7 @@ public class PatchOperation {
       return String.valueOf(value);
     }
 
+    @com.fasterxml.jackson.annotation.JsonCreator
     public static OpEnum fromValue(String text) {
       for (OpEnum b : OpEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -97,8 +101,25 @@ public class PatchOperation {
   @SerializedName("value")
   private Object value = null;
 
-  @SerializedName("from")
-  private String from = null;
+  public PatchOperation from(String from) {
+    this.from = from;
+    return this;
+  }
+
+   /**
+   * [JSON Pointer](https://datatracker.ietf.org/doc/html/rfc6901) referencing a location in the target document. Required for &#x60;COPY&#x60; and &#x60;MOVE&#x60; operations.
+   * @return from
+  **/
+
+@JsonProperty("from")
+@ApiModelProperty(value = "[JSON Pointer](https://datatracker.ietf.org/doc/html/rfc6901) referencing a location in the target document. Required for `COPY` and `MOVE` operations.")
+  public String getFrom() {
+    return from;
+  }
+
+  public void setFrom(String from) {
+    this.from = from;
+  }
 
   public PatchOperation op(OpEnum op) {
     this.op = op;
@@ -160,26 +181,6 @@ public class PatchOperation {
     this.value = value;
   }
 
-  public PatchOperation from(String from) {
-    this.from = from;
-    return this;
-  }
-
-   /**
-   * [JSON Pointer](https://datatracker.ietf.org/doc/html/rfc6901) referencing a location in the target document. Required for &#x60;COPY&#x60; and &#x60;MOVE&#x60; operations.
-   * @return from
-  **/
-
-@JsonProperty("from")
-@ApiModelProperty(value = "[JSON Pointer](https://datatracker.ietf.org/doc/html/rfc6901) referencing a location in the target document. Required for `COPY` and `MOVE` operations.")
-  public String getFrom() {
-    return from;
-  }
-
-  public void setFrom(String from) {
-    this.from = from;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -190,15 +191,15 @@ public class PatchOperation {
       return false;
     }
     PatchOperation patchOperation = (PatchOperation) o;
-    return Objects.equals(this.op, patchOperation.op) &&
+    return Objects.equals(this.from, patchOperation.from) &&
+        Objects.equals(this.op, patchOperation.op) &&
         Objects.equals(this.path, patchOperation.path) &&
-        Objects.equals(this.value, patchOperation.value) &&
-        Objects.equals(this.from, patchOperation.from);
+        Objects.equals(this.value, patchOperation.value);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(op, path, value, from);
+    return Objects.hash(from, op, path, value);
   }
 
 
@@ -207,10 +208,10 @@ public class PatchOperation {
     StringBuilder sb = new StringBuilder();
     sb.append("class PatchOperation {\n");
     
+    sb.append("    from: ").append(toIndentedString(from)).append("\n");
     sb.append("    op: ").append(toIndentedString(op)).append("\n");
     sb.append("    path: ").append(toIndentedString(path)).append("\n");
     sb.append("    value: ").append(toIndentedString(value)).append("\n");
-    sb.append("    from: ").append(toIndentedString(from)).append("\n");
     sb.append("}");
     return sb.toString();
   }

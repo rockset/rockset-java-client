@@ -30,39 +30,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateQueryLambdaRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class CreateQueryLambdaRequest {
-  @SerializedName("name")
-  private String name = null;
-
   @SerializedName("description")
   private String description = null;
-
-  @SerializedName("sql")
-  private QueryLambdaSql sql = null;
 
   @SerializedName("is_public")
   private Boolean isPublic = null;
 
-  public CreateQueryLambdaRequest name(String name) {
-    this.name = name;
-    return this;
-  }
+  @SerializedName("name")
+  private String name = null;
 
-   /**
-   * Query Lambda name.
-   * @return name
-  **/
-
-@JsonProperty("name")
-@ApiModelProperty(example = "myQueryLambda", required = true, value = "Query Lambda name.")
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
+  @SerializedName("sql")
+  private QueryLambdaSql sql = null;
 
   public CreateQueryLambdaRequest description(String description) {
     this.description = description;
@@ -82,26 +62,6 @@ public class CreateQueryLambdaRequest {
 
   public void setDescription(String description) {
     this.description = description;
-  }
-
-  public CreateQueryLambdaRequest sql(QueryLambdaSql sql) {
-    this.sql = sql;
-    return this;
-  }
-
-   /**
-   * Query Lambda SQL query.
-   * @return sql
-  **/
-
-@JsonProperty("sql")
-@ApiModelProperty(required = true, value = "Query Lambda SQL query.")
-  public QueryLambdaSql getSql() {
-    return sql;
-  }
-
-  public void setSql(QueryLambdaSql sql) {
-    this.sql = sql;
   }
 
   public CreateQueryLambdaRequest isPublic(Boolean isPublic) {
@@ -124,6 +84,46 @@ public class CreateQueryLambdaRequest {
     this.isPublic = isPublic;
   }
 
+  public CreateQueryLambdaRequest name(String name) {
+    this.name = name;
+    return this;
+  }
+
+   /**
+   * Query Lambda name.
+   * @return name
+  **/
+
+@JsonProperty("name")
+@ApiModelProperty(example = "myQueryLambda", required = true, value = "Query Lambda name.")
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public CreateQueryLambdaRequest sql(QueryLambdaSql sql) {
+    this.sql = sql;
+    return this;
+  }
+
+   /**
+   * Query Lambda SQL query.
+   * @return sql
+  **/
+
+@JsonProperty("sql")
+@ApiModelProperty(required = true, value = "Query Lambda SQL query.")
+  public QueryLambdaSql getSql() {
+    return sql;
+  }
+
+  public void setSql(QueryLambdaSql sql) {
+    this.sql = sql;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -134,15 +134,15 @@ public class CreateQueryLambdaRequest {
       return false;
     }
     CreateQueryLambdaRequest createQueryLambdaRequest = (CreateQueryLambdaRequest) o;
-    return Objects.equals(this.name, createQueryLambdaRequest.name) &&
-        Objects.equals(this.description, createQueryLambdaRequest.description) &&
-        Objects.equals(this.sql, createQueryLambdaRequest.sql) &&
-        Objects.equals(this.isPublic, createQueryLambdaRequest.isPublic);
+    return Objects.equals(this.description, createQueryLambdaRequest.description) &&
+        Objects.equals(this.isPublic, createQueryLambdaRequest.isPublic) &&
+        Objects.equals(this.name, createQueryLambdaRequest.name) &&
+        Objects.equals(this.sql, createQueryLambdaRequest.sql);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, description, sql, isPublic);
+    return Objects.hash(description, isPublic, name, sql);
   }
 
 
@@ -151,10 +151,10 @@ public class CreateQueryLambdaRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class CreateQueryLambdaRequest {\n");
     
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
-    sb.append("    sql: ").append(toIndentedString(sql)).append("\n");
     sb.append("    isPublic: ").append(toIndentedString(isPublic)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    sql: ").append(toIndentedString(sql)).append("\n");
     sb.append("}");
     return sb.toString();
   }

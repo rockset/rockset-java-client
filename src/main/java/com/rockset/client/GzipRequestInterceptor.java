@@ -13,7 +13,8 @@
 
 package com.rockset.client;
 
-import com.squareup.okhttp.*;
+import okhttp3.*;
+import okhttp3.RequestBody;
 import okio.Buffer;
 import okio.BufferedSink;
 import okio.GzipSink;

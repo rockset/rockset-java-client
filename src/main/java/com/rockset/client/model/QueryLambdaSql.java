@@ -32,33 +32,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryLambdaSql
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class QueryLambdaSql {
-  @SerializedName("query")
-  private String query = null;
-
   @SerializedName("default_parameters")
   private List<QueryParameter> defaultParameters = null;
 
-  public QueryLambdaSql query(String query) {
-    this.query = query;
-    return this;
-  }
-
-   /**
-   * SQL text.
-   * @return query
-  **/
-
-@JsonProperty("query")
-@ApiModelProperty(example = "SELECT 'Foo'", required = true, value = "SQL text.")
-  public String getQuery() {
-    return query;
-  }
-
-  public void setQuery(String query) {
-    this.query = query;
-  }
+  @SerializedName("query")
+  private String query = null;
 
   public QueryLambdaSql defaultParameters(List<QueryParameter> defaultParameters) {
     this.defaultParameters = defaultParameters;
@@ -88,6 +68,26 @@ public class QueryLambdaSql {
     this.defaultParameters = defaultParameters;
   }
 
+  public QueryLambdaSql query(String query) {
+    this.query = query;
+    return this;
+  }
+
+   /**
+   * SQL text.
+   * @return query
+  **/
+
+@JsonProperty("query")
+@ApiModelProperty(example = "SELECT 'Foo'", required = true, value = "SQL text.")
+  public String getQuery() {
+    return query;
+  }
+
+  public void setQuery(String query) {
+    this.query = query;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -98,13 +98,13 @@ public class QueryLambdaSql {
       return false;
     }
     QueryLambdaSql queryLambdaSql = (QueryLambdaSql) o;
-    return Objects.equals(this.query, queryLambdaSql.query) &&
-        Objects.equals(this.defaultParameters, queryLambdaSql.defaultParameters);
+    return Objects.equals(this.defaultParameters, queryLambdaSql.defaultParameters) &&
+        Objects.equals(this.query, queryLambdaSql.query);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(query, defaultParameters);
+    return Objects.hash(defaultParameters, query);
   }
 
 
@@ -113,8 +113,8 @@ public class QueryLambdaSql {
     StringBuilder sb = new StringBuilder();
     sb.append("class QueryLambdaSql {\n");
     
-    sb.append("    query: ").append(toIndentedString(query)).append("\n");
     sb.append("    defaultParameters: ").append(toIndentedString(defaultParameters)).append("\n");
+    sb.append("    query: ").append(toIndentedString(query)).append("\n");
     sb.append("}");
     return sb.toString();
   }

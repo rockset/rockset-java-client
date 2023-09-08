@@ -20,6 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.rockset.client.model.SourceAzBlobStorageSettings;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -29,16 +30,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceAzureBlobStorage
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class SourceAzureBlobStorage {
-  @SerializedName("container")
-  private String container = null;
-
-  @SerializedName("prefix")
-  private String prefix = null;
-
-  @SerializedName("pattern")
-  private String pattern = null;
+  @SerializedName("blob_bytes_total")
+  private Long blobBytesTotal = null;
 
   @SerializedName("blob_count_downloaded")
   private Long blobCountDownloaded = null;
@@ -46,67 +41,27 @@ public class SourceAzureBlobStorage {
   @SerializedName("blob_count_total")
   private Long blobCountTotal = null;
 
-  @SerializedName("blob_bytes_total")
-  private Long blobBytesTotal = null;
+  @SerializedName("container")
+  private String container = null;
 
-  public SourceAzureBlobStorage container(String container) {
-    this.container = container;
-    return this;
-  }
+  @SerializedName("pattern")
+  private String pattern = null;
 
-   /**
-   * Name of Azure blob Storage container you want to ingest from.
-   * @return container
-  **/
+  @SerializedName("prefix")
+  private String prefix = null;
 
-@JsonProperty("container")
-@ApiModelProperty(example = "server-logs", value = "Name of Azure blob Storage container you want to ingest from.")
-  public String getContainer() {
-    return container;
-  }
-
-  public void setContainer(String container) {
-    this.container = container;
-  }
-
-  public SourceAzureBlobStorage prefix(String prefix) {
-    this.prefix = prefix;
-    return this;
-  }
+  @SerializedName("settings")
+  private SourceAzBlobStorageSettings settings = null;
 
    /**
-   * Prefix that selects blobs to ingest.
-   * @return prefix
+   * Get blobBytesTotal
+   * @return blobBytesTotal
   **/
 
-@JsonProperty("prefix")
-@ApiModelProperty(example = "prefix/to/blobs", value = "Prefix that selects blobs to ingest.")
-  public String getPrefix() {
-    return prefix;
-  }
-
-  public void setPrefix(String prefix) {
-    this.prefix = prefix;
-  }
-
-  public SourceAzureBlobStorage pattern(String pattern) {
-    this.pattern = pattern;
-    return this;
-  }
-
-   /**
-   * Glob-style pattern that selects keys to ingest. Only either prefix or pattern can be specified.
-   * @return pattern
-  **/
-
-@JsonProperty("pattern")
-@ApiModelProperty(example = "prefix/to/_**_/keys/_*.format", value = "Glob-style pattern that selects keys to ingest. Only either prefix or pattern can be specified.")
-  public String getPattern() {
-    return pattern;
-  }
-
-  public void setPattern(String pattern) {
-    this.pattern = pattern;
+@JsonProperty("blob_bytes_total")
+@ApiModelProperty(value = "")
+  public Long getBlobBytesTotal() {
+    return blobBytesTotal;
   }
 
    /**
@@ -131,15 +86,84 @@ public class SourceAzureBlobStorage {
     return blobCountTotal;
   }
 
+  public SourceAzureBlobStorage container(String container) {
+    this.container = container;
+    return this;
+  }
+
    /**
-   * Get blobBytesTotal
-   * @return blobBytesTotal
+   * Name of Azure blob Storage container you want to ingest from.
+   * @return container
   **/
 
-@JsonProperty("blob_bytes_total")
-@ApiModelProperty(value = "")
-  public Long getBlobBytesTotal() {
-    return blobBytesTotal;
+@JsonProperty("container")
+@ApiModelProperty(example = "server-logs", value = "Name of Azure blob Storage container you want to ingest from.")
+  public String getContainer() {
+    return container;
+  }
+
+  public void setContainer(String container) {
+    this.container = container;
+  }
+
+  public SourceAzureBlobStorage pattern(String pattern) {
+    this.pattern = pattern;
+    return this;
+  }
+
+   /**
+   * Glob-style pattern that selects keys to ingest. Only either prefix or pattern can be specified.
+   * @return pattern
+  **/
+
+@JsonProperty("pattern")
+@ApiModelProperty(example = "prefix/to/_**_/keys/_*.format", value = "Glob-style pattern that selects keys to ingest. Only either prefix or pattern can be specified.")
+  public String getPattern() {
+    return pattern;
+  }
+
+  public void setPattern(String pattern) {
+    this.pattern = pattern;
+  }
+
+  public SourceAzureBlobStorage prefix(String prefix) {
+    this.prefix = prefix;
+    return this;
+  }
+
+   /**
+   * Prefix that selects blobs to ingest.
+   * @return prefix
+  **/
+
+@JsonProperty("prefix")
+@ApiModelProperty(example = "prefix/to/blobs", value = "Prefix that selects blobs to ingest.")
+  public String getPrefix() {
+    return prefix;
+  }
+
+  public void setPrefix(String prefix) {
+    this.prefix = prefix;
+  }
+
+  public SourceAzureBlobStorage settings(SourceAzBlobStorageSettings settings) {
+    this.settings = settings;
+    return this;
+  }
+
+   /**
+   * custom settings for Azure blob Storage source
+   * @return settings
+  **/
+
+@JsonProperty("settings")
+@ApiModelProperty(value = "custom settings for Azure blob Storage source")
+  public SourceAzBlobStorageSettings getSettings() {
+    return settings;
+  }
+
+  public void setSettings(SourceAzBlobStorageSettings settings) {
+    this.settings = settings;
   }
 
 
@@ -152,17 +176,18 @@ public class SourceAzureBlobStorage {
       return false;
     }
     SourceAzureBlobStorage sourceAzureBlobStorage = (SourceAzureBlobStorage) o;
-    return Objects.equals(this.container, sourceAzureBlobStorage.container) &&
-        Objects.equals(this.prefix, sourceAzureBlobStorage.prefix) &&
-        Objects.equals(this.pattern, sourceAzureBlobStorage.pattern) &&
+    return Objects.equals(this.blobBytesTotal, sourceAzureBlobStorage.blobBytesTotal) &&
         Objects.equals(this.blobCountDownloaded, sourceAzureBlobStorage.blobCountDownloaded) &&
         Objects.equals(this.blobCountTotal, sourceAzureBlobStorage.blobCountTotal) &&
-        Objects.equals(this.blobBytesTotal, sourceAzureBlobStorage.blobBytesTotal);
+        Objects.equals(this.container, sourceAzureBlobStorage.container) &&
+        Objects.equals(this.pattern, sourceAzureBlobStorage.pattern) &&
+        Objects.equals(this.prefix, sourceAzureBlobStorage.prefix) &&
+        Objects.equals(this.settings, sourceAzureBlobStorage.settings);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(container, prefix, pattern, blobCountDownloaded, blobCountTotal, blobBytesTotal);
+    return Objects.hash(blobBytesTotal, blobCountDownloaded, blobCountTotal, container, pattern, prefix, settings);
   }
 
 
@@ -171,12 +196,13 @@ public class SourceAzureBlobStorage {
     StringBuilder sb = new StringBuilder();
     sb.append("class SourceAzureBlobStorage {\n");
     
-    sb.append("    container: ").append(toIndentedString(container)).append("\n");
-    sb.append("    prefix: ").append(toIndentedString(prefix)).append("\n");
-    sb.append("    pattern: ").append(toIndentedString(pattern)).append("\n");
+    sb.append("    blobBytesTotal: ").append(toIndentedString(blobBytesTotal)).append("\n");
     sb.append("    blobCountDownloaded: ").append(toIndentedString(blobCountDownloaded)).append("\n");
     sb.append("    blobCountTotal: ").append(toIndentedString(blobCountTotal)).append("\n");
-    sb.append("    blobBytesTotal: ").append(toIndentedString(blobBytesTotal)).append("\n");
+    sb.append("    container: ").append(toIndentedString(container)).append("\n");
+    sb.append("    pattern: ").append(toIndentedString(pattern)).append("\n");
+    sb.append("    prefix: ").append(toIndentedString(prefix)).append("\n");
+    sb.append("    settings: ").append(toIndentedString(settings)).append("\n");
     sb.append("}");
     return sb.toString();
   }

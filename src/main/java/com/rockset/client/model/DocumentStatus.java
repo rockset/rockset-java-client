@@ -30,16 +30,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * DocumentStatus
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class DocumentStatus {
   @SerializedName("_collection")
   private String collection = null;
 
+  @SerializedName("_id")
+  private String id = null;
+
   @SerializedName("error")
   private ErrorModel error = null;
 
-  @SerializedName("_id")
-  private String id = null;
+  @SerializedName("patch_id")
+  private String patchId = null;
 
   /**
    * Status of the document.
@@ -71,6 +74,7 @@ public class DocumentStatus {
       return String.valueOf(value);
     }
 
+    @com.fasterxml.jackson.annotation.JsonCreator
     public static StatusEnum fromValue(String text) {
       for (StatusEnum b : StatusEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -97,9 +101,6 @@ public class DocumentStatus {
   @SerializedName("status")
   private StatusEnum status = null;
 
-  @SerializedName("patch_id")
-  private String patchId = null;
-
   public DocumentStatus collection(String collection) {
     this.collection = collection;
     return this;
@@ -118,26 +119,6 @@ public class DocumentStatus {
 
   public void setCollection(String collection) {
     this.collection = collection;
-  }
-
-  public DocumentStatus error(ErrorModel error) {
-    this.error = error;
-    return this;
-  }
-
-   /**
-   * Error message, if any.
-   * @return error
-  **/
-
-@JsonProperty("error")
-@ApiModelProperty(value = "Error message, if any.")
-  public ErrorModel getError() {
-    return error;
-  }
-
-  public void setError(ErrorModel error) {
-    this.error = error;
   }
 
   public DocumentStatus id(String id) {
@@ -160,24 +141,24 @@ public class DocumentStatus {
     this.id = id;
   }
 
-  public DocumentStatus status(StatusEnum status) {
-    this.status = status;
+  public DocumentStatus error(ErrorModel error) {
+    this.error = error;
     return this;
   }
 
    /**
-   * Status of the document.
-   * @return status
+   * Error message, if any.
+   * @return error
   **/
 
-@JsonProperty("status")
-@ApiModelProperty(example = "ADDED", value = "Status of the document.")
-  public StatusEnum getStatus() {
-    return status;
+@JsonProperty("error")
+@ApiModelProperty(value = "Error message, if any.")
+  public ErrorModel getError() {
+    return error;
   }
 
-  public void setStatus(StatusEnum status) {
-    this.status = status;
+  public void setError(ErrorModel error) {
+    this.error = error;
   }
 
   public DocumentStatus patchId(String patchId) {
@@ -200,6 +181,26 @@ public class DocumentStatus {
     this.patchId = patchId;
   }
 
+  public DocumentStatus status(StatusEnum status) {
+    this.status = status;
+    return this;
+  }
+
+   /**
+   * Status of the document.
+   * @return status
+  **/
+
+@JsonProperty("status")
+@ApiModelProperty(example = "ADDED", value = "Status of the document.")
+  public StatusEnum getStatus() {
+    return status;
+  }
+
+  public void setStatus(StatusEnum status) {
+    this.status = status;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -211,15 +212,15 @@ public class DocumentStatus {
     }
     DocumentStatus documentStatus = (DocumentStatus) o;
     return Objects.equals(this.collection, documentStatus.collection) &&
-        Objects.equals(this.error, documentStatus.error) &&
         Objects.equals(this.id, documentStatus.id) &&
-        Objects.equals(this.status, documentStatus.status) &&
-        Objects.equals(this.patchId, documentStatus.patchId);
+        Objects.equals(this.error, documentStatus.error) &&
+        Objects.equals(this.patchId, documentStatus.patchId) &&
+        Objects.equals(this.status, documentStatus.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(collection, error, id, status, patchId);
+    return Objects.hash(collection, id, error, patchId, status);
   }
 
 
@@ -229,10 +230,10 @@ public class DocumentStatus {
     sb.append("class DocumentStatus {\n");
     
     sb.append("    collection: ").append(toIndentedString(collection)).append("\n");
-    sb.append("    error: ").append(toIndentedString(error)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    error: ").append(toIndentedString(error)).append("\n");
     sb.append("    patchId: ").append(toIndentedString(patchId)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
     return sb.toString();
   }

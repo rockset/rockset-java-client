@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceSnowflake
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class SourceSnowflake {
   @SerializedName("database")
   private String database = null;
@@ -38,14 +38,14 @@ public class SourceSnowflake {
   @SerializedName("schema")
   private String schema = null;
 
+  @SerializedName("status")
+  private StatusSnowflake status = null;
+
   @SerializedName("table_name")
   private String tableName = null;
 
   @SerializedName("warehouse")
   private String warehouse = null;
-
-  @SerializedName("status")
-  private StatusSnowflake status = null;
 
   public SourceSnowflake database(String database) {
     this.database = database;
@@ -85,6 +85,17 @@ public class SourceSnowflake {
 
   public void setSchema(String schema) {
     this.schema = schema;
+  }
+
+   /**
+   * Snowflake source status.
+   * @return status
+  **/
+
+@JsonProperty("status")
+@ApiModelProperty(value = "Snowflake source status.")
+  public StatusSnowflake getStatus() {
+    return status;
   }
 
   public SourceSnowflake tableName(String tableName) {
@@ -127,17 +138,6 @@ public class SourceSnowflake {
     this.warehouse = warehouse;
   }
 
-   /**
-   * Snowflake source status.
-   * @return status
-  **/
-
-@JsonProperty("status")
-@ApiModelProperty(value = "Snowflake source status.")
-  public StatusSnowflake getStatus() {
-    return status;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -150,14 +150,14 @@ public class SourceSnowflake {
     SourceSnowflake sourceSnowflake = (SourceSnowflake) o;
     return Objects.equals(this.database, sourceSnowflake.database) &&
         Objects.equals(this.schema, sourceSnowflake.schema) &&
+        Objects.equals(this.status, sourceSnowflake.status) &&
         Objects.equals(this.tableName, sourceSnowflake.tableName) &&
-        Objects.equals(this.warehouse, sourceSnowflake.warehouse) &&
-        Objects.equals(this.status, sourceSnowflake.status);
+        Objects.equals(this.warehouse, sourceSnowflake.warehouse);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(database, schema, tableName, warehouse, status);
+    return Objects.hash(database, schema, status, tableName, warehouse);
   }
 
 
@@ -168,9 +168,9 @@ public class SourceSnowflake {
     
     sb.append("    database: ").append(toIndentedString(database)).append("\n");
     sb.append("    schema: ").append(toIndentedString(schema)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    tableName: ").append(toIndentedString(tableName)).append("\n");
     sb.append("    warehouse: ").append(toIndentedString(warehouse)).append("\n");
-    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
     return sb.toString();
   }

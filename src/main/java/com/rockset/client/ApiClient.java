@@ -13,14 +13,14 @@
 
 package com.rockset.client;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.rockset.client.model.ErrorModel;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.squareup.okhttp.*;
-import com.squareup.okhttp.internal.http.HttpMethod;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import okhttp3.*;
+import okhttp3.internal.http.HttpMethod;
+import okhttp3.logging.HttpLoggingInterceptor;
+import okhttp3.logging.HttpLoggingInterceptor.Level;
 import okio.BufferedSink;
 import okio.Okio;
 import org.threeten.bp.LocalDate;
@@ -81,10 +81,11 @@ public class ApiClient {
      * Constructor for ApiClient
      */
     public ApiClient() {
-        httpClient = new OkHttpClient();
-		// socket timeout
-		httpClient.setConnectTimeout(140, TimeUnit.SECONDS);
-        httpClient.setReadTimeout(140, TimeUnit.SECONDS);
+        // socket timeout
+        httpClient = new OkHttpClient.Builder()
+                .connectTimeout(140, TimeUnit.SECONDS)
+                .readTimeout(140, TimeUnit.SECONDS)
+                .build();
 
 
         verifyingSsl = true;
@@ -398,7 +399,7 @@ public class ApiClient {
      * @return Timeout in milliseconds
      */
     public int getConnectTimeout() {
-        return httpClient.getConnectTimeout();
+            return httpClient.connectTimeoutMillis();
     }
 
     /**
@@ -410,8 +411,8 @@ public class ApiClient {
      * @return Api client
      */
     public ApiClient setConnectTimeout(int connectionTimeout) {
-        httpClient.setConnectTimeout(connectionTimeout, TimeUnit.MILLISECONDS);
-        return this;
+                httpClient = httpClient.newBuilder().connectTimeout(connectionTimeout, TimeUnit.MILLISECONDS).build();
+                return this;
     }
 
     /**
@@ -420,7 +421,7 @@ public class ApiClient {
      * @return Timeout in milliseconds
      */
     public int getReadTimeout() {
-        return httpClient.getReadTimeout();
+      return httpClient.readTimeoutMillis();
     }
 
     /**
@@ -432,8 +433,8 @@ public class ApiClient {
      * @return Api client
      */
     public ApiClient setReadTimeout(int readTimeout) {
-        httpClient.setReadTimeout(readTimeout, TimeUnit.MILLISECONDS);
-        return this;
+            httpClient = httpClient.newBuilder().readTimeout(readTimeout, TimeUnit.MILLISECONDS).build();
+            return this;
     }
 
     /**
@@ -442,7 +443,7 @@ public class ApiClient {
      * @return Timeout in milliseconds
      */
     public int getWriteTimeout() {
-        return httpClient.getWriteTimeout();
+            return httpClient.writeTimeoutMillis();
     }
 
     /**
@@ -454,8 +455,8 @@ public class ApiClient {
      * @return Api client
      */
     public ApiClient setWriteTimeout(int writeTimeout) {
-        httpClient.setWriteTimeout(writeTimeout, TimeUnit.MILLISECONDS);
-        return this;
+            httpClient = httpClient.newBuilder().writeTimeout(writeTimeout, TimeUnit.MILLISECONDS).build();
+            return this;
     }
 
     /**
@@ -845,24 +846,25 @@ public class ApiClient {
      */
     @SuppressWarnings("unchecked")
     public <T> void executeAsync(Call call, final Type returnType, final ApiCallback<T> callback) {
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Request request, IOException e) {
-                callback.onFailure(new ApiException(e), 0, null);
-            }
+           call.enqueue(new Callback() {
+               @Override
+               public void onFailure(Call call, IOException e) {
+                   callback.onFailure(new ApiException(e), 0, null);
+               }
 
-            @Override
-            public void onResponse(Response response) throws IOException {
-                T result;
-                try {
-                    result = (T) handleResponse(response, returnType);
-                } catch (Exception e) {
-                    callback.onFailure(e, response.code(), response.headers().toMultimap());
-                    return;
-                }
-                callback.onSuccess(result, response.code(), response.headers().toMultimap());
-            }
-        });
+               @Override
+               public void onResponse(Call call, Response response) {
+                   T result;
+                   try {
+                       result = (T) handleResponse(response, returnType);
+                   } catch (Exception e) {
+                       callback.onFailure(e, response.code(), response.headers().toMultimap());
+                       return;
+                   }
+                   callback.onSuccess(result, response.code(), response.headers().toMultimap());
+
+               }
+           });
     }
 
     /**
@@ -883,7 +885,7 @@ public class ApiClient {
                 if (response.body() != null) {
                     try {
                         response.body().close();
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         throw new ApiException(response.message(), e, response.code(), response.headers().toMultimap());
                     }
                 }
@@ -1083,7 +1085,7 @@ public class ApiClient {
      * @return RequestBody
      */
     public RequestBody buildRequestBodyFormEncoding(Map<String, Object> formParams) {
-        FormEncodingBuilder formBuilder  = new FormEncodingBuilder();
+        FormBody.Builder formBuilder  = new FormBody.Builder();
         for (Entry<String, Object> param : formParams.entrySet()) {
             formBuilder.add(param.getKey(), parameterToString(param.getValue()));
         }
@@ -1098,7 +1100,8 @@ public class ApiClient {
      * @return RequestBody
      */
     public RequestBody buildRequestBodyMultipart(Map<String, Object> formParams) {
-        MultipartBuilder mpBuilder = new MultipartBuilder().type(MultipartBuilder.FORM);
+        MultipartBody.Builder mpBuilder = new MultipartBody.Builder();
+        mpBuilder.setType(MultipartBody.FORM);
         for (Entry<String, Object> param : formParams.entrySet()) {
             if (param.getValue() instanceof File) {
                 File file = (File) param.getValue();
@@ -1169,14 +1172,17 @@ public class ApiClient {
                 trustManagers = trustManagerFactory.getTrustManagers();
             }
 
+            OkHttpClient.Builder httpClientLocal = httpClient.newBuilder();
             if (keyManagers != null || trustManagers != null) {
                 SSLContext sslContext = SSLContext.getInstance("TLS");
                 sslContext.init(keyManagers, trustManagers, new SecureRandom());
-                httpClient.setSslSocketFactory(sslContext.getSocketFactory());
+                httpClientLocal.sslSocketFactory(sslContext.getSocketFactory());
             } else {
-                httpClient.setSslSocketFactory(null);
+                httpClientLocal.sslSocketFactory(null);
             }
-            httpClient.setHostnameVerifier(hostnameVerifier);
+
+            httpClientLocal.hostnameVerifier(hostnameVerifier);
+            httpClient = httpClientLocal.build();
         } catch (GeneralSecurityException e) {
             throw new RuntimeException(e);
         }

@@ -27,6 +27,7 @@ import java.io.IOException;
 
 
 import com.rockset.client.model.ErrorModel;
+import com.rockset.client.model.ExecutePublicQueryLambdaRequest;
 import com.rockset.client.model.QueryResponse;
 
 import java.lang.reflect.Type;
@@ -57,13 +58,14 @@ public class SharedLambdasApi {
     /**
      * Build call for execute
      * @param publicAccessId public access ID of the query lambda (required)
+     * @param body JSON object (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call executeCall(String publicAccessId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
-        Object localVarPostBody = null;
+    public okhttp3.Call executeCall(String publicAccessId, ExecutePublicQueryLambdaRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        Object localVarPostBody = body;
 
         // create path and map variables
         String localVarPath = "/v1/public/shared_lambdas/{public_access_id}"
@@ -89,10 +91,10 @@ public class SharedLambdasApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+                    okhttp3.Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -101,11 +103,11 @@ public class SharedLambdasApi {
         }
 
         String[] localVarAuthNames = new String[] {  };
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call executeValidateBeforeCall(String publicAccessId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private okhttp3.Call executeValidateBeforeCall(String publicAccessId, ExecutePublicQueryLambdaRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'publicAccessId' is set
         if (publicAccessId == null) {
@@ -113,45 +115,48 @@ public class SharedLambdasApi {
         }
         
 
-        com.squareup.okhttp.Call call = executeCall(publicAccessId, progressListener, progressRequestListener);
+        okhttp3.Call call = executeCall(publicAccessId, body, progressListener, progressRequestListener);
         return call;
 
     }
 
     /**
      * Execute a Public Query Lambda
-     * Execute a public query lambda.
+     * Execute a public query lambda (full version).
      * @param publicAccessId public access ID of the query lambda (required)
+     * @param body JSON object (optional)
      * @return QueryResponse
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public QueryResponse execute(String publicAccessId) throws Exception {
-        ApiResponse<QueryResponse> resp = executeWithHttpInfo(publicAccessId);
+    public QueryResponse execute(String publicAccessId, ExecutePublicQueryLambdaRequest body) throws Exception {
+        ApiResponse<QueryResponse> resp = executeWithHttpInfo(publicAccessId, body);
         return resp.getData();
     }
 
     /**
      * Execute a Public Query Lambda
-     * Execute a public query lambda.
+     * Execute a public query lambda (full version).
      * @param publicAccessId public access ID of the query lambda (required)
+     * @param body JSON object (optional)
      * @return ApiResponse&lt;QueryResponse&gt;
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<QueryResponse> executeWithHttpInfo(String publicAccessId) throws Exception {
-        com.squareup.okhttp.Call call = executeValidateBeforeCall(publicAccessId, null, null);
+    public ApiResponse<QueryResponse> executeWithHttpInfo(String publicAccessId, ExecutePublicQueryLambdaRequest body) throws Exception {
+        okhttp3.Call call = executeValidateBeforeCall(publicAccessId, body, null, null);
         Type localVarReturnType = new TypeToken<QueryResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
      * Execute a Public Query Lambda (asynchronously)
-     * Execute a public query lambda.
+     * Execute a public query lambda (full version).
      * @param publicAccessId public access ID of the query lambda (required)
+     * @param body JSON object (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call executeAsync(String publicAccessId, final ApiCallback<QueryResponse> callback) throws Exception {
+    public okhttp3.Call executeAsync(String publicAccessId, ExecutePublicQueryLambdaRequest body, final ApiCallback<QueryResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -172,7 +177,7 @@ public class SharedLambdasApi {
             };
         }
 
-        com.squareup.okhttp.Call call = executeValidateBeforeCall(publicAccessId, progressListener, progressRequestListener);
+        okhttp3.Call call = executeValidateBeforeCall(publicAccessId, body, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<QueryResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

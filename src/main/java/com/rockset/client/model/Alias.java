@@ -31,22 +31,28 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Alias
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class Alias {
-  @SerializedName("name")
-  private String name = null;
+  @SerializedName("collections")
+  private List<String> collections = null;
 
-  @SerializedName("description")
-  private String description = null;
+  @SerializedName("created_at")
+  private String createdAt = null;
 
-  @SerializedName("workspace")
-  private String workspace = null;
+  @SerializedName("created_by_apikey_name")
+  private String createdByApikeyName = null;
 
   @SerializedName("creator_email")
   private String creatorEmail = null;
 
-  @SerializedName("collections")
-  private List<String> collections = null;
+  @SerializedName("description")
+  private String description = null;
+
+  @SerializedName("modified_at")
+  private String modifiedAt = null;
+
+  @SerializedName("name")
+  private String name = null;
 
   /**
    * State of the alias.
@@ -72,6 +78,7 @@ public class Alias {
       return String.valueOf(value);
     }
 
+    @com.fasterxml.jackson.annotation.JsonCreator
     public static StateEnum fromValue(String text) {
       for (StateEnum b : StateEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -98,91 +105,8 @@ public class Alias {
   @SerializedName("state")
   private StateEnum state = null;
 
-  @SerializedName("created_at")
-  private String createdAt = null;
-
-  @SerializedName("modified_at")
-  private String modifiedAt = null;
-
-  public Alias name(String name) {
-    this.name = name;
-    return this;
-  }
-
-   /**
-   * Name of the alias.
-   * @return name
-  **/
-
-@JsonProperty("name")
-@ApiModelProperty(example = "demo", value = "Name of the alias.")
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public Alias description(String description) {
-    this.description = description;
-    return this;
-  }
-
-   /**
-   * Alias description.
-   * @return description
-  **/
-
-@JsonProperty("description")
-@ApiModelProperty(example = "alias referencing collection in workspace", value = "Alias description.")
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public Alias workspace(String workspace) {
-    this.workspace = workspace;
-    return this;
-  }
-
-   /**
-   * Name of the workspace.
-   * @return workspace
-  **/
-
-@JsonProperty("workspace")
-@ApiModelProperty(example = "commons", value = "Name of the workspace.")
-  public String getWorkspace() {
-    return workspace;
-  }
-
-  public void setWorkspace(String workspace) {
-    this.workspace = workspace;
-  }
-
-  public Alias creatorEmail(String creatorEmail) {
-    this.creatorEmail = creatorEmail;
-    return this;
-  }
-
-   /**
-   * Email of the creator.
-   * @return creatorEmail
-  **/
-
-@JsonProperty("creator_email")
-@ApiModelProperty(example = "xyz@rockset.com", value = "Email of the creator.")
-  public String getCreatorEmail() {
-    return creatorEmail;
-  }
-
-  public void setCreatorEmail(String creatorEmail) {
-    this.creatorEmail = creatorEmail;
-  }
+  @SerializedName("workspace")
+  private String workspace = null;
 
   public Alias collections(List<String> collections) {
     this.collections = collections;
@@ -212,26 +136,6 @@ public class Alias {
     this.collections = collections;
   }
 
-  public Alias state(StateEnum state) {
-    this.state = state;
-    return this;
-  }
-
-   /**
-   * State of the alias.
-   * @return state
-  **/
-
-@JsonProperty("state")
-@ApiModelProperty(example = "CREATED", value = "State of the alias.")
-  public StateEnum getState() {
-    return state;
-  }
-
-  public void setState(StateEnum state) {
-    this.state = state;
-  }
-
   public Alias createdAt(String createdAt) {
     this.createdAt = createdAt;
     return this;
@@ -250,6 +154,66 @@ public class Alias {
 
   public void setCreatedAt(String createdAt) {
     this.createdAt = createdAt;
+  }
+
+  public Alias createdByApikeyName(String createdByApikeyName) {
+    this.createdByApikeyName = createdByApikeyName;
+    return this;
+  }
+
+   /**
+   * Name of the API key that was used to create this object if one was used.
+   * @return createdByApikeyName
+  **/
+
+@JsonProperty("created_by_apikey_name")
+@ApiModelProperty(value = "Name of the API key that was used to create this object if one was used.")
+  public String getCreatedByApikeyName() {
+    return createdByApikeyName;
+  }
+
+  public void setCreatedByApikeyName(String createdByApikeyName) {
+    this.createdByApikeyName = createdByApikeyName;
+  }
+
+  public Alias creatorEmail(String creatorEmail) {
+    this.creatorEmail = creatorEmail;
+    return this;
+  }
+
+   /**
+   * Email of the creator.
+   * @return creatorEmail
+  **/
+
+@JsonProperty("creator_email")
+@ApiModelProperty(example = "xyz@rockset.com", value = "Email of the creator.")
+  public String getCreatorEmail() {
+    return creatorEmail;
+  }
+
+  public void setCreatorEmail(String creatorEmail) {
+    this.creatorEmail = creatorEmail;
+  }
+
+  public Alias description(String description) {
+    this.description = description;
+    return this;
+  }
+
+   /**
+   * Alias description.
+   * @return description
+  **/
+
+@JsonProperty("description")
+@ApiModelProperty(example = "alias referencing collection in workspace", value = "Alias description.")
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
   }
 
   public Alias modifiedAt(String modifiedAt) {
@@ -272,6 +236,66 @@ public class Alias {
     this.modifiedAt = modifiedAt;
   }
 
+  public Alias name(String name) {
+    this.name = name;
+    return this;
+  }
+
+   /**
+   * Name of the alias.
+   * @return name
+  **/
+
+@JsonProperty("name")
+@ApiModelProperty(example = "demo", value = "Name of the alias.")
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public Alias state(StateEnum state) {
+    this.state = state;
+    return this;
+  }
+
+   /**
+   * State of the alias.
+   * @return state
+  **/
+
+@JsonProperty("state")
+@ApiModelProperty(example = "CREATED", value = "State of the alias.")
+  public StateEnum getState() {
+    return state;
+  }
+
+  public void setState(StateEnum state) {
+    this.state = state;
+  }
+
+  public Alias workspace(String workspace) {
+    this.workspace = workspace;
+    return this;
+  }
+
+   /**
+   * Name of the workspace.
+   * @return workspace
+  **/
+
+@JsonProperty("workspace")
+@ApiModelProperty(example = "commons", value = "Name of the workspace.")
+  public String getWorkspace() {
+    return workspace;
+  }
+
+  public void setWorkspace(String workspace) {
+    this.workspace = workspace;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -282,19 +306,20 @@ public class Alias {
       return false;
     }
     Alias alias = (Alias) o;
-    return Objects.equals(this.name, alias.name) &&
-        Objects.equals(this.description, alias.description) &&
-        Objects.equals(this.workspace, alias.workspace) &&
-        Objects.equals(this.creatorEmail, alias.creatorEmail) &&
-        Objects.equals(this.collections, alias.collections) &&
-        Objects.equals(this.state, alias.state) &&
+    return Objects.equals(this.collections, alias.collections) &&
         Objects.equals(this.createdAt, alias.createdAt) &&
-        Objects.equals(this.modifiedAt, alias.modifiedAt);
+        Objects.equals(this.createdByApikeyName, alias.createdByApikeyName) &&
+        Objects.equals(this.creatorEmail, alias.creatorEmail) &&
+        Objects.equals(this.description, alias.description) &&
+        Objects.equals(this.modifiedAt, alias.modifiedAt) &&
+        Objects.equals(this.name, alias.name) &&
+        Objects.equals(this.state, alias.state) &&
+        Objects.equals(this.workspace, alias.workspace);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, description, workspace, creatorEmail, collections, state, createdAt, modifiedAt);
+    return Objects.hash(collections, createdAt, createdByApikeyName, creatorEmail, description, modifiedAt, name, state, workspace);
   }
 
 
@@ -303,14 +328,15 @@ public class Alias {
     StringBuilder sb = new StringBuilder();
     sb.append("class Alias {\n");
     
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    description: ").append(toIndentedString(description)).append("\n");
-    sb.append("    workspace: ").append(toIndentedString(workspace)).append("\n");
-    sb.append("    creatorEmail: ").append(toIndentedString(creatorEmail)).append("\n");
     sb.append("    collections: ").append(toIndentedString(collections)).append("\n");
-    sb.append("    state: ").append(toIndentedString(state)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
+    sb.append("    createdByApikeyName: ").append(toIndentedString(createdByApikeyName)).append("\n");
+    sb.append("    creatorEmail: ").append(toIndentedString(creatorEmail)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    modifiedAt: ").append(toIndentedString(modifiedAt)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    state: ").append(toIndentedString(state)).append("\n");
+    sb.append("    workspace: ").append(toIndentedString(workspace)).append("\n");
     sb.append("}");
     return sb.toString();
   }

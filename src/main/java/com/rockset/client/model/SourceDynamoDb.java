@@ -31,13 +31,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceDynamoDb
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class SourceDynamoDb {
   @SerializedName("aws_region")
   private String awsRegion = null;
-
-  @SerializedName("table_name")
-  private String tableName = null;
 
   @SerializedName("current_status")
   private StatusDynamoDbV2 currentStatus = null;
@@ -47,6 +44,9 @@ public class SourceDynamoDb {
 
   @SerializedName("status")
   private StatusDynamoDb status = null;
+
+  @SerializedName("table_name")
+  private String tableName = null;
 
   @SerializedName("use_scan_api")
   private Boolean useScanApi = null;
@@ -69,26 +69,6 @@ public class SourceDynamoDb {
 
   public void setAwsRegion(String awsRegion) {
     this.awsRegion = awsRegion;
-  }
-
-  public SourceDynamoDb tableName(String tableName) {
-    this.tableName = tableName;
-    return this;
-  }
-
-   /**
-   * Name of DynamoDB table containing data.
-   * @return tableName
-  **/
-
-@JsonProperty("table_name")
-@ApiModelProperty(example = "dynamodb_table_name", required = true, value = "Name of DynamoDB table containing data.")
-  public String getTableName() {
-    return tableName;
-  }
-
-  public void setTableName(String tableName) {
-    this.tableName = tableName;
   }
 
    /**
@@ -133,6 +113,26 @@ public class SourceDynamoDb {
     return status;
   }
 
+  public SourceDynamoDb tableName(String tableName) {
+    this.tableName = tableName;
+    return this;
+  }
+
+   /**
+   * Name of DynamoDB table containing data.
+   * @return tableName
+  **/
+
+@JsonProperty("table_name")
+@ApiModelProperty(example = "dynamodb_table_name", required = true, value = "Name of DynamoDB table containing data.")
+  public String getTableName() {
+    return tableName;
+  }
+
+  public void setTableName(String tableName) {
+    this.tableName = tableName;
+  }
+
   public SourceDynamoDb useScanApi(Boolean useScanApi) {
     this.useScanApi = useScanApi;
     return this;
@@ -164,16 +164,16 @@ public class SourceDynamoDb {
     }
     SourceDynamoDb sourceDynamoDb = (SourceDynamoDb) o;
     return Objects.equals(this.awsRegion, sourceDynamoDb.awsRegion) &&
-        Objects.equals(this.tableName, sourceDynamoDb.tableName) &&
         Objects.equals(this.currentStatus, sourceDynamoDb.currentStatus) &&
         Objects.equals(this.rcu, sourceDynamoDb.rcu) &&
         Objects.equals(this.status, sourceDynamoDb.status) &&
+        Objects.equals(this.tableName, sourceDynamoDb.tableName) &&
         Objects.equals(this.useScanApi, sourceDynamoDb.useScanApi);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(awsRegion, tableName, currentStatus, rcu, status, useScanApi);
+    return Objects.hash(awsRegion, currentStatus, rcu, status, tableName, useScanApi);
   }
 
 
@@ -183,10 +183,10 @@ public class SourceDynamoDb {
     sb.append("class SourceDynamoDb {\n");
     
     sb.append("    awsRegion: ").append(toIndentedString(awsRegion)).append("\n");
-    sb.append("    tableName: ").append(toIndentedString(tableName)).append("\n");
     sb.append("    currentStatus: ").append(toIndentedString(currentStatus)).append("\n");
     sb.append("    rcu: ").append(toIndentedString(rcu)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    tableName: ").append(toIndentedString(tableName)).append("\n");
     sb.append("    useScanApi: ").append(toIndentedString(useScanApi)).append("\n");
     sb.append("}");
     return sb.toString();

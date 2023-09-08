@@ -32,8 +32,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * StatusAzureEventHubs
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-11-22T11:16:43.952-05:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:21:47.964-07:00")
 public class StatusAzureEventHubs {
+  @SerializedName("last_consumed_time")
+  private String lastConsumedTime = null;
+
+  @SerializedName("num_documents_processed")
+  private Long numDocumentsProcessed = null;
+
+  @SerializedName("partitions")
+  private List<StatusAzureEventHubsPartition> partitions = null;
+
   /**
    * State of the source.
    */
@@ -60,6 +69,7 @@ public class StatusAzureEventHubs {
       return String.valueOf(value);
     }
 
+    @com.fasterxml.jackson.annotation.JsonCreator
     public static StateEnum fromValue(String text) {
       for (StateEnum b : StateEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
@@ -85,35 +95,6 @@ public class StatusAzureEventHubs {
 
   @SerializedName("state")
   private StateEnum state = null;
-
-  @SerializedName("last_consumed_time")
-  private String lastConsumedTime = null;
-
-  @SerializedName("num_documents_processed")
-  private Long numDocumentsProcessed = null;
-
-  @SerializedName("partitions")
-  private List<StatusAzureEventHubsPartition> partitions = null;
-
-  public StatusAzureEventHubs state(StateEnum state) {
-    this.state = state;
-    return this;
-  }
-
-   /**
-   * State of the source.
-   * @return state
-  **/
-
-@JsonProperty("state")
-@ApiModelProperty(example = "ACTIVE", value = "State of the source.")
-  public StateEnum getState() {
-    return state;
-  }
-
-  public void setState(StateEnum state) {
-    this.state = state;
-  }
 
   public StatusAzureEventHubs lastConsumedTime(String lastConsumedTime) {
     this.lastConsumedTime = lastConsumedTime;
@@ -183,6 +164,26 @@ public class StatusAzureEventHubs {
     this.partitions = partitions;
   }
 
+  public StatusAzureEventHubs state(StateEnum state) {
+    this.state = state;
+    return this;
+  }
+
+   /**
+   * State of the source.
+   * @return state
+  **/
+
+@JsonProperty("state")
+@ApiModelProperty(example = "ACTIVE", value = "State of the source.")
+  public StateEnum getState() {
+    return state;
+  }
+
+  public void setState(StateEnum state) {
+    this.state = state;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -193,15 +194,15 @@ public class StatusAzureEventHubs {
       return false;
     }
     StatusAzureEventHubs statusAzureEventHubs = (StatusAzureEventHubs) o;
-    return Objects.equals(this.state, statusAzureEventHubs.state) &&
-        Objects.equals(this.lastConsumedTime, statusAzureEventHubs.lastConsumedTime) &&
+    return Objects.equals(this.lastConsumedTime, statusAzureEventHubs.lastConsumedTime) &&
         Objects.equals(this.numDocumentsProcessed, statusAzureEventHubs.numDocumentsProcessed) &&
-        Objects.equals(this.partitions, statusAzureEventHubs.partitions);
+        Objects.equals(this.partitions, statusAzureEventHubs.partitions) &&
+        Objects.equals(this.state, statusAzureEventHubs.state);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(state, lastConsumedTime, numDocumentsProcessed, partitions);
+    return Objects.hash(lastConsumedTime, numDocumentsProcessed, partitions, state);
   }
 
 
@@ -210,10 +211,10 @@ public class StatusAzureEventHubs {
     StringBuilder sb = new StringBuilder();
     sb.append("class StatusAzureEventHubs {\n");
     
-    sb.append("    state: ").append(toIndentedString(state)).append("\n");
     sb.append("    lastConsumedTime: ").append(toIndentedString(lastConsumedTime)).append("\n");
     sb.append("    numDocumentsProcessed: ").append(toIndentedString(numDocumentsProcessed)).append("\n");
     sb.append("    partitions: ").append(toIndentedString(partitions)).append("\n");
+    sb.append("    state: ").append(toIndentedString(state)).append("\n");
     sb.append("}");
     return sb.toString();
   }
