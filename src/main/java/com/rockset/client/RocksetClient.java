@@ -28,7 +28,7 @@ public class RocksetClient {
     assert !apiKey.isEmpty();
 
     if (apiServer.isEmpty()) {
-      apiServer = "https://api.rs2.usw2.rockset.com";
+      apiServer = "https://api.usw2a1.rockset.com";
     }
 
     if (!apiServer.startsWith("https://") && !apiServer.startsWith("http://")) {
@@ -45,7 +45,7 @@ public class RocksetClient {
         new ApiClient()
             .setApiKey(apiKey)
             .setApiServer(apiServer)
-            .setVersion("0.10.1") // TODO: figure out how we can set this dynamically.
+            .setVersion("0.10.2") // TODO: figure out how we can set this dynamically.
             .setUserAgent(userAgent);
 
     this.aliases = new AliasesApi(this.apiClient);
