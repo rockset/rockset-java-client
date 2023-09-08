@@ -20,6 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.rockset.client.model.SourceS3Settings;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -31,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceS3
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:46:16.821-07:00")
 public class SourceS3 {
   @SerializedName("bucket")
   private String bucket = null;
@@ -59,6 +60,9 @@ public class SourceS3 {
 
   @SerializedName("region")
   private String region = null;
+
+  @SerializedName("settings")
+  private SourceS3Settings settings = null;
 
   public SourceS3 bucket(String bucket) {
     this.bucket = bucket;
@@ -195,6 +199,26 @@ public class SourceS3 {
     this.region = region;
   }
 
+  public SourceS3 settings(SourceS3Settings settings) {
+    this.settings = settings;
+    return this;
+  }
+
+   /**
+   * custom settings for Amazon S3 source
+   * @return settings
+  **/
+
+@JsonProperty("settings")
+@ApiModelProperty(value = "custom settings for Amazon S3 source")
+  public SourceS3Settings getSettings() {
+    return settings;
+  }
+
+  public void setSettings(SourceS3Settings settings) {
+    this.settings = settings;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -213,12 +237,13 @@ public class SourceS3 {
         Objects.equals(this.pattern, sourceS3.pattern) &&
         Objects.equals(this.prefix, sourceS3.prefix) &&
         Objects.equals(this.prefixes, sourceS3.prefixes) &&
-        Objects.equals(this.region, sourceS3.region);
+        Objects.equals(this.region, sourceS3.region) &&
+        Objects.equals(this.settings, sourceS3.settings);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(bucket, objectBytesDownloaded, objectBytesTotal, objectCountDownloaded, objectCountTotal, pattern, prefix, prefixes, region);
+    return Objects.hash(bucket, objectBytesDownloaded, objectBytesTotal, objectCountDownloaded, objectCountTotal, pattern, prefix, prefixes, region, settings);
   }
 
 
@@ -236,6 +261,7 @@ public class SourceS3 {
     sb.append("    prefix: ").append(toIndentedString(prefix)).append("\n");
     sb.append("    prefixes: ").append(toIndentedString(prefixes)).append("\n");
     sb.append("    region: ").append(toIndentedString(region)).append("\n");
+    sb.append("    settings: ").append(toIndentedString(settings)).append("\n");
     sb.append("}");
     return sb.toString();
   }

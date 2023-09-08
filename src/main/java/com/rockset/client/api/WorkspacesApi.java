@@ -66,7 +66,7 @@ public class WorkspacesApi {
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call createCall(CreateWorkspaceRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public okhttp3.Call createCall(CreateWorkspaceRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -92,10 +92,10 @@ public class WorkspacesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+                    okhttp3.Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -108,7 +108,7 @@ public class WorkspacesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call createValidateBeforeCall(CreateWorkspaceRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private okhttp3.Call createValidateBeforeCall(CreateWorkspaceRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'body' is set
         if (body == null) {
@@ -116,7 +116,7 @@ public class WorkspacesApi {
         }
         
 
-        com.squareup.okhttp.Call call = createCall(body, progressListener, progressRequestListener);
+        okhttp3.Call call = createCall(body, progressListener, progressRequestListener);
         return call;
 
     }
@@ -141,7 +141,7 @@ public class WorkspacesApi {
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<CreateWorkspaceResponse> createWithHttpInfo(CreateWorkspaceRequest body) throws Exception {
-        com.squareup.okhttp.Call call = createValidateBeforeCall(body, null, null);
+        okhttp3.Call call = createValidateBeforeCall(body, null, null);
         Type localVarReturnType = new TypeToken<CreateWorkspaceResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -154,7 +154,7 @@ public class WorkspacesApi {
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call createAsync(CreateWorkspaceRequest body, final ApiCallback<CreateWorkspaceResponse> callback) throws Exception {
+    public okhttp3.Call createAsync(CreateWorkspaceRequest body, final ApiCallback<CreateWorkspaceResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -175,7 +175,7 @@ public class WorkspacesApi {
             };
         }
 
-        com.squareup.okhttp.Call call = createValidateBeforeCall(body, progressListener, progressRequestListener);
+        okhttp3.Call call = createValidateBeforeCall(body, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<CreateWorkspaceResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -188,7 +188,7 @@ public class WorkspacesApi {
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call deleteCall(String workspace, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public okhttp3.Call deleteCall(String workspace, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -215,10 +215,10 @@ public class WorkspacesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+                    okhttp3.Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -231,7 +231,7 @@ public class WorkspacesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call deleteValidateBeforeCall(String workspace, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private okhttp3.Call deleteValidateBeforeCall(String workspace, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'workspace' is set
         if (workspace == null) {
@@ -239,7 +239,7 @@ public class WorkspacesApi {
         }
         
 
-        com.squareup.okhttp.Call call = deleteCall(workspace, progressListener, progressRequestListener);
+        okhttp3.Call call = deleteCall(workspace, progressListener, progressRequestListener);
         return call;
 
     }
@@ -264,7 +264,7 @@ public class WorkspacesApi {
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<DeleteWorkspaceResponse> deleteWithHttpInfo(String workspace) throws Exception {
-        com.squareup.okhttp.Call call = deleteValidateBeforeCall(workspace, null, null);
+        okhttp3.Call call = deleteValidateBeforeCall(workspace, null, null);
         Type localVarReturnType = new TypeToken<DeleteWorkspaceResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -277,7 +277,7 @@ public class WorkspacesApi {
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call deleteAsync(String workspace, final ApiCallback<DeleteWorkspaceResponse> callback) throws Exception {
+    public okhttp3.Call deleteAsync(String workspace, final ApiCallback<DeleteWorkspaceResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -298,7 +298,7 @@ public class WorkspacesApi {
             };
         }
 
-        com.squareup.okhttp.Call call = deleteValidateBeforeCall(workspace, progressListener, progressRequestListener);
+        okhttp3.Call call = deleteValidateBeforeCall(workspace, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<DeleteWorkspaceResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -311,7 +311,7 @@ public class WorkspacesApi {
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getCall(String workspace, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public okhttp3.Call getCall(String workspace, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -338,10 +338,10 @@ public class WorkspacesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+                    okhttp3.Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -354,7 +354,7 @@ public class WorkspacesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getValidateBeforeCall(String workspace, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private okhttp3.Call getValidateBeforeCall(String workspace, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'workspace' is set
         if (workspace == null) {
@@ -362,7 +362,7 @@ public class WorkspacesApi {
         }
         
 
-        com.squareup.okhttp.Call call = getCall(workspace, progressListener, progressRequestListener);
+        okhttp3.Call call = getCall(workspace, progressListener, progressRequestListener);
         return call;
 
     }
@@ -387,7 +387,7 @@ public class WorkspacesApi {
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<GetWorkspaceResponse> getWithHttpInfo(String workspace) throws Exception {
-        com.squareup.okhttp.Call call = getValidateBeforeCall(workspace, null, null);
+        okhttp3.Call call = getValidateBeforeCall(workspace, null, null);
         Type localVarReturnType = new TypeToken<GetWorkspaceResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -400,7 +400,7 @@ public class WorkspacesApi {
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getAsync(String workspace, final ApiCallback<GetWorkspaceResponse> callback) throws Exception {
+    public okhttp3.Call getAsync(String workspace, final ApiCallback<GetWorkspaceResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -421,7 +421,7 @@ public class WorkspacesApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getValidateBeforeCall(workspace, progressListener, progressRequestListener);
+        okhttp3.Call call = getValidateBeforeCall(workspace, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<GetWorkspaceResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -433,7 +433,7 @@ public class WorkspacesApi {
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call listCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public okhttp3.Call listCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -459,10 +459,10 @@ public class WorkspacesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+                    okhttp3.Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -475,10 +475,10 @@ public class WorkspacesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call listValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private okhttp3.Call listValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
 
-        com.squareup.okhttp.Call call = listCall(progressListener, progressRequestListener);
+        okhttp3.Call call = listCall(progressListener, progressRequestListener);
         return call;
 
     }
@@ -501,7 +501,7 @@ public class WorkspacesApi {
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<ListWorkspacesResponse> listWithHttpInfo() throws Exception {
-        com.squareup.okhttp.Call call = listValidateBeforeCall(null, null);
+        okhttp3.Call call = listValidateBeforeCall(null, null);
         Type localVarReturnType = new TypeToken<ListWorkspacesResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -513,7 +513,7 @@ public class WorkspacesApi {
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listAsync(final ApiCallback<ListWorkspacesResponse> callback) throws Exception {
+    public okhttp3.Call listAsync(final ApiCallback<ListWorkspacesResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -534,7 +534,7 @@ public class WorkspacesApi {
             };
         }
 
-        com.squareup.okhttp.Call call = listValidateBeforeCall(progressListener, progressRequestListener);
+        okhttp3.Call call = listValidateBeforeCall(progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<ListWorkspacesResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

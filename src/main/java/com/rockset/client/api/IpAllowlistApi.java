@@ -60,7 +60,7 @@ public class IpAllowlistApi {
    * @return Call to execute
    * @throws Exception If fail to serialize the request body object
    */
-  public com.squareup.okhttp.Call createCall(
+  public okhttp3.Call createCall(
       CreateIpAllowlistRequest body,
       final ProgressResponseBody.ProgressListener progressListener,
       final ProgressRequestBody.ProgressRequestListener progressRequestListener)
@@ -90,11 +90,11 @@ public class IpAllowlistApi {
           .getHttpClient()
           .networkInterceptors()
           .add(
-              new com.squareup.okhttp.Interceptor() {
+              new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(
-                    com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                  com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(
+                    okhttp3.Interceptor.Chain chain) throws IOException {
+                  okhttp3.Response originalResponse = chain.proceed(chain.request());
                   return originalResponse
                       .newBuilder()
                       .body(new ProgressResponseBody(originalResponse.body(), progressListener))
@@ -117,7 +117,7 @@ public class IpAllowlistApi {
   }
 
   @SuppressWarnings("rawtypes")
-  private com.squareup.okhttp.Call createValidateBeforeCall(
+  private okhttp3.Call createValidateBeforeCall(
       CreateIpAllowlistRequest body,
       final ProgressResponseBody.ProgressListener progressListener,
       final ProgressRequestBody.ProgressRequestListener progressRequestListener)
@@ -128,7 +128,7 @@ public class IpAllowlistApi {
       throw new Exception("Missing the required parameter 'body' when calling create(Async)");
     }
 
-    com.squareup.okhttp.Call call = createCall(body, progressListener, progressRequestListener);
+    okhttp3.Call call = createCall(body, progressListener, progressRequestListener);
     return call;
   }
 
@@ -155,7 +155,7 @@ public class IpAllowlistApi {
    */
   public ApiResponse<CreateIpAllowlistResponse> createWithHttpInfo(CreateIpAllowlistRequest body)
       throws Exception {
-    com.squareup.okhttp.Call call = createValidateBeforeCall(body, null, null);
+    okhttp3.Call call = createValidateBeforeCall(body, null, null);
     Type localVarReturnType = new TypeToken<CreateIpAllowlistResponse>() {}.getType();
     return apiClient.execute(call, localVarReturnType);
   }
@@ -168,7 +168,7 @@ public class IpAllowlistApi {
    * @return The request call
    * @throws Exception If fail to process the API call, e.g. serializing the request body object
    */
-  public com.squareup.okhttp.Call createAsync(
+  public okhttp3.Call createAsync(
       CreateIpAllowlistRequest body, final ApiCallback<CreateIpAllowlistResponse> callback)
       throws Exception {
 
@@ -193,7 +193,7 @@ public class IpAllowlistApi {
           };
     }
 
-    com.squareup.okhttp.Call call =
+    okhttp3.Call call =
         createValidateBeforeCall(body, progressListener, progressRequestListener);
     Type localVarReturnType = new TypeToken<CreateIpAllowlistResponse>() {}.getType();
     apiClient.executeAsync(call, localVarReturnType, callback);
@@ -208,7 +208,7 @@ public class IpAllowlistApi {
    * @return Call to execute
    * @throws Exception If fail to serialize the request body object
    */
-  public com.squareup.okhttp.Call deleteCall(
+  public okhttp3.Call deleteCall(
       String name,
       final ProgressResponseBody.ProgressListener progressListener,
       final ProgressRequestBody.ProgressRequestListener progressRequestListener)
@@ -240,11 +240,11 @@ public class IpAllowlistApi {
           .getHttpClient()
           .networkInterceptors()
           .add(
-              new com.squareup.okhttp.Interceptor() {
+              new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(
-                    com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                  com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(
+                    okhttp3.Interceptor.Chain chain) throws IOException {
+                  okhttp3.Response originalResponse = chain.proceed(chain.request());
                   return originalResponse
                       .newBuilder()
                       .body(new ProgressResponseBody(originalResponse.body(), progressListener))
@@ -267,7 +267,7 @@ public class IpAllowlistApi {
   }
 
   @SuppressWarnings("rawtypes")
-  private com.squareup.okhttp.Call deleteValidateBeforeCall(
+  private okhttp3.Call deleteValidateBeforeCall(
       String name,
       final ProgressResponseBody.ProgressListener progressListener,
       final ProgressRequestBody.ProgressRequestListener progressRequestListener)
@@ -278,7 +278,7 @@ public class IpAllowlistApi {
       throw new Exception("Missing the required parameter 'name' when calling delete(Async)");
     }
 
-    com.squareup.okhttp.Call call = deleteCall(name, progressListener, progressRequestListener);
+    okhttp3.Call call = deleteCall(name, progressListener, progressRequestListener);
     return call;
   }
 
@@ -304,7 +304,7 @@ public class IpAllowlistApi {
    *     body
    */
   public ApiResponse<DeleteIpAllowlistResponse> deleteWithHttpInfo(String name) throws Exception {
-    com.squareup.okhttp.Call call = deleteValidateBeforeCall(name, null, null);
+    okhttp3.Call call = deleteValidateBeforeCall(name, null, null);
     Type localVarReturnType = new TypeToken<DeleteIpAllowlistResponse>() {}.getType();
     return apiClient.execute(call, localVarReturnType);
   }
@@ -318,7 +318,7 @@ public class IpAllowlistApi {
    * @return The request call
    * @throws Exception If fail to process the API call, e.g. serializing the request body object
    */
-  public com.squareup.okhttp.Call deleteAsync(
+  public okhttp3.Call deleteAsync(
       String name, final ApiCallback<DeleteIpAllowlistResponse> callback) throws Exception {
 
     ProgressResponseBody.ProgressListener progressListener = null;
@@ -342,7 +342,7 @@ public class IpAllowlistApi {
           };
     }
 
-    com.squareup.okhttp.Call call =
+    okhttp3.Call call =
         deleteValidateBeforeCall(name, progressListener, progressRequestListener);
     Type localVarReturnType = new TypeToken<DeleteIpAllowlistResponse>() {}.getType();
     apiClient.executeAsync(call, localVarReturnType, callback);
@@ -357,7 +357,7 @@ public class IpAllowlistApi {
    * @return Call to execute
    * @throws Exception If fail to serialize the request body object
    */
-  public com.squareup.okhttp.Call getCall(
+  public okhttp3.Call getCall(
       String name,
       final ProgressResponseBody.ProgressListener progressListener,
       final ProgressRequestBody.ProgressRequestListener progressRequestListener)
@@ -389,11 +389,11 @@ public class IpAllowlistApi {
           .getHttpClient()
           .networkInterceptors()
           .add(
-              new com.squareup.okhttp.Interceptor() {
+              new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(
-                    com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                  com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(
+                    okhttp3.Interceptor.Chain chain) throws IOException {
+                  okhttp3.Response originalResponse = chain.proceed(chain.request());
                   return originalResponse
                       .newBuilder()
                       .body(new ProgressResponseBody(originalResponse.body(), progressListener))
@@ -416,7 +416,7 @@ public class IpAllowlistApi {
   }
 
   @SuppressWarnings("rawtypes")
-  private com.squareup.okhttp.Call getValidateBeforeCall(
+  private okhttp3.Call getValidateBeforeCall(
       String name,
       final ProgressResponseBody.ProgressListener progressListener,
       final ProgressRequestBody.ProgressRequestListener progressRequestListener)
@@ -427,7 +427,7 @@ public class IpAllowlistApi {
       throw new Exception("Missing the required parameter 'name' when calling get(Async)");
     }
 
-    com.squareup.okhttp.Call call = getCall(name, progressListener, progressRequestListener);
+    okhttp3.Call call = getCall(name, progressListener, progressRequestListener);
     return call;
   }
 
@@ -453,7 +453,7 @@ public class IpAllowlistApi {
    *     body
    */
   public ApiResponse<GetIpAllowlistResponse> getWithHttpInfo(String name) throws Exception {
-    com.squareup.okhttp.Call call = getValidateBeforeCall(name, null, null);
+    okhttp3.Call call = getValidateBeforeCall(name, null, null);
     Type localVarReturnType = new TypeToken<GetIpAllowlistResponse>() {}.getType();
     return apiClient.execute(call, localVarReturnType);
   }
@@ -467,7 +467,7 @@ public class IpAllowlistApi {
    * @return The request call
    * @throws Exception If fail to process the API call, e.g. serializing the request body object
    */
-  public com.squareup.okhttp.Call getAsync(
+  public okhttp3.Call getAsync(
       String name, final ApiCallback<GetIpAllowlistResponse> callback) throws Exception {
 
     ProgressResponseBody.ProgressListener progressListener = null;
@@ -491,7 +491,7 @@ public class IpAllowlistApi {
           };
     }
 
-    com.squareup.okhttp.Call call =
+    okhttp3.Call call =
         getValidateBeforeCall(name, progressListener, progressRequestListener);
     Type localVarReturnType = new TypeToken<GetIpAllowlistResponse>() {}.getType();
     apiClient.executeAsync(call, localVarReturnType, callback);
@@ -505,7 +505,7 @@ public class IpAllowlistApi {
    * @return Call to execute
    * @throws Exception If fail to serialize the request body object
    */
-  public com.squareup.okhttp.Call listCall(
+  public okhttp3.Call listCall(
       final ProgressResponseBody.ProgressListener progressListener,
       final ProgressRequestBody.ProgressRequestListener progressRequestListener)
       throws Exception {
@@ -534,11 +534,11 @@ public class IpAllowlistApi {
           .getHttpClient()
           .networkInterceptors()
           .add(
-              new com.squareup.okhttp.Interceptor() {
+              new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(
-                    com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                  com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(
+                    okhttp3.Interceptor.Chain chain) throws IOException {
+                  okhttp3.Response originalResponse = chain.proceed(chain.request());
                   return originalResponse
                       .newBuilder()
                       .body(new ProgressResponseBody(originalResponse.body(), progressListener))
@@ -561,12 +561,12 @@ public class IpAllowlistApi {
   }
 
   @SuppressWarnings("rawtypes")
-  private com.squareup.okhttp.Call listValidateBeforeCall(
+  private okhttp3.Call listValidateBeforeCall(
       final ProgressResponseBody.ProgressListener progressListener,
       final ProgressRequestBody.ProgressRequestListener progressRequestListener)
       throws Exception {
 
-    com.squareup.okhttp.Call call = listCall(progressListener, progressRequestListener);
+    okhttp3.Call call = listCall(progressListener, progressRequestListener);
     return call;
   }
 
@@ -590,7 +590,7 @@ public class IpAllowlistApi {
    *     body
    */
   public ApiResponse<ListIpAllowlistsResponse> listWithHttpInfo() throws Exception {
-    com.squareup.okhttp.Call call = listValidateBeforeCall(null, null);
+    okhttp3.Call call = listValidateBeforeCall(null, null);
     Type localVarReturnType = new TypeToken<ListIpAllowlistsResponse>() {}.getType();
     return apiClient.execute(call, localVarReturnType);
   }
@@ -602,7 +602,7 @@ public class IpAllowlistApi {
    * @return The request call
    * @throws Exception If fail to process the API call, e.g. serializing the request body object
    */
-  public com.squareup.okhttp.Call listAsync(final ApiCallback<ListIpAllowlistsResponse> callback)
+  public okhttp3.Call listAsync(final ApiCallback<ListIpAllowlistsResponse> callback)
       throws Exception {
 
     ProgressResponseBody.ProgressListener progressListener = null;
@@ -626,7 +626,7 @@ public class IpAllowlistApi {
           };
     }
 
-    com.squareup.okhttp.Call call =
+    okhttp3.Call call =
         listValidateBeforeCall(progressListener, progressRequestListener);
     Type localVarReturnType = new TypeToken<ListIpAllowlistsResponse>() {}.getType();
     apiClient.executeAsync(call, localVarReturnType, callback);

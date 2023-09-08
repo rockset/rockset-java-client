@@ -20,6 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.rockset.client.model.SourceAzBlobStorageSettings;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -29,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceAzureBlobStorage
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:46:16.821-07:00")
 public class SourceAzureBlobStorage {
   @SerializedName("blob_bytes_total")
   private Long blobBytesTotal = null;
@@ -48,6 +49,9 @@ public class SourceAzureBlobStorage {
 
   @SerializedName("prefix")
   private String prefix = null;
+
+  @SerializedName("settings")
+  private SourceAzBlobStorageSettings settings = null;
 
    /**
    * Get blobBytesTotal
@@ -142,6 +146,26 @@ public class SourceAzureBlobStorage {
     this.prefix = prefix;
   }
 
+  public SourceAzureBlobStorage settings(SourceAzBlobStorageSettings settings) {
+    this.settings = settings;
+    return this;
+  }
+
+   /**
+   * custom settings for Azure blob Storage source
+   * @return settings
+  **/
+
+@JsonProperty("settings")
+@ApiModelProperty(value = "custom settings for Azure blob Storage source")
+  public SourceAzBlobStorageSettings getSettings() {
+    return settings;
+  }
+
+  public void setSettings(SourceAzBlobStorageSettings settings) {
+    this.settings = settings;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -157,12 +181,13 @@ public class SourceAzureBlobStorage {
         Objects.equals(this.blobCountTotal, sourceAzureBlobStorage.blobCountTotal) &&
         Objects.equals(this.container, sourceAzureBlobStorage.container) &&
         Objects.equals(this.pattern, sourceAzureBlobStorage.pattern) &&
-        Objects.equals(this.prefix, sourceAzureBlobStorage.prefix);
+        Objects.equals(this.prefix, sourceAzureBlobStorage.prefix) &&
+        Objects.equals(this.settings, sourceAzureBlobStorage.settings);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(blobBytesTotal, blobCountDownloaded, blobCountTotal, container, pattern, prefix);
+    return Objects.hash(blobBytesTotal, blobCountDownloaded, blobCountTotal, container, pattern, prefix, settings);
   }
 
 
@@ -177,6 +202,7 @@ public class SourceAzureBlobStorage {
     sb.append("    container: ").append(toIndentedString(container)).append("\n");
     sb.append("    pattern: ").append(toIndentedString(pattern)).append("\n");
     sb.append("    prefix: ").append(toIndentedString(prefix)).append("\n");
+    sb.append("    settings: ").append(toIndentedString(settings)).append("\n");
     sb.append("}");
     return sb.toString();
   }

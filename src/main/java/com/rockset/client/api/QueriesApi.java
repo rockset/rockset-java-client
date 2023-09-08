@@ -68,7 +68,7 @@ public class QueriesApi {
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call cancelCall(String queryId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public okhttp3.Call cancelCall(String queryId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -95,10 +95,10 @@ public class QueriesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+                    okhttp3.Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -111,7 +111,7 @@ public class QueriesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call cancelValidateBeforeCall(String queryId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private okhttp3.Call cancelValidateBeforeCall(String queryId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'queryId' is set
         if (queryId == null) {
@@ -119,7 +119,7 @@ public class QueriesApi {
         }
         
 
-        com.squareup.okhttp.Call call = cancelCall(queryId, progressListener, progressRequestListener);
+        okhttp3.Call call = cancelCall(queryId, progressListener, progressRequestListener);
         return call;
 
     }
@@ -144,7 +144,7 @@ public class QueriesApi {
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<CancelQueryResponse> cancelWithHttpInfo(String queryId) throws Exception {
-        com.squareup.okhttp.Call call = cancelValidateBeforeCall(queryId, null, null);
+        okhttp3.Call call = cancelValidateBeforeCall(queryId, null, null);
         Type localVarReturnType = new TypeToken<CancelQueryResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -157,7 +157,7 @@ public class QueriesApi {
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call cancelAsync(String queryId, final ApiCallback<CancelQueryResponse> callback) throws Exception {
+    public okhttp3.Call cancelAsync(String queryId, final ApiCallback<CancelQueryResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -178,7 +178,7 @@ public class QueriesApi {
             };
         }
 
-        com.squareup.okhttp.Call call = cancelValidateBeforeCall(queryId, progressListener, progressRequestListener);
+        okhttp3.Call call = cancelValidateBeforeCall(queryId, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<CancelQueryResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -191,7 +191,7 @@ public class QueriesApi {
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getCall(String queryId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public okhttp3.Call getCall(String queryId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -218,10 +218,10 @@ public class QueriesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+                    okhttp3.Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -234,7 +234,7 @@ public class QueriesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getValidateBeforeCall(String queryId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private okhttp3.Call getValidateBeforeCall(String queryId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'queryId' is set
         if (queryId == null) {
@@ -242,7 +242,7 @@ public class QueriesApi {
         }
         
 
-        com.squareup.okhttp.Call call = getCall(queryId, progressListener, progressRequestListener);
+        okhttp3.Call call = getCall(queryId, progressListener, progressRequestListener);
         return call;
 
     }
@@ -267,7 +267,7 @@ public class QueriesApi {
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<GetQueryResponse> getWithHttpInfo(String queryId) throws Exception {
-        com.squareup.okhttp.Call call = getValidateBeforeCall(queryId, null, null);
+        okhttp3.Call call = getValidateBeforeCall(queryId, null, null);
         Type localVarReturnType = new TypeToken<GetQueryResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -280,7 +280,7 @@ public class QueriesApi {
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getAsync(String queryId, final ApiCallback<GetQueryResponse> callback) throws Exception {
+    public okhttp3.Call getAsync(String queryId, final ApiCallback<GetQueryResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -301,7 +301,7 @@ public class QueriesApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getValidateBeforeCall(queryId, progressListener, progressRequestListener);
+        okhttp3.Call call = getValidateBeforeCall(queryId, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<GetQueryResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -317,7 +317,7 @@ public class QueriesApi {
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call get_0Call(String queryId, String cursor, Integer docs, Integer offset, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public okhttp3.Call get_0Call(String queryId, String cursor, Integer docs, Integer offset, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -350,10 +350,10 @@ public class QueriesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+                    okhttp3.Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -366,7 +366,7 @@ public class QueriesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call get_0ValidateBeforeCall(String queryId, String cursor, Integer docs, Integer offset, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private okhttp3.Call get_0ValidateBeforeCall(String queryId, String cursor, Integer docs, Integer offset, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'queryId' is set
         if (queryId == null) {
@@ -374,7 +374,7 @@ public class QueriesApi {
         }
         
 
-        com.squareup.okhttp.Call call = get_0Call(queryId, cursor, docs, offset, progressListener, progressRequestListener);
+        okhttp3.Call call = get_0Call(queryId, cursor, docs, offset, progressListener, progressRequestListener);
         return call;
 
     }
@@ -405,7 +405,7 @@ public class QueriesApi {
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<QueryPaginationResponse> get_0WithHttpInfo(String queryId, String cursor, Integer docs, Integer offset) throws Exception {
-        com.squareup.okhttp.Call call = get_0ValidateBeforeCall(queryId, cursor, docs, offset, null, null);
+        okhttp3.Call call = get_0ValidateBeforeCall(queryId, cursor, docs, offset, null, null);
         Type localVarReturnType = new TypeToken<QueryPaginationResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -421,7 +421,7 @@ public class QueriesApi {
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call get_0Async(String queryId, String cursor, Integer docs, Integer offset, final ApiCallback<QueryPaginationResponse> callback) throws Exception {
+    public okhttp3.Call get_0Async(String queryId, String cursor, Integer docs, Integer offset, final ApiCallback<QueryPaginationResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -442,7 +442,7 @@ public class QueriesApi {
             };
         }
 
-        com.squareup.okhttp.Call call = get_0ValidateBeforeCall(queryId, cursor, docs, offset, progressListener, progressRequestListener);
+        okhttp3.Call call = get_0ValidateBeforeCall(queryId, cursor, docs, offset, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<QueryPaginationResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -454,7 +454,7 @@ public class QueriesApi {
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call listCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public okhttp3.Call listCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -480,10 +480,10 @@ public class QueriesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+                    okhttp3.Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -496,10 +496,10 @@ public class QueriesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call listValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private okhttp3.Call listValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
 
-        com.squareup.okhttp.Call call = listCall(progressListener, progressRequestListener);
+        okhttp3.Call call = listCall(progressListener, progressRequestListener);
         return call;
 
     }
@@ -522,7 +522,7 @@ public class QueriesApi {
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<ListQueriesResponse> listWithHttpInfo() throws Exception {
-        com.squareup.okhttp.Call call = listValidateBeforeCall(null, null);
+        okhttp3.Call call = listValidateBeforeCall(null, null);
         Type localVarReturnType = new TypeToken<ListQueriesResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -534,7 +534,7 @@ public class QueriesApi {
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listAsync(final ApiCallback<ListQueriesResponse> callback) throws Exception {
+    public okhttp3.Call listAsync(final ApiCallback<ListQueriesResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -555,7 +555,7 @@ public class QueriesApi {
             };
         }
 
-        com.squareup.okhttp.Call call = listValidateBeforeCall(progressListener, progressRequestListener);
+        okhttp3.Call call = listValidateBeforeCall(progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<ListQueriesResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -568,7 +568,7 @@ public class QueriesApi {
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call queryCall(QueryRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public okhttp3.Call queryCall(QueryRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -594,10 +594,10 @@ public class QueriesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+                    okhttp3.Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -610,7 +610,7 @@ public class QueriesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call queryValidateBeforeCall(QueryRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private okhttp3.Call queryValidateBeforeCall(QueryRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'body' is set
         if (body == null) {
@@ -618,7 +618,7 @@ public class QueriesApi {
         }
         
 
-        com.squareup.okhttp.Call call = queryCall(body, progressListener, progressRequestListener);
+        okhttp3.Call call = queryCall(body, progressListener, progressRequestListener);
         return call;
 
     }
@@ -643,7 +643,7 @@ public class QueriesApi {
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<QueryResponse> queryWithHttpInfo(QueryRequest body) throws Exception {
-        com.squareup.okhttp.Call call = queryValidateBeforeCall(body, null, null);
+        okhttp3.Call call = queryValidateBeforeCall(body, null, null);
         Type localVarReturnType = new TypeToken<QueryResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -656,7 +656,7 @@ public class QueriesApi {
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call queryAsync(QueryRequest body, final ApiCallback<QueryResponse> callback) throws Exception {
+    public okhttp3.Call queryAsync(QueryRequest body, final ApiCallback<QueryResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -677,7 +677,7 @@ public class QueriesApi {
             };
         }
 
-        com.squareup.okhttp.Call call = queryValidateBeforeCall(body, progressListener, progressRequestListener);
+        okhttp3.Call call = queryValidateBeforeCall(body, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<QueryResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -690,7 +690,7 @@ public class QueriesApi {
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call validateCall(QueryRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public okhttp3.Call validateCall(QueryRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -716,10 +716,10 @@ public class QueriesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+                    okhttp3.Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -732,7 +732,7 @@ public class QueriesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call validateValidateBeforeCall(QueryRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private okhttp3.Call validateValidateBeforeCall(QueryRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'body' is set
         if (body == null) {
@@ -740,7 +740,7 @@ public class QueriesApi {
         }
         
 
-        com.squareup.okhttp.Call call = validateCall(body, progressListener, progressRequestListener);
+        okhttp3.Call call = validateCall(body, progressListener, progressRequestListener);
         return call;
 
     }
@@ -765,7 +765,7 @@ public class QueriesApi {
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<ValidateQueryResponse> validateWithHttpInfo(QueryRequest body) throws Exception {
-        com.squareup.okhttp.Call call = validateValidateBeforeCall(body, null, null);
+        okhttp3.Call call = validateValidateBeforeCall(body, null, null);
         Type localVarReturnType = new TypeToken<ValidateQueryResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -778,7 +778,7 @@ public class QueriesApi {
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call validateAsync(QueryRequest body, final ApiCallback<ValidateQueryResponse> callback) throws Exception {
+    public okhttp3.Call validateAsync(QueryRequest body, final ApiCallback<ValidateQueryResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -799,7 +799,7 @@ public class QueriesApi {
             };
         }
 
-        com.squareup.okhttp.Call call = validateValidateBeforeCall(body, progressListener, progressRequestListener);
+        okhttp3.Call call = validateValidateBeforeCall(body, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<ValidateQueryResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

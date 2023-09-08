@@ -29,13 +29,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceSnapshot
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:46:16.821-07:00")
 public class SourceSnapshot {
   @SerializedName("source_collection_path")
   private String sourceCollectionPath = null;
 
-  @SerializedName("source_snapshot_id")
-  private String sourceSnapshotId = null;
+  @SerializedName("source_snapshot_rrn")
+  private String sourceSnapshotRrn = null;
 
   public SourceSnapshot sourceCollectionPath(String sourceCollectionPath) {
     this.sourceCollectionPath = sourceCollectionPath;
@@ -57,24 +57,24 @@ public class SourceSnapshot {
     this.sourceCollectionPath = sourceCollectionPath;
   }
 
-  public SourceSnapshot sourceSnapshotId(String sourceSnapshotId) {
-    this.sourceSnapshotId = sourceSnapshotId;
+  public SourceSnapshot sourceSnapshotRrn(String sourceSnapshotRrn) {
+    this.sourceSnapshotRrn = sourceSnapshotRrn;
     return this;
   }
 
    /**
-   * Snapshot id of the snapshot that the new collection will be created from.
-   * @return sourceSnapshotId
+   * RRN of the snapshot that the new collection will be created from.
+   * @return sourceSnapshotRrn
   **/
 
-@JsonProperty("source_snapshot_id")
-@ApiModelProperty(value = "Snapshot id of the snapshot that the new collection will be created from.")
-  public String getSourceSnapshotId() {
-    return sourceSnapshotId;
+@JsonProperty("source_snapshot_rrn")
+@ApiModelProperty(example = "rrn:snap:use1a1:123e4567-e89b-12d3-a456-556642440000", value = "RRN of the snapshot that the new collection will be created from.")
+  public String getSourceSnapshotRrn() {
+    return sourceSnapshotRrn;
   }
 
-  public void setSourceSnapshotId(String sourceSnapshotId) {
-    this.sourceSnapshotId = sourceSnapshotId;
+  public void setSourceSnapshotRrn(String sourceSnapshotRrn) {
+    this.sourceSnapshotRrn = sourceSnapshotRrn;
   }
 
 
@@ -88,12 +88,12 @@ public class SourceSnapshot {
     }
     SourceSnapshot sourceSnapshot = (SourceSnapshot) o;
     return Objects.equals(this.sourceCollectionPath, sourceSnapshot.sourceCollectionPath) &&
-        Objects.equals(this.sourceSnapshotId, sourceSnapshot.sourceSnapshotId);
+        Objects.equals(this.sourceSnapshotRrn, sourceSnapshot.sourceSnapshotRrn);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(sourceCollectionPath, sourceSnapshotId);
+    return Objects.hash(sourceCollectionPath, sourceSnapshotRrn);
   }
 
 
@@ -103,7 +103,7 @@ public class SourceSnapshot {
     sb.append("class SourceSnapshot {\n");
     
     sb.append("    sourceCollectionPath: ").append(toIndentedString(sourceCollectionPath)).append("\n");
-    sb.append("    sourceSnapshotId: ").append(toIndentedString(sourceSnapshotId)).append("\n");
+    sb.append("    sourceSnapshotRrn: ").append(toIndentedString(sourceSnapshotRrn)).append("\n");
     sb.append("}");
     return sb.toString();
   }

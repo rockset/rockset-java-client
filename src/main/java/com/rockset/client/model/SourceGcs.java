@@ -20,6 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.rockset.client.model.SourceGcsSettings;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -29,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceGcs
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:46:16.821-07:00")
 public class SourceGcs {
   @SerializedName("bucket")
   private String bucket = null;
@@ -51,6 +52,9 @@ public class SourceGcs {
 
   @SerializedName("prefix")
   private String prefix = null;
+
+  @SerializedName("settings")
+  private SourceGcsSettings settings = null;
 
   public SourceGcs bucket(String bucket) {
     this.bucket = bucket;
@@ -156,6 +160,26 @@ public class SourceGcs {
     this.prefix = prefix;
   }
 
+  public SourceGcs settings(SourceGcsSettings settings) {
+    this.settings = settings;
+    return this;
+  }
+
+   /**
+   * custom settings for Google cloud Storage source
+   * @return settings
+  **/
+
+@JsonProperty("settings")
+@ApiModelProperty(value = "custom settings for Google cloud Storage source")
+  public SourceGcsSettings getSettings() {
+    return settings;
+  }
+
+  public void setSettings(SourceGcsSettings settings) {
+    this.settings = settings;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -172,12 +196,13 @@ public class SourceGcs {
         Objects.equals(this.objectCountDownloaded, sourceGcs.objectCountDownloaded) &&
         Objects.equals(this.objectCountTotal, sourceGcs.objectCountTotal) &&
         Objects.equals(this.pattern, sourceGcs.pattern) &&
-        Objects.equals(this.prefix, sourceGcs.prefix);
+        Objects.equals(this.prefix, sourceGcs.prefix) &&
+        Objects.equals(this.settings, sourceGcs.settings);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(bucket, objectBytesDownloaded, objectBytesTotal, objectCountDownloaded, objectCountTotal, pattern, prefix);
+    return Objects.hash(bucket, objectBytesDownloaded, objectBytesTotal, objectCountDownloaded, objectCountTotal, pattern, prefix, settings);
   }
 
 
@@ -193,6 +218,7 @@ public class SourceGcs {
     sb.append("    objectCountTotal: ").append(toIndentedString(objectCountTotal)).append("\n");
     sb.append("    pattern: ").append(toIndentedString(pattern)).append("\n");
     sb.append("    prefix: ").append(toIndentedString(prefix)).append("\n");
+    sb.append("    settings: ").append(toIndentedString(settings)).append("\n");
     sb.append("}");
     return sb.toString();
   }

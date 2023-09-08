@@ -64,7 +64,7 @@ public class SharedLambdasApi {
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call executeCall(String publicAccessId, ExecutePublicQueryLambdaRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public okhttp3.Call executeCall(String publicAccessId, ExecutePublicQueryLambdaRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -91,10 +91,10 @@ public class SharedLambdasApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+                    okhttp3.Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
@@ -107,7 +107,7 @@ public class SharedLambdasApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call executeValidateBeforeCall(String publicAccessId, ExecutePublicQueryLambdaRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private okhttp3.Call executeValidateBeforeCall(String publicAccessId, ExecutePublicQueryLambdaRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'publicAccessId' is set
         if (publicAccessId == null) {
@@ -115,7 +115,7 @@ public class SharedLambdasApi {
         }
         
 
-        com.squareup.okhttp.Call call = executeCall(publicAccessId, body, progressListener, progressRequestListener);
+        okhttp3.Call call = executeCall(publicAccessId, body, progressListener, progressRequestListener);
         return call;
 
     }
@@ -142,7 +142,7 @@ public class SharedLambdasApi {
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ApiResponse<QueryResponse> executeWithHttpInfo(String publicAccessId, ExecutePublicQueryLambdaRequest body) throws Exception {
-        com.squareup.okhttp.Call call = executeValidateBeforeCall(publicAccessId, body, null, null);
+        okhttp3.Call call = executeValidateBeforeCall(publicAccessId, body, null, null);
         Type localVarReturnType = new TypeToken<QueryResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -156,7 +156,7 @@ public class SharedLambdasApi {
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call executeAsync(String publicAccessId, ExecutePublicQueryLambdaRequest body, final ApiCallback<QueryResponse> callback) throws Exception {
+    public okhttp3.Call executeAsync(String publicAccessId, ExecutePublicQueryLambdaRequest body, final ApiCallback<QueryResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -177,7 +177,7 @@ public class SharedLambdasApi {
             };
         }
 
-        com.squareup.okhttp.Call call = executeValidateBeforeCall(publicAccessId, body, progressListener, progressRequestListener);
+        okhttp3.Call call = executeValidateBeforeCall(publicAccessId, body, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<QueryResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
