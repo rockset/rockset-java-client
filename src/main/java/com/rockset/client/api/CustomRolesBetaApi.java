@@ -59,7 +59,7 @@ public class CustomRolesBetaApi {
    * @return Call to execute
    * @throws Exception If fail to serialize the request body object
    */
-  public com.squareup.okhttp.Call createCall(
+  public okhttp3.Call createCall(
       CreateRoleRequest body,
       final ProgressResponseBody.ProgressListener progressListener,
       final ProgressRequestBody.ProgressRequestListener progressRequestListener)
@@ -89,11 +89,11 @@ public class CustomRolesBetaApi {
           .getHttpClient()
           .networkInterceptors()
           .add(
-              new com.squareup.okhttp.Interceptor() {
+              new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(
-                    com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                  com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(
+                    okhttp3.Interceptor.Chain chain) throws IOException {
+                  okhttp3.Response originalResponse = chain.proceed(chain.request());
                   return originalResponse
                       .newBuilder()
                       .body(new ProgressResponseBody(originalResponse.body(), progressListener))
@@ -116,7 +116,7 @@ public class CustomRolesBetaApi {
   }
 
   @SuppressWarnings("rawtypes")
-  private com.squareup.okhttp.Call createValidateBeforeCall(
+  private okhttp3.Call createValidateBeforeCall(
       CreateRoleRequest body,
       final ProgressResponseBody.ProgressListener progressListener,
       final ProgressRequestBody.ProgressRequestListener progressRequestListener)
@@ -127,7 +127,7 @@ public class CustomRolesBetaApi {
       throw new Exception("Missing the required parameter 'body' when calling create(Async)");
     }
 
-    com.squareup.okhttp.Call call = createCall(body, progressListener, progressRequestListener);
+    okhttp3.Call call = createCall(body, progressListener, progressRequestListener);
     return call;
   }
 
@@ -153,7 +153,7 @@ public class CustomRolesBetaApi {
    *     body
    */
   public ApiResponse<RoleResponse> createWithHttpInfo(CreateRoleRequest body) throws Exception {
-    com.squareup.okhttp.Call call = createValidateBeforeCall(body, null, null);
+    okhttp3.Call call = createValidateBeforeCall(body, null, null);
     Type localVarReturnType = new TypeToken<RoleResponse>() {}.getType();
     return apiClient.execute(call, localVarReturnType);
   }
@@ -166,7 +166,7 @@ public class CustomRolesBetaApi {
    * @return The request call
    * @throws Exception If fail to process the API call, e.g. serializing the request body object
    */
-  public com.squareup.okhttp.Call createAsync(
+  public okhttp3.Call createAsync(
       CreateRoleRequest body, final ApiCallback<RoleResponse> callback) throws Exception {
 
     ProgressResponseBody.ProgressListener progressListener = null;
@@ -190,7 +190,7 @@ public class CustomRolesBetaApi {
           };
     }
 
-    com.squareup.okhttp.Call call =
+    okhttp3.Call call =
         createValidateBeforeCall(body, progressListener, progressRequestListener);
     Type localVarReturnType = new TypeToken<RoleResponse>() {}.getType();
     apiClient.executeAsync(call, localVarReturnType, callback);
@@ -205,7 +205,7 @@ public class CustomRolesBetaApi {
    * @return Call to execute
    * @throws Exception If fail to serialize the request body object
    */
-  public com.squareup.okhttp.Call deleteCall(
+  public okhttp3.Call deleteCall(
       String roleName,
       final ProgressResponseBody.ProgressListener progressListener,
       final ProgressRequestBody.ProgressRequestListener progressRequestListener)
@@ -237,11 +237,11 @@ public class CustomRolesBetaApi {
           .getHttpClient()
           .networkInterceptors()
           .add(
-              new com.squareup.okhttp.Interceptor() {
+              new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(
-                    com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                  com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(
+                    okhttp3.Interceptor.Chain chain) throws IOException {
+                  okhttp3.Response originalResponse = chain.proceed(chain.request());
                   return originalResponse
                       .newBuilder()
                       .body(new ProgressResponseBody(originalResponse.body(), progressListener))
@@ -264,7 +264,7 @@ public class CustomRolesBetaApi {
   }
 
   @SuppressWarnings("rawtypes")
-  private com.squareup.okhttp.Call deleteValidateBeforeCall(
+  private okhttp3.Call deleteValidateBeforeCall(
       String roleName,
       final ProgressResponseBody.ProgressListener progressListener,
       final ProgressRequestBody.ProgressRequestListener progressRequestListener)
@@ -275,7 +275,7 @@ public class CustomRolesBetaApi {
       throw new Exception("Missing the required parameter 'roleName' when calling delete(Async)");
     }
 
-    com.squareup.okhttp.Call call = deleteCall(roleName, progressListener, progressRequestListener);
+    okhttp3.Call call = deleteCall(roleName, progressListener, progressRequestListener);
     return call;
   }
 
@@ -301,7 +301,7 @@ public class CustomRolesBetaApi {
    *     body
    */
   public ApiResponse<RoleResponse> deleteWithHttpInfo(String roleName) throws Exception {
-    com.squareup.okhttp.Call call = deleteValidateBeforeCall(roleName, null, null);
+    okhttp3.Call call = deleteValidateBeforeCall(roleName, null, null);
     Type localVarReturnType = new TypeToken<RoleResponse>() {}.getType();
     return apiClient.execute(call, localVarReturnType);
   }
@@ -314,7 +314,7 @@ public class CustomRolesBetaApi {
    * @return The request call
    * @throws Exception If fail to process the API call, e.g. serializing the request body object
    */
-  public com.squareup.okhttp.Call deleteAsync(
+  public okhttp3.Call deleteAsync(
       String roleName, final ApiCallback<RoleResponse> callback) throws Exception {
 
     ProgressResponseBody.ProgressListener progressListener = null;
@@ -338,7 +338,7 @@ public class CustomRolesBetaApi {
           };
     }
 
-    com.squareup.okhttp.Call call =
+    okhttp3.Call call =
         deleteValidateBeforeCall(roleName, progressListener, progressRequestListener);
     Type localVarReturnType = new TypeToken<RoleResponse>() {}.getType();
     apiClient.executeAsync(call, localVarReturnType, callback);
@@ -352,7 +352,7 @@ public class CustomRolesBetaApi {
    * @return Call to execute
    * @throws Exception If fail to serialize the request body object
    */
-  public com.squareup.okhttp.Call listCall(
+  public okhttp3.Call listCall(
       final ProgressResponseBody.ProgressListener progressListener,
       final ProgressRequestBody.ProgressRequestListener progressRequestListener)
       throws Exception {
@@ -381,11 +381,11 @@ public class CustomRolesBetaApi {
           .getHttpClient()
           .networkInterceptors()
           .add(
-              new com.squareup.okhttp.Interceptor() {
+              new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(
-                    com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                  com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(
+                    okhttp3.Interceptor.Chain chain) throws IOException {
+                  okhttp3.Response originalResponse = chain.proceed(chain.request());
                   return originalResponse
                       .newBuilder()
                       .body(new ProgressResponseBody(originalResponse.body(), progressListener))
@@ -408,12 +408,12 @@ public class CustomRolesBetaApi {
   }
 
   @SuppressWarnings("rawtypes")
-  private com.squareup.okhttp.Call listValidateBeforeCall(
+  private okhttp3.Call listValidateBeforeCall(
       final ProgressResponseBody.ProgressListener progressListener,
       final ProgressRequestBody.ProgressRequestListener progressRequestListener)
       throws Exception {
 
-    com.squareup.okhttp.Call call = listCall(progressListener, progressRequestListener);
+    okhttp3.Call call = listCall(progressListener, progressRequestListener);
     return call;
   }
 
@@ -437,7 +437,7 @@ public class CustomRolesBetaApi {
    *     body
    */
   public ApiResponse<ListRolesResponse> listWithHttpInfo() throws Exception {
-    com.squareup.okhttp.Call call = listValidateBeforeCall(null, null);
+    okhttp3.Call call = listValidateBeforeCall(null, null);
     Type localVarReturnType = new TypeToken<ListRolesResponse>() {}.getType();
     return apiClient.execute(call, localVarReturnType);
   }
@@ -449,7 +449,7 @@ public class CustomRolesBetaApi {
    * @return The request call
    * @throws Exception If fail to process the API call, e.g. serializing the request body object
    */
-  public com.squareup.okhttp.Call listAsync(final ApiCallback<ListRolesResponse> callback)
+  public okhttp3.Call listAsync(final ApiCallback<ListRolesResponse> callback)
       throws Exception {
 
     ProgressResponseBody.ProgressListener progressListener = null;
@@ -473,7 +473,7 @@ public class CustomRolesBetaApi {
           };
     }
 
-    com.squareup.okhttp.Call call =
+    okhttp3.Call call =
         listValidateBeforeCall(progressListener, progressRequestListener);
     Type localVarReturnType = new TypeToken<ListRolesResponse>() {}.getType();
     apiClient.executeAsync(call, localVarReturnType, callback);
@@ -489,7 +489,7 @@ public class CustomRolesBetaApi {
    * @return Call to execute
    * @throws Exception If fail to serialize the request body object
    */
-  public com.squareup.okhttp.Call updateCall(
+  public okhttp3.Call updateCall(
       String roleName,
       UpdateRoleRequest body,
       final ProgressResponseBody.ProgressListener progressListener,
@@ -522,11 +522,11 @@ public class CustomRolesBetaApi {
           .getHttpClient()
           .networkInterceptors()
           .add(
-              new com.squareup.okhttp.Interceptor() {
+              new okhttp3.Interceptor() {
                 @Override
-                public com.squareup.okhttp.Response intercept(
-                    com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
-                  com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                public okhttp3.Response intercept(
+                    okhttp3.Interceptor.Chain chain) throws IOException {
+                  okhttp3.Response originalResponse = chain.proceed(chain.request());
                   return originalResponse
                       .newBuilder()
                       .body(new ProgressResponseBody(originalResponse.body(), progressListener))
@@ -549,7 +549,7 @@ public class CustomRolesBetaApi {
   }
 
   @SuppressWarnings("rawtypes")
-  private com.squareup.okhttp.Call updateValidateBeforeCall(
+  private okhttp3.Call updateValidateBeforeCall(
       String roleName,
       UpdateRoleRequest body,
       final ProgressResponseBody.ProgressListener progressListener,
@@ -566,7 +566,7 @@ public class CustomRolesBetaApi {
       throw new Exception("Missing the required parameter 'body' when calling update(Async)");
     }
 
-    com.squareup.okhttp.Call call =
+    okhttp3.Call call =
         updateCall(roleName, body, progressListener, progressRequestListener);
     return call;
   }
@@ -596,7 +596,7 @@ public class CustomRolesBetaApi {
    */
   public ApiResponse<RoleResponse> updateWithHttpInfo(String roleName, UpdateRoleRequest body)
       throws Exception {
-    com.squareup.okhttp.Call call = updateValidateBeforeCall(roleName, body, null, null);
+    okhttp3.Call call = updateValidateBeforeCall(roleName, body, null, null);
     Type localVarReturnType = new TypeToken<RoleResponse>() {}.getType();
     return apiClient.execute(call, localVarReturnType);
   }
@@ -610,7 +610,7 @@ public class CustomRolesBetaApi {
    * @return The request call
    * @throws Exception If fail to process the API call, e.g. serializing the request body object
    */
-  public com.squareup.okhttp.Call updateAsync(
+  public okhttp3.Call updateAsync(
       String roleName, UpdateRoleRequest body, final ApiCallback<RoleResponse> callback)
       throws Exception {
 
@@ -635,7 +635,7 @@ public class CustomRolesBetaApi {
           };
     }
 
-    com.squareup.okhttp.Call call =
+    okhttp3.Call call =
         updateValidateBeforeCall(roleName, body, progressListener, progressRequestListener);
     Type localVarReturnType = new TypeToken<RoleResponse>() {}.getType();
     apiClient.executeAsync(call, localVarReturnType, callback);

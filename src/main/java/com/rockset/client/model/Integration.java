@@ -44,7 +44,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "Integrations that can be associated with data sources to create collections. Only one type of integration may be specified.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-08-08T22:21:01.705Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:46:16.821-07:00")
 public class Integration {
   @SerializedName("azure_blob_storage")
   private AzureBlobStorageIntegration azureBlobStorage = null;
