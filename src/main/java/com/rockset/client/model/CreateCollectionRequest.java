@@ -35,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateCollectionRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:46:16.821-07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-19T15:55:29.974-07:00")
 public class CreateCollectionRequest {
   @SerializedName("clustering_key")
   private List<FieldPartition> clusteringKey = null;

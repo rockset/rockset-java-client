@@ -46,7 +46,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "Details about the data source for the given collection. Only one of the following fields are allowed to be defined. Only collections can act as data sources for views. ")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:46:16.821-07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-19T15:55:29.974-07:00")
 public class Source {
   @SerializedName("azure_blob_storage")
   private SourceAzureBlobStorage azureBlobStorage = null;
@@ -86,6 +86,9 @@ public class Source {
 
   @SerializedName("mongodb")
   private SourceMongoDb mongodb = null;
+
+  @SerializedName("resume_at")
+  private String resumeAt = null;
 
   @SerializedName("s3")
   private SourceS3 s3 = null;
@@ -344,6 +347,17 @@ public class Source {
     this.mongodb = mongodb;
   }
 
+   /**
+   * ISO-8601 date when source would be auto resumed, if suspended
+   * @return resumeAt
+  **/
+
+@JsonProperty("resume_at")
+@ApiModelProperty(example = "2019-01-15T21:48:23Z", value = "ISO-8601 date when source would be auto resumed, if suspended")
+  public String getResumeAt() {
+    return resumeAt;
+  }
+
   public Source s3(SourceS3 s3) {
     this.s3 = s3;
     return this;
@@ -449,6 +463,7 @@ public class Source {
         Objects.equals(this.kafka, source.kafka) &&
         Objects.equals(this.kinesis, source.kinesis) &&
         Objects.equals(this.mongodb, source.mongodb) &&
+        Objects.equals(this.resumeAt, source.resumeAt) &&
         Objects.equals(this.s3, source.s3) &&
         Objects.equals(this.snowflake, source.snowflake) &&
         Objects.equals(this.status, source.status) &&
@@ -458,7 +473,7 @@ public class Source {
 
   @Override
   public int hashCode() {
-    return Objects.hash(azureBlobStorage, azureEventHubs, azureServiceBus, dynamodb, fileUpload, formatParams, gcs, id, ingestTransformation, integrationName, kafka, kinesis, mongodb, s3, snowflake, status, suspendedAt, system);
+    return Objects.hash(azureBlobStorage, azureEventHubs, azureServiceBus, dynamodb, fileUpload, formatParams, gcs, id, ingestTransformation, integrationName, kafka, kinesis, mongodb, resumeAt, s3, snowflake, status, suspendedAt, system);
   }
 
 
@@ -480,6 +495,7 @@ public class Source {
     sb.append("    kafka: ").append(toIndentedString(kafka)).append("\n");
     sb.append("    kinesis: ").append(toIndentedString(kinesis)).append("\n");
     sb.append("    mongodb: ").append(toIndentedString(mongodb)).append("\n");
+    sb.append("    resumeAt: ").append(toIndentedString(resumeAt)).append("\n");
     sb.append("    s3: ").append(toIndentedString(s3)).append("\n");
     sb.append("    snowflake: ").append(toIndentedString(snowflake)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");

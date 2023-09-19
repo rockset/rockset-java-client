@@ -38,7 +38,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Collection
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-07T20:46:16.821-07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-19T15:55:29.974-07:00")
 public class Collection {
   @SerializedName("aliases")
   private List<Alias> aliases = null;
@@ -78,6 +78,9 @@ public class Collection {
 
   @SerializedName("retention_secs")
   private Long retentionSecs = null;
+
+  @SerializedName("rrn")
+  private String rrn = null;
 
   @SerializedName("sources")
   private List<Source> sources = null;
@@ -155,6 +158,59 @@ public class Collection {
 
   @SerializedName("status")
   private StatusEnum status = null;
+
+  /**
+   * RocksDB storage compression type.
+   */
+  @JsonAdapter(StorageCompressionTypeEnum.Adapter.class)
+  public enum StorageCompressionTypeEnum {
+    LZ4("LZ4"),
+    
+    ZSTD("ZSTD"),
+    
+    UNKNOWN("UNKNOWN");
+
+    private String value;
+
+    StorageCompressionTypeEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @com.fasterxml.jackson.annotation.JsonCreator
+    public static StorageCompressionTypeEnum fromValue(String text) {
+      for (StorageCompressionTypeEnum b : StorageCompressionTypeEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+
+    public static class Adapter extends TypeAdapter<StorageCompressionTypeEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final StorageCompressionTypeEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public StorageCompressionTypeEnum read(final JsonReader jsonReader) throws IOException {
+        String value = jsonReader.nextString();
+        return StorageCompressionTypeEnum.fromValue(String.valueOf(value));
+      }
+    }
+  }
+
+  @SerializedName("storage_compression_type")
+  private StorageCompressionTypeEnum storageCompressionType = null;
 
   @SerializedName("workspace")
   private String workspace = null;
@@ -451,6 +507,26 @@ public class Collection {
     this.retentionSecs = retentionSecs;
   }
 
+  public Collection rrn(String rrn) {
+    this.rrn = rrn;
+    return this;
+  }
+
+   /**
+   * Collection RRN.
+   * @return rrn
+  **/
+
+@JsonProperty("rrn")
+@ApiModelProperty(example = "rrn:col:use1a1:123e4567-e89b-12d3-a456-556642440000", value = "Collection RRN.")
+  public String getRrn() {
+    return rrn;
+  }
+
+  public void setRrn(String rrn) {
+    this.rrn = rrn;
+  }
+
   public Collection sources(List<Source> sources) {
     this.sources = sources;
     return this;
@@ -519,6 +595,26 @@ public class Collection {
     this.status = status;
   }
 
+  public Collection storageCompressionType(StorageCompressionTypeEnum storageCompressionType) {
+    this.storageCompressionType = storageCompressionType;
+    return this;
+  }
+
+   /**
+   * RocksDB storage compression type.
+   * @return storageCompressionType
+  **/
+
+@JsonProperty("storage_compression_type")
+@ApiModelProperty(value = "RocksDB storage compression type.")
+  public StorageCompressionTypeEnum getStorageCompressionType() {
+    return storageCompressionType;
+  }
+
+  public void setStorageCompressionType(StorageCompressionTypeEnum storageCompressionType) {
+    this.storageCompressionType = storageCompressionType;
+  }
+
   public Collection workspace(String workspace) {
     this.workspace = workspace;
     return this;
@@ -562,15 +658,17 @@ public class Collection {
         Objects.equals(this.name, collection.name) &&
         Objects.equals(this.readOnly, collection.readOnly) &&
         Objects.equals(this.retentionSecs, collection.retentionSecs) &&
+        Objects.equals(this.rrn, collection.rrn) &&
         Objects.equals(this.sources, collection.sources) &&
         Objects.equals(this.stats, collection.stats) &&
         Objects.equals(this.status, collection.status) &&
+        Objects.equals(this.storageCompressionType, collection.storageCompressionType) &&
         Objects.equals(this.workspace, collection.workspace);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(aliases, bulkStats, clusteringKey, createdAt, createdBy, createdByApikeyName, description, fieldMappingQuery, fieldMappings, insertOnly, name, readOnly, retentionSecs, sources, stats, status, workspace);
+    return Objects.hash(aliases, bulkStats, clusteringKey, createdAt, createdBy, createdByApikeyName, description, fieldMappingQuery, fieldMappings, insertOnly, name, readOnly, retentionSecs, rrn, sources, stats, status, storageCompressionType, workspace);
   }
 
 
@@ -592,9 +690,11 @@ public class Collection {
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    readOnly: ").append(toIndentedString(readOnly)).append("\n");
     sb.append("    retentionSecs: ").append(toIndentedString(retentionSecs)).append("\n");
+    sb.append("    rrn: ").append(toIndentedString(rrn)).append("\n");
     sb.append("    sources: ").append(toIndentedString(sources)).append("\n");
     sb.append("    stats: ").append(toIndentedString(stats)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    storageCompressionType: ").append(toIndentedString(storageCompressionType)).append("\n");
     sb.append("    workspace: ").append(toIndentedString(workspace)).append("\n");
     sb.append("}");
     return sb.toString();
