@@ -32,6 +32,7 @@ import com.rockset.client.model.GetSourceResponse;
 import com.rockset.client.model.ListSourcesResponse;
 import com.rockset.client.model.Source;
 import com.rockset.client.model.SourceBase;
+import com.rockset.client.model.SuspendSourceRequest;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -96,7 +97,7 @@ public class SourcesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -104,10 +105,10 @@ public class SourcesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            });
+            }).build());
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -239,7 +240,7 @@ public class SourcesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -247,10 +248,10 @@ public class SourcesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            });
+            }).build());
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
         return apiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -382,7 +383,7 @@ public class SourcesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -390,10 +391,10 @@ public class SourcesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            });
+            }).build());
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -523,7 +524,7 @@ public class SourcesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -531,10 +532,10 @@ public class SourcesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            });
+            }).build());
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -658,7 +659,7 @@ public class SourcesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -666,10 +667,10 @@ public class SourcesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            });
+            }).build());
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -767,13 +768,14 @@ public class SourcesApi {
      * @param workspace name of the workspace (required)
      * @param collection name of the collection (required)
      * @param source id of source (required)
+     * @param body JSON object (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public okhttp3.Call suspendCall(String workspace, String collection, String source, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
-        Object localVarPostBody = null;
+    public okhttp3.Call suspendCall(String workspace, String collection, String source, SuspendSourceRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        Object localVarPostBody = body;
 
         // create path and map variables
         String localVarPath = "/v1/orgs/self/ws/{workspace}/collections/{collection}/sources/{source}/suspend"
@@ -801,7 +803,7 @@ public class SourcesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -809,15 +811,15 @@ public class SourcesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            });
+            }).build());
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call suspendValidateBeforeCall(String workspace, String collection, String source, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private okhttp3.Call suspendValidateBeforeCall(String workspace, String collection, String source, SuspendSourceRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'workspace' is set
         if (workspace == null) {
@@ -835,7 +837,7 @@ public class SourcesApi {
         }
         
 
-        okhttp3.Call call = suspendCall(workspace, collection, source, progressListener, progressRequestListener);
+        okhttp3.Call call = suspendCall(workspace, collection, source, body, progressListener, progressRequestListener);
         return call;
 
     }
@@ -846,11 +848,12 @@ public class SourcesApi {
      * @param workspace name of the workspace (required)
      * @param collection name of the collection (required)
      * @param source id of source (required)
+     * @param body JSON object (optional)
      * @return GetSourceResponse
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public GetSourceResponse suspend(String workspace, String collection, String source) throws Exception {
-        ApiResponse<GetSourceResponse> resp = suspendWithHttpInfo(workspace, collection, source);
+    public GetSourceResponse suspend(String workspace, String collection, String source, SuspendSourceRequest body) throws Exception {
+        ApiResponse<GetSourceResponse> resp = suspendWithHttpInfo(workspace, collection, source, body);
         return resp.getData();
     }
 
@@ -860,11 +863,12 @@ public class SourcesApi {
      * @param workspace name of the workspace (required)
      * @param collection name of the collection (required)
      * @param source id of source (required)
+     * @param body JSON object (optional)
      * @return ApiResponse&lt;GetSourceResponse&gt;
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<GetSourceResponse> suspendWithHttpInfo(String workspace, String collection, String source) throws Exception {
-        okhttp3.Call call = suspendValidateBeforeCall(workspace, collection, source, null, null);
+    public ApiResponse<GetSourceResponse> suspendWithHttpInfo(String workspace, String collection, String source, SuspendSourceRequest body) throws Exception {
+        okhttp3.Call call = suspendValidateBeforeCall(workspace, collection, source, body, null, null);
         Type localVarReturnType = new TypeToken<GetSourceResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -875,11 +879,12 @@ public class SourcesApi {
      * @param workspace name of the workspace (required)
      * @param collection name of the collection (required)
      * @param source id of source (required)
+     * @param body JSON object (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public okhttp3.Call suspendAsync(String workspace, String collection, String source, final ApiCallback<GetSourceResponse> callback) throws Exception {
+    public okhttp3.Call suspendAsync(String workspace, String collection, String source, SuspendSourceRequest body, final ApiCallback<GetSourceResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -900,7 +905,7 @@ public class SourcesApi {
             };
         }
 
-        okhttp3.Call call = suspendValidateBeforeCall(workspace, collection, source, progressListener, progressRequestListener);
+        okhttp3.Call call = suspendValidateBeforeCall(workspace, collection, source, body, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<GetSourceResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -945,7 +950,7 @@ public class SourcesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -953,10 +958,10 @@ public class SourcesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            });
+            }).build());
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
         return apiClient.buildCall(localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 

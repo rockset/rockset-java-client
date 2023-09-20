@@ -37,10 +37,10 @@ import java.io.IOException;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * CreateIntegrationRequest
+ * UpdateIntegrationRequest
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-19T15:55:29.974-07:00")
-public class CreateIntegrationRequest {
+public class UpdateIntegrationRequest {
   @SerializedName("azure_blob_storage")
   private AzureBlobStorageIntegration azureBlobStorage = null;
 
@@ -68,16 +68,13 @@ public class CreateIntegrationRequest {
   @SerializedName("mongodb")
   private MongoDbIntegration mongodb = null;
 
-  @SerializedName("name")
-  private String name = null;
-
   @SerializedName("s3")
   private S3Integration s3 = null;
 
   @SerializedName("snowflake")
   private SnowflakeIntegration snowflake = null;
 
-  public CreateIntegrationRequest azureBlobStorage(AzureBlobStorageIntegration azureBlobStorage) {
+  public UpdateIntegrationRequest azureBlobStorage(AzureBlobStorageIntegration azureBlobStorage) {
     this.azureBlobStorage = azureBlobStorage;
     return this;
   }
@@ -97,7 +94,7 @@ public class CreateIntegrationRequest {
     this.azureBlobStorage = azureBlobStorage;
   }
 
-  public CreateIntegrationRequest azureEventHubs(AzureEventHubsIntegration azureEventHubs) {
+  public UpdateIntegrationRequest azureEventHubs(AzureEventHubsIntegration azureEventHubs) {
     this.azureEventHubs = azureEventHubs;
     return this;
   }
@@ -117,7 +114,7 @@ public class CreateIntegrationRequest {
     this.azureEventHubs = azureEventHubs;
   }
 
-  public CreateIntegrationRequest azureServiceBus(AzureServiceBusIntegration azureServiceBus) {
+  public UpdateIntegrationRequest azureServiceBus(AzureServiceBusIntegration azureServiceBus) {
     this.azureServiceBus = azureServiceBus;
     return this;
   }
@@ -137,7 +134,7 @@ public class CreateIntegrationRequest {
     this.azureServiceBus = azureServiceBus;
   }
 
-  public CreateIntegrationRequest description(String description) {
+  public UpdateIntegrationRequest description(String description) {
     this.description = description;
     return this;
   }
@@ -157,7 +154,7 @@ public class CreateIntegrationRequest {
     this.description = description;
   }
 
-  public CreateIntegrationRequest dynamodb(DynamodbIntegration dynamodb) {
+  public UpdateIntegrationRequest dynamodb(DynamodbIntegration dynamodb) {
     this.dynamodb = dynamodb;
     return this;
   }
@@ -177,7 +174,7 @@ public class CreateIntegrationRequest {
     this.dynamodb = dynamodb;
   }
 
-  public CreateIntegrationRequest gcs(GcsIntegration gcs) {
+  public UpdateIntegrationRequest gcs(GcsIntegration gcs) {
     this.gcs = gcs;
     return this;
   }
@@ -197,7 +194,7 @@ public class CreateIntegrationRequest {
     this.gcs = gcs;
   }
 
-  public CreateIntegrationRequest kafka(KafkaIntegration kafka) {
+  public UpdateIntegrationRequest kafka(KafkaIntegration kafka) {
     this.kafka = kafka;
     return this;
   }
@@ -217,7 +214,7 @@ public class CreateIntegrationRequest {
     this.kafka = kafka;
   }
 
-  public CreateIntegrationRequest kinesis(KinesisIntegration kinesis) {
+  public UpdateIntegrationRequest kinesis(KinesisIntegration kinesis) {
     this.kinesis = kinesis;
     return this;
   }
@@ -237,7 +234,7 @@ public class CreateIntegrationRequest {
     this.kinesis = kinesis;
   }
 
-  public CreateIntegrationRequest mongodb(MongoDbIntegration mongodb) {
+  public UpdateIntegrationRequest mongodb(MongoDbIntegration mongodb) {
     this.mongodb = mongodb;
     return this;
   }
@@ -257,27 +254,7 @@ public class CreateIntegrationRequest {
     this.mongodb = mongodb;
   }
 
-  public CreateIntegrationRequest name(String name) {
-    this.name = name;
-    return this;
-  }
-
-   /**
-   * Descriptive label.
-   * @return name
-  **/
-
-@JsonProperty("name")
-@ApiModelProperty(example = "event-logs", required = true, value = "Descriptive label.")
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public CreateIntegrationRequest s3(S3Integration s3) {
+  public UpdateIntegrationRequest s3(S3Integration s3) {
     this.s3 = s3;
     return this;
   }
@@ -297,7 +274,7 @@ public class CreateIntegrationRequest {
     this.s3 = s3;
   }
 
-  public CreateIntegrationRequest snowflake(SnowflakeIntegration snowflake) {
+  public UpdateIntegrationRequest snowflake(SnowflakeIntegration snowflake) {
     this.snowflake = snowflake;
     return this;
   }
@@ -326,31 +303,30 @@ public class CreateIntegrationRequest {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CreateIntegrationRequest createIntegrationRequest = (CreateIntegrationRequest) o;
-    return Objects.equals(this.azureBlobStorage, createIntegrationRequest.azureBlobStorage) &&
-        Objects.equals(this.azureEventHubs, createIntegrationRequest.azureEventHubs) &&
-        Objects.equals(this.azureServiceBus, createIntegrationRequest.azureServiceBus) &&
-        Objects.equals(this.description, createIntegrationRequest.description) &&
-        Objects.equals(this.dynamodb, createIntegrationRequest.dynamodb) &&
-        Objects.equals(this.gcs, createIntegrationRequest.gcs) &&
-        Objects.equals(this.kafka, createIntegrationRequest.kafka) &&
-        Objects.equals(this.kinesis, createIntegrationRequest.kinesis) &&
-        Objects.equals(this.mongodb, createIntegrationRequest.mongodb) &&
-        Objects.equals(this.name, createIntegrationRequest.name) &&
-        Objects.equals(this.s3, createIntegrationRequest.s3) &&
-        Objects.equals(this.snowflake, createIntegrationRequest.snowflake);
+    UpdateIntegrationRequest updateIntegrationRequest = (UpdateIntegrationRequest) o;
+    return Objects.equals(this.azureBlobStorage, updateIntegrationRequest.azureBlobStorage) &&
+        Objects.equals(this.azureEventHubs, updateIntegrationRequest.azureEventHubs) &&
+        Objects.equals(this.azureServiceBus, updateIntegrationRequest.azureServiceBus) &&
+        Objects.equals(this.description, updateIntegrationRequest.description) &&
+        Objects.equals(this.dynamodb, updateIntegrationRequest.dynamodb) &&
+        Objects.equals(this.gcs, updateIntegrationRequest.gcs) &&
+        Objects.equals(this.kafka, updateIntegrationRequest.kafka) &&
+        Objects.equals(this.kinesis, updateIntegrationRequest.kinesis) &&
+        Objects.equals(this.mongodb, updateIntegrationRequest.mongodb) &&
+        Objects.equals(this.s3, updateIntegrationRequest.s3) &&
+        Objects.equals(this.snowflake, updateIntegrationRequest.snowflake);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(azureBlobStorage, azureEventHubs, azureServiceBus, description, dynamodb, gcs, kafka, kinesis, mongodb, name, s3, snowflake);
+    return Objects.hash(azureBlobStorage, azureEventHubs, azureServiceBus, description, dynamodb, gcs, kafka, kinesis, mongodb, s3, snowflake);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CreateIntegrationRequest {\n");
+    sb.append("class UpdateIntegrationRequest {\n");
     
     sb.append("    azureBlobStorage: ").append(toIndentedString(azureBlobStorage)).append("\n");
     sb.append("    azureEventHubs: ").append(toIndentedString(azureEventHubs)).append("\n");
@@ -361,7 +337,6 @@ public class CreateIntegrationRequest {
     sb.append("    kafka: ").append(toIndentedString(kafka)).append("\n");
     sb.append("    kinesis: ").append(toIndentedString(kinesis)).append("\n");
     sb.append("    mongodb: ").append(toIndentedString(mongodb)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    s3: ").append(toIndentedString(s3)).append("\n");
     sb.append("    snowflake: ").append(toIndentedString(snowflake)).append("\n");
     sb.append("}");

@@ -33,6 +33,8 @@ import com.rockset.client.model.CreateVirtualInstanceRequest;
 import com.rockset.client.model.CreateVirtualInstanceResponse;
 import com.rockset.client.model.DeleteVirtualInstanceResponse;
 import com.rockset.client.model.ErrorModel;
+import com.rockset.client.model.GetCollectionCommit;
+import com.rockset.client.model.GetCollectionCommitRequest;
 import com.rockset.client.model.GetVirtualInstanceResponse;
 import com.rockset.client.model.ListCollectionMountsResponse;
 import com.rockset.client.model.ListQueriesResponse;
@@ -103,7 +105,7 @@ public class VirtualInstancesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -111,10 +113,10 @@ public class VirtualInstancesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            });
+            }).build());
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -226,7 +228,7 @@ public class VirtualInstancesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -234,10 +236,10 @@ public class VirtualInstancesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            });
+            }).build());
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
         return apiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -349,7 +351,7 @@ public class VirtualInstancesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -357,10 +359,10 @@ public class VirtualInstancesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            });
+            }).build());
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -474,7 +476,7 @@ public class VirtualInstancesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -482,10 +484,10 @@ public class VirtualInstancesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            });
+            }).build());
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -573,12 +575,154 @@ public class VirtualInstancesApi {
     /**
      * Build call for get_1
      * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param collectionPath  (required)
+     * @param body JSON object (required)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws Exception If fail to serialize the request body object
      */
-    public okhttp3.Call get_1Call(String virtualInstanceId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    public okhttp3.Call get_1Call(String virtualInstanceId, String collectionPath, GetCollectionCommitRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/v1/orgs/self/virtualinstances/{virtualInstanceId}/mounts/{collectionPath}/offsets/commit"
+            .replaceAll("\\{" + "virtualInstanceId" + "\\}", apiClient.escapeString(virtualInstanceId.toString()))
+            .replaceAll("\\{" + "collectionPath" + "\\}", apiClient.escapeString(collectionPath.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
+                @Override
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
+                    okhttp3.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            }).build());
+        }
+
+        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
+        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call get_1ValidateBeforeCall(String virtualInstanceId, String collectionPath, GetCollectionCommitRequest body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+        
+        // verify the required parameter 'virtualInstanceId' is set
+        if (virtualInstanceId == null) {
+            throw new Exception("Missing the required parameter 'virtualInstanceId' when calling get_1(Async)");
+        }
+        
+        // verify the required parameter 'collectionPath' is set
+        if (collectionPath == null) {
+            throw new Exception("Missing the required parameter 'collectionPath' when calling get_1(Async)");
+        }
+        
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new Exception("Missing the required parameter 'body' when calling get_1(Async)");
+        }
+        
+
+        okhttp3.Call call = get_1Call(virtualInstanceId, collectionPath, body, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Get Collection Commit
+     * Determines if the collection includes data at or after the specified fence(s) for close read-after-write semantics.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param collectionPath  (required)
+     * @param body JSON object (required)
+     * @return GetCollectionCommit
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public GetCollectionCommit get_1(String virtualInstanceId, String collectionPath, GetCollectionCommitRequest body) throws Exception {
+        ApiResponse<GetCollectionCommit> resp = get_1WithHttpInfo(virtualInstanceId, collectionPath, body);
+        return resp.getData();
+    }
+
+    /**
+     * Get Collection Commit
+     * Determines if the collection includes data at or after the specified fence(s) for close read-after-write semantics.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param collectionPath  (required)
+     * @param body JSON object (required)
+     * @return ApiResponse&lt;GetCollectionCommit&gt;
+     * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<GetCollectionCommit> get_1WithHttpInfo(String virtualInstanceId, String collectionPath, GetCollectionCommitRequest body) throws Exception {
+        okhttp3.Call call = get_1ValidateBeforeCall(virtualInstanceId, collectionPath, body, null, null);
+        Type localVarReturnType = new TypeToken<GetCollectionCommit>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Get Collection Commit (asynchronously)
+     * Determines if the collection includes data at or after the specified fence(s) for close read-after-write semantics.
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param collectionPath  (required)
+     * @param body JSON object (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws Exception If fail to process the API call, e.g. serializing the request body object
+     */
+    public okhttp3.Call get_1Async(String virtualInstanceId, String collectionPath, GetCollectionCommitRequest body, final ApiCallback<GetCollectionCommit> callback) throws Exception {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        okhttp3.Call call = get_1ValidateBeforeCall(virtualInstanceId, collectionPath, body, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<GetCollectionCommit>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for get_2
+     * @param virtualInstanceId Virtual Instance RRN (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws Exception If fail to serialize the request body object
+     */
+    public okhttp3.Call get_2Call(String virtualInstanceId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -605,7 +749,7 @@ public class VirtualInstancesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -613,23 +757,23 @@ public class VirtualInstancesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            });
+            }).build());
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call get_1ValidateBeforeCall(String virtualInstanceId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
+    private okhttp3.Call get_2ValidateBeforeCall(String virtualInstanceId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
         
         // verify the required parameter 'virtualInstanceId' is set
         if (virtualInstanceId == null) {
-            throw new Exception("Missing the required parameter 'virtualInstanceId' when calling get_1(Async)");
+            throw new Exception("Missing the required parameter 'virtualInstanceId' when calling get_2(Async)");
         }
         
 
-        okhttp3.Call call = get_1Call(virtualInstanceId, progressListener, progressRequestListener);
+        okhttp3.Call call = get_2Call(virtualInstanceId, progressListener, progressRequestListener);
         return call;
 
     }
@@ -641,8 +785,8 @@ public class VirtualInstancesApi {
      * @return ListQueriesResponse
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ListQueriesResponse get_1(String virtualInstanceId) throws Exception {
-        ApiResponse<ListQueriesResponse> resp = get_1WithHttpInfo(virtualInstanceId);
+    public ListQueriesResponse get_2(String virtualInstanceId) throws Exception {
+        ApiResponse<ListQueriesResponse> resp = get_2WithHttpInfo(virtualInstanceId);
         return resp.getData();
     }
 
@@ -653,8 +797,8 @@ public class VirtualInstancesApi {
      * @return ApiResponse&lt;ListQueriesResponse&gt;
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<ListQueriesResponse> get_1WithHttpInfo(String virtualInstanceId) throws Exception {
-        okhttp3.Call call = get_1ValidateBeforeCall(virtualInstanceId, null, null);
+    public ApiResponse<ListQueriesResponse> get_2WithHttpInfo(String virtualInstanceId) throws Exception {
+        okhttp3.Call call = get_2ValidateBeforeCall(virtualInstanceId, null, null);
         Type localVarReturnType = new TypeToken<ListQueriesResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -667,7 +811,7 @@ public class VirtualInstancesApi {
      * @return The request call
      * @throws Exception If fail to process the API call, e.g. serializing the request body object
      */
-    public okhttp3.Call get_1Async(String virtualInstanceId, final ApiCallback<ListQueriesResponse> callback) throws Exception {
+    public okhttp3.Call get_2Async(String virtualInstanceId, final ApiCallback<ListQueriesResponse> callback) throws Exception {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -688,7 +832,7 @@ public class VirtualInstancesApi {
             };
         }
 
-        okhttp3.Call call = get_1ValidateBeforeCall(virtualInstanceId, progressListener, progressRequestListener);
+        okhttp3.Call call = get_2ValidateBeforeCall(virtualInstanceId, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<ListQueriesResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -726,7 +870,7 @@ public class VirtualInstancesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -734,10 +878,10 @@ public class VirtualInstancesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            });
+            }).build());
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -841,7 +985,7 @@ public class VirtualInstancesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -849,10 +993,10 @@ public class VirtualInstancesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            });
+            }).build());
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -965,7 +1109,7 @@ public class VirtualInstancesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -973,10 +1117,10 @@ public class VirtualInstancesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            });
+            }).build());
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -1097,7 +1241,7 @@ public class VirtualInstancesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -1105,10 +1249,10 @@ public class VirtualInstancesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            });
+            }).build());
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -1228,7 +1372,7 @@ public class VirtualInstancesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -1236,10 +1380,10 @@ public class VirtualInstancesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            });
+            }).build());
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -1352,7 +1496,7 @@ public class VirtualInstancesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -1360,10 +1504,10 @@ public class VirtualInstancesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            });
+            }).build());
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -1483,7 +1627,7 @@ public class VirtualInstancesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -1491,10 +1635,10 @@ public class VirtualInstancesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            });
+            }).build());
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -1608,7 +1752,7 @@ public class VirtualInstancesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
+            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -1616,10 +1760,10 @@ public class VirtualInstancesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            });
+            }).build());
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
         return apiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 

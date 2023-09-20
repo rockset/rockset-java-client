@@ -27,77 +27,31 @@ import java.io.IOException;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * QueryParameter
+ * SuspendSourceRequest
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-19T15:55:29.974-07:00")
-public class QueryParameter {
-  @SerializedName("name")
-  private String name = null;
+public class SuspendSourceRequest {
+  @SerializedName("resume_after_duration")
+  private String resumeAfterDuration = null;
 
-  @SerializedName("type")
-  private String type = null;
-
-  @SerializedName("value")
-  private String value = null;
-
-  public QueryParameter name(String name) {
-    this.name = name;
+  public SuspendSourceRequest resumeAfterDuration(String resumeAfterDuration) {
+    this.resumeAfterDuration = resumeAfterDuration;
     return this;
   }
 
    /**
-   * Name of the field.
-   * @return name
+   * duration to suspend source; 1h is the default
+   * @return resumeAfterDuration
   **/
 
-@JsonProperty("name")
-@ApiModelProperty(example = "_id", required = true, value = "Name of the field.")
-  public String getName() {
-    return name;
+@JsonProperty("resume_after_duration")
+@ApiModelProperty(example = "30min", value = "duration to suspend source; 1h is the default")
+  public String getResumeAfterDuration() {
+    return resumeAfterDuration;
   }
 
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public QueryParameter type(String type) {
-    this.type = type;
-    return this;
-  }
-
-   /**
-   * Deprecated. Data type of the field.
-   * @return type
-  **/
-
-@JsonProperty("type")
-@ApiModelProperty(example = "string", required = true, value = "Deprecated. Data type of the field.")
-  public String getType() {
-    return type;
-  }
-
-  public void setType(String type) {
-    this.type = type;
-  }
-
-  public QueryParameter value(String value) {
-    this.value = value;
-    return this;
-  }
-
-   /**
-   * Literal value of the field.
-   * @return value
-  **/
-
-@JsonProperty("value")
-@ApiModelProperty(example = "85beb391", required = true, value = "Literal value of the field.")
-  public String getValue() {
-    return value;
-  }
-
-  public void setValue(String value) {
-    this.value = value;
+  public void setResumeAfterDuration(String resumeAfterDuration) {
+    this.resumeAfterDuration = resumeAfterDuration;
   }
 
 
@@ -109,26 +63,22 @@ public class QueryParameter {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    QueryParameter queryParameter = (QueryParameter) o;
-    return Objects.equals(this.name, queryParameter.name) &&
-        Objects.equals(this.type, queryParameter.type) &&
-        Objects.equals(this.value, queryParameter.value);
+    SuspendSourceRequest suspendSourceRequest = (SuspendSourceRequest) o;
+    return Objects.equals(this.resumeAfterDuration, suspendSourceRequest.resumeAfterDuration);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, type, value);
+    return Objects.hash(resumeAfterDuration);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class QueryParameter {\n");
+    sb.append("class SuspendSourceRequest {\n");
     
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    value: ").append(toIndentedString(value)).append("\n");
+    sb.append("    resumeAfterDuration: ").append(toIndentedString(resumeAfterDuration)).append("\n");
     sb.append("}");
     return sb.toString();
   }
