@@ -29,10 +29,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateApiKeyRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-19T15:55:29.974-07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-12-13T21:29:19.801Z")
 public class CreateApiKeyRequest {
   @SerializedName("created_by")
   private String createdBy = null;
+
+  @SerializedName("expiry_time")
+  private String expiryTime = null;
 
   @SerializedName("name")
   private String name = null;
@@ -58,6 +61,26 @@ public class CreateApiKeyRequest {
 
   public void setCreatedBy(String createdBy) {
     this.createdBy = createdBy;
+  }
+
+  public CreateApiKeyRequest expiryTime(String expiryTime) {
+    this.expiryTime = expiryTime;
+    return this;
+  }
+
+   /**
+   * If provided, the API key will automatically expire at this time (ISO-8601 format). Requires premium.
+   * @return expiryTime
+  **/
+
+@JsonProperty("expiry_time")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "If provided, the API key will automatically expire at this time (ISO-8601 format). Requires premium.")
+  public String getExpiryTime() {
+    return expiryTime;
+  }
+
+  public void setExpiryTime(String expiryTime) {
+    this.expiryTime = expiryTime;
   }
 
   public CreateApiKeyRequest name(String name) {
@@ -111,13 +134,14 @@ public class CreateApiKeyRequest {
     }
     CreateApiKeyRequest createApiKeyRequest = (CreateApiKeyRequest) o;
     return Objects.equals(this.createdBy, createApiKeyRequest.createdBy) &&
+        Objects.equals(this.expiryTime, createApiKeyRequest.expiryTime) &&
         Objects.equals(this.name, createApiKeyRequest.name) &&
         Objects.equals(this.role, createApiKeyRequest.role);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(createdBy, name, role);
+    return Objects.hash(createdBy, expiryTime, name, role);
   }
 
 
@@ -127,6 +151,7 @@ public class CreateApiKeyRequest {
     sb.append("class CreateApiKeyRequest {\n");
     
     sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
+    sb.append("    expiryTime: ").append(toIndentedString(expiryTime)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    role: ").append(toIndentedString(role)).append("\n");
     sb.append("}");

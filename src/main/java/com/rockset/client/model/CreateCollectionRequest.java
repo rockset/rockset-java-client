@@ -35,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateCollectionRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-19T15:55:29.974-07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-12-13T21:29:19.801Z")
 public class CreateCollectionRequest {
   @SerializedName("clustering_key")
   private List<FieldPartition> clusteringKey = null;
@@ -226,13 +226,14 @@ public class CreateCollectionRequest {
   }
 
    /**
-   * Number of seconds after which data is purged, based on event time.
+   * Number of seconds after which data is purged, based on event time. Minimum allowable value is 3600s/1 hour. The maximum value is strictly less than 10 years.
    * minimum: 3600
+   * maximum: 315359999
    * @return retentionSecs
   **/
 
 @JsonProperty("retention_secs")
-@ApiModelProperty(example = "1000000", value = "Number of seconds after which data is purged, based on event time.")
+@ApiModelProperty(example = "1000000", value = "Number of seconds after which data is purged, based on event time. Minimum allowable value is 3600s/1 hour. The maximum value is strictly less than 10 years.")
   public Long getRetentionSecs() {
     return retentionSecs;
   }

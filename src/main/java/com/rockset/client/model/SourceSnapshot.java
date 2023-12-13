@@ -29,10 +29,33 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceSnapshot
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-19T15:55:29.974-07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-12-13T21:29:19.801Z")
 public class SourceSnapshot {
+  @SerializedName("source_collection_path")
+  private String sourceCollectionPath = null;
+
   @SerializedName("source_snapshot_rrn")
   private String sourceSnapshotRrn = null;
+
+  public SourceSnapshot sourceCollectionPath(String sourceCollectionPath) {
+    this.sourceCollectionPath = sourceCollectionPath;
+    return this;
+  }
+
+   /**
+   * A representation of the workspace and collection where the source snapshot originated.
+   * @return sourceCollectionPath
+  **/
+
+@JsonProperty("source_collection_path")
+@ApiModelProperty(example = "myWorkspace.myCollection", value = "A representation of the workspace and collection where the source snapshot originated.")
+  public String getSourceCollectionPath() {
+    return sourceCollectionPath;
+  }
+
+  public void setSourceCollectionPath(String sourceCollectionPath) {
+    this.sourceCollectionPath = sourceCollectionPath;
+  }
 
   public SourceSnapshot sourceSnapshotRrn(String sourceSnapshotRrn) {
     this.sourceSnapshotRrn = sourceSnapshotRrn;
@@ -64,12 +87,13 @@ public class SourceSnapshot {
       return false;
     }
     SourceSnapshot sourceSnapshot = (SourceSnapshot) o;
-    return Objects.equals(this.sourceSnapshotRrn, sourceSnapshot.sourceSnapshotRrn);
+    return Objects.equals(this.sourceCollectionPath, sourceSnapshot.sourceCollectionPath) &&
+        Objects.equals(this.sourceSnapshotRrn, sourceSnapshot.sourceSnapshotRrn);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(sourceSnapshotRrn);
+    return Objects.hash(sourceCollectionPath, sourceSnapshotRrn);
   }
 
 
@@ -78,6 +102,7 @@ public class SourceSnapshot {
     StringBuilder sb = new StringBuilder();
     sb.append("class SourceSnapshot {\n");
     
+    sb.append("    sourceCollectionPath: ").append(toIndentedString(sourceCollectionPath)).append("\n");
     sb.append("    sourceSnapshotRrn: ").append(toIndentedString(sourceSnapshotRrn)).append("\n");
     sb.append("}");
     return sb.toString();

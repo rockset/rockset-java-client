@@ -20,6 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.rockset.client.model.SourceDynamoDbSettings;
 import com.rockset.client.model.StatusDynamoDb;
 import com.rockset.client.model.StatusDynamoDbV2;
 import io.swagger.annotations.ApiModel;
@@ -31,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceDynamoDb
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-19T15:55:29.974-07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-12-13T21:29:19.801Z")
 public class SourceDynamoDb {
   @SerializedName("aws_region")
   private String awsRegion = null;
@@ -41,6 +42,9 @@ public class SourceDynamoDb {
 
   @SerializedName("rcu")
   private Long rcu = null;
+
+  @SerializedName("settings")
+  private SourceDynamoDbSettings settings = null;
 
   @SerializedName("status")
   private StatusDynamoDb status = null;
@@ -100,6 +104,26 @@ public class SourceDynamoDb {
 
   public void setRcu(Long rcu) {
     this.rcu = rcu;
+  }
+
+  public SourceDynamoDb settings(SourceDynamoDbSettings settings) {
+    this.settings = settings;
+    return this;
+  }
+
+   /**
+   * custom settings for Amazon DynamoDB source
+   * @return settings
+  **/
+
+@JsonProperty("settings")
+@ApiModelProperty(value = "custom settings for Amazon DynamoDB source")
+  public SourceDynamoDbSettings getSettings() {
+    return settings;
+  }
+
+  public void setSettings(SourceDynamoDbSettings settings) {
+    this.settings = settings;
   }
 
    /**
@@ -166,6 +190,7 @@ public class SourceDynamoDb {
     return Objects.equals(this.awsRegion, sourceDynamoDb.awsRegion) &&
         Objects.equals(this.currentStatus, sourceDynamoDb.currentStatus) &&
         Objects.equals(this.rcu, sourceDynamoDb.rcu) &&
+        Objects.equals(this.settings, sourceDynamoDb.settings) &&
         Objects.equals(this.status, sourceDynamoDb.status) &&
         Objects.equals(this.tableName, sourceDynamoDb.tableName) &&
         Objects.equals(this.useScanApi, sourceDynamoDb.useScanApi);
@@ -173,7 +198,7 @@ public class SourceDynamoDb {
 
   @Override
   public int hashCode() {
-    return Objects.hash(awsRegion, currentStatus, rcu, status, tableName, useScanApi);
+    return Objects.hash(awsRegion, currentStatus, rcu, settings, status, tableName, useScanApi);
   }
 
 
@@ -185,6 +210,7 @@ public class SourceDynamoDb {
     sb.append("    awsRegion: ").append(toIndentedString(awsRegion)).append("\n");
     sb.append("    currentStatus: ").append(toIndentedString(currentStatus)).append("\n");
     sb.append("    rcu: ").append(toIndentedString(rcu)).append("\n");
+    sb.append("    settings: ").append(toIndentedString(settings)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    tableName: ").append(toIndentedString(tableName)).append("\n");
     sb.append("    useScanApi: ").append(toIndentedString(useScanApi)).append("\n");

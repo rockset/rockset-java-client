@@ -20,6 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.rockset.client.model.TLSConfig;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -29,10 +30,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * MongoDbIntegration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-19T15:55:29.974-07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-12-13T21:29:19.801Z")
 public class MongoDbIntegration {
   @SerializedName("connection_uri")
   private String connectionUri = null;
+
+  @SerializedName("tls")
+  private TLSConfig tls = null;
 
   public MongoDbIntegration connectionUri(String connectionUri) {
     this.connectionUri = connectionUri;
@@ -54,6 +58,26 @@ public class MongoDbIntegration {
     this.connectionUri = connectionUri;
   }
 
+  public MongoDbIntegration tls(TLSConfig tls) {
+    this.tls = tls;
+    return this;
+  }
+
+   /**
+   * TLS configuration for mongo connection
+   * @return tls
+  **/
+
+@JsonProperty("tls")
+@ApiModelProperty(value = "TLS configuration for mongo connection")
+  public TLSConfig getTls() {
+    return tls;
+  }
+
+  public void setTls(TLSConfig tls) {
+    this.tls = tls;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -64,12 +88,13 @@ public class MongoDbIntegration {
       return false;
     }
     MongoDbIntegration mongoDbIntegration = (MongoDbIntegration) o;
-    return Objects.equals(this.connectionUri, mongoDbIntegration.connectionUri);
+    return Objects.equals(this.connectionUri, mongoDbIntegration.connectionUri) &&
+        Objects.equals(this.tls, mongoDbIntegration.tls);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(connectionUri);
+    return Objects.hash(connectionUri, tls);
   }
 
 
@@ -79,6 +104,7 @@ public class MongoDbIntegration {
     sb.append("class MongoDbIntegration {\n");
     
     sb.append("    connectionUri: ").append(toIndentedString(connectionUri)).append("\n");
+    sb.append("    tls: ").append(toIndentedString(tls)).append("\n");
     sb.append("}");
     return sb.toString();
   }

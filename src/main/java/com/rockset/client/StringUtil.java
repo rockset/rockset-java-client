@@ -13,7 +13,7 @@
 
 package com.rockset.client;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-19T15:55:29.974-07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-12-13T21:29:19.801Z")
 public class StringUtil {
   /**
    * Check if the given array contains the given value (with case-insensitive comparison).

@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceS3
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-19T15:55:29.974-07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-12-13T21:29:19.801Z")
 public class SourceS3 {
   @SerializedName("bucket")
   private String bucket = null;
@@ -169,12 +169,12 @@ public class SourceS3 {
   }
 
    /**
-   * List of prefixes to paths from which data should be ingested.
+   * Deprecated in favor of &#x60;prefix&#x60;. List of prefixes to paths from which data should be ingested.
    * @return prefixes
   **/
 
 @JsonProperty("prefixes")
-@ApiModelProperty(example = "\"[\\\"/transactions\\\", \\\"/stores\\\"]\"", value = "List of prefixes to paths from which data should be ingested.")
+@ApiModelProperty(example = "\"[\\\"/transactions\\\", \\\"/stores\\\"]\"", value = "Deprecated in favor of `prefix`. List of prefixes to paths from which data should be ingested.")
   public List<String> getPrefixes() {
     return prefixes;
   }

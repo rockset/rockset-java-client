@@ -29,8 +29,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * UpdateApiKeyRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-19T15:55:29.974-07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-12-13T21:29:19.801Z")
 public class UpdateApiKeyRequest {
+  @SerializedName("clear_expiry_time")
+  private Boolean clearExpiryTime = null;
+
+  @SerializedName("expiry_time")
+  private String expiryTime = null;
+
   /**
    * State that the api key should be set to.
    */
@@ -82,6 +88,46 @@ public class UpdateApiKeyRequest {
   @SerializedName("state")
   private StateEnum state = null;
 
+  public UpdateApiKeyRequest clearExpiryTime(Boolean clearExpiryTime) {
+    this.clearExpiryTime = clearExpiryTime;
+    return this;
+  }
+
+   /**
+   * If set to true, the expiration time for this key will be cleared.
+   * @return clearExpiryTime
+  **/
+
+@JsonProperty("clear_expiry_time")
+@ApiModelProperty(example = "true", value = "If set to true, the expiration time for this key will be cleared.")
+  public Boolean isClearExpiryTime() {
+    return clearExpiryTime;
+  }
+
+  public void setClearExpiryTime(Boolean clearExpiryTime) {
+    this.clearExpiryTime = clearExpiryTime;
+  }
+
+  public UpdateApiKeyRequest expiryTime(String expiryTime) {
+    this.expiryTime = expiryTime;
+    return this;
+  }
+
+   /**
+   * If provided, the API key will automatically expire at this time (ISO-8601 format). Requires premium.
+   * @return expiryTime
+  **/
+
+@JsonProperty("expiry_time")
+@ApiModelProperty(example = "2001-08-28T00:23:41Z", value = "If provided, the API key will automatically expire at this time (ISO-8601 format). Requires premium.")
+  public String getExpiryTime() {
+    return expiryTime;
+  }
+
+  public void setExpiryTime(String expiryTime) {
+    this.expiryTime = expiryTime;
+  }
+
   public UpdateApiKeyRequest state(StateEnum state) {
     this.state = state;
     return this;
@@ -112,12 +158,14 @@ public class UpdateApiKeyRequest {
       return false;
     }
     UpdateApiKeyRequest updateApiKeyRequest = (UpdateApiKeyRequest) o;
-    return Objects.equals(this.state, updateApiKeyRequest.state);
+    return Objects.equals(this.clearExpiryTime, updateApiKeyRequest.clearExpiryTime) &&
+        Objects.equals(this.expiryTime, updateApiKeyRequest.expiryTime) &&
+        Objects.equals(this.state, updateApiKeyRequest.state);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(state);
+    return Objects.hash(clearExpiryTime, expiryTime, state);
   }
 
 
@@ -126,6 +174,8 @@ public class UpdateApiKeyRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class UpdateApiKeyRequest {\n");
     
+    sb.append("    clearExpiryTime: ").append(toIndentedString(clearExpiryTime)).append("\n");
+    sb.append("    expiryTime: ").append(toIndentedString(expiryTime)).append("\n");
     sb.append("    state: ").append(toIndentedString(state)).append("\n");
     sb.append("}");
     return sb.toString();
