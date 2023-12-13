@@ -32,6 +32,7 @@ import com.rockset.client.model.SourceKafka;
 import com.rockset.client.model.SourceKinesis;
 import com.rockset.client.model.SourceMongoDb;
 import com.rockset.client.model.SourceS3;
+import com.rockset.client.model.SourceSnapshot;
 import com.rockset.client.model.SourceSnowflake;
 import com.rockset.client.model.SourceSystem;
 import com.rockset.client.model.Status;
@@ -46,7 +47,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "Details about the data source for the given collection. Only one of the following fields are allowed to be defined. Only collections can act as data sources for views. ")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-19T15:55:29.974-07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-12-13T18:31:46.278Z")
 public class Source {
   @SerializedName("azure_blob_storage")
   private SourceAzureBlobStorage azureBlobStorage = null;
@@ -92,6 +93,9 @@ public class Source {
 
   @SerializedName("s3")
   private SourceS3 s3 = null;
+
+  @SerializedName("snapshot")
+  private SourceSnapshot snapshot = null;
 
   @SerializedName("snowflake")
   private SourceSnowflake snowflake = null;
@@ -378,6 +382,26 @@ public class Source {
     this.s3 = s3;
   }
 
+  public Source snapshot(SourceSnapshot snapshot) {
+    this.snapshot = snapshot;
+    return this;
+  }
+
+   /**
+   * Configuration for restoring from snapshot.
+   * @return snapshot
+  **/
+
+@JsonProperty("snapshot")
+@ApiModelProperty(value = "Configuration for restoring from snapshot.")
+  public SourceSnapshot getSnapshot() {
+    return snapshot;
+  }
+
+  public void setSnapshot(SourceSnapshot snapshot) {
+    this.snapshot = snapshot;
+  }
+
   public Source snowflake(SourceSnowflake snowflake) {
     this.snowflake = snowflake;
     return this;
@@ -465,6 +489,7 @@ public class Source {
         Objects.equals(this.mongodb, source.mongodb) &&
         Objects.equals(this.resumeAt, source.resumeAt) &&
         Objects.equals(this.s3, source.s3) &&
+        Objects.equals(this.snapshot, source.snapshot) &&
         Objects.equals(this.snowflake, source.snowflake) &&
         Objects.equals(this.status, source.status) &&
         Objects.equals(this.suspendedAt, source.suspendedAt) &&
@@ -473,7 +498,7 @@ public class Source {
 
   @Override
   public int hashCode() {
-    return Objects.hash(azureBlobStorage, azureEventHubs, azureServiceBus, dynamodb, fileUpload, formatParams, gcs, id, ingestTransformation, integrationName, kafka, kinesis, mongodb, resumeAt, s3, snowflake, status, suspendedAt, system);
+    return Objects.hash(azureBlobStorage, azureEventHubs, azureServiceBus, dynamodb, fileUpload, formatParams, gcs, id, ingestTransformation, integrationName, kafka, kinesis, mongodb, resumeAt, s3, snapshot, snowflake, status, suspendedAt, system);
   }
 
 
@@ -497,6 +522,7 @@ public class Source {
     sb.append("    mongodb: ").append(toIndentedString(mongodb)).append("\n");
     sb.append("    resumeAt: ").append(toIndentedString(resumeAt)).append("\n");
     sb.append("    s3: ").append(toIndentedString(s3)).append("\n");
+    sb.append("    snapshot: ").append(toIndentedString(snapshot)).append("\n");
     sb.append("    snowflake: ").append(toIndentedString(snowflake)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    suspendedAt: ").append(toIndentedString(suspendedAt)).append("\n");

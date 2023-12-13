@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceS3Settings
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-19T15:55:29.974-07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-12-13T18:31:46.278Z")
 public class SourceS3Settings {
   @SerializedName("s3_scan_frequency")
   private String s3ScanFrequency = null;
@@ -40,12 +40,12 @@ public class SourceS3Settings {
   }
 
    /**
-   * Rockset scans an S3 bucket based on a defined time interval. The scan frequency determines the length of time between a new scan and the previous scan. If the previous scan finds new objects or updates to existing objects, Rockset immediately scans the bucket again after processing changes from the previous scan.
+   * Rockset scans an S3 bucket based on a defined time interval. The scan frequency determines the length of time between a new scan and the previous scan. If the previous scan finds new objects or updates to existing objects, Rockset immediately scans the bucket again after processing changes from the previous scan. Duration value is of type ISO 8601 (e.g. PT5H, PT4M, PT3S). It doesn&#39;t account for DST, leap seconds and leap years. Minimum value: PT1S. Maximum value: PT1H.
    * @return s3ScanFrequency
   **/
 
 @JsonProperty("s3_scan_frequency")
-@ApiModelProperty(example = "5min", value = "Rockset scans an S3 bucket based on a defined time interval. The scan frequency determines the length of time between a new scan and the previous scan. If the previous scan finds new objects or updates to existing objects, Rockset immediately scans the bucket again after processing changes from the previous scan.")
+@ApiModelProperty(example = "PT5M", value = "Rockset scans an S3 bucket based on a defined time interval. The scan frequency determines the length of time between a new scan and the previous scan. If the previous scan finds new objects or updates to existing objects, Rockset immediately scans the bucket again after processing changes from the previous scan. Duration value is of type ISO 8601 (e.g. PT5H, PT4M, PT3S). It doesn't account for DST, leap seconds and leap years. Minimum value: PT1S. Maximum value: PT1H.")
   public String getS3ScanFrequency() {
     return s3ScanFrequency;
   }

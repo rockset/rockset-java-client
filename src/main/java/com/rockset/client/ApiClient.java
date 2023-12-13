@@ -13,7 +13,6 @@
 
 package com.rockset.client;
 
-import com.rockset.client.auth.ApiKeyAuth;
 import com.rockset.client.model.ErrorModel;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -88,13 +87,13 @@ public class ApiClient {
                 .readTimeout(140, TimeUnit.SECONDS)
                 .build();
 
+
         verifyingSsl = true;
 
         json = new JSON();
 
         // Setup authentications (key: authentication name, value: authentication).
         authentications = new HashMap<String, Authentication>();
-        authentications.put("ApiKeyAuth", new ApiKeyAuth("header", "Authorization"));
         // Prevent the authentications from being modified.
         authentications = Collections.unmodifiableMap(authentications);
     }
@@ -361,11 +360,9 @@ public class ApiClient {
             if (debugging) {
                 loggingInterceptor = new HttpLoggingInterceptor();
                 loggingInterceptor.setLevel(Level.BODY);
-                setHttpClient(getHttpClient().newBuilder().addInterceptor(loggingInterceptor).build());
+                httpClient.interceptors().add(loggingInterceptor);
             } else {
-                OkHttpClient.Builder client = getHttpClient().newBuilder();
-                client.interceptors().remove(loggingInterceptor);
-                setHttpClient(client.build());
+                httpClient.interceptors().remove(loggingInterceptor);
                 loggingInterceptor = null;
             }
         }

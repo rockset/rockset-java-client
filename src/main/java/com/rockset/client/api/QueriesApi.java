@@ -95,7 +95,7 @@ public class QueriesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -103,10 +103,10 @@ public class QueriesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            }).build());
+            });
         }
 
-        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
+        String[] localVarAuthNames = new String[] {  };
         return apiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -218,7 +218,7 @@ public class QueriesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -226,10 +226,10 @@ public class QueriesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            }).build());
+            });
         }
 
-        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
+        String[] localVarAuthNames = new String[] {  };
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -350,7 +350,7 @@ public class QueriesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -358,10 +358,10 @@ public class QueriesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            }).build());
+            });
         }
 
-        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
+        String[] localVarAuthNames = new String[] {  };
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -480,7 +480,7 @@ public class QueriesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -488,10 +488,10 @@ public class QueriesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            }).build());
+            });
         }
 
-        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
+        String[] localVarAuthNames = new String[] {  };
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -594,7 +594,7 @@ public class QueriesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -602,10 +602,10 @@ public class QueriesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            }).build());
+            });
         }
 
-        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
+        String[] localVarAuthNames = new String[] {  };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -625,7 +625,7 @@ public class QueriesApi {
 
     /**
      * Execute SQL Query
-     * Make a SQL query to Rockset.
+     * Make a SQL query to Rockset. If you want to issue the query to a specific Virtual Instance use this https://docs.rockset.com/documentation/reference/queryvirtualinstance
      * @param body JSON object (required)
      * @return QueryResponse
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -637,7 +637,7 @@ public class QueriesApi {
 
     /**
      * Execute SQL Query
-     * Make a SQL query to Rockset.
+     * Make a SQL query to Rockset. If you want to issue the query to a specific Virtual Instance use this https://docs.rockset.com/documentation/reference/queryvirtualinstance
      * @param body JSON object (required)
      * @return ApiResponse&lt;QueryResponse&gt;
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -650,7 +650,7 @@ public class QueriesApi {
 
     /**
      * Execute SQL Query (asynchronously)
-     * Make a SQL query to Rockset.
+     * Make a SQL query to Rockset. If you want to issue the query to a specific Virtual Instance use this https://docs.rockset.com/documentation/reference/queryvirtualinstance
      * @param body JSON object (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
@@ -716,7 +716,7 @@ public class QueriesApi {
         localVarHeaderParams.put("Content-Type", localVarContentType);
 
         if(progressListener != null) {
-            apiClient.setHttpClient(apiClient.getHttpClient().newBuilder().addInterceptor(new okhttp3.Interceptor() {
+            apiClient.getHttpClient().networkInterceptors().add(new okhttp3.Interceptor() {
                 @Override
                 public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain) throws IOException {
                     okhttp3.Response originalResponse = chain.proceed(chain.request());
@@ -724,10 +724,10 @@ public class QueriesApi {
                     .body(new ProgressResponseBody(originalResponse.body(), progressListener))
                     .build();
                 }
-            }).build());
+            });
         }
 
-        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
+        String[] localVarAuthNames = new String[] {  };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 

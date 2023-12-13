@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateVirtualInstanceRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-19T15:55:29.974-07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-12-13T18:31:46.278Z")
 public class CreateVirtualInstanceRequest {
   @SerializedName("auto_suspend_seconds")
   private Integer autoSuspendSeconds = null;
@@ -42,6 +42,57 @@ public class CreateVirtualInstanceRequest {
 
   @SerializedName("mount_refresh_interval_seconds")
   private Integer mountRefreshIntervalSeconds = null;
+
+  /**
+   * The mount type of collections that this Virtual Instance will query. Live mounted collections stay up-to-date with the underlying collection in real-time. Static mounted collections do not stay up-to-date. See https://docs.rockset.com/documentation/docs/virtual-instances#virtual-instance-configuration
+   */
+  @JsonAdapter(MountTypeEnum.Adapter.class)
+  public enum MountTypeEnum {
+    LIVE("LIVE"),
+    
+    STATIC("STATIC");
+
+    private String value;
+
+    MountTypeEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @com.fasterxml.jackson.annotation.JsonCreator
+    public static MountTypeEnum fromValue(String text) {
+      for (MountTypeEnum b : MountTypeEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+
+    public static class Adapter extends TypeAdapter<MountTypeEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final MountTypeEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public MountTypeEnum read(final JsonReader jsonReader) throws IOException {
+        String value = jsonReader.nextString();
+        return MountTypeEnum.fromValue(String.valueOf(value));
+      }
+    }
+  }
+
+  @SerializedName("mount_type")
+  private MountTypeEnum mountType = null;
 
   @SerializedName("name")
   private String name = null;
@@ -58,6 +109,8 @@ public class CreateVirtualInstanceRequest {
     SHARED("SHARED"),
     
     MILLI("MILLI"),
+    
+    XSMALL("XSMALL"),
     
     SMALL("SMALL"),
     
@@ -183,18 +236,38 @@ public class CreateVirtualInstanceRequest {
   }
 
    /**
-   * Number of seconds between data refreshes for mounts on this Virtual Instance. A value of 0 means continuous refresh and a value of null means never refresh.
+   * DEPRECATED. Use &#x60;mount_type&#x60; instead. Number of seconds between data refreshes for mounts on this Virtual Instance. The only valid values are 0 and null. 0 means the data will be refreshed continuously and null means the data will never refresh.
    * @return mountRefreshIntervalSeconds
   **/
 
 @JsonProperty("mount_refresh_interval_seconds")
-@ApiModelProperty(example = "3600", value = "Number of seconds between data refreshes for mounts on this Virtual Instance. A value of 0 means continuous refresh and a value of null means never refresh.")
+@ApiModelProperty(example = "0", value = "DEPRECATED. Use `mount_type` instead. Number of seconds between data refreshes for mounts on this Virtual Instance. The only valid values are 0 and null. 0 means the data will be refreshed continuously and null means the data will never refresh.")
   public Integer getMountRefreshIntervalSeconds() {
     return mountRefreshIntervalSeconds;
   }
 
   public void setMountRefreshIntervalSeconds(Integer mountRefreshIntervalSeconds) {
     this.mountRefreshIntervalSeconds = mountRefreshIntervalSeconds;
+  }
+
+  public CreateVirtualInstanceRequest mountType(MountTypeEnum mountType) {
+    this.mountType = mountType;
+    return this;
+  }
+
+   /**
+   * The mount type of collections that this Virtual Instance will query. Live mounted collections stay up-to-date with the underlying collection in real-time. Static mounted collections do not stay up-to-date. See https://docs.rockset.com/documentation/docs/virtual-instances#virtual-instance-configuration
+   * @return mountType
+  **/
+
+@JsonProperty("mount_type")
+@ApiModelProperty(example = "LIVE", value = "The mount type of collections that this Virtual Instance will query. Live mounted collections stay up-to-date with the underlying collection in real-time. Static mounted collections do not stay up-to-date. See https://docs.rockset.com/documentation/docs/virtual-instances#virtual-instance-configuration")
+  public MountTypeEnum getMountType() {
+    return mountType;
+  }
+
+  public void setMountType(MountTypeEnum mountType) {
+    this.mountType = mountType;
   }
 
   public CreateVirtualInstanceRequest name(String name) {
@@ -251,13 +324,14 @@ public class CreateVirtualInstanceRequest {
         Objects.equals(this.description, createVirtualInstanceRequest.description) &&
         Objects.equals(this.enableRemountOnResume, createVirtualInstanceRequest.enableRemountOnResume) &&
         Objects.equals(this.mountRefreshIntervalSeconds, createVirtualInstanceRequest.mountRefreshIntervalSeconds) &&
+        Objects.equals(this.mountType, createVirtualInstanceRequest.mountType) &&
         Objects.equals(this.name, createVirtualInstanceRequest.name) &&
         Objects.equals(this.type, createVirtualInstanceRequest.type);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(autoSuspendSeconds, description, enableRemountOnResume, mountRefreshIntervalSeconds, name, type);
+    return Objects.hash(autoSuspendSeconds, description, enableRemountOnResume, mountRefreshIntervalSeconds, mountType, name, type);
   }
 
 
@@ -270,6 +344,7 @@ public class CreateVirtualInstanceRequest {
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    enableRemountOnResume: ").append(toIndentedString(enableRemountOnResume)).append("\n");
     sb.append("    mountRefreshIntervalSeconds: ").append(toIndentedString(mountRefreshIntervalSeconds)).append("\n");
+    sb.append("    mountType: ").append(toIndentedString(mountType)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");
