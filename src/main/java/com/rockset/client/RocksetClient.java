@@ -3,6 +3,8 @@ package com.rockset.client;
 import com.rockset.client.api.*;
 import com.rockset.client.model.*;
 
+import java.util.Optional;
+
 public class RocksetClient {
   private ApiClient apiClient;
 
@@ -19,6 +21,12 @@ public class RocksetClient {
   public ViewsApi views;
   public VirtualInstancesApi virtualInstances;
   public WorkspacesApi workspaces;
+  private static final String implementationVersion =
+      Optional.ofNullable(RocksetClient.class.getPackage())
+          .map(Package::getImplementationVersion)
+          // If the version is not from
+          // a jar file, it will be null. Set it to a default value for now.
+          .orElse("0.9999.9999.SNAPSHOT");
 
   public RocksetClient(String apiKey, String apiServer) {
     this(apiKey, apiServer, "");
@@ -45,7 +53,7 @@ public class RocksetClient {
         new ApiClient()
             .setApiKey(apiKey)
             .setApiServer(apiServer)
-            .setVersion("0.10.3") // TODO: figure out how we can set this dynamically.
+            .setVersion(implementationVersion)
             .setUserAgent(userAgent);
 
     this.aliases = new AliasesApi(this.apiClient);

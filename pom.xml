@@ -141,6 +141,12 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Implementation-Version>0.10.4</Implementation-Version>
+                            <Implementation-Vendor>Rockset</Implementation-Vendor>
+                        </manifestEntries>
+                    </archive>
                 </configuration>
             </plugin>
 
