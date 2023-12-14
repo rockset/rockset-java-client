@@ -29,14 +29,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceSystem
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-19T15:55:29.974-07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-12-14T01:21:30.506Z")
 public class SourceSystem {
   /**
    * The type of this system source.
    */
   @JsonAdapter(TypeEnum.Adapter.class)
   public enum TypeEnum {
-    QUERY_LOGS("QUERYLOGS");
+    QUERY_LOGS("QUERYLOGS"),
+    
+    INGEST_LOGS("INGESTLOGS");
 
     private String value;
 
@@ -80,6 +82,9 @@ public class SourceSystem {
   @SerializedName("type")
   private TypeEnum type = null;
 
+  @SerializedName("workspace")
+  private String workspace = null;
+
   public SourceSystem type(TypeEnum type) {
     this.type = type;
     return this;
@@ -100,6 +105,26 @@ public class SourceSystem {
     this.type = type;
   }
 
+  public SourceSystem workspace(String workspace) {
+    this.workspace = workspace;
+    return this;
+  }
+
+   /**
+   * The workspace for which collections will have logs created. If unspecified, logs will be created for collections in all workspaces. Currently only supported for the INGEST_LOGS system source.
+   * @return workspace
+  **/
+
+@JsonProperty("workspace")
+@ApiModelProperty(example = "commons", value = "The workspace for which collections will have logs created. If unspecified, logs will be created for collections in all workspaces. Currently only supported for the INGEST_LOGS system source.")
+  public String getWorkspace() {
+    return workspace;
+  }
+
+  public void setWorkspace(String workspace) {
+    this.workspace = workspace;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -110,12 +135,13 @@ public class SourceSystem {
       return false;
     }
     SourceSystem sourceSystem = (SourceSystem) o;
-    return Objects.equals(this.type, sourceSystem.type);
+    return Objects.equals(this.type, sourceSystem.type) &&
+        Objects.equals(this.workspace, sourceSystem.workspace);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(type);
+    return Objects.hash(type, workspace);
   }
 
 
@@ -125,6 +151,7 @@ public class SourceSystem {
     sb.append("class SourceSystem {\n");
     
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    workspace: ").append(toIndentedString(workspace)).append("\n");
     sb.append("}");
     return sb.toString();
   }

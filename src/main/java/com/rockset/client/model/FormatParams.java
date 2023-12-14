@@ -32,10 +32,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * FormatParams
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-19T15:55:29.974-07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-12-14T01:21:30.506Z")
 public class FormatParams {
   @SerializedName("avro")
   private AvroParams avro = null;
+
+  @SerializedName("bson")
+  private Boolean bson = null;
 
   @SerializedName("csv")
   private CsvParams csv = null;
@@ -76,6 +79,26 @@ public class FormatParams {
 
   public void setAvro(AvroParams avro) {
     this.avro = avro;
+  }
+
+  public FormatParams bson(Boolean bson) {
+    this.bson = bson;
+    return this;
+  }
+
+   /**
+   * Get bson
+   * @return bson
+  **/
+
+@JsonProperty("bson")
+@ApiModelProperty(value = "")
+  public Boolean isBson() {
+    return bson;
+  }
+
+  public void setBson(Boolean bson) {
+    this.bson = bson;
   }
 
   public FormatParams csv(CsvParams csv) {
@@ -229,6 +252,7 @@ public class FormatParams {
     }
     FormatParams formatParams = (FormatParams) o;
     return Objects.equals(this.avro, formatParams.avro) &&
+        Objects.equals(this.bson, formatParams.bson) &&
         Objects.equals(this.csv, formatParams.csv) &&
         Objects.equals(this.json, formatParams.json) &&
         Objects.equals(this.mssqlDms, formatParams.mssqlDms) &&
@@ -240,7 +264,7 @@ public class FormatParams {
 
   @Override
   public int hashCode() {
-    return Objects.hash(avro, csv, json, mssqlDms, mysqlDms, oracleDms, postgresDms, xml);
+    return Objects.hash(avro, bson, csv, json, mssqlDms, mysqlDms, oracleDms, postgresDms, xml);
   }
 
 
@@ -250,6 +274,7 @@ public class FormatParams {
     sb.append("class FormatParams {\n");
     
     sb.append("    avro: ").append(toIndentedString(avro)).append("\n");
+    sb.append("    bson: ").append(toIndentedString(bson)).append("\n");
     sb.append("    csv: ").append(toIndentedString(csv)).append("\n");
     sb.append("    json: ").append(toIndentedString(json)).append("\n");
     sb.append("    mssqlDms: ").append(toIndentedString(mssqlDms)).append("\n");

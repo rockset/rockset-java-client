@@ -106,7 +106,7 @@ public class QueriesApi {
             }).build());
         }
 
-        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
+        String[] localVarAuthNames = new String[] {  };
         return apiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -229,7 +229,7 @@ public class QueriesApi {
             }).build());
         }
 
-        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
+        String[] localVarAuthNames = new String[] {  };
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -361,7 +361,7 @@ public class QueriesApi {
             }).build());
         }
 
-        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
+        String[] localVarAuthNames = new String[] {  };
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -491,7 +491,7 @@ public class QueriesApi {
             }).build());
         }
 
-        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
+        String[] localVarAuthNames = new String[] {  };
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -605,7 +605,7 @@ public class QueriesApi {
             }).build());
         }
 
-        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
+        String[] localVarAuthNames = new String[] {  };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -625,7 +625,7 @@ public class QueriesApi {
 
     /**
      * Execute SQL Query
-     * Make a SQL query to Rockset.
+     * Make a SQL query to Rockset. If you want to issue the query to a specific Virtual Instance use this https://docs.rockset.com/documentation/reference/queryvirtualinstance
      * @param body JSON object (required)
      * @return QueryResponse
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -637,7 +637,7 @@ public class QueriesApi {
 
     /**
      * Execute SQL Query
-     * Make a SQL query to Rockset.
+     * Make a SQL query to Rockset. If you want to issue the query to a specific Virtual Instance use this https://docs.rockset.com/documentation/reference/queryvirtualinstance
      * @param body JSON object (required)
      * @return ApiResponse&lt;QueryResponse&gt;
      * @throws Exception If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -650,7 +650,7 @@ public class QueriesApi {
 
     /**
      * Execute SQL Query (asynchronously)
-     * Make a SQL query to Rockset.
+     * Make a SQL query to Rockset. If you want to issue the query to a specific Virtual Instance use this https://docs.rockset.com/documentation/reference/queryvirtualinstance
      * @param body JSON object (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
@@ -727,7 +727,7 @@ public class QueriesApi {
             }).build());
         }
 
-        String[] localVarAuthNames = new String[] { "ApiKeyAuth" };
+        String[] localVarAuthNames = new String[] {  };
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
