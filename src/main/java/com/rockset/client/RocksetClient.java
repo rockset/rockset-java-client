@@ -24,7 +24,9 @@ public class RocksetClient {
   private static final String implementationVersion =
       Optional.ofNullable(RocksetClient.class.getPackage())
           .map(Package::getImplementationVersion)
-          .orElse("SNAPSHOT");
+          // If the version is not from
+          // a jar file, it will be null. Set it to a default value for now.
+          .orElse("0.9999.9999.SNAPSHOT");
 
   public RocksetClient(String apiKey, String apiServer) {
     this(apiKey, apiServer, "");
