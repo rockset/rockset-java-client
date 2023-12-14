@@ -37,7 +37,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * KafkaIntegration
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-19T15:55:29.974-07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-12-14T01:21:30.506Z")
 public class KafkaIntegration {
   @SerializedName("aws_role")
   private AwsRole awsRole = null;

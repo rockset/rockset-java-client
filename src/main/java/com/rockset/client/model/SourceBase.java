@@ -21,6 +21,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.rockset.client.model.SourceAzBlobStorageBase;
+import com.rockset.client.model.SourceDynamoDb;
 import com.rockset.client.model.SourceGcsBase;
 import com.rockset.client.model.SourceS3Base;
 import io.swagger.annotations.ApiModel;
@@ -32,10 +33,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceBase
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-19T15:55:29.974-07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-12-14T01:21:30.506Z")
 public class SourceBase {
   @SerializedName("azure_blob_storage")
   private SourceAzBlobStorageBase azureBlobStorage = null;
+
+  @SerializedName("dynamodb")
+  private SourceDynamoDb dynamodb = null;
 
   @SerializedName("gcs")
   private SourceGcsBase gcs = null;
@@ -61,6 +65,26 @@ public class SourceBase {
 
   public void setAzureBlobStorage(SourceAzBlobStorageBase azureBlobStorage) {
     this.azureBlobStorage = azureBlobStorage;
+  }
+
+  public SourceBase dynamodb(SourceDynamoDb dynamodb) {
+    this.dynamodb = dynamodb;
+    return this;
+  }
+
+   /**
+   * Configuration for ingestion from a DynamoDb table.
+   * @return dynamodb
+  **/
+
+@JsonProperty("dynamodb")
+@ApiModelProperty(value = "Configuration for ingestion from a DynamoDb table.")
+  public SourceDynamoDb getDynamodb() {
+    return dynamodb;
+  }
+
+  public void setDynamodb(SourceDynamoDb dynamodb) {
+    this.dynamodb = dynamodb;
   }
 
   public SourceBase gcs(SourceGcsBase gcs) {
@@ -114,13 +138,14 @@ public class SourceBase {
     }
     SourceBase sourceBase = (SourceBase) o;
     return Objects.equals(this.azureBlobStorage, sourceBase.azureBlobStorage) &&
+        Objects.equals(this.dynamodb, sourceBase.dynamodb) &&
         Objects.equals(this.gcs, sourceBase.gcs) &&
         Objects.equals(this.s3, sourceBase.s3);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(azureBlobStorage, gcs, s3);
+    return Objects.hash(azureBlobStorage, dynamodb, gcs, s3);
   }
 
 
@@ -130,6 +155,7 @@ public class SourceBase {
     sb.append("class SourceBase {\n");
     
     sb.append("    azureBlobStorage: ").append(toIndentedString(azureBlobStorage)).append("\n");
+    sb.append("    dynamodb: ").append(toIndentedString(dynamodb)).append("\n");
     sb.append("    gcs: ").append(toIndentedString(gcs)).append("\n");
     sb.append("    s3: ").append(toIndentedString(s3)).append("\n");
     sb.append("}");

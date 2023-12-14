@@ -30,8 +30,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceKafka
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-09-19T15:55:29.974-07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-12-14T01:21:30.506Z")
 public class SourceKafka {
+  @SerializedName("client_id")
+  private String clientId = null;
+
   @SerializedName("consumer_group_id")
   private String consumerGroupId = null;
 
@@ -94,6 +97,26 @@ public class SourceKafka {
 
   @SerializedName("use_v3")
   private Boolean useV3 = null;
+
+  public SourceKafka clientId(String clientId) {
+    this.clientId = clientId;
+    return this;
+  }
+
+   /**
+   * The kafka client id being used.
+   * @return clientId
+  **/
+
+@JsonProperty("client_id")
+@ApiModelProperty(example = "cwc|0013a00001hSJ7oAAG|rockset-colln-consumer", value = "The kafka client id being used.")
+  public String getClientId() {
+    return clientId;
+  }
+
+  public void setClientId(String clientId) {
+    this.clientId = clientId;
+  }
 
   public SourceKafka consumerGroupId(String consumerGroupId) {
     this.consumerGroupId = consumerGroupId;
@@ -196,7 +219,8 @@ public class SourceKafka {
       return false;
     }
     SourceKafka sourceKafka = (SourceKafka) o;
-    return Objects.equals(this.consumerGroupId, sourceKafka.consumerGroupId) &&
+    return Objects.equals(this.clientId, sourceKafka.clientId) &&
+        Objects.equals(this.consumerGroupId, sourceKafka.consumerGroupId) &&
         Objects.equals(this.kafkaTopicName, sourceKafka.kafkaTopicName) &&
         Objects.equals(this.offsetResetPolicy, sourceKafka.offsetResetPolicy) &&
         Objects.equals(this.status, sourceKafka.status) &&
@@ -205,7 +229,7 @@ public class SourceKafka {
 
   @Override
   public int hashCode() {
-    return Objects.hash(consumerGroupId, kafkaTopicName, offsetResetPolicy, status, useV3);
+    return Objects.hash(clientId, consumerGroupId, kafkaTopicName, offsetResetPolicy, status, useV3);
   }
 
 
@@ -214,6 +238,7 @@ public class SourceKafka {
     StringBuilder sb = new StringBuilder();
     sb.append("class SourceKafka {\n");
     
+    sb.append("    clientId: ").append(toIndentedString(clientId)).append("\n");
     sb.append("    consumerGroupId: ").append(toIndentedString(consumerGroupId)).append("\n");
     sb.append("    kafkaTopicName: ").append(toIndentedString(kafkaTopicName)).append("\n");
     sb.append("    offsetResetPolicy: ").append(toIndentedString(offsetResetPolicy)).append("\n");

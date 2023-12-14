@@ -1,5 +1,8 @@
 # Rockset Java Client Changelog
 
+## v0.11.4 2023-12-14
+- TODO
+
 ## v0.10.3 2023-09-19
 - Fix async calls with okhttp3
 - Support the latest Rockset API endpoints and improvements
