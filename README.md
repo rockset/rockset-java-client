@@ -42,6 +42,10 @@ Set ROCKSET_APIKEY with the API key in the environment variables. To run test:
 mvn test
 ```
 
+## Scala Considerations
+
+If using [Scala](https://www.scala-lang.org/)https://www.scala-lang.org/, we recommend converting scala map and object types to java maps and collections (e.g. `java.util.LinkedHashMap`) rather than using the native Scala types with this java client.
+
 ## Support
 
 Feel free to log issues against this client through GitHub.
