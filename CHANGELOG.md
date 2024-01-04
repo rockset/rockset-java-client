@@ -1,7 +1,11 @@
 # Rockset Java Client Changelog
 
 ## v0.11.4 2023-12-14
-- TODO
+- Added "XSMALL" VI size
+- Introduced `expiry_time` for API key
+- Deprecated `mount_refresh_interval_seconds`, replacing it with `mount_type` for handling data refreshes on Virtual Instances
+- Added `bson` data type support
+- Added DynamoDB source configuration
 
 ## v0.10.3 2023-09-19
 - Fix async calls with okhttp3
