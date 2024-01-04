@@ -13,7 +13,7 @@ Method | HTTP request | Description
 [**ListCollectionMounts**](VirtualInstancesApi.md#ListCollectionMounts) | **Get** /v1/orgs/self/virtualinstances/{virtualInstanceId}/mounts | List Collection Mounts
 [**ListVirtualInstances**](VirtualInstancesApi.md#ListVirtualInstances) | **Get** /v1/orgs/self/virtualinstances | List Virtual Instances
 [**MountCollection**](VirtualInstancesApi.md#MountCollection) | **Post** /v1/orgs/self/virtualinstances/{virtualInstanceId}/mounts | Mount Collections
-[**QueryVirtualInstance**](VirtualInstancesApi.md#QueryVirtualInstance) | **Post** /v1/orgs/self/virtualinstances/{virtualInstanceId}/queries | Execute SQL Query
+[**QueryVirtualInstance**](VirtualInstancesApi.md#QueryVirtualInstance) | **Post** /v1/orgs/self/virtualinstances/{virtualInstanceId}/queries | Execute SQL Query on a specific Virtual Instance
 [**ResumeVirtualInstance**](VirtualInstancesApi.md#ResumeVirtualInstance) | **Post** /v1/orgs/self/virtualinstances/{virtualInstanceId}/resume | Resume Virtual Instance
 [**SetVirtualInstance**](VirtualInstancesApi.md#SetVirtualInstance) | **Post** /v1/orgs/self/virtualinstances/{virtualInstanceId} | Update Virtual Instance
 [**SuspendVirtualInstance**](VirtualInstancesApi.md#SuspendVirtualInstance) | **Post** /v1/orgs/self/virtualinstances/{virtualInstanceId}/suspend | Suspend Virtual Instance
@@ -652,7 +652,7 @@ No authorization required
 
 > QueryResponse QueryVirtualInstance(ctx, virtualInstanceId).Body(body).Execute()
 
-Execute SQL Query
+Execute SQL Query on a specific Virtual Instance
 
 
 

@@ -20,6 +20,7 @@ var _ MappedNullable = &FormatParams{}
 // FormatParams struct for FormatParams
 type FormatParams struct {
 	Avro map[string]interface{} `json:"avro,omitempty"`
+	Bson *bool `json:"bson,omitempty"`
 	Csv *CsvParams `json:"csv,omitempty"`
 	// Source data is in json format.
 	Json *bool `json:"json,omitempty"`
@@ -77,6 +78,38 @@ func (o *FormatParams) HasAvro() bool {
 // SetAvro gets a reference to the given map[string]interface{} and assigns it to the Avro field.
 func (o *FormatParams) SetAvro(v map[string]interface{}) {
 	o.Avro = v
+}
+
+// GetBson returns the Bson field value if set, zero value otherwise.
+func (o *FormatParams) GetBson() bool {
+	if o == nil || IsNil(o.Bson) {
+		var ret bool
+		return ret
+	}
+	return *o.Bson
+}
+
+// GetBsonOk returns a tuple with the Bson field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FormatParams) GetBsonOk() (*bool, bool) {
+	if o == nil || IsNil(o.Bson) {
+		return nil, false
+	}
+	return o.Bson, true
+}
+
+// HasBson returns a boolean if a field has been set.
+func (o *FormatParams) HasBson() bool {
+	if o != nil && !IsNil(o.Bson) {
+		return true
+	}
+
+	return false
+}
+
+// SetBson gets a reference to the given bool and assigns it to the Bson field.
+func (o *FormatParams) SetBson(v bool) {
+	o.Bson = &v
 }
 
 // GetCsv returns the Csv field value if set, zero value otherwise.
@@ -315,6 +348,9 @@ func (o FormatParams) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Avro) {
 		toSerialize["avro"] = o.Avro
+	}
+	if !IsNil(o.Bson) {
+		toSerialize["bson"] = o.Bson
 	}
 	if !IsNil(o.Csv) {
 		toSerialize["csv"] = o.Csv

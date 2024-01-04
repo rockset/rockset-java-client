@@ -84,7 +84,7 @@ type QueriesApi interface {
 	/*
 	Query Execute SQL Query
 
-	Make a SQL query to Rockset.
+	Make a SQL query to Rockset. If you want to issue the query to a specific Virtual Instance use this https://docs.rockset.com/documentation/reference/queryvirtualinstance
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiQueryRequest
@@ -1182,7 +1182,7 @@ func (r ApiQueryRequest) Execute() (*QueryResponse, *http.Response, error) {
 /*
 Query Execute SQL Query
 
-Make a SQL query to Rockset.
+Make a SQL query to Rockset. If you want to issue the query to a specific Virtual Instance use this https://docs.rockset.com/documentation/reference/queryvirtualinstance
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiQueryRequest

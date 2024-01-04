@@ -25,8 +25,10 @@ type CreateVirtualInstanceRequest struct {
 	Description *string `json:"description,omitempty"`
 	// When a Virtual Instance is resumed, it will remount all collections that were mounted when the Virtual Instance was suspended.
 	EnableRemountOnResume *bool `json:"enable_remount_on_resume,omitempty"`
-	// Number of seconds between data refreshes for mounts on this Virtual Instance. A value of 0 means continuous refresh and a value of null means never refresh.
+	// DEPRECATED. Use `mount_type` instead. Number of seconds between data refreshes for mounts on this Virtual Instance. The only valid values are 0 and null. 0 means the data will be refreshed continuously and null means the data will never refresh.
 	MountRefreshIntervalSeconds *int32 `json:"mount_refresh_interval_seconds,omitempty"`
+	// The mount type of collections that this Virtual Instance will query. Live mounted collections stay up-to-date with the underlying collection in real-time. Static mounted collections do not stay up-to-date. See https://docs.rockset.com/documentation/docs/virtual-instances#virtual-instance-configuration
+	MountType *string `json:"mount_type,omitempty"`
 	// Unique identifier for virtual instance, can contain alphanumeric or dash characters.
 	Name string `json:"name"`
 	// Requested virtual instance type.
@@ -179,6 +181,38 @@ func (o *CreateVirtualInstanceRequest) SetMountRefreshIntervalSeconds(v int32) {
 	o.MountRefreshIntervalSeconds = &v
 }
 
+// GetMountType returns the MountType field value if set, zero value otherwise.
+func (o *CreateVirtualInstanceRequest) GetMountType() string {
+	if o == nil || IsNil(o.MountType) {
+		var ret string
+		return ret
+	}
+	return *o.MountType
+}
+
+// GetMountTypeOk returns a tuple with the MountType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateVirtualInstanceRequest) GetMountTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.MountType) {
+		return nil, false
+	}
+	return o.MountType, true
+}
+
+// HasMountType returns a boolean if a field has been set.
+func (o *CreateVirtualInstanceRequest) HasMountType() bool {
+	if o != nil && !IsNil(o.MountType) {
+		return true
+	}
+
+	return false
+}
+
+// SetMountType gets a reference to the given string and assigns it to the MountType field.
+func (o *CreateVirtualInstanceRequest) SetMountType(v string) {
+	o.MountType = &v
+}
+
 // GetName returns the Name field value
 func (o *CreateVirtualInstanceRequest) GetName() string {
 	if o == nil {
@@ -256,6 +290,9 @@ func (o CreateVirtualInstanceRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.MountRefreshIntervalSeconds) {
 		toSerialize["mount_refresh_interval_seconds"] = o.MountRefreshIntervalSeconds
+	}
+	if !IsNil(o.MountType) {
+		toSerialize["mount_type"] = o.MountType
 	}
 	toSerialize["name"] = o.Name
 	if !IsNil(o.Type) {

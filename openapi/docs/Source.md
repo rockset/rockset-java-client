@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **Mongodb** | Pointer to [**SourceMongoDb**](SourceMongoDb.md) |  | [optional] 
 **ResumeAt** | Pointer to **string** | ISO-8601 date when source would be auto resumed, if suspended | [optional] [readonly] 
 **S3** | Pointer to [**SourceS3**](SourceS3.md) |  | [optional] 
+**Snapshot** | Pointer to [**SourceSnapshot**](SourceSnapshot.md) |  | [optional] 
 **Snowflake** | Pointer to [**SourceSnowflake**](SourceSnowflake.md) |  | [optional] 
 **Status** | Pointer to [**Status**](Status.md) |  | [optional] 
 **SuspendedAt** | Pointer to **string** | ISO-8601 date when source was suspended, if suspended | [optional] [readonly] 
@@ -417,6 +418,31 @@ SetS3 sets S3 field to given value.
 `func (o *Source) HasS3() bool`
 
 HasS3 returns a boolean if a field has been set.
+
+### GetSnapshot
+
+`func (o *Source) GetSnapshot() SourceSnapshot`
+
+GetSnapshot returns the Snapshot field if non-nil, zero value otherwise.
+
+### GetSnapshotOk
+
+`func (o *Source) GetSnapshotOk() (*SourceSnapshot, bool)`
+
+GetSnapshotOk returns a tuple with the Snapshot field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSnapshot
+
+`func (o *Source) SetSnapshot(v SourceSnapshot)`
+
+SetSnapshot sets Snapshot field to given value.
+
+### HasSnapshot
+
+`func (o *Source) HasSnapshot() bool`
+
+HasSnapshot returns a boolean if a field has been set.
 
 ### GetSnowflake
 

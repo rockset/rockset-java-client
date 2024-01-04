@@ -158,7 +158,7 @@ type VirtualInstancesApi interface {
 	MountCollectionExecute(r ApiMountCollectionRequest) (*CreateCollectionMountsResponse, *http.Response, error)
 
 	/*
-	QueryVirtualInstance Execute SQL Query
+	QueryVirtualInstance Execute SQL Query on a specific Virtual Instance
 
 	Make a SQL query to Rockset.
 
@@ -2595,7 +2595,7 @@ func (r ApiQueryVirtualInstanceRequest) Execute() (*QueryResponse, *http.Respons
 }
 
 /*
-QueryVirtualInstance Execute SQL Query
+QueryVirtualInstance Execute SQL Query on a specific Virtual Instance
 
 Make a SQL query to Rockset.
 

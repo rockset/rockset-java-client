@@ -20,6 +20,8 @@ var _ MappedNullable = &CreateApiKeyRequest{}
 // CreateApiKeyRequest struct for CreateApiKeyRequest
 type CreateApiKeyRequest struct {
 	CreatedBy *string `json:"created_by,omitempty"`
+	// If provided, the API key will automatically expire at this time (ISO-8601 format). Requires premium.
+	ExpiryTime *string `json:"expiry_time,omitempty"`
 	// Name for this API key.
 	Name string `json:"name"`
 	Role *string `json:"role,omitempty"`
@@ -73,6 +75,38 @@ func (o *CreateApiKeyRequest) HasCreatedBy() bool {
 // SetCreatedBy gets a reference to the given string and assigns it to the CreatedBy field.
 func (o *CreateApiKeyRequest) SetCreatedBy(v string) {
 	o.CreatedBy = &v
+}
+
+// GetExpiryTime returns the ExpiryTime field value if set, zero value otherwise.
+func (o *CreateApiKeyRequest) GetExpiryTime() string {
+	if o == nil || IsNil(o.ExpiryTime) {
+		var ret string
+		return ret
+	}
+	return *o.ExpiryTime
+}
+
+// GetExpiryTimeOk returns a tuple with the ExpiryTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateApiKeyRequest) GetExpiryTimeOk() (*string, bool) {
+	if o == nil || IsNil(o.ExpiryTime) {
+		return nil, false
+	}
+	return o.ExpiryTime, true
+}
+
+// HasExpiryTime returns a boolean if a field has been set.
+func (o *CreateApiKeyRequest) HasExpiryTime() bool {
+	if o != nil && !IsNil(o.ExpiryTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetExpiryTime gets a reference to the given string and assigns it to the ExpiryTime field.
+func (o *CreateApiKeyRequest) SetExpiryTime(v string) {
+	o.ExpiryTime = &v
 }
 
 // GetName returns the Name field value
@@ -143,6 +177,9 @@ func (o CreateApiKeyRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.CreatedBy) {
 		toSerialize["created_by"] = o.CreatedBy
+	}
+	if !IsNil(o.ExpiryTime) {
+		toSerialize["expiry_time"] = o.ExpiryTime
 	}
 	toSerialize["name"] = o.Name
 	if !IsNil(o.Role) {

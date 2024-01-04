@@ -170,6 +170,7 @@ docs/SourceAzureEventHubs.md
 docs/SourceAzureServiceBus.md
 docs/SourceBase.md
 docs/SourceDynamoDb.md
+docs/SourceDynamoDbSettings.md
 docs/SourceFileUpload.md
 docs/SourceGcs.md
 docs/SourceGcsBase.md
@@ -371,6 +372,7 @@ model_source_azure_event_hubs.go
 model_source_azure_service_bus.go
 model_source_base.go
 model_source_dynamo_db.go
+model_source_dynamo_db_settings.go
 model_source_file_upload.go
 model_source_gcs.go
 model_source_gcs_base.go

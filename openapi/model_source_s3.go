@@ -29,7 +29,7 @@ type SourceS3 struct {
 	Pattern *string `json:"pattern,omitempty"`
 	// Prefix that selects keys to ingest.
 	Prefix *string `json:"prefix,omitempty"`
-	// List of prefixes to paths from which data should be ingested.
+	// Deprecated in favor of `prefix`. List of prefixes to paths from which data should be ingested.
 	Prefixes []string `json:"prefixes,omitempty"`
 	// AWS region containing source bucket.
 	Region *string `json:"region,omitempty"`

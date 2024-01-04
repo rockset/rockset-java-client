@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **EventTimeInfo** | Pointer to [**EventTimeInfo**](EventTimeInfo.md) |  | [optional] 
 **FieldMappingQuery** | Pointer to [**FieldMappingQuery**](FieldMappingQuery.md) |  | [optional] 
 **Name** | Pointer to **string** | Unique identifier for collection, can contain alphanumeric or dash characters. | [optional] 
-**RetentionSecs** | Pointer to **int64** | Number of seconds after which data is purged, based on event time. | [optional] 
+**RetentionSecs** | Pointer to **int64** | Number of seconds after which data is purged, based on event time. Minimum allowable value is 3600s/1 hour. The maximum value is strictly less than 10 years. | [optional] 
 **SourceDownloadSoftLimitBytes** | Pointer to **int64** | Soft ingest limit for this collection. | [optional] 
 **Sources** | Pointer to [**[]Source**](Source.md) | List of sources from which to ingest data. | [optional] 
 **StorageCompressionType** | Pointer to **string** | RocksDB storage compression type. | [optional] 

@@ -16,7 +16,8 @@ Name | Type | Description | Notes
 **EnableRemountOnResume** | Pointer to **bool** | When a Virtual Instance is resumed, it will remount all collections that were mounted when the Virtual Instance was suspended. | [optional] 
 **Id** | Pointer to **string** | Unique identifier for virtual instance. | [optional] 
 **MonitoringEnabled** | Pointer to **bool** |  | [optional] 
-**MountRefreshIntervalSeconds** | Pointer to **int32** | Number of seconds between data refreshes for mounts on this Virtual Instance | [optional] 
+**MountRefreshIntervalSeconds** | Pointer to **int32** | DEPRECATED. Number of seconds between data refreshes for mounts on this Virtual Instance | [optional] 
+**MountType** | Pointer to **string** | The mount type of collections that this Virtual Instance will query. Live mounted collections stay up-to-date with the underlying collection in real-time. Static mounted collections do not stay up-to-date. See https://docs.rockset.com/documentation/docs/virtual-instances#virtual-instance-configuration | [optional] 
 **Name** | **string** | Virtual instance name. | 
 **ResumedAt** | Pointer to **string** | ISO-8601 date of when virtual instance was created. | [optional] 
 **Rrn** | Pointer to **string** | Virtual Instance RRN. | [optional] 
@@ -367,6 +368,31 @@ SetMountRefreshIntervalSeconds sets MountRefreshIntervalSeconds field to given v
 `func (o *VirtualInstance) HasMountRefreshIntervalSeconds() bool`
 
 HasMountRefreshIntervalSeconds returns a boolean if a field has been set.
+
+### GetMountType
+
+`func (o *VirtualInstance) GetMountType() string`
+
+GetMountType returns the MountType field if non-nil, zero value otherwise.
+
+### GetMountTypeOk
+
+`func (o *VirtualInstance) GetMountTypeOk() (*string, bool)`
+
+GetMountTypeOk returns a tuple with the MountType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMountType
+
+`func (o *VirtualInstance) SetMountType(v string)`
+
+SetMountType sets MountType field to given value.
+
+### HasMountType
+
+`func (o *VirtualInstance) HasMountType() bool`
+
+HasMountType returns a boolean if a field has been set.
 
 ### GetName
 

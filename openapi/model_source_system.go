@@ -21,6 +21,8 @@ var _ MappedNullable = &SourceSystem{}
 type SourceSystem struct {
 	// The type of this system source.
 	Type *string `json:"type,omitempty"`
+	// The workspace for which collections will have logs created. If unspecified, logs will be created for collections in all workspaces. Currently only supported for the INGEST_LOGS system source.
+	Workspace *string `json:"workspace,omitempty"`
 }
 
 // NewSourceSystem instantiates a new SourceSystem object
@@ -72,6 +74,38 @@ func (o *SourceSystem) SetType(v string) {
 	o.Type = &v
 }
 
+// GetWorkspace returns the Workspace field value if set, zero value otherwise.
+func (o *SourceSystem) GetWorkspace() string {
+	if o == nil || IsNil(o.Workspace) {
+		var ret string
+		return ret
+	}
+	return *o.Workspace
+}
+
+// GetWorkspaceOk returns a tuple with the Workspace field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SourceSystem) GetWorkspaceOk() (*string, bool) {
+	if o == nil || IsNil(o.Workspace) {
+		return nil, false
+	}
+	return o.Workspace, true
+}
+
+// HasWorkspace returns a boolean if a field has been set.
+func (o *SourceSystem) HasWorkspace() bool {
+	if o != nil && !IsNil(o.Workspace) {
+		return true
+	}
+
+	return false
+}
+
+// SetWorkspace gets a reference to the given string and assigns it to the Workspace field.
+func (o *SourceSystem) SetWorkspace(v string) {
+	o.Workspace = &v
+}
+
 func (o SourceSystem) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -84,6 +118,9 @@ func (o SourceSystem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
+	}
+	if !IsNil(o.Workspace) {
+		toSerialize["workspace"] = o.Workspace
 	}
 	return toSerialize, nil
 }

@@ -19,7 +19,7 @@ var _ MappedNullable = &SourceS3Settings{}
 
 // SourceS3Settings struct for SourceS3Settings
 type SourceS3Settings struct {
-	// Rockset scans an S3 bucket based on a defined time interval. The scan frequency determines the length of time between a new scan and the previous scan. If the previous scan finds new objects or updates to existing objects, Rockset immediately scans the bucket again after processing changes from the previous scan.
+	// Rockset scans an S3 bucket based on a defined time interval. The scan frequency determines the length of time between a new scan and the previous scan. If the previous scan finds new objects or updates to existing objects, Rockset immediately scans the bucket again after processing changes from the previous scan. Duration value is of type ISO 8601 (e.g. PT5H, PT4M, PT3S). It doesn't account for DST, leap seconds and leap years. Minimum value: PT1S. Maximum value: PT1H.
 	S3ScanFrequency *string `json:"s3_scan_frequency,omitempty"`
 }
 

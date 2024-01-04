@@ -27,7 +27,7 @@ type CreateCollectionRequest struct {
 	FieldMappingQuery *FieldMappingQuery `json:"field_mapping_query,omitempty"`
 	// Unique identifier for collection, can contain alphanumeric or dash characters.
 	Name *string `json:"name,omitempty"`
-	// Number of seconds after which data is purged, based on event time.
+	// Number of seconds after which data is purged, based on event time. Minimum allowable value is 3600s/1 hour. The maximum value is strictly less than 10 years.
 	RetentionSecs *int64 `json:"retention_secs,omitempty"`
 	// Soft ingest limit for this collection.
 	SourceDownloadSoftLimitBytes *int64 `json:"source_download_soft_limit_bytes,omitempty"`

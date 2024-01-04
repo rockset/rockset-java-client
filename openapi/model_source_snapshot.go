@@ -19,6 +19,8 @@ var _ MappedNullable = &SourceSnapshot{}
 
 // SourceSnapshot struct for SourceSnapshot
 type SourceSnapshot struct {
+	// A representation of the workspace and collection where the source snapshot originated.
+	SourceCollectionPath *string `json:"source_collection_path,omitempty"`
 	// RRN of the snapshot that the new collection will be created from.
 	SourceSnapshotRrn *string `json:"source_snapshot_rrn,omitempty"`
 }
@@ -38,6 +40,38 @@ func NewSourceSnapshot() *SourceSnapshot {
 func NewSourceSnapshotWithDefaults() *SourceSnapshot {
 	this := SourceSnapshot{}
 	return &this
+}
+
+// GetSourceCollectionPath returns the SourceCollectionPath field value if set, zero value otherwise.
+func (o *SourceSnapshot) GetSourceCollectionPath() string {
+	if o == nil || IsNil(o.SourceCollectionPath) {
+		var ret string
+		return ret
+	}
+	return *o.SourceCollectionPath
+}
+
+// GetSourceCollectionPathOk returns a tuple with the SourceCollectionPath field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SourceSnapshot) GetSourceCollectionPathOk() (*string, bool) {
+	if o == nil || IsNil(o.SourceCollectionPath) {
+		return nil, false
+	}
+	return o.SourceCollectionPath, true
+}
+
+// HasSourceCollectionPath returns a boolean if a field has been set.
+func (o *SourceSnapshot) HasSourceCollectionPath() bool {
+	if o != nil && !IsNil(o.SourceCollectionPath) {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceCollectionPath gets a reference to the given string and assigns it to the SourceCollectionPath field.
+func (o *SourceSnapshot) SetSourceCollectionPath(v string) {
+	o.SourceCollectionPath = &v
 }
 
 // GetSourceSnapshotRrn returns the SourceSnapshotRrn field value if set, zero value otherwise.
@@ -82,6 +116,9 @@ func (o SourceSnapshot) MarshalJSON() ([]byte, error) {
 
 func (o SourceSnapshot) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.SourceCollectionPath) {
+		toSerialize["source_collection_path"] = o.SourceCollectionPath
+	}
 	if !IsNil(o.SourceSnapshotRrn) {
 		toSerialize["source_snapshot_rrn"] = o.SourceSnapshotRrn
 	}

@@ -39,8 +39,10 @@ type VirtualInstance struct {
 	// Unique identifier for virtual instance.
 	Id *string `json:"id,omitempty"`
 	MonitoringEnabled *bool `json:"monitoring_enabled,omitempty"`
-	// Number of seconds between data refreshes for mounts on this Virtual Instance
+	// DEPRECATED. Number of seconds between data refreshes for mounts on this Virtual Instance
 	MountRefreshIntervalSeconds *int32 `json:"mount_refresh_interval_seconds,omitempty"`
+	// The mount type of collections that this Virtual Instance will query. Live mounted collections stay up-to-date with the underlying collection in real-time. Static mounted collections do not stay up-to-date. See https://docs.rockset.com/documentation/docs/virtual-instances#virtual-instance-configuration
+	MountType *string `json:"mount_type,omitempty"`
 	// Virtual instance name.
 	Name string `json:"name"`
 	// ISO-8601 date of when virtual instance was created.
@@ -487,6 +489,38 @@ func (o *VirtualInstance) SetMountRefreshIntervalSeconds(v int32) {
 	o.MountRefreshIntervalSeconds = &v
 }
 
+// GetMountType returns the MountType field value if set, zero value otherwise.
+func (o *VirtualInstance) GetMountType() string {
+	if o == nil || IsNil(o.MountType) {
+		var ret string
+		return ret
+	}
+	return *o.MountType
+}
+
+// GetMountTypeOk returns a tuple with the MountType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualInstance) GetMountTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.MountType) {
+		return nil, false
+	}
+	return o.MountType, true
+}
+
+// HasMountType returns a boolean if a field has been set.
+func (o *VirtualInstance) HasMountType() bool {
+	if o != nil && !IsNil(o.MountType) {
+		return true
+	}
+
+	return false
+}
+
+// SetMountType gets a reference to the given string and assigns it to the MountType field.
+func (o *VirtualInstance) SetMountType(v string) {
+	o.MountType = &v
+}
+
 // GetName returns the Name field value
 func (o *VirtualInstance) GetName() string {
 	if o == nil {
@@ -715,6 +749,9 @@ func (o VirtualInstance) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.MountRefreshIntervalSeconds) {
 		toSerialize["mount_refresh_interval_seconds"] = o.MountRefreshIntervalSeconds
+	}
+	if !IsNil(o.MountType) {
+		toSerialize["mount_type"] = o.MountType
 	}
 	toSerialize["name"] = o.Name
 	if !IsNil(o.ResumedAt) {

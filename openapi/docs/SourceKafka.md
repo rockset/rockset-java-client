@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClientId** | Pointer to **string** | The kafka client id being used. | [optional] 
 **ConsumerGroupId** | Pointer to **string** | The Kafka consumer group Id being used. | [optional] 
 **KafkaTopicName** | Pointer to **string** | The Kafka topic to be tailed. | [optional] 
 **OffsetResetPolicy** | Pointer to **string** | The offset reset policy. | [optional] 
@@ -28,6 +29,31 @@ will change when the set of required properties is changed
 NewSourceKafkaWithDefaults instantiates a new SourceKafka object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClientId
+
+`func (o *SourceKafka) GetClientId() string`
+
+GetClientId returns the ClientId field if non-nil, zero value otherwise.
+
+### GetClientIdOk
+
+`func (o *SourceKafka) GetClientIdOk() (*string, bool)`
+
+GetClientIdOk returns a tuple with the ClientId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClientId
+
+`func (o *SourceKafka) SetClientId(v string)`
+
+SetClientId sets ClientId field to given value.
+
+### HasClientId
+
+`func (o *SourceKafka) HasClientId() bool`
+
+HasClientId returns a boolean if a field has been set.
 
 ### GetConsumerGroupId
 

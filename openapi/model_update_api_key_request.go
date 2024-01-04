@@ -19,6 +19,10 @@ var _ MappedNullable = &UpdateApiKeyRequest{}
 
 // UpdateApiKeyRequest struct for UpdateApiKeyRequest
 type UpdateApiKeyRequest struct {
+	// If set to true, the expiration time for this key will be cleared.
+	ClearExpiryTime *bool `json:"clear_expiry_time,omitempty"`
+	// If provided, the API key will automatically expire at this time (ISO-8601 format). Requires premium.
+	ExpiryTime *string `json:"expiry_time,omitempty"`
 	// State that the api key should be set to.
 	State *string `json:"state,omitempty"`
 }
@@ -38,6 +42,70 @@ func NewUpdateApiKeyRequest() *UpdateApiKeyRequest {
 func NewUpdateApiKeyRequestWithDefaults() *UpdateApiKeyRequest {
 	this := UpdateApiKeyRequest{}
 	return &this
+}
+
+// GetClearExpiryTime returns the ClearExpiryTime field value if set, zero value otherwise.
+func (o *UpdateApiKeyRequest) GetClearExpiryTime() bool {
+	if o == nil || IsNil(o.ClearExpiryTime) {
+		var ret bool
+		return ret
+	}
+	return *o.ClearExpiryTime
+}
+
+// GetClearExpiryTimeOk returns a tuple with the ClearExpiryTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateApiKeyRequest) GetClearExpiryTimeOk() (*bool, bool) {
+	if o == nil || IsNil(o.ClearExpiryTime) {
+		return nil, false
+	}
+	return o.ClearExpiryTime, true
+}
+
+// HasClearExpiryTime returns a boolean if a field has been set.
+func (o *UpdateApiKeyRequest) HasClearExpiryTime() bool {
+	if o != nil && !IsNil(o.ClearExpiryTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetClearExpiryTime gets a reference to the given bool and assigns it to the ClearExpiryTime field.
+func (o *UpdateApiKeyRequest) SetClearExpiryTime(v bool) {
+	o.ClearExpiryTime = &v
+}
+
+// GetExpiryTime returns the ExpiryTime field value if set, zero value otherwise.
+func (o *UpdateApiKeyRequest) GetExpiryTime() string {
+	if o == nil || IsNil(o.ExpiryTime) {
+		var ret string
+		return ret
+	}
+	return *o.ExpiryTime
+}
+
+// GetExpiryTimeOk returns a tuple with the ExpiryTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateApiKeyRequest) GetExpiryTimeOk() (*string, bool) {
+	if o == nil || IsNil(o.ExpiryTime) {
+		return nil, false
+	}
+	return o.ExpiryTime, true
+}
+
+// HasExpiryTime returns a boolean if a field has been set.
+func (o *UpdateApiKeyRequest) HasExpiryTime() bool {
+	if o != nil && !IsNil(o.ExpiryTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetExpiryTime gets a reference to the given string and assigns it to the ExpiryTime field.
+func (o *UpdateApiKeyRequest) SetExpiryTime(v string) {
+	o.ExpiryTime = &v
 }
 
 // GetState returns the State field value if set, zero value otherwise.
@@ -82,6 +150,12 @@ func (o UpdateApiKeyRequest) MarshalJSON() ([]byte, error) {
 
 func (o UpdateApiKeyRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ClearExpiryTime) {
+		toSerialize["clear_expiry_time"] = o.ClearExpiryTime
+	}
+	if !IsNil(o.ExpiryTime) {
+		toSerialize["expiry_time"] = o.ExpiryTime
+	}
 	if !IsNil(o.State) {
 		toSerialize["state"] = o.State
 	}

@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**SourceCollectionPath** | Pointer to **string** | A representation of the workspace and collection where the source snapshot originated. | [optional] 
 **SourceSnapshotRrn** | Pointer to **string** | RRN of the snapshot that the new collection will be created from. | [optional] 
 
 ## Methods
@@ -24,6 +25,31 @@ will change when the set of required properties is changed
 NewSourceSnapshotWithDefaults instantiates a new SourceSnapshot object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetSourceCollectionPath
+
+`func (o *SourceSnapshot) GetSourceCollectionPath() string`
+
+GetSourceCollectionPath returns the SourceCollectionPath field if non-nil, zero value otherwise.
+
+### GetSourceCollectionPathOk
+
+`func (o *SourceSnapshot) GetSourceCollectionPathOk() (*string, bool)`
+
+GetSourceCollectionPathOk returns a tuple with the SourceCollectionPath field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceCollectionPath
+
+`func (o *SourceSnapshot) SetSourceCollectionPath(v string)`
+
+SetSourceCollectionPath sets SourceCollectionPath field to given value.
+
+### HasSourceCollectionPath
+
+`func (o *SourceSnapshot) HasSourceCollectionPath() bool`
+
+HasSourceCollectionPath returns a boolean if a field has been set.
 
 ### GetSourceSnapshotRrn
 

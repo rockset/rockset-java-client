@@ -7,7 +7,8 @@ Name | Type | Description | Notes
 **AutoSuspendSeconds** | Pointer to **int32** | Number of seconds without queries after which the VI is suspended | [optional] 
 **Description** | Pointer to **string** | Description of requested virtual instance. | [optional] 
 **EnableRemountOnResume** | Pointer to **bool** | When a Virtual Instance is resumed, it will remount all collections that were mounted when the Virtual Instance was suspended. | [optional] 
-**MountRefreshIntervalSeconds** | Pointer to **int32** | Number of seconds between data refreshes for mounts on this Virtual Instance. A value of 0 means continuous refresh and a value of null means never refresh. | [optional] 
+**MountRefreshIntervalSeconds** | Pointer to **int32** | DEPRECATED. Use &#x60;mount_type&#x60; instead. Number of seconds between data refreshes for mounts on this Virtual Instance. The only valid values are 0 and null. 0 means the data will be refreshed continuously and null means the data will never refresh. | [optional] 
+**MountType** | Pointer to **string** | The mount type of collections that this Virtual Instance will query. Live mounted collections stay up-to-date with the underlying collection in real-time. Static mounted collections do not stay up-to-date. See https://docs.rockset.com/documentation/docs/virtual-instances#virtual-instance-configuration | [optional] 
 **Name** | **string** | Unique identifier for virtual instance, can contain alphanumeric or dash characters. | 
 **Type** | Pointer to **string** | Requested virtual instance type. | [optional] 
 
@@ -129,6 +130,31 @@ SetMountRefreshIntervalSeconds sets MountRefreshIntervalSeconds field to given v
 `func (o *CreateVirtualInstanceRequest) HasMountRefreshIntervalSeconds() bool`
 
 HasMountRefreshIntervalSeconds returns a boolean if a field has been set.
+
+### GetMountType
+
+`func (o *CreateVirtualInstanceRequest) GetMountType() string`
+
+GetMountType returns the MountType field if non-nil, zero value otherwise.
+
+### GetMountTypeOk
+
+`func (o *CreateVirtualInstanceRequest) GetMountTypeOk() (*string, bool)`
+
+GetMountTypeOk returns a tuple with the MountType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMountType
+
+`func (o *CreateVirtualInstanceRequest) SetMountType(v string)`
+
+SetMountType sets MountType field to given value.
+
+### HasMountType
+
+`func (o *CreateVirtualInstanceRequest) HasMountType() bool`
+
+HasMountType returns a boolean if a field has been set.
 
 ### GetName
 

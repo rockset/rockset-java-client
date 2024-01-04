@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CreatedBy** | Pointer to **string** |  | [optional] 
+**ExpiryTime** | Pointer to **string** | If provided, the API key will automatically expire at this time (ISO-8601 format). Requires premium. | [optional] 
 **Name** | **string** | Name for this API key. | 
 **Role** | Pointer to **string** |  | [optional] 
 
@@ -51,6 +52,31 @@ SetCreatedBy sets CreatedBy field to given value.
 `func (o *CreateApiKeyRequest) HasCreatedBy() bool`
 
 HasCreatedBy returns a boolean if a field has been set.
+
+### GetExpiryTime
+
+`func (o *CreateApiKeyRequest) GetExpiryTime() string`
+
+GetExpiryTime returns the ExpiryTime field if non-nil, zero value otherwise.
+
+### GetExpiryTimeOk
+
+`func (o *CreateApiKeyRequest) GetExpiryTimeOk() (*string, bool)`
+
+GetExpiryTimeOk returns a tuple with the ExpiryTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpiryTime
+
+`func (o *CreateApiKeyRequest) SetExpiryTime(v string)`
+
+SetExpiryTime sets ExpiryTime field to given value.
+
+### HasExpiryTime
+
+`func (o *CreateApiKeyRequest) HasExpiryTime() bool`
+
+HasExpiryTime returns a boolean if a field has been set.
 
 ### GetName
 

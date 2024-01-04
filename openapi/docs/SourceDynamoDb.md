@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **AwsRegion** | Pointer to **string** | AWS region name of DynamoDB table, by default us-west-2 is used. | [optional] 
 **CurrentStatus** | Pointer to [**StatusDynamoDbV2**](StatusDynamoDbV2.md) |  | [optional] 
 **Rcu** | Pointer to **int64** | Max RCU usage for scan. | [optional] 
+**Settings** | Pointer to [**SourceDynamoDbSettings**](SourceDynamoDbSettings.md) |  | [optional] 
 **Status** | Pointer to [**StatusDynamoDb**](StatusDynamoDb.md) |  | [optional] 
 **TableName** | **string** | Name of DynamoDB table containing data. | 
 **UseScanApi** | Pointer to **bool** | Whether to use DynamoDB Scan API for the initial scan. | [optional] 
@@ -104,6 +105,31 @@ SetRcu sets Rcu field to given value.
 `func (o *SourceDynamoDb) HasRcu() bool`
 
 HasRcu returns a boolean if a field has been set.
+
+### GetSettings
+
+`func (o *SourceDynamoDb) GetSettings() SourceDynamoDbSettings`
+
+GetSettings returns the Settings field if non-nil, zero value otherwise.
+
+### GetSettingsOk
+
+`func (o *SourceDynamoDb) GetSettingsOk() (*SourceDynamoDbSettings, bool)`
+
+GetSettingsOk returns a tuple with the Settings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSettings
+
+`func (o *SourceDynamoDb) SetSettings(v SourceDynamoDbSettings)`
+
+SetSettings sets Settings field to given value.
+
+### HasSettings
+
+`func (o *SourceDynamoDb) HasSettings() bool`
+
+HasSettings returns a boolean if a field has been set.
 
 ### GetStatus
 

@@ -19,6 +19,8 @@ var _ MappedNullable = &SourceKafka{}
 
 // SourceKafka struct for SourceKafka
 type SourceKafka struct {
+	// The kafka client id being used.
+	ClientId *string `json:"client_id,omitempty"`
 	// The Kafka consumer group Id being used.
 	ConsumerGroupId *string `json:"consumer_group_id,omitempty"`
 	// The Kafka topic to be tailed.
@@ -45,6 +47,38 @@ func NewSourceKafka() *SourceKafka {
 func NewSourceKafkaWithDefaults() *SourceKafka {
 	this := SourceKafka{}
 	return &this
+}
+
+// GetClientId returns the ClientId field value if set, zero value otherwise.
+func (o *SourceKafka) GetClientId() string {
+	if o == nil || IsNil(o.ClientId) {
+		var ret string
+		return ret
+	}
+	return *o.ClientId
+}
+
+// GetClientIdOk returns a tuple with the ClientId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SourceKafka) GetClientIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ClientId) {
+		return nil, false
+	}
+	return o.ClientId, true
+}
+
+// HasClientId returns a boolean if a field has been set.
+func (o *SourceKafka) HasClientId() bool {
+	if o != nil && !IsNil(o.ClientId) {
+		return true
+	}
+
+	return false
+}
+
+// SetClientId gets a reference to the given string and assigns it to the ClientId field.
+func (o *SourceKafka) SetClientId(v string) {
+	o.ClientId = &v
 }
 
 // GetConsumerGroupId returns the ConsumerGroupId field value if set, zero value otherwise.
@@ -217,6 +251,9 @@ func (o SourceKafka) MarshalJSON() ([]byte, error) {
 
 func (o SourceKafka) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ClientId) {
+		toSerialize["client_id"] = o.ClientId
+	}
 	if !IsNil(o.ConsumerGroupId) {
 		toSerialize["consumer_group_id"] = o.ConsumerGroupId
 	}

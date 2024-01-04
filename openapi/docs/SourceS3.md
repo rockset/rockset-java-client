@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **ObjectCountTotal** | Pointer to **int64** |  | [optional] [readonly] 
 **Pattern** | Pointer to **string** | Glob-style pattern that selects keys to ingest. Only either prefix or pattern can be specified. | [optional] 
 **Prefix** | Pointer to **string** | Prefix that selects keys to ingest. | [optional] 
-**Prefixes** | Pointer to **[]string** | List of prefixes to paths from which data should be ingested. | [optional] [readonly] 
+**Prefixes** | Pointer to **[]string** | Deprecated in favor of &#x60;prefix&#x60;. List of prefixes to paths from which data should be ingested. | [optional] [readonly] 
 **Region** | Pointer to **string** | AWS region containing source bucket. | [optional] 
 **Settings** | Pointer to [**SourceS3Settings**](SourceS3Settings.md) |  | [optional] 
 

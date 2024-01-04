@@ -24,6 +24,7 @@ type SourceDynamoDb struct {
 	CurrentStatus *StatusDynamoDbV2 `json:"current_status,omitempty"`
 	// Max RCU usage for scan.
 	Rcu *int64 `json:"rcu,omitempty"`
+	Settings *SourceDynamoDbSettings `json:"settings,omitempty"`
 	Status *StatusDynamoDb `json:"status,omitempty"`
 	// Name of DynamoDB table containing data.
 	TableName string `json:"table_name"`
@@ -145,6 +146,38 @@ func (o *SourceDynamoDb) SetRcu(v int64) {
 	o.Rcu = &v
 }
 
+// GetSettings returns the Settings field value if set, zero value otherwise.
+func (o *SourceDynamoDb) GetSettings() SourceDynamoDbSettings {
+	if o == nil || IsNil(o.Settings) {
+		var ret SourceDynamoDbSettings
+		return ret
+	}
+	return *o.Settings
+}
+
+// GetSettingsOk returns a tuple with the Settings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SourceDynamoDb) GetSettingsOk() (*SourceDynamoDbSettings, bool) {
+	if o == nil || IsNil(o.Settings) {
+		return nil, false
+	}
+	return o.Settings, true
+}
+
+// HasSettings returns a boolean if a field has been set.
+func (o *SourceDynamoDb) HasSettings() bool {
+	if o != nil && !IsNil(o.Settings) {
+		return true
+	}
+
+	return false
+}
+
+// SetSettings gets a reference to the given SourceDynamoDbSettings and assigns it to the Settings field.
+func (o *SourceDynamoDb) SetSettings(v SourceDynamoDbSettings) {
+	o.Settings = &v
+}
+
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *SourceDynamoDb) GetStatus() StatusDynamoDb {
 	if o == nil || IsNil(o.Status) {
@@ -251,6 +284,9 @@ func (o SourceDynamoDb) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Rcu) {
 		toSerialize["rcu"] = o.Rcu
+	}
+	if !IsNil(o.Settings) {
+		toSerialize["settings"] = o.Settings
 	}
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status

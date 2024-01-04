@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Avro** | Pointer to **map[string]interface{}** |  | [optional] 
+**Bson** | Pointer to **bool** |  | [optional] 
 **Csv** | Pointer to [**CsvParams**](CsvParams.md) |  | [optional] 
 **Json** | Pointer to **bool** | Source data is in json format. | [optional] 
 **MssqlDms** | Pointer to **bool** |  | [optional] 
@@ -56,6 +57,31 @@ SetAvro sets Avro field to given value.
 `func (o *FormatParams) HasAvro() bool`
 
 HasAvro returns a boolean if a field has been set.
+
+### GetBson
+
+`func (o *FormatParams) GetBson() bool`
+
+GetBson returns the Bson field if non-nil, zero value otherwise.
+
+### GetBsonOk
+
+`func (o *FormatParams) GetBsonOk() (*bool, bool)`
+
+GetBsonOk returns a tuple with the Bson field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBson
+
+`func (o *FormatParams) SetBson(v bool)`
+
+SetBson sets Bson field to given value.
+
+### HasBson
+
+`func (o *FormatParams) HasBson() bool`
+
+HasBson returns a boolean if a field has been set.
 
 ### GetCsv
 
