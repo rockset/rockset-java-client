@@ -1,7 +1,7 @@
 # Rockset Java Client Changelog
 
 ## v0.12.0 2024-01-15
-- TODO
+- Add ScheduledQueryLambda support
 
 ## v0.11.4 2023-12-14
 - Added "XSMALL" VI size
