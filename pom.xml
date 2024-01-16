@@ -5,7 +5,7 @@
     <artifactId>rockset-java</artifactId>
     <packaging>jar</packaging>
     <name>Rockset Java</name>
-    <version>0.11.4-SNAPSHOT</version>
+    <version>0.12.0-SNAPSHOT</version>
     <url>https://github.com/rockset/rockset-java-client</url>
     <description>The official Rockset Java client library</description>
     <scm>
@@ -143,7 +143,7 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <Implementation-Version>0.11.4</Implementation-Version>
+                            <Implementation-Version>0.12.0</Implementation-Version>
                             <Implementation-Vendor>Rockset</Implementation-Vendor>
                         </manifestEntries>
                     </archive>

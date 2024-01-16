@@ -21,7 +21,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.rockset.client.model.SourceAzBlobStorageBase;
-import com.rockset.client.model.SourceDynamoDb;
+import com.rockset.client.model.SourceDynamoDbBase;
 import com.rockset.client.model.SourceGcsBase;
 import com.rockset.client.model.SourceS3Base;
 import io.swagger.annotations.ApiModel;
@@ -33,13 +33,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceBase
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-12-14T01:21:30.506Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-01-15T19:57:30.680Z")
 public class SourceBase {
   @SerializedName("azure_blob_storage")
   private SourceAzBlobStorageBase azureBlobStorage = null;
 
   @SerializedName("dynamodb")
-  private SourceDynamoDb dynamodb = null;
+  private SourceDynamoDbBase dynamodb = null;
 
   @SerializedName("gcs")
   private SourceGcsBase gcs = null;
@@ -67,7 +67,7 @@ public class SourceBase {
     this.azureBlobStorage = azureBlobStorage;
   }
 
-  public SourceBase dynamodb(SourceDynamoDb dynamodb) {
+  public SourceBase dynamodb(SourceDynamoDbBase dynamodb) {
     this.dynamodb = dynamodb;
     return this;
   }
@@ -79,11 +79,11 @@ public class SourceBase {
 
 @JsonProperty("dynamodb")
 @ApiModelProperty(value = "Configuration for ingestion from a DynamoDb table.")
-  public SourceDynamoDb getDynamodb() {
+  public SourceDynamoDbBase getDynamodb() {
     return dynamodb;
   }
 
-  public void setDynamodb(SourceDynamoDb dynamodb) {
+  public void setDynamodb(SourceDynamoDbBase dynamodb) {
     this.dynamodb = dynamodb;
   }
 

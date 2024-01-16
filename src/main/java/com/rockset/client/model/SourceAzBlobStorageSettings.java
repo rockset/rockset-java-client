@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * SourceAzBlobStorageSettings
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-12-14T01:21:30.506Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-01-15T19:57:30.680Z")
 public class SourceAzBlobStorageSettings {
   @SerializedName("azblob_scan_frequency")
   private String azblobScanFrequency = null;

@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Privilege
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-12-14T01:21:30.506Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-01-15T19:57:30.680Z")
 public class Privilege {
   /**
    * The action allowed by this privilege.
@@ -71,6 +71,8 @@ public class Privilege {
     DELETE_INTEGRATION_GLOBAL("DELETEINTEGRATIONGLOBAL"),
     
     LIST_INTEGRATIONS_GLOBAL("LISTINTEGRATIONSGLOBAL"),
+    
+    EXPORT_DATA_GLOBAL("EXPORTDATAGLOBAL"),
     
     UPDATE_RESOURCE_OWNER_GLOBAL("UPDATERESOURCEOWNERGLOBAL"),
     
@@ -148,7 +150,9 @@ public class Privilege {
     
     DELETE_NETWORK_CONFIGURATION_GLOBAL("DELETENETWORKCONFIGURATIONGLOBAL"),
     
-    LIST_NETWORK_CONFIGURATIONS_GLOBAL("LISTNETWORKCONFIGURATIONSGLOBAL");
+    LIST_NETWORK_CONFIGURATIONS_GLOBAL("LISTNETWORKCONFIGURATIONSGLOBAL"),
+    
+    UPDATE_ORG_QUERY_ROUTING("UPDATEORGQUERYROUTING");
 
     private String value;
 

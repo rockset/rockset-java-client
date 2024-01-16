@@ -47,7 +47,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "Details about the data source for the given collection. Only one of the following fields are allowed to be defined. Only collections can act as data sources for views. ")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2023-12-14T01:21:30.506Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-01-15T19:57:30.680Z")
 public class Source {
   @SerializedName("azure_blob_storage")
   private SourceAzureBlobStorage azureBlobStorage = null;
