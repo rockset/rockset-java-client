@@ -35,6 +35,7 @@ import com.rockset.client.model.SourceS3;
 import com.rockset.client.model.SourceSnapshot;
 import com.rockset.client.model.SourceSnowflake;
 import com.rockset.client.model.SourceSystem;
+import com.rockset.client.model.SourceWriteApi;
 import com.rockset.client.model.Status;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -47,7 +48,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "Details about the data source for the given collection. Only one of the following fields are allowed to be defined. Only collections can act as data sources for views. ")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-01-15T19:57:30.680Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-01-25T12:03:52.511Z")
 public class Source {
   @SerializedName("azure_blob_storage")
   private SourceAzureBlobStorage azureBlobStorage = null;
@@ -108,6 +109,9 @@ public class Source {
 
   @SerializedName("system")
   private SourceSystem system = null;
+
+  @SerializedName("write_api")
+  private SourceWriteApi writeApi = null;
 
   public Source azureBlobStorage(SourceAzureBlobStorage azureBlobStorage) {
     this.azureBlobStorage = azureBlobStorage;
@@ -464,6 +468,26 @@ public class Source {
     this.system = system;
   }
 
+  public Source writeApi(SourceWriteApi writeApi) {
+    this.writeApi = writeApi;
+    return this;
+  }
+
+   /**
+   * Get writeApi
+   * @return writeApi
+  **/
+
+@JsonProperty("write_api")
+@ApiModelProperty(value = "")
+  public SourceWriteApi getWriteApi() {
+    return writeApi;
+  }
+
+  public void setWriteApi(SourceWriteApi writeApi) {
+    this.writeApi = writeApi;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -493,12 +517,13 @@ public class Source {
         Objects.equals(this.snowflake, source.snowflake) &&
         Objects.equals(this.status, source.status) &&
         Objects.equals(this.suspendedAt, source.suspendedAt) &&
-        Objects.equals(this.system, source.system);
+        Objects.equals(this.system, source.system) &&
+        Objects.equals(this.writeApi, source.writeApi);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(azureBlobStorage, azureEventHubs, azureServiceBus, dynamodb, fileUpload, formatParams, gcs, id, ingestTransformation, integrationName, kafka, kinesis, mongodb, resumeAt, s3, snapshot, snowflake, status, suspendedAt, system);
+    return Objects.hash(azureBlobStorage, azureEventHubs, azureServiceBus, dynamodb, fileUpload, formatParams, gcs, id, ingestTransformation, integrationName, kafka, kinesis, mongodb, resumeAt, s3, snapshot, snowflake, status, suspendedAt, system, writeApi);
   }
 
 
@@ -527,6 +552,7 @@ public class Source {
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    suspendedAt: ").append(toIndentedString(suspendedAt)).append("\n");
     sb.append("    system: ").append(toIndentedString(system)).append("\n");
+    sb.append("    writeApi: ").append(toIndentedString(writeApi)).append("\n");
     sb.append("}");
     return sb.toString();
   }
