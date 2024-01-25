@@ -15,46 +15,14 @@ package com.rockset.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import com.rockset.client.model.ApiKey;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import java.io.IOException;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * GetApiKeyResponse
+ * SourceWriteApi
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-01-25T12:03:52.511Z")
-public class GetApiKeyResponse {
-  @SerializedName("data")
-  private ApiKey data = null;
-
-  public GetApiKeyResponse data(ApiKey data) {
-    this.data = data;
-    return this;
-  }
-
-   /**
-   * The requested API key object.
-   * @return data
-  **/
-
-@JsonProperty("data")
-@ApiModelProperty(value = "The requested API key object.")
-  public ApiKey getData() {
-    return data;
-  }
-
-  public void setData(ApiKey data) {
-    this.data = data;
-  }
-
+public class SourceWriteApi {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -64,22 +32,20 @@ public class GetApiKeyResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    GetApiKeyResponse getApiKeyResponse = (GetApiKeyResponse) o;
-    return Objects.equals(this.data, getApiKeyResponse.data);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data);
+    return Objects.hash();
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class GetApiKeyResponse {\n");
+    sb.append("class SourceWriteApi {\n");
     
-    sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("}");
     return sb.toString();
   }
