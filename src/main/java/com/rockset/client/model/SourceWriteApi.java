@@ -15,56 +15,14 @@ package com.rockset.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import com.rockset.client.model.View;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * ListViewsResponse
+ * SourceWriteApi
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-01-31T12:04:03.466Z")
-public class ListViewsResponse {
-  @SerializedName("data")
-  private List<View> data = null;
-
-  public ListViewsResponse data(List<View> data) {
-    this.data = data;
-    return this;
-  }
-
-  public ListViewsResponse addDataItem(View dataItem) {
-    if (this.data == null) {
-      this.data = new ArrayList<View>();
-    }
-    this.data.add(dataItem);
-    return this;
-  }
-
-   /**
-   * List of all views.
-   * @return data
-  **/
-
-@JsonProperty("data")
-@ApiModelProperty(value = "List of all views.")
-  public List<View> getData() {
-    return data;
-  }
-
-  public void setData(List<View> data) {
-    this.data = data;
-  }
-
+public class SourceWriteApi {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -74,22 +32,20 @@ public class ListViewsResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ListViewsResponse listViewsResponse = (ListViewsResponse) o;
-    return Objects.equals(this.data, listViewsResponse.data);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data);
+    return Objects.hash();
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ListViewsResponse {\n");
+    sb.append("class SourceWriteApi {\n");
     
-    sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("}");
     return sb.toString();
   }

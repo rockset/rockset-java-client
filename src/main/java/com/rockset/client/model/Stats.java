@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Stats
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-01-15T19:57:30.680Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-01-31T12:04:03.466Z")
 public class Stats {
   @SerializedName("elapsed_time_ms")
   private Long elapsedTimeMs = null;
@@ -39,6 +39,9 @@ public class Stats {
 
   @SerializedName("result_set_document_count")
   private Long resultSetDocumentCount = null;
+
+  @SerializedName("result_set_file_count")
+  private Long resultSetFileCount = null;
 
   @SerializedName("throttled_time_ms")
   private Long throttledTimeMs = null;
@@ -103,6 +106,26 @@ public class Stats {
     this.resultSetDocumentCount = resultSetDocumentCount;
   }
 
+  public Stats resultSetFileCount(Long resultSetFileCount) {
+    this.resultSetFileCount = resultSetFileCount;
+    return this;
+  }
+
+   /**
+   * Number of files written by by the query. Only populated if &#x60;status&#x60; is &#x60;COMPLETE&#x60; and the query is an export query.
+   * @return resultSetFileCount
+  **/
+
+@JsonProperty("result_set_file_count")
+@ApiModelProperty(example = "1235", value = "Number of files written by by the query. Only populated if `status` is `COMPLETE` and the query is an export query.")
+  public Long getResultSetFileCount() {
+    return resultSetFileCount;
+  }
+
+  public void setResultSetFileCount(Long resultSetFileCount) {
+    this.resultSetFileCount = resultSetFileCount;
+  }
+
   public Stats throttledTimeMs(Long throttledTimeMs) {
     this.throttledTimeMs = throttledTimeMs;
     return this;
@@ -136,12 +159,13 @@ public class Stats {
     return Objects.equals(this.elapsedTimeMs, stats.elapsedTimeMs) &&
         Objects.equals(this.resultSetBytesSize, stats.resultSetBytesSize) &&
         Objects.equals(this.resultSetDocumentCount, stats.resultSetDocumentCount) &&
+        Objects.equals(this.resultSetFileCount, stats.resultSetFileCount) &&
         Objects.equals(this.throttledTimeMs, stats.throttledTimeMs);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(elapsedTimeMs, resultSetBytesSize, resultSetDocumentCount, throttledTimeMs);
+    return Objects.hash(elapsedTimeMs, resultSetBytesSize, resultSetDocumentCount, resultSetFileCount, throttledTimeMs);
   }
 
 
@@ -153,6 +177,7 @@ public class Stats {
     sb.append("    elapsedTimeMs: ").append(toIndentedString(elapsedTimeMs)).append("\n");
     sb.append("    resultSetBytesSize: ").append(toIndentedString(resultSetBytesSize)).append("\n");
     sb.append("    resultSetDocumentCount: ").append(toIndentedString(resultSetDocumentCount)).append("\n");
+    sb.append("    resultSetFileCount: ").append(toIndentedString(resultSetFileCount)).append("\n");
     sb.append("    throttledTimeMs: ").append(toIndentedString(throttledTimeMs)).append("\n");
     sb.append("}");
     return sb.toString();

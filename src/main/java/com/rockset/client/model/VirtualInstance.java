@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * VirtualInstance
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-01-15T19:57:30.680Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-01-31T12:04:03.466Z")
 public class VirtualInstance {
   @SerializedName("auto_scaling_policy")
   private AutoScalingPolicy autoScalingPolicy = null;
@@ -44,6 +44,59 @@ public class VirtualInstance {
 
   @SerializedName("created_by")
   private String createdBy = null;
+
+  /**
+   * Virtual Instance Class. &#x60;MO_IL&#x60; represents Memory Optimized and &#x60;GP_IL&#x60; represents General Purpose instance class.
+   */
+  @JsonAdapter(CurrentInstanceClassEnum.Adapter.class)
+  public enum CurrentInstanceClassEnum {
+    MO_BR("MOBR"),
+    
+    MO_IL("MOIL"),
+    
+    GP_IL("GPIL");
+
+    private String value;
+
+    CurrentInstanceClassEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @com.fasterxml.jackson.annotation.JsonCreator
+    public static CurrentInstanceClassEnum fromValue(String text) {
+      for (CurrentInstanceClassEnum b : CurrentInstanceClassEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+
+    public static class Adapter extends TypeAdapter<CurrentInstanceClassEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final CurrentInstanceClassEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public CurrentInstanceClassEnum read(final JsonReader jsonReader) throws IOException {
+        String value = jsonReader.nextString();
+        return CurrentInstanceClassEnum.fromValue(String.valueOf(value));
+      }
+    }
+  }
+
+  @SerializedName("current_instance_class")
+  private CurrentInstanceClassEnum currentInstanceClass = null;
 
   /**
    * Virtual instance current size.
@@ -126,6 +179,59 @@ public class VirtualInstance {
 
   @SerializedName("description")
   private String description = null;
+
+  /**
+   * Virtual Instance Class.
+   */
+  @JsonAdapter(DesiredInstanceClassEnum.Adapter.class)
+  public enum DesiredInstanceClassEnum {
+    MO_BR("MOBR"),
+    
+    MO_IL("MOIL"),
+    
+    GP_IL("GPIL");
+
+    private String value;
+
+    DesiredInstanceClassEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @com.fasterxml.jackson.annotation.JsonCreator
+    public static DesiredInstanceClassEnum fromValue(String text) {
+      for (DesiredInstanceClassEnum b : DesiredInstanceClassEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+
+    public static class Adapter extends TypeAdapter<DesiredInstanceClassEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final DesiredInstanceClassEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public DesiredInstanceClassEnum read(final JsonReader jsonReader) throws IOException {
+        String value = jsonReader.nextString();
+        return DesiredInstanceClassEnum.fromValue(String.valueOf(value));
+      }
+    }
+  }
+
+  @SerializedName("desired_instance_class")
+  private DesiredInstanceClassEnum desiredInstanceClass = null;
 
   /**
    * Virtual instance desired size.
@@ -425,6 +531,26 @@ public class VirtualInstance {
     this.createdBy = createdBy;
   }
 
+  public VirtualInstance currentInstanceClass(CurrentInstanceClassEnum currentInstanceClass) {
+    this.currentInstanceClass = currentInstanceClass;
+    return this;
+  }
+
+   /**
+   * Virtual Instance Class. &#x60;MO_IL&#x60; represents Memory Optimized and &#x60;GP_IL&#x60; represents General Purpose instance class.
+   * @return currentInstanceClass
+  **/
+
+@JsonProperty("current_instance_class")
+@ApiModelProperty(example = "MO_IL", value = "Virtual Instance Class. `MO_IL` represents Memory Optimized and `GP_IL` represents General Purpose instance class.")
+  public CurrentInstanceClassEnum getCurrentInstanceClass() {
+    return currentInstanceClass;
+  }
+
+  public void setCurrentInstanceClass(CurrentInstanceClassEnum currentInstanceClass) {
+    this.currentInstanceClass = currentInstanceClass;
+  }
+
    /**
    * Virtual instance current size.
    * @return currentSize
@@ -494,6 +620,26 @@ public class VirtualInstance {
 
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  public VirtualInstance desiredInstanceClass(DesiredInstanceClassEnum desiredInstanceClass) {
+    this.desiredInstanceClass = desiredInstanceClass;
+    return this;
+  }
+
+   /**
+   * Virtual Instance Class.
+   * @return desiredInstanceClass
+  **/
+
+@JsonProperty("desired_instance_class")
+@ApiModelProperty(example = "MO_IL", value = "Virtual Instance Class.")
+  public DesiredInstanceClassEnum getDesiredInstanceClass() {
+    return desiredInstanceClass;
+  }
+
+  public void setDesiredInstanceClass(DesiredInstanceClassEnum desiredInstanceClass) {
+    this.desiredInstanceClass = desiredInstanceClass;
   }
 
    /**
@@ -741,10 +887,12 @@ public class VirtualInstance {
         Objects.equals(this.autoSuspendSeconds, virtualInstance.autoSuspendSeconds) &&
         Objects.equals(this.createdAt, virtualInstance.createdAt) &&
         Objects.equals(this.createdBy, virtualInstance.createdBy) &&
+        Objects.equals(this.currentInstanceClass, virtualInstance.currentInstanceClass) &&
         Objects.equals(this.currentSize, virtualInstance.currentSize) &&
         Objects.equals(this.defaultPodCount, virtualInstance.defaultPodCount) &&
         Objects.equals(this.defaultVi, virtualInstance.defaultVi) &&
         Objects.equals(this.description, virtualInstance.description) &&
+        Objects.equals(this.desiredInstanceClass, virtualInstance.desiredInstanceClass) &&
         Objects.equals(this.desiredSize, virtualInstance.desiredSize) &&
         Objects.equals(this.enableRemountOnResume, virtualInstance.enableRemountOnResume) &&
         Objects.equals(this.id, virtualInstance.id) &&
@@ -761,7 +909,7 @@ public class VirtualInstance {
 
   @Override
   public int hashCode() {
-    return Objects.hash(autoScalingPolicy, autoSuspendSeconds, createdAt, createdBy, currentSize, defaultPodCount, defaultVi, description, desiredSize, enableRemountOnResume, id, monitoringEnabled, mountRefreshIntervalSeconds, mountType, name, resumedAt, rrn, scaledPodCount, state, stats);
+    return Objects.hash(autoScalingPolicy, autoSuspendSeconds, createdAt, createdBy, currentInstanceClass, currentSize, defaultPodCount, defaultVi, description, desiredInstanceClass, desiredSize, enableRemountOnResume, id, monitoringEnabled, mountRefreshIntervalSeconds, mountType, name, resumedAt, rrn, scaledPodCount, state, stats);
   }
 
 
@@ -774,10 +922,12 @@ public class VirtualInstance {
     sb.append("    autoSuspendSeconds: ").append(toIndentedString(autoSuspendSeconds)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
+    sb.append("    currentInstanceClass: ").append(toIndentedString(currentInstanceClass)).append("\n");
     sb.append("    currentSize: ").append(toIndentedString(currentSize)).append("\n");
     sb.append("    defaultPodCount: ").append(toIndentedString(defaultPodCount)).append("\n");
     sb.append("    defaultVi: ").append(toIndentedString(defaultVi)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    desiredInstanceClass: ").append(toIndentedString(desiredInstanceClass)).append("\n");
     sb.append("    desiredSize: ").append(toIndentedString(desiredSize)).append("\n");
     sb.append("    enableRemountOnResume: ").append(toIndentedString(enableRemountOnResume)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
