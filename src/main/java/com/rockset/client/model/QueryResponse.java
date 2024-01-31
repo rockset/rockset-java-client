@@ -35,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * QueryResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-01-15T19:57:30.680Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-01-31T12:04:03.466Z")
 public class QueryResponse {
   @SerializedName("collections")
   private List<String> collections = null;
