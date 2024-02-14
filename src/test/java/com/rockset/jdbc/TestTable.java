@@ -205,8 +205,8 @@ public class TestTable {
       waitNumberDocs(collectionName, 1);
 
       // there should be 5 columns in this test file
-      // a, name, nested, _id, _event_time
-      final int numColumns = 5;
+      // a, name, nested, _id, _event_time, _meta
+      final int numColumns = 6;
 
       conn = DriverManager.getConnection(DB_URL, property);
 
@@ -336,6 +336,7 @@ public class TestTable {
 
       assertNextEquals(rs, "_event_time", Types.TIMESTAMP);
       assertNextEquals(rs, "_id", Types.VARCHAR);
+      assertNextEquals(rs, "_meta", Types.JAVA_OBJECT);
       assertNextEquals(rs, "array_col", Types.ARRAY);
       assertNextEquals(rs, "bool_col", Types.BOOLEAN);
       assertNextEquals(rs, "date_col", Types.DATE);
