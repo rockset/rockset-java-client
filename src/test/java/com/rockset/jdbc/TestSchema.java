@@ -204,8 +204,8 @@ public class TestSchema {
       waitNumberDocs(collectionName, 1);
 
       // there should be 5 columns in this test file
-      // a, name, nested, _id, _event_time
-      final int numColumns = 5;
+      // a, name, nested, _id, _event_time, _meta
+      final int numColumns = 6;
 
       conn = DriverManager.getConnection(DB_URL, property);
 
