@@ -15,46 +15,14 @@ package com.rockset.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import com.rockset.client.model.Workspace;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import java.io.IOException;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * DeleteWorkspaceResponse
+ * SourceWriteApi
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-02-14T12:03:45.664Z")
-public class DeleteWorkspaceResponse {
-  @SerializedName("data")
-  private Workspace data = null;
-
-  public DeleteWorkspaceResponse data(Workspace data) {
-    this.data = data;
-    return this;
-  }
-
-   /**
-   * The workspace that was deleted.
-   * @return data
-  **/
-
-@JsonProperty("data")
-@ApiModelProperty(value = "The workspace that was deleted.")
-  public Workspace getData() {
-    return data;
-  }
-
-  public void setData(Workspace data) {
-    this.data = data;
-  }
-
+public class SourceWriteApi {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -64,22 +32,20 @@ public class DeleteWorkspaceResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    DeleteWorkspaceResponse deleteWorkspaceResponse = (DeleteWorkspaceResponse) o;
-    return Objects.equals(this.data, deleteWorkspaceResponse.data);
+    return true;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data);
+    return Objects.hash();
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class DeleteWorkspaceResponse {\n");
+    sb.append("class SourceWriteApi {\n");
     
-    sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("}");
     return sb.toString();
   }

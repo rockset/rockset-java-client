@@ -44,7 +44,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @ApiModel(description = "Integrations that can be associated with data sources to create collections. Only one type of integration may be specified.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-01-15T19:57:30.680Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-02-14T12:03:45.664Z")
 public class Integration {
   @SerializedName("azure_blob_storage")
   private AzureBlobStorageIntegration azureBlobStorage = null;
@@ -75,6 +75,9 @@ public class Integration {
 
   @SerializedName("gcs")
   private GcsIntegration gcs = null;
+
+  @SerializedName("is_write_enabled")
+  private Boolean isWriteEnabled = null;
 
   @SerializedName("kafka")
   private KafkaIntegration kafka = null;
@@ -305,6 +308,26 @@ public class Integration {
     this.gcs = gcs;
   }
 
+  public Integration isWriteEnabled(Boolean isWriteEnabled) {
+    this.isWriteEnabled = isWriteEnabled;
+    return this;
+  }
+
+   /**
+   * is write access enabled for this integration
+   * @return isWriteEnabled
+  **/
+
+@JsonProperty("is_write_enabled")
+@ApiModelProperty(value = "is write access enabled for this integration")
+  public Boolean isIsWriteEnabled() {
+    return isWriteEnabled;
+  }
+
+  public void setIsWriteEnabled(Boolean isWriteEnabled) {
+    this.isWriteEnabled = isWriteEnabled;
+  }
+
   public Integration kafka(KafkaIntegration kafka) {
     this.kafka = kafka;
     return this;
@@ -465,6 +488,7 @@ public class Integration {
         Objects.equals(this.description, integration.description) &&
         Objects.equals(this.dynamodb, integration.dynamodb) &&
         Objects.equals(this.gcs, integration.gcs) &&
+        Objects.equals(this.isWriteEnabled, integration.isWriteEnabled) &&
         Objects.equals(this.kafka, integration.kafka) &&
         Objects.equals(this.kinesis, integration.kinesis) &&
         Objects.equals(this.mongodb, integration.mongodb) &&
@@ -476,7 +500,7 @@ public class Integration {
 
   @Override
   public int hashCode() {
-    return Objects.hash(azureBlobStorage, azureEventHubs, azureServiceBus, collections, createdAt, createdBy, createdByApikeyName, description, dynamodb, gcs, kafka, kinesis, mongodb, name, ownerEmail, s3, snowflake);
+    return Objects.hash(azureBlobStorage, azureEventHubs, azureServiceBus, collections, createdAt, createdBy, createdByApikeyName, description, dynamodb, gcs, isWriteEnabled, kafka, kinesis, mongodb, name, ownerEmail, s3, snowflake);
   }
 
 
@@ -495,6 +519,7 @@ public class Integration {
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    dynamodb: ").append(toIndentedString(dynamodb)).append("\n");
     sb.append("    gcs: ").append(toIndentedString(gcs)).append("\n");
+    sb.append("    isWriteEnabled: ").append(toIndentedString(isWriteEnabled)).append("\n");
     sb.append("    kafka: ").append(toIndentedString(kafka)).append("\n");
     sb.append("    kinesis: ").append(toIndentedString(kinesis)).append("\n");
     sb.append("    mongodb: ").append(toIndentedString(mongodb)).append("\n");

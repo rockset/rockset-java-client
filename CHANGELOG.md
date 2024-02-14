@@ -1,5 +1,8 @@
 # Rockset Java Client Changelog
 
+## v0.13.0 2024-02-14
+- TODO
+
 ## v0.12.0 2024-01-15
 - Add ScheduledQueryLambda support
 

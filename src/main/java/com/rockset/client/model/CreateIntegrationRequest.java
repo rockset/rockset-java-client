@@ -39,7 +39,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateIntegrationRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-01-15T19:57:30.680Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-02-14T12:03:45.664Z")
 public class CreateIntegrationRequest {
   @SerializedName("azure_blob_storage")
   private AzureBlobStorageIntegration azureBlobStorage = null;
@@ -58,6 +58,9 @@ public class CreateIntegrationRequest {
 
   @SerializedName("gcs")
   private GcsIntegration gcs = null;
+
+  @SerializedName("is_write_enabled")
+  private Boolean isWriteEnabled = null;
 
   @SerializedName("kafka")
   private KafkaIntegration kafka = null;
@@ -197,6 +200,26 @@ public class CreateIntegrationRequest {
     this.gcs = gcs;
   }
 
+  public CreateIntegrationRequest isWriteEnabled(Boolean isWriteEnabled) {
+    this.isWriteEnabled = isWriteEnabled;
+    return this;
+  }
+
+   /**
+   * is write access enabled for this integration.
+   * @return isWriteEnabled
+  **/
+
+@JsonProperty("is_write_enabled")
+@ApiModelProperty(value = "is write access enabled for this integration.")
+  public Boolean isIsWriteEnabled() {
+    return isWriteEnabled;
+  }
+
+  public void setIsWriteEnabled(Boolean isWriteEnabled) {
+    this.isWriteEnabled = isWriteEnabled;
+  }
+
   public CreateIntegrationRequest kafka(KafkaIntegration kafka) {
     this.kafka = kafka;
     return this;
@@ -333,6 +356,7 @@ public class CreateIntegrationRequest {
         Objects.equals(this.description, createIntegrationRequest.description) &&
         Objects.equals(this.dynamodb, createIntegrationRequest.dynamodb) &&
         Objects.equals(this.gcs, createIntegrationRequest.gcs) &&
+        Objects.equals(this.isWriteEnabled, createIntegrationRequest.isWriteEnabled) &&
         Objects.equals(this.kafka, createIntegrationRequest.kafka) &&
         Objects.equals(this.kinesis, createIntegrationRequest.kinesis) &&
         Objects.equals(this.mongodb, createIntegrationRequest.mongodb) &&
@@ -343,7 +367,7 @@ public class CreateIntegrationRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(azureBlobStorage, azureEventHubs, azureServiceBus, description, dynamodb, gcs, kafka, kinesis, mongodb, name, s3, snowflake);
+    return Objects.hash(azureBlobStorage, azureEventHubs, azureServiceBus, description, dynamodb, gcs, isWriteEnabled, kafka, kinesis, mongodb, name, s3, snowflake);
   }
 
 
@@ -358,6 +382,7 @@ public class CreateIntegrationRequest {
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    dynamodb: ").append(toIndentedString(dynamodb)).append("\n");
     sb.append("    gcs: ").append(toIndentedString(gcs)).append("\n");
+    sb.append("    isWriteEnabled: ").append(toIndentedString(isWriteEnabled)).append("\n");
     sb.append("    kafka: ").append(toIndentedString(kafka)).append("\n");
     sb.append("    kinesis: ").append(toIndentedString(kinesis)).append("\n");
     sb.append("    mongodb: ").append(toIndentedString(mongodb)).append("\n");

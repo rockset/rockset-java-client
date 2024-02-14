@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * CreateVirtualInstanceRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-01-15T19:57:30.680Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-02-14T12:03:45.664Z")
 public class CreateVirtualInstanceRequest {
   @SerializedName("auto_suspend_seconds")
   private Integer autoSuspendSeconds = null;
@@ -39,6 +39,57 @@ public class CreateVirtualInstanceRequest {
 
   @SerializedName("enable_remount_on_resume")
   private Boolean enableRemountOnResume = null;
+
+  /**
+   * Virtual Instance Class. Use &#x60;MO_IL&#x60; for Memory Optimized and &#x60;GP_IL&#x60; for General Purpose instance class.
+   */
+  @JsonAdapter(InstanceClassEnum.Adapter.class)
+  public enum InstanceClassEnum {
+    MO_IL("MOIL"),
+    
+    GP_IL("GPIL");
+
+    private String value;
+
+    InstanceClassEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @com.fasterxml.jackson.annotation.JsonCreator
+    public static InstanceClassEnum fromValue(String text) {
+      for (InstanceClassEnum b : InstanceClassEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+
+    public static class Adapter extends TypeAdapter<InstanceClassEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final InstanceClassEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public InstanceClassEnum read(final JsonReader jsonReader) throws IOException {
+        String value = jsonReader.nextString();
+        return InstanceClassEnum.fromValue(String.valueOf(value));
+      }
+    }
+  }
+
+  @SerializedName("instance_class")
+  private InstanceClassEnum instanceClass = null;
 
   @SerializedName("mount_refresh_interval_seconds")
   private Integer mountRefreshIntervalSeconds = null;
@@ -230,6 +281,26 @@ public class CreateVirtualInstanceRequest {
     this.enableRemountOnResume = enableRemountOnResume;
   }
 
+  public CreateVirtualInstanceRequest instanceClass(InstanceClassEnum instanceClass) {
+    this.instanceClass = instanceClass;
+    return this;
+  }
+
+   /**
+   * Virtual Instance Class. Use &#x60;MO_IL&#x60; for Memory Optimized and &#x60;GP_IL&#x60; for General Purpose instance class.
+   * @return instanceClass
+  **/
+
+@JsonProperty("instance_class")
+@ApiModelProperty(example = "MO_IL", value = "Virtual Instance Class. Use `MO_IL` for Memory Optimized and `GP_IL` for General Purpose instance class.")
+  public InstanceClassEnum getInstanceClass() {
+    return instanceClass;
+  }
+
+  public void setInstanceClass(InstanceClassEnum instanceClass) {
+    this.instanceClass = instanceClass;
+  }
+
   public CreateVirtualInstanceRequest mountRefreshIntervalSeconds(Integer mountRefreshIntervalSeconds) {
     this.mountRefreshIntervalSeconds = mountRefreshIntervalSeconds;
     return this;
@@ -323,6 +394,7 @@ public class CreateVirtualInstanceRequest {
     return Objects.equals(this.autoSuspendSeconds, createVirtualInstanceRequest.autoSuspendSeconds) &&
         Objects.equals(this.description, createVirtualInstanceRequest.description) &&
         Objects.equals(this.enableRemountOnResume, createVirtualInstanceRequest.enableRemountOnResume) &&
+        Objects.equals(this.instanceClass, createVirtualInstanceRequest.instanceClass) &&
         Objects.equals(this.mountRefreshIntervalSeconds, createVirtualInstanceRequest.mountRefreshIntervalSeconds) &&
         Objects.equals(this.mountType, createVirtualInstanceRequest.mountType) &&
         Objects.equals(this.name, createVirtualInstanceRequest.name) &&
@@ -331,7 +403,7 @@ public class CreateVirtualInstanceRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(autoSuspendSeconds, description, enableRemountOnResume, mountRefreshIntervalSeconds, mountType, name, type);
+    return Objects.hash(autoSuspendSeconds, description, enableRemountOnResume, instanceClass, mountRefreshIntervalSeconds, mountType, name, type);
   }
 
 
@@ -343,6 +415,7 @@ public class CreateVirtualInstanceRequest {
     sb.append("    autoSuspendSeconds: ").append(toIndentedString(autoSuspendSeconds)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    enableRemountOnResume: ").append(toIndentedString(enableRemountOnResume)).append("\n");
+    sb.append("    instanceClass: ").append(toIndentedString(instanceClass)).append("\n");
     sb.append("    mountRefreshIntervalSeconds: ").append(toIndentedString(mountRefreshIntervalSeconds)).append("\n");
     sb.append("    mountType: ").append(toIndentedString(mountType)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
