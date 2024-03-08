@@ -13,3 +13,6 @@ target/
 
 # binaries
 bin/
+
+# secrets
+.envrc

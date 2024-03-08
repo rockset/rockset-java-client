@@ -30,7 +30,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.rockset</groupId>
   <artifactId>rockset-java</artifactId>
-  <version>0.10.3</version>
+  <version>...</version>
 </dependency>
 ```
 
