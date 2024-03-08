@@ -1,8 +1,12 @@
 package com.rockset.client.api;
 
 import com.rockset.client.ApiClient;
+import com.rockset.client.ProgressRequestBody;
+import com.rockset.client.ProgressResponseBody;
 import com.rockset.client.model.AddDocumentsRequest;
 import com.rockset.client.model.AddDocumentsResponse;
+import com.squareup.okhttp.Call;
+
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -31,8 +35,7 @@ public class CustomDocumentsApi extends DocumentsApi {
   }
 
   @Override
-  public AddDocumentsResponse add(String workspace, String collection, AddDocumentsRequest body)
-      throws Exception {
+  public Call addCall(String workspace, String collection, AddDocumentsRequest body, ProgressResponseBody.ProgressListener progressListener, ProgressRequestBody.ProgressRequestListener progressRequestListener) throws Exception {
     for (Object doc : body.getData()) {
       if (!(doc instanceof Map)) {
         throw new IllegalArgumentException("Document is not a valid Map Object");
@@ -40,7 +43,7 @@ public class CustomDocumentsApi extends DocumentsApi {
       buildRocksetObject(doc);
     }
 
-    return super.add(workspace, collection, body);
+    return super.addCall(workspace, collection, body, progressListener, progressRequestListener);
   }
 
   Object buildRocksetObject(Object doc) {
