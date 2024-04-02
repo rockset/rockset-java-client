@@ -1,6 +1,8 @@
 package com.rockset.client;
 
 import com.rockset.client.model.*;
+
+import java.sql.Time;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -61,7 +63,7 @@ public class TestWorkspace {
     // wait for collection to go away
     Awaitility.await("Waiting for collection to be cleaned up ")
         .atMost(3, TimeUnit.MINUTES)
-            .pollInterval(1, TimeUnit.SECONDS)
+        .pollInterval(1, TimeUnit.SECONDS)
         .until(
             (Callable<Boolean>)
                 () -> {
