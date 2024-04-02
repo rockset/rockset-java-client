@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 import org.testng.Assert;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
@@ -106,7 +105,8 @@ public class TestQueryLambda {
     CreateQueryLambdaTagRequest reqQLTag = new CreateQueryLambdaTagRequest();
     reqQLTag.setTagName(queryLambdaTag);
     reqQLTag.setVersion(version);
-    QueryLambdaTagResponse respQLTag = client.queryLambdas.create_0("commons", paginatedQueryName, reqQLTag);
+    QueryLambdaTagResponse respQLTag =
+        client.queryLambdas.create_0("commons", paginatedQueryName, reqQLTag);
     Assert.assertEquals(respQLTag.getData().getTagName(), queryLambdaTag);
 
     // Execute the QL and get only the first page.
@@ -114,7 +114,8 @@ public class TestQueryLambda {
     exReq.setPaginate(true);
     exReq.setDefaultRowLimit(10);
     exReq.setInitialPaginateResponseDocCount(1);
-    QueryResponse qr = client.queryLambdas.execute("commons", paginatedQueryName, queryLambdaTag, exReq);
+    QueryResponse qr =
+        client.queryLambdas.execute("commons", paginatedQueryName, queryLambdaTag, exReq);
     Assert.assertEquals(qr.getResults().size(), 1);
 
     Map<String, String> result = (Map<String, String>) qr.getResults().get(0);
@@ -131,7 +132,8 @@ public class TestQueryLambda {
 
     // Check that the second row just has a 2.
     Assert.assertEquals(paginationResponse.getResults().size(), 1);
-    Assert.assertEquals(paginationResponse.getPagination().getCurrentPageDocCount().longValue(), 1L);
+    Assert.assertEquals(
+        paginationResponse.getPagination().getCurrentPageDocCount().longValue(), 1L);
     result = (Map<String, String>) paginationResponse.getResults().get(0);
     Assert.assertEquals(result.values().stream().collect(Collectors.toList()).get(0), "2");
 

@@ -51,7 +51,9 @@ public class TestIntegration {
         awsSecretkey);
   }
 
-  @Test(enabled = false, dependsOnMethods = {"testIntegrationCreate"})
+  @Test(
+      enabled = false,
+      dependsOnMethods = {"testIntegrationCreate"})
   public void testGetIntegration() throws Exception {
     // describe integration
     GetIntegrationResponse getIntegrationResponse = client.integrations.get(integrationName);
@@ -74,7 +76,9 @@ public class TestIntegration {
         awsSecretkey);
   }
 
-  @Test(enabled = false, dependsOnMethods = {"testGetIntegration"})
+  @Test(
+      enabled = false,
+      dependsOnMethods = {"testGetIntegration"})
   public void testDeleteIntegration() throws Exception {
     // delete integration
     DeleteIntegrationResponse deleteIntegrationResponse =

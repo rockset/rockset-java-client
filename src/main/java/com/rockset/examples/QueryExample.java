@@ -3,7 +3,6 @@ package com.rockset.examples;
 import com.google.gson.internal.LinkedTreeMap;
 import com.rockset.client.RocksetClient;
 import com.rockset.client.model.*;
-
 import java.util.Map;
 
 public class QueryExample {

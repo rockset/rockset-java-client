@@ -94,8 +94,7 @@ public class CustomDocumentsApi extends DocumentsApi {
       // Formats a String in hh:mm:ss format
       return constructTime(((Time) doc).toString());
     } else if (doc instanceof java.util.Date) {
-      return constructTimestamp(((java.util.Date)doc).toInstant());
-
+      return constructTimestamp(((java.util.Date) doc).toInstant());
     }
 
     return doc;

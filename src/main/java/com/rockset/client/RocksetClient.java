@@ -2,7 +2,6 @@ package com.rockset.client;
 
 import com.rockset.client.api.*;
 import com.rockset.client.model.*;
-
 import java.util.Optional;
 
 public class RocksetClient {

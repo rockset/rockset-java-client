@@ -550,8 +550,8 @@ public class RocksetConnection implements Connection {
   //
   // This is invoked by the RocksetStatement to paginate a query
   //
-  QueryPaginationResponse getQueryPaginationResults(String queryId, String cursor, int fetchSize, int offset)
-      throws Exception {
+  QueryPaginationResponse getQueryPaginationResults(
+      String queryId, String cursor, int fetchSize, int offset) throws Exception {
 
     return client.queries.get_0(queryId, cursor, fetchSize, offset);
   }

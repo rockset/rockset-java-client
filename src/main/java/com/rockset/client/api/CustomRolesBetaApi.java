@@ -91,8 +91,8 @@ public class CustomRolesBetaApi {
           .add(
               new okhttp3.Interceptor() {
                 @Override
-                public okhttp3.Response intercept(
-                    okhttp3.Interceptor.Chain chain) throws IOException {
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain)
+                    throws IOException {
                   okhttp3.Response originalResponse = chain.proceed(chain.request());
                   return originalResponse
                       .newBuilder()
@@ -166,8 +166,8 @@ public class CustomRolesBetaApi {
    * @return The request call
    * @throws Exception If fail to process the API call, e.g. serializing the request body object
    */
-  public okhttp3.Call createAsync(
-      CreateRoleRequest body, final ApiCallback<RoleResponse> callback) throws Exception {
+  public okhttp3.Call createAsync(CreateRoleRequest body, final ApiCallback<RoleResponse> callback)
+      throws Exception {
 
     ProgressResponseBody.ProgressListener progressListener = null;
     ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -190,8 +190,7 @@ public class CustomRolesBetaApi {
           };
     }
 
-    okhttp3.Call call =
-        createValidateBeforeCall(body, progressListener, progressRequestListener);
+    okhttp3.Call call = createValidateBeforeCall(body, progressListener, progressRequestListener);
     Type localVarReturnType = new TypeToken<RoleResponse>() {}.getType();
     apiClient.executeAsync(call, localVarReturnType, callback);
     return call;
@@ -239,8 +238,8 @@ public class CustomRolesBetaApi {
           .add(
               new okhttp3.Interceptor() {
                 @Override
-                public okhttp3.Response intercept(
-                    okhttp3.Interceptor.Chain chain) throws IOException {
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain)
+                    throws IOException {
                   okhttp3.Response originalResponse = chain.proceed(chain.request());
                   return originalResponse
                       .newBuilder()
@@ -314,8 +313,8 @@ public class CustomRolesBetaApi {
    * @return The request call
    * @throws Exception If fail to process the API call, e.g. serializing the request body object
    */
-  public okhttp3.Call deleteAsync(
-      String roleName, final ApiCallback<RoleResponse> callback) throws Exception {
+  public okhttp3.Call deleteAsync(String roleName, final ApiCallback<RoleResponse> callback)
+      throws Exception {
 
     ProgressResponseBody.ProgressListener progressListener = null;
     ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -383,8 +382,8 @@ public class CustomRolesBetaApi {
           .add(
               new okhttp3.Interceptor() {
                 @Override
-                public okhttp3.Response intercept(
-                    okhttp3.Interceptor.Chain chain) throws IOException {
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain)
+                    throws IOException {
                   okhttp3.Response originalResponse = chain.proceed(chain.request());
                   return originalResponse
                       .newBuilder()
@@ -449,8 +448,7 @@ public class CustomRolesBetaApi {
    * @return The request call
    * @throws Exception If fail to process the API call, e.g. serializing the request body object
    */
-  public okhttp3.Call listAsync(final ApiCallback<ListRolesResponse> callback)
-      throws Exception {
+  public okhttp3.Call listAsync(final ApiCallback<ListRolesResponse> callback) throws Exception {
 
     ProgressResponseBody.ProgressListener progressListener = null;
     ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -473,8 +471,7 @@ public class CustomRolesBetaApi {
           };
     }
 
-    okhttp3.Call call =
-        listValidateBeforeCall(progressListener, progressRequestListener);
+    okhttp3.Call call = listValidateBeforeCall(progressListener, progressRequestListener);
     Type localVarReturnType = new TypeToken<ListRolesResponse>() {}.getType();
     apiClient.executeAsync(call, localVarReturnType, callback);
     return call;
@@ -524,8 +521,8 @@ public class CustomRolesBetaApi {
           .add(
               new okhttp3.Interceptor() {
                 @Override
-                public okhttp3.Response intercept(
-                    okhttp3.Interceptor.Chain chain) throws IOException {
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain)
+                    throws IOException {
                   okhttp3.Response originalResponse = chain.proceed(chain.request());
                   return originalResponse
                       .newBuilder()
@@ -566,8 +563,7 @@ public class CustomRolesBetaApi {
       throw new Exception("Missing the required parameter 'body' when calling update(Async)");
     }
 
-    okhttp3.Call call =
-        updateCall(roleName, body, progressListener, progressRequestListener);
+    okhttp3.Call call = updateCall(roleName, body, progressListener, progressRequestListener);
     return call;
   }
 

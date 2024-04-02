@@ -103,16 +103,19 @@ public class TestJdbcPreparedStatement {
     // 2 select cast('12:34:56' as time) -> __rockset_type= 'TIME' / value = '12:34:56'
     // 3 select cast('12:34:56.1' as time) -> __rockset_type= 'TIME' / value = '12:34:56.1'
     // 4 select cast('12:34:56.123' as time) -> __rockset_type= 'TIME' / value = '12:34:56.123'
-    // 5 select cast('12:34:56.123456' as time) -> __rockset_type= 'TIME' / value = '12:34:56.123456'
-    // 6 select cast('12:34:56.1234567890' as time) -> __rockset_type= 'TIME' / value = '12:34:56.123456'
+    // 5 select cast('12:34:56.123456' as time) -> __rockset_type= 'TIME' / value =
+    // '12:34:56.123456'
+    // 6 select cast('12:34:56.1234567890' as time) -> __rockset_type= 'TIME' / value =
+    // '12:34:56.123456'
 
-    String sql = "SELECT CAST(:1 AS TIME), CAST(:2 AS TIME), CAST(:3 AS TIME), CAST(:4 AS TIME), CAST(:5 AS TIME), CAST(:6 AS TIME)";
+    String sql =
+        "SELECT CAST(:1 AS TIME), CAST(:2 AS TIME), CAST(:3 AS TIME), CAST(:4 AS TIME), CAST(:5 AS TIME), CAST(:6 AS TIME)";
 
     try (Connection connection = createConnection();
-         PreparedStatement statement = connection.prepareStatement(sql)) {
+        PreparedStatement statement = connection.prepareStatement(sql)) {
       statement.setString(1, "12:34");
       statement.setString(2, "12:34:56");
-      statement.setString(3,  "12:34:56.1");
+      statement.setString(3, "12:34:56.1");
       statement.setString(4, "12:34:56.123");
       statement.setString(5, "12:34:56.123456");
       statement.setString(6, "12:34:56.1234567890");

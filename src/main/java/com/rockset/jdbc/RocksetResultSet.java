@@ -66,19 +66,20 @@ public class RocksetResultSet implements ResultSet {
   static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
   static final DateTimeFormatter DATE_FORMATTER = ISODateTimeFormat.date();
 
-  static final DateTimeParser MICROSECOND_PARSER = new DateTimeFormatterBuilder()
-          .appendPattern(".")
-          .appendFractionOfSecond(1, 6)
-          .toParser();
+  static final DateTimeParser MICROSECOND_PARSER =
+      new DateTimeFormatterBuilder().appendPattern(".").appendFractionOfSecond(1, 6).toParser();
 
-  static final DateTimeParser SECOND_PARSER = new DateTimeFormatterBuilder()
+  static final DateTimeParser SECOND_PARSER =
+      new DateTimeFormatterBuilder()
           .appendPattern(":ss")
           .appendOptional(MICROSECOND_PARSER)
           .toParser();
 
-  static final DateTimeFormatter TIME_FORMATTER = new DateTimeFormatterBuilder().appendPattern("HH:mm")
-                                                                                .appendOptional(SECOND_PARSER)
-                                                                                .toFormatter();
+  static final DateTimeFormatter TIME_FORMATTER =
+      new DateTimeFormatterBuilder()
+          .appendPattern("HH:mm")
+          .appendOptional(SECOND_PARSER)
+          .toFormatter();
   static final DateTimeFormatter TIMESTAMP_FORMATTER =
       DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS");
 
@@ -115,8 +116,10 @@ public class RocksetResultSet implements ResultSet {
   private final ResultSetMetaData resultSetMetaData;
   private final AtomicInteger rowIndex = new AtomicInteger(-1);
 
-  // see next() and parseCurrentDocRootNode() -> we eagerly deserialize the raw Maps in the resultSet collection
-  // into JsonNodes whenever next() is called. On wide rows and large resultsets, this yields measurable performance benefit.
+  // see next() and parseCurrentDocRootNode() -> we eagerly deserialize the raw Maps in the
+  // resultSet collection
+  // into JsonNodes whenever next() is called. On wide rows and large resultsets, this yields
+  // measurable performance benefit.
   private JsonNode currentDocRootNode;
   private final long maxRows;
 
@@ -357,7 +360,8 @@ public class RocksetResultSet implements ResultSet {
           "Error processing getBytes for column index "
               + columnIndex
               + " exception "
-              + e.getMessage(), e);
+              + e.getMessage(),
+          e);
     }
   }
 
@@ -478,7 +482,8 @@ public class RocksetResultSet implements ResultSet {
           "Error processing getBytes for column label "
               + columnLabel
               + " exception "
-              + e.getMessage(), e);
+              + e.getMessage(),
+          e);
     }
   }
 
@@ -1432,8 +1437,7 @@ public class RocksetResultSet implements ResultSet {
       wasNull.set((value == null) || (value instanceof NullNode));
       return value;
     } catch (Exception e) {
-      throw new SQLException(
-          "Error processing column index " + index + " exception", e);
+      throw new SQLException("Error processing column index " + index + " exception", e);
     }
   }
 
@@ -1475,7 +1479,8 @@ public class RocksetResultSet implements ResultSet {
       String time = value.get("value").asText();
       try {
         LocalTime localTime = LocalTime.parse(time, TIME_FORMATTER);
-        return new Time(localTime.getHourOfDay(), localTime.getMinuteOfHour(), localTime.getSecondOfMinute());
+        return new Time(
+            localTime.getHourOfDay(), localTime.getMinuteOfHour(), localTime.getSecondOfMinute());
       } catch (IllegalArgumentException e) {
         throw new SQLException("Invalid time from server: " + time, e);
       }
@@ -1632,8 +1637,7 @@ public class RocksetResultSet implements ResultSet {
       return out;
     } catch (Exception e) {
       log("Error processing row to extract column info exception" + e.getMessage());
-      throw new SQLException(
-          "Error processing row to extract column info exception", e);
+      throw new SQLException("Error processing row to extract column info exception", e);
     }
   }
 
@@ -1653,7 +1657,7 @@ public class RocksetResultSet implements ResultSet {
     this.rowIndex.getAndIncrement();
 
     if (this.rocksetResultSetPaginationParams != null
-            && this.rocksetResultSetPaginationParams.getFetchSize() > 0) {
+        && this.rocksetResultSetPaginationParams.getFetchSize() > 0) {
       return doNextIfPaginationEnabled();
     }
 
@@ -1676,8 +1680,7 @@ public class RocksetResultSet implements ResultSet {
 
       return OBJECT_MAPPER.readTree(asJson);
     } catch (JsonProcessingException e) {
-      throw new SQLException(
-              "Error caching document root node at row index " + index, e);
+      throw new SQLException("Error caching document root node at row index " + index, e);
     }
   }
 }

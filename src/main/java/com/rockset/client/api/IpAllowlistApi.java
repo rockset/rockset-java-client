@@ -92,8 +92,8 @@ public class IpAllowlistApi {
           .add(
               new okhttp3.Interceptor() {
                 @Override
-                public okhttp3.Response intercept(
-                    okhttp3.Interceptor.Chain chain) throws IOException {
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain)
+                    throws IOException {
                   okhttp3.Response originalResponse = chain.proceed(chain.request());
                   return originalResponse
                       .newBuilder()
@@ -193,8 +193,7 @@ public class IpAllowlistApi {
           };
     }
 
-    okhttp3.Call call =
-        createValidateBeforeCall(body, progressListener, progressRequestListener);
+    okhttp3.Call call = createValidateBeforeCall(body, progressListener, progressRequestListener);
     Type localVarReturnType = new TypeToken<CreateIpAllowlistResponse>() {}.getType();
     apiClient.executeAsync(call, localVarReturnType, callback);
     return call;
@@ -242,8 +241,8 @@ public class IpAllowlistApi {
           .add(
               new okhttp3.Interceptor() {
                 @Override
-                public okhttp3.Response intercept(
-                    okhttp3.Interceptor.Chain chain) throws IOException {
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain)
+                    throws IOException {
                   okhttp3.Response originalResponse = chain.proceed(chain.request());
                   return originalResponse
                       .newBuilder()
@@ -342,8 +341,7 @@ public class IpAllowlistApi {
           };
     }
 
-    okhttp3.Call call =
-        deleteValidateBeforeCall(name, progressListener, progressRequestListener);
+    okhttp3.Call call = deleteValidateBeforeCall(name, progressListener, progressRequestListener);
     Type localVarReturnType = new TypeToken<DeleteIpAllowlistResponse>() {}.getType();
     apiClient.executeAsync(call, localVarReturnType, callback);
     return call;
@@ -391,8 +389,8 @@ public class IpAllowlistApi {
           .add(
               new okhttp3.Interceptor() {
                 @Override
-                public okhttp3.Response intercept(
-                    okhttp3.Interceptor.Chain chain) throws IOException {
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain)
+                    throws IOException {
                   okhttp3.Response originalResponse = chain.proceed(chain.request());
                   return originalResponse
                       .newBuilder()
@@ -467,8 +465,8 @@ public class IpAllowlistApi {
    * @return The request call
    * @throws Exception If fail to process the API call, e.g. serializing the request body object
    */
-  public okhttp3.Call getAsync(
-      String name, final ApiCallback<GetIpAllowlistResponse> callback) throws Exception {
+  public okhttp3.Call getAsync(String name, final ApiCallback<GetIpAllowlistResponse> callback)
+      throws Exception {
 
     ProgressResponseBody.ProgressListener progressListener = null;
     ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -491,8 +489,7 @@ public class IpAllowlistApi {
           };
     }
 
-    okhttp3.Call call =
-        getValidateBeforeCall(name, progressListener, progressRequestListener);
+    okhttp3.Call call = getValidateBeforeCall(name, progressListener, progressRequestListener);
     Type localVarReturnType = new TypeToken<GetIpAllowlistResponse>() {}.getType();
     apiClient.executeAsync(call, localVarReturnType, callback);
     return call;
@@ -536,8 +533,8 @@ public class IpAllowlistApi {
           .add(
               new okhttp3.Interceptor() {
                 @Override
-                public okhttp3.Response intercept(
-                    okhttp3.Interceptor.Chain chain) throws IOException {
+                public okhttp3.Response intercept(okhttp3.Interceptor.Chain chain)
+                    throws IOException {
                   okhttp3.Response originalResponse = chain.proceed(chain.request());
                   return originalResponse
                       .newBuilder()
@@ -626,8 +623,7 @@ public class IpAllowlistApi {
           };
     }
 
-    okhttp3.Call call =
-        listValidateBeforeCall(progressListener, progressRequestListener);
+    okhttp3.Call call = listValidateBeforeCall(progressListener, progressRequestListener);
     Type localVarReturnType = new TypeToken<ListIpAllowlistsResponse>() {}.getType();
     apiClient.executeAsync(call, localVarReturnType, callback);
     return call;
