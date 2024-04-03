@@ -44,15 +44,21 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TimeZone;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
+
+import org.jetbrains.annotations.Nullable;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormat;
@@ -1567,55 +1573,49 @@ public class RocksetResultSet implements ResultSet {
 
   private static List<Column> getColumns(QueryResponse response) throws SQLException {
     List<Column> out = new ArrayList<Column>();
-    ObjectMapper mapper = new ObjectMapper();
+
 
     try {
-      if (response.getResults().size() > 0) {
-        Set<String> fieldNames = new HashSet<>();
-        // Loop through all the rows to get the fields and (their first
-        // non-null) types.
+      if (!response.getResults().isEmpty()) {
+        List<String> orderedFields = Collections.emptyList();
+        // column fields will be null if a wildcard is used in the query
+        // otherwise, we want to return results in the order set by the projection
+        if(response.getColumnFields() != null) {
+          orderedFields = response.getColumnFields()
+                  .stream()
+                  .map(QueryFieldType::getName)
+                  .collect(Collectors.toList());
+        }
+        // Loop through all the rows to get the fields and types
+        Map<String, Column.ColumnTypes> fieldTypes = new HashMap<>();
         for (int i = 0; i < response.getResults().size(); ++i) {
           log("Extracting column information from record " + i + " in resultset");
           Object onedoc = response.getResults().get(i);
-          JsonNode docRootNode = mapper.readTree(mapper.writeValueAsString(onedoc));
+          JsonNode docRootNode = OBJECT_MAPPER.readTree(OBJECT_MAPPER.writeValueAsString(onedoc));
 
-          Iterator<Map.Entry<String, JsonNode>> fields = docRootNode.fields();
-          while (fields.hasNext()) {
-            Map.Entry<String, JsonNode> field = fields.next();
-            String fieldName = field.getKey();
-            if (fieldNames.contains(fieldName)) {
-              // This fieldname was already found to have a non-null type
-              // in a previous record.
-              continue;
+            for (Iterator<Map.Entry<String, JsonNode>> it = docRootNode.fields(); it.hasNext(); ) {
+                Map.Entry<String, JsonNode> field = it.next();
+                String fieldName = field.getKey();
+                if (fieldTypes.containsKey(fieldName) && !fieldTypes.get(fieldName).equals(Column.ColumnTypes.NULL)) {
+                  // This fieldname was already found to have a non-null type
+                  // in a previous record.
+                  continue;
+                }
+                JsonNode value = field.getValue();
+                Column.ColumnTypes type = valueToColumnType(value);
+                log("getColumns::column name " + fieldName + " type: " + type.toString());
+                fieldTypes.put(fieldName, type);
             }
-            JsonNode value = field.getValue();
-            Column.ColumnTypes type = Column.ColumnTypes.fromValue(value.getNodeType().toString());
-            // Skip over the fields with null type unless all values for that
-            // field are null
-            if (type.equals(Column.ColumnTypes.NULL) && i != response.getResults().size() - 1) {
-              continue;
-            }
-            if (type.equals(Column.ColumnTypes.STRING)) {
-              java.time.format.DateTimeFormatter format = TIMESTAMP_PARSE_FORMAT;
-              try {
-                LocalDateTime.parse(value.asText(), format);
-                type = Column.ColumnTypes.TIMESTAMP;
-              } catch (DateTimeParseException e) {
-                // ignore
-              }
-            }
-            if (type.equals(Column.ColumnTypes.OBJECT)) {
-              if (value.get("__rockset_type") != null) {
-                type = Column.ColumnTypes.fromValue(value.get("__rockset_type").asText());
-              }
-            }
-            log("getColumns::column name " + fieldName + " type: " + type.toString());
-            Column c = new Column(fieldName, type);
-            out.add(c);
-            fieldNames.add(fieldName);
-          }
         }
-      } else if (response.getColumnFields() != null && response.getColumnFields().size() > 0) {
+
+        // If we know the desired field ordering through explicit projection, use that ordering.
+        // Otherwise, just iterate over in arbitrary ordering
+        Collection<String> fields = orderedFields.isEmpty() ? fieldTypes.keySet() : orderedFields;
+        for(String field : fields){
+          out.add(new Column(field, fieldTypes.get(field)));
+        }
+
+      } else if (response.getColumnFields() != null && !response.getColumnFields().isEmpty()) {
         // If this is not a select star query, and has returned 0 rows.
         // Extrapolate the fields from query response's getColumnFields
         log("Extracting column information from explicit fields");
@@ -1635,6 +1635,26 @@ public class RocksetResultSet implements ResultSet {
       throw new SQLException(
           "Error processing row to extract column info exception", e);
     }
+  }
+
+  @Nullable
+  private static Column.ColumnTypes valueToColumnType(JsonNode value) {
+    Column.ColumnTypes type = Column.ColumnTypes.fromValue(value.getNodeType().toString());
+    if (type.equals(Column.ColumnTypes.STRING)) {
+      java.time.format.DateTimeFormatter format = TIMESTAMP_PARSE_FORMAT;
+      try {
+        LocalDateTime.parse(value.asText(), format);
+        type = Column.ColumnTypes.TIMESTAMP;
+      } catch (DateTimeParseException e) {
+        // ignore
+      }
+    }
+    if (type.equals(Column.ColumnTypes.OBJECT)) {
+      if (value.get("__rockset_type") != null) {
+        type = Column.ColumnTypes.fromValue(value.get("__rockset_type").asText());
+      }
+    }
+    return type;
   }
 
   private static Map<String, Integer> getFieldMap(List<Column> columns) {

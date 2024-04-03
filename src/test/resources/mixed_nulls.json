@@ -1,0 +1,2 @@
+{"id":  1, "name": null, "age": null, "mixed": "hello"  }
+{"id":  2, "name": "bob", "age": null, "mixed": ["a", "b"] }
