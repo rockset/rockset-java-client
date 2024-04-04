@@ -42,17 +42,11 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TimeZone;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
+
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormat;
@@ -1565,25 +1559,25 @@ public class RocksetResultSet implements ResultSet {
     }
   }
 
+  private static ObjectMapper MAPPER = new ObjectMapper();
   private static List<Column> getColumns(QueryResponse response) throws SQLException {
-    List<Column> out = new ArrayList<Column>();
-    ObjectMapper mapper = new ObjectMapper();
-
+    Map<String, Column> fieldNameToCol = new HashMap<>();
+    LinkedHashSet<String> colNamesInOrder = new LinkedHashSet<>();
     try {
       if (response.getResults().size() > 0) {
-        Set<String> fieldNames = new HashSet<>();
         // Loop through all the rows to get the fields and (their first
         // non-null) types.
         for (int i = 0; i < response.getResults().size(); ++i) {
           log("Extracting column information from record " + i + " in resultset");
           Object onedoc = response.getResults().get(i);
-          JsonNode docRootNode = mapper.readTree(mapper.writeValueAsString(onedoc));
+          JsonNode docRootNode = MAPPER.readTree(MAPPER.writeValueAsString(onedoc));
 
           Iterator<Map.Entry<String, JsonNode>> fields = docRootNode.fields();
           while (fields.hasNext()) {
             Map.Entry<String, JsonNode> field = fields.next();
             String fieldName = field.getKey();
-            if (fieldNames.contains(fieldName)) {
+            colNamesInOrder.add(fieldName);
+            if (fieldNameToCol.containsKey(fieldName)) {
               // This fieldname was already found to have a non-null type
               // in a previous record.
               continue;
@@ -1611,8 +1605,7 @@ public class RocksetResultSet implements ResultSet {
             }
             log("getColumns::column name " + fieldName + " type: " + type.toString());
             Column c = new Column(fieldName, type);
-            out.add(c);
-            fieldNames.add(fieldName);
+            fieldNameToCol.put(fieldName, c);
           }
         }
       } else if (response.getColumnFields() != null && response.getColumnFields().size() > 0) {
@@ -1626,10 +1619,11 @@ public class RocksetResultSet implements ResultSet {
             valueType = Column.ColumnTypes.STRING;
           }
           Column c = new Column(field.getName(), valueType);
-          out.add(c);
+          colNamesInOrder.add(field.getName());
+          fieldNameToCol.put(field.getName(), c);
         }
       }
-      return out;
+      return colNamesInOrder.stream().map(fieldNameToCol::get).collect(Collectors.toList());
     } catch (Exception e) {
       log("Error processing row to extract column info exception" + e.getMessage());
       throw new SQLException(
