@@ -1623,7 +1623,7 @@ public class RocksetResultSet implements ResultSet {
           fieldNameToCol.put(field.getName(), c);
         }
       }
-      return colNamesInOrder.stream().map(fieldNameToCol::get).collect(Collectors.toList());
+      return colNamesInOrder.stream().map(fieldNameToCol::get).filter(Objects::nonNull).collect(Collectors.toList());
     } catch (Exception e) {
       log("Error processing row to extract column info exception" + e.getMessage());
       throw new SQLException(
