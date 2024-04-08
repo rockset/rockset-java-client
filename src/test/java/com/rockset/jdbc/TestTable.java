@@ -6,8 +6,8 @@ import static org.testng.Assert.assertTrue;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.rockset.client.RocksetClient;
 import com.rockset.client.model.Collection;
 import com.rockset.client.model.CreateCollectionRequest;
@@ -371,8 +371,8 @@ public class TestTable {
     }
   }
 
-  @Test
-  public void testColumnOrdering() throws Exception {
+  @Test(dataProvider = "columnOrderings")
+  public void testColumnOrdering(Map<String, String> projectionTypes, String queryFormatString, String filePath) throws Exception {
     List<String> collections = generateCollectionNames(/*numCollections*/ 1);
     Connection conn = null;
     try {
@@ -380,23 +380,11 @@ public class TestTable {
       waitCollections(collections);
 
       String collection = collections.get(0);
-      uploadFile(collection, "src/test/resources/mixed_nulls.json", null);
+      uploadFile(collection, filePath, null);
       waitNumberDocs(collection, 2);
 
       conn = DriverManager.getConnection(DB_URL, property);
 
-
-      // id is non null in all records
-      // name is null in one of the records
-      // age is null in all the records
-      // mixed is a string or array, however we query such that string is the first non-null type in the result set
-      // the type in the column will be string
-      // When there is a single non-null field, the type should be of the first non-null field
-      Map<String, String> projectionTypes = new HashMap<>();
-      projectionTypes.put("age", "null");
-      projectionTypes.put("id", "bigint");
-      projectionTypes.put("name", "varchar");
-      projectionTypes.put("mixed", "varchar");
 
 
       // When there is a wildcard in the projection, no ordering is guaranteed
@@ -415,18 +403,13 @@ public class TestTable {
         }
       }
 
-      // A few permutations of projections
-      String[][] projectionOrderings = new  String[][]{
-        {"age", "name", "mixed","id" },
-        {"name", "age", "id", "mixed"},
-        {"mixed", "name", "id", "age"},
-        {"id", "name" , "mixed", "age"},
-        {"id", "age", "name", "mixed"},
-      };
+      java.util.Collection<List<String>> projectionOrderings = Collections2.permutations(new ArrayList<>(projectionTypes.keySet()));
 
-      for(String[] projections : projectionOrderings) {
-        List<String> expectedTypes = Arrays.stream(projections).map(projectionTypes::get).collect(Collectors.toList());
-        query = String.format("select %s, %s, %s, %s from %s ORDER BY id ASC", projections[0], projections[1], projections[2], projections[3],  collection);
+      for(List<String> projections : projectionOrderings) {
+        List<String> expectedTypes = projections.stream().map(projectionTypes::get).collect(Collectors.toList());
+        List<String> queryStringParams = new ArrayList<>(projections);
+        queryStringParams.add(collection);
+        query = String.format(queryFormatString, queryStringParams.toArray());
         try (PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
 
@@ -440,7 +423,6 @@ public class TestTable {
           }
           Assert.assertEquals(colNames, Lists.newArrayList(projections));
           Assert.assertEquals(colTypes, expectedTypes);
-
         }
       }
 
@@ -617,5 +599,40 @@ public class TestTable {
               "Collection %s found %d docs, waiting for %d", collectionName, found, expectedDocs));
       Thread.sleep(1000);
     }
+  }
+
+  @DataProvider(name="columnOrderings")
+  Object[][] columnOrderings(){
+
+    Map<String, String> nullProjectionTypes = new HashMap<>();
+    nullProjectionTypes.put("a", "null");
+    nullProjectionTypes.put("b", "null");
+
+    String nullProjectionQueryFormat = "select %s, %s from %s ";
+    String nullProjectionFile = "src/test/resources/all_nulls.json";
+
+    // id is non null in all records
+    // name is null in one of the records
+    // age is null in all the records
+    // mixed is a string or array, however we query such that string is the first non-null type in the result set
+    // the type in the column will be string
+    // When there is a single non-null field, the type should be of the first non-null field
+    Map<String, String> mixedProjectionTypes = new HashMap<>();
+    mixedProjectionTypes.put("age", "null");
+    mixedProjectionTypes.put("id", "bigint");
+    mixedProjectionTypes.put("name", "varchar");
+    mixedProjectionTypes.put("mixed", "varchar");
+
+    String mixedProjectionQueryFormat = "select %s, %s, %s, %s from %s ORDER BY id ASC";
+    String mixedProjectionFile = "src/test/resources/mixed_nulls.json";
+
+
+
+    return new Object[][]{{
+      nullProjectionTypes, nullProjectionQueryFormat, nullProjectionFile
+    }, {
+      mixedProjectionTypes, mixedProjectionQueryFormat, mixedProjectionFile
+    }};
+
   }
 }
