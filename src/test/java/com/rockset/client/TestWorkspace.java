@@ -60,7 +60,8 @@ public class TestWorkspace {
 
     // wait for collection to go away
     Awaitility.await("Waiting for collection to be cleaned up ")
-        .atMost(60, TimeUnit.SECONDS)
+        .atMost(3, TimeUnit.MINUTES)
+            .pollInterval(1, TimeUnit.SECONDS)
         .until(
             (Callable<Boolean>)
                 () -> {
@@ -70,7 +71,6 @@ public class TestWorkspace {
                   } catch (Exception e) {
                     return true; // collection deleted
                   }
-                  Thread.sleep(1000);
                   return false;
                 });
 

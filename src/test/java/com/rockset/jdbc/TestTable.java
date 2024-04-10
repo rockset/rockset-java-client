@@ -6,6 +6,8 @@ import static org.testng.Assert.assertTrue;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 import com.rockset.client.RocksetClient;
 import com.rockset.client.model.Collection;
 import com.rockset.client.model.CreateCollectionRequest;
@@ -20,6 +22,7 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -27,8 +30,15 @@ import java.sql.Statement;
 import java.sql.Time;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -38,6 +48,7 @@ import okhttp3.Response;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 //
@@ -360,6 +371,68 @@ public class TestTable {
     }
   }
 
+  @Test(dataProvider = "columnOrderings")
+  public void testColumnOrdering(Map<String, String> projectionTypes, String queryFormatString, String filePath) throws Exception {
+    List<String> collections = generateCollectionNames(/*numCollections*/ 1);
+    Connection conn = null;
+    try {
+      createCollections(collections);
+      waitCollections(collections);
+
+      String collection = collections.get(0);
+      uploadFile(collection, filePath, null);
+      waitNumberDocs(collection, 2);
+
+      conn = DriverManager.getConnection(DB_URL, property);
+
+
+
+      // When there is a wildcard in the projection, no ordering is guaranteed
+      String query = String.format("select * EXCEPT(_id, _meta, _event_time) from %s", collection);
+      try (PreparedStatement stmt = conn.prepareStatement(query);
+           ResultSet rs = stmt.executeQuery()) {
+
+        ResultSetMetaData rsmd = rs.getMetaData();
+        int cc = rsmd.getColumnCount();
+        while (rs.next()) {
+          Set<String> colNames = new HashSet<>();
+          for (int i = 1; i <= cc; i++) {
+            colNames.add(rsmd.getColumnName(i));
+          }
+          Assert.assertEquals(colNames, projectionTypes.keySet());
+        }
+      }
+
+      java.util.Collection<List<String>> projectionOrderings = Collections2.permutations(new ArrayList<>(projectionTypes.keySet()));
+
+      for(List<String> projections : projectionOrderings) {
+        List<String> expectedTypes = projections.stream().map(projectionTypes::get).collect(Collectors.toList());
+        List<String> queryStringParams = new ArrayList<>(projections);
+        queryStringParams.add(collection);
+        query = String.format(queryFormatString, queryStringParams.toArray());
+        try (PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+          ResultSetMetaData rsmd = rs.getMetaData();
+          int cc = rsmd.getColumnCount();
+          List<String> colNames = new ArrayList<>();
+          List<String> colTypes = new ArrayList<>();
+          for (int i = 1; i <= cc; i++) {
+            colNames.add(rsmd.getColumnName(i));
+            colTypes.add(rsmd.getColumnTypeName(i));
+          }
+          Assert.assertEquals(colNames, Lists.newArrayList(projections));
+          Assert.assertEquals(colTypes, expectedTypes);
+        }
+      }
+
+
+    } finally {
+      cleanup(collections, null, conn);
+    }
+  }
+
+
   private void assertNextEquals(ResultSet rs, String expectedColumnName, int expectedType)
       throws SQLException {
     int columnNameIndex = rs.findColumn("COLUMN_NAME");
@@ -526,5 +599,40 @@ public class TestTable {
               "Collection %s found %d docs, waiting for %d", collectionName, found, expectedDocs));
       Thread.sleep(1000);
     }
+  }
+
+  @DataProvider(name="columnOrderings")
+  Object[][] columnOrderings(){
+
+    Map<String, String> nullProjectionTypes = new HashMap<>();
+    nullProjectionTypes.put("a", "null");
+    nullProjectionTypes.put("b", "null");
+
+    String nullProjectionQueryFormat = "select %s, %s from %s ";
+    String nullProjectionFile = "src/test/resources/all_nulls.json";
+
+    // id is non null in all records
+    // name is null in one of the records
+    // age is null in all the records
+    // mixed is a string or array, however we query such that string is the first non-null type in the result set
+    // the type in the column will be string
+    // When there is a single non-null field, the type should be of the first non-null field
+    Map<String, String> mixedProjectionTypes = new HashMap<>();
+    mixedProjectionTypes.put("age", "null");
+    mixedProjectionTypes.put("id", "bigint");
+    mixedProjectionTypes.put("name", "varchar");
+    mixedProjectionTypes.put("mixed", "varchar");
+
+    String mixedProjectionQueryFormat = "select %s, %s, %s, %s from %s ORDER BY id ASC";
+    String mixedProjectionFile = "src/test/resources/mixed_nulls.json";
+
+
+
+    return new Object[][]{{
+      nullProjectionTypes, nullProjectionQueryFormat, nullProjectionFile
+    }, {
+      mixedProjectionTypes, mixedProjectionQueryFormat, mixedProjectionFile
+    }};
+
   }
 }
