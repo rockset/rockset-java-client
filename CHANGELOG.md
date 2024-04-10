@@ -1,5 +1,9 @@
 # Rockset Java Client Changelog
 
+## v0.13.0 2024-03-7
+- Add support for default workspaces when specifying a schema
+- Stable projection ordering in ResultSets
+
 ## v0.12.1 2024-03-7
 - Update dependencies
 
