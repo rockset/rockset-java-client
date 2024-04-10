@@ -185,6 +185,11 @@ public class RocksetStatement implements Statement {
   protected boolean executeWithParams(String sql, List<QueryParameter> params) throws SQLException {
     clearCurrentResults();
     checkOpen();
+    final String schema = this.connection.get().getSchema();
+
+    final String sqlWithWorkspace = schema.equals(RocksetConnection.DEFAULT_SCHEMA)
+            ? sql
+            : String.format("OPTION(default_workspace='%s')\n %s", schema, sql);
 
     ResultSet resultSet = null;
     try {
@@ -192,12 +197,12 @@ public class RocksetStatement implements Statement {
       // because rockset queries do not yet have a client-side timeout.
       QueryResponse resp =
           connection()
-              .startQuery(sql, this.fetchSize.get(), params, getStatementSessionProperties());
+              .startQuery(sqlWithWorkspace, this.fetchSize.get(), params, getStatementSessionProperties());
 
       // store resuts in memory
       resultSet =
           new RocksetResultSet(
-              sql,
+              sqlWithWorkspace,
               resp,
               this.maxRows.get(),
               RocksetResultSetPaginationParams.builder()
@@ -210,7 +215,7 @@ public class RocksetStatement implements Statement {
       this.currentResult.set(resultSet);
       return true;
     } catch (RuntimeException e) {
-      String msg = "Error executing query '" + sql + "'" + " error =  " + e.getMessage();
+      String msg = "Error executing query '" + sqlWithWorkspace + "'" + " error =  " + e.getMessage();
       RocksetDriver.log(msg);
       throw new SQLException(msg, e);
     } catch (Exception e) {
