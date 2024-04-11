@@ -52,7 +52,15 @@ Feel free to log issues against this client through GitHub.
 
 ## JDBC
 
-The Rockset JDBC driver is packaged as part of this java client. Here is an [one example](https://github.com/rockset/rockset-java-client/blob/master/src/test/java/com/rockset/jdbc/FirstExample.java) that shows how to use it.
+The Rockset JDBC driver is packaged as part of this java client. Here is [one example](https://github.com/rockset/rockset-java-client/blob/master/src/test/java/com/rockset/jdbc/FirstExample.java) that shows how to use it.
+
+A JDBC schema corresponds to a Rockset workspace. 
+To scope your queries to a particular workspace without needing to fully qualify the workspace name, set the schema on the connection object.
+```java
+Connection connection = DriverManager.getConnection(...);
+connection.setSchema("my_workspace");
+```
+To see the behavior of this configuration, look at the [Schema Tests](https://github.com/rockset/rockset-java-client/blob/master/src/test/java/com/rockset/jdbc/TestSchema.java).
 
 ## License
 
